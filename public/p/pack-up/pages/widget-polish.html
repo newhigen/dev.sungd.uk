@@ -1,0 +1,525 @@
+<title>한 줄 위젯 다듬기</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root {
+  --bg: #F1F3F0; --card: #FFFFFF; --stroke: #E2E7E2;
+  --ink: #191E1B; --dim: #5A6560; --faint: #8B948F;
+  --accent: #16624A; --accent-soft: #DCEBE3; --hot: #C0562A;
+
+  /* 위젯 목업은 늘 밤 옷 — 폰이 밤 모드라 실제로 이렇게 보인다 */
+  --w-card: #1A201D; --w-ink: #E9EEEB; --w-dim: #97A29C; --w-faint: #6E7873;
+  --w-chip: #212925; --w-accent: #4FBF95; --w-hot: #E8905E; --w-cold: #6FB3D9;
+  --wall-a: #7C8AA6; --wall-b: #A7A2B8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121614; --card: #1A201D; --stroke: #262E2A;
+    --ink: #E9EEEB; --dim: #97A29C; --faint: #6E7873;
+    --accent: #4FBF95; --accent-soft: #1D2E27; --hot: #E8905E;
+    --wall-a: #2B3345; --wall-b: #3A3348;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121614; --card: #1A201D; --stroke: #262E2A;
+  --ink: #E9EEEB; --dim: #97A29C; --faint: #6E7873;
+  --accent: #4FBF95; --accent-soft: #1D2E27; --hot: #E8905E;
+  --wall-a: #2B3345; --wall-b: #3A3348;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased;
+}
+.wrap { max-width: 980px; margin: 0 auto; padding: 56px 24px 96px; }
+
+.eyebrow {
+  font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 11.5px;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); margin: 0 0 14px;
+}
+h1 {
+  font-family: "Gothic A1", sans-serif; font-weight: 800;
+  font-size: clamp(30px, 5vw, 42px); line-height: 1.2;
+  letter-spacing: -0.02em; margin: 0 0 18px; text-wrap: balance;
+}
+.lede { max-width: 64ch; color: var(--dim); font-size: 16px; margin: 0 0 10px; }
+.lede strong { color: var(--ink); font-weight: 600; }
+
+.now {
+  margin-top: 26px; padding: 16px 18px; border-left: 2px solid var(--hot);
+  background: var(--card); border-radius: 0 10px 10px 0; max-width: 64ch;
+}
+.now h3 {
+  font-family: "Gothic A1", sans-serif; font-weight: 700;
+  font-size: 15px; margin: 0 0 8px;
+}
+.now p { margin: 0; color: var(--dim); font-size: 14px; }
+
+hr.rule { border: 0; border-top: 1px solid var(--stroke); margin: 46px 0; }
+
+.idea { display: grid; grid-template-columns: 380px 1fr; gap: 34px; align-items: start; margin-bottom: 54px; }
+@media (max-width: 830px) { .idea { grid-template-columns: 1fr; gap: 22px; } }
+
+.stage { padding: 16px; border-radius: 20px; background: linear-gradient(150deg, var(--wall-a), var(--wall-b)); }
+.stage + .stage { margin-top: 12px; }
+
+.widget {
+  background: var(--w-card); border-radius: 18px; color: var(--w-ink);
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.w4 { width: 330px; height: 92px; padding: 9px 11px; }
+.w3 { width: 250px; height: 92px; padding: 9px 10px; }
+
+.top { display: flex; align-items: center; gap: 6px; }
+.chip {
+  background: var(--w-chip); color: var(--w-dim); border-radius: 999px;
+  padding: 4px 10px; font-size: 11.5px; line-height: 1.25; white-space: nowrap;
+}
+.chip.on { background: var(--w-accent); color: #0C1310; font-weight: 600; }
+.spacer { flex: 1 }
+
+.hi { font-family: "Gothic A1", sans-serif; font-weight: 800; color: var(--w-hot); line-height: 1; }
+.lo { font-family: "Gothic A1", sans-serif; font-weight: 500; color: var(--w-cold); line-height: 1; }
+
+.no { font-family: "IBM Plex Mono", monospace; font-size: 11.5px; letter-spacing: 0.12em; color: var(--faint); }
+.idea h2 {
+  font-family: "Gothic A1", sans-serif; font-weight: 700;
+  font-size: 23px; letter-spacing: -0.01em; margin: 4px 0 10px;
+}
+.idea p { margin: 0 0 16px; color: var(--dim); font-size: 14.5px; max-width: 46ch; }
+
+.adds { display: grid; gap: 7px; margin: 0 0 4px; padding: 0; list-style: none; }
+.adds li {
+  display: grid; grid-template-columns: 16px 1fr; gap: 9px;
+  font-size: 13.5px; color: var(--dim); line-height: 1.55;
+}
+.adds .m { font-weight: 600; line-height: 1.5; color: var(--accent); }
+.adds .cost .m { color: var(--hot); }
+
+.pick {
+  display: inline-block; margin-top: 12px; padding: 4px 11px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 600;
+}
+
+.closing {
+  margin-top: 10px; padding: 26px 28px; background: var(--card);
+  border: 1px solid var(--stroke); border-radius: 14px;
+}
+.closing h2 { font-family: "Gothic A1", sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 12px; }
+.closing p { margin: 0 0 12px; color: var(--dim); font-size: 14.5px; max-width: 64ch; }
+.closing p:last-child { margin-bottom: 0; }
+.closing b { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">챙김 · 홈 위젯 · 세 번째 시안</p>
+  <h1>왼쪽·오른쪽을 그만두고<br>위·아래로 나눈다</h1>
+  <p class="lede">
+    지금은 왼쪽에 숫자, 오른쪽에 그림이다. 왼쪽이 <strong>118dp</strong>를 먹으니 4×1에서도
+    그림에 190dp밖에 안 남고, 단추는 그 118dp 안에 들어가느라 «오늘»·«내일» 두 글자로 쪼그라들었다.
+    위·아래로 나누면 그림이 <strong>308dp</strong>를 쓴다. 넓어진 만큼 무엇을 더 넣을지가 시안이다.
+  </p>
+
+  <div class="now">
+    <h3>지금 무엇이 아쉬운가</h3>
+    <p>
+      단추가 «오늘»·«내일» 두 글자라 며칠인지 안 보이고, 그림에는 선 하나와 세로줄뿐이라
+      몇 도인지·얼마나 오는지를 읽을 근거가 없다. 넷 다 이 둘을 푼다 — 얼마나 넣느냐가 다르다.
+    </p>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ─────────────────────── 1 ─────────────────────── -->
+  <section class="idea">
+    <div>
+      <div class="stage">
+        <div class="widget w4">
+          <div class="top">
+            <span class="chip on">오늘 9/1 (화)</span>
+            <span class="chip">내일 9/2 (수)</span>
+            <span class="spacer"></span>
+            <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+            </svg>
+            <span class="hi" style="font-size:19px; margin-left:4px">25°</span>
+            <span class="lo" style="font-size:13px; margin-left:4px">23°</span>
+          </div>
+          <svg id="a4" width="308" height="47" style="display:block; margin-top:5px"></svg>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="widget w3">
+          <div class="top">
+            <span class="chip on" style="font-size:11px; padding:3px 9px">오늘</span>
+            <span class="chip" style="font-size:11px; padding:3px 9px">내일</span>
+            <span class="spacer"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+            </svg>
+            <span class="hi" style="font-size:18px; margin-left:4px">25°</span>
+          </div>
+          <svg id="a3" width="230" height="47" style="display:block; margin-top:5px"></svg>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">시안 1</span>
+      <h2>골격만 바꾼다</h2>
+      <p>
+        윗줄에 단추와 온도, 아랫줄에 그림. 그림 안은 지금과 같다 — 선과 세로줄과 시각.
+        단추에 날짜가 들어가고 그림이 60% 넓어지는 것만으로도 읽히는 게 달라진다.
+      </p>
+      <ul class="adds">
+        <li><span class="m">＋</span><span>단추에 «오늘 9/1 (화)» 가 들어간다.</span></li>
+        <li><span class="m">＋</span><span>그림 폭 190 → 308dp. 스물네 칸이 한 칸 12dp.</span></li>
+        <li class="cost"><span class="m">−</span><span>그림 세로는 40dp 그대로. 여전히 눈금 넣을 자리는 없다.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 2 ─────────────────────── -->
+  <section class="idea">
+    <div>
+      <div class="stage">
+        <div class="widget w4">
+          <div class="top">
+            <span class="chip on">오늘 9/1 (화)</span>
+            <span class="chip">내일 9/2 (수)</span>
+            <span class="spacer"></span>
+            <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+            </svg>
+            <span class="hi" style="font-size:19px; margin-left:4px">25°</span>
+            <span class="lo" style="font-size:13px; margin-left:4px">23°</span>
+          </div>
+          <svg id="b4" width="308" height="47" style="display:block; margin-top:5px"></svg>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="widget w3">
+          <div class="top">
+            <span class="chip on" style="font-size:11px; padding:3px 9px">오늘</span>
+            <span class="chip" style="font-size:11px; padding:3px 9px">내일</span>
+            <span class="spacer"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+            </svg>
+            <span class="hi" style="font-size:18px; margin-left:4px">25°</span>
+          </div>
+          <svg id="b3" width="230" height="47" style="display:block; margin-top:5px"></svg>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">시안 2</span>
+      <h2>비를 진하게</h2>
+      <p>
+        온도 숫자는 윗줄이 이미 말하고 있으니 그림 안에는 안 넣는다. 대신 곡선 뒤 막대를
+        진하게 올려 «언제 얼마나 오나» 를 그림의 몫으로 만든다.
+      </p>
+      <ul class="adds">
+        <li><span class="m">＋</span><span>막대가 또렷해져 비 오는 때가 곡선만큼 눈에 든다.</span></li>
+        <li><span class="m">＋</span><span>왼쪽에 눈금 자리를 안 내주니 그림 폭이 308dp 그대로다.</span></li>
+        <li class="cost"><span class="m">−</span><span>몇 mm인지는 여전히 모른다. 높이로 견줄 뿐.</span></li>
+      </ul>
+      <span class="pick">내 추천</span>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 3 ─────────────────────── -->
+  <section class="idea">
+    <div>
+      <div class="stage">
+        <div class="widget w4">
+          <div class="top">
+            <span class="chip on">오늘 9/1 (화)</span>
+            <span class="chip">내일 9/2 (수)</span>
+            <span class="spacer"></span>
+            <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+            </svg>
+            <span class="hi" style="font-size:19px; margin-left:4px">25°</span>
+            <span class="lo" style="font-size:13px; margin-left:4px">23°</span>
+          </div>
+          <svg id="c4" width="308" height="38" style="display:block; margin-top:5px"></svg>
+          <svg id="c4r" width="308" height="9" style="display:block; margin-top:2px"></svg>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="widget w3">
+          <div class="top">
+            <span class="chip on" style="font-size:11px; padding:3px 9px">오늘</span>
+            <span class="chip" style="font-size:11px; padding:3px 9px">내일</span>
+            <span class="spacer"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+            </svg>
+            <span class="hi" style="font-size:18px; margin-left:4px">25°</span>
+          </div>
+          <svg id="c3" width="230" height="38" style="display:block; margin-top:5px"></svg>
+          <svg id="c3r" width="230" height="9" style="display:block; margin-top:2px"></svg>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">시안 3</span>
+      <h2>비를 띠로 뺀다</h2>
+      <p>
+        곡선 뒤에 겹치던 막대를 아래 띠로 내린다. 4×2에서 한 번 그렸던 그것이다 —
+        비 오는 칸만 파랗고 많이 올수록 진하다. 온도 곡선이 아무것도 안 가린다.
+      </p>
+      <ul class="adds">
+        <li><span class="m">＋</span><span>온도와 비가 서로를 안 가린다.</span></li>
+        <li><span class="m">＋</span><span>비가 «언제» 오는지가 가장 또렷하다.</span></li>
+        <li class="cost"><span class="m">−</span><span>띠가 11dp를 먹어 곡선이 32dp로 눌린다.</span></li>
+        <li class="cost"><span class="m">−</span><span>몇 mm인지는 진하기로만 안다.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 4 ─────────────────────── -->
+  <section class="idea">
+    <div>
+      <div class="stage">
+        <div class="widget w4">
+          <div class="top">
+            <span class="chip on">오늘 9/1 (화)</span>
+            <span class="chip">내일 9/2 (수)</span>
+            <span class="spacer"></span>
+            <svg width="19" height="19" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+            </svg>
+            <span class="hi" style="font-size:19px; margin-left:4px">25°</span>
+            <span class="lo" style="font-size:13px; margin-left:4px">23°</span>
+          </div>
+          <svg id="d4" width="308" height="47" style="display:block; margin-top:5px"></svg>
+        </div>
+      </div>
+      <div class="stage">
+        <div class="widget w3">
+          <div class="top">
+            <span class="chip on" style="font-size:11px; padding:3px 9px">오늘</span>
+            <span class="chip" style="font-size:11px; padding:3px 9px">내일</span>
+            <span class="spacer"></span>
+            <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+            </svg>
+            <span class="hi" style="font-size:18px; margin-left:4px">25°</span>
+          </div>
+          <svg id="d3" width="230" height="47" style="display:block; margin-top:5px"></svg>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">시안 4</span>
+      <h2>«지금» 을 더한다</h2>
+      <p>
+        시안 2에 세로 점선 하나를 더해 지금이 어디인지 표시한다. 하루 스물넷을 볼 때
+        «남은 게 얼마인지» 가 선 하나로 갈린다.
+      </p>
+      <ul class="adds">
+        <li><span class="m">＋</span><span>오늘을 볼 때 지나간 쪽과 남은 쪽이 갈린다.</span></li>
+        <li class="cost"><span class="m">−</span><span>짧은 줄(3×1)은 «지금» 이 늘 맨 왼쪽이라 쓸모가 없다.</span></li>
+        <li class="cost"><span class="m">−</span><span>세로줄이 하나 더 서서 격자와 헷갈릴 수 있다.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <div class="closing">
+    <h2>내 생각</h2>
+    <p>
+      <b>온도 숫자는 그림 안에 안 넣는다.</b> 윗줄에 «25° 23°» 가 이미 크게 있는데 눈금과
+      봉우리 숫자를 또 넣으면 같은 말을 세 번 하는 셈이고, 40dp 안에 우겨넣느라 서로 부딪힌다.
+      그림은 <b>«언제»</b> 만 맡는다 — 곡선의 모양, 비 오는 칸, 시각 눈금.
+    </p>
+    <p>
+      그래서 <b>시안 2</b>다. 눈금 자리를 안 내주니 그림 폭이 308dp 그대로고, 막대를 진하게
+      올려 비가 곡선만큼 눈에 든다. 3×1에서도 버릴 게 없어 두 크기가 같은 물건으로 보인다.
+    </p>
+    <p>
+      시안 4의 «지금» 선은 하루 스물넷(4×1)에서만 쓸모가 있다 — 짧은 줄은 창이 «지금부터» 라
+      늘 맨 왼쪽이다. 넣는다면 4×1에만 넣는 게 맞다.
+    </p>
+  </div>
+</div>
+
+<script>
+// 9월 1일, 집·회사 중 나쁜 쪽(시각마다 더 높은 값). 폰에서 그대로 꺼낸 값이다.
+const T  = [22.7,22.6,22.5,21.9,22.5,22.2,22.0,22.3,22.8,24.1,24.5,24.8,
+            24.7,25.4,24.6,25.1,25.1,25.5,25.0,24.4,24.0,25.0,24.0,24.0];
+const MM = [18.9,9.8,9.0,11.4,13.4,1.2,3.2,8.8,6.4,3.1,2.3,1.1,
+            1.1,0.9,0.5,0.7,0.6,0.1,0,0,0,0,0,0];
+
+// 짧은 줄은 «지금부터 열두 시간». 밤 열한 시 기준이라 자정을 넘어 이어진다.
+const NOW = 23;
+const T12 = [], M12 = [];
+for (let i = 0; i < 12; i++) { const h = (NOW + i) % 24; T12.push(T[h]); M12.push(MM[h]); }
+
+const NS = "http://www.w3.org/2000/svg";
+const el = (n, a) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); return e; };
+const txt = (a, s) => { const t = el("text", a); t.textContent = s; return t; };
+
+function smooth(pts) {
+  const n = pts.length;
+  if (n < 3) return "M" + pts.map(p => p.join(",")).join("L");
+  const d = [], m = [];
+  for (let i = 0; i < n - 1; i++) d.push((pts[i+1][1] - pts[i][1]) / (pts[i+1][0] - pts[i][0]));
+  m[0] = d[0]; m[n-1] = d[n-2];
+  for (let i = 1; i < n - 1; i++) m[i] = (d[i-1] + d[i]) / 2;
+  for (let i = 0; i < n - 1; i++) {
+    if (d[i] === 0) { m[i] = 0; m[i+1] = 0; continue; }
+    const a = m[i]/d[i], b = m[i+1]/d[i], h = a*a + b*b;
+    if (h > 9) { const t = 3/Math.sqrt(h); m[i] = t*a*d[i]; m[i+1] = t*b*d[i]; }
+  }
+  let s = `M${pts[0][0]},${pts[0][1]}`;
+  for (let i = 0; i < n - 1; i++) {
+    const dx = (pts[i+1][0] - pts[i][0]) / 3;
+    s += `C${pts[i][0]+dx},${pts[i][1]+m[i]*dx} ${pts[i+1][0]-dx},${pts[i+1][1]-m[i+1]*dx} ${pts[i+1][0]},${pts[i+1][1]}`;
+  }
+  return s;
+}
+
+/** «오후 6시». 앱 차트와 같은 어휘. */
+const clock = h => h === 0 ? "자정" : h < 12 ? `오전 ${h}시` : `오후 ${h === 12 ? 12 : h - 12}시`;
+
+/**
+ * 한 줄 위젯의 그림 한 판. opt 로 무엇을 얹을지 고른다 —
+ * 네 시안이 같은 함수를 쓰므로 «무엇을 더 넣었나» 만 눈에 남는다.
+ */
+function board(svg, w, h, t, mm, opt = {}) {
+  const short = t.length <= 12;
+  const step = short ? 3 : 6;
+  const g = opt.ticks ? 22 : 0;
+  const axis = 13;
+  const top = 2, bottom = h - axis;
+  const slot = (w - g) / t.length;
+  const x = i => g + slot * (i + 0.5);
+  const lo = Math.min(...t), hi = Math.max(...t);
+  const pad = (hi - lo) * 0.22 || 1;
+  const f = lo - pad, c = hi + pad;
+  const y = v => bottom - ((v - f) / (c - f)) * (bottom - top);
+
+  // 세로줄 — 매시간 옅게, 눈금 시각만 진하게
+  t.forEach((_, i) => {
+    const hr = short ? (NOW + i) % 24 : i;
+    svg.appendChild(el("line", {
+      x1: g + slot*i, y1: top, x2: g + slot*i, y2: bottom,
+      stroke: hr % step === 0 ? "#3A443F" : "#262E2A", "stroke-width": 1,
+    }));
+  });
+
+  // 온도 눈금 둘 — 위·아래
+  if (opt.ticks) {
+    [hi, lo].forEach(v => {
+      svg.appendChild(el("line", { x1: g, y1: y(v), x2: w, y2: y(v), stroke: "#262E2A", "stroke-width": 1 }));
+      svg.appendChild(txt({
+        x: g - 4, y: y(v) + 3.5, "text-anchor": "end", fill: "#97A29C",
+        "font-family": "IBM Plex Mono, monospace", "font-size": 9.5,
+      }, Math.round(v) + "°"));
+    });
+  }
+
+  // 비 — 곡선 뒤 막대, 또는 아래 띠
+  const rmax = Math.max(...mm, 0.1);
+  if (opt.bars) {
+    mm.forEach((v, i) => {
+      if (v <= 0) return;
+      const bh = (v / (rmax * 1.15)) * (bottom - top);
+      svg.appendChild(el("rect", {
+        x: x(i) - slot*0.32, y: bottom - bh, width: slot*0.64, height: bh,
+        fill: "#4E8FBF", "fill-opacity": opt.strongRain ? 0.6 : 0.42, rx: 1,
+      }));
+    });
+  }
+
+  // 온도 곡선
+  const pts = t.map((v, i) => [x(i), y(v)]);
+  svg.appendChild(el("path", {
+    d: smooth(pts), fill: "none", stroke: "#4FBF95",
+    "stroke-width": 1.9, "stroke-linecap": "round", "stroke-linejoin": "round",
+  }));
+
+  // 봉우리와 골에 숫자
+  if (opt.caps) {
+    [[t.indexOf(hi), -5], [t.indexOf(lo), 10]].forEach(([i, dy]) => {
+      svg.appendChild(el("circle", { cx: pts[i][0], cy: pts[i][1], r: 2.1, fill: "#4FBF95" }));
+      svg.appendChild(txt({
+        x: Math.min(Math.max(pts[i][0], g + 10), w - 10), y: pts[i][1] + dy,
+        "text-anchor": "middle", fill: "#E9EEEB",
+        "font-family": "IBM Plex Mono, monospace", "font-size": 8.5,
+      }, Math.round(t[i]) + "°"));
+    });
+  }
+
+  // «지금» 세로 점선
+  if (opt.now) {
+    const nx = short ? g + slot * 0.4 : g + slot * (NOW + 0.4);
+    svg.appendChild(el("line", {
+      x1: nx, y1: top, x2: nx, y2: bottom,
+      stroke: "#97A29C", "stroke-width": 1.2, "stroke-dasharray": "3 3",
+    }));
+  }
+
+  // 시각 이름표 — 겹치면 가운데부터 버리고, 창의 끝은 남긴다
+  const marks = [];
+  t.forEach((_, i) => {
+    const hr = short ? (NOW + i) % 24 : i;
+    if (i === 0 || i === t.length - 1 || hr % step === 0) marks.push([i, hr]);
+  });
+  const tail = marks[marks.length - 1];
+  const tailText = clock(tail[1]);
+  // 한글은 글자폭이 글자크기와 거의 같고 숫자는 절반이다. 글자 수로 재면 겹침 판정이 헐거워진다.
+  const est = s => [...s].reduce((a, ch) =>
+    a + (/[가-힣]/.test(ch) ? 10 : ch === " " ? 3 : 5.5), 0);
+  const tailLeft = w - est(tailText);
+  let cursor = g;
+  marks.slice(0, -1).forEach(([i, hr]) => {
+    const s = clock(hr), tw = est(s);
+    const left = Math.max(x(i) - tw / 2, cursor);
+    if (left + tw > tailLeft - 5) return;
+    svg.appendChild(txt({
+      x: left, y: h - 1, fill: "#97A29C",
+      "font-family": "IBM Plex Sans KR, sans-serif", "font-size": 10,
+    }, s));
+    cursor = left + tw + 5;
+  });
+  svg.appendChild(txt({
+    x: tailLeft, y: h - 1, fill: "#97A29C",
+    "font-family": "IBM Plex Sans KR, sans-serif", "font-size": 10,
+  }, tailText));
+}
+
+board(document.getElementById("a4"), 308, 47, T, MM, { bars: true });
+board(document.getElementById("a3"), 230, 47, T12, M12, { bars: true });
+
+board(document.getElementById("b4"), 308, 47, T, MM, { bars: true, strongRain: true });
+board(document.getElementById("b3"), 230, 47, T12, M12, { bars: true, strongRain: true });
+
+board(document.getElementById("c4"), 308, 38, T, MM, {});
+board(document.getElementById("c3"), 230, 38, T12, M12, {});
+
+board(document.getElementById("d4"), 308, 47, T, MM, { bars: true, strongRain: true, now: true });
+board(document.getElementById("d3"), 230, 47, T12, M12, { bars: true, strongRain: true, now: true });
+
+/** 시안 3의 비 띠. 0.5 / 3 / 10mm 를 계단으로 진하기를 나눈다. */
+[["c4r", MM, 308], ["c3r", M12, 230]].forEach(([id, mm, w]) => {
+  const svg = document.getElementById(id);
+  const cw = w / mm.length;
+  mm.forEach((v, i) => {
+    const a = v === 0 ? 0 : v < 0.5 ? 0.22 : v < 3 ? 0.45 : v < 10 ? 0.72 : 1;
+    svg.appendChild(el("rect", {
+      x: i * cw + 0.5, y: 0, width: cw - 1, height: 9, rx: 2,
+      fill: a === 0 ? "#232B27" : "#4E8FBF", "fill-opacity": a === 0 ? 1 : a,
+    }));
+  });
+});
+</script>
