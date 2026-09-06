@@ -1,0 +1,592 @@
+<title>한 줄짜리 챙김 위젯</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@500;700;800&family=IBM+Plex+Sans+KR:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+:root {
+  --bg: #F1F3F0;
+  --card: #FFFFFF;
+  --stroke: #E2E7E2;
+  --ink: #191E1B;
+  --dim: #5A6560;
+  --faint: #8B948F;
+  --accent: #16624A;
+  --accent-soft: #DCEBE3;
+  --hot: #C0562A;
+
+  /* 위젯 목업은 늘 밤 옷 — 폰이 밤 모드라 실제로 이렇게 보인다 */
+  --w-card: #1A201D;
+  --w-ink: #E9EEEB;
+  --w-dim: #97A29C;
+  --w-faint: #6E7873;
+  --w-hair: #262E2A;
+  --w-chip: #212925;
+  --w-accent: #4FBF95;
+  --w-hot: #E8905E;
+  --w-cold: #6FB3D9;
+  --w-rain: #4E8FBF;
+
+  --wall-a: #7C8AA6;
+  --wall-b: #A7A2B8;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #121614; --card: #1A201D; --stroke: #262E2A;
+    --ink: #E9EEEB; --dim: #97A29C; --faint: #6E7873;
+    --accent: #4FBF95; --accent-soft: #1D2E27; --hot: #E8905E;
+    --wall-a: #2B3345; --wall-b: #3A3348;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #121614; --card: #1A201D; --stroke: #262E2A;
+  --ink: #E9EEEB; --dim: #97A29C; --faint: #6E7873;
+  --accent: #4FBF95; --accent-soft: #1D2E27; --hot: #E8905E;
+  --wall-a: #2B3345; --wall-b: #3A3348;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "IBM Plex Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap { max-width: 940px; margin: 0 auto; padding: 56px 24px 96px; }
+
+.eyebrow {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 14px;
+}
+h1 {
+  font-family: "Gothic A1", sans-serif; font-weight: 800;
+  font-size: clamp(30px, 5vw, 42px); line-height: 1.2;
+  letter-spacing: -0.02em; margin: 0 0 18px; text-wrap: balance;
+}
+.lede { max-width: 62ch; color: var(--dim); font-size: 16px; margin: 0 0 10px; }
+.lede strong { color: var(--ink); font-weight: 600; }
+
+.sizes {
+  display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px;
+  font-family: "IBM Plex Mono", monospace; font-size: 12.5px;
+}
+.sizes span {
+  padding: 6px 12px; border: 1px solid var(--stroke); border-radius: 7px; color: var(--dim);
+}
+.sizes span b { color: var(--ink); font-weight: 500; }
+
+hr.rule { border: 0; border-top: 1px solid var(--stroke); margin: 46px 0; }
+
+.idea {
+  display: grid; grid-template-columns: 362px 1fr; gap: 34px;
+  align-items: start; margin-bottom: 54px;
+}
+@media (max-width: 800px) { .idea { grid-template-columns: 1fr; gap: 22px; } }
+
+.stage { padding: 16px; border-radius: 20px; background: linear-gradient(150deg, var(--wall-a), var(--wall-b)); }
+
+.widget {
+  width: 330px; background: var(--w-card); border-radius: 18px;
+  color: var(--w-ink); overflow: hidden;
+}
+.w1 { height: 72px; padding: 9px 12px; }
+.w3 { width: 250px; height: 72px; padding: 8px 11px; }
+.w2 { height: 158px; padding: 13px; }
+
+.chip {
+  display: inline-block; background: var(--w-chip); color: var(--w-dim);
+  border-radius: 999px; padding: 4px 10px; font-size: 11px;
+}
+.chip.on { background: var(--w-accent); color: #0C1310; font-weight: 600; }
+
+.hi { font-family: "Gothic A1", sans-serif; font-weight: 800; color: var(--w-hot); line-height: 1; }
+.lo { font-family: "Gothic A1", sans-serif; font-weight: 500; color: var(--w-cold); line-height: 1; }
+.word { font-family: "Gothic A1", sans-serif; font-weight: 700; color: var(--w-ink); }
+
+.axis {
+  display: flex; justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace; font-size: 9px; color: var(--w-faint);
+}
+
+.no {
+  font-family: "IBM Plex Mono", monospace; font-size: 11.5px;
+  letter-spacing: 0.12em; color: var(--faint);
+}
+.idea h2 {
+  font-family: "Gothic A1", sans-serif; font-weight: 700;
+  font-size: 23px; letter-spacing: -0.01em; margin: 4px 0 10px;
+}
+.idea p { margin: 0 0 16px; color: var(--dim); font-size: 14.5px; max-width: 46ch; }
+
+.tradeoff { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+.tradeoff li {
+  display: grid; grid-template-columns: 16px 1fr; gap: 9px;
+  font-size: 13.5px; color: var(--dim); line-height: 1.55;
+}
+.tradeoff .m { font-weight: 600; line-height: 1.5; }
+.tradeoff .yes .m { color: var(--accent); }
+.tradeoff .no-m .m { color: var(--hot); }
+
+.pick {
+  display: inline-block; margin-top: 14px; padding: 4px 11px; border-radius: 999px;
+  background: var(--accent-soft); color: var(--accent); font-size: 12px; font-weight: 600;
+}
+
+.closing {
+  margin-top: 10px; padding: 26px 28px; background: var(--card);
+  border: 1px solid var(--stroke); border-radius: 14px;
+}
+.closing h2 { font-family: "Gothic A1", sans-serif; font-weight: 700; font-size: 20px; margin: 0 0 12px; }
+.closing p { margin: 0 0 12px; color: var(--dim); font-size: 14.5px; max-width: 64ch; }
+.closing p:last-child { margin-bottom: 0; }
+.closing b { color: var(--ink); font-weight: 600; }
+</style>
+
+<div class="wrap">
+
+  <p class="eyebrow">챙김 · 홈 위젯 · 두 번째 시안</p>
+  <h1>한 줄로 줄이면<br>무엇이 남고 무엇이 빠지나</h1>
+  <p class="lede">
+    지금 4×2는 그림에 <strong>50dp 남짓</strong>을 쓴다. 한 줄(4×1)로 내리면 그 자리가
+    <strong>30dp 아래</strong>로 떨어져 격자와 눈금이 먼저 무너진다. 무엇을 버릴지가 곧 시안이다.
+    마지막 하나는 4×2를 그대로 두고 날짜 단추만 뺀 안이다.
+  </p>
+
+  <div class="sizes">
+    <span><b>4×2</b> 330 × 158dp · 그림 50dp</span>
+    <span><b>4×1</b> 330 × 72dp · 그림 30dp 안팎</span>
+    <span><b>3×1</b> 250 × 72dp · 그림 104dp 폭</span>
+    <span>9월 1일 실제 예보로 그림</span>
+  </div>
+
+  <hr class="rule">
+
+  <!-- ─────────────────────── 1 ─────────────────────── -->
+  <section class="idea">
+    <div class="stage">
+      <div class="widget w1" style="display:flex; align-items:center; gap:11px">
+        <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" style="flex:none">
+          <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+        </svg>
+        <div style="display:flex; align-items:baseline; gap:5px; flex:none">
+          <span class="hi" style="font-size:25px">25°</span>
+          <span class="lo" style="font-size:15px">23°</span>
+        </div>
+        <div style="flex:1; min-width:0">
+          <svg id="s1" width="190" height="34" style="display:block" aria-label="시간별 온도와 강수량"></svg>
+          <div class="axis" style="width:190px; padding-top:1px">
+            <span>0</span><span>6</span><span>12</span><span>18</span><span>24</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">시안 1</span>
+      <h2>왼쪽에 숫자, 오른쪽에 그림</h2>
+      <p>
+        온도는 숫자로 읽고, 그림은 «언제 덥고 언제 오나» 만 말한다. 눈금과 격자를 다 버리는 대신
+        곡선과 비 막대는 그대로 남아서 4×2와 같은 정보를 준다.
+      </p>
+      <ul class="tradeoff">
+        <li class="yes"><span class="m">✓</span><span>최고·최저는 숫자라 그림이 작아도 안 흐려진다.</span></li>
+        <li class="yes"><span class="m">✓</span><span>비 오는 때가 여전히 시각으로 짚인다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>몇 도인지·몇 mm인지 읽을 눈금이 없다. 모양만 남는다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>날짜 단추 자리가 없다. 앱이 정한 날만 본다.</span></li>
+      </ul>
+      <span class="pick">4×1 중에서는 이것</span>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 2 ─────────────────────── -->
+  <section class="idea">
+    <div class="stage">
+      <div class="widget w1" style="display:flex; align-items:center; gap:12px">
+        <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" style="flex:none">
+          <path d="M7.5 16h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 16z" fill="#C9D2CE"/>
+          <path d="M9 18.5l-1 2.5M13 18.5l-1 2.5M17 18.5l-1 2.5" stroke="#6FB3D9" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <div style="min-width:0">
+          <div style="display:flex; align-items:baseline; gap:6px">
+            <span class="word" style="font-size:15px">흐림</span>
+            <span class="hi" style="font-size:22px">25°</span>
+            <span class="lo" style="font-size:14px">23°</span>
+          </div>
+          <div style="font-size:11.5px; color:var(--w-dim); margin-top:2px; white-space:nowrap">
+            비 <span style="color:var(--w-cold)">자정 ~ 낮 12시</span>
+            <span style="color:var(--w-faint)">· 가장 셀 때 19mm</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">시안 2</span>
+      <h2>그림을 아예 버린다</h2>
+      <p>
+        한 줄에 그림을 욱여넣는 대신 말로 적는다. «비 자정 ~ 낮 12시» 면 곡선을 훑을 일이 없고,
+        글자가 커져서 지나가며 봐도 읽힌다.
+      </p>
+      <ul class="tradeoff">
+        <li class="yes"><span class="m">✓</span><span>가장 크고 가장 빨리 읽힌다. 4×1 에서 유일하게 안 답답하다.</span></li>
+        <li class="yes"><span class="m">✓</span><span>2×1 로 더 줄여도 살아남는다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>비가 띄엄띄엄 오는 날 «자정~낮 12시» 가 과장이 된다. 끊어 적는 규칙이 따로 필요하다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>온도가 하루 어떻게 움직이는지 사라진다.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 3 ─────────────────────── -->
+  <section class="idea">
+    <div class="stage">
+      <div class="widget w1" style="position:relative; padding:0">
+        <svg id="s3" width="330" height="72" style="display:block" aria-label="시간별 온도와 강수량"></svg>
+        <div style="position:absolute; left:12px; top:9px; display:flex; align-items:baseline; gap:5px">
+          <span class="hi" style="font-size:21px">25°</span>
+          <span class="lo" style="font-size:13px">23°</span>
+        </div>
+        <div style="position:absolute; right:12px; top:11px; font-size:10.5px; color:var(--w-rain)">
+          비 19mm
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">시안 3</span>
+      <h2>그림이 위젯 전체</h2>
+      <p>
+        여백을 없애고 그림을 위젯 끝까지 채운 뒤, 숫자를 그 위에 얹는다.
+        같은 72dp 라도 그림에 쓰는 세로가 두 배가 된다.
+      </p>
+      <ul class="tradeoff">
+        <li class="yes"><span class="m">✓</span><span>한 줄짜리 중 곡선이 가장 크게 산다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>숫자가 곡선 위에 겹친다. 새벽에 기온이 높은 날은 숫자와 선이 부딪힌다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>시간 눈금 넣을 자리가 없어 «몇 시쯤» 을 6시간 세로줄로만 짐작한다.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 4 ─────────────────────── -->
+  <section class="idea">
+    <div class="stage">
+      <div class="widget w2" style="display:flex; flex-direction:column">
+        <div style="display:flex; align-items:center; gap:7px">
+          <svg width="23" height="23" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+          </svg>
+          <span class="word" style="font-size:17px">흐림</span>
+          <span style="flex:1"></span>
+          <span class="hi" style="font-size:23px">25°</span>
+          <span class="lo" style="font-size:15px; margin-left:7px">23°</span>
+        </div>
+        <div style="font-size:10.5px; color:var(--w-faint); margin-top:3px">오늘 9/1 (화) · 오후 11:04</div>
+        <svg id="s4" width="304" height="78" style="display:block; margin-top:5px" aria-label="시간별 온도와 강수량"></svg>
+        <div class="axis" style="width:304px">
+          <span>자정</span><span>오전 6시</span><span>낮 12시</span><span>오후 6시</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">시안 4</span>
+      <h2>4×2에서 단추만 뺀다</h2>
+      <p>
+        크기는 지금 그대로 두고 날짜 단추 두 개를 없앤다. 대신 그 자리에 «오늘 9/1 (화)» 를
+        작은 글로 적어 어느 날인지만 남긴다. 그림이 <strong>50dp 에서 78dp 로</strong> 는다.
+      </p>
+      <ul class="tradeoff">
+        <li class="yes"><span class="m">✓</span><span>그림이 반 넘게 커진다. 격자·눈금·기준선까지 다 살아난다.</span></li>
+        <li class="yes"><span class="m">✓</span><span>날짜는 여전히 적혀 있어 새벽에도 안 헷갈린다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>내일을 보려면 앱을 열어야 한다.</span></li>
+      </ul>
+      <span class="pick">단추를 버릴 거면 이것</span>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <h1 style="font-size:clamp(24px,4vw,32px); margin-bottom:14px">그럼 3×1은</h1>
+  <p class="lede" style="margin-bottom:34px">
+    폭이 <strong>250dp</strong> 로 80dp 더 좁다. 4×1 레이아웃을 그대로 넣으면 아이콘과 숫자가
+    146dp 를 먹어서 <strong>그림에 104dp</strong> 밖에 안 남는다 — 스물네 칸을 그리면 한 칸이 4dp,
+    비 막대가 머리카락이 된다. 폭을 되찾는 방법이 셋 있다.
+  </p>
+
+  <!-- ─────────────────────── 3×1 A ─────────────────────── -->
+  <section class="idea">
+    <div class="stage">
+      <div class="widget w3" style="display:flex; align-items:center; gap:9px">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex:none">
+          <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+        </svg>
+        <div style="display:flex; align-items:baseline; gap:4px; flex:none">
+          <span class="hi" style="font-size:22px">25°</span>
+          <span class="lo" style="font-size:13px">23°</span>
+        </div>
+        <div style="flex:1; min-width:0">
+          <svg id="t1" width="104" height="34" style="display:block"></svg>
+          <div class="axis" style="width:104px; padding-top:1px">
+            <span>0</span><span>12</span><span>24</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">3×1 · 가</span>
+      <h2>그냥 좁힌다</h2>
+      <p>손대는 데 없이 폭만 준 것. 곡선은 살아 있는데 비 막대가 가늘어져 «새벽에 왔다» 정도만 남는다.</p>
+      <ul class="tradeoff">
+        <li class="yes"><span class="m">✓</span><span>4×1 과 코드가 같다. 폭만 다르게 부르면 끝.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>한 칸이 4dp. 한두 시간 오는 비는 안 보인다.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 3×1 B ─────────────────────── -->
+  <section class="idea">
+    <div class="stage">
+      <div class="widget w3" style="display:flex; align-items:center; gap:9px">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex:none">
+          <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+        </svg>
+        <span class="hi" style="font-size:22px; flex:none">25°</span>
+        <div style="flex:1; min-width:0">
+          <svg id="t2" width="140" height="34" style="display:block"></svg>
+          <div class="axis" style="width:140px; padding-top:1px">
+            <span>0</span><span>6</span><span>12</span><span>18</span><span>24</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">3×1 · 나</span>
+      <h2>최저를 버린다</h2>
+      <p>
+        최고만 숫자로 남기고 최저는 곡선의 골로 읽는다. 그림이 <strong>104 → 140dp</strong> 로 는다.
+        여름에는 최저가 덜 급한 값이라 버릴 만하다.
+      </p>
+      <ul class="tradeoff">
+        <li class="yes"><span class="m">✓</span><span>숫자 하나를 버려 그림을 35% 키운다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>겨울엔 최저가 더 급한 값인데 그때도 사라진다.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 3×1 C ─────────────────────── -->
+  <section class="idea">
+    <div class="stage">
+      <div class="widget w3" style="display:flex; align-items:center; gap:9px">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="flex:none">
+          <path d="M7.5 18h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 18z" fill="#C9D2CE"/>
+        </svg>
+        <div style="display:flex; align-items:baseline; gap:4px; flex:none">
+          <span class="hi" style="font-size:22px">25°</span>
+          <span class="lo" style="font-size:13px">23°</span>
+        </div>
+        <div style="flex:1; min-width:0">
+          <svg id="t3" width="104" height="34" style="display:block"></svg>
+          <div class="axis" style="width:104px; padding-top:1px">
+            <span>지금</span><span>+6</span><span>+12</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">3×1 · 다</span>
+      <h2>앞으로 열두 시간만</h2>
+      <p>
+        지난 시간을 버린다. 위젯이 답할 건 «이제부터 어떻게 되나» 라, 지금부터 열두 시간만 그리면
+        같은 104dp 에 <strong>한 칸이 두 배</strong> 넓어진다. 비가 한 시간만 와도 보인다.
+      </p>
+      <ul class="tradeoff">
+        <li class="yes"><span class="m">✓</span><span>칸이 8.7dp. 좁은 위젯에서 비를 되살리는 유일한 길이다.</span></li>
+        <li class="yes"><span class="m">✓</span><span>«이제부터» 라 출근길·퇴근길이 늘 그림 안에 든다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>하루의 모양(새벽에 낮고 오후에 높고)이 안 보인다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>다른 위젯과 시간축이 달라진다. 나란히 두면 헷갈린다.</span></li>
+      </ul>
+      <span class="pick">3×1 중에서는 이것</span>
+    </div>
+  </section>
+
+  <!-- ─────────────────────── 3×1 D ─────────────────────── -->
+  <section class="idea">
+    <div class="stage">
+      <div class="widget w3" style="display:flex; align-items:center; gap:10px">
+        <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true" style="flex:none">
+          <path d="M7.5 16h9a4 4 0 0 0 .4-8 5.5 5.5 0 0 0-10.6 1.2A3.4 3.4 0 0 0 7.5 16z" fill="#C9D2CE"/>
+          <path d="M9 18.5l-1 2.5M13 18.5l-1 2.5M17 18.5l-1 2.5" stroke="#6FB3D9" stroke-width="1.7" stroke-linecap="round"/>
+        </svg>
+        <div style="min-width:0">
+          <div style="display:flex; align-items:baseline; gap:5px">
+            <span class="hi" style="font-size:21px">25°</span>
+            <span class="lo" style="font-size:13px">23°</span>
+          </div>
+          <div style="font-size:11px; color:var(--w-dim); margin-top:1px; white-space:nowrap">
+            비 <span style="color:var(--w-cold)">낮 12시까지</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <span class="no">3×1 · 라</span>
+      <h2>그림을 버린다</h2>
+      <p>250dp 에 그림을 우겨넣지 않고 말로 적는다. 4×1 의 시안 2 를 그대로 좁힌 것이다.</p>
+      <ul class="tradeoff">
+        <li class="yes"><span class="m">✓</span><span>폭이 줄어도 안 상한다. 2×1 까지 내려간다.</span></li>
+        <li class="no-m"><span class="m">✗</span><span>언제 얼마나 오는지의 결이 사라진다.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <div class="closing">
+    <h2>내 생각</h2>
+    <p>
+      <b>4×1은 시안 1</b>이 낫다. 4×1에서 그림에 남는 건 30dp 안팎이라 눈금을 넣어 봐야 글자가
+      뭉갠다. 눈금을 버리고 최고·최저만 숫자로 빼면, 그림은 «언제» 만 말하는 몫으로 정리된다.
+    </p>
+    <p>
+      다만 <b>4×1로 내리면 날짜 단추는 못 넣는다.</b> 330dp 폭에 단추 둘(각 88dp)과 숫자와
+      그림을 다 넣으면 그림이 100dp도 안 남는다. 오늘·내일을 오가는 게 아깝다면 시안 4 —
+      크기는 그대로 두고 단추만 빼서 그림을 키우는 쪽이 이득이 더 크다.
+    </p>
+    <p>
+      셋째 길도 있다. <b>4×1과 4×2를 둘 다 두는 것.</b> 안드로이드 위젯은 한 앱이 여러 크기를
+      제공할 수 있어서, 고를 때 «한 줄» 과 «두 줄» 이 따로 뜨게 만들면 된다.
+      지금 코드는 그림 그리는 부분이 한 벌이라 크기별 레이아웃만 하나 더 쓰면 끝난다.
+    </p>
+  </div>
+</div>
+
+<script>
+// 9월 1일, 집·회사 중 나쁜 쪽(시각마다 더 높은 값). 폰에서 그대로 꺼낸 값이다.
+const T  = [22.7,22.6,22.5,21.9,22.5,22.2,22.0,22.3,22.8,24.1,24.5,24.8,
+            24.7,25.4,24.6,25.1,25.1,25.5,25.0,24.4,24.0,25.0,24.0,24.0];
+const MM = [18.9,9.8,9.0,11.4,13.4,1.2,3.2,8.8,6.4,3.1,2.3,1.1,
+            1.1,0.9,0.5,0.7,0.6,0.1,0,0,0,0,0,0];
+
+const NS = "http://www.w3.org/2000/svg";
+const el = (n, a) => { const e = document.createElementNS(NS, n); for (const k in a) e.setAttribute(k, a[k]); return e; };
+
+/** 홑진 3차 보간 — 원래 값 밖으로 안 튄다. */
+function smooth(pts) {
+  const n = pts.length;
+  if (n < 3) return "M" + pts.map(p => p.join(",")).join("L");
+  const d = [], m = [];
+  for (let i = 0; i < n - 1; i++) d.push((pts[i+1][1] - pts[i][1]) / (pts[i+1][0] - pts[i][0]));
+  m[0] = d[0]; m[n-1] = d[n-2];
+  for (let i = 1; i < n - 1; i++) m[i] = (d[i-1] + d[i]) / 2;
+  for (let i = 0; i < n - 1; i++) {
+    if (d[i] === 0) { m[i] = 0; m[i+1] = 0; continue; }
+    const a = m[i]/d[i], b = m[i+1]/d[i], h = a*a + b*b;
+    if (h > 9) { const t = 3/Math.sqrt(h); m[i] = t*a*d[i]; m[i+1] = t*b*d[i]; }
+  }
+  let s = `M${pts[0][0]},${pts[0][1]}`;
+  for (let i = 0; i < n - 1; i++) {
+    const dx = (pts[i+1][0] - pts[i][0]) / 3;
+    s += `C${pts[i][0]+dx},${pts[i][1]+m[i]*dx} ${pts[i+1][0]-dx},${pts[i+1][1]-m[i+1]*dx} ${pts[i+1][0]},${pts[i+1][1]}`;
+  }
+  return s;
+}
+
+const LO = Math.min(...T), HI = Math.max(...T), RMAX = Math.max(...MM);
+
+/**
+ * 한 판에 겹쳐 그리기. 곡선 뒤에 강수 막대를 반투명으로 세운다 —
+ * 폰에 들어간 것과 같은 방식이라 시안이 실제와 어긋나지 않는다.
+ */
+function board(svg, w, h, opt) {
+  const g = opt.gutter || 0;
+  const slot = (w - g) / 24;
+  const x = i => g + slot * (i + 0.5);
+  const top = opt.top ?? 2, bottom = h - (opt.bottom ?? 2);
+
+  if (opt.vlines) {
+    for (let hh = 6; hh < 24; hh += 6) {
+      svg.appendChild(el("line", {
+        x1: g + slot*hh, y1: top, x2: g + slot*hh, y2: bottom,
+        stroke: "#2E3833", "stroke-width": 1,
+      }));
+    }
+  }
+  if (opt.hlines) {
+    for (let v = Math.ceil(LO/2)*2; v <= HI; v += 2) {
+      const y = bottom - ((v - (LO-1)) / ((HI+1) - (LO-1))) * (bottom - top);
+      svg.appendChild(el("line", { x1: g, y1: y, x2: w, y2: y, stroke: "#232B27", "stroke-width": 1 }));
+      const t = el("text", { x: g - 4, y: y + 3, "text-anchor": "end", fill: "#6E7873",
+                             "font-family": "IBM Plex Mono, monospace", "font-size": 8.5 });
+      t.textContent = v + "°";
+      svg.appendChild(t);
+    }
+  }
+
+  // 비 — 곡선 뒤
+  MM.forEach((v, i) => {
+    if (v <= 0) return;
+    const bh = (v / (RMAX * 1.15)) * (bottom - top);
+    svg.appendChild(el("rect", {
+      x: x(i) - slot*0.34, y: bottom - bh, width: slot*0.68, height: bh,
+      fill: "#4E8FBF", "fill-opacity": 0.42,
+    }));
+  });
+
+  // 온도
+  const pad = (HI - LO) * 0.2;
+  const f = LO - pad, c = HI + pad;
+  const pts = T.map((v, i) => [x(i), bottom - ((v - f)/(c - f)) * (bottom - top)]);
+  svg.appendChild(el("path", {
+    d: smooth(pts), fill: "none", stroke: "#4FBF95",
+    "stroke-width": opt.thin ? 1.7 : 2, "stroke-linecap": "round", "stroke-linejoin": "round",
+  }));
+
+  if (opt.caps) {
+    [[T.indexOf(HI), -5], [T.indexOf(LO), 11]].forEach(([i, dy]) => {
+      svg.appendChild(el("circle", { cx: pts[i][0], cy: pts[i][1], r: 2.2, fill: "#4FBF95" }));
+      const t = el("text", {
+        x: Math.min(Math.max(pts[i][0], g + 11), w - 11), y: pts[i][1] + dy,
+        "text-anchor": "middle", fill: "#E9EEEB",
+        "font-family": "IBM Plex Mono, monospace", "font-size": 9,
+      });
+      t.textContent = Math.round(T[i]) + "°";
+      svg.appendChild(t);
+    });
+  }
+}
+
+board(document.getElementById("s1"), 190, 34, { vlines: true, thin: true });
+board(document.getElementById("t1"), 104, 34, { vlines: true, thin: true });
+board(document.getElementById("t2"), 140, 34, { vlines: true, thin: true });
+
+/** 앞으로 열두 시간만. 오후 11시 기준이라 자정을 넘어 다음 날로 이어진다. */
+(function ahead() {
+  const NOW = 23;
+  const t = [], mm = [];
+  for (let i = 0; i < 12; i++) { const h = (NOW + i) % 24; t.push(T[h]); mm.push(MM[h]); }
+  const svg = document.getElementById("t3");
+  const w = 104, h = 34, slot = w / 12;
+  for (let i = 6; i < 12; i += 6) {
+    svg.appendChild(el("line", { x1: slot*i, y1: 2, x2: slot*i, y2: h-2, stroke: "#2E3833", "stroke-width": 1 }));
+  }
+  const rmax = Math.max(...mm, 0.1);
+  mm.forEach((v, i) => {
+    if (v <= 0) return;
+    const bh = (v / (rmax * 1.15)) * (h - 4);
+    svg.appendChild(el("rect", {
+      x: slot*(i+0.5) - slot*0.34, y: h - 2 - bh, width: slot*0.68, height: bh,
+      fill: "#4E8FBF", "fill-opacity": 0.42,
+    }));
+  });
+  const lo = Math.min(...t), hi = Math.max(...t), pad = (hi - lo) * 0.2 || 1;
+  const pts = t.map((v, i) => [slot*(i+0.5), (h-2) - ((v - (lo-pad))/((hi+pad)-(lo-pad))) * (h-4)]);
+  svg.appendChild(el("path", {
+    d: smooth(pts), fill: "none", stroke: "#4FBF95",
+    "stroke-width": 1.7, "stroke-linecap": "round", "stroke-linejoin": "round",
+  }));
+})();
+board(document.getElementById("s3"), 330, 72, { vlines: true, top: 26, bottom: 4 });
+board(document.getElementById("s4"), 304, 78, { vlines: true, hlines: true, caps: true, gutter: 24, top: 10 });
+</script>
