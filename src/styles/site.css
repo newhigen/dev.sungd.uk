@@ -809,7 +809,10 @@ a { color: inherit; }
 
 /* ── 흐름 도식 ────────────────────────────────────── */
 
-.flow { max-width: none; margin: 2.3rem 0 2.6rem; }
+/* 본문 폭 안에 선다. 그림(figure)의 좌우 끌어내기(-1.2rem)와 max-width:none 이 겹쳐
+   글 기둥 양옆으로 삐져나왔다 — Compare 처럼 --measure 에 맞춘다. */
+.flow { max-width: var(--measure); margin: 2.3rem 0 2.6rem; }
+.doc-body .prose > figure.flow { margin-left: 0; margin-right: 0; }
 .flow ol {
   list-style: none;
   display: grid;
