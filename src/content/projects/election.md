@@ -4,7 +4,7 @@ title: "선거 공약 분석"
 tagline: "후보 공약과 과거 이행 실적으로 \"공약이 지켜질지\"를 전망하는 분석 도구. 가상 도시 예시."
 period: "2026.05.28"
 purpose: 공부·관심사
-status: 끝남
+status: 완료
 tags: ["Data Analysis", "Civic"]
 link: "https://resume.sungd.uk/dashboards/election.html"
 linkLabel: 대시보드

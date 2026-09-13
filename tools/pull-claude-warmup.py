@@ -26,3 +26,11 @@ subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", 
 subprocess.run(["sips", "-c", "1520", "2400", "--cropOffset", "532", "40", str(shot)],
                check=True, capture_output=True)
 print("✓", page.name, len(html), "·", shot.name)
+
+# 링크 공유 표지 — 원본 repo 에 없는 그림이라 tools/ 의 HTML 에서 찍는다
+cover = OUT / "cover.png"
+subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars", "--virtual-time-budget=4000",
+                "--window-size=1200,630", f"--screenshot={cover}",
+                (pathlib.Path(__file__).resolve().parent / "cover-claude-warmup.html").as_uri()],
+               check=True, capture_output=True)
+print("✓", cover.name)

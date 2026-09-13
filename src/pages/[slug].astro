@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Badge from '../components/Badge.astro';
 import Tabs from '../components/Tabs.astro';
 import Toc from '../components/Toc.astro';
 
@@ -25,7 +26,7 @@ if (d.shots.length > 0) toc.push({ slug: 'shots', text: '이전 버전' });
 
 <Base title={d.title} description={d.tagline} image={d.cover}>
   <header class="doc-head">
-    <h1 transition:name="doc-title">{d.title}</h1>
+    <h1 transition:name="doc-title">{d.title} <Badge status={d.status} /></h1>
     <p class="tagline">{d.tagline}</p>
   </header>
 
@@ -37,9 +38,9 @@ if (d.shots.length > 0) toc.push({ slug: 'shots', text: '이전 버전' });
         {d.kind && <><dt>종류</dt><dd>{d.kind}</dd></>}
         <dt>기간</dt>
         <dd class="when">{d.period}</dd>
-        <dt>상태</dt>
-        <dd>{d.status} · {d.purpose}</dd>
-        {d.ended && <dd class="ended">{d.ended}</dd>}
+        <dt>갈래</dt>
+        <dd>{d.purpose}</dd>
+        {d.ended && <><dt>{d.status}</dt><dd class="ended">{d.ended}</dd></>}
         {d.tags.length > 0 && <><dt>스택</dt><dd>{d.tags.join(' · ')}</dd></>}
         {(d.github || d.link) && (
           <>

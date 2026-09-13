@@ -11,8 +11,10 @@ interface Props {
   /** 아래 괄호 — 두 시각 사이 길이 */
   ranges?: { from: number; to: number; label: string; dashed?: boolean }[];
   caption?: string;
+  /** 글자를 한 단계 키운다 — 판 맨 위에 서는 도식 */
+  large?: boolean;
 }
-const { min, max, ticks, bars = [], points = [], ranges = [], caption } = Astro.props;
+const { min, max, ticks, bars = [], points = [], ranges = [], caption, large = false } = Astro.props;
 
 const W = 600, P = 24;
 const x = (v: number) => P + ((v - min) / (max - min)) * (W - P * 2);
@@ -22,7 +24,7 @@ const H = ranges.length ? 104 + ranges.length * 30 + 10 : barY + barH + below;
 const anchor = (v: number) => (x(v) < 60 ? 'start' : x(v) > W - 60 ? 'end' : 'middle');
 ---
 
-<figure class="track">
+<figure class:list={['track', { large }]}>
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={caption ?? ''}>
     {ticks.map(t => <text class="tick" x={x(t.at)} y="12" text-anchor={anchor(t.at)}>{t.label}</text>)}
     <rect class="rail" x={P} y={barY} width={W - P * 2} height={barH} rx={barH / 2} />

@@ -1,6 +1,7 @@
 ---
 import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
+import Badge from '../../components/Badge.astro';
 import Tabs from '../../components/Tabs.astro';
 import Toc from '../../components/Toc.astro';
 
@@ -23,7 +24,7 @@ const d = project.data;
 
 <Base title={`${d.title} 개발기`} description={entry.data.tagline} image={d.cover}>
   <header class="doc-head">
-    <h1 transition:name="doc-title">{d.title}</h1>
+    <h1 transition:name="doc-title">{d.title} <Badge status={d.status} /></h1>
     <p class="tagline">{entry.data.tagline}</p>
   </header>
 
@@ -35,9 +36,9 @@ const d = project.data;
         {d.kind && <><dt>종류</dt><dd>{d.kind}</dd></>}
         <dt>기간</dt>
         <dd class="when">{d.period}</dd>
-        <dt>상태</dt>
-        <dd>{d.status} · {d.purpose}</dd>
-        {d.ended && <dd class="ended">{d.ended}</dd>}
+        <dt>갈래</dt>
+        <dd>{d.purpose}</dd>
+        {d.ended && <><dt>{d.status}</dt><dd class="ended">{d.ended}</dd></>}
         {d.tags.length > 0 && <><dt>스택</dt><dd>{d.tags.join(' · ')}</dd></>}
         <dt>링크</dt>
         <dd><a href={`/${project.id}`}>소개</a></dd>

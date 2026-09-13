@@ -1,0 +1,13 @@
+---
+interface Props {
+  /** 소개 첫 화면 끝에서 다른 판으로 — 판 이름 · 그 판이 답하는 질문 */
+  items: { tab: string; title: string; href: string }[];
+}
+const { items } = Astro.props;
+---
+
+<nav class="next">
+  {items.map(it => (
+    <a href={it.href}><small>{it.tab}</small><b>{it.title} →</b></a>
+  ))}
+</nav>

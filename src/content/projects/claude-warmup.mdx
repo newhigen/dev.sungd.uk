@@ -2,7 +2,7 @@
 title: Claude 워밍업
 tagline: 출근 전 Claude 사용량 윈도우를 미리 열어 근무 중 윈도우 3개를 확보하는 CLI
 period: "2026.05.29"
-status: 폐기
+status: 종료
 purpose: 개발 도구
 ended: 공식 Claude Code 루틴(/schedule)이 같은 기능 제공, 2026.06 종료
 kind: CLI
@@ -10,6 +10,7 @@ tags: [Bash, launchd, pmset, Claude Code]
 github: https://github.com/newhigen/claude-warmup
 link: /p/claude-warmup/quota-windows.html
 linkLabel: 윈도우 시각화
+cover: /p/claude-warmup/cover.png
 headCover: false
 use:
   - "설치 때 출근 시각 하나만 입력"
@@ -18,46 +19,33 @@ use:
 ---
 
 import Hero from '../../components/Hero.astro';
-import Day from '../../components/Day.astro';
+import Now from '../../components/Now.astro';
+import Next from '../../components/Next.astro';
 import Chain from '../../components/Chain.astro';
 import Versus from '../../components/Versus.astro';
-import Cases from '../../components/Cases.astro';
 
-<p class="q">첫 사용 시각이 그날의 사용량 시간표를 결정.</p>
+<p class="q">9시간 근무, 5시간 윈도우는 2개뿐.</p>
 
-Claude 의 5시간 윈도우는 그날 첫 메시지 시각에 시작. 출근 전 짧은 메시지를 자동 발송해 출근 직후 · 점심 사이 ·
-퇴근 전에 윈도우를 하나씩 개방.
+Claude 의 5시간 윈도우는 첫 메시지 시각에 시작. 출근 전 자동 메시지로 근무 중 윈도우 3개 확보.
 
 <Hero label="하루에 받는 한도" v="최대 1.5배"
   note="근무 중 윈도우 2개 → 3개. 한도를 매번 다 쓰는 날 기준"
-  before={2} after={3}
   tiles={[
     { label: "야근한 날 세 번째 윈도우", v: "20% → ≈100%", note: "19시 퇴근" },
     { label: "드는 것", v: "하루 3통", note: "가장 작은 모델 · 한 단어 · 세션 미저장" },
   ]}
   basis="계산값 — 7시 출근 · 16시 퇴근 기준 윈도우 계산. 토큰 사용량 실측 아님." />
 
-<Day from={3} to={21}
-  span={{ from: 7, to: 16, label: "근무 07:00–16:00" }}
-  rows={[
-    { label: "전", count: "2개",
-      blocks: [
-        { from: 7, to: 12, name: "W1 07–12", tone: 1 },
-        { from: 13, to: 18, name: "W2 13–18", tone: 2 },
-      ],
-      cut: { from: 16, to: 18 } },
-    { label: "후", count: "3개",
-      blocks: [
-        { from: 3.98, to: 8.98, name: "W1 03:59–", tone: 1 },
-        { from: 9, to: 14, name: "W2 09:00–", tone: 2 },
-        { from: 14.02, to: 19.02, name: "W3 14:01–", tone: 3 },
-      ],
-      marks: [3.98, 9, 14.02], marksLabel: "자동 메시지 3통" },
-  ]}
-  legend={["첫 윈도우", "두 번째", "세 번째", "퇴근 뒤로 밀린 몫"]}
-  caption="7시 출근 · 16시 퇴근 하루. 출근 7~11시 모두 윈도우 3개 — 출근 시각별 전체는 왼쪽 난의 윈도우 시각화." />
+<Now year="2026" month="6월"
+  line="Claude Code 에 <b>/schedule</b> 이 들어와 종료"
+  sub="정한 시각에 메시지 보내기를 공식 지원 — 이 도구가 하던 일" />
 
-## 주요 기능
+<Next items={[
+  { tab: "왜 만들었나", title: "하루 윈도우가 어디로 가나", href: "/claude-warmup/why" },
+  { tab: "개발기", title: "새벽 5시와 macOS 절전", href: "/claude-warmup/making" },
+]} />
+
+## 동작 방식
 
 ### 출근 시각 하나로 계산
 
@@ -68,41 +56,11 @@ Claude 의 5시간 윈도우는 그날 첫 메시지 시각에 시작. 출근 �
   { op: "+10:02", v: "14:01", name: "세 번째" },
 ]} />
 
-1분씩 둔 여유로 시각 오차 흡수. 설치 전 윈도우별 근무 중 사용 시간 표로 확인.
-
-### 한 메시지짜리 호출
-
-`claude -p "ok" --model haiku --no-session-persistence` 한 줄. 가장 작은 모델 · 짧은 응답 · 세션 미저장으로
-호출 자체의 사용량은 무시 수준. 목적은 윈도우 개방.
-
-### 새벽에 맥 깨우기
-
-`pmset` 으로 첫 메시지 5분 전 맥 기상, `launchd` 가 정한 시각에 실행. 호출은 `caffeinate -i` 로 감싸 실행 도중
-절전 방지.
+새벽엔 `pmset` 으로 맥 기상, `launchd` 로 `claude -p "ok" --model haiku` 한 줄.
 
 ### 동료용과 개인용
 
 <Versus a="<code>install.sh</code> 동료용" b="<code>install-personal.sh</code> 집 맥" rows={[
   { head: "기준", a: "출근 시각", aNote: "입력 하나로 계산", b: "고정 시각", bNote: "5 · 10 · 15 · 20시" },
-  { head: "횟수", a: "하루 3번", b: "하루 4번" },
-  { head: "요일", a: "평일", b: "매일" },
-  { head: "나눠 주기", a: "파일 하나", aNote: "채팅으로 보내면 한 줄 설치", b: "—" },
+  { head: "횟수", a: "하루 3번 · 평일", b: "하루 4번 · 매일" },
 ]} />
-
-## 자세한 동작
-
-<Cases items={[
-  { when: "설치 전 미리보기",
-    what: "<code>--dry-run</code> — 계산한 시각과 윈도우 표만 출력, 스케줄 등록 없음." },
-  { when: "맥을 덮어 둔 새벽",
-    what: "배터리 · 덮은 상태면 저전력 기상(DarkWake)만 되고 스케줄 작업 미실행. 첫 메시지는 뚜껑을 여는 시점에 발송. 정시 발송은 전원 연결 · 열어 둔 상태에서만." },
-  { when: "낮 시간의 메시지",
-    what: "맥이 깨어 있는 시각이라 정시 발송." },
-  { when: "제거",
-    what: "<code>--uninstall</code> 로 스케줄 해제, <code>sudo pmset repeat cancel</code> 로 새벽 기상 예약 삭제." },
-]} />
-
-## 접은 까닭
-
-Claude Code 루틴(`/schedule`) 등장 — 정한 시각 실행을 공식 지원해 `launchd` 로 하던 일과 동일. 6월 14일 스케줄
-작업 · 설치 폴더 삭제, repo archive.

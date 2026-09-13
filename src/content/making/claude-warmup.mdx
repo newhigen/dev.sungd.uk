@@ -2,31 +2,41 @@
 tagline: 새벽 5시 메시지 한 통의 정시 발송을 두고 macOS 절전과 씨름한 17일
 ---
 
-import Nums from '../../components/Nums.astro';
 import Evo from '../../components/Evo.astro';
 import Track from '../../components/Track.astro';
 
 <p class="q">5시 예약 메시지, 매일 ~11분 지연.</p>
 
-<Track min={0} max={16}
+<Track large min={0} max={40}
+  ticks={[{ at: 0, label: "04:50" }, { at: 10, label: "05:00" }, { at: 20, label: "05:10" }, { at: 30, label: "05:20" }, { at: 40, label: "05:30" }]}
+  bars={[
+    { from: 5, to: 6, tone: "2", label: "04:55 기상" },
+    { from: 6, to: 22, tone: "mute", inside: "1분 뒤 다시 잠듦" },
+  ]}
+  points={[
+    { at: 10, kind: "miss", label: "05:00 예약 — 누락" },
+    { at: 22, kind: "dot", label: "~05:12 실행", sub: "맥을 열었을 때" },
+    { at: 36, kind: "ring", label: "05:26", sub: "6월 1일" },
+  ]}
+  ranges={[
+    { from: 10, to: 22, label: "매일 ~11분" },
+    { from: 10, to: 36, label: "가장 늦은 날 26분", dashed: true },
+  ]}
+  caption="깨운 맥이 예약 시각까지 못 버팀 → 막으려던 wake-bridge 도 덮인 맥(DarkWake)에선 무력." />
+
+<Track large min={0} max={16}
   ticks={[{ at: 0, label: "5/29" }, { at: 3, label: "6/1" }, { at: 4, label: "6/2" }, { at: 16, label: "6/14" }]}
   bars={[
     { from: 0, to: 1, tone: "1", label: "만들기" },
     { from: 3, to: 5, tone: "cut", label: "새벽 절전과 씨름 · PR 4개" },
-    { from: 5, to: 15, tone: "mute", inside: "한계를 README 에 적은 뒤 사용" },
-    { from: 15, to: 16, tone: "mute", label: "은퇴" },
+    { from: 5, to: 15, tone: "mute" },
+    { from: 15, to: 16, tone: "mute", label: "종료" },
   ]}
   points={[
     { at: 0, kind: "small" }, { at: 3, kind: "small" }, { at: 3.35, kind: "small" },
     { at: 3.7, kind: "small" }, { at: 4, kind: "small" }, { at: 16, kind: "small" },
   ]}
-  caption="점이 PR. 계산은 첫날 완료, 이후는 새벽 첫 메시지 정시 발송 문제." />
-
-<Nums items={[
-  { v: "5개", note: "머지한 PR" },
-  { v: "~11분", note: "새벽 5시 메시지 평소 지연. 6월 1일은 26분" },
-  { v: "17일", note: "5월 29일 ~ 6월 14일" },
-]} />
+  caption="17일 · PR 5개(점). 계산은 첫날 완료, 이후는 새벽 첫 메시지 정시 발송 문제." />
 
 ## 개발 과정
 
@@ -49,30 +59,11 @@ import Track from '../../components/Track.astro';
     result: "읽기 전용 repo 와 윈도우 시각화만 남음" },
 ]} />
 
-### 새벽 25분
-
-<Track min={0} max={40}
-  ticks={[{ at: 0, label: "04:50" }, { at: 10, label: "05:00" }, { at: 20, label: "05:10" }, { at: 30, label: "05:20" }, { at: 40, label: "05:30" }]}
-  bars={[
-    { from: 5, to: 6, tone: "2", label: "04:55 기상" },
-    { from: 6, to: 22, tone: "mute", inside: "1분 뒤 다시 잠듦" },
-  ]}
-  points={[
-    { at: 10, kind: "miss", label: "05:00 예약 — 누락" },
-    { at: 22, kind: "dot", label: "~05:12 실행", sub: "맥을 열었을 때" },
-    { at: 36, kind: "ring", label: "05:26", sub: "6월 1일" },
-  ]}
-  ranges={[
-    { from: 10, to: 22, label: "매일 ~11분" },
-    { from: 10, to: 36, label: "가장 늦은 날 26분", dashed: true },
-  ]}
-  caption="6월 1일 카드의 문제. wake-bridge 로 막으려 했으나 다음 날 DarkWake 로 다시 누락." />
-
 ## 배운 점
 
-**공백을 메우는 도구는 공식 기능 출시와 함께 수명 종료.** 유지 대신 은퇴 결정.
+**공백을 메우는 도구는 공식 기능 출시와 함께 수명 종료.** 유지 대신 종료 결정.
 
-**은퇴도 기록.** README 맨 위 · HISTORY 에 «무엇이 대체했나» 를 남겨 repo 방문자를 루틴으로 안내.
+**종료도 기록.** README 맨 위 · HISTORY 에 «무엇이 대체했나» 를 남겨 repo 방문자를 루틴으로 안내.
 
 ## 산출물
 

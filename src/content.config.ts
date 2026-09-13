@@ -1,8 +1,9 @@
 import { defineCollection, z } from 'astro:content';
 import { glob } from 'astro/loaders';
 
-/** 상태 — 사용 중 · 멈춤(다시 열 수 있다) · 끝남(한 번 쓰고 목적을 다했다) · 폐기(안 쓰기로 했다) */
-export const STATUS = ['사용 중', '멈춤', '끝남', '폐기'] as const;
+/** 상태 — 사용 중 · 보류(다시 열 수 있다) · 완료(한 번 쓰고 목적을 다했다) · 종료(운영을 닫았다)
+ *  2026-09-13 멈춤·끝남·폐기에서 바꿨다. «폐기» 는 버린 물건으로 읽혔다(docs/explore/status-badge.html) */
+export const STATUS = ['사용 중', '보류', '완료', '종료'] as const;
 /** 갈래 — 무엇을 위해 만들었나 */
 export const PURPOSE = ['생활', '돈', '일·커리어', '개발 도구', '공부·관심사'] as const;
 
@@ -15,11 +16,11 @@ const projects = defineCollection({
     tagline: z.string(),
     /** 2026.08 처럼. 목록 정렬 기준 */
     period: z.string(),
-    /** 지금 어떤가. 목록이 이 순서로 절을 나눈다 */
+    /** 지금 어떤가. 목록 카드와 글머리에 배지로 선다 */
     status: z.enum(STATUS).default('사용 중'),
     /** 무엇을 위해 만들었나. 목록 위 칩으로 거른다 */
     purpose: z.enum(PURPOSE),
-    /** 멈추거나 접은 까닭 한 줄 — 멈춤·폐기에서 카드에 선다 */
+    /** 보류하거나 종료한 까닭 한 줄 — 카드에 선다 */
     ended: z.string().optional(),
     tags: z.array(z.string()).default([]),
     github: z.string().url().optional(),

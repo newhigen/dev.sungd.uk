@@ -4,7 +4,7 @@ title: "근태 기록 분석"
 tagline: "근태 데이터로 야근 시기와 출퇴근 리듬을 시각화."
 period: "2026.05.24"
 purpose: 일·커리어
-status: 끝남
+status: 완료
 tags: ["Dashboard", "Data Visualization"]
 link: "https://resume.sungd.uk/dashboards/worklog.html#sec-heatmap"
 linkLabel: 대시보드

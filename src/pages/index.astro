@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { STATUS, PURPOSE } from '../content.config';
+import Badge from '../components/Badge.astro';
+import { PURPOSE } from '../content.config';
 
 const all = await getCollection('projects');
 
@@ -12,24 +13,15 @@ function num(p: string) {
 /** 목록에는 월까지만 — 2026.05.30 → 2026.05 */
 function ym(p: string) { return p.slice(0, 7); }
 
+// 상태로 절을 나누지 않는다 — 카드마다 배지가 선다. 최근 것이 위
 const sorted = [...all].sort((a, b) => num(b.data.period) - num(a.data.period));
-
-const NOTE: Record<(typeof STATUS)[number], string> = {
-  '사용 중': '지금도 쓴다.',
-  '멈춤': '손을 놓았다. 다시 열 수 있다.',
-  '끝남': '한 번 쓰고 목적을 다했다.',
-  '폐기': '안 쓰기로 했다. 접은 까닭을 같이 적었다.',
-};
-
-const groups = STATUS.map(s => ({ status: s, items: sorted.filter(p => p.data.status === s) }))
-  .filter(g => g.items.length > 0);
 const purposes = PURPOSE.map(g => ({ name: g, n: all.filter(p => p.data.purpose === g).length }))
   .filter(g => g.n > 0);
 ---
 
 <Base title="프로젝트">
   <p class="lede">
-    직접 쓰려고 만든 앱과 도구. 대개 내 하루에 걸리적거리던 것에서 시작했다. 멈추거나 접은
+    직접 쓰려고 만든 앱과 도구. 대개 내 하루에 걸리적거리던 것에서 시작했다. 보류하거나 종료한
     것도 까닭과 함께 남겨 둔다.
   </p>
 
@@ -40,54 +32,38 @@ const purposes = PURPOSE.map(g => ({ name: g, n: all.filter(p => p.data.purpose 
     ))}
   </nav>
 
-  {groups.map(g => (
-    <section data-status={g.status}>
-      <h2 class="sec">{g.status}<span class="n">{g.items.length}</span></h2>
-      <p class="note">{NOTE[g.status]}</p>
-      <div class="cards">
-        {g.items.map(p => {
-          const d = p.data;
-          const body = (
-            <>
-              {d.icon && <img class="icon" src={d.icon} alt="" />}
-              {d.kind && <div class="kd">{d.kind}</div>}
-              <div class="nm">{d.title}</div>
-              <p class="ds">{d.tagline}</p>
-              {d.ended && <p class="ed">{d.ended}</p>}
-              <div class="mt">{d.purpose} · {ym(d.period)}</div>
-            </>
-          );
-          const cls = ['card', { bare: d.draft, noicon: !d.icon }];
-          return d.draft
-            ? <div class:list={cls} data-purpose={d.purpose}>{body}</div>
-            : <a class:list={cls} href={`/${p.id}`} data-purpose={d.purpose}>{body}</a>;
-        })}
-      </div>
-    </section>
-  ))}
+  <div class="cards">
+    {sorted.map(p => {
+      const d = p.data;
+      const body = (
+        <>
+          {d.icon && <img class="icon" src={d.icon} alt="" />}
+          {d.kind && <div class="kd">{d.kind}</div>}
+          <div class="nm">{d.title}</div>
+          <p class="ds">{d.tagline}</p>
+          {d.ended && <p class="ed">{d.ended}</p>}
+          <div class="mt"><Badge status={d.status} /><span>{d.purpose} · {ym(d.period)}</span></div>
+        </>
+      );
+      const cls = ['card', { bare: d.draft, noicon: !d.icon }];
+      return d.draft
+        ? <div class:list={cls} data-purpose={d.purpose}>{body}</div>
+        : <a class:list={cls} href={`/${p.id}`} data-purpose={d.purpose}>{body}</a>;
+    })}
+  </div>
 </Base>
 
 <script>
-  // 갈래 칩 — 고른 갈래만 남기고, 비는 절은 접는다. 주소(?갈래=)에 남겨 링크로 건넬 수 있다.
+  // 갈래 칩 — 고른 갈래만 남긴다. 주소(?갈래=)에 남겨 링크로 건넬 수 있다.
   function init() {
     const bar = document.querySelector<HTMLElement>('.filter');
     if (!bar) return;
     const buttons = [...bar.querySelectorAll<HTMLButtonElement>('button')];
-    const sections = [...document.querySelectorAll<HTMLElement>('section[data-status]')];
+    const cards = [...document.querySelectorAll<HTMLElement>('.cards [data-purpose]')];
 
     function apply(pick: string) {
       buttons.forEach(b => b.classList.toggle('on', b.dataset.pick === pick));
-      for (const sec of sections) {
-        const cards = [...sec.querySelectorAll<HTMLElement>('[data-purpose]')];
-        let shown = 0;
-        for (const c of cards) {
-          c.hidden = !!pick && c.dataset.purpose !== pick;
-          if (!c.hidden) shown++;
-        }
-        sec.hidden = shown === 0;
-        const n = sec.querySelector('.sec .n');
-        if (n) n.textContent = String(shown);
-      }
+      for (const c of cards) c.hidden = !!pick && c.dataset.purpose !== pick;
     }
 
     const url = new URL(location.href);

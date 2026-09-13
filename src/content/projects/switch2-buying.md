@@ -4,7 +4,7 @@ title: "닌텐도 스위치2 구매 분석"
 tagline: "스위치2를 어디서·얼마에 살지 — 적정가·버전·타이밍·게임을 '결론 먼저, 근거는 옆에' 보드로 정리한 구매 분석."
 period: "2026.05"
 purpose: 생활
-status: 끝남
+status: 완료
 tags: ["Research", "Decision"]
 link: "https://resume.sungd.uk/dashboards/switch2-price-analysis.html"
 linkLabel: 대시보드
