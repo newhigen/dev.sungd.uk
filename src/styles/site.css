@@ -223,8 +223,8 @@ a { color: inherit; }
 }
 
 /* 나머지 — 한 줄에 아이콘 · 이름 · 설명 · 갈래 · 배지 · 시기 */
-.rows { display: flex; flex-direction: column; gap: 0.35rem; }
-.row {
+.prows { display: flex; flex-direction: column; gap: 0.35rem; }
+.prow {
   display: grid;
   grid-template-columns: 1.75rem 10rem minmax(0, 1fr) 6rem 5rem 4rem;
   gap: 1rem;
@@ -235,15 +235,15 @@ a { color: inherit; }
   box-shadow: 0 1px 6px rgba(40, 35, 80, 0.05);
   text-decoration: none;
 }
-a.row:hover .rn { color: var(--link); }
-.row.bare { background: color-mix(in srgb, var(--card) 50%, transparent); box-shadow: none; }
-.row.bare .rn { color: var(--ink-2); }
-.row .ri img { display: block; width: 1.6rem; height: 1.6rem; border-radius: 50%; }
-.row .ri i { display: block; width: 0.45rem; height: 0.45rem; margin-left: 0.6rem; border-radius: 50%; background: var(--ink-3); opacity: 0.35; }
-.row .rn { font-size: 0.92rem; font-weight: 600; }
-.row .rd { font-size: 0.84rem; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.row .rp { font-size: 0.78rem; color: var(--ink-3); }
-.row .ry { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); text-align: right; }
+a.prow:hover .rn { color: var(--link); }
+.prow.bare { background: color-mix(in srgb, var(--card) 50%, transparent); box-shadow: none; }
+.prow.bare .rn { color: var(--ink-2); }
+.prow .ri img { display: block; width: 1.6rem; height: 1.6rem; border-radius: 50%; }
+.prow .ri i { display: block; width: 0.45rem; height: 0.45rem; margin-left: 0.6rem; border-radius: 50%; background: var(--ink-3); opacity: 0.35; }
+.prow .rn { font-size: 0.92rem; font-weight: 600; }
+.prow .rd { font-size: 0.84rem; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.prow .rp { font-size: 0.78rem; color: var(--ink-3); }
+.prow .ry { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); text-align: right; }
 
 @media (max-width: 900px) {
   .home { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
@@ -252,14 +252,14 @@ a.row:hover .rn { color: var(--link); }
   .pick .lb { width: 100%; margin: 0; }
   .pick button { background: var(--chip); border-radius: 999px; gap: 0.4rem; }
   .pick.st button { background: transparent; padding: 0.2rem 0.3rem; }
-  .row { grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: 0.2rem 0.8rem; }
-  .row .ri { grid-row: span 2; }
-  .row .rd { grid-column: 2 / -1; }
-  .row .rp, .row .ry { display: none; }
-  .row .rb { grid-column: 3; grid-row: 1; }
+  .prow { grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: 0.2rem 0.8rem; }
+  .prow .ri { grid-row: span 2; }
+  .prow .rd { grid-column: 2 / -1; }
+  .prow .rp, .prow .ry { display: none; }
+  .prow .rb { grid-column: 3; grid-row: 1; }
 }
 
-/* 거른 카드 · 줄 — .card · .row 의 display:grid 가 hidden 을 이긴다 */
+/* 거른 카드 · 줄 — .card · .prow 의 display:grid 가 hidden 을 이긴다 */
 [hidden] { display: none !important; }
 /* 아이콘이 없는 편 — 아이콘 칸을 비워 두면 이름이 3rem 칸에 끼어 한 글자씩 접힌다 */
 .card.noicon { grid-template-columns: minmax(0, 1fr); }

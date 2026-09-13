@@ -69,7 +69,7 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
 
       <section class="grp">
         <h2 class="sec">나머지<span class="n">{past.length}</span></h2>
-        <div class="rows">
+        <div class="prows">
           {past.map(p => {
             const d = p.data;
             const body = (
@@ -83,8 +83,8 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
               </>
             );
             return d.draft
-              ? <div class="row bare" data-purpose={d.purpose} data-status={d.status}>{body}</div>
-              : <a class="row" href={`/${p.id}`} data-purpose={d.purpose} data-status={d.status}>{body}</a>;
+              ? <div class="prow bare" data-purpose={d.purpose} data-status={d.status}>{body}</div>
+              : <a class="prow" href={`/${p.id}`} data-purpose={d.purpose} data-status={d.status}>{body}</a>;
           })}
         </div>
       </section>
