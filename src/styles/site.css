@@ -661,6 +661,67 @@ a { color: inherit; }
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
+/* 대표 숫자 하나 + 타일 — 소개 맨 위 */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 0.8rem;
+  max-width: var(--measure);
+  margin: 1.8rem 0 2.4rem;
+  font-family: var(--sans);
+}
+.hero .tile { border-radius: 12px; padding: 1rem 1.2rem; background: var(--card-2); }
+.hero .big { grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+.hero .lb { font-size: 0.75rem; color: var(--ink-3); }
+.hero .v { margin-top: 0.15rem; font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: var(--ink); }
+.hero .big .v { font-size: 3.2rem; line-height: 1.1; }
+.hero .d { margin-top: 0.2rem; font-size: 0.78rem; line-height: 1.5; color: var(--ink-2); }
+.hero .cells .line { display: flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; }
+.hero .cells i { width: 2.2rem; height: 0.55rem; border-radius: 3px; background: var(--rule-mid); }
+.hero .cells i.on { background: var(--ink); }
+.hero .cells span { margin-left: 0.3rem; font-size: 0.72rem; color: var(--ink-3); }
+.hero .basis, .impact-basis { grid-column: 1 / -1; margin: 0; font-family: var(--sans); font-size: 0.75rem; color: var(--ink-3); }
+
+/* 막힌 지점 → 한 것 → 숫자 */
+.impact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.8rem;
+  margin: 1.4rem 0 0.6rem;
+  font-family: var(--sans);
+}
+.impact section { display: flex; flex-direction: column; border-radius: 12px; padding: 1rem 1.1rem 1.1rem; background: var(--card-2); }
+.impact .lb { font-size: 0.7rem; color: var(--ink-3); }
+.prose .impact h3 { margin: 0.1rem 0 0.45rem; font-family: var(--sans); font-size: 0.92rem; font-weight: 600; line-height: 1.45; color: var(--ink); }
+.prose .impact p { flex: 1; margin: 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.55; color: var(--ink-2); }
+.impact .v { margin-top: 0.9rem; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; color: var(--ink); }
+.impact .v small { display: block; margin-top: 0.2rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0; color: var(--ink-3); }
+.impact-basis { margin: 0 0 2.2rem; }
+
+/* 하루 타임라인 — 전 · 후 줄에 윈도우 같은 블록 */
+:root { --t1: #7c93d6; --t2: #5fa88c; --t3: #9a82d4; --cut: #c98a8a; }
+.doc-body .prose > figure.day { max-width: var(--measure); margin: 1.6rem 0 2rem; }
+.day svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+.day .span { fill: var(--ink); opacity: 0.05; }
+.day .end { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 3; opacity: 0.7; }
+.day .lbl, .day .tick { font-size: 10px; fill: var(--ink-3); }
+.day .row { font-size: 12px; font-weight: 600; fill: var(--ink); }
+.day .blk { opacity: 0.88; }
+.day .t1 { fill: var(--t1); } .day .t2 { fill: var(--t2); } .day .t3 { fill: var(--t3); }
+.day .bn { font-size: 11px; font-weight: 600; fill: #fff; }
+.day .cnt { font-size: 22px; font-weight: 700; fill: var(--ink); }
+.day .mk { fill: var(--ink); }
+.day .cutblk { stroke: var(--cut); stroke-width: 1; }
+.day-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin-top: 0.5rem; font-size: 0.75rem; color: var(--ink-3); }
+.day-legend i { display: inline-block; width: 0.8rem; height: 0.8rem; margin-right: 0.3rem; border-radius: 3px; vertical-align: -0.1rem; }
+.day-legend i.t1 { background: var(--t1); } .day-legend i.t2 { background: var(--t2); } .day-legend i.t3 { background: var(--t3); }
+.day-legend i.cut { background: repeating-linear-gradient(45deg, var(--cut) 0 2px, transparent 2px 5px); }
+@media (max-width: 640px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero .big { grid-row: auto; }
+  .hero .big .v { font-size: 2.6rem; }
+}
+
 /* 소리 몇 개 — 언제 · 말 · 재생 */
 .voices {
   display: grid;

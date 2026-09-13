@@ -18,7 +18,7 @@ use:
 ---
 
 import Fig from '../../components/Fig.astro';
-import Nums from '../../components/Nums.astro';
+import Hero from '../../components/Hero.astro';
 import Cases from '../../components/Cases.astro';
 
 <p class="q">처음 쓴 시각이 그날의 사용량 시간표를 정했다.</p>
@@ -31,14 +31,17 @@ Claude 워밍업은 출근 전에 짧은 메시지 한 통을 자동으로 보�
 보낼 시각 셋을 계산해 macOS 스케줄러에 걸고, 새벽에는 맥을 깨워 둔다. 윈도우가 근무 시간에 맞춰
 정렬되어 출근 직후 · 점심 사이 · 퇴근 전에 새 윈도우가 열린다.
 
+<Hero label="하루에 받는 한도" v="최대 1.5배"
+  note="근무 중 열리는 윈도우 2개 → 3개. 한도를 매번 다 쓰는 날 기준"
+  before={2} after={3}
+  tiles={[
+    { label: "야근한 날 세 번째 윈도우", v: "20% → ≈100%", note: "19시 퇴근" },
+    { label: "드는 것", v: "하루 3통", note: "가장 작은 모델 · 한 단어 · 세션 안 남김" },
+  ]}
+  basis="계산값 — 7시 출근 · 16시 퇴근 기준 윈도우 계산. 토큰 사용량을 직접 재지는 않았다." />
+
 <Fig src="/p/claude-warmup/quota-windows.png" wide
   caption="왼쪽이 워밍업 없이 7시에 출근한 날, 오른쪽이 워밍업을 건 날. 출근 시각이 7시부터 11시까지 어느 때여도 윈도우 셋이 근무 시간에 들어온다." />
-
-<Nums items={[
-  { v: "2 → 3개", note: "9시간 근무에 들어오는 윈도우" },
-  { v: "7시간 58분", note: "7시 출근 기준, 근무 시간 안에서 쓰는 윈도우 시간" },
-  { v: "17일", note: "5월 29일에 만들고 6월 14일에 접었다" },
-]} />
 
 ## 주요 기능
 

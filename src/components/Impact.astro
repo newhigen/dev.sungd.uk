@@ -1,0 +1,20 @@
+---
+interface Props {
+  /** 막힌 지점 하나에 카드 한 장 — 상황 · 무엇이 막혔나 · 한 것 · 바닥의 숫자 */
+  items: { when: string; problem: string; did: string; v: string; vnote: string }[];
+  basis?: string;
+}
+const { items, basis } = Astro.props;
+---
+
+<div class="impact">
+  {items.map(it => (
+    <section>
+      <div class="lb">{it.when}</div>
+      <h3>{it.problem}</h3>
+      <p set:html={it.did} />
+      <div class="v">{it.v}<small>{it.vnote}</small></div>
+    </section>
+  ))}
+</div>
+{basis && <p class="basis impact-basis">{basis}</p>}
