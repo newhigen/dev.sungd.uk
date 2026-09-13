@@ -231,6 +231,9 @@ a { color: inherit; }
      오른쪽 끝에는 칩이 서니 그 앞에서 끊는다 — 24rem 은 칩 셋짜리 캡슐이 들어가는 폭이다.
      이걸 안 두면 1100px 아래에서 설명이 칩 밑으로 깔려 글자가 가려진다. */
   max-width: min(46rem, 100% - 24rem);
+  /* 칩은 이 줄 끝에서 위로 끌어올려 세운다(-4.2rem). 설명이 한 줄인 판과 두 줄인 판을 오가면
+     머리 높이가 달라져 칩이 한 줄만큼 오르내렸다. 두 줄 자리를 늘 잡아 둔다. */
+  min-height: 2lh;
   font-size: 1.15rem;
   color: var(--ink-2);
 }
@@ -909,7 +912,7 @@ figcaption {
   :root { --gut: 1.5rem; }
   /* 설명 옆에 세울 자리가 안 나온다 — 제 줄로 내린다 */
   .tabs { margin: 0 0 0.9rem auto; }
-  .doc-head .tagline { max-width: 100%; }
+  .doc-head .tagline { max-width: 100%; min-height: 0; }
   .doc-body { grid-template-columns: 1fr; gap: 0; }
   .rail { margin-bottom: 2rem; }
   .rail ul { margin-top: 1rem; }
