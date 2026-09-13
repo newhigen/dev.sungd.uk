@@ -13,7 +13,7 @@ use:
 ---
 
 import Hero from '../../components/Hero.astro';
-import Fig from '../../components/Fig.astro';
+import Capsules from '../../components/gvb/Capsules.astro';
 import Next from '../../components/Next.astro';
 import Devices from '../../components/gvb/Devices.astro';
 import Timeline from '../../components/gvb/Timeline.astro';
@@ -32,8 +32,7 @@ import Cases from '../../components/Cases.astro';
   ]}
   basis="Mac 에 남는 WAV 백업의 파일 수 · 길이 기준. Esc 로 취소한 녹음은 지워져서 빠짐." />
 
-<Fig src="/p/galaxy-voice-bridge/capsule-f.png" wide
-  caption="녹음 중 Mac 화면 아래에 뜨는 캡슐 — 실시간 파형, 이어서 «전사 중…» → «완료»." />
+<Capsules caption="Mac 화면 아래 가운데에 뜨는 캡슐. Esc 로 취소하면 캡슐은 바로 닫힘 · 연결이 끊기면 주황 점 «연결 오류»." />
 
 <Next items={[
   { tab: "왜 만들었나", title: "모니터 2대면 덮개를 닫아야 함", href: "/galaxy-voice-bridge/why" },

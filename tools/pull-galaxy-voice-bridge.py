@@ -2,7 +2,8 @@
 """갤럭시 음성 브리지(galaxy-voice-bridge) 시안을 projects.sungd.uk 로 옮긴다 — pull-pack-up.py 와 같은 꼴.
 
 원본 repo 는 private 이고 스크린샷이 없다. design/ 의 시안 HTML 여섯 쪽을 통째로 옮기고,
-크롬으로 찍어 개발기 격자 썸네일과 소개의 «실제로 고른 캡슐» 한 장을 만든다.
+크롬으로 찍어 개발기 격자 썸네일을 만든다. 소개의 캡슐 상태 넷은 캡처가 아니라
+src/components/gvb/Capsules.astro 가 main.swift 값으로 다시 그린다.
 
 ⚠ recordings/ 는 절대 가져오지 않는다 — 실제 목소리다. 글에 쓰는 건 개수와 길이뿐.
 
@@ -43,12 +44,5 @@ for name in PAGES:
     shot(dst, thumb, "1200,900")
     subprocess.run(["sips", "--resampleWidth", "520", str(thumb)], check=True, capture_output=True)
 
-# ── 고른 캡슐 — subtle-capsules 의 F 안(9월 9일 PR #31 에서 적용) 한 칸만 2배로 잘라 온다
-capsule = OUT / "capsule-f.png"
-shot(OUT / "pages/subtle-capsules.html", capsule, "1440,700", scale=2)
-subprocess.run(["sips", "-c", "262", "1404", "--cropOffset", "960", "1458", str(capsule)],
-               check=True, capture_output=True)
-subprocess.run(["sips", "--resampleWidth", "1000", str(capsule)], check=True, capture_output=True)
-
 print("galaxy-voice-bridge →", OUT)
-print("  썸네일", len(PAGES), "장 · 캡슐 1장")
+print("  썸네일", len(PAGES), "장")
