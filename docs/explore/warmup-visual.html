@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude 워밍업 — 줄글을 도식으로</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{
+  --bg:#e6e3f0; --card:#fbfaff; --card-2:#dfe6f2;
+  --shadow:0 2px 24px rgba(40,35,80,.08);
+  --ink:#221f2b; --prose:#3a3646; --ink-2:#57536b; --ink-3:#6f6b85;
+  --accent:#8a6a3c; --rule:rgba(34,31,43,.09); --rule-mid:rgba(34,31,43,.18); --link:#4a4b93;
+  --t1:#7c93d6; --t2:#5fa88c; --t3:#9a82d4; --cut:#c98a8a;
+  --sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;
+  --serif:"Noto Serif KR",Pretendard,serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--prose);font:16.5px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:84rem;margin:0 auto;padding:3rem 2rem 8rem}
+.lede h1{font-family:var(--serif);font-size:2.3rem;font-weight:700;letter-spacing:-.02em;margin:0 0 .5rem;color:var(--ink)}
+.lede p{max-width:48rem;margin:0;color:var(--ink-2)}
+h2.part{font-family:var(--serif);font-size:1.6rem;color:var(--ink);margin:4.5rem 0 0}
+h3.n{font-size:1.05rem;font-weight:600;color:var(--accent);margin:2.8rem 0 .2rem}
+.q{font-size:.9rem;color:var(--ink-3);margin:0 0 .9rem;max-width:52rem}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem;align-items:start}
+.col .tag{font-size:.75rem;font-weight:600;color:var(--ink-3);margin:0 0 .35rem}
+.col.new .tag{color:var(--accent)}
+.paper{background:var(--card);border-radius:14px;padding:1.6rem 1.8rem 1.8rem;box-shadow:var(--shadow)}
+.col.old .paper{opacity:.72}
+.paper p.t{font-family:var(--serif);margin:0 0 .9rem;font-size:.95rem;line-height:1.85}
+.paper p.t:last-child{margin-bottom:0}
+.paper h4{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);margin:0 0 .5rem}
+.paper .cap{font-family:var(--serif);font-size:.78rem;color:var(--ink-3);margin-top:.5rem}
+.paper img{display:block;width:100%;border-radius:6px}
+code{font-family:var(--mono);font-size:.85em}
+svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+
+/* 흐름 체인 */
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin:.3rem 0 .2rem}
+.chain .s{background:var(--card-2);border-radius:10px;padding:.6rem .7rem;position:relative}
+.chain .s .op{font-family:var(--mono);font-size:.72rem;color:var(--ink-3)}
+.chain .s .tm{font-size:1.25rem;font-weight:700;color:var(--ink);letter-spacing:-.02em;line-height:1.2}
+.chain .s .nt{font-size:.72rem;color:var(--ink-2)}
+.chain .s.key{background:var(--ink)}
+.chain .s.key .tm,.chain .s.key .nt,.chain .s.key .op{color:var(--card)}
+
+/* 두 열 표 */
+.vs{display:grid;grid-template-columns:5.5rem 1fr 1fr;gap:0 1rem;font-size:.85rem}
+.vs div{padding:.45rem 0}
+.vs .h{font-size:.75rem;color:var(--ink-3);font-weight:600}
+.vs .h code{color:var(--ink)}
+.vs .k{color:var(--ink-3)}
+.vs .v{color:var(--ink);font-weight:600}
+.vs .v small{display:block;font-weight:400;color:var(--ink-3);font-size:.72rem}
+
+/* 칩 */
+.cmd{font-family:var(--mono);font-size:.8rem;background:var(--card-2);border-radius:8px;padding:.5rem .7rem;color:var(--ink)}
+.chips{display:flex;gap:.35rem;flex-wrap:wrap;margin-top:.5rem}
+.chips span{font-size:.75rem;padding:.2rem .6rem;border-radius:999px;background:var(--card-2);color:var(--ink-2)}
+
+@media (max-width:900px){.pair{grid-template-columns:1fr}.chain{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="lede">
+  <h1>Claude 워밍업 — 줄글을 도식으로</h1>
+  <p>추천한 여섯 자리를 지금 모습과 시안으로 나란히 놓았다. 왼쪽이 지금, 오른쪽이 바꿀 모습. 숫자와 시각은 README · PR 기록 그대로다.</p>
+</div>
+
+<h2 class="part">소개</h2>
+
+<!-- 소개 1 -->
+<h3 class="n">소개 1 · 첫 두 문단 → 한 문단</h3>
+<p class="q">윈도우가 첫 메시지에 열린다는 설명은 바로 아래 대표 숫자와 도식이 한다. 무엇인가만 남긴다.</p>
+<div class="pair">
+  <div class="col old"><p class="tag">지금 · 두 문단 7줄</p><div class="paper">
+    <p class="t">Claude 의 사용량 한도는 5시간 윈도우 단위로 돌아간다. 윈도우는 그날 첫 메시지를 보낸 시각에 열린다. 7시에 출근해 바로 쓰면 7~12시가 첫 윈도우, 점심 뒤 13~18시가 두 번째다. 16시에 퇴근하면 세 번째 윈도우는 오지 않는다.</p>
+    <p class="t">Claude 워밍업은 출근 전에 짧은 메시지 한 통을 자동으로 보내 윈도우를 미리 연다. 출근 시각을 입력하면 보낼 시각 셋을 계산해 macOS 스케줄러에 걸고, 새벽에는 맥을 깨워 둔다. 윈도우가 근무 시간에 맞춰 정렬되어 출근 직후 · 점심 사이 · 퇴근 전에 새 윈도우가 열린다.</p>
+  </div></div>
+  <div class="col new"><p class="tag">시안 · 한 문단 3줄</p><div class="paper">
+    <p class="t">Claude 의 5시간 윈도우는 그날 첫 메시지에 열린다. Claude 워밍업은 출근 전에 짧은 메시지를 자동으로 보내, 출근 직후 · 점심 사이 · 퇴근 전에 윈도우가 하나씩 열리게 한다.</p>
+  </div></div>
+</div>
+
+<!-- 소개 2 -->
+<h3 class="n">소개 2 · 캡처 그림 → 하루 도식</h3>
+<p class="q">캡처는 글자가 너무 작다. 왜 만들었나와 같은 도식을 쓰면 판을 넘겨도 같은 그림이 이어진다. 원본 시각화는 링크로 남긴다.</p>
+<div class="pair">
+  <div class="col old"><p class="tag">지금 · 시각화 캡처</p><div class="paper">
+    <img src="http://localhost:4399/p/claude-warmup/quota-windows.png" alt="">
+    <p class="cap">왼쪽이 워밍업 없이 7시에 출근한 날, 오른쪽이 워밍업을 건 날.</p>
+  </div></div>
+  <div class="col new"><p class="tag">시안 · 도식 + 링크</p><div class="paper">
+    <svg viewBox="0 0 600 200">
+      <defs><pattern id="h1" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="6" stroke="#c98a8a" stroke-width="2.5"/></pattern></defs>
+      <!-- 3~21시, x = 28 + (h-3)*29.2 -->
+      <rect x="145" y="18" width="263" height="140" rx="6" fill="#221f2b" opacity=".05"/>
+      <text x="151" y="14" font-size="10" fill="#6f6b85">근무 07:00–16:00</text>
+      <line x1="408" y1="18" x2="408" y2="158" stroke="#221f2b" stroke-dasharray="3 3" opacity=".7"/>
+      <text x="0" y="57" font-size="12" font-weight="600" fill="#221f2b">전</text>
+      <rect x="145" y="38" width="143" height="30" rx="6" fill="#7c93d6"/><text x="153" y="57" font-size="11" font-weight="600" fill="#fff">W1 07–12</text>
+      <rect x="320" y="38" width="88" height="30" rx="6" fill="#5fa88c"/><text x="328" y="57" font-size="11" font-weight="600" fill="#fff">W2 13–18</text>
+      <rect x="408" y="38" width="55" height="30" rx="6" fill="url(#h1)" stroke="#c98a8a"/>
+      <text x="596" y="60" text-anchor="end" font-size="22" font-weight="700" fill="#221f2b">2개</text>
+      <text x="0" y="127" font-size="12" font-weight="600" fill="#221f2b">후</text>
+      <rect x="57" y="108" width="143" height="30" rx="6" fill="#7c93d6"/><text x="65" y="127" font-size="11" font-weight="600" fill="#fff">W1 03:59–</text>
+      <rect x="203" y="108" width="143" height="30" rx="6" fill="#5fa88c"/><text x="211" y="127" font-size="11" font-weight="600" fill="#fff">W2 09:00–</text>
+      <rect x="350" y="108" width="143" height="30" rx="6" fill="#9a82d4"/><text x="358" y="127" font-size="11" font-weight="600" fill="#fff">W3 14:01–</text>
+      <text x="596" y="130" text-anchor="end" font-size="22" font-weight="700" fill="#221f2b">3개</text>
+      <g font-size="10" fill="#6f6b85" text-anchor="middle"><text x="28" y="192">03</text><text x="116" y="192">06</text><text x="203" y="192">09</text><text x="291" y="192">12</text><text x="379" y="192">15</text><text x="466" y="192">18</text><text x="554" y="192">21</text></g>
+    </svg>
+    <p class="cap">7시 출근 · 16시 퇴근한 하루. 출근 시각별 전체 그림은 <a href="#" style="color:var(--link)">윈도우 시각화</a>.</p>
+  </div></div>
+</div>
+
+<!-- 소개 3 -->
+<h3 class="n">소개 3 · 출근 시각 하나로 계산 → 흐름 한 줄</h3>
+<p class="q">공식 네 줄 풀이를 계산 순서대로 칸 넷에. 입력은 첫 칸 하나뿐이라는 게 색으로 보인다.</p>
+<div class="pair">
+  <div class="col old"><p class="tag">지금 · 네 줄</p><div class="paper">
+    <h4>출근 시각 하나로 계산</h4>
+    <p class="t">설치 스크립트는 출근 시각만 묻는다. 첫 메시지는 출근 3시간 1분 전, 두 번째는 그 5시간 1분 뒤, 세 번째는 10시간 2분 뒤다. 두 번째 윈도우가 출근 2시간 뒤 정각에 열리고, 1분씩 둔 여유가 시각 오차를 받는다. 설치 전에 윈도우별로 근무 중 몇 시간을 쓰는지 표로 보여 주고 확인을 받는다.</p>
+  </div></div>
+  <div class="col new"><p class="tag">시안 · 칸 넷 + 한 줄</p><div class="paper">
+    <h4>출근 시각 하나로 계산</h4>
+    <div class="chain">
+      <div class="s key"><div class="op">입력</div><div class="tm">07:00</div><div class="nt">출근</div></div>
+      <div class="s"><div class="op">−3:01</div><div class="tm">03:59</div><div class="nt">첫 메시지</div></div>
+      <div class="s"><div class="op">+5:01</div><div class="tm">09:00</div><div class="nt">두 번째 · 출근 +2시간 정각</div></div>
+      <div class="s"><div class="op">+10:02</div><div class="tm">14:01</div><div class="nt">세 번째</div></div>
+    </div>
+    <p class="t" style="margin-top:.8rem">1분씩 둔 여유가 시각 오차를 받는다. 설치 전에 윈도우 표로 확인을 받는다.</p>
+  </div></div>
+</div>
+
+<!-- 소개 5 -->
+<h3 class="n">소개 5 · 동료용과 개인용 → 두 열 표</h3>
+<p class="q">두 스크립트의 차이는 기준 · 횟수 · 요일 셋뿐이다. 문장으로 이으면 무엇이 다른지 한 번 더 찾아야 한다.</p>
+<div class="pair">
+  <div class="col old"><p class="tag">지금 · 세 줄</p><div class="paper">
+    <h4>동료용과 개인용</h4>
+    <p class="t"><code>install.sh</code> 는 출근 시각 기반 윈도우 셋, 평일만. 파일 하나에 본문이 다 들어 있어 채팅으로 보내면 받은 사람이 한 줄로 설치한다. <code>install-personal.sh</code> 는 집 맥용으로 5 · 10 · 15 · 20시 네 번, 매일.</p>
+  </div></div>
+  <div class="col new"><p class="tag">시안 · 표</p><div class="paper">
+    <h4>동료용과 개인용</h4>
+    <div class="vs">
+      <div class="h"></div><div class="h"><code>install.sh</code> 동료용</div><div class="h"><code>install-personal.sh</code> 집 맥</div>
+      <div class="k">기준</div><div class="v">출근 시각<small>입력 하나로 계산</small></div><div class="v">고정 시각<small>5 · 10 · 15 · 20시</small></div>
+      <div class="k">횟수</div><div class="v">하루 3번</div><div class="v">하루 4번</div>
+      <div class="k">요일</div><div class="v">평일</div><div class="v">매일</div>
+      <div class="k">나눠 주기</div><div class="v">파일 하나<small>채팅으로 보내면 한 줄 설치</small></div><div class="v">—</div>
+    </div>
+  </div></div>
+</div>
+
+<h2 class="part">개발기</h2>
+
+<!-- 개발기 1 -->
+<h3 class="n">개발기 1 · 「새벽 메시지가 늦는다」 → 새벽 확대 타임라인</h3>
+<p class="q">카드 글로는 «깨웠다 · 다시 잠들었다 · 놓쳤다» 순서가 머리에 안 그려진다. 04:50~05:30 을 확대해 그 25분을 그림으로. 카드는 짧아지고 이 그림이 카드 위에 선다.</p>
+<div class="pair">
+  <div class="col old"><p class="tag">지금 · 카드 글</p><div class="paper">
+    <h4>새벽 메시지가 늦는다</h4>
+    <p class="t"><b>문제</b> 5시 메시지가 매일 ~11분쯤 늦었다. 4시 55분에 깨운 맥이 1분 만에 다시 잠들어 5시 작업을 놓쳤다<br>
+    <b>한 것</b> 4시 55분부터 7분간 절전을 막는 작업(wake-bridge)을 따로 걸고, 호출도 caffeinate 로 감쌌다<br>
+    <b>결과</b> 개인용에 넣고 같은 날 동료용 설치 스크립트에도 넣었다</p>
+  </div></div>
+  <div class="col new"><p class="tag">시안 · 새벽 25분</p><div class="paper">
+    <h4>새벽 메시지가 늦는다</h4>
+    <svg viewBox="0 0 600 190">
+      <!-- 04:50~05:30, 40분 → x = 20 + m*14 (m = 04:50 부터 분) -->
+      <rect x="90" y="40" width="14" height="36" rx="4" fill="#5fa88c"/>
+      <text x="97" y="30" text-anchor="middle" font-size="11" font-weight="600" fill="#221f2b">04:55 깨움</text>
+      <rect x="104" y="40" width="190" height="36" rx="4" fill="#221f2b" opacity=".08"/>
+      <text x="199" y="63" text-anchor="middle" font-size="11" fill="#57536b">1분 뒤 다시 잠듦</text>
+      <line x1="160" y1="34" x2="160" y2="86" stroke="#c98a8a" stroke-width="2"/>
+      <text x="160" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="#c98a8a">05:00 예약 — 놓침</text>
+      <circle cx="328" cy="58" r="7" fill="#221f2b"/>
+      <text x="328" y="30" text-anchor="middle" font-size="11" font-weight="600" fill="#221f2b">~05:12 실행</text>
+      <text x="328" y="104" text-anchor="middle" font-size="10" fill="#6f6b85">맥을 열었을 때</text>
+      <circle cx="524" cy="58" r="7" fill="none" stroke="#221f2b" stroke-width="2"/>
+      <text x="524" y="30" text-anchor="middle" font-size="11" font-weight="600" fill="#221f2b">05:26</text>
+      <text x="524" y="104" text-anchor="middle" font-size="10" fill="#6f6b85">6월 1일</text>
+      <path d="M160 132 H328" stroke="#221f2b" stroke-width="1.5"/><text x="244" y="150" text-anchor="middle" font-size="13" font-weight="700" fill="#221f2b">매일 ~11분</text>
+      <path d="M160 160 H524" stroke="#6f6b85" stroke-width="1.5" stroke-dasharray="3 3"/><text x="342" y="178" text-anchor="middle" font-size="11" fill="#6f6b85">가장 늦은 날 26분</text>
+      <g font-size="10" fill="#6f6b85" text-anchor="middle"><text x="20" y="14">04:50</text><text x="160" y="14">05:00</text><text x="300" y="14">05:10</text><text x="440" y="14">05:20</text><text x="580" y="14">05:30</text></g>
+    </svg>
+    <p class="t" style="margin-top:.8rem;font-size:.85rem"><b>한 것</b> 04:55부터 7분간 절전을 막는 작업(wake-bridge)을 걸었다 → 다음 날에도 안 나갔다. 다음 카드로.</p>
+  </div></div>
+</div>
+
+<!-- 개발기 2 -->
+<h3 class="n">개발기 2 · 17일 가로 띠</h3>
+<p class="q">첫 두 문단이 말하던 «계산은 첫날, 나머지는 절전과 씨름» 을 날짜 띠 하나로. 점이 PR 이다. 첫 화면에서 시간이 어디에 들어갔는지 보인다.</p>
+<div class="pair">
+  <div class="col old"><p class="tag">지금 · 두 문단</p><div class="paper">
+    <p class="t">계산과 설치는 첫날 끝났다. 남은 17일은 대부분 새벽 첫 메시지를 정시에 내보내는 일이었고, 그 끝에서 macOS 가 덮인 맥에서는 스케줄 작업을 돌리지 않는다는 한계를 만났다. 그걸 문서로 남긴 지 열흘 남짓 뒤에 공식 기능이 같은 일을 맡았다.</p>
+  </div></div>
+  <div class="col new"><p class="tag">시안 · 날짜 띠 + 한 문장</p><div class="paper">
+    <svg viewBox="0 0 600 130">
+      <!-- 5/29 ~ 6/14 = 16일, x = 20 + d*35 -->
+      <rect x="20" y="40" width="560" height="10" rx="5" fill="#221f2b" opacity=".07"/>
+      <rect x="20" y="40" width="35" height="10" rx="5" fill="#7c93d6"/>
+      <rect x="125" y="40" width="70" height="10" rx="5" fill="#c98a8a"/>
+      <rect x="545" y="40" width="35" height="10" rx="5" fill="#6f6b85"/>
+      <g fill="#221f2b"><circle cx="20" cy="45" r="5"/><circle cx="125" cy="45" r="5"/><circle cx="137" cy="45" r="5"/><circle cx="149" cy="45" r="5"/><circle cx="160" cy="45" r="5"/><circle cx="580" cy="45" r="5"/></g>
+      <text x="20" y="28" font-size="11" font-weight="600" fill="#221f2b">만들기</text>
+      <text x="125" y="28" font-size="11" font-weight="600" fill="#c98a8a">새벽 절전과 씨름 · PR 4개</text>
+      <text x="580" y="28" text-anchor="end" font-size="11" font-weight="600" fill="#221f2b">은퇴</text>
+      <text x="360" y="72" text-anchor="middle" font-size="10" fill="#6f6b85">DarkWake 한계를 README 에 적고 그대로 씀</text>
+      <g font-size="10" fill="#6f6b85"><text x="20" y="95">5/29</text><text x="125" y="95">6/1</text><text x="160" y="110">6/2</text><text x="580" y="95" text-anchor="end">6/14</text></g>
+    </svg>
+    <p class="t" style="margin-top:.6rem">계산은 첫날 끝났고, 나머지는 새벽 첫 메시지를 정시에 보내는 일이었다.</p>
+  </div></div>
+</div>
+
+</div>
+</body>
+</html>

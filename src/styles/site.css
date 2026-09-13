@@ -112,20 +112,71 @@ a { color: inherit; }
 
 .lede { margin: 1.6rem 0 2.9rem; max-width: 44rem; color: var(--ink-2); text-wrap: pretty; }
 
-.sec {
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--ink-3);
-  margin: 0 0 1.2rem;
+/* 상태 배지 — 색 · 아이콘 · 글자. 목록 카드와 글머리 제목 옆에 같은 모양으로 선다
+   (2026-09-13 docs/explore/status-badge.html 의 B 용어 · ② 모양) */
+:root { --st1: #2f8a64; --st2: #a8720f; --st3: #4a6db8; --st4: #716d85; }
+@media (prefers-color-scheme: dark) {
+  :root { --st1: #6cc79d; --st2: #e0b060; --st3: #93adeb; --st4: #aaa5bf; }
 }
-.sec .n { margin-left: 0.5rem; font-family: var(--mono); font-size: 0.75rem; }
-.note { margin: -0.5rem 0 1.4rem; font-size: 0.8125rem; color: var(--ink-3); }
-.wrap > section + section { margin-top: 3.75rem; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.32rem;
+  padding: 0.3rem 0.62rem 0.3rem 0.52rem;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--c);
+  background: color-mix(in srgb, var(--c) 14%, var(--card));
+}
+.badge svg { width: 0.78rem; height: 0.78rem; flex: none; }
+.st1 { --c: var(--st1); } .st2 { --c: var(--st2); } .st3 { --c: var(--st3); } .st4 { --c: var(--st4); }
+.doc-head h1 .badge { vertical-align: 0.45em; margin-left: 0.4rem; font-size: 1rem; padding: 0.38rem 0.8rem 0.38rem 0.66rem; }
+.doc-head h1 .badge svg { width: 0.95rem; height: 0.95rem; }
 
-/* 지금 쓰는 것 — 무엇이 살아 있는지 한눈에 */
+/* 홈 — 왼쪽 난(소개 · 갈래 · 상태) + 오른쪽 목록 둘. 지금 쓰는 것은 카드, 나머지는 한 줄
+   (2026-09-13 docs/explore/home.html 의 B + C) */
+.home {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+  margin-top: 1.4rem;
+}
+.pick-rail { position: sticky; top: 1.5rem; }
+.pick-rail .lede { margin: 0 0 2rem; font-size: 0.9rem; }
+.pick { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 1.6rem; }
+.pick .lb { font-size: 0.8125rem; color: var(--ink-3); margin-bottom: 0.3rem; }
+.pick button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  padding: 0.32rem 0.7rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.pick button:hover { color: var(--ink); }
+.pick button.on { background: var(--card); color: var(--ink); font-weight: 600; box-shadow: 0 1px 3px rgba(40, 35, 80, 0.1); }
+.pick .n { font-family: var(--mono); font-size: 0.75rem; font-weight: 400; color: var(--ink-3); }
+.pick.st button { padding-left: 0.45rem; }
+
+.lists { display: flex; flex-direction: column; gap: 3rem; }
+.sec { font-size: 0.8125rem; font-weight: 500; color: var(--ink-3); margin: 0 0 1rem; }
+.sec .n { margin-left: 0.5rem; font-family: var(--mono); font-size: 0.75rem; }
+
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(23rem, 27rem));
+  grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
   gap: 1rem;
 }
 .card {
@@ -161,57 +212,59 @@ a { color: inherit; }
   /* 아이콘이 세 줄만 차지해서 넷째 줄인 이 줄은 아이콘 칸(3rem)으로 밀렸다 —
      「Androi/d」 처럼 낱말이 끊겼다. 글 칸에 명시해 둔다. */
   grid-column: 2;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.3rem 0.6rem;
   margin-top: 0.75rem;
   font-family: var(--mono);
   font-size: 0.75rem;
   color: var(--ink-3);
 }
 
-/* 갈래 칩 — 탭과 같은 알약. 고른 것만 흰 알약이 된다 */
-.filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: -1.2rem 0 3rem;
+/* 나머지 — 한 줄에 아이콘 · 이름 · 설명 · 갈래 · 배지 · 시기 */
+.rows { display: flex; flex-direction: column; gap: 0.35rem; }
+.row {
+  display: grid;
+  grid-template-columns: 1.75rem 10rem minmax(0, 1fr) 6rem 5rem 4rem;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: 0 1px 6px rgba(40, 35, 80, 0.05);
+  text-decoration: none;
 }
-.filter button {
-  font: inherit;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.36rem 0.9rem;
-  border: 0;
-  border-radius: 999px;
-  background: var(--chip);
-  color: var(--ink-2);
-  cursor: pointer;
-}
-.filter button:hover { color: var(--ink); }
-.filter button.on {
-  background: var(--chip-on);
-  color: var(--chip-on-ink);
-  box-shadow: 0 1px 3px rgba(40, 35, 80, 0.14);
-}
-.filter .n { margin-left: 0.4rem; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); }
+a.row:hover .rn { color: var(--link); }
+.row.bare { background: color-mix(in srgb, var(--card) 50%, transparent); box-shadow: none; }
+.row.bare .rn { color: var(--ink-2); }
+.row .ri img { display: block; width: 1.6rem; height: 1.6rem; border-radius: 50%; }
+.row .ri i { display: block; width: 0.45rem; height: 0.45rem; margin-left: 0.6rem; border-radius: 50%; background: var(--ink-3); opacity: 0.35; }
+.row .rn { font-size: 0.92rem; font-weight: 600; }
+.row .rd { font-size: 0.84rem; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row .rp { font-size: 0.78rem; color: var(--ink-3); }
+.row .ry { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); text-align: right; }
 
-/* 칩이 거른 카드 — .card 의 display:grid 가 hidden 을 이긴다 */
+@media (max-width: 900px) {
+  .home { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+  .pick-rail { position: static; }
+  .pick { flex-direction: row; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.9rem; }
+  .pick .lb { width: 100%; margin: 0; }
+  .pick button { background: var(--chip); border-radius: 999px; gap: 0.4rem; }
+  .pick.st button { background: transparent; padding: 0.2rem 0.3rem; }
+  .row { grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: 0.2rem 0.8rem; }
+  .row .ri { grid-row: span 2; }
+  .row .rd { grid-column: 2 / -1; }
+  .row .rp, .row .ry { display: none; }
+  .row .rb { grid-column: 3; grid-row: 1; }
+}
+
+/* 거른 카드 · 줄 — .card · .row 의 display:grid 가 hidden 을 이긴다 */
 [hidden] { display: none !important; }
 /* 아이콘이 없는 편 — 아이콘 칸을 비워 두면 이름이 3rem 칸에 끼어 한 글자씩 접힌다 */
 .card.noicon { grid-template-columns: minmax(0, 1fr); }
-.card.noicon .mt, .card.noicon .ed { grid-column: 1; }
+.card.noicon .mt { grid-column: 1; }
 
-/* 페이지가 없는 편 — 누를 데가 없으니 뜨지 않는다 */
-.card.bare { box-shadow: none; background: color-mix(in srgb, var(--card) 50%, transparent); }
-.card.bare .nm { color: var(--ink-2); }
-.card.bare:hover .nm { color: var(--ink-2); }
-/* 멈추거나 접은 까닭 */
-.card .ed {
-  grid-column: 2;
-  margin: 0.45rem 0 0;
-  font-size: 0.8125rem;
-  color: var(--ink-3);
-  text-wrap: pretty;
-}
-.card .ed::before { content: "→ "; }
 .rail dd.ended { color: var(--ink-3); }
 
 /* ── 글 ───────────────────────────────────────────── */
@@ -661,6 +714,156 @@ a { color: inherit; }
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
+/* 대표 숫자 하나 + 타일 — 소개 맨 위 */
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 0.8rem;
+  max-width: var(--measure);
+  margin: 1.8rem 0 2.4rem;
+  font-family: var(--sans);
+}
+.hero .tile { border-radius: 12px; padding: 1rem 1.2rem; background: var(--card-2); }
+.hero .big { grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
+.hero .lb { font-size: 0.75rem; color: var(--ink-3); }
+.hero .v { margin-top: 0.15rem; font-size: 1.45rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; color: var(--ink); }
+.hero .big .v { font-size: 3.2rem; line-height: 1.1; }
+.hero .d { margin-top: 0.2rem; font-size: 0.78rem; line-height: 1.5; color: var(--ink-2); }
+.hero .cells .line { display: flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; }
+.hero .cells i { width: 2.2rem; height: 0.55rem; border-radius: 3px; background: var(--rule-mid); }
+.hero .cells i.on { background: var(--ink); }
+.hero .cells span { margin-left: 0.3rem; font-size: 0.72rem; color: var(--ink-3); }
+.hero .basis, .impact-basis { grid-column: 1 / -1; margin: 0; font-family: var(--sans); font-size: 0.75rem; color: var(--ink-3); }
+
+/* 막힌 지점 → 한 것 → 숫자 */
+.impact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 0.8rem;
+  margin: 1.4rem 0 0.6rem;
+  font-family: var(--sans);
+}
+.impact section { display: flex; flex-direction: column; border-radius: 12px; padding: 1rem 1.1rem 1.1rem; background: var(--card-2); }
+.impact .lb { font-size: 0.7rem; color: var(--ink-3); }
+.prose .impact h3 { margin: 0.1rem 0 0.45rem; font-family: var(--sans); font-size: 0.92rem; font-weight: 600; line-height: 1.45; color: var(--ink); }
+.prose .impact p { flex: 1; margin: 0; font-family: var(--sans); font-size: 0.8rem; line-height: 1.55; color: var(--ink-2); }
+.impact .v { margin-top: 0.9rem; font-size: 1.6rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; color: var(--ink); }
+.impact .v small { display: block; margin-top: 0.2rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0; color: var(--ink-3); }
+.impact-basis { margin: 0 0 2.2rem; }
+
+/* 하루 타임라인 — 전 · 후 줄에 윈도우 같은 블록 */
+:root { --t1: #7c93d6; --t2: #5fa88c; --t3: #9a82d4; --cut: #c98a8a; }
+.doc-body .prose > figure.day { max-width: var(--measure); margin: 1.6rem 0 2rem; }
+.day svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+.day .span { fill: var(--ink); opacity: 0.05; }
+.day .end { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 3; opacity: 0.7; }
+.day .lbl, .day .tick { font-size: 10px; fill: var(--ink-3); }
+.day .row { font-size: 12px; font-weight: 600; fill: var(--ink); }
+.day .blk { opacity: 0.88; }
+.day .t1 { fill: var(--t1); } .day .t2 { fill: var(--t2); } .day .t3 { fill: var(--t3); }
+.day .bn { font-size: 11px; font-weight: 600; fill: #fff; }
+.day .cnt { font-size: 22px; font-weight: 700; fill: var(--ink); }
+.day .mk { fill: var(--ink); }
+.day .cutblk { stroke: var(--cut); stroke-width: 1; }
+.day-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin-top: 0.5rem; font-size: 0.75rem; color: var(--ink-3); }
+.day-legend i { display: inline-block; width: 0.8rem; height: 0.8rem; margin-right: 0.3rem; border-radius: 3px; vertical-align: -0.1rem; }
+.day-legend i.t1 { background: var(--t1); } .day-legend i.t2 { background: var(--t2); } .day-legend i.t3 { background: var(--t3); }
+.day-legend i.cut { background: repeating-linear-gradient(45deg, var(--cut) 0 2px, transparent 2px 5px); }
+@media (max-width: 640px) {
+  .hero { grid-template-columns: 1fr; }
+  .hero .big { grid-row: auto; }
+  .hero .big .v { font-size: 2.6rem; }
+}
+
+/* 계산 한 줄 — 칸 넷, 입력 칸만 짙게 */
+.chain {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: 0.4rem;
+  max-width: var(--measure);
+  margin: 0.8rem 0 1rem;
+  font-family: var(--sans);
+}
+.chain .s { display: flex; flex-direction: column; padding: 0.6rem 0.75rem; border-radius: 10px; background: var(--card-2); }
+.chain .op { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-3); }
+.chain .v { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; color: var(--ink); }
+.chain .nm { font-size: 0.74rem; line-height: 1.4; color: var(--ink-2); }
+.chain .key { background: var(--ink); }
+.chain .key .op, .chain .key .v, .chain .key .nm { color: var(--card); }
+
+/* 둘을 항목별로 — 표 선 없이 열만 맞춘다 */
+.versus {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 1.2rem;
+  max-width: var(--measure);
+  margin: 0.8rem 0 1rem;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+}
+.versus > span { padding: 0.45rem 0; }
+.versus .h { font-size: 0.75rem; font-weight: 600; color: var(--ink-3); }
+.versus .h code { color: var(--ink); }
+.versus .h small { display: block; font-weight: 400; }
+.versus .k { color: var(--ink-3); }
+.versus .v { font-weight: 600; color: var(--ink); }
+.versus .v small { display: block; font-size: 0.72rem; font-weight: 400; color: var(--ink-3); }
+
+/* 한 축 위의 사건 — 새벽 확대 · 기간 띠 */
+.doc-body .prose > figure.track { max-width: var(--measure); margin: 1.2rem 0 1.8rem; }
+.track svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+.track .tick { font-size: 10px; fill: var(--ink-3); }
+.track .rail { fill: var(--ink); opacity: 0.06; }
+.track .b1 { fill: var(--t1); } .track .b2 { fill: var(--t2); } .track .b3 { fill: var(--t3); }
+.track .bmute { fill: var(--ink); opacity: 0.12; } .track .bcut { fill: var(--cut); }
+.track text.top { font-size: 11px; font-weight: 600; fill: var(--ink); opacity: 1; }
+.track text.top.bcut { fill: var(--cut); }
+.track .in { font-size: 10px; fill: var(--ink-2); }
+.track .pt { fill: var(--ink); } .track .pt.ring { fill: var(--card); stroke: var(--ink); stroke-width: 2; }
+.track .miss { stroke: var(--cut); stroke-width: 2; }
+.track .pl { font-size: 11px; font-weight: 600; fill: var(--ink); } .track .pl.k-miss { fill: var(--cut); }
+.track .pl.k-small { font-weight: 400; font-size: 10px; fill: var(--ink-3); }
+.track .ps { font-size: 10px; fill: var(--ink-3); }
+.track .rg { fill: none; stroke: var(--ink); stroke-width: 1.3; } .track .rg.dashed { stroke: var(--ink-3); stroke-dasharray: 3 3; }
+.track .rl { font-size: 12px; font-weight: 700; fill: var(--ink); } .track .rl.dashed { font-size: 11px; font-weight: 500; fill: var(--ink-3); }
+.track.large .tick { font-size: 12px; }
+.track.large text.top, .track.large .pl { font-size: 13px; }
+.track.large .in, .track.large .ps, .track.large .pl.k-small { font-size: 12px; }
+.track.large .rl { font-size: 15px; } .track.large .rl.dashed { font-size: 12px; }
+
+/* 종료 — 무엇이 들어와 접었나. 대표 숫자 바로 아래 */
+.now {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+  max-width: var(--measure);
+  margin: -1.4rem 0 2.2rem;
+  padding: 0.85rem 1.1rem;
+  border-radius: 12px;
+  background: var(--card-2);
+  font-family: var(--sans);
+}
+.now .d { font-size: 0.72rem; line-height: 1.3; text-align: center; color: var(--ink-3); }
+.now .d b { display: block; font-size: 1.1rem; color: var(--ink); }
+.prose .now p { margin: 0; font-family: var(--sans); font-size: 0.9rem; line-height: 1.5; color: var(--ink); }
+.now small { display: block; margin-top: 0.15rem; font-size: 0.78rem; color: var(--ink-2); }
+
+/* 소개 첫 화면 끝 — 다른 판으로 가는 두 칸 */
+.next {
+  display: grid;
+  /* 판이 하나뿐인 편은 한 칸 — 폭 전체로 늘지 않게 칸 폭을 고정한다 */
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: 0.6rem;
+  max-width: var(--measure);
+  margin: 0 0 2.6rem;
+  font-family: var(--sans);
+}
+.prose .next a { display: block; padding: 0.85rem 1.1rem; border-radius: 12px; background: var(--card-2); color: var(--ink); text-decoration: none; }
+.prose .next a:hover b { color: var(--link); }
+.next small { display: block; font-size: 0.72rem; color: var(--ink-3); }
+.next b { font-size: 0.95rem; font-weight: 600; }
+
 /* 소리 몇 개 — 언제 · 말 · 재생 */
 .voices {
   display: grid;
@@ -928,12 +1131,7 @@ figcaption {
   .card .ds { font-size: 0.8125rem; }
   .card .mt { margin-top: 0.7rem; font-size: 0.6875rem; }
 
-  .wrap > section + section { margin-top: 2.6rem; }
-  .note { font-size: 0.75rem; }
-
-  .filter { margin: -0.8rem 0 2rem; }
-  .filter button { font-size: 0.8125rem; padding: 0.32rem 0.8rem; }
-  .card .ed { font-size: 0.75rem; }
+  .pick button { font-size: 0.8125rem; padding: 0.3rem 0.75rem; }
 
   .tabs { margin: 0 0 0.6rem auto; }
   .tabs a { min-width: 4.6rem; padding: 0.38rem 0.9rem; font-size: 0.875rem; }

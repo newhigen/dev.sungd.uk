@@ -1,0 +1,66 @@
+---
+title: Claude 워밍업
+tagline: 출근 전 Claude 사용량 윈도우를 미리 열어 근무 중 윈도우 3개를 확보하는 CLI
+period: "2026.05.29"
+status: 종료
+purpose: 개발 도구
+ended: 공식 Claude Code 루틴(/schedule)이 같은 기능 제공, 2026.06 종료
+kind: CLI
+tags: [Bash, launchd, pmset, Claude Code]
+github: https://github.com/newhigen/claude-warmup
+link: /p/claude-warmup/quota-windows.html
+linkLabel: 윈도우 시각화
+cover: /p/claude-warmup/cover.png
+headCover: false
+use:
+  - "설치 때 출근 시각 하나만 입력"
+  - "출근 3시간 전 · 2시간 후 · 7시간 후 자동 메시지"
+  - "근무 중 사용량 윈도우 3개가 차례로 개방"
+---
+
+import Hero from '../../components/Hero.astro';
+import Now from '../../components/Now.astro';
+import Next from '../../components/Next.astro';
+import Chain from '../../components/Chain.astro';
+import Versus from '../../components/Versus.astro';
+
+<p class="q">9시간 근무, 5시간 윈도우는 2개뿐.</p>
+
+Claude 의 5시간 윈도우는 첫 메시지 시각에 시작. 출근 전 자동 메시지로 근무 중 윈도우 3개 확보.
+
+<Hero label="하루에 받는 한도" v="최대 1.5배"
+  note="근무 중 윈도우 2개 → 3개. 한도를 매번 다 쓰는 날 기준"
+  tiles={[
+    { label: "야근한 날 세 번째 윈도우", v: "20% → ≈100%", note: "19시 퇴근" },
+    { label: "드는 것", v: "하루 3통", note: "가장 작은 모델 · 한 단어 · 세션 미저장" },
+  ]}
+  basis="계산값 — 7시 출근 · 16시 퇴근 기준 윈도우 계산. 토큰 사용량 실측 아님." />
+
+<Now year="2026" month="6월"
+  line="Claude Code 에 <b>/schedule</b> 이 들어와 종료"
+  sub="정한 시각에 메시지 보내기를 공식 지원 — 이 도구가 하던 일" />
+
+<Next items={[
+  { tab: "왜 만들었나", title: "하루 윈도우가 어디로 가나", href: "/claude-warmup/why" },
+  { tab: "개발기", title: "새벽 5시와 macOS 절전", href: "/claude-warmup/making" },
+]} />
+
+## 동작 방식
+
+### 출근 시각 하나로 계산
+
+<Chain steps={[
+  { op: "입력", v: "07:00", name: "출근", key: true },
+  { op: "−3:01", v: "03:59", name: "첫 메시지" },
+  { op: "+5:01", v: "09:00", name: "두 번째 · 출근 +2시간 정각" },
+  { op: "+10:02", v: "14:01", name: "세 번째" },
+]} />
+
+새벽엔 `pmset` 으로 맥 기상, `launchd` 로 `claude -p "ok" --model haiku` 한 줄.
+
+### 동료용과 개인용
+
+<Versus a="<code>install.sh</code> 동료용" b="<code>install-personal.sh</code> 집 맥" rows={[
+  { head: "기준", a: "출근 시각", aNote: "입력 하나로 계산", b: "고정 시각", bNote: "5 · 10 · 15 · 20시" },
+  { head: "횟수", a: "하루 3번 · 평일", b: "하루 4번 · 매일" },
+]} />

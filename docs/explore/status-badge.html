@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>상태 배지 — 용어와 모양</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#e6e3f0;--card:#fbfaff;--card-2:#dfe6f2;--shadow:0 2px 24px rgba(40,35,80,.08);--ink:#221f2b;--prose:#3a3646;--ink-2:#57536b;--ink-3:#6f6b85;--accent:#8a6a3c;
+--s1:#2f8a64;--s2:#b07818;--s3:#4a6db8;--s4:#77738a;
+--sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;--serif:"Noto Serif KR",Pretendard,serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--prose);font:16px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:84rem;margin:0 auto;padding:3rem 2rem 8rem}
+h1{font-family:var(--serif);font-size:2.2rem;margin:0 0 .4rem;color:var(--ink)}
+.lede{max-width:54rem;color:var(--ink-2);margin:0}
+h2{font-size:1.15rem;font-weight:600;color:var(--accent);margin:3.5rem 0 .2rem}
+.q{font-size:.88rem;color:var(--ink-3);margin:0 0 1rem;max-width:58rem}
+.q b{color:var(--ink)}
+.paper{background:var(--card);border-radius:14px;padding:1.4rem 1.8rem;box-shadow:var(--shadow)}
+
+/* 용어 표 */
+table{border-collapse:collapse;width:100%}
+th,td{text-align:left;padding:.7rem .8rem .7rem 0;vertical-align:middle}
+th{font-size:.72rem;font-weight:600;color:var(--ink-3)}
+tbody tr+tr td{border-top:1px solid #ece9f3}
+td.nm{font-weight:600;color:var(--ink);white-space:nowrap}
+td.nt{font-size:.8rem;color:var(--ink-2);max-width:22rem}
+tr.pick td.nm::after{content:"추천";margin-left:.5rem;font-size:.66rem;color:#fff;background:var(--accent);padding:.05rem .45rem;border-radius:999px;vertical-align:.1rem}
+.scroll{overflow-x:auto}
+
+/* 배지 공통 */
+.b{font-family:var(--sans);letter-spacing:0;display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:600;line-height:1;white-space:nowrap;border-radius:999px;padding:.32rem .65rem .32rem .55rem}
+.b svg{width:.8rem;height:.8rem;flex:none}
+.s1{--c:var(--s1)}.s2{--c:var(--s2)}.s3{--c:var(--s3)}.s4{--c:var(--s4)}
+/* 모양 1 · 점 */
+.dot{color:var(--ink);padding-left:0;padding-right:0}
+.dot::before{content:"";width:.5rem;height:.5rem;border-radius:999px;background:var(--c)}
+.dot.s4::before{background:transparent;box-shadow:inset 0 0 0 1.5px var(--c)}
+/* 모양 2 · 아이콘 + 옅은 바탕 */
+.tint{color:var(--c);background:color-mix(in srgb,var(--c) 13%,var(--card))}
+/* 모양 3 · 아이콘 + 테두리 */
+.line{color:var(--c);box-shadow:inset 0 0 0 1.2px color-mix(in srgb,var(--c) 55%,transparent);background:transparent}
+/* 모양 4 · 채움 */
+.fill{color:#fff;background:var(--c)}
+
+.styles{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}
+.styles .paper{padding:1.2rem 1.3rem}
+.styles h3{font-size:.9rem;margin:0 0 .15rem;color:var(--ink)}
+.styles p{font-size:.78rem;color:var(--ink-3);margin:0 0 .9rem}
+.row{display:flex;flex-wrap:wrap;gap:.45rem .5rem}
+.bg-page{background:var(--bg);border-radius:10px;padding:.7rem;margin-top:.7rem}
+.bg-page small{display:block;font-size:.68rem;color:var(--ink-3);margin-bottom:.35rem}
+@media (max-width:1000px){.styles{grid-template-columns:1fr 1fr}}
+
+/* 실제 자리 */
+.ctx{display:grid;grid-template-columns:1.25fr 1fr;gap:1.4rem;align-items:start}
+@media (max-width:1000px){.ctx{grid-template-columns:1fr}}
+.tag{font-size:.75rem;font-weight:600;color:var(--ink-3);margin:0 0 .5rem}
+.head h3{font-family:var(--serif);font-size:1.9rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);margin:0;line-height:1.25;display:flex;align-items:center;gap:.7rem;flex-wrap:wrap}
+.head .tl{font-size:.9rem;color:var(--ink-2);margin:.35rem 0 0}
+.tabs{display:flex;gap:.3rem;margin:.8rem 0 1rem}
+.tabs span{font-size:.75rem;padding:.2rem .7rem;border-radius:999px;background:var(--card);color:var(--ink-2)}
+.tabs span.on{background:var(--ink);color:var(--card)}
+.hook{font-family:var(--serif);font-size:1.45rem;font-weight:700;color:var(--ink);margin:0 0 .4rem}
+.t{font-family:var(--serif);font-size:.9rem;margin:0}
+.ghost{margin-top:1rem;height:4rem;border-radius:12px;background:var(--card-2);opacity:.55;display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--ink-3)}
+.now{margin-top:.9rem;display:grid;grid-template-columns:auto 1fr;gap:.9rem;align-items:center;padding:.8rem 1rem;border-radius:12px;background:var(--card-2)}
+.now .d{font-size:.72rem;color:var(--ink-3);line-height:1.3;text-align:center}.now .d b{display:block;font-size:1.05rem;color:var(--ink)}
+.now p{margin:0;font-size:.85rem;color:var(--ink)}.now p small{display:block;font-size:.74rem;color:var(--ink-2)}
+.list h4{font-size:.8rem;color:var(--ink-3);margin:1rem 0 .5rem;font-weight:600}
+.list h4:first-child{margin-top:0}
+.card{display:grid;grid-template-columns:1fr auto;gap:.1rem .8rem;align-items:center;background:var(--card);border-radius:12px;padding:.75rem 1rem;box-shadow:var(--shadow);margin-bottom:.5rem}
+.card b{font-family:var(--serif);color:var(--ink);font-size:1rem}
+.card span.d{grid-column:1;font-size:.76rem;color:var(--ink-2)}
+.card .b{grid-row:1 / span 2;grid-column:2}
+</style>
+</head>
+<body><div class="wrap">
+<svg width="0" height="0" style="position:absolute"><defs>
+  <symbol id="i1" viewBox="0 0 16 16"><path d="M5 3.5v9l7-4.5z" fill="currentColor"/></symbol>
+  <symbol id="i2" viewBox="0 0 16 16"><rect x="4" y="3.5" width="2.6" height="9" rx=".6" fill="currentColor"/><rect x="9.4" y="3.5" width="2.6" height="9" rx=".6" fill="currentColor"/></symbol>
+  <symbol id="i3" viewBox="0 0 16 16"><path d="M3.5 8.4l3 3 6-6.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i4" viewBox="0 0 16 16"><rect x="2.5" y="3" width="11" height="3.2" rx=".8" fill="currentColor"/><path d="M3.6 7.2h8.8v5.3a1 1 0 0 1-1 1H4.6a1 1 0 0 1-1-1z" fill="currentColor" opacity=".55"/><rect x="6.3" y="8.6" width="3.4" height="1.3" rx=".6" fill="#fff"/></symbol>
+  <symbol id="i4b" viewBox="0 0 16 16"><path d="M3 8h7.5M8 4.5L11.5 8 8 11.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</defs></svg>
+
+<h1>상태 배지 — 용어와 모양</h1>
+<p class="lede">목록의 상태 넷이 제목 옆 칩으로도 서니 두 자리가 같은 말·같은 모양이어야 함. 용어 먼저, 모양 다음, 마지막에 실제 자리.</p>
+
+<h2>1 · 용어</h2>
+<p class="q"><b>폐기</b>는 «버렸다» 로 읽혀 쓸모없는 물건 같음. Claude 워밍업·알림 목소리는 버린 게 아니라 할 일을 다 하고 손을 뗀 것. 넷째 칸을 무엇으로 부를지가 핵심이고, 첫 셋은 거기에 맞춰 짝을 맞춤.</p>
+<div class="paper scroll"><table>
+<thead><tr><th>안</th><th>쓰는 중</th><th>잠시 멈춤</th><th>목적 달성</th><th>손 뗌</th><th>읽힘</th></tr></thead>
+<tbody>
+<tr><td class="nm">지금</td>
+<td><span class="b tint s1"><svg><use href="#i1"/></svg>사용 중</span></td><td><span class="b tint s2"><svg><use href="#i2"/></svg>멈춤</span></td><td><span class="b tint s3"><svg><use href="#i3"/></svg>끝남</span></td><td><span class="b tint s4"><svg><use href="#i4"/></svg>폐기</span></td>
+<td class="nt">폐기는 실패·쓰레기 느낌. 끝남과 폐기의 차이도 흐림</td></tr>
+<tr class="pick"><td class="nm">B</td>
+<td><span class="b tint s1"><svg><use href="#i1"/></svg>사용 중</span></td><td><span class="b tint s2"><svg><use href="#i2"/></svg>보류</span></td><td><span class="b tint s3"><svg><use href="#i3"/></svg>완료</span></td><td><span class="b tint s4"><svg><use href="#i4"/></svg>종료</span></td>
+<td class="nt">프로젝트 관리 표준 용어. 완료 = 목적 달성, 종료 = 운영을 닫음. 뒤 셋이 두 글자 한자어로 짝이 맞음</td></tr>
+<tr><td class="nm">C</td>
+<td><span class="b tint s1"><svg><use href="#i1"/></svg>사용 중</span></td><td><span class="b tint s2"><svg><use href="#i2"/></svg>멈춤</span></td><td><span class="b tint s3"><svg><use href="#i3"/></svg>끝남</span></td><td><span class="b tint s4"><svg><use href="#i4"/></svg>보관</span></td>
+<td class="nt">GitHub 의 Archived 번역어. 코드는 남아 있다는 뜻까지 전달. 지금 셋은 그대로</td></tr>
+<tr><td class="nm">D</td>
+<td><span class="b tint s1"><svg><use href="#i1"/></svg>사용 중</span></td><td><span class="b tint s2"><svg><use href="#i2"/></svg>보류</span></td><td><span class="b tint s3"><svg><use href="#i3"/></svg>완료</span></td><td><span class="b tint s4"><svg><use href="#i4b"/></svg>대체됨</span></td>
+<td class="nt">넷째 칸을 까닭으로. 워밍업엔 딱 맞지만 대체한 것 없이 접은 편(1인 AI 회사 · Term Radar · LifeOS)엔 안 맞음</td></tr>
+</tbody></table></div>
+
+<h2>2 · 모양</h2>
+<p class="q">색은 상태마다 하나 — 초록 사용 중 · 황색 보류 · 파랑 완료 · 회색 종료. 아이콘은 재생 · 일시정지 · 체크 · 상자로 미디어 버튼 문법을 빌림. 용어는 B 로 그림. 아래 연보라 칸은 글머리처럼 페이지 바탕 위에 섰을 때.</p>
+<div class="styles">
+  <div class="paper"><h3>① 점</h3><p>가장 조용함. 색만으로 가름</p>
+    <div class="row"><span class="b dot s1">사용 중</span><span class="b dot s2">보류</span><span class="b dot s3">완료</span><span class="b dot s4">종료</span></div>
+    <div class="bg-page"><small>바탕 위</small><div class="row"><span class="b dot s1">사용 중</span><span class="b dot s4">종료</span></div></div></div>
+  <div class="paper"><h3>② 아이콘 + 옅은 바탕</h3><p>색 · 모양 · 글자 셋이 겹쳐 흑백에서도 읽힘</p>
+    <div class="row"><span class="b tint s1"><svg><use href="#i1"/></svg>사용 중</span><span class="b tint s2"><svg><use href="#i2"/></svg>보류</span><span class="b tint s3"><svg><use href="#i3"/></svg>완료</span><span class="b tint s4"><svg><use href="#i4"/></svg>종료</span></div>
+    <div class="bg-page"><small>바탕 위</small><div class="row"><span class="b tint s1"><svg><use href="#i1"/></svg>사용 중</span><span class="b tint s4"><svg><use href="#i4"/></svg>종료</span></div></div></div>
+  <div class="paper"><h3>③ 아이콘 + 테두리</h3><p>바탕 없이 선만. 카드 위에서 가벼움</p>
+    <div class="row"><span class="b line s1"><svg><use href="#i1"/></svg>사용 중</span><span class="b line s2"><svg><use href="#i2"/></svg>보류</span><span class="b line s3"><svg><use href="#i3"/></svg>완료</span><span class="b line s4"><svg><use href="#i4"/></svg>종료</span></div>
+    <div class="bg-page"><small>바탕 위</small><div class="row"><span class="b line s1"><svg><use href="#i1"/></svg>사용 중</span><span class="b line s4"><svg><use href="#i4"/></svg>종료</span></div></div></div>
+  <div class="paper"><h3>④ 채움</h3><p>가장 셈. 목록에 스무 개 서면 시끄러움</p>
+    <div class="row"><span class="b fill s1"><svg><use href="#i1"/></svg>사용 중</span><span class="b fill s2"><svg><use href="#i2"/></svg>보류</span><span class="b fill s3"><svg><use href="#i3"/></svg>완료</span><span class="b fill s4"><svg><use href="#i4"/></svg>종료</span></div>
+    <div class="bg-page"><small>바탕 위</small><div class="row"><span class="b fill s1"><svg><use href="#i1"/></svg>사용 중</span><span class="b fill s4"><svg><use href="#i4"/></svg>종료</span></div></div></div>
+</div>
+
+<h2>3 · 실제 자리 — 용어 B · 모양 ②</h2>
+<p class="q">왼쪽은 고른 C 판 글머리. 오른쪽은 목록 카드. 목록은 지금 상태별로 절을 나눠 두어 절 제목이 이미 상태를 말함 — 카드마다 배지를 달면 겹침. 그래서 목록엔 <b>«사용 중» 절 밖 카드에만</b> 달거나, 절을 없애고 배지로 대신하는 두 길.</p>
+<div class="ctx">
+  <div><p class="tag">소개 글머리</p>
+    <div class="head"><h3>Claude 워밍업 <span class="b tint s4"><svg><use href="#i4"/></svg>종료 · 2026.06</span></h3><p class="tl">출근 전 Claude 사용량 윈도우를 미리 열어 근무 중 윈도우 3개를 확보하는 CLI</p><div class="tabs"><span class="on">소개</span><span>왜 만들었나</span><span>개발기</span></div></div>
+    <div class="paper">
+      <p class="hook">9시간 근무, 5시간 윈도우는 2개뿐.</p>
+      <p class="t">Claude 의 5시간 윈도우는 첫 메시지 시각에 시작. 출근 전 자동 메시지로 근무 중 윈도우 3개 확보.</p>
+      <div class="ghost">대표 숫자</div>
+      <div class="now"><div class="d">2026<b>6월</b></div><p>Claude Code 에 <b>/schedule</b> 이 들어와 종료<small>정한 시각에 메시지 보내기를 공식 지원 — 이 도구가 하던 일</small></p></div>
+    </div>
+  </div>
+  <div class="list"><p class="tag">목록 — 절 없이 배지로</p>
+    <div class="card"><b>약수첩</b><span class="d">약·영양제 홈 화면 위젯</span><span class="b tint s1"><svg><use href="#i1"/></svg>사용 중</span></div>
+    <div class="card"><b>리딩 어시스턴트</b><span class="d">페이지를 열면 AI 가 먼저 핵심을 짚는 크롬 확장</span><span class="b tint s2"><svg><use href="#i2"/></svg>보류</span></div>
+    <div class="card"><b>선거 공약 분석</b><span class="d">공약이 지켜질지 전망하는 분석</span><span class="b tint s3"><svg><use href="#i3"/></svg>완료</span></div>
+    <div class="card"><b>Claude 워밍업</b><span class="d">출근 전 사용량 윈도우 미리 열기</span><span class="b tint s4"><svg><use href="#i4"/></svg>종료</span></div>
+    <div class="card"><b>1인 AI 회사</b><span class="d">Linear 티켓을 에이전트가 처리하는 실험</span><span class="b tint s4"><svg><use href="#i4"/></svg>종료</span></div>
+  </div>
+</div>
+
+</div></body></html>

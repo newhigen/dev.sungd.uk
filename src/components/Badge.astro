@@ -1,0 +1,20 @@
+---
+import type { STATUS } from '../content.config';
+
+interface Props {
+  /** 상태 하나 — 색 · 아이콘 · 글자 셋이 같이 간다. 흑백에서도 아이콘으로 갈린다 */
+  status: (typeof STATUS)[number];
+}
+const { status } = Astro.props;
+const tone = { '사용 중': 1, '보류': 2, '완료': 3, '종료': 4 }[status];
+---
+
+<span class={`badge st${tone}`}>
+  <svg viewBox="0 0 16 16" aria-hidden="true">
+    {tone === 1 && <path d="M5 3.5v9l7-4.5z" fill="currentColor" />}
+    {tone === 2 && <><rect x="4" y="3.5" width="2.6" height="9" rx=".6" fill="currentColor" /><rect x="9.4" y="3.5" width="2.6" height="9" rx=".6" fill="currentColor" /></>}
+    {tone === 3 && <path d="M3.5 8.4l3 3 6-6.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />}
+    {tone === 4 && <><rect x="2.5" y="3" width="11" height="3.2" rx=".8" fill="currentColor" /><path d="M3.6 7.2h8.8v5.3a1 1 0 0 1-1 1H4.6a1 1 0 0 1-1-1z" fill="currentColor" opacity=".55" /></>}
+  </svg>
+  {status}
+</span>

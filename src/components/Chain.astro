@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** 계산 한 줄 — 칸마다 연산 · 결과 · 이름. key 는 입력 칸(짙게) */
+  steps: { op: string; v: string; name: string; key?: boolean }[];
+}
+const { steps } = Astro.props;
+---
+
+<div class="chain">
+  {steps.map(s => (
+    <div class:list={['s', { key: s.key }]}>
+      <span class="op">{s.op}</span>
+      <span class="v">{s.v}</span>
+      <span class="nm">{s.name}</span>
+    </div>
+  ))}
+</div>

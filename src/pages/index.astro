@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
-import { STATUS, PURPOSE } from '../content.config';
+import Badge from '../components/Badge.astro';
+import { PURPOSE, STATUS } from '../content.config';
 
 const all = await getCollection('projects');
 
@@ -13,96 +14,126 @@ function num(p: string) {
 function ym(p: string) { return p.slice(0, 7); }
 
 const sorted = [...all].sort((a, b) => num(b.data.period) - num(a.data.period));
-
-const NOTE: Record<(typeof STATUS)[number], string> = {
-  '사용 중': '지금도 쓴다.',
-  '멈춤': '손을 놓았다. 다시 열 수 있다.',
-  '끝남': '한 번 쓰고 목적을 다했다.',
-  '폐기': '안 쓰기로 했다. 접은 까닭을 같이 적었다.',
-};
-
-const groups = STATUS.map(s => ({ status: s, items: sorted.filter(p => p.data.status === s) }))
-  .filter(g => g.items.length > 0);
+// 지금 쓰는 것(사용 중 · 페이지 있음)은 카드로 크게, 나머지(보류 · 완료 · 종료 · 페이지 없는 편)는 한 줄 목록
+// (2026-09-13 docs/explore/home.html 의 B + C)
+const live = sorted.filter(p => p.data.status === '사용 중' && !p.data.draft);
+const past = sorted.filter(p => !live.includes(p));
 const purposes = PURPOSE.map(g => ({ name: g, n: all.filter(p => p.data.purpose === g).length }))
   .filter(g => g.n > 0);
+const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status === s).length }))
+  .filter(s => s.n > 0);
 ---
 
 <Base title="프로젝트">
-  <p class="lede">
-    직접 쓰려고 만든 앱과 도구. 대개 내 하루에 걸리적거리던 것에서 시작했다. 멈추거나 접은
-    것도 까닭과 함께 남겨 둔다.
-  </p>
+  <div class="home">
+    <aside class="pick-rail">
+      <p class="lede">
+        직접 쓰려고 만든 앱과 도구. 대개 내 하루에 걸리적거리던 것에서 시작했다. 종료한 것도 까닭과 함께
+        남겨 둔다.
+      </p>
 
-  <nav class="filter" aria-label="갈래">
-    <button type="button" class="on" data-pick="">전체<span class="n">{all.length}</span></button>
-    {purposes.map(g => (
-      <button type="button" data-pick={g.name}>{g.name}<span class="n">{g.n}</span></button>
-    ))}
-  </nav>
+      <nav class="pick" data-key="갈래" aria-label="갈래">
+        <div class="lb">갈래</div>
+        <button type="button" class="on" data-pick="">전체<span class="n">{all.length}</span></button>
+        {purposes.map(g => (
+          <button type="button" data-pick={g.name}>{g.name}<span class="n">{g.n}</span></button>
+        ))}
+      </nav>
 
-  {groups.map(g => (
-    <section data-status={g.status}>
-      <h2 class="sec">{g.status}<span class="n">{g.items.length}</span></h2>
-      <p class="note">{NOTE[g.status]}</p>
-      <div class="cards">
-        {g.items.map(p => {
-          const d = p.data;
-          const body = (
-            <>
-              {d.icon && <img class="icon" src={d.icon} alt="" />}
-              {d.kind && <div class="kd">{d.kind}</div>}
-              <div class="nm">{d.title}</div>
-              <p class="ds">{d.tagline}</p>
-              {d.ended && <p class="ed">{d.ended}</p>}
-              <div class="mt">{d.purpose} · {ym(d.period)}</div>
-            </>
-          );
-          const cls = ['card', { bare: d.draft, noicon: !d.icon }];
-          return d.draft
-            ? <div class:list={cls} data-purpose={d.purpose}>{body}</div>
-            : <a class:list={cls} href={`/${p.id}`} data-purpose={d.purpose}>{body}</a>;
-        })}
-      </div>
-    </section>
-  ))}
+      <nav class="pick st" data-key="상태" aria-label="상태">
+        <div class="lb">상태</div>
+        {statuses.map(s => (
+          <button type="button" data-pick={s.name}><Badge status={s.name} /><span class="n">{s.n}</span></button>
+        ))}
+      </nav>
+    </aside>
+
+    <div class="lists">
+      <section class="grp">
+        <h2 class="sec">지금 쓰는 것<span class="n">{live.length}</span></h2>
+        <div class="cards">
+          {live.map(p => {
+            const d = p.data;
+            return (
+              <a class:list={['card', { noicon: !d.icon }]} href={`/${p.id}`} data-purpose={d.purpose} data-status={d.status}>
+                {d.icon && <img class="icon" src={d.icon} alt="" />}
+                {d.kind && <div class="kd">{d.kind}</div>}
+                <div class="nm">{d.title}</div>
+                <p class="ds">{d.tagline}</p>
+                <div class="mt"><Badge status={d.status} /><span>{d.purpose} · {ym(d.period)}</span></div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+
+      <section class="grp">
+        <h2 class="sec">나머지<span class="n">{past.length}</span></h2>
+        <div class="rows">
+          {past.map(p => {
+            const d = p.data;
+            const body = (
+              <>
+                <span class="ri">{d.icon ? <img src={d.icon} alt="" /> : <i />}</span>
+                <span class="rn">{d.title}</span>
+                <span class="rd">{d.tagline}</span>
+                <span class="rp">{d.purpose}</span>
+                <span class="rb"><Badge status={d.status} /></span>
+                <span class="ry">{ym(d.period)}</span>
+              </>
+            );
+            return d.draft
+              ? <div class="row bare" data-purpose={d.purpose} data-status={d.status}>{body}</div>
+              : <a class="row" href={`/${p.id}`} data-purpose={d.purpose} data-status={d.status}>{body}</a>;
+          })}
+        </div>
+      </section>
+    </div>
+  </div>
 </Base>
 
 <script>
-  // 갈래 칩 — 고른 갈래만 남기고, 비는 절은 접는다. 주소(?갈래=)에 남겨 링크로 건넬 수 있다.
+  // 갈래 · 상태 두 거르기 — 둘 다 맞는 것만 남기고, 비는 묶음은 접는다.
+  // 주소(?갈래= · ?상태=)에 남겨 링크로 건넬 수 있다. 같은 칩을 다시 누르면 풀린다.
   function init() {
-    const bar = document.querySelector<HTMLElement>('.filter');
-    if (!bar) return;
-    const buttons = [...bar.querySelectorAll<HTMLButtonElement>('button')];
-    const sections = [...document.querySelectorAll<HTMLElement>('section[data-status]')];
+    const navs = [...document.querySelectorAll<HTMLElement>('.pick[data-key]')];
+    if (!navs.length) return;
+    const items = [...document.querySelectorAll<HTMLElement>('.lists [data-purpose]')];
+    const groups = [...document.querySelectorAll<HTMLElement>('.lists .grp')];
+    const state: Record<string, string> = {};
 
-    function apply(pick: string) {
-      buttons.forEach(b => b.classList.toggle('on', b.dataset.pick === pick));
-      for (const sec of sections) {
-        const cards = [...sec.querySelectorAll<HTMLElement>('[data-purpose]')];
-        let shown = 0;
-        for (const c of cards) {
-          c.hidden = !!pick && c.dataset.purpose !== pick;
-          if (!c.hidden) shown++;
-        }
-        sec.hidden = shown === 0;
-        const n = sec.querySelector('.sec .n');
+    function apply() {
+      for (const nav of navs) {
+        const v = state[nav.dataset.key!] ?? '';
+        nav.querySelectorAll<HTMLButtonElement>('button').forEach(b => b.classList.toggle('on', (b.dataset.pick ?? '') === v));
+      }
+      const g = state['갈래'] ?? '', s = state['상태'] ?? '';
+      for (const it of items) it.hidden = (!!g && it.dataset.purpose !== g) || (!!s && it.dataset.status !== s);
+      for (const grp of groups) {
+        const shown = grp.querySelectorAll('[data-purpose]:not([hidden])').length;
+        grp.hidden = shown === 0;
+        const n = grp.querySelector('.sec .n');
         if (n) n.textContent = String(shown);
       }
+      const u = new URL(location.href);
+      for (const k of ['갈래', '상태']) state[k] ? u.searchParams.set(k, state[k]) : u.searchParams.delete(k);
+      history.replaceState(history.state, '', u);
     }
 
     const url = new URL(location.href);
-    const start = url.searchParams.get('갈래') ?? '';
-    apply(buttons.some(b => b.dataset.pick === start) ? start : '');
-
-    bar.addEventListener('click', e => {
-      const b = (e.target as HTMLElement).closest('button');
-      if (!b) return;
-      const pick = b.dataset.pick ?? '';
-      apply(pick);
-      const u = new URL(location.href);
-      if (pick) u.searchParams.set('갈래', pick); else u.searchParams.delete('갈래');
-      history.replaceState(history.state, '', u);
-    });
+    for (const nav of navs) {
+      const k = nav.dataset.key!;
+      const want = url.searchParams.get(k) ?? '';
+      if ([...nav.querySelectorAll('button')].some(b => b.dataset.pick === want)) state[k] = want;
+      nav.addEventListener('click', e => {
+        const b = (e.target as HTMLElement).closest('button');
+        if (!b) return;
+        const v = b.dataset.pick ?? '';
+        state[k] = state[k] === v ? '' : v;
+        apply();
+      });
+    }
+    apply();
   }
   document.addEventListener('astro:page-load', init);
 </script>

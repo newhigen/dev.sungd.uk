@@ -1,0 +1,20 @@
+---
+interface Props {
+  /** 둘을 항목별로 — 열 이름 둘과 행마다 값 둘 (값 아래 작은 풀이는 note) */
+  a: string;
+  b: string;
+  rows: { head: string; a: string; b: string; aNote?: string; bNote?: string }[];
+}
+const { a, b, rows } = Astro.props;
+---
+
+<div class="versus">
+  <span></span><span class="h" set:html={a} /><span class="h" set:html={b} />
+  {rows.map(r => (
+    <>
+      <span class="k">{r.head}</span>
+      <span class="v">{r.a}{r.aNote && <small>{r.aNote}</small>}</span>
+      <span class="v">{r.b}{r.bNote && <small>{r.bNote}</small>}</span>
+    </>
+  ))}
+</div>

@@ -4,7 +4,7 @@ title: "독서 성향 분석"
 tagline: "읽은 책 데이터로 분야·저자 분포와 시기별 흐름을 정리하는 리포트."
 period: "2026.05.30"
 purpose: 공부·관심사
-status: 끝남
+status: 완료
 tags: ["Data Analysis", "Python"]
 link: "https://resume.sungd.uk/dashboards/book-analysis.html"
 linkLabel: 대시보드

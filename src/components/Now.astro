@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** 종료한 달 — 왼쪽 칸에 해 · 달 두 줄로 */
+  year: string;
+  month: string;
+  /** 무엇이 들어와 접었나 한 줄 — <b> 가능 */
+  line: string;
+  /** 그게 이 도구가 하던 일과 어떻게 같은가 */
+  sub?: string;
+}
+const { year, month, line, sub } = Astro.props;
+---
+
+<aside class="now">
+  <div class="d">{year}<b>{month}</b></div>
+  <p><span set:html={line} />{sub && <small set:html={sub} />}</p>
+</aside>

@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>왜 만들었나에 숫자를 넣는 법</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{
+  --bg:#e6e3f0; --card:#fbfaff; --card-2:#dfe6f2;
+  --shadow:0 2px 24px rgba(40,35,80,.08);
+  --ink:#221f2b; --prose:#3a3646; --ink-2:#57536b; --ink-3:#6f6b85;
+  --accent:#8a6a3c; --rule:rgba(34,31,43,.09); --rule-mid:rgba(34,31,43,.18); --link:#4a4b93;
+  --w1:#7c93d6; --w2:#5fa88c; --w3:#9a82d4; --waste:#c98a8a;
+  --sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;
+  --serif:"Noto Serif KR",Pretendard,serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--prose);font:16.5px/1.7 var(--sans);-webkit-font-smoothing:antialiased}
+.wrap{max-width:62rem;margin:0 auto;padding:3rem 2rem 8rem}
+.lede h1{font-family:var(--serif);font-size:2.3rem;font-weight:700;letter-spacing:-.02em;margin:0 0 .5rem;color:var(--ink)}
+.lede p{max-width:46rem;margin:0 0 .5rem;color:var(--ink-2)}
+.basis{margin:1.2rem 0 0;padding:1rem 1.2rem;border-radius:12px;background:var(--card);font-size:.88rem;color:var(--ink-2);max-width:46rem}
+.basis b{color:var(--ink)}
+.basis ul{margin:.4rem 0 0;padding-left:1.1rem}
+h2.n{font-size:1.05rem;font-weight:600;color:var(--accent);margin:4rem 0 .2rem}
+.q{font-size:.92rem;color:var(--ink-3);margin:0 0 1rem;max-width:46rem}
+
+/* 실제 판의 종이 */
+.paper{background:var(--card);border-radius:14px;padding:2rem 2.2rem 2.2rem;box-shadow:var(--shadow)}
+.paper .hook{font-family:var(--serif);font-size:1.45rem;font-weight:700;color:var(--ink);margin:0 0 .6rem;line-height:1.4}
+.paper p.t{font-family:var(--serif);margin:0 0 1rem;font-size:.98rem;line-height:1.85;max-width:40rem}
+.paper h4{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--accent);margin:2rem 0 .8rem}
+.note{font-size:.75rem;color:var(--ink-3);margin-top:.6rem}
+
+/* A — 큰 숫자 셋 */
+.kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin:1.4rem 0 .4rem}
+.kpi .v{font-family:var(--sans);font-size:2.3rem;font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.1}
+.kpi .v s{color:var(--ink-3);font-weight:500;text-decoration:none;font-size:1.4rem}
+.kpi .v .ar{color:var(--ink-3);font-weight:400;font-size:1.3rem;margin:0 .25rem}
+.kpi .k{font-size:.85rem;font-weight:600;color:var(--ink);margin-top:.35rem}
+.kpi .d{font-size:.78rem;color:var(--ink-3);line-height:1.5}
+
+/* B — 하루 타임라인 */
+.day{margin:1.2rem 0 .2rem}
+.day svg{display:block;width:100%;height:auto}
+.day text{font-family:var(--sans)}
+.legend{display:flex;gap:1.2rem;font-size:.75rem;color:var(--ink-3);margin-top:.5rem;flex-wrap:wrap}
+.legend i{display:inline-block;width:.8rem;height:.8rem;border-radius:3px;vertical-align:-.1rem;margin-right:.3rem}
+
+/* C — 막대 */
+.bars{display:grid;gap:1.3rem;margin:1.3rem 0 .3rem}
+.bar .k{display:flex;justify-content:space-between;align-items:baseline;font-size:.88rem;font-weight:600;color:var(--ink);margin-bottom:.35rem}
+.bar .k span{font-weight:700;font-size:1.05rem}
+.bar .row{display:grid;grid-template-columns:2.2rem 1fr 6.5rem;gap:.6rem;align-items:center;font-size:.75rem;color:var(--ink-3);margin:.2rem 0}
+.bar .track{height:.9rem;border-radius:5px;background:var(--card-2);overflow:hidden}
+.bar .fill{height:100%;border-radius:5px}
+.bar .row .val{font-family:var(--mono);font-size:.75rem;color:var(--ink-2)}
+
+/* D — 카드 셋 */
+.cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin:1.3rem 0 .3rem}
+.c3{background:var(--card-2);border-radius:12px;padding:1rem 1.1rem 1.1rem;display:flex;flex-direction:column}
+.c3 .lb{font-size:.7rem;color:var(--ink-3);letter-spacing:.02em}
+.c3 .tt{font-size:.92rem;font-weight:600;color:var(--ink);margin:.1rem 0 .5rem;line-height:1.45}
+.c3 .bd{font-size:.8rem;color:var(--ink-2);line-height:1.55;flex:1}
+.c3 .big{margin-top:.9rem;font-size:1.7rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1.1}
+.c3 .big small{display:block;font-size:.72rem;font-weight:500;color:var(--ink-3);letter-spacing:0;margin-top:.2rem}
+
+/* E — 타일 */
+.tiles{display:grid;grid-template-columns:1.3fr 1fr;gap:.9rem;margin:1.3rem 0 .3rem}
+.tile{border-radius:12px;padding:1rem 1.2rem;background:var(--card-2)}
+.tile.hero{grid-row:span 2;display:flex;flex-direction:column;justify-content:space-between}
+.tile .lb{font-size:.75rem;color:var(--ink-3)}
+.tile .v{font-size:1.6rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1.2;margin-top:.2rem}
+.tile.hero .v{font-size:3.4rem}
+.tile .d{font-size:.78rem;color:var(--ink-2);margin-top:.2rem}
+.dots{display:flex;gap:.35rem;margin:.6rem 0 .2rem}
+.dots i{width:2.2rem;height:.6rem;border-radius:3px;background:var(--rule-mid)}
+.dots i.on{background:var(--ink)}
+
+@media (max-width:760px){
+  .kpi,.cards3,.tiles{grid-template-columns:1fr}
+  .tile.hero{grid-row:auto}
+  .paper{padding:1.4rem 1.2rem}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="lede">
+  <h1>왜 만들었나에 숫자를 넣는 법</h1>
+  <p>Claude 워밍업 「왜 만들었나」 한 편을 다섯 벌로 다시 그렸다. 줄글을 줄이고 수치와 도식을 앞에 둔다.
+     고른 판의 핵심 숫자는 소개 맨 위로, 과정의 숫자는 개발기로 옮긴다.</p>
+  <div class="basis">
+    <b>숫자의 근거 — 모두 계산값이다.</b> 실제 토큰 사용량 기록은 없다. 설치 스크립트가 쓰는 윈도우 계산(7시 출근 · 16시 퇴근 · 점심 11:30~12:30)과 README 의 시나리오에서 나온다.
+    <ul>
+      <li>근무 중 새로 열리는 윈도우 <b>2개 → 3개</b> — 한도를 매번 다 쓰는 날이면 하루에 받는 한도가 <b>최대 1.5배</b></li>
+      <li>19시까지 야근한 날 세 번째 윈도우 <b>5시간 중 1시간(20%)</b> 사용 → 14:01에 열려 퇴근까지 <b>약 5시간</b></li>
+      <li>출근 7 · 8 · 9 · 10 · 11시 <b>다섯 경우 모두</b> 윈도우 3개</li>
+      <li>드는 것 — 하루 메시지 <b>3통</b>(가장 작은 모델 · 한 단어) · 설치 때 입력 <b>1개</b> · 비밀번호 <b>1번</b></li>
+    </ul>
+  </div>
+</div>
+
+<!-- A ─────────────────────────────────────────── -->
+<h2 class="n">A · 숫자 셋이 머리</h2>
+<p class="q">훅 한 줄 다음에 바로 전 → 후 숫자 셋. 줄글은 두 문장. 흐름도는 뺀다. 이력서 한 줄로 옮기기 가장 쉽다.</p>
+<div class="paper">
+  <p class="hook">토큰은 모자라는데, 퇴근할 때 윈도우가 남아 있었다.</p>
+  <p class="t">5시간 윈도우는 그날 첫 메시지에 열린다. 출근해서 처음 쓰면 근무 시간 안에 윈도우가 둘밖에 안 들어온다.</p>
+  <div class="kpi">
+    <div><div class="v"><s>2</s><span class="ar">→</span>3개</div><div class="k">근무 중 열리는 윈도우</div><div class="d">7시 출근 · 16시 퇴근</div></div>
+    <div><div class="v"><s>1</s><span class="ar">→</span>1.5배</div><div class="k">하루에 받는 한도</div><div class="d">한도를 매번 다 쓰는 날 기준, 최대</div></div>
+    <div><div class="v"><s>20</s><span class="ar">→</span>≈100%</div><div class="k">야근한 날 세 번째 윈도우</div><div class="d">19시 퇴근. 5시간 중 1시간 → 거의 전부</div></div>
+  </div>
+  <p class="note">계산값. 드는 것은 하루 메시지 3통.</p>
+</div>
+
+<!-- B ─────────────────────────────────────────── -->
+<h2 class="n">B · 하루 타임라인 도식</h2>
+<p class="q">같은 하루를 전 · 후 두 줄로. 근무 구간 위에 윈도우 블록이 어떻게 떨어지는지 보이고, 줄 끝에 개수. 설명 없이 그림이 말한다.</p>
+<div class="paper">
+  <p class="hook">윈도우는 첫 메시지에 열리고, 첫 메시지는 늘 출근한 뒤였다.</p>
+  <div class="day">
+    <svg viewBox="0 0 760 210" role="img" aria-label="전후 윈도우 타임라인">
+      <!-- 축: 3시~21시, 1시간 = 36px, x0 = 70 -->
+      <g font-size="10" fill="#6f6b85">
+        <text x="70" y="200">03</text><text x="178" y="200">06</text><text x="286" y="200">09</text>
+        <text x="394" y="200">12</text><text x="502" y="200">15</text><text x="610" y="200">18</text><text x="706" y="200">21</text>
+      </g>
+      <!-- 근무 07~16 -->
+      <rect x="214" y="18" width="324" height="166" rx="6" fill="#221f2b" opacity=".045"/>
+      <text x="220" y="14" font-size="10" fill="#6f6b85">근무 07:00–16:00</text>
+      <line x1="538" y1="18" x2="538" y2="184" stroke="#221f2b" stroke-width="1.2" stroke-dasharray="3 3"/>
+      <!-- 전 -->
+      <text x="0" y="62" font-size="12" font-weight="600" fill="#221f2b">전</text>
+      <rect x="214" y="44" width="180" height="30" rx="6" fill="#7c93d6" opacity=".85"/>
+      <text x="222" y="63" font-size="11" fill="#fff" font-weight="600">W1 07–12</text>
+      <rect x="430" y="44" width="180" height="30" rx="6" fill="#5fa88c" opacity=".85"/>
+      <text x="438" y="63" font-size="11" fill="#fff" font-weight="600">W2 13–18</text>
+      <rect x="538" y="44" width="72" height="30" fill="url(#hatch)"/>
+      <text x="640" y="64" font-size="22" font-weight="700" fill="#221f2b">2개</text>
+      <!-- 후 -->
+      <text x="0" y="138" font-size="12" font-weight="600" fill="#221f2b">후</text>
+      <rect x="100" y="120" width="180" height="30" rx="6" fill="#7c93d6" opacity=".85"/>
+      <text x="108" y="139" font-size="11" fill="#fff" font-weight="600">W1 03:59–</text>
+      <rect x="286" y="120" width="180" height="30" rx="6" fill="#5fa88c" opacity=".85"/>
+      <text x="294" y="139" font-size="11" fill="#fff" font-weight="600">W2 09:00–</text>
+      <rect x="467" y="120" width="180" height="30" rx="6" fill="#9a82d4" opacity=".85"/>
+      <text x="475" y="139" font-size="11" fill="#fff" font-weight="600">W3 14:01–</text>
+      <text x="680" y="140" font-size="22" font-weight="700" fill="#221f2b">3개</text>
+      <!-- 핑 -->
+      <g fill="#221f2b"><circle cx="100" cy="162" r="3"/><circle cx="286" cy="162" r="3"/><circle cx="467" cy="162" r="3"/></g>
+      <text x="100" y="178" font-size="10" fill="#6f6b85">자동 메시지 3통</text>
+      <defs><pattern id="hatch" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#fbfaff"/><line x1="0" y1="0" x2="0" y2="6" stroke="#c98a8a" stroke-width="2.5"/></pattern></defs>
+    </svg>
+    <div class="legend"><span><i style="background:var(--w1)"></i>첫 윈도우</span><span><i style="background:var(--w2)"></i>두 번째</span><span><i style="background:var(--w3)"></i>세 번째</span><span><i style="background:repeating-linear-gradient(45deg,var(--waste) 0 2px,#fbfaff 2px 5px)"></i>퇴근 뒤로 밀린 몫</span></div>
+  </div>
+  <p class="t" style="margin-top:1.2rem">7~11시 어느 때 출근해도 후 줄은 윈도우 셋이 근무 시간에 걸린다.</p>
+  <p class="note">계산값.</p>
+</div>
+
+<!-- C ─────────────────────────────────────────── -->
+<h2 class="n">C · 전 · 후 막대</h2>
+<p class="q">항목마다 막대 두 줄. 크기 차이를 눈으로 잰다. 비용 막대를 같이 둬 «무엇을 치르고 얻었나» 가 한 판에 선다.</p>
+<div class="paper">
+  <p class="hook">토큰은 모자라는데, 퇴근할 때 윈도우가 남아 있었다.</p>
+  <div class="bars">
+    <div class="bar">
+      <div class="k">근무 중 받는 한도 <span>1.5배</span></div>
+      <div class="row">전<div class="track"><div class="fill" style="width:66.6%;background:var(--ink-3)"></div></div><span class="val">윈도우 2</span></div>
+      <div class="row">후<div class="track"><div class="fill" style="width:100%;background:var(--ink)"></div></div><span class="val">윈도우 3</span></div>
+    </div>
+    <div class="bar">
+      <div class="k">야근한 날 세 번째 윈도우 사용 <span>20% → 약 100%</span></div>
+      <div class="row">전<div class="track"><div class="fill" style="width:20%;background:var(--ink-3)"></div></div><span class="val">1h / 5h</span></div>
+      <div class="row">후<div class="track"><div class="fill" style="width:99%;background:var(--ink)"></div></div><span class="val">≈5h / 5h</span></div>
+    </div>
+    <div class="bar">
+      <div class="k">드는 것 <span>하루 3통</span></div>
+      <div class="row">전<div class="track"><div class="fill" style="width:0"></div></div><span class="val">0통</span></div>
+      <div class="row">후<div class="track"><div class="fill" style="width:6%;background:var(--accent)"></div></div><span class="val">3통 · 한 단어</span></div>
+    </div>
+  </div>
+  <p class="note">계산값. 7시 출근 · 16시 퇴근, 야근은 19시 퇴근.</p>
+</div>
+
+<!-- D ─────────────────────────────────────────── -->
+<h2 class="n">D · 문제 → 한 것 → 효과 카드</h2>
+<p class="q">막힌 지점 하나에 카드 한 장, 카드 바닥에 숫자. 포트폴리오의 «상황 · 행동 · 결과» 틀과 같다. 줄글 절(쓰던 것 · 그래서 정한 것)이 카드로 흡수된다.</p>
+<div class="paper">
+  <p class="hook">토큰은 모자라는데, 퇴근할 때 윈도우가 남아 있었다.</p>
+  <div class="cards3">
+    <div class="c3"><div class="lb">정시 퇴근한 날</div><div class="tt">윈도우 둘만 들어온다</div><div class="bd">7~12시, 13~18시. 세 번째는 퇴근 뒤. → 출근 3시간 전에 첫 윈도우를 연다.</div><div class="big">2 → 3개<small>근무 중 윈도우</small></div></div>
+    <div class="c3"><div class="lb">야근한 날</div><div class="tt">세 번째가 늦게 열려 대부분 남는다</div><div class="bd">18시에 열려 19시 퇴근이면 한 시간. → 세 번째를 14:01에 연다.</div><div class="big">20 → ≈100%<small>세 번째 윈도우 사용</small></div></div>
+    <div class="c3"><div class="lb">사람마다</div><div class="tt">출근 시각이 달라 시각을 따로 계산해야 한다</div><div class="bd">→ 출근 시각 하나만 입력받고 나머지는 스크립트가 계산.</div><div class="big">입력 1개<small>7~11시 출근 모두 윈도우 3개</small></div></div>
+  </div>
+  <p class="note">계산값.</p>
+</div>
+
+<!-- E ─────────────────────────────────────────── -->
+<h2 class="n">E · 대표 숫자 하나 + 타일</h2>
+<p class="q">가장 센 숫자 하나를 크게, 나머지는 작은 타일. 소개 맨 위에 그대로 올리기 좋다. 타일 수만큼만 말하니 줄글이 가장 적다.</p>
+<div class="paper">
+  <p class="hook">토큰은 모자라는데, 퇴근할 때 윈도우가 남아 있었다.</p>
+  <div class="tiles">
+    <div class="tile hero">
+      <div><div class="lb">하루에 받는 한도</div><div class="v">1.5배</div><div class="d">근무 중 윈도우 2개 → 3개. 한도를 매번 다 쓰는 날, 최대</div></div>
+      <div class="dots"><i class="on"></i><i class="on"></i><i></i><span style="font-size:.72rem;color:var(--ink-3);margin-left:.4rem">전</span></div>
+      <div class="dots" style="margin-top:0"><i class="on"></i><i class="on"></i><i class="on"></i><span style="font-size:.72rem;color:var(--ink-3);margin-left:.4rem">후</span></div>
+    </div>
+    <div class="tile"><div class="lb">야근한 날 세 번째 윈도우</div><div class="v">20% → ≈100%</div></div>
+    <div class="tile"><div class="lb">드는 것</div><div class="v">하루 3통</div><div class="d">가장 작은 모델 · 한 단어 · 세션 안 남김</div></div>
+  </div>
+  <p class="note">계산값.</p>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+---
+tagline: 새벽 5시 메시지 한 통의 정시 발송을 두고 macOS 절전과 씨름한 17일
+---
+
+import Evo from '../../components/Evo.astro';
+import Track from '../../components/Track.astro';
+
+<p class="q">5시 예약 메시지, 매일 ~11분 지연.</p>
+
+<Track large min={0} max={40}
+  ticks={[{ at: 0, label: "04:50" }, { at: 10, label: "05:00" }, { at: 20, label: "05:10" }, { at: 30, label: "05:20" }, { at: 40, label: "05:30" }]}
+  bars={[
+    { from: 5, to: 6, tone: "2", label: "04:55 기상" },
+    { from: 6, to: 22, tone: "mute", inside: "1분 뒤 다시 잠듦" },
+  ]}
+  points={[
+    { at: 10, kind: "miss", label: "05:00 예약 — 누락" },
+    { at: 22, kind: "dot", label: "~05:12 실행", sub: "맥을 열었을 때" },
+    { at: 36, kind: "ring", label: "05:26", sub: "6월 1일" },
+  ]}
+  ranges={[
+    { from: 10, to: 22, label: "매일 ~11분" },
+    { from: 10, to: 36, label: "가장 늦은 날 26분", dashed: true },
+  ]}
+  caption="깨운 맥이 예약 시각까지 못 버팀 → 막으려던 wake-bridge 도 덮인 맥(DarkWake)에선 무력." />
+
+<Track large min={0} max={16}
+  ticks={[{ at: 0, label: "5/29" }, { at: 3, label: "6/1" }, { at: 4, label: "6/2" }, { at: 16, label: "6/14" }]}
+  bars={[
+    { from: 0, to: 1, tone: "1", label: "만들기" },
+    { from: 3, to: 5, tone: "cut", label: "새벽 절전과 씨름 · PR 4개" },
+    { from: 5, to: 15, tone: "mute" },
+    { from: 15, to: 16, tone: "mute", label: "종료" },
+  ]}
+  points={[
+    { at: 0, kind: "small" }, { at: 3, kind: "small" }, { at: 3.35, kind: "small" },
+    { at: 3.7, kind: "small" }, { at: 4, kind: "small" }, { at: 16, kind: "small" },
+  ]}
+  caption="17일 · PR 5개(점). 계산은 첫날 완료, 이후는 새벽 첫 메시지 정시 발송 문제." />
+
+## 개발 과정
+
+<Evo items={[
+  { at: "5월 29일", title: "출근 시각 하나로 계산",
+    problem: "근무 중 윈도우 3개가 들어오는 시각을 사람마다 따로 계산",
+    did: "출근 −3:01 · +5:01 · +10:02 공식, 대화형 설치, 미리보기 표",
+    result: "7시 출근 → 03:59 · 09:00 · 14:01. 근무 중 윈도우 2 → 3개(계산값), 파일 하나로 배포" },
+  { at: "6월 1일", title: "새벽 메시지 지연",
+    problem: "04:55 기상한 맥이 1분 뒤 다시 잠들어 05:00 작업 누락",
+    did: "04:55부터 7분간 절전 차단 작업(wake-bridge) 추가, 호출을 caffeinate 로 감쌈",
+    result: "개인용 · 동료용 설치 스크립트 양쪽에 적용" },
+  { at: "6월 2~3일", title: "DarkWake",
+    problem: "다음 날 새벽에도 미발송 — 덮인 맥은 저전력 기상만, macOS 는 그 상태에서 사용자 스케줄 작업 미실행",
+    did: "wake-bridge 제거, caffeinate 감싸기는 실행 중 절전 방지로 유지",
+    result: "«전원 연결 · 열림이면 정시, 덮으면 뚜껑 열 때» 를 README 에 한계로 기록" },
+  { at: "6월 14일", title: "루틴으로 대체",
+    problem: "Claude Code 루틴(/schedule)이 정한 시각 실행을 공식 지원",
+    did: "스케줄 작업 · 설치 폴더 삭제, repo archive, README 맨 위 은퇴 안내",
+    result: "읽기 전용 repo 와 윈도우 시각화만 남음" },
+]} />
+
+## 배운 점
+
+**공백을 메우는 도구는 공식 기능 출시와 함께 수명 종료.** 유지 대신 종료 결정.
+
+**종료도 기록.** README 맨 위 · HISTORY 에 «무엇이 대체했나» 를 남겨 repo 방문자를 루틴으로 안내.
+
+## 산출물
+
+- [윈도우 시각화](/p/claude-warmup/quota-windows.html) — 워밍업 전 · 후, 출근 시각별 한 장
+- [소스](https://github.com/newhigen/claude-warmup) — archive, 읽기 전용
