@@ -37,6 +37,9 @@ if (d.shots.length > 0) toc.push({ slug: 'shots', text: '이전 버전' });
         {d.kind && <><dt>종류</dt><dd>{d.kind}</dd></>}
         <dt>기간</dt>
         <dd class="when">{d.period}</dd>
+        <dt>상태</dt>
+        <dd>{d.status} · {d.purpose}</dd>
+        {d.ended && <dd class="ended">{d.ended}</dd>}
         {d.tags.length > 0 && <><dt>스택</dt><dd>{d.tags.join(' · ')}</dd></>}
         {(d.github || d.link) && (
           <>

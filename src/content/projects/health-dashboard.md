@@ -3,7 +3,7 @@ draft: true
 title: "건강검진 결과지 분석"
 tagline: "건강검진 수치의 연도별 추세를 추적하는 대시보드."
 period: "2026.05.20"
-category: "데이터·대시보드"
+purpose: 생활
 tags: ["Health", "Dashboard"]
 link: "https://resume.sungd.uk/dashboards/health.html"
 linkLabel: 대시보드

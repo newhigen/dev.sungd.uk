@@ -3,7 +3,8 @@ draft: true
 title: "보험 상품 비교 분석"
 tagline: "두 보험 상품을 한 기준으로 비교하고 30년 손익을 시뮬레이션."
 period: "2026.05.25"
-category: "데이터·대시보드"
+purpose: 돈
+status: 끝남
 tags: ["Insurance", "Dashboard"]
 link: "https://resume.sungd.uk/dashboards/insurance.html"
 linkLabel: 대시보드

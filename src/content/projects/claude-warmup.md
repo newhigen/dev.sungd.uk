@@ -3,7 +3,9 @@ draft: true
 title: "Claude 워밍업"
 tagline: "출근 전 Claude quota 윈도우를 미리 깨워 하루 토큰을 고르게 분산."
 period: "2026.05.29"
-category: "Claude·Agent"
+purpose: 개발 도구
+status: 폐기
+ended: "공식 Claude Code 루틴(/schedule)이 같은 일을 하게 돼 접었다 (2026.06)"
 tags: ["Claude Code", "CLI"]
 github: "https://github.com/newhigen/claude-warmup"
 link: "https://resume.sungd.uk/dashboards/claude-warmup.html"

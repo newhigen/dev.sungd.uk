@@ -3,7 +3,7 @@ draft: true
 title: "Claude Code 트래킹"
 tagline: "릴리스마다 \"오늘 써볼 만한 것\"을 골라주는 changelog 큐레이션."
 period: "2026.05.28"
-category: "Claude·Agent"
+purpose: 개발 도구
 tags: ["Claude Code", "Curation"]
 link: "https://ai.sungd.uk"
 linkLabel: 사이트

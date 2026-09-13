@@ -167,52 +167,52 @@ a { color: inherit; }
   color: var(--ink-3);
 }
 
-/* 지나온 것 — 시간이 축이다 */
-.tl { position: relative; }
-.tl::before {
-  content: "";
-  position: absolute;
-  left: 6.5rem;
-  top: 0.4rem;
-  bottom: 0.4rem;
-  width: 1px;
-  background: var(--rule);
+/* 갈래 칩 — 탭과 같은 알약. 고른 것만 흰 알약이 된다 */
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: -1.2rem 0 3rem;
 }
-.tl .yr {
-  position: relative;
-  margin: 1.9rem 0 0.7rem;
-  font-family: var(--mono);
+.filter button {
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.36rem 0.9rem;
+  border: 0;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.filter button:hover { color: var(--ink); }
+.filter button.on {
+  background: var(--chip-on);
+  color: var(--chip-on-ink);
+  box-shadow: 0 1px 3px rgba(40, 35, 80, 0.14);
+}
+.filter .n { margin-left: 0.4rem; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); }
+
+/* 칩이 거른 카드 — .card 의 display:grid 가 hidden 을 이긴다 */
+[hidden] { display: none !important; }
+/* 아이콘이 없는 편 — 아이콘 칸을 비워 두면 이름이 3rem 칸에 끼어 한 글자씩 접힌다 */
+.card.noicon { grid-template-columns: minmax(0, 1fr); }
+.card.noicon .mt, .card.noicon .ed { grid-column: 1; }
+
+/* 페이지가 없는 편 — 누를 데가 없으니 뜨지 않는다 */
+.card.bare { box-shadow: none; background: color-mix(in srgb, var(--card) 50%, transparent); }
+.card.bare .nm { color: var(--ink-2); }
+.card.bare:hover .nm { color: var(--ink-2); }
+/* 멈추거나 접은 까닭 */
+.card .ed {
+  grid-column: 2;
+  margin: 0.45rem 0 0;
   font-size: 0.8125rem;
   color: var(--ink-3);
+  text-wrap: pretty;
 }
-.tl .yr:first-child { margin-top: 0; }
-.tl .ev {
-  position: relative;
-  display: grid;
-  grid-template-columns: 5.25rem 11rem minmax(0, 1fr);
-  gap: 0 1.25rem;
-  align-items: baseline;
-  padding: 0.42rem 0;
-}
-.tl .ev::before {
-  content: "";
-  position: absolute;
-  left: calc(6.5rem - 4px);
-  top: 1.05em;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--card);
-  box-shadow: inset 0 0 0 1px var(--rule-mid);
-}
-.tl .dt {
-  text-align: right;
-  font-family: var(--mono);
-  font-size: 0.75rem;
-  color: var(--ink-3);
-}
-.tl .nm { padding-left: 1.25rem; color: var(--ink-2); }
-.tl .ds { font-size: 0.875rem; color: var(--ink-3); }
+.card .ed::before { content: "→ "; }
+.rail dd.ended { color: var(--ink-3); }
 
 /* ── 글 ───────────────────────────────────────────── */
 
@@ -924,13 +924,9 @@ figcaption {
   .wrap > section + section { margin-top: 2.6rem; }
   .note { font-size: 0.75rem; }
 
-  .tl::before { left: 3px; }
-  .tl .yr { margin: 1.5rem 0 0.5rem; font-size: 0.75rem; }
-  .tl .ev { display: block; padding: 0.42rem 0 0.42rem 1.1rem; }
-  .tl .ev::before { left: 0; top: 0.95em; }
-  .tl .dt { display: block; text-align: left; font-size: 0.6875rem; }
-  .tl .nm { display: block; padding-left: 0; font-size: 0.875rem; }
-  .tl .ds { display: block; font-size: 0.75rem; }
+  .filter { margin: -0.8rem 0 2rem; }
+  .filter button { font-size: 0.8125rem; padding: 0.32rem 0.8rem; }
+  .card .ed { font-size: 0.75rem; }
 
   .tabs { margin: 0 0 0.6rem auto; }
   .tabs a { min-width: 4.6rem; padding: 0.38rem 0.9rem; font-size: 0.875rem; }

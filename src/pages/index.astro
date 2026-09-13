@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import { STATUS, PURPOSE } from '../content.config';
 
 const all = await getCollection('projects');
 
@@ -8,65 +9,100 @@ function num(p: string) {
   const m = p.match(/(\d{4})\.(\d{2})(?:\.(\d{2}))?/);
   return m ? Number(m[1]) * 10000 + Number(m[2]) * 100 + Number(m[3] ?? 0) : 0;
 }
-function year(p: string) { return p.slice(0, 4); }
-function md(p: string) { return p.slice(5); }   // 05.30 · 05
+/** 목록에는 월까지만 — 2026.05.30 → 2026.05 */
+function ym(p: string) { return p.slice(0, 7); }
 
 const sorted = [...all].sort((a, b) => num(b.data.period) - num(a.data.period));
-const live = sorted.filter(p => !p.data.draft);
-const past = sorted.filter(p => p.data.draft);
 
-// 지나온 것은 시간순 — 연도로만 끊는다.
-const byYear = new Map<string, typeof past>();
-for (const p of past) {
-  const y = year(p.data.period);
-  if (!byYear.has(y)) byYear.set(y, []);
-  byYear.get(y)!.push(p);
-}
+const NOTE: Record<(typeof STATUS)[number], string> = {
+  '사용 중': '지금도 쓴다.',
+  '멈춤': '손을 놓았다. 다시 열 수 있다.',
+  '끝남': '한 번 쓰고 목적을 다했다.',
+  '폐기': '안 쓰기로 했다. 접은 까닭을 같이 적었다.',
+};
+
+const groups = STATUS.map(s => ({ status: s, items: sorted.filter(p => p.data.status === s) }))
+  .filter(g => g.items.length > 0);
+const purposes = PURPOSE.map(g => ({ name: g, n: all.filter(p => p.data.purpose === g).length }))
+  .filter(g => g.n > 0);
 ---
 
 <Base title="프로젝트">
   <p class="lede">
-    직접 쓰려고 만든 앱과 도구. 대개 내 하루에 걸리적거리던 것에서 시작했고, 만든 뒤에도
-    계속 쓰고 있는 것만 올려 둔다.
+    직접 쓰려고 만든 앱과 도구. 대개 내 하루에 걸리적거리던 것에서 시작했다. 멈추거나 접은
+    것도 까닭과 함께 남겨 둔다.
   </p>
 
-  {live.length > 0 && (
-    <section>
-      <h2 class="sec">지금 쓰는 것<span class="n">{live.length}</span></h2>
-      <div class="cards">
-        {live.map(p => (
-          <a class="card" href={`/${p.id}`}>
-            {p.data.icon && <img class="icon" src={p.data.icon} alt="" />}
-            {p.data.kind && <div class="kd">{p.data.kind}</div>}
-            <div class="nm">{p.data.title}</div>
-            <p class="ds">{p.data.tagline}</p>
-            <div class="mt">
-              {[p.data.tags[0], p.data.period].filter(Boolean).join(' · ')}
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
-  )}
+  <nav class="filter" aria-label="갈래">
+    <button type="button" class="on" data-pick="">전체<span class="n">{all.length}</span></button>
+    {purposes.map(g => (
+      <button type="button" data-pick={g.name}>{g.name}<span class="n">{g.n}</span></button>
+    ))}
+  </nav>
 
-  {past.length > 0 && (
-    <section>
-      <h2 class="sec">지나온 것<span class="n">{past.length}</span></h2>
-      <p class="note">만들고 쓴 순서대로. 페이지는 아직 안 열었다.</p>
-      <div class="tl">
-        {[...byYear.entries()].map(([y, items]) => (
-          <>
-            <div class="yr">{y}</div>
-            {items.map(p => (
-              <div class="ev">
-                <span class="dt">{md(p.data.period)}</span>
-                <span class="nm">{p.data.title}</span>
-                <span class="ds">{p.data.tagline}</span>
-              </div>
-            ))}
-          </>
-        ))}
+  {groups.map(g => (
+    <section data-status={g.status}>
+      <h2 class="sec">{g.status}<span class="n">{g.items.length}</span></h2>
+      <p class="note">{NOTE[g.status]}</p>
+      <div class="cards">
+        {g.items.map(p => {
+          const d = p.data;
+          const body = (
+            <>
+              {d.icon && <img class="icon" src={d.icon} alt="" />}
+              {d.kind && <div class="kd">{d.kind}</div>}
+              <div class="nm">{d.title}</div>
+              <p class="ds">{d.tagline}</p>
+              {d.ended && <p class="ed">{d.ended}</p>}
+              <div class="mt">{d.purpose} · {ym(d.period)}</div>
+            </>
+          );
+          const cls = ['card', { bare: d.draft, noicon: !d.icon }];
+          return d.draft
+            ? <div class:list={cls} data-purpose={d.purpose}>{body}</div>
+            : <a class:list={cls} href={`/${p.id}`} data-purpose={d.purpose}>{body}</a>;
+        })}
       </div>
     </section>
-  )}
+  ))}
 </Base>
+
+<script>
+  // 갈래 칩 — 고른 갈래만 남기고, 비는 절은 접는다. 주소(?갈래=)에 남겨 링크로 건넬 수 있다.
+  function init() {
+    const bar = document.querySelector<HTMLElement>('.filter');
+    if (!bar) return;
+    const buttons = [...bar.querySelectorAll<HTMLButtonElement>('button')];
+    const sections = [...document.querySelectorAll<HTMLElement>('section[data-status]')];
+
+    function apply(pick: string) {
+      buttons.forEach(b => b.classList.toggle('on', b.dataset.pick === pick));
+      for (const sec of sections) {
+        const cards = [...sec.querySelectorAll<HTMLElement>('[data-purpose]')];
+        let shown = 0;
+        for (const c of cards) {
+          c.hidden = !!pick && c.dataset.purpose !== pick;
+          if (!c.hidden) shown++;
+        }
+        sec.hidden = shown === 0;
+        const n = sec.querySelector('.sec .n');
+        if (n) n.textContent = String(shown);
+      }
+    }
+
+    const url = new URL(location.href);
+    const start = url.searchParams.get('갈래') ?? '';
+    apply(buttons.some(b => b.dataset.pick === start) ? start : '');
+
+    bar.addEventListener('click', e => {
+      const b = (e.target as HTMLElement).closest('button');
+      if (!b) return;
+      const pick = b.dataset.pick ?? '';
+      apply(pick);
+      const u = new URL(location.href);
+      if (pick) u.searchParams.set('갈래', pick); else u.searchParams.delete('갈래');
+      history.replaceState(history.state, '', u);
+    });
+  }
+  document.addEventListener('astro:page-load', init);
+</script>
