@@ -1,9 +1,10 @@
-# projects.sungd.uk
+# dev.sungd.uk
 
-프로젝트 — 앱 · 도구 · 대시보드 · 분석. [projects.sungd.uk](https://projects.sungd.uk)
+프로젝트와 노트 — 앱 · 도구 · 대시보드 · 분석, 그리고 개발 메모. [dev.sungd.uk](https://dev.sungd.uk)
 
 전에는 `resume.sungd.uk/projects` 에 있었다. 주소는 이력서인데 라우트로 보면 프로젝트가
-더 컸고, 갈래도 화면도 다시 짜야 해서 제 주소로 뗐다.
+더 컸고, 갈래도 화면도 다시 짜야 해서 제 주소로 뗐다. 2026-09-14 에 `projects.sungd.uk`
+에서 이 주소로 옮겼다.
 
 ## 구조
 
@@ -40,7 +41,7 @@ npm run build      # dist/
 ```
 
 `main` 에 올리면 Actions 가 GitHub Pages 로 올린다. 도메인은 Cloudflare 에서
-`projects` → `CNAME newhigen.github.io` (회색 구름).
+`dev` → `CNAME newhigen.github.io` (회색 구름).
 
 ## 남은 것
 
