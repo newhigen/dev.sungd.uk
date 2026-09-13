@@ -67,4 +67,14 @@ const why = defineCollection({
   schema: z.object({ tagline: z.string() }),
 });
 
-export const collections = { projects, why, making };
+/** 노트 — writing.sungd.uk 기술 글. 표지 없이 날짜·제목만 목록에 선다 */
+const notes = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/notes' }),
+  schema: z.object({
+    title: z.string(),
+    pubDate: z.coerce.date(),
+    tags: z.array(z.string()).default([]),
+  }),
+});
+
+export const collections = { projects, why, making, notes };

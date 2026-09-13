@@ -1,0 +1,172 @@
+/* 노트 — writing.sungd.uk 기술 글 12편. 표지 없이 날짜·제목만 목록에 서고,
+ * 글 화면은 프로젝트 문서보다 코드·표를 넉넉히 보여준다. 색은 site.css 토큰 그대로 쓴다.
+ */
+
+/* ── 목록 ─────────────────────────────────────────── */
+
+.notes-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  max-width: var(--measure);
+}
+.notes-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 1.1rem;
+  padding: 0.45rem 0;
+  text-decoration: none;
+}
+.notes-list .dt {
+  flex: 0 0 6rem;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--ink-3);
+}
+.notes-list .tt {
+  font-size: 0.9375rem;
+  color: var(--ink);
+}
+.notes-list a:hover .tt {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-mid);
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+  .notes-list a { flex-direction: column; gap: 0.15rem; padding: 0.45rem 0; }
+  .notes-list .dt { flex: none; }
+}
+
+/* ── 글 머리 — 날짜만, 탭이 없으니 두 줄 예약은 끈다 ─── */
+
+.note-doc .doc-head .tagline {
+  min-height: 0;
+  max-width: none;
+  font-family: var(--mono);
+  font-size: 0.875rem;
+}
+
+/* ── 본문 안 h1 — writing 글이 그대로 갖고 온 큰 절 제목 ─ */
+
+.note-doc .prose h1 {
+  font-family: var(--serif);
+  color: var(--ink);
+  font-size: 1.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin: 3.4rem 0 1rem;
+  scroll-margin-top: 1.75rem;
+}
+.note-doc .prose > h1:first-child { margin-top: 0; }
+
+/* ── 코드 — 폭은 판 끝까지, 배경은 카드보다 한 단 짙게 ─── */
+
+.note-doc .prose pre {
+  max-width: none;
+  background: var(--card-2);
+  border-radius: 10px;
+}
+.note-doc .prose code {
+  background: var(--card-2);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  /* 공백 없는 긴 인라인 code(경로 등)가 좁은 화면에서 줄을 넘기지 않고 꺾이게 */
+  overflow-wrap: anywhere;
+}
+.note-doc .prose pre code {
+  background: none;
+  padding: 0;
+}
+
+/* shiki 이중 테마 — defaultColor:false 라 밤낮 값을 직접 골라 써야 한다 */
+.note-doc .prose pre[class*='astro-code'],
+.note-doc .prose pre[class*='astro-code'] span {
+  color: var(--shiki-light);
+}
+@media (prefers-color-scheme: dark) {
+  .note-doc .prose pre[class*='astro-code'],
+  .note-doc .prose pre[class*='astro-code'] span {
+    color: var(--shiki-dark);
+  }
+}
+
+/* ── 표 — 마크다운 표 그대로. 넓으면 통째로 가로 스크롤 ── */
+
+.note-doc .prose table {
+  display: block;
+  overflow-x: auto;
+  max-width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin: 0 0 1.5rem;
+}
+.note-doc .prose th,
+.note-doc .prose td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.5rem 1.2rem 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.note-doc .prose thead th {
+  color: var(--ink-3);
+  font-weight: 500;
+  border-bottom: 1px solid var(--rule-mid);
+}
+.note-doc .prose th:last-child,
+.note-doc .prose td:last-child { padding-right: 0; }
+
+/* ── 각주 — remark-gfm 이 붙이는 구분선을 여백으로 바꾼다 ── */
+
+.note-doc .prose [data-footnotes] {
+  margin-top: 3rem;
+  font-size: 0.875rem;
+  color: var(--ink-2);
+}
+.note-doc .prose [data-footnotes] hr { display: none; }
+.note-doc .prose [data-footnotes] ol { padding-left: 1.2rem; }
+.note-doc .prose [data-footnotes] li { margin-bottom: 0.4rem; }
+/* remark-gfm 이 붙이는 a11y 전용 「Footnotes」 제목 — 화면엔 숨기고 스크린리더에만 남긴다 */
+.note-doc .prose .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 900px) {
+  .note-doc .prose pre { max-width: 100%; }
+}
+
+/* ── 좁은 화면 — 카드는 두되 거터·패딩을 줄여 글줄 폭을 넓힌다 ── */
+
+@media (max-width: 640px) {
+  /* 바깥 거터(site.css --gut)는 프로젝트 글과 공유하는 값이라 여기서만 좁힌다 */
+  .wrap:has(.note-doc) {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+  .note-doc .doc-body > .paper,
+  .note-doc .doc-body > div,
+  .note-doc .doc-body > .prose {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 9px;
+  }
+  .note-doc .prose {
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  .note-doc .doc-head h1 { font-size: 1.375rem; }
+  .note-doc .prose h1 { font-size: 1.3rem; margin-top: 2.4rem; }
+  .note-doc .prose h2 { font-size: 1.05rem; }
+  .note-doc .prose h3 { font-size: 0.9375rem; }
+  .note-doc .prose pre { font-size: 0.78125rem; }
+}
