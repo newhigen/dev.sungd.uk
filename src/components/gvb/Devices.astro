@@ -1,0 +1,54 @@
+---
+/**
+ * 갤럭시 음성 브리지 — 무엇이 어디로 가나. 갤럭시 → Mac → 입력창 세 기기를 한 줄로.
+ * (2026-09-14 docs/explore/gvb-diagram.html 의 A) 색은 토큰 클래스라 밤 판에서 뒤집힌다.
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+---
+
+<figure class="gvb">
+  <svg viewBox="0 0 640 290" role="img" aria-label="갤럭시에서 녹음한 음성이 같은 Wi-Fi 로 Mac 에 가고, Mac 의 Whisper 가 전사해 입력창 커서 자리에 붙여넣음">
+    <defs><marker id="gvb-ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" class="f-ink2" /></marker></defs>
+    <rect x="262" y="8" width="176" height="28" rx="14" class="f-ink" />
+    <text x="350" y="26" text-anchor="middle" class="t-key">⌥ Space ×2 — 시작 · 정지</text>
+
+    <rect x="40" y="46" width="92" height="170" rx="16" class="f-ink" />
+    <rect x="47" y="58" width="78" height="146" rx="10" class="f-card" />
+    <circle cx="86" cy="116" r="20" class="f-rec" opacity=".18" /><circle cx="86" cy="116" r="10" class="f-rec" />
+    <text x="86" y="158" text-anchor="middle" class="t-b">녹음 중</text>
+    <text x="86" y="174" text-anchor="middle" class="t-s">Mac 으로 전송</text>
+    <text x="86" y="244" text-anchor="middle" class="t-h">갤럭시</text>
+    <text x="86" y="262" text-anchor="middle" class="t-n">마이크 · 전용 앱</text>
+
+    <line x1="146" y1="128" x2="250" y2="128" class="s-wire" stroke-dasharray="6 5" marker-end="url(#gvb-ar)" />
+    <text x="198" y="112" text-anchor="middle" class="t-b">음성 16 kHz</text>
+    <text x="198" y="150" text-anchor="middle" class="t-s">같은 Wi-Fi</text>
+    <text x="198" y="164" text-anchor="middle" class="t-s">녹음 중 실시간</text>
+
+    <rect x="262" y="56" width="176" height="120" rx="8" class="f-ink" />
+    <rect x="270" y="64" width="160" height="104" rx="3" class="f-screen" />
+    <rect x="300" y="80" width="100" height="36" rx="8" class="f-t3" />
+    <text x="350" y="96" text-anchor="middle" class="t-on">Whisper</text>
+    <text x="350" y="109" text-anchor="middle" class="t-on s">large-v3-turbo</text>
+    <rect x="306" y="136" width="88" height="20" rx="10" class="f-cap" />
+    <circle cx="318" cy="146" r="3.5" class="f-rec" />
+    <text x="342" y="150" text-anchor="middle" class="t-cap">녹음 중</text>
+    <g class="s-wave"><line x1="364" y1="143" x2="364" y2="149" /><line x1="368" y1="140" x2="368" y2="152" /><line x1="372" y1="142" x2="372" y2="150" /><line x1="376" y1="139" x2="376" y2="153" /><line x1="380" y1="143" x2="380" y2="149" /><line x1="384" y1="141" x2="384" y2="151" /></g>
+    <path d="M250 176h200l14 14H236z" class="f-base" />
+    <text x="350" y="244" text-anchor="middle" class="t-h">Mac</text>
+    <text x="350" y="262" text-anchor="middle" class="t-n">덮개 닫힘 · 받기 · 전사 — 밖으로 안 나감</text>
+
+    <line x1="452" y1="128" x2="512" y2="128" class="s-wire" marker-end="url(#gvb-ar)" />
+    <text x="482" y="112" text-anchor="middle" class="t-b">전사문</text>
+    <text x="482" y="150" text-anchor="middle" class="t-s">붙여넣기</text>
+
+    <rect x="522" y="92" width="100" height="72" rx="10" class="f-card s-edge" />
+    <text x="534" y="116" class="t-s">Claude Code</text>
+    <text x="534" y="136" class="t-in">테스트 돌려 줘</text>
+    <rect x="603" y="126" width="1.6" height="13" class="f-ink" />
+    <text x="572" y="244" text-anchor="middle" class="t-h">입력창</text>
+    <text x="572" y="262" text-anchor="middle" class="t-n">커서 자리</text>
+  </svg>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

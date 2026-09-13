@@ -1,0 +1,34 @@
+---
+/**
+ * 갤럭시 음성 브리지 — 언제 무엇이. Mac · 갤럭시 · 입력창 세 줄, 가로가 시간.
+ * (2026-09-14 docs/explore/gvb-diagram.html 의 B)
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+---
+
+<figure class="gvb">
+  <svg viewBox="0 34 640 216" role="img" aria-label="첫 Option+Space 에 갤럭시 녹음이 시작되고, 두 번째에 멈춘 뒤 Mac 이 전사해 입력창에 붙여넣음">
+    <defs><marker id="gvb-ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" class="f-ink2" /></marker></defs>
+    <text x="0" y="64" class="t-h s">Mac</text><text x="0" y="134" class="t-h s">갤럭시</text><text x="0" y="204" class="t-h s">입력창</text>
+    <g class="s-lane"><line x1="70" y1="60" x2="630" y2="60" /><line x1="70" y1="130" x2="630" y2="130" /><line x1="70" y1="200" x2="630" y2="200" /></g>
+
+    <rect x="80" y="46" width="70" height="28" rx="14" class="f-ink" /><text x="115" y="64" text-anchor="middle" class="t-key s">⌥ Space</text>
+    <line x1="115" y1="76" x2="115" y2="116" class="s-wire t" marker-end="url(#gvb-ar2)" />
+
+    <rect x="115" y="120" width="250" height="20" rx="6" class="f-rec" />
+    <text x="240" y="134" text-anchor="middle" class="t-on">녹음 · 16 kHz PCM 실시간 전송</text>
+    <g class="s-wire t" stroke-dasharray="3 3"><line x1="170" y1="118" x2="170" y2="76" /><line x1="230" y1="118" x2="230" y2="76" /><line x1="290" y1="118" x2="290" y2="76" /><line x1="350" y1="118" x2="350" y2="76" /></g>
+    <rect x="160" y="50" width="200" height="20" rx="10" class="f-cap s-edge" /><text x="260" y="64" text-anchor="middle" class="t-cap">캡슐 «녹음 중» · 파형 · 출력 음소거</text>
+
+    <rect x="365" y="46" width="70" height="28" rx="14" class="f-ink" /><text x="400" y="64" text-anchor="middle" class="t-key s">⌥ Space</text>
+    <rect x="440" y="50" width="100" height="20" rx="6" class="f-t3" /><text x="490" y="64" text-anchor="middle" class="t-on">Whisper 전사</text>
+    <line x1="545" y1="72" x2="575" y2="186" class="s-wire t" marker-end="url(#gvb-ar2)" />
+    <rect x="560" y="188" width="70" height="24" rx="6" class="f-card s-edge" /><text x="595" y="204" text-anchor="middle" class="t-cap">붙여넣기</text>
+
+    <text x="115" y="238" text-anchor="middle" class="t-s">시작음 Tink</text>
+    <text x="400" y="238" text-anchor="middle" class="t-s">정지음 Pop</text>
+    <text x="545" y="238" text-anchor="middle" class="t-s">«완료»</text>
+  </svg>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

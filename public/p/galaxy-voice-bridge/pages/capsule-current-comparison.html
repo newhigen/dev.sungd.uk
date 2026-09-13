@@ -1,0 +1,373 @@
+<section id="galaxy-capsule-compare" aria-label="Galaxy Voice Bridge 캡슐 비교">
+  <style>
+    #galaxy-capsule-compare {
+      width: 100%;
+      color: light-dark(#17191f, #f3f4f7);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+    }
+
+    #galaxy-capsule-compare * { box-sizing: border-box; }
+
+    #galaxy-capsule-compare .comparison-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    #galaxy-capsule-compare .comparison-note {
+      margin: 0;
+      color: light-dark(#6d7280, #aeb3bf);
+      font-size: 13px;
+    }
+
+    #galaxy-capsule-compare .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    #galaxy-capsule-compare .variant {
+      min-width: 0;
+    }
+
+    #galaxy-capsule-compare .variant-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 0 2px 8px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    #galaxy-capsule-compare .variant-heading span:last-child {
+      color: light-dark(#777c88, #989eaa);
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    #galaxy-capsule-compare .current-name {
+      color: light-dark(#b5222d, #ff7b84);
+    }
+
+    #galaxy-capsule-compare .recommended-name {
+      color: light-dark(#16663b, #67d996);
+    }
+
+    #galaxy-capsule-compare .desktop-stage {
+      position: relative;
+      height: 142px;
+      overflow: hidden;
+      border-radius: 18px;
+      background:
+        linear-gradient(90deg, transparent 0 5%, rgba(255,255,255,.035) 5% 5.5%, transparent 5.5% 100%),
+        repeating-linear-gradient(180deg, #252624 0 18px, #222321 18px 36px);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.06);
+    }
+
+    #galaxy-capsule-compare .desktop-stage::before,
+    #galaxy-capsule-compare .desktop-stage::after {
+      content: "";
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      height: 4px;
+      border-radius: 2px;
+      opacity: .22;
+      background: linear-gradient(90deg, #b7bbb5 0 46%, transparent 46% 51%, #898d87 51% 75%, transparent 75%);
+    }
+
+    #galaxy-capsule-compare .desktop-stage::before { top: 22px; }
+    #galaxy-capsule-compare .desktop-stage::after { top: 47px; right: 55px; }
+
+    #galaxy-capsule-compare .mock-dock-line {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 11px;
+      height: 1px;
+      background: rgba(255,255,255,.12);
+    }
+
+    #galaxy-capsule-compare .capsule {
+      position: absolute;
+      left: 50%;
+      bottom: 19px;
+      display: flex;
+      align-items: center;
+      color: #191b20;
+      transform: translateX(-50%);
+      white-space: nowrap;
+    }
+
+    #galaxy-capsule-compare .status-dot {
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #ff453a;
+    }
+
+    #galaxy-capsule-compare .state-transcribing .status-dot { background: #0a84ff; }
+    #galaxy-capsule-compare .state-error .status-dot { background: #ff9f0a; }
+
+    #galaxy-capsule-compare .status-copy {
+      flex: 0 0 auto;
+      letter-spacing: -.2px;
+      line-height: 1;
+    }
+
+    #galaxy-capsule-compare .waveform {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    #galaxy-capsule-compare .state-transcribing .waveform,
+    #galaxy-capsule-compare .state-error .waveform { display: none; }
+
+    #galaxy-capsule-compare .waveform i {
+      display: block;
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: #25272d;
+      opacity: .88;
+    }
+
+    /* A0: 현재 AppKit 구현과 같은 236 × 58, 18pt 여백, 9pt 점, 12개 파형. */
+    #galaxy-capsule-compare .variant-current .capsule {
+      width: 236px;
+      height: 58px;
+      padding: 0 18px;
+      gap: 12px;
+      border: 1px solid rgba(255,255,255,.9);
+      border-radius: 29px;
+      background: rgba(252,252,252,.98);
+      box-shadow: 0 12px 44px rgba(0,0,0,.42);
+    }
+    #galaxy-capsule-compare .variant-current .status-dot { width: 9px; height: 9px; }
+    #galaxy-capsule-compare .variant-current .status-copy { font-size: 14px; font-weight: 700; }
+    #galaxy-capsule-compare .variant-current .waveform { gap: 3px; }
+    #galaxy-capsule-compare .variant-current .waveform i { width: 3px; }
+
+    /* B: 높이와 좌우 여백을 한 단계 줄인 균형형. */
+    #galaxy-capsule-compare .variant-balanced .capsule {
+      width: 208px;
+      height: 46px;
+      padding: 0 15px;
+      gap: 10px;
+      border: 1px solid rgba(20,22,27,.08);
+      border-radius: 23px;
+      background: #fafafa;
+      box-shadow: 0 10px 26px rgba(0,0,0,.32), 0 2px 5px rgba(0,0,0,.18);
+    }
+    #galaxy-capsule-compare .variant-balanced .status-dot { width: 8px; height: 8px; }
+    #galaxy-capsule-compare .variant-balanced .status-copy { font-size: 13px; font-weight: 600; }
+    #galaxy-capsule-compare .variant-balanced .waveform { gap: 2.5px; }
+    #galaxy-capsule-compare .variant-balanced .waveform i { width: 2.5px; }
+
+    /* C: 가장 작고 정보 밀도가 높은 형. */
+    #galaxy-capsule-compare .variant-dense .capsule {
+      width: 188px;
+      height: 40px;
+      padding: 0 13px;
+      gap: 9px;
+      border: 1px solid rgba(20,22,27,.07);
+      border-radius: 20px;
+      background: #f7f7f6;
+      box-shadow: 0 7px 18px rgba(0,0,0,.28);
+    }
+    #galaxy-capsule-compare .variant-dense .status-dot { width: 7px; height: 7px; }
+    #galaxy-capsule-compare .variant-dense .status-copy { font-size: 12px; font-weight: 600; }
+    #galaxy-capsule-compare .variant-dense .waveform { gap: 2px; }
+    #galaxy-capsule-compare .variant-dense .waveform i { width: 2px; }
+
+    /* D: 너비는 유지하되 덜 하얗고 그림자가 낮은 형. */
+    #galaxy-capsule-compare .variant-quiet .capsule {
+      width: 210px;
+      height: 46px;
+      padding: 0 15px;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,.68);
+      border-radius: 23px;
+      background: rgba(240,241,239,.96);
+      box-shadow: 0 5px 14px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.7);
+    }
+    #galaxy-capsule-compare .variant-quiet .status-dot { width: 8px; height: 8px; }
+    #galaxy-capsule-compare .variant-quiet .status-copy { font-size: 13px; font-weight: 600; }
+    #galaxy-capsule-compare .variant-quiet .waveform { gap: 2.5px; }
+    #galaxy-capsule-compare .variant-quiet .waveform i { width: 2.5px; }
+
+    /* E: 밝은 글래스 질감과 가는 내부 윤곽. */
+    #galaxy-capsule-compare .variant-glass .capsule {
+      width: 212px;
+      height: 46px;
+      padding: 0 15px;
+      gap: 10px;
+      border: 1px solid rgba(255,255,255,.76);
+      border-radius: 23px;
+      background: rgba(247,248,249,.88);
+      box-shadow: 0 11px 30px rgba(0,0,0,.3), inset 0 0 0 1px rgba(25,27,33,.045);
+      backdrop-filter: blur(14px) saturate(1.15);
+    }
+    #galaxy-capsule-compare .variant-glass .status-dot { width: 8px; height: 8px; box-shadow: 0 0 0 4px rgba(255,69,58,.1); }
+    #galaxy-capsule-compare .variant-glass .state-transcribing .status-dot { box-shadow: 0 0 0 4px rgba(10,132,255,.1); }
+    #galaxy-capsule-compare .variant-glass .state-error .status-dot { box-shadow: 0 0 0 4px rgba(255,159,10,.1); }
+    #galaxy-capsule-compare .variant-glass .status-copy { font-size: 13px; font-weight: 600; }
+    #galaxy-capsule-compare .variant-glass .waveform { gap: 2.5px; }
+    #galaxy-capsule-compare .variant-glass .waveform i { width: 2.5px; }
+
+    /* F: 높이를 낮추고 모서리만 살짝 덜 둥글게 한 도구형. */
+    #galaxy-capsule-compare .variant-tool .capsule {
+      width: 204px;
+      height: 42px;
+      padding: 0 14px;
+      gap: 9px;
+      border: 1px solid rgba(25,27,32,.09);
+      border-radius: 15px;
+      background: #fbfbfa;
+      box-shadow: 0 8px 22px rgba(0,0,0,.3);
+    }
+    #galaxy-capsule-compare .variant-tool .status-dot { width: 7px; height: 7px; }
+    #galaxy-capsule-compare .variant-tool .status-copy { font-size: 13px; font-weight: 600; }
+    #galaxy-capsule-compare .variant-tool .waveform { gap: 2px; }
+    #galaxy-capsule-compare .variant-tool .waveform i { width: 2px; }
+
+    #galaxy-capsule-compare .state-transcribing .capsule,
+    #galaxy-capsule-compare .state-error .capsule {
+      width: max-content;
+      min-width: 0;
+    }
+
+    #galaxy-capsule-compare .variant-current .state-transcribing .capsule,
+    #galaxy-capsule-compare .variant-current .state-error .capsule {
+      width: 236px;
+      padding-left: 18px;
+      padding-right: 18px;
+      justify-content: center;
+    }
+
+    #galaxy-capsule-compare .variant-balanced .state-transcribing .capsule,
+    #galaxy-capsule-compare .variant-balanced .state-error .capsule,
+    #galaxy-capsule-compare .variant-quiet .state-transcribing .capsule,
+    #galaxy-capsule-compare .variant-quiet .state-error .capsule,
+    #galaxy-capsule-compare .variant-glass .state-transcribing .capsule,
+    #galaxy-capsule-compare .variant-glass .state-error .capsule { padding-left: 17px; padding-right: 17px; }
+
+    #galaxy-capsule-compare .variant-dense .state-transcribing .capsule,
+    #galaxy-capsule-compare .variant-dense .state-error .capsule,
+    #galaxy-capsule-compare .variant-tool .state-transcribing .capsule,
+    #galaxy-capsule-compare .variant-tool .state-error .capsule { padding-left: 15px; padding-right: 15px; }
+
+    @media (max-width: 800px) {
+      #galaxy-capsule-compare .comparison-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      #galaxy-capsule-compare .comparison-grid { grid-template-columns: 1fr; }
+      #galaxy-capsule-compare .desktop-stage { height: 132px; }
+    }
+  </style>
+
+  <div class="comparison-toolbar">
+    <div class="nav nav-pills" role="tablist" aria-label="상태 비교">
+      <button class="nav-link active" id="capsule-state-recording" type="button" role="tab" aria-controls="capsule-variants" aria-selected="true" data-state="recording">녹음 중</button>
+      <button class="nav-link" id="capsule-state-transcribing" type="button" role="tab" aria-controls="capsule-variants" aria-selected="false" data-state="transcribing">전사 중…</button>
+      <button class="nav-link" id="capsule-state-error" type="button" role="tab" aria-controls="capsule-variants" aria-selected="false" data-state="error">연결 오류</button>
+    </div>
+    <p class="comparison-note">A가 지금 실행 중인 크기와 간격입니다.</p>
+  </div>
+
+  <div class="comparison-grid" id="capsule-variants" role="tabpanel" aria-labelledby="capsule-state-recording" aria-live="polite">
+    <article class="variant variant-current">
+      <h3 class="variant-heading"><span class="current-name">A · 현재 실제</span><span>236 × 58</span></h3>
+      <div class="desktop-stage"><div class="mock-dock-line"></div><div class="capsule"><span class="status-dot"></span><span class="status-copy">녹음 중</span><span class="waveform"></span></div></div>
+    </article>
+    <article class="variant variant-balanced">
+      <h3 class="variant-heading"><span class="recommended-name">B · 컴팩트 균형</span><span>208 × 46</span></h3>
+      <div class="desktop-stage"><div class="mock-dock-line"></div><div class="capsule"><span class="status-dot"></span><span class="status-copy">녹음 중</span><span class="waveform"></span></div></div>
+    </article>
+    <article class="variant variant-dense">
+      <h3 class="variant-heading"><span>C · 초밀도</span><span>188 × 40</span></h3>
+      <div class="desktop-stage"><div class="mock-dock-line"></div><div class="capsule"><span class="status-dot"></span><span class="status-copy">녹음 중</span><span class="waveform"></span></div></div>
+    </article>
+    <article class="variant variant-quiet">
+      <h3 class="variant-heading"><span>D · 낮은 그림자</span><span>210 × 46</span></h3>
+      <div class="desktop-stage"><div class="mock-dock-line"></div><div class="capsule"><span class="status-dot"></span><span class="status-copy">녹음 중</span><span class="waveform"></span></div></div>
+    </article>
+    <article class="variant variant-glass">
+      <h3 class="variant-heading"><span>E · 밝은 글래스</span><span>212 × 46</span></h3>
+      <div class="desktop-stage"><div class="mock-dock-line"></div><div class="capsule"><span class="status-dot"></span><span class="status-copy">녹음 중</span><span class="waveform"></span></div></div>
+    </article>
+    <article class="variant variant-tool">
+      <h3 class="variant-heading"><span>F · 낮은 도구형</span><span>204 × 42</span></h3>
+      <div class="desktop-stage"><div class="mock-dock-line"></div><div class="capsule"><span class="status-dot"></span><span class="status-copy">녹음 중</span><span class="waveform"></span></div></div>
+    </article>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById("galaxy-capsule-compare");
+      const grid = root.querySelector("#capsule-variants");
+      const stateText = {
+        recording: "녹음 중",
+        transcribing: "전사 중…",
+        error: "연결 오류"
+      };
+      const heights = [5, 11, 7, 16, 9, 19, 12, 8, 17, 10, 14, 6];
+
+      root.querySelectorAll(".waveform").forEach((wave) => {
+        heights.forEach((height) => {
+          const bar = document.createElement("i");
+          bar.style.height = `${height}px`;
+          wave.appendChild(bar);
+        });
+      });
+
+      function setState(state, activeButton) {
+        root.querySelectorAll(".desktop-stage").forEach((stage) => {
+          stage.classList.remove("state-recording", "state-transcribing", "state-error");
+          stage.classList.add(`state-${state}`);
+          stage.querySelector(".status-copy").textContent = stateText[state];
+        });
+        root.querySelectorAll("[data-state]").forEach((button) => {
+          const selected = button === activeButton;
+          button.classList.toggle("active", selected);
+          button.setAttribute("aria-selected", String(selected));
+        });
+        grid.setAttribute("aria-labelledby", activeButton.id);
+      }
+
+      root.querySelectorAll("[data-state]").forEach((button) => {
+        button.addEventListener("click", () => setState(button.dataset.state, button));
+      });
+
+      const previewState = new URLSearchParams(location.search).get("state");
+      const previewButton = root.querySelector(`[data-state="${previewState}"]`);
+      if (previewButton) setState(previewState, previewButton);
+
+      const editable = { variant: "B", width: 208, height: 46, radius: 23, shadow: 26 };
+      const balanced = root.querySelector(".variant-balanced .capsule");
+      const balancedSize = root.querySelector(".variant-balanced .variant-heading span:last-child");
+
+      function renderBalanced() {
+        balanced.style.width = `${editable.width}px`;
+        balanced.style.height = `${editable.height}px`;
+        balanced.style.borderRadius = `${editable.radius}px`;
+        balanced.style.boxShadow = `0 10px ${editable.shadow}px rgba(0,0,0,.32), 0 2px 5px rgba(0,0,0,.18)`;
+        balancedSize.textContent = `${editable.width} × ${editable.height}`;
+      }
+
+      renderBalanced();
+      if (globalThis.Tweak) {
+        const tweak = new Tweak({ container: root.querySelector(".variant-balanced"), onChange: renderBalanced });
+        tweak.addSlider(editable, "width", { label: "B 너비", min: 184, max: 232, unit: "px", reference: "capsule.width" });
+        tweak.addSlider(editable, "height", { label: "B 높이", min: 38, max: 56, unit: "px", reference: "capsule.height" });
+        tweak.addSlider(editable, "radius", { label: "B 모서리", min: 12, max: 28, unit: "px", reference: "capsule.radius" });
+        tweak.addSlider(editable, "shadow", { label: "B 그림자", min: 8, max: 42, unit: "px", reference: "capsule.shadow" });
+      }
+    })();
+  </script>
+</section>

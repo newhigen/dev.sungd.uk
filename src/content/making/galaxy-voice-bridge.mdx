@@ -1,0 +1,87 @@
+---
+tagline: 삼성 녹음기 자동화에서 전용 앱으로, 그리고 녹음 캡슐 한 개에 PR 18개를 쓴 닷새
+---
+
+import Track from '../../components/Track.astro';
+import Evo from '../../components/Evo.astro';
+import Shots from '../../components/Shots.astro';
+
+<p class="q">닷새 동안 PR 34개, 그중 18개가 녹음 캡슐.</p>
+
+<Track large min={0} max={5}
+  ticks={[{ at: 0, label: "9/6" }, { at: 1, label: "9/7" }, { at: 2, label: "9/8" }, { at: 3, label: "9/9" }, { at: 4, label: "9/10" }]}
+  bars={[
+    { from: 0, to: 1, tone: "1", inside: "1", label: "음성 전송" },
+    { from: 1, to: 2, tone: "1", inside: "10", label: "받아쓰기 · 전사" },
+    { from: 2, to: 2.25, tone: "1" },
+    { from: 2.25, to: 3, tone: "3", inside: "9", label: "녹음 캡슐" },
+    { from: 3, to: 3.9, tone: "3", inside: "9" },
+    { from: 3.9, to: 4, tone: "1" },
+    { from: 4, to: 5, tone: "1", inside: "1", label: "Mac 두 대" },
+  ]}
+  ranges={[
+    { from: 2.25, to: 3.9, label: "녹음 캡슐 PR 18개" },
+    { from: 0, to: 5, label: "닷새 · PR 34개", dashed: true },
+  ]}
+  caption="칸 안 숫자가 그날 머지한 PR. 파랑은 기능 · 연결, 보라는 Mac 화면 아래 녹음 캡슐." />
+
+## 개발 과정
+
+<Evo items={[
+  { at: "9월 6일", title: "삼성 녹음기 대신 전용 앱",
+    problem: "삼성 음성 녹음기의 녹음 시작 Intent(START_RECORDING)는 signature|privileged 권한 — 남의 앱에서 못 부름. 화면 자동화는 되지만 저장 대화상자에 의존",
+    did: "전용 안드로이드 앱이 마이크 PCM 을 녹음 중 Mac 으로 전송. 갤럭시 · Mac 양쪽에 WAV 백업. 첫 연결은 ADB reverse 로만",
+    result: "PR #1. 오디오 경로를 먼저 검증하고 Whisper · 단축키는 그 뒤에" },
+  { at: "9월 7일", title: "Option+Space, Handy 와 나눠 쓰기",
+    problem: "이미 쓰던 받아쓰기 도구 Handy 의 단축키와 겹침",
+    did: "Handy 는 Shift+Option+Space, 브리지는 Option+Space. 전사 모델도 Handy 와 같은 large-v3-turbo",
+    result: "어느 앱에서든 커서 자리에 붙여넣기. 손쉬운 사용 권한이 없으면 클립보드까지" },
+  { at: "9월 7일", title: "다시 빌드해도 권한 유지",
+    problem: "helper 를 새로 빌드하면 자동 붙여넣기 권한이 풀림",
+    did: "고정된 앱 식별자로 서명",
+    result: "PR #8. 로그인 자동 실행 · 연결 자동 복구와 묶어 터미널 없이 사용" },
+  { at: "9월 7~8일", title: "CPU 서버 → Handy 가속",
+    problem: "이 Mac 에서 whisper.cpp 의 Metal 경로가 불안정해 CPU 서버로 상주",
+    did: "Handy 공식 headless CLI(--transcribe-file)로 전사 — Metal 자동 가속. Handy 가 없으면 CPU 서버로 대체",
+    result: "전사 대기 단축(시간은 재지 않음). Handy 없는 Mac 에서도 동작 유지" },
+  { at: "9월 8일", title: "케이블 없이 같은 Wi-Fi",
+    problem: "연결이 ADB reverse 에 묶여 있음",
+    did: "갤럭시가 UDP 8765 브로드캐스트로 Mac 을 찾고 TCP 8766 으로 음성 전송. ADB 는 복구용. 갤럭시 앱 ON/OFF 저장",
+    result: "PR #14. 끄면 Mac 의 Option+Space 요청까지 차단" },
+  { at: "9월 8~9일", title: "녹음 캡슐 — PR 18개",
+    problem: "녹음 · 전사 중 · 완료를 화면 아래에서 한눈에",
+    did: "그림자 후보 비교 → «높은 부유» 260pt → 실제 캡슐을 시안 밀도로 → 여섯 방향 탐색 → 미세 조정 A~F",
+    result: "F안 — 42pt 높이 · 막대 10개 파형, 높이 대비만 한 번 더(#32)" },
+  { at: "9월 9일", title: "Esc 를 세 번 고침",
+    problem: "Esc 로 취소해도 캡슐이 늦게 사라짐",
+    did: "#25 취소 표시 정리 → #26 입력과 동시에 닫기 → #27 이벤트 안에서 즉시 제거",
+    result: "누르는 순간 사라짐" },
+  { at: "9월 9~10일", title: "Mac 두 대",
+    problem: "두 번째 Mac 준비가 손작업. 같은 Wi-Fi 에 두 대면 어느 쪽에 붙었는지 모름",
+    did: "setup_mac.sh 한 명령(Handy 없으면 whisper.cpp · q5 모델 자동). Mac 이 발견 응답에 컴퓨터 이름을 실어 보냄",
+    result: "갤럭시 화면에 연결된 Mac 과 발견한 Mac 목록. 갤럭시 앱은 다시 설치할 필요 없음" },
+]} />
+
+## 의사결정 방식
+
+말로 고르지 않고 후보를 HTML 로 그려 같은 조건에서 비교. 캡슐은 시안과 실제 Mac 화면을 나란히 놓고 밀도 · 좌표계를 맞춤. 누르면 그때 페이지.
+
+<Shots items={[
+  { src: "/p/galaxy-voice-bridge/shot-ui-candidates.png", caption: "9월 8일 — Mac 상태 표시 넷 · 갤럭시 연결 화면 둘", href: "/p/galaxy-voice-bridge/pages/ui-candidates.html" },
+  { src: "/p/galaxy-voice-bridge/shot-bright-capsule-variants.png", caption: "9월 8일 — 밝은 캡슐 그림자 후보", href: "/p/galaxy-voice-bridge/pages/bright-capsule-variants.html" },
+  { src: "/p/galaxy-voice-bridge/shot-capsule-current-comparison.png", caption: "9월 8일 — 실제 캡슐과 대안을 같은 조건에서", href: "/p/galaxy-voice-bridge/pages/capsule-current-comparison.html" },
+  { src: "/p/galaxy-voice-bridge/shot-special-capsule-showcase.png", caption: "9월 9일 — 캡슐의 특별한 표현", href: "/p/galaxy-voice-bridge/pages/special-capsule-showcase.html" },
+  { src: "/p/galaxy-voice-bridge/shot-radical-voice.png", caption: "9월 9일 — 여섯 방향: 잉크 한 방울 · 두 기기 사이 · 빛의 틈 · 말의 밑줄 · 음성 메모지 · 작은 녹음기", href: "/p/galaxy-voice-bridge/pages/radical-voice.html" },
+  { src: "/p/galaxy-voice-bridge/shot-subtle-capsules.png", caption: "9월 9일 — 결국 기존 캡슐의 미세 조정 A~F, F 채택", href: "/p/galaxy-voice-bridge/pages/subtle-capsules.html" },
+]} />
+
+## 배운 점
+
+**남의 앱 흐름에 기대면 권한 하나에 막힘.** 녹음기 자동화 대신 마이크 PCM 부터 직접 잡은 게 첫날의 전환.
+
+**멀리 돌아간 탐색이 원래 자리로 옴.** 여섯 방향을 그려 본 뒤 고른 건 기존 캡슐의 미세 조정 F안.
+
+## 산출물
+
+- 시안 페이지 여섯 — 위 격자
+- 소스 — private repo(newhigen-labs/galaxy-voice-bridge)

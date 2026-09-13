@@ -1,0 +1,478 @@
+<section id="voice-capsule-showcase" aria-label="특별한 녹음 캡슐 디자인 비교">
+  <style>
+    #voice-capsule-showcase {
+      width: 100%;
+      color: light-dark(#181a1f, #f1f2f5);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+    }
+
+    #voice-capsule-showcase * { box-sizing: border-box; }
+
+    #voice-capsule-showcase .showcase-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    #voice-capsule-showcase .showcase-note {
+      margin: 0;
+      color: light-dark(#727784, #a2a8b4);
+      font-size: 13px;
+    }
+
+    #voice-capsule-showcase .variant-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    #voice-capsule-showcase .variant { min-width: 0; }
+
+    #voice-capsule-showcase .variant-title {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+      margin: 0 2px 8px;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    #voice-capsule-showcase .variant-title span:last-child {
+      color: light-dark(#7d828e, #969ca8);
+      font-size: 12px;
+      font-weight: 400;
+      white-space: nowrap;
+    }
+
+    #voice-capsule-showcase .current-label { color: light-dark(#a62e37, #ff7d85); }
+    #voice-capsule-showcase .special-label { color: light-dark(#5c3ba7, #b49aff); }
+
+    #voice-capsule-showcase .desktop-stage {
+      position: relative;
+      height: 146px;
+      overflow: hidden;
+      border-radius: 18px;
+      background:
+        linear-gradient(90deg, transparent 0 6%, rgba(255,255,255,.035) 6% 6.5%, transparent 6.5% 100%),
+        repeating-linear-gradient(180deg, #242624 0 18px, #212321 18px 36px);
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.07);
+    }
+
+    #voice-capsule-showcase[data-backdrop="light"] .desktop-stage {
+      background:
+        linear-gradient(90deg, transparent 0 6%, rgba(38,41,47,.035) 6% 6.5%, transparent 6.5% 100%),
+        repeating-linear-gradient(180deg, #ecebe7 0 18px, #e7e5e0 18px 36px);
+      box-shadow: inset 0 0 0 1px rgba(25,27,31,.08);
+    }
+
+    #voice-capsule-showcase .desktop-stage::before,
+    #voice-capsule-showcase .desktop-stage::after {
+      content: "";
+      position: absolute;
+      left: 13px;
+      right: 20px;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, rgba(255,255,255,.22) 0 45%, transparent 45% 50%, rgba(255,255,255,.13) 50% 78%, transparent 78%);
+    }
+
+    #voice-capsule-showcase[data-backdrop="light"] .desktop-stage::before,
+    #voice-capsule-showcase[data-backdrop="light"] .desktop-stage::after {
+      background: linear-gradient(90deg, rgba(20,22,26,.16) 0 45%, transparent 45% 50%, rgba(20,22,26,.09) 50% 78%, transparent 78%);
+    }
+
+    #voice-capsule-showcase .desktop-stage::before { top: 22px; }
+    #voice-capsule-showcase .desktop-stage::after { top: 48px; right: 62px; }
+
+    #voice-capsule-showcase .bottom-rule {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      height: 1px;
+      background: rgba(255,255,255,.12);
+    }
+
+    #voice-capsule-showcase[data-backdrop="light"] .bottom-rule { background: rgba(20,22,26,.1); }
+
+    #voice-capsule-showcase .capsule {
+      position: absolute;
+      left: 50%;
+      bottom: 20px;
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+      transform: translateX(-50%);
+      transition: width .18s ease, border-radius .18s ease, background .18s ease;
+    }
+
+    #voice-capsule-showcase .copy { flex: 0 0 auto; line-height: 1; }
+
+    #voice-capsule-showcase .record-dot {
+      flex: 0 0 auto;
+      border-radius: 50%;
+      background: #ff453a;
+    }
+
+    #voice-capsule-showcase[data-state="transcribing"] .record-dot { background: #0a84ff; }
+    #voice-capsule-showcase[data-state="cancelled"] .record-dot { background: #8e8e93; }
+
+    #voice-capsule-showcase .recording-signal { display: flex; align-items: center; }
+    #voice-capsule-showcase .processing-signal { display: none; align-items: center; gap: 3px; }
+    #voice-capsule-showcase .processing-signal i { width: 4px; height: 4px; border-radius: 50%; background: currentColor; opacity: .45; }
+
+    #voice-capsule-showcase[data-state="transcribing"] .recording-signal { display: none; }
+    #voice-capsule-showcase[data-state="transcribing"] .processing-signal { display: flex; }
+    #voice-capsule-showcase[data-state="cancelled"] .recording-signal,
+    #voice-capsule-showcase[data-state="cancelled"] .processing-signal { display: none; }
+
+    #voice-capsule-showcase[data-state="transcribing"] .capsule,
+    #voice-capsule-showcase[data-state="cancelled"] .capsule {
+      width: auto !important;
+      min-width: 0 !important;
+      padding-left: 17px !important;
+      padding-right: 17px !important;
+    }
+
+    /* 0 · 현재 실행 중 */
+    #voice-capsule-showcase .v-current .capsule {
+      width: 151px;
+      height: 46px;
+      padding: 0 15px;
+      gap: 10px;
+      color: #191b20;
+      border: 1px solid rgba(255,255,255,.68);
+      border-radius: 23px;
+      background: rgba(240,241,239,.96);
+      box-shadow: 0 7px 18px rgba(0,0,0,.46), 0 2px 5px rgba(0,0,0,.32), inset 0 1px 0 rgba(255,255,255,.7);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -.2px;
+    }
+    #voice-capsule-showcase .v-current .record-dot { width: 8px; height: 8px; }
+    #voice-capsule-showcase .v-current .recording-signal { gap: 2.5px; }
+    #voice-capsule-showcase .v-current .recording-signal i { width: 2.5px; border-radius: 99px; background: #25272d; }
+
+    /* 1 · Editorial Air — 명조 + 얇은 잉크 파형 */
+    #voice-capsule-showcase .v-editorial .capsule {
+      width: 174px;
+      height: 48px;
+      padding: 0 16px;
+      gap: 11px;
+      color: #2a2520;
+      border: 1px solid rgba(88,72,58,.13);
+      border-radius: 24px;
+      background: #f4efe7;
+      box-shadow: 0 12px 28px rgba(8,9,10,.38), inset 0 1px 0 rgba(255,255,255,.72);
+      font-family: "AppleMyungjo", "Noto Serif KR", serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: -.35px;
+    }
+    #voice-capsule-showcase .v-editorial .record-dot { width: 7px; height: 7px; background: #d9433b; }
+    #voice-capsule-showcase .v-editorial .recording-signal {
+      width: 52px;
+      height: 16px;
+      margin-left: auto;
+      background: #5d5148;
+      clip-path: polygon(0 50%, 7% 48%, 12% 29%, 18% 72%, 24% 44%, 30% 55%, 36% 18%, 42% 82%, 49% 40%, 56% 61%, 63% 31%, 69% 70%, 76% 47%, 82% 53%, 89% 36%, 94% 65%, 100% 50%, 100% 57%, 94% 72%, 89% 43%, 82% 60%, 76% 54%, 69% 77%, 63% 38%, 56% 68%, 49% 47%, 42% 89%, 36% 25%, 30% 62%, 24% 51%, 18% 79%, 12% 36%, 7% 55%, 0 57%);
+    }
+
+    /* 2 · Mono Signal — 고정폭 글꼴 + 디지털 세그먼트 */
+    #voice-capsule-showcase .v-mono .capsule {
+      width: 170px;
+      height: 42px;
+      padding: 0 14px;
+      gap: 9px;
+      color: #16181c;
+      border: 1px solid rgba(20,22,26,.12);
+      border-radius: 12px;
+      background: #f7f7f4;
+      box-shadow: 0 8px 20px rgba(0,0,0,.36), inset 0 0 0 1px rgba(255,255,255,.7);
+      font-family: ui-monospace, "SFMono-Regular", Menlo, monospace;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: -.15px;
+    }
+    #voice-capsule-showcase .v-mono .record-dot { width: 7px; height: 7px; border-radius: 2px; }
+    #voice-capsule-showcase .v-mono .recording-signal { margin-left: auto; gap: 3px; }
+    #voice-capsule-showcase .v-mono .recording-signal i { width: 3px; height: 8px !important; border-radius: 1px; background: #33363d; }
+    #voice-capsule-showcase .v-mono .recording-signal i:nth-child(3n) { height: 14px !important; }
+    #voice-capsule-showcase .v-mono .recording-signal i:nth-child(2n) { opacity: .45; }
+
+    /* 3 · Orbit — 파형 대신 살아 있는 원형 신호 */
+    #voice-capsule-showcase .v-orbit .capsule {
+      width: 168px;
+      height: 52px;
+      padding: 0 15px;
+      gap: 11px;
+      color: #17191e;
+      border: 1px solid rgba(255,255,255,.74);
+      border-radius: 26px;
+      background: linear-gradient(180deg, #ffffff, #eceef0);
+      box-shadow: 0 14px 34px rgba(0,0,0,.42), 0 3px 8px rgba(0,0,0,.28), inset 0 1px 0 #fff;
+      font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -.25px;
+    }
+    #voice-capsule-showcase .v-orbit .record-dot { width: 18px; height: 18px; border: 5px solid #fff; box-shadow: 0 0 0 1px rgba(255,69,58,.34), 0 0 0 5px rgba(255,69,58,.11); }
+    #voice-capsule-showcase .v-orbit .recording-signal { position: relative; width: 24px; height: 24px; margin-left: auto; border: 1px solid rgba(28,31,37,.18); border-radius: 50%; }
+    #voice-capsule-showcase .v-orbit .recording-signal i { position: absolute; width: 4px; height: 4px !important; border-radius: 50%; background: #2f333a; }
+    #voice-capsule-showcase .v-orbit .recording-signal i:nth-child(1) { left: 10px; top: -2px; }
+    #voice-capsule-showcase .v-orbit .recording-signal i:nth-child(2) { right: -1px; top: 10px; }
+    #voice-capsule-showcase .v-orbit .recording-signal i:nth-child(3) { left: 10px; bottom: -2px; }
+    #voice-capsule-showcase .v-orbit .recording-signal i:nth-child(4) { left: -1px; top: 10px; }
+    #voice-capsule-showcase .v-orbit .recording-signal i:nth-child(n+5) { display: none; }
+
+    /* 4 · Voice Trail — 크기가 흐르는 점 파형 */
+    #voice-capsule-showcase .v-trail .capsule {
+      width: 162px;
+      height: 46px;
+      padding: 0 15px;
+      gap: 10px;
+      color: #202127;
+      border: 1px solid rgba(22,24,29,.08);
+      border-radius: 23px;
+      background: #fbfbfa;
+      box-shadow: 0 10px 26px rgba(0,0,0,.38), inset 0 1px 0 #fff;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -.25px;
+    }
+    #voice-capsule-showcase .v-trail .record-dot { width: 8px; height: 8px; }
+    #voice-capsule-showcase .v-trail .recording-signal { margin-left: auto; gap: 4px; }
+    #voice-capsule-showcase .v-trail .recording-signal i { border-radius: 50%; background: #30333a; }
+    #voice-capsule-showcase .v-trail .recording-signal i:nth-child(1) { width: 3px; height: 3px !important; opacity: .35; }
+    #voice-capsule-showcase .v-trail .recording-signal i:nth-child(2) { width: 5px; height: 5px !important; opacity: .55; }
+    #voice-capsule-showcase .v-trail .recording-signal i:nth-child(3) { width: 8px; height: 8px !important; opacity: .82; }
+    #voice-capsule-showcase .v-trail .recording-signal i:nth-child(4) { width: 5px; height: 5px !important; opacity: .55; }
+    #voice-capsule-showcase .v-trail .recording-signal i:nth-child(5) { width: 3px; height: 3px !important; opacity: .35; }
+    #voice-capsule-showcase .v-trail .recording-signal i:nth-child(n+6) { display: none; }
+
+    /* 5 · Aurora Glass — 어두운 반투명 캡슐 + 컬러 파형 */
+    #voice-capsule-showcase .v-aurora .capsule {
+      width: 180px;
+      height: 48px;
+      padding: 0 16px;
+      gap: 10px;
+      color: #f8f8fb;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(34,36,44,.96), rgba(17,19,24,.94));
+      box-shadow: 0 14px 34px rgba(0,0,0,.54), 0 0 0 1px rgba(119,154,255,.08), inset 0 1px 0 rgba(255,255,255,.12);
+      backdrop-filter: blur(18px) saturate(1.2);
+      font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -.2px;
+    }
+    #voice-capsule-showcase .v-aurora .record-dot { width: 8px; height: 8px; background: #ff5a6b; box-shadow: 0 0 10px rgba(255,76,96,.72); }
+    #voice-capsule-showcase .v-aurora .recording-signal { margin-left: auto; gap: 3px; }
+    #voice-capsule-showcase .v-aurora .recording-signal i { width: 3px; border-radius: 99px; background: linear-gradient(180deg, #8be6ff, #9d7cff); box-shadow: 0 0 7px rgba(126,166,255,.46); }
+    #voice-capsule-showcase .v-aurora .processing-signal { color: #9fc6ff; }
+
+    /* 6 · Signal Ribbon — 파형 대신 리본형 레벨 */
+    #voice-capsule-showcase .v-ribbon .capsule {
+      width: 174px;
+      height: 44px;
+      padding: 0 15px;
+      gap: 9px;
+      color: #17191d;
+      border: 1px solid rgba(20,22,26,.1);
+      border-radius: 16px;
+      background: #f7f7f5;
+      box-shadow: 0 9px 23px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.9);
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: -.2px;
+    }
+    #voice-capsule-showcase .v-ribbon .capsule::before { content: ""; position: absolute; left: 16px; right: 16px; top: 0; height: 2px; border-radius: 0 0 2px 2px; background: linear-gradient(90deg, #ff4d54, #ff9c52); }
+    #voice-capsule-showcase .v-ribbon .record-dot { width: 7px; height: 7px; }
+    #voice-capsule-showcase .v-ribbon .recording-signal { width: 48px; height: 8px; margin-left: auto; border-radius: 4px; background: #e0e1de; overflow: hidden; }
+    #voice-capsule-showcase .v-ribbon .recording-signal::before { content: ""; width: 64%; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #ff4d54, #ff9c52); }
+    #voice-capsule-showcase .v-ribbon .recording-signal i { display: none; }
+
+    /* 7 · Time Halo — 파형 없이 시간과 상태 후광 */
+    #voice-capsule-showcase .v-time .capsule {
+      width: 158px;
+      height: 48px;
+      padding: 0 16px;
+      gap: 11px;
+      color: #1b1c21;
+      border: 1px solid rgba(24,26,31,.08);
+      border-radius: 24px;
+      background: #fbfbfb;
+      box-shadow: 0 12px 28px rgba(0,0,0,.4), inset 0 0 0 4px rgba(255,255,255,.55);
+      font-family: ui-rounded, "SF Pro Rounded", -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: -.2px;
+    }
+    #voice-capsule-showcase .v-time .record-dot { width: 9px; height: 9px; box-shadow: 0 0 0 5px rgba(255,69,58,.12); }
+    #voice-capsule-showcase .v-time .recording-signal { margin-left: auto; color: #696e79; font-family: ui-monospace, "SFMono-Regular", Menlo, monospace; font-size: 11px; letter-spacing: .2px; }
+    #voice-capsule-showcase .v-time .recording-signal i { display: none; }
+    #voice-capsule-showcase .v-time .recording-signal::before { content: "00:08"; }
+
+    #voice-capsule-showcase .bars i:nth-child(1) { height: 5px; }
+    #voice-capsule-showcase .bars i:nth-child(2) { height: 11px; }
+    #voice-capsule-showcase .bars i:nth-child(3) { height: 7px; }
+    #voice-capsule-showcase .bars i:nth-child(4) { height: 16px; }
+    #voice-capsule-showcase .bars i:nth-child(5) { height: 9px; }
+    #voice-capsule-showcase .bars i:nth-child(6) { height: 19px; }
+    #voice-capsule-showcase .bars i:nth-child(7) { height: 12px; }
+    #voice-capsule-showcase .bars i:nth-child(8) { height: 8px; }
+    #voice-capsule-showcase .bars i:nth-child(9) { height: 17px; }
+    #voice-capsule-showcase .bars i:nth-child(10) { height: 10px; }
+    #voice-capsule-showcase .bars i:nth-child(11) { height: 14px; }
+    #voice-capsule-showcase .bars i:nth-child(12) { height: 6px; }
+
+    @media (prefers-reduced-motion: no-preference) {
+      #voice-capsule-showcase[data-state="recording"] .v-orbit .recording-signal { animation: voice-orbit 2.2s linear infinite; }
+      #voice-capsule-showcase[data-state="recording"] .v-aurora .recording-signal i:nth-child(odd) { animation: voice-bar 1.1s ease-in-out infinite alternate; }
+      #voice-capsule-showcase[data-state="recording"] .v-ribbon .recording-signal::before { animation: voice-ribbon 1.5s ease-in-out infinite alternate; }
+      #voice-capsule-showcase[data-state="transcribing"] .processing-signal i:nth-child(2) { animation: voice-dot .7s ease-in-out infinite alternate; }
+    }
+
+    @keyframes voice-orbit { to { transform: rotate(360deg); } }
+    @keyframes voice-bar { to { transform: scaleY(.5); } }
+    @keyframes voice-ribbon { to { width: 88%; } }
+    @keyframes voice-dot { to { opacity: 1; transform: scale(1.3); } }
+
+    @media (max-width: 800px) {
+      #voice-capsule-showcase .variant-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 520px) {
+      #voice-capsule-showcase .variant-grid { grid-template-columns: 1fr; }
+      #voice-capsule-showcase .desktop-stage { height: 136px; }
+    }
+  </style>
+
+  <div class="showcase-toolbar">
+    <div class="nav nav-pills" role="tablist" aria-label="표시 상태">
+      <button class="nav-link active" id="special-state-recording" type="button" role="tab" aria-controls="special-variants" aria-selected="true" data-state-choice="recording">녹음 중</button>
+      <button class="nav-link" id="special-state-transcribing" type="button" role="tab" aria-controls="special-variants" aria-selected="false" data-state-choice="transcribing">전사 중…</button>
+      <button class="nav-link" id="special-state-cancelled" type="button" role="tab" aria-controls="special-variants" aria-selected="false" data-state-choice="cancelled">취소됨</button>
+    </div>
+    <div class="nav nav-pills" role="tablist" aria-label="배경 밝기">
+      <button class="nav-link active" id="special-bg-dark" type="button" role="tab" aria-controls="special-variants" aria-selected="true" data-backdrop-choice="dark">어두운 화면</button>
+      <button class="nav-link" id="special-bg-light" type="button" role="tab" aria-controls="special-variants" aria-selected="false" data-backdrop-choice="light">밝은 화면</button>
+    </div>
+    <p class="showcase-note">0번이 지금 실행 중인 디자인입니다.</p>
+  </div>
+
+  <div class="variant-grid" id="special-variants" role="tabpanel" aria-labelledby="special-state-recording" aria-live="polite">
+    <article class="variant v-current">
+      <h3 class="variant-title"><span class="current-label">0 · 현재</span><span>막대 파형</span></h3>
+      <div class="desktop-stage"><div class="bottom-rule"></div><div class="capsule"><span class="record-dot"></span><span class="copy">녹음 중</span><span class="recording-signal bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="processing-signal"><i></i><i></i><i></i></span></div></div>
+    </article>
+
+    <article class="variant v-editorial">
+      <h3 class="variant-title"><span>1 · Editorial Air</span><span>명조 + 선 파형</span></h3>
+      <div class="desktop-stage"><div class="bottom-rule"></div><div class="capsule"><span class="record-dot"></span><span class="copy">녹음 중</span><span class="recording-signal"></span><span class="processing-signal"><i></i><i></i><i></i></span></div></div>
+    </article>
+
+    <article class="variant v-mono">
+      <h3 class="variant-title"><span>2 · Mono Signal</span><span>고정폭 + 세그먼트</span></h3>
+      <div class="desktop-stage"><div class="bottom-rule"></div><div class="capsule"><span class="record-dot"></span><span class="copy">REC 중</span><span class="recording-signal bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="processing-signal"><i></i><i></i><i></i></span></div></div>
+    </article>
+
+    <article class="variant v-orbit" aria-label="3번 Orbit 디자인">
+      <h3 class="variant-title"><span class="special-label">3 · Orbit</span><span>둥근 글꼴 + 원형 신호</span></h3>
+      <div class="desktop-stage"><div class="bottom-rule"></div><div class="capsule"><span class="record-dot"></span><span class="copy">녹음 중</span><span class="recording-signal"><i></i><i></i><i></i><i></i></span><span class="processing-signal"><i></i><i></i><i></i></span></div></div>
+    </article>
+
+    <article class="variant v-trail">
+      <h3 class="variant-title"><span>4 · Voice Trail</span><span>점 파형</span></h3>
+      <div class="desktop-stage"><div class="bottom-rule"></div><div class="capsule"><span class="record-dot"></span><span class="copy">녹음 중</span><span class="recording-signal"><i></i><i></i><i></i><i></i><i></i></span><span class="processing-signal"><i></i><i></i><i></i></span></div></div>
+    </article>
+
+    <article class="variant v-aurora">
+      <h3 class="variant-title"><span class="special-label">5 · Aurora Glass</span><span>다크 + 컬러 파형</span></h3>
+      <div class="desktop-stage"><div class="bottom-rule"></div><div class="capsule"><span class="record-dot"></span><span class="copy">녹음 중</span><span class="recording-signal bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="processing-signal"><i></i><i></i><i></i></span></div></div>
+    </article>
+
+    <article class="variant v-ribbon">
+      <h3 class="variant-title"><span>6 · Signal Ribbon</span><span>리본 레벨</span></h3>
+      <div class="desktop-stage"><div class="bottom-rule"></div><div class="capsule"><span class="record-dot"></span><span class="copy">녹음 중</span><span class="recording-signal"><i></i></span><span class="processing-signal"><i></i><i></i><i></i></span></div></div>
+    </article>
+
+    <article class="variant v-time">
+      <h3 class="variant-title"><span>7 · Time Halo</span><span>파형 없음 + 시간</span></h3>
+      <div class="desktop-stage"><div class="bottom-rule"></div><div class="capsule"><span class="record-dot"></span><span class="copy">녹음 중</span><span class="recording-signal"></span><span class="processing-signal"><i></i><i></i><i></i></span></div></div>
+    </article>
+  </div>
+
+  <script>
+    (() => {
+      const root = document.getElementById("voice-capsule-showcase");
+      const grid = root.querySelector("#special-variants");
+      const labels = {
+        recording: new Map([["v-mono", "REC 중"]]),
+        transcribing: new Map([["v-mono", "PROC…"]]),
+        cancelled: new Map([["v-mono", "CANCEL"]])
+      };
+      const commonLabels = { recording: "녹음 중", transcribing: "전사 중…", cancelled: "취소됨" };
+
+      function setState(state, activeButton) {
+        root.dataset.state = state;
+        root.querySelectorAll(".variant").forEach((variant) => {
+          const special = [...variant.classList].find((name) => labels[state].has(name));
+          variant.querySelector(".copy").textContent = special ? labels[state].get(special) : commonLabels[state];
+        });
+        root.querySelectorAll("[data-state-choice]").forEach((button) => {
+          const selected = button === activeButton;
+          button.classList.toggle("active", selected);
+          button.setAttribute("aria-selected", String(selected));
+        });
+        grid.setAttribute("aria-labelledby", activeButton.id);
+      }
+
+      function setBackdrop(backdrop, activeButton) {
+        root.dataset.backdrop = backdrop;
+        root.querySelectorAll("[data-backdrop-choice]").forEach((button) => {
+          const selected = button === activeButton;
+          button.classList.toggle("active", selected);
+          button.setAttribute("aria-selected", String(selected));
+        });
+      }
+
+      root.querySelectorAll("[data-state-choice]").forEach((button) => {
+        button.addEventListener("click", () => setState(button.dataset.stateChoice, button));
+      });
+      root.querySelectorAll("[data-backdrop-choice]").forEach((button) => {
+        button.addEventListener("click", () => setBackdrop(button.dataset.backdropChoice, button));
+      });
+
+      root.dataset.state = "recording";
+      root.dataset.backdrop = "dark";
+
+      const orbitState = { width: 168, height: 52, radius: 26, shadow: 34, motion: true };
+      const orbit = root.querySelector(".v-orbit .capsule");
+      function renderOrbit() {
+        orbit.style.width = `${orbitState.width}px`;
+        orbit.style.height = `${orbitState.height}px`;
+        orbit.style.borderRadius = `${orbitState.radius}px`;
+        orbit.style.boxShadow = `0 14px ${orbitState.shadow}px rgba(0,0,0,.42), 0 3px 8px rgba(0,0,0,.28), inset 0 1px 0 #fff`;
+        orbit.querySelector(".recording-signal").style.animationPlayState = orbitState.motion ? "running" : "paused";
+      }
+      renderOrbit();
+
+      if (globalThis.Tweak) {
+        const tweak = new Tweak({ container: root.querySelector(".v-orbit"), onChange: renderOrbit });
+        tweak.addSlider(orbitState, "width", { label: "Orbit 너비", min: 145, max: 205, unit: "px", reference: "orbit.width" });
+        tweak.addSlider(orbitState, "height", { label: "Orbit 높이", min: 42, max: 58, unit: "px", reference: "orbit.height" });
+        tweak.addSlider(orbitState, "radius", { label: "Orbit 모서리", min: 14, max: 29, unit: "px", reference: "orbit.radius" });
+        tweak.addSlider(orbitState, "shadow", { label: "Orbit 그림자", min: 10, max: 48, unit: "px", reference: "orbit.shadow" });
+        tweak.addToggle(orbitState, "motion", { label: "Orbit 움직임", reference: "orbit.motion" });
+      }
+    })();
+  </script>
+</section>

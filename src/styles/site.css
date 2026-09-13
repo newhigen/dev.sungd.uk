@@ -1208,3 +1208,44 @@ figcaption {
 
   .foot { margin-top: 3rem; font-size: 0.75rem; }
 }
+
+/* 갤럭시 음성 브리지 도식 둘(components/gvb) — 기기 · 시간표. 색은 토큰으로, 밤 판에서 뒤집힌다 */
+.doc-body .prose > figure.gvb { max-width: var(--measure); margin: 1.2rem 0 1.8rem; }
+.gvb svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+/* 캡슐 상태 넷 — 캡슐 자체는 앱 화면이라 밤에도 색을 안 바꾼다 */
+.caps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
+.cap-cell { background: #232228; border-radius: 10px; padding: 1.5rem .25rem 1rem;
+  display: flex; flex-direction: column; align-items: center; gap: .9rem; }
+.cap-cell small { font: .75rem/1.3 var(--sans); color: #a9a6b5; text-align: center; }
+.cap { display: inline-flex; align-items: center; gap: 9px; height: 42px; padding: 0 15px; box-sizing: border-box;
+  border-radius: 21px; background: #f4f4f2; border: 1px solid rgba(255,255,255,.56);
+  box-shadow: 0 1px 3px rgba(0,0,0,.33), 0 6px 16px rgba(0,0,0,.34);
+  font: 500 13px/1 -apple-system, BlinkMacSystemFont, var(--sans); letter-spacing: -.2px; color: #1a1a1a; white-space: nowrap; }
+.cap i { width: 7px; height: 7px; border-radius: 50%; background: var(--c); }
+.cap b { display: flex; align-items: center; gap: 3px; }
+.cap em { display: block; width: 2px; border-radius: 1px; background: rgba(33,33,33,.88); }
+.cap.rec { --c: #ff3b30; } .cap.run { --c: #007aff; } .cap.ok { --c: #28cd41; } .cap.none { --c: #8e8e93; }
+@media (max-width: 760px) { .caps-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* 좁은 화면에선 글자가 5px 로 줄어 못 읽는다 → 도식만 옆으로 밀어 본다 */
+@media (max-width: 640px) {
+  .gvb { overflow-x: auto; }
+  .gvb svg { min-width: 560px; }
+}
+.gvb .f-ink { fill: var(--ink); } .gvb .f-ink2 { fill: var(--ink-2); }
+.gvb .f-card { fill: var(--card); } .gvb .f-screen { fill: color-mix(in srgb, var(--ink) 88%, var(--card)); }
+.gvb .f-base { fill: color-mix(in srgb, var(--ink) 80%, var(--card)); }
+.gvb .f-rec { fill: #e0564f; } .gvb .f-t3 { fill: var(--t3); }
+.gvb .f-cap { fill: #f3f1f7; }
+.gvb .s-edge { stroke: color-mix(in srgb, var(--ink) 20%, transparent); }
+.gvb .s-wire { stroke: var(--ink-2); stroke-width: 2; fill: none; } .gvb .s-wire.t { stroke-width: 1.4; }
+.gvb .s-lane line { stroke: var(--ink); stroke-opacity: 0.12; }
+.gvb .s-wave { stroke: #221f2b; stroke-width: 1.6; stroke-linecap: round; }
+.gvb .t-h { font-size: 14px; font-weight: 700; fill: var(--ink); } .gvb .t-h.s { font-size: 12px; font-weight: 600; }
+.gvb .t-b { font-size: 11px; font-weight: 600; fill: var(--ink); }
+.gvb .t-n { font-size: 11px; fill: var(--ink-3); }
+.gvb .t-s { font-size: 10px; fill: var(--ink-3); }
+.gvb .t-in { font-size: 10.5px; fill: var(--ink); }
+.gvb .t-key { font-size: 11px; font-weight: 600; fill: var(--card); } .gvb .t-key.s { font-size: 10px; }
+.gvb .t-on { font-size: 10px; font-weight: 700; fill: #fff; } .gvb .t-on.s { font-size: 8.5px; font-weight: 400; }
+.gvb .t-cap { font-size: 9px; font-weight: 600; fill: #221f2b; }
