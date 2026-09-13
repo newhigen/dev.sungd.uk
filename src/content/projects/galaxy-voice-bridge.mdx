@@ -1,0 +1,80 @@
+---
+title: 갤럭시 음성 브리지
+tagline: 갤럭시를 맥의 무선 받아쓰기 마이크로 — Option+Space 로 녹음, 맥 안의 Whisper 로 전사해 커서 자리에 붙여넣기
+period: "2026.09.06"
+purpose: 개발 도구
+kind: 안드로이드 앱 · Mac 도우미
+tags: [Android, Kotlin, Python, Swift, Whisper]
+headCover: false
+use:
+  - "어느 Mac 앱에서든 Option+Space 로 녹음 시작 · 한 번 더 누르면 정지"
+  - "갤럭시 마이크 소리가 같은 Wi-Fi 로 Mac 에 실시간 전송"
+  - "Mac 안의 Whisper 가 한국어 전사 → 커서 자리에 자동 붙여넣기"
+---
+
+import Hero from '../../components/Hero.astro';
+import Fig from '../../components/Fig.astro';
+import Next from '../../components/Next.astro';
+import Flow from '../../components/Flow.astro';
+import Versus from '../../components/Versus.astro';
+import Cases from '../../components/Cases.astro';
+
+<p class="q">Option+Space 두 번, 그 사이 한 말은 커서 자리에.</p>
+
+갤럭시가 Mac 의 무선 마이크. 음성은 같은 Wi-Fi 안에서만 오가고 전사는 Mac 안에서 끝남.
+
+<Hero label="9월 13일 하루 받아쓰기" v="55번"
+  note="개발을 끝낸 사흘 뒤, 평소 작업 중에 누른 횟수"
+  tiles={[
+    { label: "한 번에 말한 길이", v: "평균 13초", note: "55번 · 합계 11분 37초" },
+    { label: "음성이 나가는 곳", v: "외부 서버 0", note: "같은 Wi-Fi → Mac 안의 Whisper" },
+  ]}
+  basis="Mac 에 남는 WAV 백업의 파일 수 · 길이 기준. Esc 로 취소한 녹음은 지워져서 빠짐." />
+
+<Fig src="/p/galaxy-voice-bridge/capsule-f.png" wide
+  caption="녹음 중 Mac 화면 아래에 뜨는 캡슐 — 실시간 파형, 이어서 «전사 중…» → «완료»." />
+
+<Next items={[
+  { tab: "개발기", title: "닷새 동안 PR 34개, 그중 18개가 캡슐", href: "/galaxy-voice-bridge/making" },
+]} />
+
+## 동작 방식
+
+<Flow caption="파란 점이 사람이 하는 일 — 키 두 번." steps={[
+  { at: "Mac", name: "Option+Space", note: "시작음 Tink", key: true },
+  { at: "갤럭시", name: "녹음", note: "16 kHz 모노 PCM" },
+  { at: "같은 Wi-Fi", name: "실시간 전송", note: "UDP 로 Mac 찾기 → TCP" },
+  { at: "Mac", name: "Option+Space", note: "정지음 Pop", key: true },
+  { at: "Mac", name: "Whisper 전사", note: "large-v3-turbo" },
+  { at: "커서", name: "붙여넣기", note: "권한 없으면 클립보드" },
+]} />
+
+### 전사 경로 둘
+
+<Versus a="Handy 가 있는 Mac" b="Handy 가 없는 Mac" rows={[
+  { head: "전사", a: "Handy 공식 CLI", aNote: "--transcribe-file", b: "whisper.cpp 서버", bNote: "모델을 메모리에 상주" },
+  { head: "모델", a: "large-v3-turbo", b: "large-v3-turbo-q5_0" },
+  { head: "가속", a: "Metal (자동)", b: "CPU" },
+  { head: "단축키", a: "Option+Space", aNote: "Handy 는 Shift+Option+Space", b: "Option+Space" },
+]} />
+
+### 녹음 중 Mac
+
+- **소리만 음소거** — Mac 출력 음소거, Spotify 는 일시정지 없이 계속 재생. 정지 · 취소 · 종료 때 원래대로.
+- **Esc** — 녹음 취소, 갤럭시 · Mac 양쪽 임시 파일 삭제.
+- **대기 중엔 마이크 닫힘** — 갤럭시 `AudioRecord` 는 녹음 중에만 존재.
+
+## 자세한 동작
+
+<Cases items={[
+  { when: "연결이 끊김", what: "갤럭시 쪽 WAV 백업은 남음. 끊긴 구간 자동 재전송은 없음." },
+  { when: "Mac 이 두 대", what: "같은 Wi-Fi 에서 먼저 응답한 Mac 에 연결. 갤럭시 화면에 <b>지금 연결된 Mac 이름</b>과 발견한 Mac 목록 표시." },
+  { when: "브리지 끄기", what: "갤럭시 앱에서 끄면 연결 · 녹음 종료, Mac 의 Option+Space 요청도 차단." },
+  { when: "회사 Wi-Fi", what: "기기 사이 통신을 막는 망이면 개인 핫스팟 또는 ADB reverse. 음성 스트림은 암호화하지 않아 신뢰하는 Wi-Fi 에서만." },
+]} />
+
+## 설치와 요구 사항
+
+- **갤럭시** — Galaxy S25+(SM-S936N)에서 검증. 첫 설치만 Android SDK · ADB 필요.
+- **Mac** — `./scripts/setup_mac.sh` 한 번. Apple Silicon · Intel, Handy 가 없으면 whisper.cpp 와 모델까지 자동 준비. 손쉬운 사용 권한 허용.
+- 저장소는 private.

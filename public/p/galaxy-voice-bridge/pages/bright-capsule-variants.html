@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>밝은 캡슐 UI 후보</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; color: #f5f6f9; background: radial-gradient(circle at 50% -10%, #242936 0, #10131a 38%, #080a0e 78%); }
+    main { width: min(1280px, calc(100% - 40px)); margin: 0 auto; padding: 50px 0 80px; }
+    h1 { margin: 0 0 10px; font-size: 34px; letter-spacing: -.045em; }
+    .intro { margin: 0; color: #979daa; font-size: 15px; }
+    .toolbar { margin: 24px 0 34px; padding: 6px; width: fit-content; display: flex; gap: 5px; border: 1px solid #ffffff14; border-radius: 14px; background: #10131a; }
+    .toolbar button { height: 36px; padding: 0 15px; color: #9298a5; border: 0; border-radius: 9px; background: transparent; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; }
+    .toolbar button.active { color: #171a21; background: #f7f8fa; box-shadow: 0 4px 13px #0007; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+    .board { padding: 22px; border: 1px solid #ffffff12; border-radius: 24px; background: #11141b; }
+    .title { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 23px; }
+    h2 { margin: 0; font-size: 16px; letter-spacing: -.025em; }
+    .title span { color: #777e8d; font-size: 12px; }
+    .stage { position: relative; overflow: hidden; padding: 30px 24px 38px; border-radius: 17px; background: linear-gradient(145deg, #b9bec8, #9098a6); transition: background .2s ease; }
+    .stage::before { content: ""; position: absolute; inset: 0; opacity: .32; background: linear-gradient(#fff8 1px, transparent 1px), linear-gradient(90deg, #fff6 1px, transparent 1px); background-size: 36px 36px; mask-image: linear-gradient(#0008, transparent); pointer-events: none; }
+    body[data-backdrop="light"] .stage { background: linear-gradient(145deg, #f1f3f7, #d9dde5); }
+    body[data-backdrop="dark"] .stage { background: linear-gradient(145deg, #454b57, #282d36); }
+    .states { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 15px; align-items: start; }
+    .capsule { --tone: #9299a7; position: relative; isolation: isolate; height: 58px; min-width: 0; padding: 0 18px; display: flex; align-items: center; gap: 12px; color: #16181e; background: #f7f8fa; border-radius: 29px; }
+    .capsule.recording { --tone: #fa505d; }
+    .capsule.working { --tone: #398ef1; }
+    .capsule.complete { --tone: #25b76b; }
+    .capsule.cancelled { --tone: #858c9b; }
+    .capsule.failed { --tone: #f29a32; }
+    .dot { width: 9px; height: 9px; flex: 0 0 9px; border-radius: 50%; background: var(--tone); }
+    .text { min-width: 63px; white-space: nowrap; font-size: 14px; font-weight: 720; letter-spacing: -.02em; line-height: 1; }
+    .wave { height: 24px; margin-left: auto; display: flex; align-items: center; gap: 3px; color: #252832; }
+    .wave i { width: 3px; height: var(--h); border-radius: 99px; background: currentColor; opacity: .88; }
+    .s1 .capsule { border: 1px solid #dfe2e8; box-shadow: none; }
+    .s2 .capsule { background: #fff; box-shadow: 0 12px 30px #00000042; }
+    .s3 .capsule { border-radius: 999px; background: #fbfbfc; box-shadow: 0 20px 55px #00000063, 0 3px 8px #00000024; }
+    .s4 .capsule { background: linear-gradient(#fff, #f1f2f5); box-shadow: 0 1px 0 #fff inset, 0 -1px 0 #d8dbe2 inset, 0 4px 9px #00000030, 0 18px 32px #00000038; }
+    .s5 .capsule { border-radius: 18px; background: #f8f9fb; border: 1px solid #fff; box-shadow: 0 8px 0 -3px #00000038, 0 15px 24px #0000002e; }
+    .s6 .capsule { background: #f7f8fbdd; border: 1px solid #ffffffd9; backdrop-filter: blur(20px) saturate(1.25); box-shadow: 0 14px 38px #00000045, 0 1px 0 #fff inset; }
+    .s7 .capsule { background: #fff; box-shadow: 0 16px 42px #0000004d; }
+    .s7 .capsule::before { content: ""; position: absolute; inset: 5px; z-index: -1; border-radius: inherit; box-shadow: 0 0 0 1px #1519220e inset; }
+    .s7 .dot { box-shadow: 0 0 0 5px color-mix(in srgb, var(--tone) 16%, transparent); }
+    .s8 .capsule { background: color-mix(in srgb, var(--tone) 5%, white); border: 1px solid color-mix(in srgb, var(--tone) 22%, white); box-shadow: 0 16px 38px #00000042, 0 5px 20px color-mix(in srgb, var(--tone) 18%, transparent); }
+    .s8 .text { color: color-mix(in srgb, var(--tone) 62%, #11151d); }
+    .wide { grid-column: 1 / -1; }
+    .legend { margin-top: 34px; padding: 19px 22px; display: flex; gap: 26px; flex-wrap: wrap; color: #9aa0ad; border: 1px solid #ffffff12; border-radius: 18px; background: #11141b; font-size: 13px; }
+    .legend strong { color: #f3f4f7; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } .states { grid-template-columns: 1fr; } main { width: min(100% - 28px, 620px); padding-top: 34px; } }
+  </style>
+</head>
+<body data-backdrop="mid">
+<main>
+  <h1>밝은 캡슐 · 그림자 후보</h1>
+  <p class="intro">원·텍스트·파형의 수직 중심은 같게 두고, 실제 앱 화면에 가까운 배경에서 그림자 깊이를 비교한다.</p>
+  <div class="toolbar" aria-label="미리보기 배경">
+    <button data-value="light">밝은 화면</button><button class="active" data-value="mid">중간 회색</button><button data-value="dark">어두운 화면</button>
+  </div>
+  <section class="grid" id="variants"></section>
+  <div class="legend"><span><strong>추천 1</strong> · S2 은은한 부유</span><span><strong>추천 2</strong> · S4 이중 깊이</span><span><strong>추천 3</strong> · S6 반투명 글래스</span><span>실사용은 화면 아래에서 58px 높이</span></div>
+</main>
+<script>
+  const variants = [
+    ["s1", "S1 · 플랫 라인", "그림자 없음 · 가장 조용함"],
+    ["s2", "S2 · 은은한 부유", "넓고 옅은 단일 그림자"],
+    ["s3", "S3 · 높은 부유", "더 깊고 멀리 뜬 느낌"],
+    ["s4", "S4 · 이중 깊이", "근거리 + 원거리 그림자"],
+    ["s5", "S5 · 소프트 사각", "낮은 곡률 · 또렷한 바닥"],
+    ["s6", "S6 · 반투명 글래스", "블러 + 내부 하이라이트"],
+    ["s7", "S7 · 인셋 링", "안쪽 윤곽 + 상태 원 후광"],
+    ["s8", "S8 · 상태색 글로우", "상태색을 그림자에 살짝 반영"]
+  ];
+  const states = [
+    ["recording", "녹음 중", true], ["working", "전사 중…", false],
+    ["complete", "완료", false], ["cancelled", "취소됨", false], ["failed", "연결 오류", false]
+  ];
+  const bars = [7,13,21,10,18,24,12,20,9,16,22,8];
+  const stateMarkup = states.map(([kind, text, wave]) => `<div class="capsule ${kind}"><span class="dot"></span><span class="text">${text}</span>${wave ? `<span class="wave">${bars.map(h => `<i style="--h:${h}px"></i>`).join("")}</span>` : ""}</div>`).join("");
+  document.getElementById("variants").innerHTML = variants.map(([id, title, note]) => `<article class="board ${id}"><div class="title"><h2>${title}</h2><span>${note}</span></div><div class="stage"><div class="states">${stateMarkup}</div></div></article>`).join("");
+  document.querySelectorAll(".toolbar button").forEach(button => button.addEventListener("click", () => {
+    document.body.dataset.backdrop = button.dataset.value;
+    document.querySelectorAll(".toolbar button").forEach(item => item.classList.toggle("active", item === button));
+  }));
+</script>
+</body>
+</html>

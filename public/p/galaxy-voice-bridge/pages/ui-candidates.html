@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Galaxy Voice Bridge UI 후보</title>
+  <style>
+    :root { color-scheme: dark; font-family: Inter, Pretendard, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: #090b10; color: #f6f7fb; }
+    main { max-width: 1180px; margin: 0 auto; padding: 52px 28px 80px; }
+    h1 { margin: 0 0 10px; font-size: 32px; letter-spacing: -.04em; }
+    h2 { margin: 52px 0 18px; font-size: 18px; color: #c8cbd4; }
+    p { margin: 0; color: #858a98; }
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+    .card { padding: 22px; border: 1px solid #232733; border-radius: 22px; background: #10131a; }
+    .card h3 { margin: 0 0 18px; font-size: 14px; color: #9399a8; font-weight: 600; }
+    .states { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .pill { height: 52px; min-width: 220px; padding: 0 18px; display: inline-flex; align-items: center; gap: 12px; border-radius: 18px; background: #20232b; box-shadow: 0 14px 35px #0008; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; flex: 0 0 auto; background: var(--tone); box-shadow: 0 0 0 4px color-mix(in srgb, var(--tone) 18%, transparent); }
+    .label { min-width: 66px; font-weight: 650; font-size: 14px; letter-spacing: -.02em; white-space: nowrap; }
+    .wave { margin-left: auto; height: 24px; display: flex; align-items: center; gap: 3px; }
+    .wave i { display: block; width: 3px; height: var(--h); border-radius: 99px; background: currentColor; opacity: .88; }
+    .rec { --tone: #ff5c62; }
+    .work { --tone: #5aa9ff; }
+    .done { --tone: #45d483; }
+    .cancel { --tone: #9096a5; }
+    .error { --tone: #ffad4d; }
+    .b .pill { background: #f4f5f8; color: #11131a; box-shadow: 0 14px 35px #0005; border-radius: 26px; }
+    .b .dot { box-shadow: none; }
+    .c .pill { background: color-mix(in srgb, var(--tone) 12%, #151820); border: 1px solid color-mix(in srgb, var(--tone) 35%, #252936); box-shadow: none; }
+    .c .label { color: color-mix(in srgb, var(--tone) 82%, white); }
+    .d .pill { background: rgba(26,29,37,.82); border: 1px solid #ffffff18; backdrop-filter: blur(18px); border-radius: 14px; }
+    .d .dot { width: 8px; height: 8px; box-shadow: none; }
+    .phone { width: min(100%, 390px); margin: auto; padding: 26px; border-radius: 32px; background: #f6f7fa; color: #12141a; }
+    .phone .eyebrow { font-size: 12px; color: #737986; font-weight: 650; text-transform: uppercase; letter-spacing: .08em; }
+    .phone h3 { margin: 8px 0 4px; color: #12141a; font-size: 25px; }
+    .phone .copy { color: #69707d; font-size: 14px; line-height: 1.5; }
+    .statusbox { margin: 24px 0; padding: 18px; border-radius: 18px; background: #fff; border: 1px solid #e6e8ee; display: flex; align-items: center; gap: 12px; }
+    .actions { display: grid; gap: 10px; }
+    button { height: 52px; border: 0; font: inherit; font-weight: 700; cursor: pointer; }
+    .solid { border-radius: 16px; color: white; background: #111318; box-shadow: 0 8px 22px #11131825; }
+    .soft { border-radius: 16px; color: #175f3a; background: #dff7e9; border: 1px solid #c4ecd5; }
+    .outline { border-radius: 16px; color: #222631; background: transparent; border: 1px solid #cfd3dc; }
+    .switch { border-radius: 999px; text-align: left; padding: 0 9px 0 18px; display: flex; align-items: center; justify-content: space-between; color: white; background: #176b45; }
+    .switch::after { content: ""; width: 36px; height: 36px; border-radius: 50%; background: white; box-shadow: 0 3px 10px #0003; }
+    .off-button { color: #8b2d35; background: #fff0f1; border: 1px solid #ffd8dc; }
+    .note { margin-top: 16px; font-size: 12px; color: #858a98; }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } main { padding: 34px 18px 60px; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Voice Bridge UI 후보</h1>
+  <p>동그라미 크기와 텍스트 기준선을 고정하고, 상태는 색과 문구를 함께 써서 구분했다.</p>
+
+  <h2>Mac 하단 상태 표시</h2>
+  <section class="grid">
+    <article class="card a"><h3>A · 단단한 HUD</h3><div class="states" id="a"></div></article>
+    <article class="card b"><h3>B · 밝은 캡슐</h3><div class="states" id="b"></div></article>
+    <article class="card c"><h3>C · 상태색 패널</h3><div class="states" id="c"></div></article>
+    <article class="card d"><h3>D · 얇은 글래스</h3><div class="states" id="d"></div></article>
+  </section>
+
+  <h2>Galaxy 연결 화면과 버튼 후보</h2>
+  <section class="grid">
+    <article class="card"><div class="phone"><div class="eyebrow">Galaxy Voice Bridge</div><h3>Mac과 연결됨</h3><div class="copy">같은 Wi‑Fi에서 자동으로 연결됩니다.<br>마이크는 녹음 중에만 켜집니다.</div><div class="statusbox"><span class="dot done"></span><strong>사용 가능</strong></div><div class="actions"><button class="switch">브리지 켜짐</button><button class="outline">연결 새로고침</button></div><div class="note">후보 1 · 큰 ON/OFF 스위치를 주 동작으로</div></div></article>
+    <article class="card"><div class="phone"><div class="eyebrow">Galaxy Voice Bridge</div><h3>브리지가 꺼져 있어요</h3><div class="copy">Mac의 Option+Space 요청을 받지 않습니다.<br>원할 때 다시 켤 수 있습니다.</div><div class="statusbox"><span class="dot cancel"></span><strong>연결 안 함</strong></div><div class="actions"><button class="solid">브리지 켜기</button><button class="soft">Wi‑Fi 연결 확인</button><button class="outline off-button">완전히 끄기</button></div><div class="note">후보 2 · 상태에 따라 버튼 문구와 강조를 변경</div></div></article>
+  </section>
+</main>
+<script>
+  const states = [
+    ["rec", "녹음 중", true], ["work", "전사 중…", false], ["done", "완료", false],
+    ["cancel", "취소됨", false], ["error", "연결 오류", false]
+  ];
+  const bars = [8,14,20,11,23,17,9,19,13,22,10,16];
+  for (const id of ["a","b","c","d"]) {
+    document.getElementById(id).innerHTML = states.map(([tone,label,wave]) => `
+      <div class="pill ${tone}"><span class="dot"></span><span class="label">${label}</span>
+      ${wave ? `<span class="wave">${bars.map(h => `<i style="--h:${h}px"></i>`).join("")}</span>` : ""}</div>`).join("");
+  }
+</script>
+</body>
+</html>
