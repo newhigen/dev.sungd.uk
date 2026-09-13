@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>갤럭시 음성 브리지 — 동작 도식</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#e6e3f0;--card:#fbfaff;--card-2:#dfe6f2;--shadow:0 2px 24px rgba(40,35,80,.08);--ink:#221f2b;--ink-2:#57536b;--ink-3:#6f6b85;--accent:#8a6a3c;--t1:#7c93d6;--t2:#5fa88c;--t3:#9a82d4;--rec:#e0564f;
+--sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;--serif:"Noto Serif KR",Pretendard,serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--sans);word-break:keep-all}
+.wrap{max-width:52rem;margin:0 auto;padding:3rem 1.2rem 8rem}
+h1{font-family:var(--serif);font-size:2rem;margin:0 0 .3rem}
+.lede{color:var(--ink-2);margin:0}
+h2{font-size:1.1rem;color:var(--accent);margin:3rem 0 .1rem}
+.q{font-size:.88rem;color:var(--ink-3);margin:0 0 .8rem}
+.q b{color:var(--ink)}
+.paper{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:1.6rem 1.8rem}
+svg{display:block;width:100%;height:auto;font-family:var(--sans)}
+.cap{font-family:var(--serif);font-size:.82rem;color:var(--ink-3);margin:.6rem 0 0}
+.hook{font-family:var(--serif);font-weight:700;font-size:1.3rem;margin:0 0 1rem}
+</style>
+</head>
+<body><div class="wrap">
+<h1>동작 도식 — 갤럭시에서 입력창까지</h1>
+<p class="lede">지금 소개의 흐름(Flow)은 글자 칸 여섯이라 기기 사이를 오가는 게 안 보임. 기기를 그려 잇는 판 셋.</p>
+
+<!-- A -->
+<h2>A · 기기 셋을 한 줄로 <small style="color:var(--ink-3);font-weight:400">추천</small></h2>
+<p class="q">갤럭시 → Mac → 입력창. 선 위에 무엇이 오가는지(PCM · 전사문), 기기 아래에 사람이 하는 일(키 두 번). 소개 «동작 방식» 첫 그림.</p>
+<div class="paper">
+<svg viewBox="0 0 640 300">
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#57536b"/></marker></defs>
+  <!-- Galaxy -->
+  <rect x="40" y="46" width="92" height="170" rx="16" fill="#221f2b"/>
+  <rect x="47" y="58" width="78" height="146" rx="10" fill="#fbfaff"/>
+  <circle cx="86" cy="118" r="20" fill="#e0564f" opacity=".15"/><circle cx="86" cy="118" r="10" fill="#e0564f"/>
+  <text x="86" y="160" text-anchor="middle" font-size="11" fill="#221f2b" font-weight="600">녹음 중</text>
+  <text x="86" y="176" text-anchor="middle" font-size="9" fill="#6f6b85">MacBook 으로 전송</text>
+  <text x="86" y="244" text-anchor="middle" font-size="14" font-weight="700" fill="#221f2b">갤럭시</text>
+  <text x="86" y="262" text-anchor="middle" font-size="11" fill="#6f6b85">마이크 · 전용 앱</text>
+  <!-- wire 1 -->
+  <line x1="146" y1="128" x2="250" y2="128" stroke="#57536b" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ar)"/>
+  <text x="198" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="#221f2b">음성 16 kHz</text>
+  <text x="198" y="150" text-anchor="middle" font-size="10" fill="#6f6b85">같은 Wi-Fi</text>
+  <text x="198" y="164" text-anchor="middle" font-size="10" fill="#6f6b85">녹음 중 실시간</text>
+  <!-- Mac -->
+  <rect x="262" y="60" width="176" height="116" rx="8" fill="#221f2b"/>
+  <rect x="270" y="68" width="160" height="100" rx="3" fill="#2d2a38"/>
+  <rect x="306" y="140" width="88" height="20" rx="10" fill="#f3f1f7"/>
+  <circle cx="318" cy="150" r="3.5" fill="#e0564f"/>
+  <text x="344" y="154" text-anchor="middle" font-size="8.5" font-weight="600" fill="#221f2b">녹음 중</text>
+  <g stroke="#221f2b" stroke-width="1.6" stroke-linecap="round"><line x1="364" y1="147" x2="364" y2="153"/><line x1="368" y1="144" x2="368" y2="156"/><line x1="372" y1="146" x2="372" y2="154"/><line x1="376" y1="143" x2="376" y2="157"/><line x1="380" y1="147" x2="380" y2="153"/><line x1="384" y1="145" x2="384" y2="155"/></g>
+  <rect x="300" y="84" width="100" height="36" rx="8" fill="#9a82d4" opacity=".9"/>
+  <text x="350" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="#fff">Whisper</text>
+  <text x="350" y="113" text-anchor="middle" font-size="8.5" fill="#fff">large-v3-turbo</text>
+  <path d="M250 176h200l14 14H236z" fill="#3a3646"/>
+  <text x="350" y="244" text-anchor="middle" font-size="14" font-weight="700" fill="#221f2b">Mac</text>
+  <text x="350" y="262" text-anchor="middle" font-size="11" fill="#6f6b85">받기 · 전사 — 밖으로 안 나감</text>
+  <!-- wire 2 -->
+  <line x1="452" y1="128" x2="512" y2="128" stroke="#57536b" stroke-width="2" marker-end="url(#ar)"/>
+  <text x="482" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="#221f2b">전사문</text>
+  <text x="482" y="150" text-anchor="middle" font-size="10" fill="#6f6b85">붙여넣기</text>
+  <!-- input -->
+  <rect x="522" y="92" width="100" height="72" rx="10" fill="#fbfaff" stroke="#cfcbdc"/>
+  <text x="534" y="116" font-size="9" fill="#6f6b85">어느 앱이든</text>
+  <text x="534" y="136" font-size="10.5" fill="#221f2b">회의록 정리해 줘</text>
+  <rect x="613" y="126" width="1.6" height="13" fill="#221f2b"/>
+  <text x="572" y="244" text-anchor="middle" font-size="14" font-weight="700" fill="#221f2b">입력창</text>
+  <text x="572" y="262" text-anchor="middle" font-size="11" fill="#6f6b85">커서 자리</text>
+  <!-- keys -->
+  <g font-size="11">
+    <rect x="262" y="12" width="176" height="28" rx="14" fill="#221f2b"/>
+    <text x="350" y="30" text-anchor="middle" fill="#fbfaff" font-weight="600">⌥ Space  ×2 — 시작 · 정지</text>
+  </g>
+</svg>
+<p class="cap">사람이 하는 일은 Mac 에서 Option+Space 두 번. 음성은 같은 Wi-Fi 안, 전사는 Mac 안에서 끝남. 입력창 글은 예시.</p>
+</div>
+
+<!-- B -->
+<h2>B · 세 줄 시간표 (시퀀스)</h2>
+<p class="q">가로가 시간. 갤럭시 · Mac · 입력창 세 줄에 «언제 무엇이» 넘어가나. 두 번째 키를 누른 뒤에 전사가 시작된다는 순서가 보임. 개발기 쪽에 더 맞음.</p>
+<div class="paper">
+<svg viewBox="0 0 640 250">
+  <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 10 5 0 10z" fill="#57536b"/></marker></defs>
+  <g font-size="12" font-weight="600" fill="#221f2b"><text x="0" y="64">Mac</text><text x="0" y="134">갤럭시</text><text x="0" y="204">입력창</text></g>
+  <g stroke="#221f2b" stroke-opacity=".12" stroke-width="1"><line x1="70" y1="60" x2="630" y2="60"/><line x1="70" y1="130" x2="630" y2="130"/><line x1="70" y1="200" x2="630" y2="200"/></g>
+  <!-- key 1 -->
+  <rect x="80" y="46" width="70" height="28" rx="14" fill="#221f2b"/><text x="115" y="64" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">⌥ Space</text>
+  <line x1="115" y1="76" x2="115" y2="116" stroke="#57536b" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <!-- recording band -->
+  <rect x="115" y="120" width="250" height="20" rx="6" fill="#e0564f" opacity=".85"/>
+  <text x="240" y="134" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">녹음 · 16 kHz PCM 실시간 전송</text>
+  <g stroke="#57536b" stroke-width="1.2" stroke-dasharray="3 3"><line x1="170" y1="118" x2="170" y2="80"/><line x1="230" y1="118" x2="230" y2="80"/><line x1="290" y1="118" x2="290" y2="80"/><line x1="350" y1="118" x2="350" y2="80"/></g>
+  <rect x="160" y="50" width="200" height="20" rx="10" fill="#f3f1f7" stroke="#cfcbdc"/><text x="260" y="64" text-anchor="middle" font-size="9.5" fill="#221f2b">캡슐 «녹음 중» · 파형 · 출력 음소거</text>
+  <!-- key 2 -->
+  <rect x="365" y="46" width="70" height="28" rx="14" fill="#221f2b"/><text x="400" y="64" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">⌥ Space</text>
+  <rect x="440" y="50" width="100" height="20" rx="6" fill="#9a82d4"/><text x="490" y="64" text-anchor="middle" font-size="9.5" fill="#fff" font-weight="600">Whisper 전사</text>
+  <line x1="545" y1="72" x2="575" y2="186" stroke="#57536b" stroke-width="1.5" marker-end="url(#ar2)"/>
+  <rect x="560" y="188" width="70" height="24" rx="6" fill="#fbfaff" stroke="#cfcbdc"/><text x="595" y="204" text-anchor="middle" font-size="9.5" fill="#221f2b">붙여넣기</text>
+  <text x="115" y="238" text-anchor="middle" font-size="10" fill="#6f6b85">시작음 Tink</text>
+  <text x="400" y="238" text-anchor="middle" font-size="10" fill="#6f6b85">정지음 Pop</text>
+  <text x="545" y="238" text-anchor="middle" font-size="10" fill="#6f6b85">«완료»</text>
+</svg>
+<p class="cap">빨간 띠 동안만 갤럭시 마이크가 열림. 전사는 두 번째 키 뒤.</p>
+</div>
+
+<!-- C -->
+<h2>C · A 를 세로로 (폰 폭에서)</h2>
+<p class="q">A 와 같은 그림을 위에서 아래로. 375px 에서 글자가 줄지 않음. A 를 고르면 좁은 화면에서만 이 판으로 바꿔 세우는 것도 가능.</p>
+<div class="paper" style="max-width:22rem">
+<svg viewBox="0 0 300 470">
+  <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 10 5 0 10z" fill="#57536b"/></marker></defs>
+  <rect x="100" y="10" width="100" height="30" rx="15" fill="#221f2b"/><text x="150" y="30" text-anchor="middle" font-size="12" fill="#fff" font-weight="600">⌥ Space ×2</text>
+  <rect x="20" y="60" width="260" height="70" rx="14" fill="#dfe6f2"/>
+  <rect x="34" y="70" width="28" height="50" rx="6" fill="#221f2b"/><circle cx="48" cy="95" r="6" fill="#e0564f"/>
+  <text x="78" y="92" font-size="14" font-weight="700" fill="#221f2b">갤럭시</text><text x="78" y="112" font-size="11" fill="#57536b">마이크 · 전용 앱</text>
+  <line x1="150" y1="134" x2="150" y2="186" stroke="#57536b" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#ar3)"/>
+  <text x="162" y="160" font-size="11" font-weight="600" fill="#221f2b">음성 16 kHz · 같은 Wi-Fi</text>
+  <rect x="20" y="192" width="260" height="90" rx="14" fill="#dfe6f2"/>
+  <rect x="34" y="206" width="44" height="30" rx="4" fill="#221f2b"/><path d="M30 238h52l4 5H26z" fill="#3a3646"/>
+  <text x="94" y="222" font-size="14" font-weight="700" fill="#221f2b">Mac</text><text x="94" y="242" font-size="11" fill="#57536b">받기 · 캡슐 · 음소거</text>
+  <rect x="94" y="252" width="120" height="20" rx="6" fill="#9a82d4"/><text x="154" y="266" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">Whisper large-v3-turbo</text>
+  <line x1="150" y1="286" x2="150" y2="338" stroke="#57536b" stroke-width="2" marker-end="url(#ar3)"/>
+  <text x="162" y="316" font-size="11" font-weight="600" fill="#221f2b">전사문 붙여넣기</text>
+  <rect x="20" y="344" width="260" height="70" rx="14" fill="#fbfaff" stroke="#cfcbdc"/>
+  <text x="36" y="370" font-size="11" fill="#6f6b85">입력창 · 커서 자리</text>
+  <text x="36" y="394" font-size="13" fill="#221f2b">회의록 정리해 줘</text><rect x="152" y="382" width="1.6" height="15" fill="#221f2b"/>
+  <text x="150" y="448" text-anchor="middle" font-size="11" fill="#6f6b85">음성은 Wi-Fi 안, 전사는 Mac 안</text>
+</svg>
+</div>
+
+</div></body></html>

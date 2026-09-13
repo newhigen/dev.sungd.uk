@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>갤럭시 음성 브리지 — 왜 만들었나 질문지</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#e6e3f0;--card:#fbfaff;--card-2:#dfe6f2;--shadow:0 2px 24px rgba(40,35,80,.08);--ink:#221f2b;--ink-2:#57536b;--ink-3:#6f6b85;--accent:#8a6a3c;--link:#4a4b93;
+--sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;--serif:"Noto Serif KR",Pretendard,serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--sans);word-break:keep-all}
+.wrap{max-width:46rem;margin:0 auto;padding:3rem 1.2rem 8rem}
+h1{font-family:var(--serif);font-size:2rem;margin:0 0 .4rem}
+.lede{color:var(--ink-2);margin:0 0 2rem}
+.lede b{color:var(--ink)}
+.q{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:1.3rem 1.5rem 1.4rem;margin-bottom:1rem}
+.q .n{font-size:.75rem;font-weight:600;color:var(--accent)}
+.q h2{font-size:1.08rem;margin:.1rem 0 .2rem}
+.q .why{font-size:.8rem;color:var(--ink-3);margin:0 0 .8rem}
+.opts{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem}
+.opts label{cursor:pointer}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts span{display:inline-block;padding:.36rem .85rem;border-radius:999px;background:rgba(34,31,43,.08);font-size:.88rem;color:var(--ink-2)}
+.opts input:checked+span{background:var(--ink);color:var(--card)}
+textarea{width:100%;min-height:3.2rem;border:0;border-radius:10px;background:var(--card-2);padding:.6rem .8rem;font:inherit;font-size:.9rem;color:var(--ink);resize:vertical}
+textarea::placeholder{color:var(--ink-3)}
+.out{position:sticky;bottom:1rem;margin-top:1.6rem;background:var(--ink);color:var(--card);border-radius:14px;padding:1rem 1.2rem;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.out .top{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.out b{font-size:.9rem}
+.out button{font:inherit;font-size:.85rem;font-weight:600;border:0;border-radius:999px;padding:.4rem 1rem;background:var(--card);color:var(--ink);cursor:pointer}
+.out pre{margin:.6rem 0 0;white-space:pre-wrap;font:inherit;font-size:.8rem;color:#cfcbdc;max-height:9rem;overflow:auto}
+.use{font-size:.78rem;color:var(--ink-3);margin:.3rem 0 0}
+</style>
+</head>
+<body><div class="wrap">
+<h1>왜 만들었나 — 질문지</h1>
+<p class="lede">기록(README · HISTORY · PR)에 없는 것만 물음. <b>고르고, 모자라면 한 줄.</b> 끝나면 아래 «복사» → 대화에 붙여넣기. 모르는 건 비워 두면 페이지에서 뺌.</p>
+
+<form id="f">
+
+<section class="q" data-k="1">
+  <div class="n">1 · 쓰던 것</div>
+  <h2>이 앱 전엔 Mac 에서 받아쓰기를 뭘로?</h2>
+  <p class="why">→ 「쓰던 것」 카드. 여러 개 골라도 됨.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a1" value="Handy + Mac 내장 마이크"><span>Handy + Mac 내장 마이크</span></label>
+    <label><input type="checkbox" name="a1" value="Handy + 에어팟/헤드셋"><span>Handy + 에어팟 · 헤드셋</span></label>
+    <label><input type="checkbox" name="a1" value="macOS 기본 받아쓰기"><span>macOS 기본 받아쓰기</span></label>
+    <label><input type="checkbox" name="a1" value="폰으로 녹음 후 옮김"><span>폰으로 녹음 → 옮기기</span></label>
+    <label><input type="checkbox" name="a1" value="받아쓰기 안 씀 · 타이핑"><span>안 씀 · 타이핑</span></label>
+  </div>
+  <textarea name="t1" placeholder="덧붙일 것 (예: Handy 는 언제부터, 뭐가 좋았나)"></textarea>
+</section>
+
+<section class="q" data-k="2">
+  <div class="n">2 · 막힌 지점</div>
+  <h2>왜 굳이 갤럭시를 마이크로?</h2>
+  <p class="why">→ 「막힌 지점」 — 가장 큰 것 하나가 훅이 됨.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a2" value="Mac 마이크가 멀어 인식이 떨어짐"><span>Mac 마이크가 멂 · 인식 떨어짐</span></label>
+    <label><input type="checkbox" name="a2" value="자리에서 떨어져(서서·걸으며) 말하고 싶음"><span>자리에서 떨어져 말하고 싶음</span></label>
+    <label><input type="checkbox" name="a2" value="에어팟 연결·배터리가 번거로움"><span>에어팟 연결 · 배터리 번거로움</span></label>
+    <label><input type="checkbox" name="a2" value="폰은 늘 손에 있음"><span>폰은 늘 손에 있음</span></label>
+    <label><input type="checkbox" name="a2" value="회사 Mac 에 받아쓰기 앱 설치가 어려움"><span>회사 Mac 제약</span></label>
+  </div>
+  <textarea name="t2" placeholder="구체 장면 한 줄 (예: 누워서 Claude 에 지시하려는데…)"></textarea>
+</section>
+
+<section class="q" data-k="3">
+  <div class="n">3 · 첫 시도</div>
+  <h2>처음에 삼성 녹음기로 가려던 이유는?</h2>
+  <p class="why">→ 개발기 첫 카드의 «왜». 기록엔 «비공개 Intent 로 막힘» 만 있음.</p>
+  <div class="opts">
+    <label><input type="radio" name="a3" value="삼성 녹음기 음질·노이즈 제거가 좋아서"><span>녹음기 음질 · 노이즈 제거</span></label>
+    <label><input type="radio" name="a3" value="앱을 새로 만들지 않고 끝내려고"><span>앱 안 만들고 끝내려고</span></label>
+    <label><input type="radio" name="a3" value="이미 폰 녹음기를 쓰고 있어서"><span>이미 쓰던 앱이라</span></label>
+    <label><input type="radio" name="a3" value="특별한 이유 없음 · 먼저 떠올라서"><span>먼저 떠올라서</span></label>
+  </div>
+  <textarea name="t3" placeholder="덧붙일 것"></textarea>
+</section>
+
+<section class="q" data-k="4">
+  <div class="n">4 · 달라진 것</div>
+  <h2>하루 수십 번 받아쓰는 곳은 주로?</h2>
+  <p class="why">→ 「달라진 것」. 9월 13일 55번의 쓰임.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a4" value="Claude Code 프롬프트"><span>Claude Code 프롬프트</span></label>
+    <label><input type="checkbox" name="a4" value="메신저·메일"><span>메신저 · 메일</span></label>
+    <label><input type="checkbox" name="a4" value="문서·메모"><span>문서 · 메모</span></label>
+    <label><input type="checkbox" name="a4" value="검색창"><span>검색창</span></label>
+  </div>
+  <textarea name="t4" placeholder="전과 비교해 달라진 것 한 줄 (예: 긴 지시를 타이핑 대신 말로)"></textarea>
+</section>
+
+<section class="q" data-k="5">
+  <div class="n">5 · 지금</div>
+  <h2>아직 안 되거나 아쉬운 것은?</h2>
+  <p class="why">→ 「지금」. 없으면 «없음».</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a5" value="회사 Wi-Fi 에서 연결 안 됨"><span>회사 Wi-Fi 연결</span></label>
+    <label><input type="checkbox" name="a5" value="전사 오타·고유명사"><span>전사 오타 · 고유명사</span></label>
+    <label><input type="checkbox" name="a5" value="끊겼을 때 재전송 없음"><span>끊기면 재전송 없음</span></label>
+    <label><input type="checkbox" name="a5" value="폰 재시작 후 앱을 한 번 열어야 함"><span>폰 재시작 뒤 앱 열기</span></label>
+    <label><input type="checkbox" name="a5" value="없음"><span>없음</span></label>
+  </div>
+  <textarea name="t5" placeholder="덧붙일 것"></textarea>
+</section>
+
+</form>
+
+<div class="out">
+  <div class="top"><b>답 모음</b><button type="button" id="copy">복사</button></div>
+  <pre id="pre">(아직 고른 것 없음)</pre>
+  <p class="use">복사한 글을 대화에 그대로 붙여넣으면 됨.</p>
+</div>
+</div>
+
+<script>
+const f = document.getElementById('f'), pre = document.getElementById('pre');
+const title = {1:'쓰던 것',2:'갤럭시를 마이크로 쓴 까닭',3:'삼성 녹음기로 시작한 까닭',4:'받아쓰는 곳',5:'아쉬운 것'};
+function text(){
+  const lines = [];
+  for (let k = 1; k <= 5; k++) {
+    const picks = [...f.querySelectorAll(`[name=a${k}]:checked`)].map(i => i.value);
+    const t = f.querySelector(`[name=t${k}]`).value.trim();
+    if (!picks.length && !t) continue;
+    lines.push(`${k}. ${title[k]}: ${[...picks, t].filter(Boolean).join(' / ')}`);
+  }
+  return lines.join('\n');
+}
+function draw(){ pre.textContent = text() || '(아직 고른 것 없음)'; try { localStorage.setItem('gvb-q', JSON.stringify([...new FormData(f)])); } catch {} }
+f.addEventListener('input', draw);
+document.getElementById('copy').onclick = async () => {
+  try { await navigator.clipboard.writeText(text()); document.getElementById('copy').textContent = '복사됨'; } catch {}
+};
+try {
+  for (const [n, v] of JSON.parse(localStorage.getItem('gvb-q') || '[]')) {
+    const el = f.querySelector(`[name="${n}"][value="${CSS.escape(v)}"]`);
+    if (el) el.checked = true; else { const ta = f.querySelector(`textarea[name="${n}"]`); if (ta) ta.value = v; }
+  }
+} catch {}
+draw();
+</script>
+</body></html>
