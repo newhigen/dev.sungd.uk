@@ -138,10 +138,45 @@ a { color: inherit; }
 .doc-head h1 .badge { vertical-align: 0.45em; margin-left: 0.4rem; font-size: 1rem; padding: 0.38rem 0.8rem 0.38rem 0.66rem; }
 .doc-head h1 .badge svg { width: 0.95rem; height: 0.95rem; }
 
-/* 지금 쓰는 것 — 무엇이 살아 있는지 한눈에 */
+/* 홈 — 왼쪽 난(소개 · 갈래 · 상태) + 오른쪽 목록 둘. 지금 쓰는 것은 카드, 나머지는 한 줄
+   (2026-09-13 docs/explore/home.html 의 B + C) */
+.home {
+  display: grid;
+  grid-template-columns: 14rem minmax(0, 1fr);
+  gap: 3rem;
+  align-items: start;
+  margin-top: 1.4rem;
+}
+.pick-rail { position: sticky; top: 1.5rem; }
+.pick-rail .lede { margin: 0 0 2rem; font-size: 0.9rem; }
+.pick { display: flex; flex-direction: column; gap: 0.15rem; margin-bottom: 1.6rem; }
+.pick .lb { font-size: 0.8125rem; color: var(--ink-3); margin-bottom: 0.3rem; }
+.pick button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  padding: 0.32rem 0.7rem;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--ink-2);
+  cursor: pointer;
+}
+.pick button:hover { color: var(--ink); }
+.pick button.on { background: var(--card); color: var(--ink); font-weight: 600; box-shadow: 0 1px 3px rgba(40, 35, 80, 0.1); }
+.pick .n { font-family: var(--mono); font-size: 0.75rem; font-weight: 400; color: var(--ink-3); }
+.pick.st button { padding-left: 0.45rem; }
+
+.lists { display: flex; flex-direction: column; gap: 3rem; }
+.sec { font-size: 0.8125rem; font-weight: 500; color: var(--ink-3); margin: 0 0 1rem; }
+.sec .n { margin-left: 0.5rem; font-family: var(--mono); font-size: 0.75rem; }
+
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(23rem, 27rem));
+  grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
   gap: 1rem;
 }
 .card {
@@ -187,51 +222,49 @@ a { color: inherit; }
   color: var(--ink-3);
 }
 
-/* 갈래 칩 — 탭과 같은 알약. 고른 것만 흰 알약이 된다 */
-.filter {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: -1.2rem 0 3rem;
+/* 나머지 — 한 줄에 아이콘 · 이름 · 설명 · 갈래 · 배지 · 시기 */
+.rows { display: flex; flex-direction: column; gap: 0.35rem; }
+.row {
+  display: grid;
+  grid-template-columns: 1.75rem 10rem minmax(0, 1fr) 6rem 5rem 4rem;
+  gap: 1rem;
+  align-items: center;
+  padding: 0.55rem 1rem;
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: 0 1px 6px rgba(40, 35, 80, 0.05);
+  text-decoration: none;
 }
-.filter button {
-  font: inherit;
-  font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0.36rem 0.9rem;
-  border: 0;
-  border-radius: 999px;
-  background: var(--chip);
-  color: var(--ink-2);
-  cursor: pointer;
-}
-.filter button:hover { color: var(--ink); }
-.filter button.on {
-  background: var(--chip-on);
-  color: var(--chip-on-ink);
-  box-shadow: 0 1px 3px rgba(40, 35, 80, 0.14);
-}
-.filter .n { margin-left: 0.4rem; font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); }
+a.row:hover .rn { color: var(--link); }
+.row.bare { background: color-mix(in srgb, var(--card) 50%, transparent); box-shadow: none; }
+.row.bare .rn { color: var(--ink-2); }
+.row .ri img { display: block; width: 1.6rem; height: 1.6rem; border-radius: 50%; }
+.row .ri i { display: block; width: 0.45rem; height: 0.45rem; margin-left: 0.6rem; border-radius: 50%; background: var(--ink-3); opacity: 0.35; }
+.row .rn { font-size: 0.92rem; font-weight: 600; }
+.row .rd { font-size: 0.84rem; color: var(--ink-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row .rp { font-size: 0.78rem; color: var(--ink-3); }
+.row .ry { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); text-align: right; }
 
-/* 칩이 거른 카드 — .card 의 display:grid 가 hidden 을 이긴다 */
+@media (max-width: 900px) {
+  .home { grid-template-columns: minmax(0, 1fr); gap: 1.6rem; }
+  .pick-rail { position: static; }
+  .pick { flex-direction: row; flex-wrap: wrap; gap: 0.35rem; margin-bottom: 0.9rem; }
+  .pick .lb { width: 100%; margin: 0; }
+  .pick button { background: var(--chip); border-radius: 999px; gap: 0.4rem; }
+  .pick.st button { background: transparent; padding: 0.2rem 0.3rem; }
+  .row { grid-template-columns: 1.6rem minmax(0, 1fr) auto; gap: 0.2rem 0.8rem; }
+  .row .ri { grid-row: span 2; }
+  .row .rd { grid-column: 2 / -1; }
+  .row .rp, .row .ry { display: none; }
+  .row .rb { grid-column: 3; grid-row: 1; }
+}
+
+/* 거른 카드 · 줄 — .card · .row 의 display:grid 가 hidden 을 이긴다 */
 [hidden] { display: none !important; }
 /* 아이콘이 없는 편 — 아이콘 칸을 비워 두면 이름이 3rem 칸에 끼어 한 글자씩 접힌다 */
 .card.noicon { grid-template-columns: minmax(0, 1fr); }
-.card.noicon .mt, .card.noicon .ed { grid-column: 1; }
+.card.noicon .mt { grid-column: 1; }
 
-/* 페이지가 없는 편 — 누를 데가 없으니 뜨지 않는다 */
-.card.bare { box-shadow: none; background: color-mix(in srgb, var(--card) 50%, transparent); }
-.card.bare .nm { color: var(--ink-2); }
-.card.bare:hover .nm { color: var(--ink-2); }
-/* 멈추거나 접은 까닭 */
-.card .ed {
-  grid-column: 2;
-  margin: 0.45rem 0 0;
-  font-size: 0.8125rem;
-  color: var(--ink-3);
-  text-wrap: pretty;
-}
-.card .ed::before { content: "→ "; }
 .rail dd.ended { color: var(--ink-3); }
 
 /* ── 글 ───────────────────────────────────────────── */
@@ -1098,12 +1131,7 @@ figcaption {
   .card .ds { font-size: 0.8125rem; }
   .card .mt { margin-top: 0.7rem; font-size: 0.6875rem; }
 
-  .wrap > section + section { margin-top: 2.6rem; }
-  .note { font-size: 0.75rem; }
-
-  .filter { margin: -0.8rem 0 2rem; }
-  .filter button { font-size: 0.8125rem; padding: 0.32rem 0.8rem; }
-  .card .ed { font-size: 0.75rem; }
+  .pick button { font-size: 0.8125rem; padding: 0.3rem 0.75rem; }
 
   .tabs { margin: 0 0 0.6rem auto; }
   .tabs a { min-width: 4.6rem; padding: 0.38rem 0.9rem; font-size: 0.875rem; }
