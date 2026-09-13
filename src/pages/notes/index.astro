@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import '../../styles/notes.css';
+
+const all = await getCollection('notes');
+const sorted = [...all].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+function fmt(d: Date) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}.${m}.${day}`;
+}
+---
+
+<Base title="노트" description="개발하며 정리한 기술 노트" suffix="">
+  <p class="lede">개발하며 남긴 기술 메모. writing.sungd.uk에서 옮겨 왔다.</p>
+
+  <ul class="notes-list">
+    {sorted.map(n => (
+      <li>
+        <a href={`/notes/${n.id}/`}>
+          <span class="dt">{fmt(n.data.pubDate)}</span>
+          <span class="tt">{n.data.title}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>

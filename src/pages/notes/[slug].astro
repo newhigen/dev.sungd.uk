@@ -1,0 +1,53 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Toc from '../../components/Toc.astro';
+import '../../styles/notes.css';
+
+export async function getStaticPaths() {
+  const all = await getCollection('notes');
+  return all.map(entry => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+// remark-gfm 이 각주 절 앞에 sr-only h2(«Footnotes»)를 붙인다 — 차례에선 뺀다
+const toc = headings
+  .filter(h => h.depth <= 3 && h.slug !== 'footnote-label')
+  .map(({ slug, text, depth }) => ({ slug, text, depth }));
+
+function fmt(dt: Date) {
+  const y = dt.getFullYear();
+  const m = String(dt.getMonth() + 1).padStart(2, '0');
+  const day = String(dt.getDate()).padStart(2, '0');
+  return `${y}.${m}.${day}`;
+}
+---
+
+<Base title={d.title} description={d.title} suffix="노트">
+  <article class="note-doc">
+    <header class="doc-head">
+      <h1 transition:name="doc-title">{d.title}</h1>
+      <p class="tagline">{fmt(d.pubDate)}</p>
+    </header>
+
+    <div class="doc-body">
+      <aside class="rail" transition:name="rail">
+        {d.tags.length > 0 && (
+          <dl>
+            <dt>태그</dt>
+            <dd>{d.tags.join(' · ')}</dd>
+          </dl>
+        )}
+        <Toc items={toc} />
+      </aside>
+
+      <div class="paper">
+        <article class="prose">
+          <Content />
+        </article>
+      </div>
+    </div>
+  </article>
+</Base>

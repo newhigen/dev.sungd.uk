@@ -6,11 +6,13 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  /** 제목 뒤에 붙는 소속 — 기본은 «프로젝트». 노트 화면은 «노트»로, 목록처럼 안 붙일 땐 '' */
+  suffix?: string;
 }
 
-const { title, description = '조성덕이 만든 앱 · 도구 · 대시보드 · 분석', image } = Astro.props;
+const { title, description = '조성덕이 만든 앱 · 도구 · 대시보드 · 분석', image, suffix = '프로젝트' } = Astro.props;
 const home = Astro.url.pathname === '/';
-const full = home ? '프로젝트 — 조성덕' : `${title} — 프로젝트`;
+const full = home ? '프로젝트 — 조성덕' : suffix ? `${title} — ${suffix}` : title;
 const ogImage = image ? new URL(image, Astro.site).href : undefined;
 ---
 
@@ -70,6 +72,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
       <header class="masthead" transition:persist>
         <a class="site" href="/">프로젝트</a>
         <nav>
+          <a href="/notes/">노트</a>
           <a href="https://resume.sungd.uk">이력서</a>
           <a href="https://writing.sungd.uk">글</a>
           <a href="https://sungd.uk">sungd.uk</a>
