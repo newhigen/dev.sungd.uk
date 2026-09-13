@@ -9,6 +9,6 @@
 | `tabs2.html` | 탭이 셋·넷이 되면 — 세그먼트는 넷부터 무너진다 |
 | `tabs3.html` | 떠 있는 띠의 재질 여섯. 애플이 쓰는 유리(흐림 + 채도 + 흰 테 + 그림자) |
 | `tabs4.html` | 칩 색 여덟. 흰 칩이 흰 종이 위에서 사라지던 문제 — 바닥을 짙게 하는 쪽으로 |
-
-로컬에서 보려면 `npx http-server docs/explore -p 4398 -s`.
 | `why-numbers.html` | 왜 만들었나에 숫자를 넣는 판 다섯 — Claude 워밍업으로. 숫자 셋 · 하루 도식 · 막대 · 카드 · 타일 |
+
+로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.
