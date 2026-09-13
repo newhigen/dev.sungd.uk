@@ -15,16 +15,17 @@ use:
 import Hero from '../../components/Hero.astro';
 import Fig from '../../components/Fig.astro';
 import Next from '../../components/Next.astro';
-import Flow from '../../components/Flow.astro';
+import Devices from '../../components/gvb/Devices.astro';
+import Timeline from '../../components/gvb/Timeline.astro';
 import Versus from '../../components/Versus.astro';
 import Cases from '../../components/Cases.astro';
 
 <p class="q">Option+Space 두 번, 그 사이 한 말은 커서 자리에.</p>
 
-갤럭시가 Mac 의 무선 마이크. 음성은 같은 Wi-Fi 안에서만 오가고 전사는 Mac 안에서 끝남.
+덮개를 닫아 마이크가 꺼진 Mac 에 갤럭시를 무선 마이크로. 음성은 같은 Wi-Fi 안에서만 오가고 전사는 Mac 안에서 끝남.
 
 <Hero label="9월 13일 하루 받아쓰기" v="55번"
-  note="개발을 끝낸 사흘 뒤, 평소 작업 중에 누른 횟수"
+  note="개발을 끝낸 사흘 뒤 — Claude Code 프롬프트에"
   tiles={[
     { label: "한 번에 말한 길이", v: "평균 13초", note: "55번 · 합계 11분 37초" },
     { label: "음성이 나가는 곳", v: "외부 서버 0", note: "같은 Wi-Fi → Mac 안의 Whisper" },
@@ -35,19 +36,20 @@ import Cases from '../../components/Cases.astro';
   caption="녹음 중 Mac 화면 아래에 뜨는 캡슐 — 실시간 파형, 이어서 «전사 중…» → «완료»." />
 
 <Next items={[
+  { tab: "왜 만들었나", title: "모니터 2대면 덮개를 닫아야 함", href: "/galaxy-voice-bridge/why" },
   { tab: "개발기", title: "닷새 동안 PR 34개, 그중 18개가 캡슐", href: "/galaxy-voice-bridge/making" },
 ]} />
 
 ## 동작 방식
 
-<Flow caption="파란 점이 사람이 하는 일 — 키 두 번." steps={[
-  { at: "Mac", name: "Option+Space", note: "시작음 Tink", key: true },
-  { at: "갤럭시", name: "녹음", note: "16 kHz 모노 PCM" },
-  { at: "같은 Wi-Fi", name: "실시간 전송", note: "UDP 로 Mac 찾기 → TCP" },
-  { at: "Mac", name: "Option+Space", note: "정지음 Pop", key: true },
-  { at: "Mac", name: "Whisper 전사", note: "large-v3-turbo" },
-  { at: "커서", name: "붙여넣기", note: "권한 없으면 클립보드" },
-]} />
+<Devices caption="사람이 하는 일은 Mac 에서 Option+Space 두 번. 음성은 같은 Wi-Fi 안, 전사는 Mac 안. 입력창 글은 예시." />
+
+### 키 두 번 사이
+
+<Timeline caption="빨간 띠 동안만 갤럭시 마이크가 열림. 전사는 두 번째 키 뒤." />
+
+- **소리만 음소거** — Mac 출력만 끔, Spotify 는 일시정지 없이 계속 재생. 정지 · 취소 · 종료 때 원래대로.
+- **Esc** — 녹음 취소, 갤럭시 · Mac 양쪽 임시 파일 삭제.
 
 ### 전사 경로 둘
 
@@ -57,12 +59,6 @@ import Cases from '../../components/Cases.astro';
   { head: "가속", a: "Metal (자동)", b: "CPU" },
   { head: "단축키", a: "Option+Space", aNote: "Handy 는 Shift+Option+Space", b: "Option+Space" },
 ]} />
-
-### 녹음 중 Mac
-
-- **소리만 음소거** — Mac 출력 음소거, Spotify 는 일시정지 없이 계속 재생. 정지 · 취소 · 종료 때 원래대로.
-- **Esc** — 녹음 취소, 갤럭시 · Mac 양쪽 임시 파일 삭제.
-- **대기 중엔 마이크 닫힘** — 갤럭시 `AudioRecord` 는 녹음 중에만 존재.
 
 ## 자세한 동작
 

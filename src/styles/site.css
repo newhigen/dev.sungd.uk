@@ -1207,3 +1207,29 @@ figcaption {
 
   .foot { margin-top: 3rem; font-size: 0.75rem; }
 }
+
+/* 갤럭시 음성 브리지 도식 둘(components/gvb) — 기기 · 시간표. 색은 토큰으로, 밤 판에서 뒤집힌다 */
+.doc-body .prose > figure.gvb { max-width: var(--measure); margin: 1.2rem 0 1.8rem; }
+.gvb svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+/* 좁은 화면에선 글자가 5px 로 줄어 못 읽는다 → 도식만 옆으로 밀어 본다 */
+@media (max-width: 640px) {
+  .gvb { overflow-x: auto; }
+  .gvb svg { min-width: 560px; }
+}
+.gvb .f-ink { fill: var(--ink); } .gvb .f-ink2 { fill: var(--ink-2); }
+.gvb .f-card { fill: var(--card); } .gvb .f-screen { fill: color-mix(in srgb, var(--ink) 88%, var(--card)); }
+.gvb .f-base { fill: color-mix(in srgb, var(--ink) 80%, var(--card)); }
+.gvb .f-rec { fill: #e0564f; } .gvb .f-t3 { fill: var(--t3); }
+.gvb .f-cap { fill: #f3f1f7; }
+.gvb .s-edge { stroke: color-mix(in srgb, var(--ink) 20%, transparent); }
+.gvb .s-wire { stroke: var(--ink-2); stroke-width: 2; fill: none; } .gvb .s-wire.t { stroke-width: 1.4; }
+.gvb .s-lane line { stroke: var(--ink); stroke-opacity: 0.12; }
+.gvb .s-wave { stroke: #221f2b; stroke-width: 1.6; stroke-linecap: round; }
+.gvb .t-h { font-size: 14px; font-weight: 700; fill: var(--ink); } .gvb .t-h.s { font-size: 12px; font-weight: 600; }
+.gvb .t-b { font-size: 11px; font-weight: 600; fill: var(--ink); }
+.gvb .t-n { font-size: 11px; fill: var(--ink-3); }
+.gvb .t-s { font-size: 10px; fill: var(--ink-3); }
+.gvb .t-in { font-size: 10.5px; fill: var(--ink); }
+.gvb .t-key { font-size: 11px; font-weight: 600; fill: var(--card); } .gvb .t-key.s { font-size: 10px; }
+.gvb .t-on { font-size: 10px; font-weight: 700; fill: #fff; } .gvb .t-on.s { font-size: 8.5px; font-weight: 400; }
+.gvb .t-cap { font-size: 9px; font-weight: 600; fill: #221f2b; }

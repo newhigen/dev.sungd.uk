@@ -1,0 +1,51 @@
+---
+tagline: 모니터 2대를 쓰려면 덮개를 닫아야 하고, 덮으면 Mac 마이크가 꺼짐
+---
+
+import Flow from '../../components/Flow.astro';
+import Impact from '../../components/Impact.astro';
+
+<p class="q">모니터 2대, 덮개는 닫힘, 마이크는 0개.</p>
+
+받아쓰기는 Handy + Mac 내장 마이크. M3 Mac 에 모니터 2대를 물리면 덮개를 닫아야 하고(클램쉘 모드), 닫는 순간 내장 마이크가 꺼짐.
+
+<Flow caption="전 — Handy + 내장 마이크" steps={[
+  { at: "책상", name: "모니터 2대", note: "덮개 닫힘" },
+  { at: "말하려는 순간", name: "내장 마이크 꺼짐" },
+  { at: "그다음", name: "덮개를 열면", note: "모니터 2대를 못 씀" },
+  { at: "결국", name: "타이핑", key: true },
+]} />
+
+<Flow caption="후 — 갤럭시 음성 브리지" steps={[
+  { at: "책상", name: "모니터 2대", note: "덮개 닫힘 그대로" },
+  { at: "말하려는 순간", name: "Option+Space", note: "갤럭시에 말함" },
+  { at: "그다음", name: "Mac 안에서 전사" },
+  { at: "결국", name: "커서 자리에 글", key: true },
+]} />
+
+## 막힌 지점과 한 것
+
+<Impact
+  basis="9월 13일 55번은 Mac 에 남는 WAV 백업 수. 나머지는 PR · README 기록."
+  items={[
+    { when: "클램쉘 모드",
+      problem: "덮개를 닫으면 내장 마이크가 꺼짐",
+      did: "모니터 2대 때문에 덮개는 못 엶. → 늘 손에 있는 갤럭시를 마이크로.",
+      v: "마이크 0 → 1", vnote: "덮개 닫은 채 받아쓰기" },
+    { when: "첫 시도 · 9월 6일",
+      problem: "삼성 녹음기의 녹음 시작이 비공개",
+      did: "쓰는 폰이 갤럭시라 삼성 녹음기부터. START_RECORDING 은 signature|privileged. → 전용 앱이 마이크 PCM 을 직접 전송.",
+      v: "첫날", vnote: "PR #1 에서 전용 앱으로 전환" },
+    { when: "Handy 와 같이",
+      problem: "쓰던 받아쓰기와 단축키가 겹침",
+      did: "Handy 는 Shift+Option+Space, 브리지는 Option+Space. 전사 모델도 같은 large-v3-turbo.",
+      v: "단축키 2개", vnote: "같은 모델 · 같은 전사 품질" },
+  ]} />
+
+## 달라진 것
+
+덮개를 닫은 채 Claude Code 프롬프트를 말로 입력. 9월 13일 하루 55번. 생각하던 대로 동작.
+
+## 지금
+
+Handy + 내장 마이크보다 전사가 약간 느림 — 거슬릴 정도는 아님.
