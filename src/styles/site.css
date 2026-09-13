@@ -722,6 +722,57 @@ a { color: inherit; }
   .hero .big .v { font-size: 2.6rem; }
 }
 
+/* 계산 한 줄 — 칸 넷, 입력 칸만 짙게 */
+.chain {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  gap: 0.4rem;
+  max-width: var(--measure);
+  margin: 0.8rem 0 1rem;
+  font-family: var(--sans);
+}
+.chain .s { display: flex; flex-direction: column; padding: 0.6rem 0.75rem; border-radius: 10px; background: var(--card-2); }
+.chain .op { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-3); }
+.chain .v { font-size: 1.3rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.25; color: var(--ink); }
+.chain .nm { font-size: 0.74rem; line-height: 1.4; color: var(--ink-2); }
+.chain .key { background: var(--ink); }
+.chain .key .op, .chain .key .v, .chain .key .nm { color: var(--card); }
+
+/* 둘을 항목별로 — 표 선 없이 열만 맞춘다 */
+.versus {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0 1.2rem;
+  max-width: var(--measure);
+  margin: 0.8rem 0 1rem;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+}
+.versus > span { padding: 0.45rem 0; }
+.versus .h { font-size: 0.75rem; font-weight: 600; color: var(--ink-3); }
+.versus .h code { color: var(--ink); }
+.versus .k { color: var(--ink-3); }
+.versus .v { font-weight: 600; color: var(--ink); }
+.versus .v small { display: block; font-size: 0.72rem; font-weight: 400; color: var(--ink-3); }
+
+/* 한 축 위의 사건 — 새벽 확대 · 기간 띠 */
+.doc-body .prose > figure.track { max-width: var(--measure); margin: 1.2rem 0 1.8rem; }
+.track svg { display: block; width: 100%; height: auto; font-family: var(--sans); }
+.track .tick { font-size: 10px; fill: var(--ink-3); }
+.track .rail { fill: var(--ink); opacity: 0.06; }
+.track .b1 { fill: var(--t1); } .track .b2 { fill: var(--t2); } .track .b3 { fill: var(--t3); }
+.track .bmute { fill: var(--ink); opacity: 0.12; } .track .bcut { fill: var(--cut); }
+.track text.top { font-size: 11px; font-weight: 600; fill: var(--ink); opacity: 1; }
+.track text.top.bcut { fill: var(--cut); }
+.track .in { font-size: 10px; fill: var(--ink-2); }
+.track .pt { fill: var(--ink); } .track .pt.ring { fill: var(--card); stroke: var(--ink); stroke-width: 2; }
+.track .miss { stroke: var(--cut); stroke-width: 2; }
+.track .pl { font-size: 11px; font-weight: 600; fill: var(--ink); } .track .pl.k-miss { fill: var(--cut); }
+.track .pl.k-small { font-weight: 400; font-size: 10px; fill: var(--ink-3); }
+.track .ps { font-size: 10px; fill: var(--ink-3); }
+.track .rg { fill: none; stroke: var(--ink); stroke-width: 1.3; } .track .rg.dashed { stroke: var(--ink-3); stroke-dasharray: 3 3; }
+.track .rl { font-size: 12px; font-weight: 700; fill: var(--ink); } .track .rl.dashed { font-size: 11px; font-weight: 500; fill: var(--ink-3); }
+
 /* 소리 몇 개 — 언제 · 말 · 재생 */
 .voices {
   display: grid;

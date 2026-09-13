@@ -1,0 +1,56 @@
+---
+interface Props {
+  /** 한 축 위의 사건 — 분이든 날짜든 숫자 축 하나. 새벽 확대 · 프로젝트 기간 띠에 쓴다 */
+  min: number;
+  max: number;
+  ticks: { at: number; label: string }[];
+  /** 띠 조각. tone 1·2·3 은 색, mute 는 회색, cut 은 빨강 */
+  bars?: { from: number; to: number; tone: '1' | '2' | '3' | 'mute' | 'cut'; label?: string; inside?: string }[];
+  /** 점. dot 채움 · ring 빈 원 · miss 세로선(놓친 시각) · small 작은 점(PR) */
+  points?: { at: number; kind: 'dot' | 'ring' | 'miss' | 'small'; label?: string; sub?: string }[];
+  /** 아래 괄호 — 두 시각 사이 길이 */
+  ranges?: { from: number; to: number; label: string; dashed?: boolean }[];
+  caption?: string;
+}
+const { min, max, ticks, bars = [], points = [], ranges = [], caption } = Astro.props;
+
+const W = 600, P = 24;
+const x = (v: number) => P + ((v - min) / (max - min)) * (W - P * 2);
+const barY = 44, barH = 18;
+const below = points.some(p => p.sub) ? 44 : points.some(p => p.label) ? 30 : 12;
+const H = ranges.length ? 104 + ranges.length * 30 + 10 : barY + barH + below;
+const anchor = (v: number) => (x(v) < 60 ? 'start' : x(v) > W - 60 ? 'end' : 'middle');
+---
+
+<figure class="track">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={caption ?? ''}>
+    {ticks.map(t => <text class="tick" x={x(t.at)} y="12" text-anchor={anchor(t.at)}>{t.label}</text>)}
+    <rect class="rail" x={P} y={barY} width={W - P * 2} height={barH} rx={barH / 2} />
+    {bars.map(b => (
+      <g>
+        <rect class={`bar b${b.tone}`} x={x(b.from)} y={barY} width={Math.max(x(b.to) - x(b.from), 4)} height={barH} rx="5" />
+        {b.inside && <text class="in" x={(x(b.from) + x(b.to)) / 2} y={barY + 13} text-anchor="middle">{b.inside}</text>}
+        {b.label && <text class={`top b${b.tone}`} x={x(b.from)} y={barY - 8} text-anchor={x(b.from) > W - 60 ? 'end' : 'start'}>{b.label}</text>}
+      </g>
+    ))}
+    {points.map(p => (
+      <g>
+        {p.kind === 'miss'
+          ? <line class="miss" x1={x(p.at)} y1={barY - 6} x2={x(p.at)} y2={barY + barH + 6} />
+          : <circle class={`pt ${p.kind}`} cx={x(p.at)} cy={barY + barH / 2} r={p.kind === 'small' ? 4 : 7} />}
+        {p.label && <text class={`pl k-${p.kind}`} x={x(p.at)} y={barY + barH + 22} text-anchor={anchor(p.at)}>{p.label}</text>}
+        {p.sub && <text class="ps" x={x(p.at)} y={barY + barH + 36} text-anchor={anchor(p.at)}>{p.sub}</text>}
+      </g>
+    ))}
+    {ranges.map((r, i) => {
+      const y = 120 + i * 30;
+      return (
+        <g>
+          <path class:list={['rg', { dashed: r.dashed }]} d={`M${x(r.from)} ${y - 8} V${y} H${x(r.to)} V${y - 8}`} />
+          <text class:list={['rl', { dashed: r.dashed }]} x={(x(r.from) + x(r.to)) / 2} y={y + 16} text-anchor="middle">{r.label}</text>
+        </g>
+      );
+    })}
+  </svg>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
