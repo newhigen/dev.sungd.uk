@@ -1,0 +1,63 @@
+---
+tagline: 완료와 입력 대기는 화면에 떴다. 화면을 안 볼 때가 문제였다
+---
+
+import Cases from '../../components/Cases.astro';
+import Compare from '../../components/Compare.astro';
+import Flow from '../../components/Flow.astro';
+
+<p class="q">«완료 · 입력 중 뜨는 건 좋은데.»</p>
+
+세션 모니터(claude-watch) 화면에는 세션마다 완료인지 입력을 기다리는지가 떴다. 그 화면을 보고 있을
+때는 충분했다. 다른 창에서 일하는 동안에는 세션이 끝나도 알 방법이 없었다.
+
+터미널에도 완료 알림이 있었지만 소리가 나지 않았다.
+
+## 쓰던 것
+
+<Cases items={[
+  { when: "세션 모니터 화면",
+    what: "세션마다 완료 · 입력 필요 · 기다림을 표시한다. 화면을 볼 때만 쓸모가 있다." },
+  { when: "Ghostty 터미널 벨",
+    what: "Claude Code 가 작업을 마치면 터미널에 알림을 보낸다. 받는 쪽은 Ghostty 다." },
+]} />
+
+## 막힌 지점
+
+<Cases items={[
+  { when: "벨에 소리가 없다",
+    what: "Ghostty 의 <code>bell-features</code> 기본값이 시스템 알림과 소리를 끈다. 되긴 되는데 안 들린다." },
+  { when: "tmux 안에서는 알림이 안 온다",
+    what: "세션을 tmux 화면에 모아 두면 Claude Code 가 자기가 Ghostty 안에 있는지 모른다. Ghostty 전용 알림 경로를 아예 타지 않는다." },
+  { when: "게임 소리는 싫다",
+    what: "알림 훅 peon-ping 의 기본 팩은 게임 캐릭터 목소리다. 원한 것은 «게임 소리 같지 않으면서 너무 튀지 않는 소리» 였다." },
+]} />
+
+<Flow caption="세션 하나가 끝났을 때 — 전에는 화면을 볼 때까지 아무 일도 없었다." steps={[
+  { at: "전", name: "세션 완료", note: "모니터 화면에 «완료»" },
+  { at: "전", name: "다른 창에서 일함", note: "벨은 소리가 없다" },
+  { at: "전", name: "나중에 발견", note: "창을 돌다가", key: true },
+  { at: "후", name: "세션 완료", note: "훅이 바로 받는다" },
+  { at: "후", name: "«Task complete.»", note: "헤드폰으로", key: true },
+]} />
+
+## 그래서 정한 것
+
+**터미널을 거치지 않는다.** 벨과 tmux 를 우회해 Claude Code 훅에서 직접 소리를 낸다.
+
+**사람 목소리, 세 문장.** 완료 · 입력 필요 · 한도만. 무슨 일인지 문장으로 들린다.
+
+**가볍게.** 소리 때문에 세션이 무거워지지 않는다. 훅은 컨텍스트에 들어가지 않는다.
+
+## 전 → 후
+
+<Compare before="전" after="후" rows={[
+  { head: "세션이 끝났을 때", before: "모니터 화면을 볼 때 안다", after: "바로 목소리로 듣는다" },
+  { head: "나를 기다릴 때", before: "화면에 «입력 필요» 가 떠 있다", after: "«I have a question.»" },
+  { head: "어느 세션인지", before: "화면에 이름이 있다", after: "소리로는 모른다 — 화면을 봐야 한다" },
+]} />
+
+## 지금
+
+마지막 행이 풀리지 않았다. 세션이 열 개를 넘는 날에는 소리를 들어도 결국 화면에서 찾아야 했고,
+9월 2일에 소리를 걷어냈다. 지금은 세션 모니터의 «내 차례» 목록만 쓴다.

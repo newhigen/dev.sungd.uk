@@ -1,0 +1,17 @@
+---
+interface Props {
+  /** 소리 몇 개를 나란히 — 언제 울리나 · 무엇이라 말하나 · 파일 */
+  items: { when: string; line: string; src: string }[];
+}
+const { items } = Astro.props;
+---
+
+<div class="voices">
+  {items.map(it => (
+    <div>
+      <span class="when">{it.when}</span>
+      <b>{it.line}</b>
+      <audio controls preload="none" src={it.src}></audio>
+    </div>
+  ))}
+</div>

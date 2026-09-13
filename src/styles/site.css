@@ -658,6 +658,30 @@ a { color: inherit; }
   letter-spacing: -0.02em;
   line-height: 1.2;
 }
+/* 소리 몇 개 — 언제 · 말 · 재생 */
+.voices {
+  display: grid;
+  gap: 0.6rem;
+  max-width: var(--measure);
+  margin: 1.8rem 0 2.2rem;
+}
+.voices > div {
+  display: grid;
+  grid-template-columns: 6.5rem minmax(0, 1fr) auto;
+  gap: 0 1rem;
+  align-items: center;
+  padding: 0.55rem 0.9rem;
+  border-radius: 10px;
+  background: var(--card-2);
+}
+.voices .when { font-size: 0.8125rem; color: var(--ink-3); }
+.voices b { font-family: var(--sans); font-weight: 600; font-size: 0.95rem; }
+.voices audio { height: 2rem; width: 11rem; }
+@media (max-width: 640px) {
+  .voices > div { grid-template-columns: 1fr; gap: 0.3rem; }
+  .voices audio { width: 100%; }
+}
+
 .nums span {
   display: block;
   margin-top: 0.2rem;
