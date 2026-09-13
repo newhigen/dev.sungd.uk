@@ -771,6 +771,7 @@ a { color: inherit; }
 .versus > span { padding: 0.45rem 0; }
 .versus .h { font-size: 0.75rem; font-weight: 600; color: var(--ink-3); }
 .versus .h code { color: var(--ink); }
+.versus .h small { display: block; font-weight: 400; }
 .versus .k { color: var(--ink-3); }
 .versus .v { font-weight: 600; color: var(--ink); }
 .versus .v small { display: block; font-size: 0.72rem; font-weight: 400; color: var(--ink-3); }
@@ -818,7 +819,8 @@ a { color: inherit; }
 /* 소개 첫 화면 끝 — 다른 판으로 가는 두 칸 */
 .next {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  /* 판이 하나뿐인 편은 한 칸 — 폭 전체로 늘지 않게 칸 폭을 고정한다 */
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
   gap: 0.6rem;
   max-width: var(--measure);
   margin: 0 0 2.6rem;

@@ -1,10 +1,10 @@
 ---
 title: 알림 목소리
-tagline: Claude Code 세션이 끝나거나 나를 부를 때 목소리로 알려 주던 설정. peon-ping 에 직접 만든 목소리 팩을 얹었다
+tagline: Claude Code 세션 완료 · 입력 대기 · 한도를 목소리로 알리던 설정. peon-ping 에 직접 만든 목소리 팩 적용
 period: "2026.08.23"
 status: 종료
 purpose: 개발 도구
-ended: 세션이 열 개를 넘으면 목소리로는 어느 세션인지 못 가려서 화면 알림으로 옮겼다 (2026.09)
+ended: 세션이 열 개를 넘으면 목소리로는 어느 세션인지 못 가려 화면 알림으로 이전 (2026.09)
 kind: Claude Code 훅
 tags: [peon-ping, ElevenLabs, Claude Code 훅]
 use:
@@ -13,19 +13,14 @@ use:
   - "컨텍스트 한도에 닿으면 «We've hit the limit.»"
 ---
 
-import Nums from '../../components/Nums.astro';
 import Voices from '../../components/Voices.astro';
-import Cases from '../../components/Cases.astro';
+import Hero from '../../components/Hero.astro';
+import Now from '../../components/Now.astro';
+import Next from '../../components/Next.astro';
 
-<p class="q">다른 창을 보는 사이에 세션은 끝나 있었다.</p>
+<p class="q">세션은 여러 개, 완료 알림 소리는 0.</p>
 
-Claude Code 세션을 여러 개 띄워 두고 일하면, 어느 세션이 끝났는지는 그 창을 봐야 안다.
-터미널(Ghostty)의 완료 알림은 소리가 꺼진 채였고, 세션을 모아 둔 tmux 화면 안에서는
-알림 자체가 오지 않았다.
-
-그래서 세션의 상태를 목소리로 듣게 했다. 오픈소스 알림 훅 peon-ping 을 깔고, 거기에
-ElevenLabs 로 만든 목소리 팩을 얹었다. 세션이 끝났을 때 · 나를 기다릴 때 · 한도에 닿았을 때,
-세 경우에만 울린다. 열흘 쓰고 지웠다.
+Claude Code 훅에서 직접 목소리 재생. 다른 창에서 일하는 동안에도 세션 완료 · 입력 대기 · 한도를 귀로 확인.
 
 <Voices items={[
   { when: "세션 완료", line: "Task complete.", src: "/p/peon-ping/task-complete.mp3" },
@@ -33,51 +28,34 @@ ElevenLabs 로 만든 목소리 팩을 얹었다. 세션이 끝났을 때 · 나
   { when: "한도", line: "We've hit the limit.", src: "/p/peon-ping/resource-limit.mp3" },
 ]} />
 
-<Nums items={[
-  { v: "3개", note: "켜 둔 소리. peon-ping 이 가르는 일곱 분류 중 셋" },
-  { v: "9곳", note: "소리를 내려고 건 Claude Code 훅" },
-  { v: "10일", note: "8월 23일에 깔고 9월 2일에 지웠다" },
+<Hero label="들리는 알림" v="0 → 3개"
+  note="Ghostty 벨은 기본값이 무음, tmux 안에선 미도착 → 훅에서 세 문장 직접 재생"
+  tiles={[
+    { label: "켠 소리 분류", v: "7 → 3", note: "완료 · 입력 필요 · 한도만" },
+    { label: "소리가 쓰는 토큰", v: "0", note: "훅이라 컨텍스트 밖. 딸려 온 스킬 4개(12.8KB)는 별도" },
+  ]}
+  basis="개수는 설정 파일 기준. 알림 횟수 실측 아님." />
+
+<Now year="2026" month="9월"
+  line="세션이 열 개를 넘으면 <b>어느 세션인지</b> 못 가려 종료"
+  sub="알림은 세션 모니터(claude-watch)의 «내 차례» 목록으로 이전" />
+
+<Next items={[
+  { tab: "왜 만들었나", title: "화면을 안 볼 때의 알림", href: "/peon-ping/why" },
+  { tab: "개발기", title: "안 들리던 벨에서 걷어내기까지 10일", href: "/peon-ping/making" },
 ]} />
 
-## 주요 기능
+## 동작 방식
 
 ### 소리 분류 셋
 
-peon-ping 은 세션 시작 · 작업 접수 · 완료 · 오류 · 입력 필요 · 한도 · 연타, 일곱 경우를 가른다.
-완료 · 입력 필요 · 한도 셋만 켰다. 오류도 대개 완료나 입력 필요로 도착하고, 계획 검토는 입력
-필요와 성격이 같다.
+peon-ping 이 가르는 일곱 경우(세션 시작 · 작업 접수 · 완료 · 오류 · 입력 필요 · 한도 · 연타) 중 완료 · 입력 필요 · 한도만
+사용. 오류는 대개 완료나 입력 필요로 도착.
 
 ### 직접 만든 목소리 팩
 
-게임 효과음이 기본인 팩 대신 사람 목소리로 만들었다. ElevenLabs 의 Matilda 목소리를 v3 모델에
-넣고 문장 앞에 `[excited]` 지시를 붙였다. 팩 포맷은 `openpeon.json` 과 `sounds/<분류>_NN.mp3` 가
-전부라, 분류 이름대로 파일을 놓으면 새 소리가 된다.
+ElevenLabs Matilda 목소리 · v3 모델 · `[excited]` 지시. 팩은 `openpeon.json` 과 `sounds/<분류>_NN.mp3` 가 전부.
 
-### 세 기계에 같은 소리
+### 세 기계 · 헤드폰일 때만
 
-Claude Code 를 쓰는 세 기계가 같은 목소리를 내도록 팩과 설정을 설정 repo(claude-config)에 두었다.
-peon-ping 이 관리하는 폴더에 두면 업데이트나 팩 정리 명령에 지워지기 때문이다. 설정은 통째로
-덮지 않고 다섯 키만 넣는다.
-
-### 헤드폰일 때만
-
-사무실 스피커로 소리가 나지 않게, 블루투스나 USB 헤드폰이 연결돼 있을 때만 소리를 통과시키는
-스크립트를 앞에 세웠다.
-
-## 접은 까닭
-
-<Cases items={[
-  { when: "세션이 열 개를 넘는다",
-    what: "소리는 <b>무슨 일</b>이 일어났는지만 말하고 <b>어느 세션</b>인지는 말하지 않는다. 세션마다 다른 목소리를 주는 것도 두세 개까지다. 동시에 열 개를 넘게 띄우는 날도 있다." },
-  { when: "울리지 말아야 할 때 울렸다",
-    what: "컨텍스트 압축이 한도로 잡혀 «We've hit the limit.» 이 났고, 서브에이전트가 끝날 때마다 «Task complete.» 가 났다. 8월 29일에 둘 다 껐다." },
-  { when: "소리보다 목록이 빨랐다",
-    what: "세션 모니터(claude-watch)의 «내 차례» 목록이 어느 세션이 나를 기다리는지 이름으로 보여 준다. 그 목록이 소리의 자리를 가져갔다." },
-  { when: "딸려 온 스킬",
-    what: "peon-ping 은 설정용 스킬 4개(합쳐 12.8KB)를 깔고, 이게 세션마다 컨텍스트에 올라간다. 소리 자체는 훅이라 토큰을 쓰지 않는다." },
-]} />
-
-## 지금
-
-9월 1일 회사 맥, 9월 2일 집 맥에서 모두 지웠다. 훅 배선 9곳 · 목소리 팩 · 스킬 4개 · brew 설치본까지
-걷어냈고, 알림은 세션 모니터 화면에만 뜬다. 목소리 파일은 설정 repo 의 git 이력에 남아 있다.
+팩과 설정을 설정 repo(claude-config)에 두고 세 기계에 같은 소리. 블루투스 · USB 헤드폰 연결 시에만 재생.
