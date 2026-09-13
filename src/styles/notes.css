@@ -14,7 +14,7 @@
   display: flex;
   align-items: baseline;
   gap: 1.1rem;
-  padding: 0.7rem 0;
+  padding: 0.45rem 0;
   text-decoration: none;
 }
 .notes-list .dt {
@@ -27,10 +27,15 @@
   font-size: 0.9375rem;
   color: var(--ink);
 }
-.notes-list a:hover .tt { color: var(--link); }
+.notes-list a:hover .tt {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-mid);
+  text-underline-offset: 3px;
+}
 
 @media (max-width: 640px) {
-  .notes-list a { flex-direction: column; gap: 0.15rem; padding: 0.6rem 0; }
+  .notes-list a { flex-direction: column; gap: 0.15rem; padding: 0.45rem 0; }
   .notes-list .dt { flex: none; }
 }
 
@@ -68,6 +73,8 @@
   background: var(--card-2);
   padding: 0.15em 0.4em;
   border-radius: 4px;
+  /* 공백 없는 긴 인라인 code(경로 등)가 좁은 화면에서 줄을 넘기지 않고 꺾이게 */
+  overflow-wrap: anywhere;
 }
 .note-doc .prose pre code {
   background: none;
