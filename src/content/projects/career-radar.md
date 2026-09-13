@@ -3,7 +3,7 @@ draft: true
 title: "커리어 레이더"
 tagline: "한국 IT 채용 공고(JD)를 직군별 회사×스택 매트릭스 + 통합 직무기술서 + 학습 로드맵으로 정리하는 도구. 회사명은 익명화한 예시."
 period: "2026.05"
-category: "의사결정·리서치"
+purpose: 일·커리어
 tags: ["Data Analysis", "Career"]
 link: "https://resume.sungd.uk/dashboards/career-radar.html"
 linkLabel: 대시보드

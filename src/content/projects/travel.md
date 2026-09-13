@@ -3,7 +3,7 @@ draft: true
 title: "여행 계획 대시보드"
 tagline: "가족 해외여행을 시기·비용·동선·체력까지 한 화면에서 비교하며 계획하는 플래너. 인원·금액은 익명화한 예시."
 period: "2026.05.22"
-category: "의사결정·리서치"
+purpose: 생활
 tags: ["Dashboard", "Planning"]
 link: "https://resume.sungd.uk/dashboards/travel/travel.html"
 linkLabel: 대시보드

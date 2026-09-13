@@ -35,6 +35,9 @@ const d = project.data;
         {d.kind && <><dt>종류</dt><dd>{d.kind}</dd></>}
         <dt>기간</dt>
         <dd class="when">{d.period}</dd>
+        <dt>상태</dt>
+        <dd>{d.status} · {d.purpose}</dd>
+        {d.ended && <dd class="ended">{d.ended}</dd>}
         {d.tags.length > 0 && <><dt>스택</dt><dd>{d.tags.join(' · ')}</dd></>}
         <dt>링크</dt>
         <dd><a href={`/${project.id}`}>소개</a></dd>

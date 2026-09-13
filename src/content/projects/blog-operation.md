@@ -3,7 +3,7 @@ draft: true
 title: "블로그 운영"
 tagline: "옵시디언으로 쓰고 아스트로로 배포하는 개인 지식 관리 시스템."
 period: "2025.07.01"
-category: "개발·엔지니어링"
+purpose: 공부·관심사
 tags: ["Astro"]
 cover: "/p/blog-operation/blog-operation.png"
 coverLight: "/p/blog-operation/blog-operation-light.png"

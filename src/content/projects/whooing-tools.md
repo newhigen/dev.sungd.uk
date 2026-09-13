@@ -3,7 +3,7 @@ draft: true
 title: "가계부 자동 기입"
 tagline: "은행 명세서를 후잉 가계부 형식으로 자동 변환하는 스크립트."
 period: "2026.05.18"
-category: "데이터·대시보드"
+purpose: 돈
 tags: ["Python", "Finance", "MCP"]
 cover: "/p/whooing-tools/whooing-tools.png"
 coverLight: "/p/whooing-tools/whooing-tools-light.png"
