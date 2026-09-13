@@ -144,3 +144,29 @@
 @media (max-width: 900px) {
   .note-doc .prose pre { max-width: 100%; }
 }
+
+/* ── 좁은 화면 — 카드는 두되 거터·패딩을 줄여 글줄 폭을 넓힌다 ── */
+
+@media (max-width: 640px) {
+  /* 바깥 거터(site.css --gut)는 프로젝트 글과 공유하는 값이라 여기서만 좁힌다 */
+  .wrap:has(.note-doc) {
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+  }
+  .note-doc .doc-body > .paper,
+  .note-doc .doc-body > div,
+  .note-doc .doc-body > .prose {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 9px;
+  }
+  .note-doc .prose {
+    font-size: 0.875rem;
+    line-height: 1.7;
+  }
+  .note-doc .doc-head h1 { font-size: 1.375rem; }
+  .note-doc .prose h1 { font-size: 1.3rem; margin-top: 2.4rem; }
+  .note-doc .prose h2 { font-size: 1.05rem; }
+  .note-doc .prose h3 { font-size: 0.9375rem; }
+  .note-doc .prose pre { font-size: 0.78125rem; }
+}

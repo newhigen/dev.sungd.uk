@@ -55,7 +55,7 @@ tags:
 
 ### 설정: `settings.json`
 
-```JSON
+```json
 // Minimap 설정
 "editor.minimap.maxColumn": 80,
 "editor.minimap.showSlider": "always",

@@ -11,7 +11,9 @@ tags:
 
 Ghostty를 wrapping한 터미널이다. pane 분할이 편하고, 알림이 잘 되어서 에이전트 쓸 때 유용하다.
 
-설정은 Ghostty 설정 파일(`~/.config/ghostty/config`)과 동일하게 사용한다.\n- [cmux 공식 사이트](https://cmux.com/)
+설정은 Ghostty 설정 파일(`~/.config/ghostty/config`)과 동일하게 사용한다.
+
+- [cmux 공식 사이트](https://cmux.com/)
 - [GitHub](https://github.com/manaflow-ai/cmux)
 
 <div style="border-bottom: 1px dashed var(--border);"></div>
