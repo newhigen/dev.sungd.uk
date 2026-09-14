@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude 워치 — 왜 만들었나 질문지</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#e6e3f0;--card:#fbfaff;--card-2:#dfe6f2;--shadow:0 2px 24px rgba(40,35,80,.08);--ink:#221f2b;--ink-2:#57536b;--ink-3:#6f6b85;--accent:#8a6a3c;--link:#4a4b93;
+--sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;--serif:"Noto Serif KR",Pretendard,serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--sans);word-break:keep-all}
+.wrap{max-width:46rem;margin:0 auto;padding:3rem 1.2rem 8rem}
+h1{font-family:var(--serif);font-size:2rem;margin:0 0 .4rem}
+.lede{color:var(--ink-2);margin:0 0 2rem}
+.lede b{color:var(--ink)}
+.q{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:1.3rem 1.5rem 1.4rem;margin-bottom:1rem}
+.q .n{font-size:.75rem;font-weight:600;color:var(--accent)}
+.q h2{font-size:1.08rem;margin:.1rem 0 .2rem}
+.q .why{font-size:.8rem;color:var(--ink-3);margin:0 0 .8rem}
+.opts{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem}
+.opts label{cursor:pointer}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts span{display:inline-block;padding:.36rem .85rem;border-radius:999px;background:rgba(34,31,43,.08);font-size:.88rem;color:var(--ink-2)}
+.opts input:checked+span{background:var(--ink);color:var(--card)}
+textarea{width:100%;min-height:3.2rem;border:0;border-radius:10px;background:var(--card-2);padding:.6rem .8rem;font:inherit;font-size:.9rem;color:var(--ink);resize:vertical}
+textarea::placeholder{color:var(--ink-3)}
+.out{position:sticky;bottom:1rem;margin-top:1.6rem;background:var(--ink);color:var(--card);border-radius:14px;padding:1rem 1.2rem;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.out .top{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.out b{font-size:.9rem}
+.out button{font:inherit;font-size:.85rem;font-weight:600;border:0;border-radius:999px;padding:.4rem 1rem;background:var(--card);color:var(--ink);cursor:pointer}
+.out pre{margin:.6rem 0 0;white-space:pre-wrap;font:inherit;font-size:.8rem;color:#cfcbdc;max-height:9rem;overflow:auto}
+.use{font-size:.78rem;color:var(--ink-3);margin:.3rem 0 0}
+</style>
+</head>
+<body><div class="wrap">
+<h1>왜 만들었나 — 질문지</h1>
+<p class="lede">Claude 워치(claude-watch) — 5월 29일 저장소를 떼고 9월 6일까지 커밋 190개(7월에 114개). 9월 5일 화면으로는 접고 판(Deck) · 메뉴바 · 상태줄로 넘어감. 기록(README · HISTORY)에 없는 것만 물음. <b>고르고, 모자라면 한 줄.</b> 끝나면 아래 «복사» → 대화에 붙여넣기. 모르는 건 비워 두면 페이지에서 뺌.</p>
+
+<form id="f">
+
+<section class="q" data-k="1">
+  <div class="n">1 · 쓰던 것</div>
+  <h2>claude-watch 전엔 세션 여러 개를 어떻게 봤나?</h2>
+  <p class="why">→ 「쓰던 것」. 여러 개 골라도 됨.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a1" value="claude agents 뷰만"><span>claude agents 뷰만</span></label>
+    <label><input type="checkbox" name="a1" value="터미널 탭·창을 하나씩 들춰 봄"><span>터미널 창 하나씩 들춰 보기</span></label>
+    <label><input type="checkbox" name="a1" value="cmux 사이드바"><span>cmux 사이드바</span></label>
+    <label><input type="checkbox" name="a1" value="알림 소리(peon-ping)로 알아챔"><span>알림 소리로 알아챔</span></label>
+  </div>
+  <textarea name="t1" placeholder="덧붙일 것 (예: 그때 동시에 세션 몇 개쯤)"></textarea>
+</section>
+
+<section class="q" data-k="2">
+  <div class="n">2 · 막힌 지점</div>
+  <h2>가장 괴로웠던 장면은?</h2>
+  <p class="why">→ 첫 문장(훅). 기억 기록엔 «agents 뷰는 질문으로 끝난 세션도 완료로 분류 — 그게 이 도구의 존재 이유» 라고 적혀 있음. 맞으면 그걸, 아니면 다른 것.</p>
+  <div class="opts">
+    <label><input type="radio" name="a2" value="답을 기다리는 세션이 완료로 보여 한참 방치됨"><span>기다리는 세션이 «완료» 로 보여 방치</span></label>
+    <label><input type="radio" name="a2" value="어느 세션이 나를 기다리는지 창을 일일이 들춰야 함"><span>창을 일일이 들춰 봄</span></label>
+    <label><input type="radio" name="a2" value="컨텍스트가 차는 세션을 놓침"><span>컨텍스트 차는 걸 놓침</span></label>
+    <label><input type="radio" name="a2" value="5h·7d 한도가 언제 닫힐지 모르고 일을 시작함"><span>한도가 언제 닫히는지 모름</span></label>
+  </div>
+  <textarea name="t2" placeholder="구체 장면 한 줄"></textarea>
+</section>
+
+<section class="q" data-k="3">
+  <div class="n">3 · 실제로 쓴 것</div>
+  <h2>화면으로 쓰던 때(7~8월) 많이 쓴 건?</h2>
+  <p class="why">→ 소개 판 앞자리. 기록에 있는 기능만 늘어놓음.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a3" value="? · ! 표식과 무엇을 묻는지 한 줄"><span>? · ! 표식 + 묻는 말 한 줄</span></label>
+    <label><input type="checkbox" name="a3" value="카드 클릭 한 번으로 agents 뷰에서 그 세션 열기"><span>클릭 한 번으로 세션 열기</span></label>
+    <label><input type="checkbox" name="a3" value="컨텍스트 % 경고"><span>컨텍스트 % 경고</span></label>
+    <label><input type="checkbox" name="a3" value="맨 아래 5h·7d 한도 두 줄"><span>5h · 7d 한도 줄</span></label>
+    <label><input type="checkbox" name="a3" value="우클릭 /compact·이름 바꾸기·종료"><span>우클릭 메뉴</span></label>
+    <label><input type="checkbox" name="a3" value="폰 웹에서 답하기·세션 만들기(6월)"><span>폰 웹에서 답하기 (6월)</span></label>
+  </div>
+  <textarea name="t3" placeholder="덧붙일 것 (예: 이게 제일 좋았던 순간)"></textarea>
+</section>
+
+<section class="q" data-k="4">
+  <div class="n">4 · 화면을 접은 까닭</div>
+  <h2>9월 5일 TUI 칸을 뺀 이유는?</h2>
+  <p class="why">→ «지금» 칸. 기록엔 «덱을 agents 한 판으로 줄이고 조망은 상태줄 한 줄 · 브라우저 판으로» 만 있음.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a4" value="터미널 칸 하나를 차지하는 게 아까움"><span>터미널 칸이 아까움</span></label>
+    <label><input type="checkbox" name="a4" value="브라우저 판(Deck)이 더 넓고 답까지 됨"><span>브라우저 판이 더 나음</span></label>
+    <label><input type="checkbox" name="a4" value="상태줄 한 줄로 충분"><span>상태줄 한 줄로 충분</span></label>
+    <label><input type="checkbox" name="a4" value="claude agents 뷰가 좋아져 차이가 줄었음"><span>agents 뷰가 좋아짐</span></label>
+    <label><input type="checkbox" name="a4" value="클릭이 엉뚱한 세션을 여는 일이 남음"><span>클릭 오작동</span></label>
+  </div>
+  <textarea name="t4" placeholder="덧붙일 것"></textarea>
+</section>
+
+<section class="q" data-k="5">
+  <div class="n">5 · 지금</div>
+  <h2>지금 세션을 볼 때 실제로 보는 곳은? 그리고 이 편의 상태는?</h2>
+  <p class="why">→ 배지(사용 중 · 보류 · 완료 · 종료)와 뒤를 이은 것. 세션 탭 편에서 판 · 메뉴바를 이 편으로 넘겼음.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a5" value="판(Deck, 8908)"><span>판(Deck)</span></label>
+    <label><input type="checkbox" name="a5" value="메뉴바 SessionBar"><span>메뉴바</span></label>
+    <label><input type="checkbox" name="a5" value="상태줄 한 줄"><span>상태줄 한 줄</span></label>
+    <label><input type="checkbox" name="a5" value="claude agents 뷰"><span>claude agents 뷰</span></label>
+    <label><input type="checkbox" name="a5" value="삶의 영역(tasks-web) 이어하기"><span>삶의 영역 이어하기</span></label>
+  </div>
+  <div class="opts">
+    <label><input type="radio" name="s5" value="배지: 종료 — 화면은 접고 부품으로만"><span>종료 (부품만 남음)</span></label>
+    <label><input type="radio" name="s5" value="배지: 사용 중 — 판·메뉴바로 이어져 쓰는 중"><span>사용 중 (판 · 메뉴바로 이어짐)</span></label>
+    <label><input type="radio" name="s5" value="배지: 완료"><span>완료</span></label>
+  </div>
+  <textarea name="t5" placeholder="덧붙일 것 (예: 판은 안 쓰고 메뉴바만)"></textarea>
+</section>
+
+</form>
+
+<div class="out">
+  <div class="top"><b>답 모음</b><button type="button" id="copy">복사</button></div>
+  <pre id="pre">(아직 고른 것 없음)</pre>
+  <p class="use">복사한 글을 대화에 그대로 붙여넣으면 됨.</p>
+</div>
+</div>
+
+<script>
+const f = document.getElementById('f'), pre = document.getElementById('pre');
+const title = {1:'쓰던 것',2:'가장 괴로웠던 장면',3:'실제로 쓴 것',4:'화면을 접은 까닭',5:'지금'};
+function text(){
+  const lines = [];
+  for (let k = 1; k <= 5; k++) {
+    const picks = [...f.querySelectorAll(`[name=a${k}]:checked, [name=s${k}]:checked`)].map(i => i.value);
+    const t = f.querySelector(`[name=t${k}]`).value.trim();
+    if (!picks.length && !t) continue;
+    lines.push(`${k}. ${title[k]}: ${[...picks, t].filter(Boolean).join(' / ')}`);
+  }
+  return lines.join('\n');
+}
+function draw(){ pre.textContent = text() || '(아직 고른 것 없음)'; try { localStorage.setItem('cw-q', JSON.stringify([...new FormData(f)])); } catch {} }
+f.addEventListener('input', draw);
+document.getElementById('copy').onclick = async () => {
+  try { await navigator.clipboard.writeText(text()); document.getElementById('copy').textContent = '복사됨'; } catch {}
+};
+try {
+  for (const [n, v] of JSON.parse(localStorage.getItem('cw-q') || '[]')) {
+    const el = f.querySelector(`[name="${n}"][value="${CSS.escape(v)}"]`);
+    if (el) el.checked = true; else { const ta = f.querySelector(`textarea[name="${n}"]`); if (ta) ta.value = v; }
+  }
+} catch {}
+draw();
+</script>
+</body></html>

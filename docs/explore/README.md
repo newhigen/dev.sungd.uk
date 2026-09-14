@@ -19,5 +19,6 @@
 | `gvb-diagram.html` | 갤럭시 음성 브리지 동작 도식 셋 — A 기기 셋 한 줄 · B 세 줄 시간표 · C 세로 (폰 폭) |
 | `gvb-why-questions.html` | 갤럭시 음성 브리지 «왜 만들었나» 질문지 — 고르고 한 줄, 답 모음 복사 |
 | `session-tabs-why-questions.html` | 세션 탭 «왜 만들었나» 질문지 — 쓰던 것 · 괴로운 장면 · 실제로 쓴 것 · 보류한 까닭 · 지금 |
+| `claude-watch-why-questions.html` | Claude 워치 «왜 만들었나» 질문지 — 쓰던 것 · 괴로운 장면 · 실제로 쓴 것 · 화면을 접은 까닭 · 지금 |
 
 로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.
