@@ -1249,3 +1249,29 @@ figcaption {
 .gvb .t-key { font-size: 11px; font-weight: 600; fill: var(--card); } .gvb .t-key.s { font-size: 10px; }
 .gvb .t-on { font-size: 10px; font-weight: 700; fill: #fff; } .gvb .t-on.s { font-size: 8.5px; font-weight: 400; }
 .gvb .t-cap { font-size: 9px; font-weight: 600; fill: #221f2b; }
+
+/* 세션 탭 — 크롬 탭바 전 · 후 (components/st/TabBar.astro). 탭바 바탕은 토큰, 지금 그룹만 크롬 파랑 */
+.doc-body .prose > figure.stb { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
+.stb-row { display: grid; grid-template-columns: 1.4rem minmax(0, 1fr); gap: 0.3rem 0.6rem; align-items: center; margin-bottom: 1rem; }
+.stb-lb { font: 600 0.75rem var(--sans); color: var(--ink-3); }
+.stb-bar { display: flex; align-items: flex-end; gap: 2px; height: 2.3rem; padding: 0 0.45rem; overflow: hidden;
+  border-radius: 10px 10px 0 0; background: color-mix(in srgb, var(--ink) 9%, var(--card)); }
+.stb-note { grid-column: 2; font: 0.75rem/1.4 var(--sans); color: var(--ink-3); }
+.stb-t { display: flex; align-items: center; gap: 0.3rem; min-width: 0; height: 1.85rem; padding: 0 0.5rem;
+  border-radius: 8px 8px 0 0; font: 0.72rem var(--sans); color: var(--ink-2); white-space: nowrap; }
+.stb-t i { flex: none; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--ink-3); }
+.stb-t em { font-style: normal; overflow: hidden; text-overflow: clip; }
+.stb-t.thin { flex: 1 1 0; padding: 0 0.22rem; }
+.stb-t.act { background: var(--card); color: var(--ink); }
+.stb-grp { display: flex; align-items: flex-end; gap: 2px; margin-right: 0.2rem; }
+.stb-grp b { flex: none; white-space: nowrap; align-self: center; margin: 0 0.1rem; padding: 0.16rem 0.5rem; border-radius: 6px; font: 600 0.7rem var(--sans);
+  color: var(--ink-2); background: color-mix(in srgb, var(--ink) 14%, transparent); }
+.stb-grp.on b { color: #fff; background: #1a73e8; }
+.stb-grp.on .stb-t { flex: 0 1 6rem; box-shadow: inset 0 -2px #1a73e8; }
+.stb-grp.on .stb-t i { background: #1a73e8; }
+.stb-t.loose { flex: 0 1 6.5rem; margin-left: auto; }
+.stb-bar > .stb-grp:not(.on) { align-self: center; }
+@media (max-width: 640px) {
+  .stb { overflow-x: auto; }
+  .stb-row { min-width: 560px; }
+}
