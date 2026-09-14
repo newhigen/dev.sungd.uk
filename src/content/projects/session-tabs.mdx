@@ -1,0 +1,84 @@
+---
+title: 세션 탭
+tagline: Claude Code 세션 하나를 크롬 탭 그룹 하나로 — 지금 세션의 탭만 펴고 나머지는 칩으로 접는 확장
+period: "2026.09.04"
+status: 보류
+purpose: 개발 도구
+ended: 세션 탭은 묶이지만 손으로 연 탭과 한 창에 섞임 · 그룹째 닫고 바로 이어 여는 손길이 아직 없음
+kind: 크롬 확장 · Mac 데몬
+tags: [Chrome Extension, Node.js, WebSocket, Claude Code]
+headCover: false
+use:
+  - "세션이 여는 주소는 저절로 그 세션의 탭 그룹으로"
+  - "세션을 옮기면 그 그룹만 펴지고 나머지는 이름 칩 하나로"
+  - "같은 주소는 새로 안 열고 있던 탭으로"
+---
+
+import Hero from '../../components/Hero.astro';
+import Now from '../../components/Now.astro';
+import Next from '../../components/Next.astro';
+import TabBar from '../../components/st/TabBar.astro';
+import Flow from '../../components/Flow.astro';
+import Cases from '../../components/Cases.astro';
+
+<p class="q">세션 열 개, 탭 28장, 누구 탭인지 모름.</p>
+
+세션이 여는 탭에 그 세션 이름을 붙여 크롬 탭 그룹으로. 지금 세션 그룹만 펴지고 나머지는 칩 하나로 접힘.
+
+<Hero label="세션을 옮길 때 브라우저에서 누르는 것" v="0번"
+  note="세션으로 넘어가면 그 그룹이 이미 펴져 있음"
+  tiles={[
+    { label: "같은 주소", v: "3장 → 1장", note: "한 그룹에 쌓였던 쿠폰함 페이지" },
+    { label: "펴져 있는 그룹", v: "1개", note: "나머지는 칩 · 살아 있는 그룹 최대 5개" },
+  ]}
+  basis="28장 · 3장은 session-tabs HISTORY 의 실측(2026-09-04 · 09-05). 사용 횟수 기록은 없음." />
+
+<Now year="2026" month="9월"
+  line="손으로 연 탭과 한 창에 섞여 <b>보류</b>"
+  sub="그룹째 닫기와 빠르게 이어 열기가 생기면 확장을 다시 붙여 이어감" />
+
+<TabBar caption="탭 제목과 점 색은 예시. 그룹 이름은 실제 저장소 이름." />
+
+<Next items={[
+  { tab: "왜 만들었나", title: "탭 28장 속 다른 세션의 최신 탭", href: "/session-tabs/why" },
+  { tab: "개발기", title: "첫 11시간에 PR 28개", href: "/session-tabs/making" },
+]} />
+
+## 동작 방식
+
+<Flow caption="사람이 하는 일은 세션을 고르는 것뿐. 나머지는 훅 두 개와 open 대리 명령이 부름." steps={[
+  { at: "세션 시작", name: "그룹에 붙음", note: "SessionStart 훅" },
+  { at: "주소를 열 때", name: "제 그룹에 탭", note: "open 대리 명령 · 같은 주소면 그 탭" },
+  { at: "세션을 옮기면", name: "그 그룹만 펴짐", note: "나머지는 칩", key: true },
+  { at: "세션 끝", name: "주소만 남기고 닫음", note: "SessionEnd 훅 · ~/.claude/tabs" },
+]} />
+
+- **접기 · 펴기뿐** — 탭을 옮기지 않아 페이지가 다시 안 그려지고 스크롤 위치도 그대로.
+- **창은 하나** — 세션마다 창을 띄우지 않음. 보조 모니터에 띄운 창의 탭은 안 건드림.
+
+### 탭 주인 찾기
+
+세션을 안 거치고 연 탭도 주소로 주인을 찾음.
+
+<Cases items={[
+  { when: "로컬 미리보기", what: "<b>localhost:4399/pillbox/</b> — 포트보다 경로 먼저. 정적 서버 하나가 여러 프로젝트를 내주기 때문." },
+  { when: "발행한 사이트", what: "<b>&lt;저장소&gt;.sungd.uk</b> · <b>github.com/&lt;계정&gt;/&lt;저장소&gt;</b> — ~/dev 에 그 저장소가 있으면 그 그룹." },
+  { when: "세션 이름 ≠ 저장소", what: "세션 이름(약통)과 저장소(pillbox)가 달라도 세션이 일하는 폴더로 이어 줌." },
+  { when: "그 외", what: "검색 · 메일처럼 프로젝트가 없는 탭은 그대로 둠. 주소만 보고 짐작하지 않음." },
+]} />
+
+## 자세한 동작
+
+<Cases items={[
+  { when: "같은 주소", what: "창 어디에 있든 그 탭으로. 다른 세션 그룹에 있던 것이면 이 그룹으로 데려옴." },
+  { when: "그룹이 불어날 때", what: "그룹당 6장. 넘치면 가장 오래 안 본 탭부터 닫음." },
+  { when: "그룹이 여섯째", what: "살아 있는 그룹은 5개까지. 가장 오래 안 본 세션은 동면 — 탭을 닫고 주소만 파일로, 누르면 되살아남." },
+  { when: "같은 브랜치에 세션 둘", what: "붙은 세션 수를 셈. 마지막 세션이 끝날 때만 그룹을 내림. 훅이 안 오면 1분 안에 걷어냄." },
+  { when: "Codex 세션", what: "같은 훅 파일 그대로 — Codex CLI 세션도 탭 그룹을 가짐." },
+]} />
+
+## 설치와 요구 사항
+
+- **크롬** — 116 이상. `extension/` 을 압축해제된 확장 프로그램으로 로드.
+- **Mac** — 데몬(포트 8908)을 launchd 로 상주. Claude Code `settings.json` 에 SessionStart · SessionEnd 훅 두 개.
+- 저장소는 private.

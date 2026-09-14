@@ -1,0 +1,45 @@
+---
+/**
+ * 세션 탭 — 크롬 탭바 전 · 후. 전은 세션 열 개의 탭 28장이 한 줄에, 후는 지금 세션 그룹만 펴지고
+ * 나머지는 칩. 28장은 session-tabs HISTORY 2026-09-04 의 실측, 그룹 이름은 실제 저장소 이름.
+ * 탭 제목은 예시(실제 탭 캡처는 남의 화면 · 개인 탭이 섞여 안 씀).
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+
+// 전 — 세션 열 개가 번갈아 연 28장. 점 색은 세션, 제목은 거의 안 보인다
+const hue = ['#6d8fd8', '#d98b5f', '#5fae8a', '#b57ad0', '#d8b04e', '#5aa9c2', '#d7708a', '#8a9a5b', '#9a7b6a', '#7b86a8'];
+const order = [0, 1, 0, 2, 3, 1, 4, 0, 5, 2, 6, 3, 1, 7, 4, 0, 8, 5, 2, 9, 6, 1, 3, 0, 7, 4, 8, 2];
+const names = ['소개', 'localhost:4399', '개발기', 'PR #31', '대시보드', '시안', 'README', '개발기', 'localhost:5173', '소개'];
+
+const groups = [
+  { name: 'pillbox' },
+  { name: 'wallcal' },
+  { name: 'pack-up', on: true, tabs: ['소개', '개발기', '시안'] },
+  { name: 'coupons' },
+  { name: 'sleep-now' },
+];
+---
+
+<figure class="stb">
+  <div class="stb-row">
+    <span class="stb-lb">전</span>
+    <div class="stb-bar">
+      {order.map((s, i) => (
+        <span class:list={['stb-t', 'thin', { act: i === 21 }]}><i style={`background:${hue[s]}`}></i><em>{names[s]}</em></span>
+      ))}
+    </div>
+    <span class="stb-note">세션 10개 · 탭 28장 — 제목이 안 보이고 누구 탭인지 모름</span>
+  </div>
+  <div class="stb-row">
+    <span class="stb-lb">후</span>
+    <div class="stb-bar">
+      {groups.map((g) => g.on
+        ? <span class="stb-grp on"><b>{g.name}</b>{g.tabs!.map((t, i) => <span class:list={['stb-t', { act: i === 0 }]}><i></i><em>{t}</em></span>)}</span>
+        : <span class="stb-grp"><b>{g.name}</b></span>)}
+      <span class="stb-t loose"><i></i><em>손으로 연 탭</em></span>
+    </div>
+    <span class="stb-note">지금 세션 그룹만 펴짐 · 나머지는 이름 칩 하나</span>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
