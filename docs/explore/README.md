@@ -18,5 +18,6 @@
 | `home.html` | 홈 화면 다섯 — 지금 · A 폭 채운 3열 · B 사용 중 카드 + 나머지 목록 · C 왼쪽 난 거르기 · D 대장 한 줄 목록 · E 대표 셋 크게 |
 | `gvb-diagram.html` | 갤럭시 음성 브리지 동작 도식 셋 — A 기기 셋 한 줄 · B 세 줄 시간표 · C 세로 (폰 폭) |
 | `gvb-why-questions.html` | 갤럭시 음성 브리지 «왜 만들었나» 질문지 — 고르고 한 줄, 답 모음 복사 |
+| `session-tabs-why-questions.html` | 세션 탭 «왜 만들었나» 질문지 — 쓰던 것 · 괴로운 장면 · 실제로 쓴 것 · 보류한 까닭 · 지금 |
 
 로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.

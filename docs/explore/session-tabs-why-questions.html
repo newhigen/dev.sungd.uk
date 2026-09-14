@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>세션 탭 — 왜 만들었나 질문지</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#e6e3f0;--card:#fbfaff;--card-2:#dfe6f2;--shadow:0 2px 24px rgba(40,35,80,.08);--ink:#221f2b;--ink-2:#57536b;--ink-3:#6f6b85;--accent:#8a6a3c;--link:#4a4b93;
+--sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;--serif:"Noto Serif KR",Pretendard,serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--sans);word-break:keep-all}
+.wrap{max-width:46rem;margin:0 auto;padding:3rem 1.2rem 8rem}
+h1{font-family:var(--serif);font-size:2rem;margin:0 0 .4rem}
+.lede{color:var(--ink-2);margin:0 0 2rem}
+.lede b{color:var(--ink)}
+.q{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:1.3rem 1.5rem 1.4rem;margin-bottom:1rem}
+.q .n{font-size:.75rem;font-weight:600;color:var(--accent)}
+.q h2{font-size:1.08rem;margin:.1rem 0 .2rem}
+.q .why{font-size:.8rem;color:var(--ink-3);margin:0 0 .8rem}
+.opts{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem}
+.opts label{cursor:pointer}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts span{display:inline-block;padding:.36rem .85rem;border-radius:999px;background:rgba(34,31,43,.08);font-size:.88rem;color:var(--ink-2)}
+.opts input:checked+span{background:var(--ink);color:var(--card)}
+textarea{width:100%;min-height:3.2rem;border:0;border-radius:10px;background:var(--card-2);padding:.6rem .8rem;font:inherit;font-size:.9rem;color:var(--ink);resize:vertical}
+textarea::placeholder{color:var(--ink-3)}
+.out{position:sticky;bottom:1rem;margin-top:1.6rem;background:var(--ink);color:var(--card);border-radius:14px;padding:1rem 1.2rem;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.out .top{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.out b{font-size:.9rem}
+.out button{font:inherit;font-size:.85rem;font-weight:600;border:0;border-radius:999px;padding:.4rem 1rem;background:var(--card);color:var(--ink);cursor:pointer}
+.out pre{margin:.6rem 0 0;white-space:pre-wrap;font:inherit;font-size:.8rem;color:#cfcbdc;max-height:9rem;overflow:auto}
+.use{font-size:.78rem;color:var(--ink-3);margin:.3rem 0 0}
+</style>
+</head>
+<body><div class="wrap">
+<h1>왜 만들었나 — 질문지</h1>
+<p class="lede">세션 탭(session-tabs) — 9월 4일 밤부터 7일 새벽까지 PR 80개. 기록(README · HISTORY · PR · 시안 9장)에 없는 것만 물음. <b>고르고, 모자라면 한 줄.</b> 끝나면 아래 «복사» → 대화에 붙여넣기. 모르는 건 비워 두면 페이지에서 뺌.</p>
+
+<form id="f">
+
+<section class="q" data-k="1">
+  <div class="n">1 · 쓰던 것</div>
+  <h2>세션을 여러 개 돌릴 때, 세션들이 연 탭은 어떻게 다뤘나?</h2>
+  <p class="why">→ 「쓰던 것」. 시안 첫 장 제목이 «세션 10개, 창은 3개, 탭바엔 5개». 여러 개 골라도 됨.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a1" value="한 창에 전부 뒤섞임"><span>한 창에 전부 뒤섞임</span></label>
+    <label><input type="checkbox" name="a1" value="세션마다 크롬 창을 따로 띄움"><span>세션마다 창 따로</span></label>
+    <label><input type="checkbox" name="a1" value="수시로 다 닫고 필요하면 다시 엶"><span>다 닫고 다시 열기</span></label>
+    <label><input type="checkbox" name="a1" value="탭은 두고 세션만 claude-watch·cmux 로 봄"><span>탭은 방치 · 세션만 claude-watch</span></label>
+  </div>
+  <textarea name="t1" placeholder="덧붙일 것 (예: 그때 한 번에 세션 몇 개, 탭 몇 개쯤)"></textarea>
+</section>
+
+<section class="q" data-k="2">
+  <div class="n">2 · 막힌 지점</div>
+  <h2>가장 괴로웠던 장면은?</h2>
+  <p class="why">→ 첫 문장(훅)이 됨. 하나만.</p>
+  <div class="opts">
+    <label><input type="radio" name="a2" value="이 탭이 어느 세션 것인지 모름"><span>어느 세션 탭인지 모름</span></label>
+    <label><input type="radio" name="a2" value="탭이 너무 많아 찾는 데 시간이 감"><span>탭 찾느라 시간 감</span></label>
+    <label><input type="radio" name="a2" value="창을 오가다 보던 자리를 잃음"><span>창 오가다 자리 잃음</span></label>
+    <label><input type="radio" name="a2" value="답을 기다리는 세션을 놓침"><span>기다리는 세션을 놓침</span></label>
+    <label><input type="radio" name="a2" value="끝난 세션의 옛 산출물 탭이 쌓임"><span>끝난 세션 탭이 쌓임</span></label>
+  </div>
+  <textarea name="t2" placeholder="구체 장면 한 줄 (예: 시안 셋 비교하다 다른 세션 대시보드를 눌러…)"></textarea>
+</section>
+
+<section class="q" data-k="3">
+  <div class="n">3 · 실제로 쓴 것</div>
+  <h2>만든 것 중 실제로 많이 쓴 건?</h2>
+  <p class="why">→ 소개 판에서 무엇을 앞에 세울지. 탭 그룹 · 판(Deck) · 메뉴바 · 한도 「계속」 · 서버 칩 · Codex 까지 만들었음.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a3" value="탭 그룹 접기·펴기"><span>탭 그룹 접기 · 펴기</span></label>
+    <label><input type="checkbox" name="a3" value="판(Deck) 에서 세션 고르기·답하기"><span>판(Deck) · 판에서 답하기</span></label>
+    <label><input type="checkbox" name="a3" value="메뉴바 SessionBar"><span>메뉴바 SessionBar</span></label>
+    <label><input type="checkbox" name="a3" value="한도 풀리면 판에서 「계속」"><span>한도 뒤 「계속」</span></label>
+    <label><input type="checkbox" name="a3" value="세션이 띄운 서버 칩"><span>서버 칩</span></label>
+    <label><input type="checkbox" name="a3" value="cr drop 으로 옛 탭 닫기"><span>cr drop · 동면</span></label>
+  </div>
+  <textarea name="t3" placeholder="덧붙일 것 (예: 이게 제일 좋았던 순간)"></textarea>
+</section>
+
+<section class="q" data-k="4">
+  <div class="n">4 · 보류한 까닭</div>
+  <h2>왜 멈췄나?</h2>
+  <p class="why">→ 「보류」 배지 옆 한 줄. 9월 14일 확인 — 데몬 · 훅 · 메뉴바는 돌고, 데몬은 크롬 확장 연결을 못 보는 상태.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a4" value="탭 그룹 전환이 기대만큼 편하지 않음"><span>전환이 기대만큼 안 편함</span></label>
+    <label><input type="checkbox" name="a4" value="확장이 그룹을 잃거나 탭을 잘못 묶음"><span>확장이 불안정 · 잘못 묶음</span></label>
+    <label><input type="checkbox" name="a4" value="다른 도구가 대신함 (삶의 영역·claude-watch·Claude Code 기능)"><span>다른 도구가 대신함</span></label>
+    <label><input type="checkbox" name="a4" value="돌리는 세션 수가 줄어 필요가 줄었음"><span>세션 수가 줄어듦</span></label>
+    <label><input type="checkbox" name="a4" value="만드는 데 시간을 너무 씀"><span>만드는 데 시간을 너무 씀</span></label>
+    <label><input type="checkbox" name="a4" value="특별한 이유 없이 손이 안 감"><span>그냥 손이 안 감</span></label>
+  </div>
+  <textarea name="t4" placeholder="무엇이 들어와 멈췄나 한 줄"></textarea>
+</section>
+
+<section class="q" data-k="5">
+  <div class="n">5 · 지금</div>
+  <h2>다시 켠다면 무엇부터? 아니면 이대로?</h2>
+  <p class="why">→ 「지금」. 보류와 종료를 가르는 줄.</p>
+  <div class="opts">
+    <label><input type="radio" name="a5" value="이대로 보류 — 다시 켤 계획 없음"><span>이대로 보류</span></label>
+    <label><input type="radio" name="a5" value="확장만 다시 붙이면 됨"><span>확장만 다시 붙이면 됨</span></label>
+    <label><input type="radio" name="a5" value="판·메뉴바만 남기고 탭 그룹은 접음"><span>판 · 메뉴바만 남김</span></label>
+    <label><input type="radio" name="a5" value="사실상 종료"><span>사실상 종료</span></label>
+  </div>
+  <textarea name="t5" placeholder="덧붙일 것"></textarea>
+</section>
+
+</form>
+
+<div class="out">
+  <div class="top"><b>답 모음</b><button type="button" id="copy">복사</button></div>
+  <pre id="pre">(아직 고른 것 없음)</pre>
+  <p class="use">복사한 글을 대화에 그대로 붙여넣으면 됨.</p>
+</div>
+</div>
+
+<script>
+const f = document.getElementById('f'), pre = document.getElementById('pre');
+const title = {1:'쓰던 것',2:'가장 괴로웠던 장면',3:'실제로 쓴 것',4:'보류한 까닭',5:'지금'};
+function text(){
+  const lines = [];
+  for (let k = 1; k <= 5; k++) {
+    const picks = [...f.querySelectorAll(`[name=a${k}]:checked`)].map(i => i.value);
+    const t = f.querySelector(`[name=t${k}]`).value.trim();
+    if (!picks.length && !t) continue;
+    lines.push(`${k}. ${title[k]}: ${[...picks, t].filter(Boolean).join(' / ')}`);
+  }
+  return lines.join('\n');
+}
+function draw(){ pre.textContent = text() || '(아직 고른 것 없음)'; try { localStorage.setItem('st-q', JSON.stringify([...new FormData(f)])); } catch {} }
+f.addEventListener('input', draw);
+document.getElementById('copy').onclick = async () => {
+  try { await navigator.clipboard.writeText(text()); document.getElementById('copy').textContent = '복사됨'; } catch {}
+};
+try {
+  for (const [n, v] of JSON.parse(localStorage.getItem('st-q') || '[]')) {
+    const el = f.querySelector(`[name="${n}"][value="${CSS.escape(v)}"]`);
+    if (el) el.checked = true; else { const ta = f.querySelector(`textarea[name="${n}"]`); if (ta) ta.value = v; }
+  }
+} catch {}
+draw();
+</script>
+</body></html>
