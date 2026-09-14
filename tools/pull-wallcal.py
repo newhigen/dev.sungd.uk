@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""한달(wallcal) 산출물을 projects.sungd.uk 로 옮긴다 — pull-pillbox.py 와 같은 꼴.
+"""한달(wallcal) 산출물을 dev.sungd.uk 로 옮긴다 — pull-pillbox.py 와 같은 꼴.
 
 원본은 wallcal repo 의 docs/. 글에서 가리킬 것만 골라 public/p/wallcal/ 로 복사한다.
 시안 페이지는 통째로 옮기고 썸네일을 따로 찍는다 — 개발기에서 격자로 걸고, 누르면 그 페이지로 간다.

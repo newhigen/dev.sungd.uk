@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""sleep-now 산출물을 projects.sungd.uk 로 옮긴다.
+"""sleep-now 산출물을 dev.sungd.uk 로 옮긴다.
 
 원본은 sleep-now repo 의 docs/ 다. 그대로 두면 비공개라 아무도 못 여니, 글에서 가리킬
 페이지만 골라 사이트 public/ 안으로 복사하고 주소를 ASCII 로 바꾼다. 그림은 화면에 맞게

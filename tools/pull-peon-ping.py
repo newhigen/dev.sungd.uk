@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""peon-ping 목소리 팩을 projects.sungd.uk 로 옮긴다.
+"""peon-ping 목소리 팩을 dev.sungd.uk 로 옮긴다.
 
 팩은 2026-09-02 에 기계에서 지웠고 claude-config git 이력에만 남아 있다(커밋 cdf92fe).
 체크아웃 없이 GitHub API 로 그 커밋의 파일을 받아 온다.
