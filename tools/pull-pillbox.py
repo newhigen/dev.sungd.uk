@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""약수첩(pillbox) 산출물을 projects.sungd.uk 로 옮긴다 — pull-sleep-now.py 와 같은 꼴.
+"""약수첩(pillbox) 산출물을 dev.sungd.uk 로 옮긴다 — pull-sleep-now.py 와 같은 꼴.
 
 원본은 pillbox repo 의 docs/. 글에서 가리킬 것만 골라 public/p/pillbox/ 로 복사하고
 주소를 ASCII 로 바꾼다. 그림은 화면에 맞게 줄인다.

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""claude-warmup 시각화를 projects.sungd.uk 로 옮긴다.
+"""claude-warmup 시각화를 dev.sungd.uk 로 옮긴다.
 
 repo 는 2026-06-14 에 archive 했고 로컬 체크아웃도 없다. GitHub API 로 받아 온다.
 quota-windows.html 은 열어 볼 수 있게 그대로 두고, 글에 쓸 그림은 크롬으로 찍는다.

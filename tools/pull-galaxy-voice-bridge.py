@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""갤럭시 음성 브리지(galaxy-voice-bridge) 시안을 projects.sungd.uk 로 옮긴다 — pull-pack-up.py 와 같은 꼴.
+"""갤럭시 음성 브리지(galaxy-voice-bridge) 시안을 dev.sungd.uk 로 옮긴다 — pull-pack-up.py 와 같은 꼴.
 
 원본 repo 는 private 이고 스크린샷이 없다. design/ 의 시안 HTML 여섯 쪽을 통째로 옮기고,
 크롬으로 찍어 개발기 격자 썸네일을 만든다. 소개의 캡슐 상태 넷은 캡처가 아니라
