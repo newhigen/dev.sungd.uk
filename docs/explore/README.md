@@ -21,5 +21,6 @@
 | `session-tabs-why-questions.html` | 세션 탭 «왜 만들었나» 질문지 — 쓰던 것 · 괴로운 장면 · 실제로 쓴 것 · 보류한 까닭 · 지금 |
 | `claude-watch-why-questions.html` | Claude 워치 «왜 만들었나» 질문지 — 쓰던 것 · 괴로운 장면 · 실제로 쓴 것 · 화면을 접은 까닭 · 지금 |
 | `career-radar-why-questions.html` | 커리어 레이더 «왜 만들었나» 질문지 — 범위(매트릭스 vs 잡보드) · 쓰던 것 · 막힌 지점 · 실제로 본 판 · 달라진 것 · 지금 · 공개 수위 |
+| `ml-job-board-why-questions.html` | ML 잡보드 «왜 만들었나» 질문지 — 이름 · 쓰던 것 · 막힌 지점 · 실제로 보는 탭 · 메일을 끈 까닭 · 열엿새 정지 · 지금 · 공개 수위 |
 
 로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.
