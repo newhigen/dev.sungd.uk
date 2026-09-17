@@ -1,0 +1,70 @@
+---
+/**
+ * 오픈 포지션 보드 — 화면 모형. 맨 위 «지금 손대야 하는 것» 카드와 탭 아홉, 그 아래 목록.
+ * 탭 이름과 배지 · 점수 표기 꼴은 저장소 기준(analysis/ml-job-board.html · build.py).
+ * 실제 화면에는 검토 중인 회사와 적합도 점수가 그대로 들어 있어 캡처를 쓰지 않는다 —
+ * 회사는 업종으로만, 자리 이름과 숫자는 꼴만 맞춘 예시다.
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+
+const tabs = ['직군 레인', '마감순', '타임라인', '가까운 순', '맞는 순', '오래된 순', '회사별', '새 공고', '조사 현황'];
+
+type Row = { flag?: '새' | '내려감'; due?: string; kind: string; role: string; score?: number };
+
+const top: Row[] = [
+  { flag: '새', due: 'D-6', kind: '이커머스 A', role: 'MLOps Engineer', score: 82 },
+  { due: 'D-2', kind: '핀테크 B', role: 'ML Platform Engineer', score: 74 },
+];
+
+const rows: Row[] = [
+  { flag: '새', kind: '포털 C', role: 'AI Agent Engineer', score: 71 },
+  { due: 'D-11', kind: '이커머스 A', role: 'ML Engineer, Search', score: 66 },
+  { kind: '물류 D', role: 'MLOps Engineer', score: 58 },
+  { flag: '내려감', kind: '게임 E', role: 'ML Platform Engineer' },
+  { kind: '핀테크 B', role: 'Data Platform Engineer', score: undefined },
+];
+
+const band = (n?: number) => (n === undefined ? 'none' : n >= 75 ? 'hi' : n >= 60 ? 'mid' : 'lo');
+---
+
+<figure class="mjb">
+  <div class="mjb-head">
+    <b>지금 손대야 하는 것</b>
+    <span>마감이 가깝거나 오늘 새로 뜬 것</span>
+  </div>
+  <div class="mjb-top">
+    {top.map(r => (
+      <div class="mjb-r">
+        {r.flag && <i class:list={['mjb-f', r.flag === '새' ? 'new' : 'gone']}>{r.flag}</i>}
+        {r.due && <i class="mjb-d">{r.due}</i>}
+        <span class="mjb-k">{r.kind}</span>
+        <span class="mjb-role">{r.role}</span>
+        <span class:list={['mjb-s', band(r.score)]}>{r.score ?? '—'}</span>
+      </div>
+    ))}
+  </div>
+
+  <div class="mjb-tabs">
+    {tabs.map((t, i) => (
+      <span class:list={['mjb-t', { on: i === 7 }]}>
+        {t}{t === '새 공고' && <em>3</em>}
+      </span>
+    ))}
+  </div>
+
+  <div class="mjb-list">
+    {rows.map(r => (
+      <div class="mjb-r">
+        {r.flag && <i class:list={['mjb-f', r.flag === '새' ? 'new' : 'gone']}>{r.flag}</i>}
+        {r.due && <i class="mjb-d">{r.due}</i>}
+        <span class="mjb-k">{r.kind}</span>
+        <span class="mjb-role">{r.role}</span>
+        <span class:list={['mjb-s', band(r.score)]}>{r.flag === '내려감' ? '—' : (r.score ?? '판정 부족')}</span>
+      </div>
+    ))}
+  </div>
+
+  <div class="mjb-foot">점수는 120점 만점 · 판정한 항목이 모자라면 숫자를 안 낸다</div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
