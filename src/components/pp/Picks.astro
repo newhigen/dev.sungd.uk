@@ -1,0 +1,33 @@
+---
+/**
+ * 알림 목소리 — peon-ping 이 가르는 일곱 경우 중 켠 셋. 이름 일곱은 저장소 기준.
+ * 끈 넷의 사유는 적힌 것만 적는다 — 오류 하나뿐이고 나머지는 그냥 안 켰다.
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+
+const picks = [
+  { name: '세션 시작', on: false },
+  { name: '작업 접수', on: false },
+  { name: '완료', on: true, line: 'Task complete.' },
+  { name: '오류', on: false, why: '대개 완료나 입력 필요로 도착' },
+  { name: '입력 필요', on: true, line: 'I have a question.' },
+  { name: '한도', on: true, line: "We've hit the limit." },
+  { name: '연타', on: false },
+];
+---
+
+<figure class="picks">
+  <div class="picks-g">
+    {picks.map(p => (
+      <div class:list={['pk', { on: p.on }]}>
+        <span class="pk-d">{p.on ? '♪' : '·'}</span>
+        <span class="pk-n">{p.name}</span>
+        {p.line && <span class="pk-l">{p.line}</span>}
+        {p.why && <span class="pk-w">{p.why}</span>}
+      </div>
+    ))}
+  </div>
+  <div class="picks-f">일곱 중 셋만 켜 둠 — 소리가 늘면 어느 소리인지 안 갈린다</div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

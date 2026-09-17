@@ -1,0 +1,34 @@
+---
+/**
+ * Claude 워치 — 상태 표식 여섯 장을 나란히. 앱 편의 Strip 자리에 해당한다.
+ * 글자 · 색 · 카드 바탕 틴트는 claude-watch cards.py 의 `_STATE_MARK` · `_CARD_BG` 값 그대로.
+ * 세션 이름은 실제 저장소 이름, 묻는 말은 예시.
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+
+const marks = [
+  { m: '?', tone: 'att', name: '내 차례', line: '물어 놓고 답을 기다림', sample: 'pillbox', body: '두 단 중 어느 쪽?' },
+  { m: '!', tone: 'idle', name: '잠시 멈춤', line: '권한을 기다리거나 막힘', sample: 'whooing', body: '쓰기 권한 대기' },
+  { m: '✓', tone: 'done', name: '끝남', line: '할 말을 마침', sample: 'wallcal' },
+  { m: '~', tone: 'standby', name: '기다림', line: '남 · 기계를 기다림', sample: 'career-radar' },
+  { m: '·', tone: 'work', name: '도는 중', line: '일하는 중', sample: 'analyses' },
+  { m: '·', tone: 'inact', name: '비활성', line: '접어 두고 마지막 본 때만', sample: 'lifeos' },
+];
+---
+
+<div class="marks">
+  {marks.map(k => (
+    <figure>
+      <div class:list={['mk', `bg-${k.tone}`]}>
+        <div class="mk-h">
+          <span class:list={['cwr-m', `m-${k.tone}`]}>{k.m}</span>
+          <span class="mk-n">{k.sample}</span>
+        </div>
+        {k.body && <div class="mk-b">{k.body}</div>}
+      </div>
+      <figcaption><b>{k.m} {k.name}</b><br />{k.line}</figcaption>
+    </figure>
+  ))}
+</div>
+{caption && <p class="basis">{caption}</p>}
