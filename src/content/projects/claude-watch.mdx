@@ -17,8 +17,8 @@ import Hero from '../../components/Hero.astro';
 import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import Rows from '../../components/cw/Rows.astro';
+import Marks from '../../components/cw/Marks.astro';
 import Flow from '../../components/Flow.astro';
-import Cases from '../../components/Cases.astro';
 
 <p class="q">내 차례인 세션이 «완료» 줄에 섞여 있음.</p>
 
@@ -45,16 +45,10 @@ import Cases from '../../components/Cases.astro';
 
 ## 상태로 가른다
 
-<Cases items={[
-  { when: "? 내 차례", what: "물어 놓고 답을 기다림. 맨 위로 오고 <b>무엇을 묻는지</b> 가 한 줄 붙음." },
-  { when: "! 잠시 멈춤", what: "권한을 기다리거나 막힘. 이것도 한 줄이 붙음." },
-  { when: "✓ 끝남", what: "할 말을 마친 세션." },
-  { when: "~ 기다림", what: "남 · 기계를 기다림. 한도에 막힌 세션도 여기로 — «한도 — 14:30 에 풀려요» 처럼 사유가 뜸." },
-  { when: "· 도는 중", what: "일하는 중." },
-  { when: "· 비활성", what: "아래 한 칸에 접어 두고, 마지막으로 본 지 얼마나 됐는지만." },
-]} />
+<Marks caption="표식 · 색 · 카드 바탕은 저장소 값 그대로. 세션 이름은 실제 저장소 이름이고 묻는 말은 예시." />
 
 한 줄이 더 붙는 건 «내 차례» 와 «잠시 멈춤» 둘뿐. 나머지는 이름 한 줄로 쪼그라들어 판을 안 먹음.
+한도에 막힌 세션은 표식을 새로 만들지 않고 «기다림» 안에 넣고 사유만 바꿔 «한도 — 14:30 에 풀려요» 로 띄움.
 
 ## 동작 방식
 

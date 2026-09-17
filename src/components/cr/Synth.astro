@@ -1,0 +1,50 @@
+---
+/**
+ * 커리어 레이더 — 통합 직무기술서 한 절 모형. 판 여섯 중 실제로 다시 보는 둘째.
+ * 문장 · 태그 · 위첨자 숫자는 MLOps Engineer 직군 synthesis 결과 그대로(8곳 수집).
+ * 위첨자는 그 말을 쓴 회사 수이고, 실제 화면에선 눌러 원본 공고로 간다.
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+
+const secs = [
+  {
+    title: '핵심 책임 (업무)',
+    sub: '실제로 손을 대는 일',
+    items: [
+      { tag: '오케스트레이션', n: 5, text: 'Kubernetes 기반으로 모델 학습 · 배포 · 서빙 · 모니터링 파이프라인을 구축하고 운영한다' },
+      { tag: '데이터 파이프라인', n: 5, text: '대규모 데이터 파이프라인(배치 + 실시간 스트리밍, ETL)을 설계 · 운영한다' },
+      { tag: '모델 서빙', n: 5, text: '고가용성 모델 서빙 시스템(실시간 인퍼런스 API · 서버, 추론 최적화)을 개발한다' },
+    ],
+  },
+  {
+    title: '필수 역량 (Must)',
+    sub: '지원 전제 조건',
+    items: [
+      { tag: '하드 스킬', n: 4, text: 'Python(또는 Go · Java)으로 프로덕션 수준의 백엔드 / ML 시스템을 개발한 경험' },
+      { tag: '하드 스킬', n: 4, text: 'Kubernetes · Docker 컨테이너 오케스트레이션에 대한 깊은 이해와 운영 경험' },
+    ],
+  },
+];
+---
+
+<figure class="crs">
+  {secs.map(s => (
+    <div class="crs-sec">
+      <div class="crs-h">
+        <b>{s.title}</b>
+        <span>{s.sub}</span>
+      </div>
+      <ul>
+        {s.items.map(it => (
+          <li>
+            <i class="crs-tag">{it.tag}</i>
+            <span class="crs-t">{it.text}<sup>{it.n}</sup></span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+  <div class="crs-foot">위첨자 = 그 말을 쓴 회사 수 · 누르면 그 회사 공고로</div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

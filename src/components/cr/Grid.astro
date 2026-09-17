@@ -1,0 +1,97 @@
+---
+/**
+ * 커리어 레이더 — 회사 × 스택 매트릭스 모형. 판 여섯 중 실제로 다시 보는 첫째.
+ * 칸 내용 · 배지 숫자는 MLOps Engineer 직군 실제 집계(8곳 수집) 그대로.
+ * 회사 이름은 저장소 안에만 두기로 해서 업종으로만 적는다. 배지는 그 기술을 요구한 회사 수.
+ */
+interface Props { caption?: string; wide?: boolean }
+const { caption, wide = false } = Astro.props;
+
+const cols = ['회사', '컨테이너 · 오케스트레이션', '워크플로', '서빙 · 추론', '클라우드', '언어'];
+
+type Cell = { s: string; f?: number }[];
+const rows: { head: string; cells: Cell[] }[] = [
+  {
+    head: '이커머스 A',
+    cells: [
+      [],
+      [{ s: 'Apache Airflow', f: 4 }],
+      [{ s: '실시간 서빙' }, { s: '온라인 추론' }],
+      [{ s: 'AWS', f: 5 }, { s: 'GCP', f: 4 }],
+      [{ s: 'Python', f: 5 }, { s: 'Java', f: 4 }, { s: 'Scala' }],
+    ],
+  },
+  {
+    head: '포털 B',
+    cells: [
+      [{ s: 'Kubernetes', f: 7 }, { s: 'Istio', f: 2 }],
+      [],
+      [{ s: 'LLM 추론 서빙' }, { s: '추론 최적화' }],
+      [],
+      [{ s: 'Python', f: 5 }, { s: 'Go', f: 2 }],
+    ],
+  },
+  {
+    head: '모빌리티 C',
+    cells: [
+      [{ s: 'Kubernetes', f: 7 }],
+      [{ s: '학습 · 추론 자동화' }],
+      [{ s: 'Model Serving', f: 3 }, { s: '실시간 추론' }],
+      [{ s: 'GCP', f: 4 }],
+      [{ s: 'Python', f: 5 }, { s: 'Java', f: 4 }, { s: 'Kotlin', f: 3 }],
+    ],
+  },
+  {
+    head: '패션 커머스 D',
+    cells: [
+      [{ s: 'Kubernetes', f: 7 }, { s: 'Docker', f: 3 }, { s: 'Argo CD' }],
+      [{ s: 'Apache Airflow', f: 4 }, { s: 'Kubeflow', f: 2 }],
+      [{ s: '실시간 추론 서버' }, { s: '드리프트 감지' }],
+      [{ s: 'AWS', f: 5 }],
+      [],
+    ],
+  },
+];
+
+const band = (f?: number) => (f && f >= 4 ? 'hi' : f && f >= 2 ? 'mid' : 'lo');
+---
+
+<figure class:list={['crg', { wide }]}>
+  <div class="crg-wrap">
+    <table>
+      <thead>
+        <tr>{cols.map(c => <th scope="col">{c}</th>)}</tr>
+      </thead>
+      <tbody>
+        {rows.map(r => (
+          <tr>
+            <th scope="row">{r.head}</th>
+            {r.cells.map(cell => (
+              <td>
+                {cell.length === 0 ? (
+                  <span class="crg-none">미명시</span>
+                ) : (
+                  <div class="crg-chips">
+                    {cell.map(k => (
+                      <span class:list={['crg-k', band(k.f)]}>
+                        {k.s}
+                        {k.f && k.f >= 2 && <em>{k.f}</em>}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+  <div class="crg-foot">
+    <span class="crg-k hi">4곳 이상<em>n</em></span>
+    <span class="crg-k mid">2~3곳<em>n</em></span>
+    <span class="crg-k lo">1곳</span>
+    <span class="crg-note">배지 숫자 = 그 기술을 요구한 회사 수</span>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

@@ -1,0 +1,31 @@
+---
+/**
+ * 커리어 레이더 — 공통 스택 모형. 판 여섯 중 실제로 다시 보는 셋째이자 준비 우선순위의 근거.
+ * 숫자는 MLOps Engineer 직군 실제 집계(8곳 수집) 그대로. 절반(4곳) 이상을 공통으로 본다.
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+
+const total = 8;
+const items = [
+  { s: 'Kubernetes', cat: '컨테이너 · 오케스트레이션', f: 7 },
+  { s: 'AWS', cat: '클라우드', f: 5 },
+  { s: 'Python', cat: '언어', f: 5 },
+  { s: 'Apache Airflow', cat: '워크플로', f: 4 },
+  { s: 'GCP', cat: '클라우드', f: 4 },
+  { s: 'Java', cat: '언어', f: 4 },
+];
+---
+
+<figure class="crc">
+  {items.map(it => (
+    <div class="crc-r">
+      <span class="crc-s">{it.s}</span>
+      <span class="crc-c">{it.cat}</span>
+      <span class="crc-bar"><i style={`width:${Math.round((it.f / total) * 100)}%`}></i></span>
+      <span class="crc-n">{it.f}<em>/{total}</em></span>
+    </div>
+  ))}
+  <div class="crc-foot">수집한 8곳 중 절반(4곳) 이상이 요구한 것만 — 이 순서가 준비 순서가 된다</div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

@@ -19,10 +19,15 @@ import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import Flow from '../../components/Flow.astro';
 import Cases from '../../components/Cases.astro';
+import Grid from '../../components/cr/Grid.astro';
+import Synth from '../../components/cr/Synth.astro';
+import Common from '../../components/cr/Common.astro';
 
 <p class="q">공고를 열 개 모아 놓고도 무엇부터 할지 못 정함.</p>
 
 직군 하나를 여러 회사 공고로 겹쳐 본다. 절반 넘게 나온 기술이 위로 올라오고, 그게 준비 우선순위가 된다.
+
+<Grid wide caption="MLOps Engineer 직군 · 공고 8곳을 겹친 매트릭스. 칸 내용과 배지 숫자는 실제 집계 그대로고 회사 이름만 업종으로 바꿨다." />
 
 <Hero label="견주려고 여는 채용 페이지" v="0곳"
   note="직군을 고르면 모아 둔 공고가 한 판으로 겹쳐짐"
@@ -65,6 +70,14 @@ import Cases from '../../components/Cases.astro';
 ]} />
 
 실제로 다시 보게 되는 건 앞의 셋이다. 차별점과 상세는 한 번 읽고 나면 손이 잘 안 간다.
+
+### 통합 직무기술서
+
+<Synth caption="같은 말을 한 회사가 많을수록 위첨자가 크다. 문장은 실제 synthesis 결과 그대로." />
+
+### 공통 스택
+
+<Common caption="절반 이상이 요구한 여섯. 매트릭스 배지와 같은 숫자다." />
 
 ## 회사 이름
 
