@@ -1322,3 +1322,40 @@ figcaption {
   .cwr-h, .cwr-b { font-size: 0.7rem; }
   .cwr-bar { font-size: 0.66rem; gap: 0.25rem 1rem; }
 }
+
+/* 오픈 포지션 보드 — 화면 모형 (components/mjb/Board.astro). 실제 보드가 밝은 화면이라 토큰을 그대로 쓴다 */
+.doc-body .prose > figure.mjb { max-width: var(--measure); margin: 1.4rem 0 1.8rem;
+  border-radius: 14px; background: color-mix(in srgb, var(--ink) 4%, var(--card)); overflow: hidden; }
+.mjb-head { padding: 0.9rem 1rem 0.1rem; }
+.mjb-head b { font: 700 0.95rem var(--sans); }
+.mjb-head span { display: block; font: 0.76rem var(--sans); color: var(--ink-3); margin-top: 0.1rem; }
+.mjb-top { padding: 0.6rem 0.7rem 0.9rem; }
+.mjb-top .mjb-r { background: var(--card); border-radius: 10px; margin-bottom: 0.3rem;
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--ink) 10%, transparent); }
+.mjb-r { display: flex; align-items: center; gap: 0.45rem; padding: 0.5rem 0.65rem;
+  font: 0.82rem var(--sans); color: var(--ink-2); }
+.mjb-f { flex: none; font-style: normal; font-size: 0.68rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 5px; }
+.mjb-f.new { color: #fff; background: #2f6bd8; }
+.mjb-f.gone { color: var(--ink-3); background: color-mix(in srgb, var(--ink) 12%, transparent); }
+.mjb-d { flex: none; font-style: normal; font-size: 0.7rem; font-weight: 600; color: #b4562f; }
+.mjb-k { flex: none; font-weight: 600; color: var(--ink); }
+.mjb-role { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mjb-s { flex: none; font-variant-numeric: tabular-nums; font-weight: 700; }
+.mjb-s.hi { color: #2f7d4f; }
+.mjb-s.mid { color: #8a6a3c; }
+.mjb-s.lo { color: var(--ink-3); }
+.mjb-s.none { font-size: 0.72rem; font-weight: 500; color: var(--ink-3); }
+.mjb-tabs { display: flex; flex-wrap: wrap; gap: 0.25rem; padding: 0 0.7rem 0.6rem; }
+.mjb-t { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0.24rem 0.55rem; border-radius: 999px;
+  font: 0.74rem var(--sans); color: var(--ink-3); background: color-mix(in srgb, var(--ink) 7%, transparent); }
+.mjb-t.on { color: var(--card); background: var(--ink); }
+.mjb-t em { font-style: normal; font-size: 0.66rem; font-weight: 700; padding: 0 0.28rem; border-radius: 999px;
+  color: #fff; background: #2f6bd8; }
+.mjb-t.on em { color: var(--ink); background: var(--card); }
+.mjb-list { background: var(--card); }
+.mjb-list .mjb-r + .mjb-r { box-shadow: inset 0 1px color-mix(in srgb, var(--ink) 8%, transparent); }
+.mjb-foot { padding: 0.55rem 0.9rem 0.7rem; font: 0.72rem var(--sans); color: var(--ink-3); }
+@media (max-width: 640px) {
+  .mjb-r { font-size: 0.74rem; gap: 0.35rem; }
+  .mjb-t { font-size: 0.68rem; }
+}
