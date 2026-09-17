@@ -4,8 +4,8 @@
  * 위는 워크트리에서 머지된 커밋 16개, 아래는 #53 에 멈춘 채 매일 아침 돌던 본체.
  * 날짜와 커밋 수는 저장소 기록(8/21 #53 → 8/29 #70, 그 사이 커밋 16개).
  */
-interface Props { caption?: string }
-const { caption } = Astro.props;
+interface Props { caption?: string; wide?: boolean }
+const { caption, wide = false } = Astro.props;
 
 const W = 600, H = 168;
 const x0 = 56, x1 = 544;
@@ -14,7 +14,7 @@ const merged = Array.from({ length: 16 }, (_, i) => at(0.06 + (i / 15) * 0.82));
 const mornings = Array.from({ length: 8 }, (_, i) => at(0.06 + (i / 7) * 0.82));
 ---
 
-<figure class="drift">
+<figure class:list={['drift', { wide }]}>
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={caption ?? '머지한 줄과 매일 도는 줄이 갈라진 여드레'}>
     <text class="dl" x="8" y="38">머지</text>
     <text class="dl" x="8" y="112">매일 아침</text>

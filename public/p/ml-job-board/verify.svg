@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="150" viewBox="0 0 320 150" role="img" aria-label="목록에 있는 것을 원본으로 다시 확인">
+  <style>
+    .n{font:600 11px "Inter Tight",system-ui,sans-serif;fill:#8b869a}
+    .k{font:700 11px "Inter Tight",system-ui,sans-serif;fill:#57536b}
+    .g{font:700 11px "Inter Tight",system-ui,sans-serif;fill:#2f7d4f}
+    .x{font:700 11px "Inter Tight",system-ui,sans-serif;fill:#c2705f}
+  </style>
+  <text class="n" x="6" y="14">어제 목록</text>
+  <g fill="#b0abbd">
+    <rect x="6" y="24" width="104" height="9" rx="4.5"/>
+    <rect x="6" y="39" width="104" height="9" rx="4.5"/>
+    <rect x="6" y="54" width="104" height="9" rx="4.5"/>
+    <rect x="6" y="69" width="104" height="9" rx="4.5"/>
+    <rect x="6" y="84" width="104" height="9" rx="4.5"/>
+  </g>
+
+  <text class="n" x="128" y="14">원본에 다시 물음</text>
+  <g stroke="#b0abbd" stroke-width="1.3" fill="none">
+    <path d="M114 28 H 140"/><path d="M114 43 H 140"/><path d="M114 58 H 140"/>
+    <path d="M114 73 H 140"/><path d="M114 88 H 140"/>
+  </g>
+
+  <g>
+    <rect x="146" y="24" width="104" height="9" rx="4.5" fill="#2f7d4f" opacity="0.75"/>
+    <text class="g" x="258" y="33">D-6</text>
+    <rect x="146" y="39" width="104" height="9" rx="4.5" fill="#2f7d4f" opacity="0.75"/>
+    <text class="g" x="258" y="48">D-11</text>
+    <rect x="146" y="54" width="104" height="9" rx="4.5" fill="#c2705f" opacity="0.6"/>
+    <text class="x" x="258" y="63">내려감</text>
+    <rect x="146" y="69" width="104" height="9" rx="4.5" fill="#2f7d4f" opacity="0.75"/>
+    <text class="g" x="258" y="78">D-2</text>
+    <rect x="146" y="84" width="104" height="9" rx="4.5" fill="#c2705f" opacity="0.6"/>
+    <text class="x" x="258" y="93">마감 지남</text>
+  </g>
+
+  <text class="k" x="6" y="120">목록에 있다고 살아 있는 게 아니다</text>
+  <text class="n" x="6" y="136">소스마다 원본 API 로 한 건씩</text>
+</svg>

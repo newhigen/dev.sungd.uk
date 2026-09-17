@@ -5,8 +5,8 @@
  * 실제 화면에는 검토 중인 회사와 적합도 점수가 그대로 들어 있어 캡처를 쓰지 않는다 —
  * 회사는 업종으로만, 자리 이름과 숫자는 꼴만 맞춘 예시다.
  */
-interface Props { caption?: string }
-const { caption } = Astro.props;
+interface Props { caption?: string; wide?: boolean }
+const { caption, wide = false } = Astro.props;
 
 const tabs = ['직군 레인', '마감순', '타임라인', '가까운 순', '맞는 순', '오래된 순', '회사별', '새 공고', '조사 현황'];
 
@@ -28,7 +28,7 @@ const rows: Row[] = [
 const band = (n?: number) => (n === undefined ? 'none' : n >= 75 ? 'hi' : n >= 60 ? 'mid' : 'lo');
 ---
 
-<figure class="mjb">
+<figure class:list={['mjb', { wide }]}>
   <div class="mjb-head">
     <b>지금 손대야 하는 것</b>
     <span>마감이 가깝거나 오늘 새로 뜬 것</span>

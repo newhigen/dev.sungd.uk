@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="168" viewBox="0 0 320 168" role="img" aria-label="공고 요구를 다섯으로 갈라 채점">
+  <style>
+    .n{font:600 11px "Inter Tight",system-ui,sans-serif;fill:#8b869a}
+    .k{font:700 11px "Inter Tight",system-ui,sans-serif;fill:#57536b}
+    .s{font:700 20px "Inter Tight",system-ui,sans-serif;fill:#2f7d4f}
+    .m{font:600 11px "Inter Tight",system-ui,sans-serif;fill:#b4562f}
+  </style>
+  <text class="n" x="6" y="14">공고 요구 한 줄씩</text>
+
+  <g>
+    <rect x="6" y="24" width="88" height="20" rx="5" fill="#2f7d4f" opacity="0.8"/>
+    <text class="k" x="14" y="38" fill="#fff">닿음</text>
+    <rect x="98" y="24" width="52" height="20" rx="5" fill="#6d8fd8" opacity="0.7"/>
+    <text class="k" x="106" y="38" fill="#fff">반쯤</text>
+    <rect x="154" y="24" width="46" height="20" rx="5" fill="#c2705f" opacity="0.75"/>
+    <text class="k" x="162" y="38" fill="#fff">빔</text>
+    <rect x="204" y="24" width="58" height="20" rx="5" fill="#b0abbd" opacity="0.5"/>
+    <text class="k" x="212" y="38">모름</text>
+    <rect x="266" y="24" width="48" height="20" rx="5" fill="#b0abbd" opacity="0.25"/>
+    <text class="n" x="272" y="38">뻔한 말</text>
+  </g>
+
+  <text class="n" x="6" y="68">닿은 비율 × 믿음 + 우대 보너스</text>
+  <text class="s" x="6" y="96">82</text>
+  <text class="n" x="40" y="96">/ 120점</text>
+
+  <line x1="6" y1="112" x2="314" y2="112" stroke="#b0abbd" stroke-width="1" stroke-dasharray="3 4"/>
+  <text class="m" x="6" y="132">판정 항목이 8개 미만 → 깎음</text>
+  <text class="m" x="6" y="150">셋 중 둘 넘게 모름 → 숫자를 안 냄</text>
+</svg>
