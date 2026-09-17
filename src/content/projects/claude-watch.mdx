@@ -1,0 +1,76 @@
+---
+title: Claude 워치
+tagline: 여러 Claude Code 세션 중 지금 나를 기다리는 것을 한 판에 — 화면은 접고, 지금은 판(Deck) 을 뒤에서 돌림
+period: "2026.05.29"
+status: 사용 중
+purpose: 개발 도구
+kind: 터미널 화면 · CLI
+tags: [Claude Code, Python, Textual, CLI]
+headCover: false
+use:
+  - "내 차례인 세션이 맨 위에, 묻는 말이 한 줄로"
+  - "카드를 누르면 그 세션 자리로"
+  - "5h · 7d 한도는 터미널 상태줄 한 줄로"
+---
+
+import Hero from '../../components/Hero.astro';
+import Now from '../../components/Now.astro';
+import Next from '../../components/Next.astro';
+import Rows from '../../components/cw/Rows.astro';
+import Flow from '../../components/Flow.astro';
+import Cases from '../../components/Cases.astro';
+
+<p class="q">내 차례인 세션이 «완료» 줄에 섞여 있음.</p>
+
+세션마다 상태를 읽어 한 판에 모음. 내 차례가 맨 위, 무엇을 묻는지 한 줄. 카드를 누르면 그 세션 자리로.
+
+<Hero label="손볼 세션을 찾으려고 여는 창" v="0개"
+  note="한 판에 모이고 급한 것이 맨 위로"
+  tiles={[
+    { label: "세션 열기", v: "4.0초 → 0.34초", note: "부르는 쪽이 아는 이름을 그대로 받음 · 9월 5일" },
+    { label: "갱신 한 바퀴", v: "1258ms → 80ms", note: "안 쓰는 모듈 7개를 걷어냄 · 9월 4일" },
+  ]}
+  basis="두 숫자는 claude-watch HISTORY 실측(2026-09-04 · 09-05). 창을 들춘 횟수 실측은 없음." />
+
+<Now year="2026" month="9월"
+  line="화면은 접고 <b>판(Deck) 뒤로</b>"
+  sub="판에서 카드를 누를 때마다 이 명령이 세션을 엶 · 목록도 여기서 받아 감" />
+
+<Rows caption="접기 전 화면. 표식 · 색 · 정렬 · 총계 줄 · 상태줄 형식은 저장소 기준. 세션 이름은 실제 저장소 이름이고 묻는 말과 숫자는 예시." />
+
+<Next items={[
+  { tab: "왜 만들었나", title: "«완료» 줄에 섞여 있던 내 차례", href: "/claude-watch/why" },
+  { tab: "개발기", title: "커밋 190개, 남은 손길 하나", href: "/claude-watch/making" },
+]} />
+
+## 상태로 가른다
+
+<Cases items={[
+  { when: "? 내 차례", what: "물어 놓고 답을 기다림. 맨 위로 오고 <b>무엇을 묻는지</b> 가 한 줄 붙음." },
+  { when: "! 잠시 멈춤", what: "권한을 기다리거나 막힘. 이것도 한 줄이 붙음." },
+  { when: "✓ 끝남", what: "할 말을 마친 세션." },
+  { when: "~ 기다림", what: "남 · 기계를 기다림. 한도에 막힌 세션도 여기로 — «한도 — 14:30 에 풀려요» 처럼 사유가 뜸." },
+  { when: "· 도는 중", what: "일하는 중." },
+  { when: "· 비활성", what: "아래 한 칸에 접어 두고, 마지막으로 본 지 얼마나 됐는지만." },
+]} />
+
+한 줄이 더 붙는 건 «내 차례» 와 «잠시 멈춤» 둘뿐. 나머지는 이름 한 줄로 쪼그라들어 판을 안 먹음.
+
+## 동작 방식
+
+<Flow caption="사람이 하는 일은 맨 위 카드를 누르는 것뿐." steps={[
+  { at: "세션마다", name: "상태를 읽음", note: "질문 · 멈춤 · 끝남 · 기다림 · 도는 중" },
+  { at: "판", name: "급한 것이 위로", note: "같은 상태끼리는 이름순 — 갱신할 때 자리가 안 튐" },
+  { at: "누름", name: "그 세션 자리로", key: true },
+  { at: "같이", name: "브라우저 탭 그룹도 따라옴", note: "세션 탭" },
+]} />
+
+## 지금은 어떻게 쓰나
+
+화면은 안 띄움. 지금 보는 판(Deck) 과 메뉴바는 세션 탭 데몬(포트 8908) 이 그리는데, 그 데몬이
+claude-watch 를 제 venv 에서 불러 `ls --follow` 로 목록을 받고, 카드를 누르면 `goto`, 답을 보내면 `send` 로 넘김.
+같은 명령이 인자 없이는 지금도 화면으로 뜸.
+
+- **상태줄 한 줄** — 5h · 7d 한도는 2026년 7월 22일에 판에서 터미널 상태줄로 옮겼고 지금도 그 자리.
+- **부르는 쪽은 하나** — 세션 탭 데몬. PATH 에 두지 않고 제 venv 에서 돎.
+- 저장소는 private.
