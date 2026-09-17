@@ -1257,7 +1257,7 @@ figcaption {
 .gvb .t-cap { font-size: 9px; font-weight: 600; fill: #221f2b; }
 
 /* 세션 탭 — 크롬 탭바 전 · 후 (components/st/TabBar.astro). 탭바 바탕은 토큰, 지금 그룹만 크롬 파랑 */
-.doc-body .prose > figure.stb { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
+.doc-body .prose > figure.stb:not(.wide) { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
 .stb-row { display: grid; grid-template-columns: 1.4rem minmax(0, 1fr); gap: 0.3rem 0.6rem; align-items: center; margin-bottom: 1rem; }
 .stb-lb { font: 600 0.75rem var(--sans); color: var(--ink-3); }
 .stb-bar { display: flex; align-items: flex-end; gap: 2px; height: 2.3rem; padding: 0 0.45rem; overflow: hidden;
@@ -1284,7 +1284,7 @@ figcaption {
 
 /* Claude 워치 — 접기 전 화면 (components/cw/Rows.astro). 터미널 화면이라 낮 · 밤 모두 어두운 판.
    표식 색 · 배경 틴트 · 컨텍스트 % 단계는 claude-watch cards.py 의 값 그대로 */
-.doc-body .prose > figure.cwr { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
+.doc-body .prose > figure.cwr:not(.wide) { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
 .cwr-panel { padding: 0.6rem 0.55rem 0.5rem; border-radius: 10px 10px 0 0; background: #16151a; }
 .cwr-card { padding: 0.28rem 0.5rem; border-radius: 6px; margin-bottom: 0.25rem; }
 .cwr-card.bg-att { background: rgb(82, 60, 28); }
@@ -1324,7 +1324,7 @@ figcaption {
 }
 
 /* 오픈 포지션 보드 — 화면 모형 (components/mjb/Board.astro). 실제 보드가 밝은 화면이라 토큰을 그대로 쓴다 */
-.doc-body .prose > figure.mjb { max-width: var(--measure); margin: 1.4rem 0 1.8rem;
+.doc-body .prose > figure.mjb:not(.wide) { max-width: var(--measure); margin: 1.4rem 0 1.8rem;
   border-radius: 14px; background: color-mix(in srgb, var(--ink) 4%, var(--card)); overflow: hidden; }
 .mjb-head { padding: 0.9rem 1rem 0.1rem; }
 .mjb-head b { font: 700 0.95rem var(--sans); }
@@ -1361,7 +1361,7 @@ figcaption {
 }
 
 /* 갈라져 있던 여드레 (components/mjb/Drift.astro) — 머지한 줄과 매일 도는 줄 */
-.doc-body .prose > figure.drift { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
+.doc-body .prose > figure.drift:not(.wide) { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
 .drift svg { width: 100%; height: auto; overflow: visible; }
 .drift .rail { stroke: color-mix(in srgb, var(--ink) 22%, transparent); stroke-width: 2; }
 .drift .rail.stale { stroke: #c2705f; stroke-dasharray: 3 5; }
@@ -1376,3 +1376,15 @@ figcaption {
 .drift .ds { font: 11px var(--sans); fill: var(--ink-3); }
 .drift .mail { font-size: 12px; fill: var(--ink-3); }
 .drift .join { fill: none; stroke: #2f7d4f; stroke-width: 2; }
+
+/* 손으로 그린 모형도 그림이다 — wide 를 주면 Fig 처럼 글 폭을 뚫는다 */
+.doc-body .prose > figure.cwr.wide,
+.doc-body .prose > figure.mjb.wide,
+.doc-body .prose > figure.stb.wide,
+.doc-body .prose > figure.drift.wide { max-width: none; margin: 1.6rem 0 2rem; }
+.doc-body .prose > figure.cwr.wide .cwr-h,
+.doc-body .prose > figure.cwr.wide .cwr-b { font-size: 0.9rem; }
+.doc-body .prose > figure.mjb.wide .mjb-r { font-size: 0.92rem; padding: 0.62rem 0.85rem; }
+.doc-body .prose > figure.mjb.wide .mjb-t { font-size: 0.82rem; padding: 0.3rem 0.7rem; }
+.doc-body .prose > figure.mjb.wide .mjb-head { padding: 1.1rem 1.2rem 0.2rem; }
+.doc-body .prose > figure.mjb.wide .mjb-head b { font-size: 1.05rem; }

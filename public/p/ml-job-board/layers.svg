@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="172" viewBox="0 0 320 172" role="img" aria-label="세 층으로 훑어 오늘 목록 하나로">
+  <style>
+    .n{font:600 11px "Inter Tight",system-ui,sans-serif;fill:#8b869a}
+    .v{font:700 12px "Inter Tight",system-ui,sans-serif;fill:#6d8fd8}
+    .o{font:700 12px "Inter Tight",system-ui,sans-serif;fill:#57536b}
+    .b{fill:none;stroke:#6d8fd8;stroke-width:1.6;rx:7}
+    .a{fill:none;stroke:#b0abbd;stroke-width:1.4}
+  </style>
+  <rect class="b" x="6" y="8" width="150" height="34" rx="7"/>
+  <text class="n" x="18" y="24">회사 채용 창구</text><text class="v" x="18" y="37">29곳</text>
+  <rect class="b" x="6" y="52" width="150" height="34" rx="7"/>
+  <text class="n" x="18" y="68">자체 채용 사이트</text><text class="v" x="18" y="81">5곳</text>
+  <rect class="b" x="6" y="96" width="150" height="34" rx="7"/>
+  <text class="n" x="18" y="112">원티드 그물</text><text class="v" x="18" y="125">키워드 · 회사 이름</text>
+
+  <path class="a" d="M156 25 C 190 25, 190 69, 214 69"/>
+  <path class="a" d="M156 69 H 214"/>
+  <path class="a" d="M156 113 C 190 113, 190 69, 214 69"/>
+  <circle cx="216" cy="69" r="3" fill="#b0abbd"/>
+
+  <rect x="232" y="46" width="82" height="46" rx="8" fill="#6d8fd8" opacity="0.14"/>
+  <text class="o" x="246" y="66">오늘 목록</text>
+  <text class="n" x="246" y="80">어제 것과 견줌</text>
+
+  <text class="n" x="6" y="158">한 층이 고장 나도 나머지가 돈다</text>
+</svg>

@@ -4,8 +4,8 @@
  * 나머지는 칩. 28장은 session-tabs HISTORY 2026-09-04 의 실측, 그룹 이름은 실제 저장소 이름.
  * 탭 제목은 예시(실제 탭 캡처는 남의 화면 · 개인 탭이 섞여 안 씀).
  */
-interface Props { caption?: string }
-const { caption } = Astro.props;
+interface Props { caption?: string; wide?: boolean }
+const { caption, wide = false } = Astro.props;
 
 // 전 — 세션 열 개가 번갈아 연 28장. 점 색은 세션, 제목은 거의 안 보인다
 const hue = ['#6d8fd8', '#d98b5f', '#5fae8a', '#b57ad0', '#d8b04e', '#5aa9c2', '#d7708a', '#8a9a5b', '#9a7b6a', '#7b86a8'];
@@ -21,7 +21,7 @@ const groups = [
 ];
 ---
 
-<figure class="stb">
+<figure class:list={['stb', { wide }]}>
   <div class="stb-row">
     <span class="stb-lb">전</span>
     <div class="stb-bar">
