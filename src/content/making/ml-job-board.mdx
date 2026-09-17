@@ -4,6 +4,7 @@ tagline: 22일에 커밋 96개 — 그중 여드레는 고친 것이 다음 아�
 
 import Track from '../../components/Track.astro';
 import Evo from '../../components/Evo.astro';
+import Drift from '../../components/mjb/Drift.astro';
 
 <p class="q">메일은 멀쩡히 왔다. 그동안 보드는 여드레째 낡은 코드로 돌고 있었다.</p>
 
@@ -20,6 +21,10 @@ import Evo from '../../components/Evo.astro';
     { from: 0, to: 21, label: "22일 · 커밋 96개", dashed: true },
   ]}
   caption="8월 14일부터 날짜 축. 칸 안 숫자가 그 구간에 쌓인 커밋. 빨강은 머지는 되는데 매일 도는 쪽엔 안 실리던 구간 — 8월 21일에 멈춰 8월 29일에 되찾았다." />
+
+## 갈라져 있던 여드레
+
+<Drift caption="위는 워크트리에서 머지된 커밋, 아래는 #53 에 멈춘 채 매일 아침 돌던 본체. 두 줄을 잇는 건 당기기 한 번뿐이었는데 그게 거부되고 있었다." />
 
 ## 개발 과정
 

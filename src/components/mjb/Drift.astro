@@ -1,0 +1,38 @@
+---
+/**
+ * 오픈 포지션 보드 — 머지한 줄과 매일 도는 줄이 갈라져 있던 여드레.
+ * 위는 워크트리에서 머지된 커밋 16개, 아래는 #53 에 멈춘 채 매일 아침 돌던 본체.
+ * 날짜와 커밋 수는 저장소 기록(8/21 #53 → 8/29 #70, 그 사이 커밋 16개).
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+
+const W = 600, H = 168;
+const x0 = 56, x1 = 544;
+const at = (t: number) => x0 + t * (x1 - x0);      // t: 0(8/21) ~ 1(8/29)
+const merged = Array.from({ length: 16 }, (_, i) => at(0.06 + (i / 15) * 0.82));
+const mornings = Array.from({ length: 8 }, (_, i) => at(0.06 + (i / 7) * 0.82));
+---
+
+<figure class="drift">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={caption ?? '머지한 줄과 매일 도는 줄이 갈라진 여드레'}>
+    <text class="dl" x="8" y="38">머지</text>
+    <text class="dl" x="8" y="112">매일 아침</text>
+
+    <line class="rail" x1={x0} y1="46" x2={x1} y2="46" />
+    {merged.map(x => <circle class="dot" cx={x} cy="46" r="4.5" />)}
+    <text class="dn" x={x0} y="26">워크트리에서 머지한 커밋 16개</text>
+
+    <line class="rail stale" x1={x0} y1="120" x2={x1} y2="120" />
+    <circle class="dot stale big" cx={x0} cy="120" r="7" />
+    <text class="dn stale" x={x0} y="100">본체는 #53 그대로 — 낡은 코드가 매일 돎</text>
+    {mornings.map(x => <text class="mail" x={x} y="140" text-anchor="middle">✉</text>)}
+    <text class="ds" x={at(0.44)} y="158" text-anchor="middle">메일은 여드레 내내 멀쩡히 왔다</text>
+
+    <text class="dt" x={x0} y="80" text-anchor="middle">8/21</text>
+    <path class="join" d={`M ${x1} 46 C ${x1 + 14} 46, ${x1 + 14} 120, ${x1} 120`} />
+    <text class="dt fix" x={x1 - 10} y="80" text-anchor="end">8/29</text>
+    <text class="dn fix" x={x1} y="26" text-anchor="end">스스로 당김</text>
+  </svg>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
