@@ -1359,3 +1359,20 @@ figcaption {
   .mjb-r { font-size: 0.74rem; gap: 0.35rem; }
   .mjb-t { font-size: 0.68rem; }
 }
+
+/* 갈라져 있던 여드레 (components/mjb/Drift.astro) — 머지한 줄과 매일 도는 줄 */
+.doc-body .prose > figure.drift { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
+.drift svg { width: 100%; height: auto; overflow: visible; }
+.drift .rail { stroke: color-mix(in srgb, var(--ink) 22%, transparent); stroke-width: 2; }
+.drift .rail.stale { stroke: #c2705f; stroke-dasharray: 3 5; }
+.drift .dot { fill: #6d8fd8; }
+.drift .dot.stale { fill: #c2705f; }
+.drift .dl { font: 600 11px var(--sans); fill: var(--ink-3); }
+.drift .dn { font: 600 12px var(--sans); fill: var(--ink-2); }
+.drift .dn.stale { fill: #b4562f; }
+.drift .dn.fix { fill: #2f7d4f; }
+.drift .dt { font: 600 11px var(--sans); fill: var(--ink-3); }
+.drift .dt.fix { fill: #2f7d4f; }
+.drift .ds { font: 11px var(--sans); fill: var(--ink-3); }
+.drift .mail { font-size: 12px; fill: var(--ink-3); }
+.drift .join { fill: none; stroke: #2f7d4f; stroke-width: 2; }
