@@ -1281,3 +1281,44 @@ figcaption {
   .stb { overflow-x: auto; }
   .stb-row { min-width: 560px; }
 }
+
+/* Claude 워치 — 접기 전 화면 (components/cw/Rows.astro). 터미널 화면이라 낮 · 밤 모두 어두운 판.
+   표식 색 · 배경 틴트 · 컨텍스트 % 단계는 claude-watch cards.py 의 값 그대로 */
+.doc-body .prose > figure.cwr { max-width: var(--measure); margin: 1.4rem 0 1.8rem; }
+.cwr-panel { padding: 0.6rem 0.55rem 0.5rem; border-radius: 10px 10px 0 0; background: #16151a; }
+.cwr-card { padding: 0.28rem 0.5rem; border-radius: 6px; margin-bottom: 0.25rem; }
+.cwr-card.bg-att { background: rgb(82, 60, 28); }
+.cwr-card.bg-idle { background: rgb(50, 45, 39); }
+.cwr-card.bg-done { background: rgb(48, 58, 46); }
+.cwr-card.bg-standby { background: rgb(40, 46, 42); }
+.cwr-card.bg-work { background: rgb(32, 37, 44); }
+.cwr-h { display: flex; align-items: baseline; gap: 0.5rem; font: 0.78rem/1.6 var(--mono); color: #d8d4e2; }
+.cwr-m { flex: none; width: 0.8rem; font-weight: 700; }
+.m-att { color: rgb(238, 205, 95); }
+.m-idle { color: rgb(224, 150, 80); }
+.m-done { color: rgb(130, 180, 120); }
+.m-standby { color: rgb(110, 150, 120); }
+.m-work { color: rgb(105, 165, 215); }
+.m-inact { color: rgb(120, 170, 135); }
+.cwr-n { white-space: nowrap; }
+.cwr-dots { flex: 1 1 auto; min-width: 0.5rem; }
+.cwr-s { flex: none; color: #9a95a8; }
+.cwr-c { flex: none; white-space: nowrap; }
+.c-dim { color: rgb(150, 144, 137); }
+.c-amber { color: rgb(220, 170, 80); }
+.c-coral { color: rgb(210, 100, 85); font-weight: 700; }
+.cwr-md { flex: none; color: #8b869a; }
+.cwr-b { padding-left: 1.3rem; font: 0.78rem/1.6 var(--mono); color: #b3aec2; }
+.cwr-inact { padding: 0.3rem 0.5rem; border-radius: 6px; background: rgb(33, 32, 30); }
+.cwr-tot { margin-top: 0.55rem; padding: 0 0.5rem; font: 0.75rem var(--mono); color: #8b869a; }
+.cwr-tot i { font-style: normal; padding: 0 0.45rem; }
+.cwr-bar { display: flex; flex-wrap: wrap; gap: 0.3rem 2rem; padding: 0.4rem 1.05rem 0.45rem;
+  border-radius: 0 0 10px 10px; background: #2a2833; font: 0.72rem var(--mono); color: #b3aec2; }
+.cwr-bar b { font-weight: 400; letter-spacing: -0.05em; }
+.cwr-bar b.f { color: #8fa9d8; }
+.cwr-bar b.e { color: #55526a; }
+.cwr-bar i { font-style: normal; padding: 0 0.4rem; color: #8b869a; }
+@media (max-width: 640px) {
+  .cwr-h, .cwr-b { font-size: 0.7rem; }
+  .cwr-bar { font-size: 0.66rem; gap: 0.25rem 1rem; }
+}

@@ -1,0 +1,74 @@
+---
+/**
+ * Claude 워치 — 접기 전 화면. 세로 1열 카드 목록(코드 이름은 GridView 지만 격자가 아니다).
+ * 표식 · 색 · 정렬 순서 · 총계 줄 문구 · 상태줄 형식은 claude-watch 저장소 기준
+ * (cards.py 표식표 `_STATE_MARK` · 정렬 `_STATE_ORDER` · 총계 `render_totals` · usage.py 상태줄 예시).
+ * 세션 이름은 실제 저장소 이름, 묻는 말과 숫자는 예시(실제 화면엔 개인 할 일이 섞여 캡처를 안 쓴다).
+ */
+interface Props { caption?: string }
+const { caption } = Astro.props;
+
+type Row = {
+  mark: string;
+  tone: 'att' | 'idle' | 'done' | 'standby' | 'work' | 'inact';
+  name: string;
+  body?: string;
+  side?: string;
+  ctx?: string;
+  ctxTone?: 'dim' | 'amber' | 'coral';
+  model?: string;
+  age?: string;
+};
+
+// 정렬 순서 그대로 — 질문 → 잠시 멈춤 → 완료 → 기다림 → 작동 → 비활성
+const rows: Row[] = [
+  { mark: '?', tone: 'att', name: 'dev.sungd.uk', side: '↩', ctx: '24%', ctxTone: 'dim', model: 'Opus',
+    body: '「지금」 칸을 사용 중으로 둘까요?' },
+  { mark: '?', tone: 'att', name: 'pillbox', ctx: '61%', ctxTone: 'amber', model: 'Opus',
+    body: '위젯 글자 크기 두 단 중 어느 쪽으로 갈까요?' },
+  { mark: '!', tone: 'idle', name: 'whooing', ctx: '38%', ctxTone: 'dim', model: 'Sonnet',
+    body: '쓰기 권한을 기다리는 중' },
+  { mark: '✓', tone: 'done', name: 'wallcal', ctx: '45%', ctxTone: 'dim', model: 'Opus' },
+  { mark: '~', tone: 'standby', name: 'career-radar', ctx: '12%', ctxTone: 'dim', model: 'Opus' },
+  { mark: '·', tone: 'work', name: 'analyses', side: '↳2', ctx: '⚠ 96%', ctxTone: 'coral', model: 'Opus' },
+];
+
+const inactive: Row[] = [
+  { mark: '·', tone: 'inact', name: 'lifeos', age: '3시간' },
+  { mark: '·', tone: 'inact', name: 'home-ops', age: '어제' },
+];
+---
+
+<figure class="cwr">
+  <div class="cwr-panel">
+    {rows.map(r => (
+      <div class:list={['cwr-card', `bg-${r.tone}`]}>
+        <div class="cwr-h">
+          <span class:list={['cwr-m', `m-${r.tone}`]}>{r.mark}</span>
+          <span class="cwr-n">{r.name}</span>
+          <span class="cwr-dots"></span>
+          {r.side && <span class="cwr-s">{r.side}</span>}
+          {r.ctx && <span class:list={['cwr-c', `c-${r.ctxTone}`]}>{r.ctx}</span>}
+          {r.model && <span class="cwr-md">{r.model}</span>}
+        </div>
+        {r.body && <div class="cwr-b">{r.body}</div>}
+      </div>
+    ))}
+    <div class="cwr-inact">
+      {inactive.map(r => (
+        <div class="cwr-h">
+          <span class="cwr-m m-inact">{r.mark}</span>
+          <span class="cwr-n">{r.name}</span>
+          <span class="cwr-dots"></span>
+          <span class="cwr-md">{r.age}</span>
+        </div>
+      ))}
+    </div>
+    <div class="cwr-tot">비활성 2<i>·</i>작동 1<i>·</i>기다림 1<i>·</i>내 차례 4</div>
+  </div>
+  <div class="cwr-bar">
+    <span>5h <b class="f">███</b><b class="e">░░░</b> 42%<i>⟳</i>오후 6:49</span>
+    <span>7d <b class="f">██</b><b class="e">░░░░</b> 25%<i>·</i>4.7세션/일<i>⟳</i>9/7(일) 오전 3:00</span>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
