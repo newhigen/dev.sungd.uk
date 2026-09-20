@@ -6,7 +6,7 @@ period: "2026.05"
 purpose: 생활
 status: 완료
 tags: ["Research", "Decision"]
-link: "https://resume.sungd.uk/dashboards/switch2-price-analysis.html"
+link: "https://sungd.uk/dashboards/switch2-price-analysis.html"
 linkLabel: 대시보드
 cover: "/p/switch2-buying/switch2.png"
 use:

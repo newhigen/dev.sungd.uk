@@ -6,7 +6,7 @@ period: "2026.05.28"
 purpose: 공부·관심사
 status: 완료
 tags: ["Data Analysis", "Civic"]
-link: "https://resume.sungd.uk/dashboards/election.html"
+link: "https://sungd.uk/dashboards/election.html"
 linkLabel: 대시보드
 cover: "/p/election/election.png"
 use:

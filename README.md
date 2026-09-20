@@ -45,5 +45,5 @@ npm run build      # dist/
 
 ## 남은 것
 
-- 대시보드 링크는 아직 `resume.sungd.uk/dashboards/…` 를 가리킨다. 옮길지는 나중에
-- `resume.sungd.uk/projects/*` 에서 이쪽으로 넘기는 안내가 아직 없다
+- `resume.sungd.uk/projects/*` 에서 이쪽으로 넘기는 안내가 아직 없다. 2026-09-20 에
+  resume.sungd.uk 은 Pages 가 꺼져 404 가 됐다 — 넘김은 Cloudflare 쪽에서 걸어야 한다
