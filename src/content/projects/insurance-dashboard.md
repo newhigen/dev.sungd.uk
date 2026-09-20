@@ -6,7 +6,7 @@ period: "2026.05.25"
 purpose: 돈
 status: 완료
 tags: ["Insurance", "Dashboard"]
-link: "https://resume.sungd.uk/dashboards/insurance.html"
+link: "https://sungd.uk/dashboards/insurance.html"
 linkLabel: 대시보드
 cover: "/p/insurance-dashboard/insurance-dashboard.png"
 use:

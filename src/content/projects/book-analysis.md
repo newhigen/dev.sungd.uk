@@ -6,7 +6,7 @@ period: "2026.05.30"
 purpose: 공부·관심사
 status: 완료
 tags: ["Data Analysis", "Python"]
-link: "https://resume.sungd.uk/dashboards/book-analysis.html"
+link: "https://sungd.uk/dashboards/book-analysis.html"
 linkLabel: 대시보드
 cover: "/p/book-analysis/book-analysis.png"
 use:

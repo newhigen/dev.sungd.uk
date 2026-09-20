@@ -6,7 +6,7 @@ period: "2026.05.24"
 purpose: 일·커리어
 status: 완료
 tags: ["Dashboard", "Data Visualization"]
-link: "https://resume.sungd.uk/dashboards/worklog.html#sec-heatmap"
+link: "https://sungd.uk/dashboards/worklog.html#sec-heatmap"
 linkLabel: 대시보드
 cover: "/p/worklog-dashboard/worklog-dashboard.png"
 coverLight: "/p/worklog-dashboard/worklog-dashboard-light.png"

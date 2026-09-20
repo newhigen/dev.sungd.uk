@@ -5,7 +5,7 @@ tagline: "건강검진 수치의 연도별 추세를 추적하는 대시보드."
 period: "2026.05.20"
 purpose: 생활
 tags: ["Health", "Dashboard"]
-link: "https://resume.sungd.uk/dashboards/health.html"
+link: "https://sungd.uk/dashboards/health.html"
 linkLabel: 대시보드
 cover: "/p/health-dashboard/health-dashboard.png"
 coverLight: "/p/health-dashboard/health-dashboard-light.png"

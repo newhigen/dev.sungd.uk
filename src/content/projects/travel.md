@@ -5,7 +5,7 @@ tagline: "가족 해외여행을 시기·비용·동선·체력까지 한 화면
 period: "2026.05.22"
 purpose: 생활
 tags: ["Dashboard", "Planning"]
-link: "https://resume.sungd.uk/dashboards/travel/travel.html"
+link: "https://sungd.uk/dashboards/travel/travel.html"
 linkLabel: 대시보드
 cover: "/p/travel/travel.png"
 use:
