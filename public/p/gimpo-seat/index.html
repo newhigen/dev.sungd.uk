@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="ko">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="김포공항 9호선 급행에 앉아서 타려면 걸포북변에서 몇 시 차를 타야 하는지, 승강장 대기열을 시뮬레이션해 출발 시각별로 알려 준다.">
+<meta property="og:title" content="김포공항 착석 창구">
+<meta property="og:description" content="9호선 급행에 앉아서 타려면 몇 시에 나가야 하나. 다섯 노선의 시각표로 승강장 대기열을 시뮬레이션한다.">
+<meta property="og:type" content="website">
+<title>김포공항 착석 창구</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ground:#F6F3EA; --surface:#FFFFFF; --surface-2:#EFEBDF;
+  --ink:#1B1813; --ink-2:#4A4437; --muted:#857C69; --hair:#DED7C6;
+  --accent:#B07D12; --accent-soft:#F0E2BF;
+  --gold:#9E7A05; --arex:#0A75AF; --l5:#82559B; --sh:#5F8A10;
+  --good:#2F6B45; --warn:#A65A1C; --bad:#9E3A2A;
+  --good-bg:#E2EEE5; --warn-bg:#F6E2D0; --bad-bg:#F5DED8;
+  --shadow:0 1px 2px rgba(40,32,12,.05), 0 10px 30px -18px rgba(40,32,12,.35);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --ground:#141309; --surface:#1E1C13; --surface-2:#26241A;
+    --ink:#EFEADC; --ink-2:#CFC8B4; --muted:#8F8770; --hair:#35321F;
+    --accent:#D9A63C; --accent-soft:#3A3117;
+    --gold:#C79E27; --arex:#4FADE2; --l5:#B48ECB; --sh:#94C33A;
+    --good:#7BC095; --warn:#E09B5F; --bad:#E58676;
+    --good-bg:#1E3327; --warn-bg:#38270F; --bad-bg:#3A211B;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+  }
+}
+:root[data-theme="dark"]{
+  --ground:#141309; --surface:#1E1C13; --surface-2:#26241A;
+  --ink:#EFEADC; --ink-2:#CFC8B4; --muted:#8F8770; --hair:#35321F;
+  --accent:#D9A63C; --accent-soft:#3A3117;
+  --gold:#C79E27; --arex:#4FADE2; --l5:#B48ECB; --sh:#94C33A;
+  --good:#7BC095; --warn:#E09B5F; --bad:#E58676;
+  --good-bg:#1E3327; --warn-bg:#38270F; --bad-bg:#3A211B;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 30px -18px rgba(0,0,0,.8);
+}
+*{box-sizing:border-box}
+body{
+  background:var(--ground); color:var(--ink);
+  font-family:"IBM Plex Sans KR","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+  font-size:15px; line-height:1.6; -webkit-font-smoothing:antialiased; -webkit-text-size-adjust:100%;
+}
+.mono{font-family:"IBM Plex Mono","SFMono-Regular",ui-monospace,monospace; font-variant-numeric:tabular-nums}
+.wrap{max-width:940px; margin:0 auto; padding:30px 20px 80px; display:flex; flex-direction:column; gap:46px}
+.card{background:var(--surface); border:1px solid var(--hair); border-radius:16px; padding:22px; box-shadow:var(--shadow)}
+
+header{display:flex; flex-direction:column; gap:8px}
+.eyebrow{font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted); font-weight:500}
+h1{margin:0; font-size:clamp(26px,4.6vw,36px); font-weight:600; letter-spacing:-.02em; line-height:1.15}
+.sub{margin:0; color:var(--ink-2); max-width:60ch; font-size:14.5px}
+
+/* 답 */
+.answer{display:flex; flex-direction:column; gap:18px}
+.chain{display:flex; flex-wrap:wrap; align-items:flex-end; gap:14px 13px}
+.stop{display:flex; flex-direction:column; gap:6px; min-width:0}
+.stop .cap{font-size:10.5px; letter-spacing:.08em; color:var(--muted); font-weight:600; white-space:nowrap}
+.stop .t{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;
+  font-size:23px; font-weight:600; line-height:1; letter-spacing:-.02em}
+.stop.big .t{font-size:clamp(34px,7.2vw,50px); font-weight:700; letter-spacing:-.03em}
+.chain .ar{color:var(--hair); font-size:17px; line-height:1; padding-bottom:2px}
+.meta{display:flex; flex-wrap:wrap; align-items:center; gap:9px 18px; font-size:12.5px; color:var(--ink-2)}
+.meta i{color:var(--muted); font-style:normal; margin-right:5px}
+.meta .mono{color:var(--ink); font-weight:500}
+
+.nowbar{display:flex; flex-wrap:wrap; align-items:baseline; gap:4px 14px; font-size:13px; color:var(--ink-2)}
+.nowbar b{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;
+  color:var(--accent); font-weight:700; font-size:15px; letter-spacing:-.01em}
+.nowbar .wk{color:var(--warn)}
+
+/* 설정 */
+.setup{display:flex; flex-direction:column; gap:15px}
+.set-row{display:flex; flex-direction:column; gap:8px}
+.set-lab{display:flex; justify-content:space-between; align-items:baseline; gap:12px}
+.set-lab span:first-child{font-size:12px; font-weight:500; color:var(--muted); letter-spacing:.02em}
+.set-lab span:last-child{font-size:14px; font-weight:600; color:var(--accent)}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip-btn{font:inherit; font-size:13.5px; font-weight:600; font-variant-numeric:tabular-nums;
+  font-family:"IBM Plex Mono",ui-monospace,monospace; padding:6px 12px; border-radius:9px;
+  cursor:pointer; line-height:1; background:var(--surface); color:var(--ink-2); border:1px solid var(--hair)}
+.chip-btn.txt{font-family:inherit; font-size:13px; font-weight:500}
+.chip-btn:hover{border-color:var(--accent); color:var(--ink)}
+.chip-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+.chip-btn[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:var(--ground)}
+#smChips .chip-btn{background:var(--tint); color:var(--tone); border-color:transparent}
+#smChips .chip-btn:hover{border-color:var(--tone); color:var(--tone)}
+#smChips .chip-btn[aria-pressed="true"]{background:var(--tone); border-color:var(--tone); color:var(--ground)}
+#smChips [data-mode="front"], #smChips [data-mode="seat"]{--tone:var(--good); --tint:var(--good-bg)}
+#smChips [data-mode="any"]{--tone:var(--bad); --tint:var(--bad-bg)}
+details.tune summary{cursor:pointer; font-size:12.5px; color:var(--muted); list-style:none; width:fit-content}
+details.tune summary::-webkit-details-marker{display:none}
+details.tune summary::before{content:"▸ "; color:var(--accent)}
+details.tune[open] summary::before{content:"▾ "}
+details.tune summary:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:4px}
+.tune-grid{display:grid; gap:18px; grid-template-columns:repeat(auto-fit,minmax(205px,1fr)); margin-top:16px}
+.tune-one{display:flex; flex-direction:column; gap:6px}
+.tune-one .hd{display:flex; justify-content:space-between; align-items:baseline; font-size:12.5px; color:var(--ink-2)}
+.tune-one .hd b{font-weight:600; color:var(--accent); font-family:"IBM Plex Mono",ui-monospace,monospace}
+.tune-one .nt{font-size:11px; color:var(--muted); line-height:1.45}
+input[type=range]{width:100%; accent-color:var(--accent); height:20px}
+input[type=range]:focus-visible{outline:2px solid var(--accent); outline-offset:3px}
+
+section{display:flex; flex-direction:column; gap:12px}
+h2{margin:0; font-size:18px; font-weight:600; letter-spacing:-.01em}
+.lede{margin:0; color:var(--ink-2); font-size:13.5px; max-width:64ch}
+
+.chip{display:inline-flex; align-items:center; padding:3px 9px; border-radius:999px;
+  font-size:11.5px; font-weight:600; width:fit-content; white-space:nowrap}
+.v-good{background:var(--good-bg); color:var(--good)}
+.v-warn{background:var(--warn-bg); color:var(--warn)}
+.v-bad{background:var(--bad-bg); color:var(--bad)}
+
+/* 시간축 */
+.axis{display:flex; flex-direction:column; gap:4px}
+.axis-row{display:grid; grid-template-columns:44px minmax(0,1fr); align-items:stretch}
+.axis-hr{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;
+  font-size:13px; font-weight:600; color:var(--muted); padding-top:15px}
+.axis-track{position:relative; height:56px}
+.axis-base{position:absolute; left:0; right:0; top:24px; height:1px; background:var(--hair)}
+.axis-q{position:absolute; top:16px; height:16px; width:1px; background:var(--hair); opacity:.65}
+.axis-mark{position:absolute; top:8px; transform:translateX(-50%); display:flex; flex-direction:column;
+  align-items:center; gap:4px; cursor:pointer; background:none; border:0; padding:0 2px; font:inherit}
+.axis-mark .bar{width:3px; height:22px; border-radius:2px; background:var(--good)}
+.axis-mark .mm{font-family:"IBM Plex Mono",ui-monospace,monospace; font-variant-numeric:tabular-nums;
+  font-size:12px; color:var(--ink-2); line-height:1; font-weight:500}
+.axis-mark.warn .bar{background:var(--warn)}
+.axis-mark.bad .bar{background:var(--bad)}
+.axis-mark:hover .mm{color:var(--ink)}
+.axis-mark:focus-visible{outline:2px solid var(--accent); outline-offset:3px; border-radius:5px}
+.axis-mark.on .bar{width:6px; height:30px; background:var(--accent); margin-top:-4px}
+.axis-mark.on .mm{color:var(--accent); font-weight:700; font-size:13px}
+.axis-mark.past{opacity:.3}
+.axis-now{position:absolute; top:2px; bottom:2px; width:2px; background:var(--accent); border-radius:1px}
+.axis-now::after{content:"지금"; position:absolute; top:0; left:5px; font-size:10px; font-weight:700;
+  color:var(--accent); white-space:nowrap; line-height:1}
+.axis-gap{position:absolute; top:24px; transform:translate(-50%,-50%); font-size:10.5px;
+  color:var(--muted); background:var(--surface); padding:0 6px; white-space:nowrap}
+.axis-key{display:flex; flex-wrap:wrap; gap:6px 16px; margin-top:16px; font-size:12px; color:var(--ink-2)}
+.axis-key i{display:inline-block; width:3px; height:11px; border-radius:2px; margin-right:6px; vertical-align:-1px}
+
+/* 사다리 */
+.tbl{width:100%; border-collapse:collapse; font-size:13.5px; min-width:620px}
+.tbl th{text-align:left; font-size:10.5px; letter-spacing:.09em; text-transform:uppercase;
+  color:var(--muted); font-weight:600; padding:0 12px 9px; white-space:nowrap}
+.tbl td{padding:9px 12px; border-top:1px solid var(--hair); white-space:nowrap}
+.tbl tbody tr{cursor:pointer}
+.tbl tbody tr:hover td{background:var(--surface-2)}
+.tbl tr.base td{background:var(--accent-soft)}
+.tbl tr.base td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.tbl tr.out td{color:var(--muted)}
+.tbl tr.out .chip{opacity:.6}
+.tbl .big{font-size:16px; font-weight:600}
+.tbl .why{color:var(--muted); font-size:12.5px}
+.tbl .why.push{color:var(--warn)}
+.tbl .why.stop{color:var(--bad); font-weight:600}
+.scroll{overflow-x:auto; -webkit-overflow-scrolling:touch}
+.scroll-hint{display:none; font-size:11.5px; color:var(--muted); margin-top:10px}
+
+/* 레인 */
+.lane-head{display:flex; flex-wrap:wrap; gap:6px 16px; align-items:baseline; margin-bottom:14px}
+.lane-head b{font-size:15px; font-weight:600}
+.lane-head span{font-size:12.5px; color:var(--muted)}
+.lanes{display:grid; grid-template-columns:148px minmax(0,1fr); align-items:start}
+.lane-names{display:flex; flex-direction:column; border-right:1px solid var(--hair)}
+.lane-names .sp{flex:0 0 auto}
+.lane-names .ln{display:flex; align-items:center; gap:7px; font-size:11.5px; color:var(--ink-2);
+  padding-right:12px; line-height:1.3; overflow:hidden}
+.lane-names .ln i{display:block; width:8px; height:8px; border-radius:2px; flex:0 0 8px}
+.lane-names .ln b{font-weight:500; color:var(--ink); font-size:12px}
+.lane-names .ln em{font-style:normal; color:var(--muted)}
+.lane-scroll{overflow-x:auto; overflow-y:hidden}
+.lane-note{font-size:11.5px; color:var(--muted); margin-top:12px}
+
+.facts{display:grid; gap:12px; grid-template-columns:repeat(auto-fit,minmax(245px,1fr))}
+.fact{background:var(--surface); border:1px solid var(--hair); border-radius:14px; padding:16px 18px}
+.fact h3{margin:0 0 6px; font-size:13px; font-weight:600}
+.fact p{margin:0; font-size:12.5px; color:var(--ink-2); line-height:1.62}
+.fact b{color:var(--ink); font-weight:500}
+footer{font-size:11.5px; color:var(--muted); line-height:1.65; max-width:72ch}
+
+@media (max-width:700px){
+  body{font-size:14.5px}
+  .wrap{padding:20px 13px 60px; gap:34px}
+  .card{padding:15px 14px; border-radius:14px}
+  .sub{font-size:13.5px}
+
+  .chain{display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:16px 8px}
+  .chain .ar{display:none}
+  .s1{grid-area:1/1/2/4} .s5{grid-area:1/4/2/7}
+  .s2{grid-area:2/1/3/3} .s3{grid-area:2/3/3/5} .s4{grid-area:2/5/3/7}
+  .stop .cap{font-size:10px; letter-spacing:.03em}
+  .stop .t{font-size:19px}
+  .stop.big .t{font-size:clamp(30px,9.4vw,42px)}
+  .meta{gap:7px 13px; font-size:12px}
+
+  .chip-btn{padding:8px 11px}
+  .tune-grid{gap:15px; margin-top:13px}
+
+  .axis-row{grid-template-columns:32px minmax(0,1fr)}
+  .axis-hr{font-size:12px; padding-top:14px}
+  .axis-track{height:52px}
+  .axis-mark .mm{font-size:11px}
+  .axis-key{margin-top:13px; font-size:11.5px}
+
+  .card.scroll{padding-left:0; padding-right:0}
+  .tbl{font-size:13px; min-width:560px}
+  .tbl th{padding:0 9px 8px}
+  .tbl td{padding:9px 9px}
+  .tbl th:first-child, .tbl td:first-child{padding-left:14px}
+  .tbl th:last-child, .tbl td:last-child{padding-right:14px}
+  .scroll-hint{padding:0 14px}
+  .tbl .big{font-size:15px}
+  .tbl th:first-child, .tbl td:first-child{position:sticky; left:0; z-index:1;
+    background:var(--surface); box-shadow:1px 0 0 var(--hair)}
+  .tbl tbody tr:hover td:first-child{background:var(--surface-2)}
+  .tbl tr.base td:first-child{box-shadow:inset 3px 0 0 var(--accent), 1px 0 0 var(--hair)}
+  .scroll-hint{display:block}
+
+  .lanes{grid-template-columns:96px minmax(0,1fr)}
+  .lane-names .ln{padding-right:8px; gap:6px}
+  .lane-names .ln b{font-size:11.5px}
+  .lane-names .ln em{display:none}
+  .lane-head b{font-size:14px}
+
+  .facts{gap:10px}
+  .fact{padding:14px 15px}
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">걸포북변 · 김포공항 환승 · 신논현</div>
+  <h1>김포공항 착석 창구</h1>
+  <p class="sub">9호선 급행은 전부 김포공항이 시발역이다. 앉느냐 마느냐는 승강장에 먼저 도착했는가로만 갈린다.</p>
+</header>
+
+<div class="card answer">
+  <div class="nowbar" id="nowbar"></div>
+  <div class="chain">
+    <div class="stop big s1"><span class="cap">집에서 나가기</span><span class="t" id="aGo">—</span></div>
+    <span class="ar">→</span>
+    <div class="stop s2"><span class="cap">걸포북변 출발</span><span class="t" id="aGim">—</span></div>
+    <span class="ar">→</span>
+    <div class="stop s3"><span class="cap">김포공항 도착</span><span class="t" id="aArr">—</span></div>
+    <span class="ar">→</span>
+    <div class="stop s4"><span class="cap">김포공항 출발</span><span class="t" id="aExp">—</span></div>
+    <span class="ar">→</span>
+    <div class="stop big s5"><span class="cap">신논현 도착</span><span class="t" id="aSin">—</span></div>
+  </div>
+  <div class="meta" id="aMeta"></div>
+</div>
+
+<div class="card setup">
+  <div class="set-row">
+    <div class="set-lab"><span>신논현 도착 마감</span><span class="mono" id="tgV">09:00</span></div>
+    <div class="chips" id="tgChips" role="group" aria-label="신논현 도착 마감"></div>
+  </div>
+  <div class="set-row">
+    <div class="set-lab"><span>어느 편을 고르나</span><span id="bsV">지금부터 다음 편</span></div>
+    <div class="chips" id="bsChips" role="group" aria-label="어느 편을 고르나">
+      <button type="button" class="chip-btn txt" data-basis="now" aria-pressed="true">지금부터 다음 편</button>
+      <button type="button" class="chip-btn txt" data-basis="late" aria-pressed="false">마감 안에서 가장 늦게</button>
+    </div>
+  </div>
+  <div class="set-row">
+    <div class="set-lab"><span>착석 기준</span><span id="smV">앞줄 착석</span></div>
+    <div class="chips" id="smChips" role="group" aria-label="착석 기준">
+      <button type="button" class="chip-btn txt" data-mode="front" aria-pressed="true">앞줄 착석</button>
+      <button type="button" class="chip-btn txt" data-mode="seat" aria-pressed="false">착석 가능까지</button>
+      <button type="button" class="chip-btn txt" data-mode="any" aria-pressed="false">서서라도 가장 늦게</button>
+    </div>
+  </div>
+  <details class="tune">
+    <summary>걷는 시간 · 밀림 맞추기</summary>
+    <div class="tune-grid">
+      <div class="tune-one">
+        <div class="hd"><label for="home">집 → 걸포북변 승강장</label><b id="homeV">10분</b></div>
+        <input type="range" id="home" min="4" max="20" step="1" value="10">
+        <div class="nt">개찰·승강장까지 내려가는 시간 포함.</div>
+      </div>
+      <div class="tune-one">
+        <div class="hd"><label for="walk">김포공항 하차 → 급행 줄</label><b id="walkV">4분</b></div>
+        <input type="range" id="walk" min="2" max="10" step="0.5" value="4">
+        <div class="nt">골드라인 지하 4층 → 9호선 지하 3층. 실측 — 평소 걸음 4분, 뛰면 3분. 30초만 달라도 타는 급행이 바뀌는 자리가 있다.</div>
+      </div>
+      <div class="tune-one">
+        <div class="hd"><label for="delay">내 쪽 밀림</label><b id="delayV">0분</b></div>
+        <input type="range" id="delay" min="0" max="6" step="0.5" value="0">
+        <div class="nt">골드라인 지연·하차 지체를 내 도착에만 더한다.</div>
+      </div>
+    </div>
+  </details>
+</div>
+
+<section>
+  <h2>언제 나가면 앉나</h2>
+  <p class="lede">막대 하나가 집에서 나가는 시각이다. 실제 시간 간격으로 찍었다 — 촘촘한 데는 아무 때나 나가도 되고, 빈 데는 그 사이에 앉을 편이 없다. <b id="cnt">—</b></p>
+  <div class="card">
+    <div class="axis" id="axis"></div>
+    <div class="axis-key">
+      <span><i style="background:var(--good)"></i>착석</span>
+      <span><i style="background:var(--warn)"></i>빠듯</span>
+      <span><i style="background:var(--accent)"></i>고른 편</span>
+      <span style="color:var(--muted)">가는 눈금 15분</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>이 편을 놓치면</h2>
+  <p class="lede">골드라인 다음 차는 곧 온다. 문제는 급행 줄에서 뒤로 밀리거나, 급행 한 대를 통째로 놓치는 것이다.</p>
+  <div class="card scroll">
+    <table class="tbl">
+      <thead><tr><th>집 출발</th><th>걸포북변 출발</th><th>공항 도착</th><th>급행 출발</th><th>신논현 도착</th><th>전망</th><th>기준 대비</th></tr></thead>
+      <tbody id="ladder"></tbody>
+    </table>
+    <div class="scroll-hint">가로로 밀면 나머지 구간. 집 출발 칸은 고정.</div>
+  </div>
+</section>
+
+<section>
+  <h2>왜 이 시각인가</h2>
+  <p class="lede">노선마다 한 줄. 점이 김포공항 도착, 화살표 끝이 9호선 급행 줄에 닿는 순간이다. 회색 띠 안에서 내 검은 화살표보다 앞서 끝난 화살표가 곧 내 앞에 선 사람들이다.</p>
+  <div class="card">
+    <div class="lane-head"><b id="lnT">—</b><span id="lnM"></span></div>
+    <div class="lanes">
+      <div class="lane-names" id="lnNames"></div>
+      <div class="lane-scroll" id="lnScroll"><svg id="lnSvg" role="img" aria-label="노선별 김포공항 도착과 9호선 급행 줄 도달"></svg></div>
+    </div>
+    <div class="lane-note">가로로 밀면 다른 시간대. 화살표 길이 = 그 노선 승강장에서 9호선 급행 승강장까지 걷는 시간.</div>
+  </div>
+</section>
+
+<section>
+  <h2>알아둘 것</h2>
+  <div class="facts">
+    <div class="fact">
+      <h3>급행은 김포공항 시발</h3>
+      <p>개화역 시각표에 급행은 한 편도 없다. 빈 차로 서기 때문에 착석 경쟁이 이 승강장에서만 벌어진다. <b>급행 37분, 완행 56분.</b></p>
+    </div>
+    <div class="fact">
+      <h3>공항철도가 가장 위협적</h3>
+      <p>9호선 강남 방면과 공항철도 서울역행은 <b>같은 승강장 맞은편</b>이다. 계단이 없어 하차 1분 만에 줄에 붙는다. 5호선은 3~4분, 서해선은 지하 5층이라 8~9분 뒤에 올라온다.</p>
+    </div>
+    <div class="fact">
+      <h3>뛰어도 이득이 없다</h3>
+      <p>평소 4분을 뛰어서 3분으로 줄이면, 55편 중 <b>47편은 타는 급행이 그대로다.</b> 급행이 바뀌는 8편은 전부 이미 <b>500~800명이 선 줄의 꼬리</b>이고 여유가 1분 안쪽이다. 뛰어서 나아지는 편은 한 편도 없었다.</p>
+    </div>
+    <div class="fact">
+      <h3>한 대 보내면 맨 앞</h3>
+      <p>급행을 놓치면 첨두 6분·낮 11분 뒤가 다음 급행이고, 그때는 줄 맨 앞이라 확실히 앉는다. 그래서 <b>여유 4~6분짜리가 지연에 강하다.</b></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  시각표는 2026-09-04(금) 평일 정시표. 김포골드라인·9호선·공항철도·5호선·서해선 김포공항역과 걸포북변·신논현·개화역 시각표를 열차번호로 이어 붙였다.
+  각 노선이 급행 줄에 보태는 인원(골드라인 150, 공항철도 100, 5호선 25, 서해선 25~35명/편성)과 급행 좌석 300석은 어림값이고, 시간대별 혼잡도를 곱해 보정했다. 절대 인원보다 순서와 타이밍이 결론을 만든다.
+</footer>
+</div>
+
+<script>
+const DATA = {"date":"2026-09-04(금) 평일 정시표","gold":[[19959,20899],[20537,21481],[20855,21799],[21155,22099],[21455,22399],[21755,22699],[22055,22999],[22355,23299],[22655,23599],[22955,23899],[23255,24199],[23555,24499],[23855,24799],[24155,25099],[24455,25399],[24611,25561],[24761,25711],[24911,25861],[25061,26011],[25211,26161],[25361,26311],[25511,26461],[25661,26611],[25811,26761],[25961,26911],[26111,27061],[26261,27211],[26411,27361],[26561,27511],[26711,27661],[26861,27811],[27011,27961],[27161,28111],[27311,28261],[27461,28411],[27611,28561],[27761,28711],[27911,28861],[28061,29011],[28211,29161],[28361,29311],[28511,29461],[28661,29611],[28811,29761],[28961,29911],[29111,30061],[29261,30211],[29411,30361],[29561,30511],[29711,30661],[29861,30811],[30011,30961],[30161,31111],[30311,31261],[30461,31411],[30611,31561],[30761,31711],[30911,31861],[31061,32011],[31211,32161],[31361,32311],[31511,32461],[31661,32611],[31811,32761],[31961,32911],[32111,33061],[32315,33259],[32555,33499],[32795,33739],[33035,33979],[33395,34339],[33755,34699],[34115,35059],[34475,35419],[34835,35779],[35195,36139],[35555,36499],[35915,36859],[36275,37219],[36635,37579],[36995,37939],[37355,38299],[37715,38659],[38075,39019],[38435,39379],[38795,39739],[39155,40099],[39515,40459],[39875,40819],[40235,41179],[40595,41539],[40955,41899],[41315,42259],[41675,42619],[42035,42979],[42395,43339]],"exp":[[19800,21765,"E9504"],[20400,22475,"E9506"],[21120,23125,"E9508"],[21840,23805,"E9510"],[22560,24525,"E9512"],[23280,25245,"E9514"],[24000,25965,"E9516"],[24380,26485,"E9518"],[24760,27005,"E9520"],[25140,27370,"E9522"],[25520,27750,"E9524"],[25900,28130,"E9526"],[26280,28510,"E9528"],[26660,28890,"E9530"],[27040,29270,"E9532"],[27420,29650,"E9534"],[27800,30030,"E9536"],[28180,30410,"E9538"],[28560,30790,"E9540"],[28940,31170,"E9542"],[29320,31550,"E9544"],[29700,31930,"E9546"],[30080,32310,"E9548"],[30460,32690,"E9550"],[30870,33055,"E9552"],[31350,33435,"E9554"],[31920,33885,"E9556"],[32580,34605,"E9558"],[33240,35245,"E9560"],[33900,35905,"E9562"],[34560,36565,"E9564"],[35220,37225,"E9566"],[35880,37885,"E9568"],[36540,38545,"E9570"],[37200,39205,"E9572"],[37860,39865,"E9574"],[38520,40525,"E9576"],[39240,41245,"E9578"],[39960,41965,"E9580"],[40620,42625,"E9582"],[41280,43285,"E9584"],[41940,43945,"E9586"],[42600,44605,"E9588"],[43260,45265,"E9590"],[43920,45925,"E9592"]],"loc":[[20110,23360,"C9014"],[20830,24095,"C9016"],[21550,24815,"C9018"],[22270,25545,"C9020"],[22765,26075,"C9022"],[23380,26585,"C9024"],[23660,27105,"C9026"],[24090,27455,"C9028"],[24470,27835,"C9030"],[24850,28215,"C9032"],[25230,28595,"C9034"],[25600,28975,"C9036"],[26010,29355,"C9038"],[26380,29735,"C9040"],[26750,30115,"C9042"],[27130,30495,"C9044"],[27510,30875,"C9046"],[27890,31255,"C9048"],[28270,31635,"C9050"],[28650,32015,"C9052"],[29030,32395,"C9054"],[29410,32775,"C9056"],[29790,33155,"C9058"],[30170,33535,"C9060"],[30580,33985,"C9062"],[31060,34360,"C9064"],[31630,34865,"C9066"],[32290,35520,"C9068"],[32950,36180,"C9070"],[33610,36840,"C9072"],[34270,37500,"C9074"],[34930,38160,"C9076"],[35590,38820,"C9078"],[36250,39480,"C9080"],[36910,40140,"C9082"],[37570,40815,"C9084"],[38230,41520,"C9086"],[38950,42240,"C9088"],[39670,42900,"C9090"],[40330,43560,"C9092"],[40990,44220,"C9094"],[41650,44880,"C9096"],[42310,45540,"C9098"],[42970,46200,"C9100"],[43630,46860,"C9102"]],"feed":{"arex":{"name":"공항철도 서울역행","walk":1.0,"w":100,"color":"arex","t":[20520,21050,21300,21840,22260,22620,22920,23190,23490,23690,23910,24180,24540,24930,25290,25490,25740,26010,26310,26580,26820,27090,27390,27590,27840,28050,28260,28440,28650,28860,29070,29280,29520,29730,30000,30270,30540,30780,31020,31290,31490,31740,32010,32280,32580,32940,33210,33510,33870,34170,34370,34620,34920,35220,35700,36060,36290,36510,36810,37080,37500,37890,38160,38490,38690,38910,39180,39480,39780,40230,40560,40860,41090,41310,41580,42060]},"l5":{"name":"5호선 방화발 동쪽행","walk":3.5,"w":25,"color":"l5","t":[20020,20440,20860,21280,21700,22090,22480,22840,23170,23500,23860,24190,24490,24820,25090,25390,25660,25930,26200,26470,26740,27010,27250,27490,27730,27940,28150,28360,28570,28780,28990,29140,29290,29470,29650,29830,30040,30250,30460,30670,30880,31120,31360,31600,31840,32080,32320,32560,32800,33070,33340,33640,33940,34240,34540,34840,35200,35590,35980,36370,36760,37150,37570,37960,38350,38740,39130,39520,39910,40300,40690,41080,41470,41860,42250]},"shU":{"name":"서해선 대곡·일산행","walk":8.5,"w":35,"color":"sh","t":[20820,21180,21660,21840,22500,22620,23220,23520,24060,24300,24780,24960,25500,25620,26100,26220,26640,26820,27180,27420,27600,28080,28260,28680,28980,29280,29640,29760,30120,30360,30660,30900,31260,31380,31980,32220,32820,33540,34080,34200,34800,34860,35340,35700,36060,36480,36720,37080,37500,37740,38040,38880,38940,39660,39720,40320,40680,40980,41400,41760,42360,42480]},"shD":{"name":"서해선 원시행","walk":8.5,"w":25,"color":"sh","t":[19260,19350,20040,20250,20850,20880,21630,21660,22290,22500,23190,23400,24030,24240,24570,25200,26040,26130,26700,26910,27420,27510,27960,28170,28560,28890,29160,29670,29820,30330,30420,30750,30960,31350,31560,32160,32250,32760,32910,33480,33630,33960,34290,34500,34890,35160,35550,35970,36000,36570,37020,37230,37830,37980,38550,39000,39210,39840,40110,40800,40950,41730,42390]}},"goldArr":[20899,21481,21799,22099,22399,22699,22999,23299,23599,23899,24199,24499,24799,25099,25399,25561,25711,25861,26011,26161,26311,26461,26611,26761,26911,27061,27211,27361,27511,27661,27811,27961,28111,28261,28411,28561,28711,28861,29011,29161,29311,29461,29611,29761,29911,30061,30211,30361,30511,30661,30811,30961,31111,31261,31411,31561,31711,31861,32011,32161,32311,32461,32611,32761,32911,33061,33259,33499,33739,33979,34339,34699,35059,35419,35779,36139,36499,36859,37219,37579,37939,38299,38659,39019,39379,39739,40099,40459,40819,41179,41539,41899,42259],"goldW":150,"seats":300};
+const $ = s => document.querySelector(s);
+const pad = n => String(n).padStart(2,'0');
+const hm = t => pad(Math.floor(t/3600))+':'+pad(Math.floor(t%3600/60));
+const hms = t => hm(t)+':'+pad(Math.round(t%60));
+const MINF = t => Math.floor(t/60)*60;
+
+const SEATS = DATA.seats, GW = DATA.goldW;
+const FEEDS = Object.entries(DATA.feed).map(([k,v]) => ({key:k, ...v}));
+const EIDX = tn => DATA.exp.findIndex(e => e[2] === tn);
+const KST = new Intl.DateTimeFormat('en-GB',
+  {timeZone:'Asia/Seoul', hourCycle:'h23', weekday:'short', hour:'2-digit', minute:'2-digit', second:'2-digit'});
+function nowKST(){
+  const p = {}; for(const x of KST.formatToParts(new Date())) p[x.type] = x.value;
+  return {s: +p.hour*3600 + +p.minute*60 + +p.second, wk: p.weekday === 'Sat' || p.weekday === 'Sun', wd: p.weekday};
+}
+const WD = {Sat:'토요일', Sun:'일요일'};
+
+let HOME = 10, TARGET = 9*60, SEATMODE = 'front', SEL = null, ROWS = [], DUMPS = [];
+let BASIS = 'now', PINNED = false;
+const SEAT_CAP = {front: SEATS*0.45, seat: SEATS, any: Infinity};
+const SEAT_LABEL = {front:'앞줄 착석', seat:'착석 가능까지', any:'서서라도 가장 늦게'};
+
+// 김포골드라인 시간대별 혼잡(첨두 143% → 낮 30%대)을 계수로
+function crowd(t){
+  const h = t/3600;
+  for(const [lim,m] of [[6,.30],[6.6,.50],[7,.75],[8.5,1],[9,.85],[9.5,.60],[10,.42]]) if(h < lim) return m;
+  return .28;
+}
+function verdict(ahead, slack){
+  if(slack < 1.2) return {k:'v-bad', t:'놓칠 위험', kind:'bad'};
+  if(ahead <= SEATS*0.45) return {k:'v-good', t:'앞줄 착석', kind:''};
+  if(ahead <= SEATS)      return {k:'v-good', t:'착석 가능', kind:''};
+  if(ahead <= SEATS*1.4)  return {k:'v-warn', t:'빠듯',     kind:'warn'};
+  return {k:'v-bad', t:'서서 감', kind:'bad'};
+}
+
+function compute(){
+  const walk = +$('#walk').value, delay = +$('#delay').value;
+  HOME = +$('#home').value;
+  $('#homeV').textContent = HOME + '분';
+  $('#walkV').textContent = walk + '분';
+  $('#delayV').textContent = delay + '분';
+
+  DUMPS = [];
+  for(const f of FEEDS) for(const t of f.t) DUMPS.push({color:f.color, w:f.w, plat:t + f.walk*60});
+  for(const t of DATA.goldArr) DUMPS.push({color:'gold', w:GW, plat:t + walk*60});
+  DUMPS.sort((a,b) => a.plat - b.plat);
+
+  ROWS = [];
+  for(const [dep, arr] of DATA.gold){
+    if(dep < 5.4*3600 || dep > 10.9*3600) continue;
+    const plat = arr + walk*60 + delay*60;
+    const i = DATA.exp.findIndex(e => e[0] >= plat + 20);
+    if(i < 0) continue;
+    const e = DATA.exp[i], prev = i > 0 ? DATA.exp[i-1][0] : e[0]-380;
+    let other = 0, gold = 0;
+    for(const d of DUMPS){
+      if(d.plat <= prev || d.plat >= plat) continue;
+      if(d.color === 'gold') gold += d.w; else other += d.w;
+    }
+    const ahead = (other + gold + GW*0.5) * crowd(e[0]);
+    const slack = (e[0]-plat)/60;
+    ROWS.push({dep, arr, plat, e, prev, ahead, slack, sin:e[1], total:(e[1]-dep)/60, v:verdict(ahead, slack)});
+  }
+}
+
+function qualified(){
+  const cap = SEAT_CAP[SEATMODE];
+  return ROWS.filter(r => MINF(r.sin) <= TARGET*60 && r.slack >= 2.5 && r.ahead <= cap);
+}
+
+function render(){
+  compute();
+  $('#tgV').textContent = hm(TARGET*60);
+  $('#smV').textContent = SEAT_LABEL[SEATMODE];
+  const list = qualified();
+  $('#cnt').textContent = list.length ? `기준에 맞는 편 ${list.length}개.` : '이 기준으로는 한 편도 없다.';
+  const now = nowKST().s;
+  const next = list.find(r => r.dep - HOME*60 >= now);
+  const keep = PINNED && SEL && list.find(r => r.dep === SEL.dep);
+  SEL = keep || (BASIS === 'now' ? (next || list[list.length-1]) : list[list.length-1]) || ROWS[0];
+  drawAxis(list);
+  drawNowbar();
+  drawAnswer(SEL);
+  drawLadder(SEL);
+  drawLanes(SEL);
+}
+
+function select(dep){
+  const r = ROWS.find(x => x.dep === dep);
+  if(!r) return;
+  SEL = r; PINNED = true;
+  drawNowbar();
+  document.querySelectorAll('#axis .axis-mark').forEach(b => b.classList.toggle('on', +b.dataset.dep === dep));
+  drawAnswer(r); drawLadder(r); drawLanes(r);
+}
+
+function drawNowbar(){
+  const n = nowKST(), t = n.s;
+  const list = qualified();
+  let msg;
+  if(!SEL || !list.length) msg = '';
+  else if(!list.some(r => r.dep - HOME*60 >= t))
+    msg = list.length ? '오늘 몫은 지났다 — 내일 아침 기준으로 본다' : '';
+  else {
+    const d = Math.round((SEL.dep - HOME*60 - t)/60);
+    msg = d > 1 ? `${d}분 뒤에 나가면 된다`
+        : d >= -1 ? '지금 나갈 시각이다'
+        : `${-d}분 지났다`;
+  }
+  $('#nowbar').innerHTML = `<span>지금 <b>${hm(t)}</b></span>` +
+    (msg ? `<span>${msg}</span>` : '') +
+    (n.wk ? `<span class="wk">${WD[n.wd]} — 이 표는 평일 시간표다</span>` : '');
+}
+
+function drawAnswer(r){
+  if(!r){ ['aGo','aGim','aArr','aExp','aSin'].forEach(k => $('#'+k).textContent = '—');
+    $('#aMeta').innerHTML = ''; return; }
+  $('#aGo').textContent = hm(r.dep - HOME*60);
+  $('#aGim').textContent = hm(r.dep);
+  $('#aArr').textContent = hm(r.arr);
+  $('#aExp').textContent = hm(r.e[0]);
+  $('#aSin').textContent = hm(r.sin);
+  $('#aMeta').innerHTML = `
+    <span class="chip ${r.v.k}">${r.v.t}</span>
+    <span><i>총</i><span class="mono">${Math.round(r.total)}분</span></span>
+    <span><i>급행</i><span class="mono">${r.e[2]}</span></span>
+    <span><i>급행 줄 도착</i><span class="mono">${hms(r.plat)}</span></span>
+    <span><i>여유</i><span class="mono">${r.slack.toFixed(1)}분</span></span>
+    <span><i>내 앞</i><span class="mono">약 ${Math.round(r.ahead)}명</span></span>`;
+}
+
+function drawAxis(list){
+  if(!list.length){ $('#axis').innerHTML = '<p class="lede">착석 기준을 낮추거나 마감을 늦춰야 한다.</p>'; return; }
+  const homes = list.map(r => ({r, t: r.dep - HOME*60}));
+  const now = nowKST().s;
+  const h0 = Math.floor(homes[0].t/3600), h1 = Math.floor(homes[homes.length-1].t/3600);
+  const gaps = [];
+  for(let i=1;i<homes.length;i++){
+    const d = (homes[i].t - homes[i-1].t)/60;
+    if(d >= 15) gaps.push({from:homes[i-1].t, to:homes[i].t, min:Math.round(d)});
+  }
+  let out = '';
+  for(let hh = h0; hh <= h1; hh++){
+    const base = hh*3600, pct = t => 3 + (t-base)/3600*94;
+    let inner = '<span class="axis-base"></span>';
+    for(const q of [15,30,45]) inner += `<span class="axis-q" style="left:${3 + q/60*94}%"></span>`;
+    for(const g of gaps){
+      const a = Math.max(g.from, base), b = Math.min(g.to, base+3600);
+      if(b - a < 13*60) continue;
+      inner += `<span class="axis-gap" style="left:${(pct(a)+pct(b))/2}%">${g.min}분 없음</span>`;
+    }
+    if(now >= base && now < base+3600) inner += `<span class="axis-now" style="left:${pct(now)}%"></span>`;
+    for(const {r,t} of homes.filter(x => Math.floor(x.t/3600) === hh)){
+      inner += `<button type="button" class="axis-mark ${r.v.kind}${t < now ? ' past':''}${SEL && r.dep===SEL.dep ? ' on':''}" data-dep="${r.dep}"
+        title="집 ${hm(t)} 출발 → 신논현 ${hm(r.sin)} 도착 · ${r.v.t}" style="left:${pct(t)}%">
+        <span class="bar"></span><span class="mm">${pad(Math.floor(t%3600/60))}</span></button>`;
+    }
+    out += `<div class="axis-row"><div class="axis-hr">${pad(hh)}시</div><div class="axis-track">${inner}</div></div>`;
+  }
+  $('#axis').innerHTML = out;
+  document.querySelectorAll('#axis .axis-mark').forEach(b =>
+    b.addEventListener('click', () => select(+b.dataset.dep)));
+}
+
+function drawLadder(base){
+  if(!base){ $('#ladder').innerHTML = ''; return; }
+  const tg = TARGET*60, i0 = ROWS.indexOf(base);
+  const overIdx = ROWS.findIndex((r,i) => i > i0 && MINF(r.sin) > tg);
+  let view = ROWS.slice(Math.max(0,i0-1), Math.min(i0+7, overIdx > 0 ? overIdx : ROWS.length));
+  let gapAt = null;
+  if(overIdx > 0){
+    const lastIdx = ROWS.indexOf(view[view.length-1]);
+    if(overIdx > lastIdx + 1) gapAt = ROWS[overIdx];
+    view = view.concat([ROWS[overIdx]]);
+  }
+  $('#ladder').innerHTML = view.map(r => {
+    const out = MINF(r.sin) > tg;
+    const d = Math.round((r.sin - base.sin)/60), n = EIDX(r.e[2]) - EIDX(base.e[2]);
+    const why = r === base ? '기준'
+      : out ? '마감 초과'
+      : n === 0 ? '같은 급행 · 자리만 나빠짐'
+      : n < 0 ? `${d}분 · 급행 ${-n}대 이른 편`
+      : `+${d}분 · 급행 ${n}대 밀림`;
+    const cls = out ? 'stop' : (n > 0 ? 'push' : '');
+    const gap = r === gapAt ? '<tr class="out"><td colspan="7" style="text-align:center; color:var(--muted)">⋯</td></tr>' : '';
+    return gap + `<tr class="${r===base?'base':''}${out?' out':''}" data-dep="${r.dep}">
+      <td class="mono big">${hm(r.dep - HOME*60)}</td>
+      <td class="mono">${hm(r.dep)}</td>
+      <td class="mono">${hm(r.arr)}</td>
+      <td class="mono">${hm(r.e[0])}</td>
+      <td class="mono">${hm(r.sin)}</td>
+      <td><span class="chip ${r.v.k}">${r.v.t}</span></td>
+      <td class="why ${cls}">${why}</td></tr>`;
+  }).join('');
+  document.querySelectorAll('#ladder tr[data-dep]').forEach(tr =>
+    tr.addEventListener('click', () => select(+tr.dataset.dep)));
+}
+
+function drawLanes(r){
+  if(!r) return;
+  const walk = +$('#walk').value;
+  const LANES = [
+    {name:'공항철도',    sub:'서울역행 · 맞은편', color:'arex', walk:DATA.feed.arex.walk, t:DATA.feed.arex.t},
+    {name:'5호선',       sub:'방화발 · B3',      color:'l5',   walk:DATA.feed.l5.walk,   t:DATA.feed.l5.t},
+    {name:'김포골드라인', sub:'내 노선 · B4',     color:'gold', walk,                     t:DATA.goldArr, mine:true},
+    {name:'서해선 북행',  sub:'대곡·일산 · B5',   color:'sh',   walk:DATA.feed.shU.walk,  t:DATA.feed.shU.t},
+    {name:'서해선 남행',  sub:'원시 · B5',        color:'sh',   walk:DATA.feed.shD.walk,  t:DATA.feed.shD.t},
+  ];
+  const mid = r.e[0];
+  const T0 = Math.max(5*3600+10*60, mid-34*60), T1 = Math.min(11*3600+40*60, mid+34*60);
+  const PPM = 16, LEFT = 10, RIGHT = 46, TOP = 40, LH = 42, BOT = 38;
+  const W = LEFT + (T1-T0)/60*PPM + RIGHT, H = TOP + LANES.length*LH + BOT;
+  const x = t => LEFT + (t-T0)/60*PPM, yc = i => TOP + i*LH + LH/2;
+
+  $('#lnT').textContent = `급행 ${r.e[2]} · 김포공항 ${hms(r.e[0])} 출발`;
+  $('#lnM').textContent = `내 앞 약 ${Math.round(r.ahead)}명 · 여유 ${r.slack.toFixed(1)}분`;
+  $('#lnNames').innerHTML = `<div class="sp" style="height:${TOP}px"></div>` +
+    LANES.map(l => `<div class="ln" style="height:${LH}px"><i style="background:var(--${l.color})"></i>
+      <span><b>${l.name}</b><br><em>${l.sub} · 도보 ${l.walk}분</em></span></div>`).join('') +
+    `<div class="sp" style="height:${BOT}px"></div>`;
+
+  let s = `<rect x="${x(r.prev)}" y="${TOP-8}" width="${Math.max(2, x(r.e[0])-x(r.prev))}" height="${LANES.length*LH+16}" fill="var(--surface-2)" rx="5"/>`;
+  LANES.forEach((l,i) => { s += `<line x1="${LEFT}" y1="${yc(i)}" x2="${W-RIGHT+10}" y2="${yc(i)}" stroke="var(--hair)" stroke-width="1"/>`; });
+  for(let t = Math.ceil(T0/300)*300; t <= T1; t += 300){
+    const maj = t % 600 === 0;
+    s += `<line x1="${x(t)}" y1="${TOP-12}" x2="${x(t)}" y2="${TOP+LANES.length*LH+6}" stroke="var(--hair)" opacity="${maj?.9:.4}"/>`;
+    if(maj) s += `<text x="${x(t)}" y="${TOP-18}" font-size="11" fill="var(--muted)" text-anchor="middle" font-family="IBM Plex Mono, monospace">${hm(t)}</text>`;
+  }
+  for(const e of DATA.exp){
+    if(e[0] < T0 || e[0] > T1) continue;
+    const me = e[2] === r.e[2];
+    s += `<line x1="${x(e[0])}" y1="${TOP-6}" x2="${x(e[0])}" y2="${TOP+LANES.length*LH+20}" stroke="var(--accent)" stroke-width="${me?3:1.5}" opacity="${me?1:.5}"/>`;
+    s += `<text x="${x(e[0])}" y="${TOP+LANES.length*LH+34}" font-size="${me?11.5:10.5}" font-weight="${me?600:400}" fill="var(--accent)" text-anchor="middle" opacity="${me?1:.7}" font-family="IBM Plex Mono, monospace">${hm(e[0])}</text>`;
+  }
+  LANES.forEach((l,i) => {
+    const y = yc(i);
+    for(const t of l.t){
+      if(t < T0-600 || t > T1) continue;
+      const x0 = x(t), x1 = x(t + l.walk*60);
+      const me = l.mine && Math.abs(t - r.arr) < 1;
+      const band = (t + l.walk*60) > r.prev && (t + l.walk*60) < r.e[0];
+      const col = me ? 'var(--ink)' : `var(--${l.color})`;
+      const op = me ? 1 : (band ? .95 : .24);
+      s += `<line x1="${x0}" y1="${y}" x2="${x1}" y2="${y}" stroke="${col}" stroke-width="${me?3:2}" opacity="${op}" stroke-linecap="round"/>`;
+      s += `<circle cx="${x0}" cy="${y}" r="${me?4.5:3}" fill="${col}" opacity="${op}"/>`;
+      s += `<path d="M ${x1} ${y} l -5 -4 v 8 z" fill="${col}" opacity="${op}"/>`;
+      if(me){
+        s += `<line x1="${x1}" y1="${y-13}" x2="${x1}" y2="${y+13}" stroke="var(--ink)" stroke-width="1" stroke-dasharray="2 3"/>`;
+        s += `<text x="${x1+7}" y="${y-8}" font-size="11.5" font-weight="600" fill="var(--ink)">나 · ${hms(r.plat)} 줄 도착</text>`;
+        s += `<text x="${x0}" y="${y+17}" font-size="11" fill="var(--ink-2)" text-anchor="middle" font-family="IBM Plex Mono, monospace">${hm(t)} 하차</text>`;
+      }
+    }
+  });
+  const svg = $('#lnSvg');
+  svg.setAttribute('width', W); svg.setAttribute('height', H); svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  svg.innerHTML = s;
+  const sc = $('#lnScroll');
+  sc.scrollLeft = Math.max(0, x(r.prev) - sc.clientWidth*0.35);
+}
+
+const TG_OPTS = [];
+for(let m = 6*60+30; m <= 11*60+30; m += 30) TG_OPTS.push(m);
+$('#tgChips').innerHTML = TG_OPTS.map(m =>
+  `<button type="button" class="chip-btn" data-m="${m}" aria-pressed="${m===TARGET}">${hm(m*60)}</button>`).join('');
+$('#tgChips').addEventListener('click', ev => {
+  const b = ev.target.closest('.chip-btn'); if(!b) return;
+  TARGET = +b.dataset.m; SEL = null; PINNED = false;
+  document.querySelectorAll('#tgChips .chip-btn').forEach(x => x.setAttribute('aria-pressed', +x.dataset.m === TARGET));
+  render();
+});
+$('#bsChips').addEventListener('click', ev => {
+  const b = ev.target.closest('.chip-btn'); if(!b) return;
+  BASIS = b.dataset.basis; SEL = null; PINNED = false;
+  $('#bsV').textContent = b.textContent;
+  document.querySelectorAll('#bsChips .chip-btn').forEach(x => x.setAttribute('aria-pressed', x.dataset.basis === BASIS));
+  render();
+});
+$('#smChips').addEventListener('click', ev => {
+  const b = ev.target.closest('.chip-btn'); if(!b) return;
+  SEATMODE = b.dataset.mode; SEL = null; PINNED = false;
+  document.querySelectorAll('#smChips .chip-btn').forEach(x => x.setAttribute('aria-pressed', x.dataset.mode === SEATMODE));
+  render();
+});
+['home','walk','delay'].forEach(id => $('#'+id).addEventListener('input', render));
+render();
+setInterval(() => { PINNED ? drawNowbar() : render(); }, 30000);
+</script>
