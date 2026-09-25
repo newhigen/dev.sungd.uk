@@ -190,27 +190,49 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
         if (best >= 0) show(best);
         edge();
       }
-      var snapBack;
+      // 지금 창에 가장 가까운 항목. 펼칠 내용이 있는 것만 센다
+      function near() {
+        var padL = parseFloat(sc.style.paddingLeft || 0);
+        var mid = sc.scrollLeft + sc.clientWidth / 2 - padL;
+        var best = -1, bd = Infinity;
+        items.forEach(function (it, i) {
+          if (!(it.problem || it.did || it.result)) return;
+          var d = Math.abs(at(i) - mid);
+          if (d < bd) { bd = d; best = i; }
+        });
+        return best;
+      }
+      var snapBack, settling = false;
       function go(i) {
         var to = at(i) + parseFloat(sc.style.paddingLeft || 0) - sc.clientWidth / 2;
         if (Math.abs(to - sc.scrollLeft) < 2) return;
-        // 스냅이 켜져 있으면 브라우저가 프로그램 스크롤을 되돌린다 — 옮기는 동안만 끈다
         show(i);
-        sc.style.scrollSnapType = 'none';
+        settling = true;
         sc.scrollTo({ left: to, behavior: 'smooth' });
         clearTimeout(snapBack);
         snapBack = setTimeout(function () {
           // 부드러운 스크롤은 프레임이 돌 때만 움직인다 — 안 닿았으면 그냥 옮긴다
           if (Math.abs(sc.scrollLeft - to) > 2) sc.scrollLeft = to;
-          sc.style.scrollSnapType = '';
+          settling = false;
           pick();
         }, 700);
+      }
+      // 손을 뗀 뒤 가장 가까운 항목에 붙인다 — 축의 칸은 SVG 안이라 CSS 스냅이 안 먹는다
+      var rest;
+      function settle() {
+        clearTimeout(rest);
+        if (settling) return;
+        rest = setTimeout(function () {
+          if (settling) return;
+          var i = near();
+          if (i >= 0) go(i);
+        }, 130);
       }
 
       fit();
       pick();
       window.addEventListener('resize', function () { fit(); pick(); });
-      sc.addEventListener('scroll', pick, { passive: true });
+      sc.addEventListener('scroll', function () { pick(); settle(); }, { passive: true });
       gs.forEach(function (g) {
         g.addEventListener('click', function () { go(+g.dataset.i); });
         g.addEventListener('keydown', function (e) {
