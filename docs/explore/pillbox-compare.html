@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>약수첩 소개 — 지금 vs 주석을 얹은 판</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{
+  --bg:#e6e3f0; --card:#fbfaff; --card-2:#dfe6f2; --shadow:0 2px 24px rgba(40,35,80,.08);
+  --ink:#221f2b; --prose:#3a3646; --ink-2:#57536b; --ink-3:#6f6b85; --accent:#8a6a3c; --link:#4a4b93;
+  --sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;
+  --serif:"Noto Serif KR",Pretendard,serif;
+  --acc:#2B59C3; --acc-bg:#EAF0FC; --sub:#6B7079;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--sans);word-break:keep-all;-webkit-font-smoothing:antialiased}
+.wrap{max-width:96rem;margin:0 auto;padding:2.4rem 2rem 8rem}
+.lede h1{font-family:var(--serif);font-size:2rem;font-weight:700;letter-spacing:-.02em;margin:0 0 .5rem;color:var(--ink)}
+.lede p{max-width:58rem;margin:0 0 .3rem;color:var(--ink-2);font-size:.95rem}
+.lede .m{font-size:.85rem;color:var(--ink-3)}
+
+/* ── 두 단 ── */
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:2rem;align-items:start}
+.col{min-width:0}
+.hd{position:sticky;top:0;z-index:20;background:#eceaf3;padding:.7rem 0 .6rem}
+.hd b{font-family:var(--serif);font-size:1.1rem;color:var(--ink)}
+.hd span{font-size:.82rem;color:var(--ink-3);margin-left:.5rem}
+.hd.r b{color:var(--acc)}
+
+.paper{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:2rem 2.2rem 2.4rem}
+.doc{font-family:var(--serif);color:var(--prose)}
+.doc .q{font-size:1.28rem;font-weight:700;color:var(--ink);line-height:1.5;margin:0 0 .9rem}
+.doc p{font-size:.98rem;line-height:1.9;margin:0 0 .9rem}
+.doc h2{font-family:var(--serif);font-size:1.25rem;color:var(--accent);margin:2.2rem 0 .8rem;font-weight:600}
+.doc h3{font-family:var(--serif);font-size:1.05rem;color:var(--ink);margin:1.5rem 0 .4rem;font-weight:600}
+.doc figure{margin:1.3rem 0 1.5rem}
+.doc figure img{display:block;width:100%;border-radius:10px}
+.doc figure.phone{max-width:14rem;margin-left:auto;margin-right:auto}
+.doc figcaption{margin-top:.5rem;font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--ink-3)}
+
+.hero{background:var(--card-2);border-radius:14px;padding:1.2rem 1.3rem;margin:1.3rem 0}
+.hero .lb{font-family:var(--sans);font-size:.74rem;color:var(--ink-3)}
+.hero .v{font-family:var(--sans);font-size:2.4rem;font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.1;margin:.05rem 0 .15rem}
+.hero .nt{font-family:var(--sans);font-size:.78rem;color:var(--ink-2)}
+.hero .tiles{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.8rem}
+.hero .tiles div{background:var(--card);border-radius:10px;padding:.6rem .8rem}
+.hero .tiles .tv{font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--ink)}
+.hero .tiles .tn{font-family:var(--sans);font-size:.7rem;color:var(--ink-3)}
+
+.story{list-style:none;margin:1rem 0 0;padding:0}
+.story li{display:flex;gap:.9rem;padding:.5rem 0}
+.story li+li{box-shadow:inset 0 1px rgba(34,31,43,.07)}
+.story .at{flex:none;width:3.4rem;font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--ink-3);padding-top:.15rem}
+.story .wt{font-size:.92rem;line-height:1.7}
+
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:1.2rem 0}
+.strip figure{margin:0}
+.strip img{width:100%;border-radius:8px;display:block}
+.strip figcaption{margin-top:.35rem;font-family:var(--sans);font-size:.7rem;line-height:1.45;color:var(--ink-3)}
+.strip figcaption b{color:var(--ink-2);font-size:.74rem}
+
+/* ── 오른쪽: 주석 층 ── */
+.half{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:1.2rem;align-items:center;
+  background:var(--card-2);border-radius:14px;padding:1.2rem 1.3rem;margin:1.3rem 0}
+.half h4{font-family:var(--serif);font-size:1.18rem;font-weight:700;color:var(--ink);line-height:1.45;margin:0 0 .5rem}
+.half .chips{display:flex;flex-direction:column;gap:.35rem}
+.half .chips span{display:flex;flex-direction:column;background:var(--card);border-radius:9px;padding:.45rem .7rem;font-family:var(--sans);font-size:.7rem;color:var(--ink-3)}
+.half .chips b{font-family:var(--sans);font-size:.98rem;color:var(--ink);letter-spacing:-.01em}
+.half .pic img{width:100%;border-radius:10px;display:block}
+
+.anno{position:relative;margin:1.3rem 0 1.5rem}
+.anno .shot{position:relative;width:62%;margin:0}
+.anno .shot img{display:block;width:100%;border-radius:10px}
+.anno.ph .shot{width:46%;margin-left:6%}
+.bd{position:absolute;width:1.35rem;height:1.35rem;border-radius:50%;background:var(--acc);color:#fff;
+  font:700 .74rem/1.35rem var(--sans);text-align:center;z-index:4}
+.an{position:absolute;font-family:var(--sans);font-size:.78rem;line-height:1.5;color:var(--ink-2);z-index:4}
+.an b{color:var(--ink);font-weight:600}
+.zm{position:absolute;border-radius:8px;z-index:5;background-repeat:no-repeat;
+  background-image:var(--img);background-size:var(--zoom) auto;background-position:var(--px) var(--py);
+  box-shadow:0 6px 20px rgba(30,25,60,.2);outline:2px solid var(--acc)}
+.zl{position:absolute;height:0;border-top:1.5px dashed var(--acc);z-index:4}
+.zc{position:absolute;font-family:var(--sans);font-size:.74rem;line-height:1.5;color:var(--ink-3);z-index:4}
+.dsh{position:absolute;height:0;border-top:1.5px dashed #9AA0AC;z-index:4}
+.pin{position:absolute;z-index:4}
+.pin span{display:inline-block;background:var(--card);border-radius:8px;padding:.24rem .55rem;
+  font:600 .74rem var(--sans);color:var(--ink);box-shadow:0 2px 8px rgba(30,25,60,.14)}
+.lift{position:absolute;z-index:4;border-radius:7px;outline:2px solid var(--acc);box-shadow:0 6px 20px rgba(43,89,195,.3)}
+.cap{margin-top:.6rem;font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--ink-3)}
+
+.tag{display:inline-block;font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.1em;
+  color:var(--acc);background:var(--acc-bg);border-radius:5px;padding:.12rem .4rem;margin-bottom:.4rem}
+
+.gap{margin-top:2.4rem}
+table.diff{border-collapse:collapse;width:100%;font-size:.88rem;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow);margin-top:1rem}
+table.diff th,table.diff td{padding:.6rem .9rem;text-align:left;border-bottom:1px solid #ecebf2;vertical-align:top}
+table.diff th{font-size:.76rem;color:var(--ink-3);font-weight:600;background:#faf9fd}
+table.diff td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
+h2.n{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);margin:3rem 0 .3rem}
+@media(max-width:1200px){.cols{grid-template-columns:1fr}}
+</style></head><body><div class="wrap">
+
+<div class="lede">
+<h1>약수첩 소개 — 지금 vs 주석을 얹은 판</h1>
+<p>왼쪽은 <a href="https://dev.sungd.uk/pillbox/">dev.sungd.uk/pillbox</a> 지금 그대로다. 오른쪽은 같은 글과 같은 그림에 원티드 출품작 판에서 뽑은 주석 기법만 얹었다 — 번호 뱃지, 라벨 칩과 인출선, 줌 콜아웃, 들어올리기, 반반 판.</p>
+<p class="m">바탕색과 글꼴은 양쪽 다 지금 사이트 그대로 뒀다. 달라지는 것이 그림 기법 하나뿐이어야 견줄 수 있다.</p>
+</div>
+
+<div class="cols">
+
+<!-- ══════════ 왼쪽: 지금 ══════════ -->
+<div class="col">
+<div class="hd"><b>지금</b><span>그림 셋 + 화면 넷, 설명은 전부 캡션</span></div>
+<div class="paper doc">
+  <p class="q">하루 알림 4번, 지우면 남는 기록 0.</p>
+  <p>체크가 곧 알림 해제. 미리 체크한 구간은 알림 없음, 확인은 홈 화면 위젯에서 끝.</p>
+
+  <figure>
+    <img src="img/pillbox/widget.png" alt="홈 화면 위젯">
+    <figcaption>홈 화면 2×1 위젯. 윗줄은 현재 구간의 약, 아랫줄은 나머지 세 구간 — 완료는 체크, 미완료는 남은 개수. 맨 아래는 인공눈물 띠.</figcaption>
+  </figure>
+
+  <div class="hero">
+    <div class="lb">미리 체크한 구간에 오는 알림</div>
+    <div class="v">0회</div>
+    <div class="nt">체크가 곧 알림 해제. 놓친 구간에만 한 번</div>
+    <div class="tiles">
+      <div><div class="tv">2×1</div><div class="tn">홈 화면에서 차지하는 칸</div></div>
+      <div><div class="tv">2탭</div><div class="tn">인공눈물 기록</div></div>
+    </div>
+  </div>
+
+  <h2>이런 하루</h2>
+  <p>먹는 약 셋, 영양제 넷, 아침저녁 처방 안약, 바르는 연고, 수시로 넣는 인공눈물.</p>
+  <ul class="story">
+    <li><span class="at">05:20</span><span class="wt">아침 약. 앱에서 아침 카드를 누르면 영양제 넷이 한 번에 체크. <b>알림 없음.</b></span></li>
+    <li><span class="at">10:30</span><span class="wt">낮 구간 처방 안약. 위젯 윗줄은 이미 낮 구간.</span></li>
+    <li><span class="at">15:45</span><span class="wt">오후 6종을 깜빡함. <b>그때만</b> 알림 한 번. «먹었어요» 로 구간 전체 체크.</span></li>
+    <li><span class="at">수시</span><span class="wt">인공눈물은 위젯 띠를 두 번 탭. 마지막 점안 후 60분이 지나면 물방울이 빨강.</span></li>
+  </ul>
+
+  <h2>주요 기능</h2>
+  <h3>홈 화면 위젯</h3>
+  <p>현재 구간의 약은 제형 아이콘, 나머지 세 구간은 체크 또는 남은 개수. 앱을 열지 않고 «지금 구간이 끝났나» 만 확인.</p>
+  <h3>구간 알림</h3>
+  <p><b>미리 체크한 구간은 알림 없음.</b> 놓친 구간에만 한 번, 알림에서 바로 체크.</p>
+  <figure class="phone">
+    <img src="img/pillbox/main_top.png" alt="오늘 화면">
+    <figcaption>오늘 화면. 구간마다 카드 하나, 항목을 누르면 체크와 시각 기록.</figcaption>
+  </figure>
+
+  <h2>화면</h2>
+  <div class="strip">
+    <figure><img src="img/pillbox/main_tail.png" alt=""><figcaption><b>오늘 기록</b><br>인공눈물과 시간순 기록</figcaption></figure>
+    <figure><img src="img/pillbox/history.png" alt=""><figcaption><b>기록 보관</b><br>체크 이력 영구 보관</figcaption></figure>
+    <figure><img src="img/pillbox/settings_top.png" alt=""><figcaption><b>설정</b><br>알림 시각과 방식</figcaption></figure>
+    <figure><img src="img/pillbox/meds.png" alt=""><figcaption><b>약 목록</b><br>구간별 등록과 순서</figcaption></figure>
+  </div>
+</div>
+</div>
+
+<!-- ══════════ 오른쪽: 고친 판 ══════════ -->
+<div class="col">
+<div class="hd r"><b>고친 판</b><span>같은 글 · 같은 그림, 주석만 얹음</span></div>
+<div class="paper doc">
+  <p class="q">하루 알림 4번, 지우면 남는 기록 0.</p>
+  <p>체크가 곧 알림 해제. 미리 체크한 구간은 알림 없음, 확인은 홈 화면 위젯에서 끝.</p>
+
+  <div class="half">
+    <div>
+      <h4>홈 화면에서 한 번 보고 끝</h4>
+      <div class="chips">
+        <span><b>0회</b>미리 체크한 구간에 오는 알림</span>
+        <span><b>2×1</b>홈 화면에서 차지하는 칸</span>
+        <span><b>2탭</b>인공눈물 기록</span>
+      </div>
+    </div>
+    <div class="pic"><img src="img/pillbox/widget.png" alt="홈 화면 위젯"></div>
+  </div>
+  <p class="cap"><span class="tag">반반 판</span> 숫자를 따로 세우지 않고 그림 옆에 붙였다. Hero 한 덩이 + Fig 한 장이 한 칸이 된다.</p>
+
+  <h2>위젯 한 장에 든 것</h2>
+  <div class="anno">
+    <div class="shot">
+      <img src="img/pillbox/widget.png" alt="홈 화면 위젯">
+      <div class="lift" style="left:12%;top:17.5%;width:76%;height:19%"></div>
+    </div>
+    <i class="bd" style="left:64%;top:24%">1</i>
+    <div class="an" style="left:69%;top:22.5%;width:30%"><b>윗줄 — 지금 구간의 약</b><br>제형 아이콘 그대로, 먹은 것엔 체크</div>
+    <i class="bd" style="left:64%;top:45%">2</i>
+    <div class="an" style="left:69%;top:43.5%;width:30%"><b>아랫줄 — 나머지 세 구간</b><br>끝난 구간은 체크, 남은 구간은 개수</div>
+    <i class="bd" style="left:64%;top:69%">3</i>
+    <div class="an" style="left:69%;top:67.5%;width:30%"><b>맨 아래 — 인공눈물 띠</b><br>마지막 점안 후 경과 시간. 60분이 지나면 빨강</div>
+    <div class="dsh" style="left:55%;top:28%;width:8%"></div>
+    <div class="dsh" style="left:55%;top:49%;width:8%"></div>
+    <div class="dsh" style="left:55%;top:73%;width:8%"></div>
+  </div>
+  <p class="cap"><span class="tag">번호 뱃지 · 들어올리기</span> 지금은 이 셋을 캡션 한 문장에 몰아 적었다. 번호를 붙이면 그림을 보면서 읽게 된다. 파란 테두리는 「지금 구간」 줄만 띄운 것.</p>
+
+  <h2>이런 하루</h2>
+  <p>먹는 약 셋, 영양제 넷, 아침저녁 처방 안약, 바르는 연고, 수시로 넣는 인공눈물.</p>
+  <ul class="story">
+    <li><span class="at">05:20</span><span class="wt">아침 약. 앱에서 아침 카드를 누르면 영양제 넷이 한 번에 체크. <b>알림 없음.</b></span></li>
+    <li><span class="at">10:30</span><span class="wt">낮 구간 처방 안약. 위젯 윗줄은 이미 낮 구간.</span></li>
+    <li><span class="at">15:45</span><span class="wt">오후 6종을 깜빡함. <b>그때만</b> 알림 한 번. «먹었어요» 로 구간 전체 체크.</span></li>
+    <li><span class="at">수시</span><span class="wt">인공눈물은 위젯 띠를 두 번 탭. 마지막 점안 후 60분이 지나면 물방울이 빨강.</span></li>
+  </ul>
+
+  <h2>구간 알림 — 미리 체크한 구간엔 안 온다</h2>
+  <div class="anno ph">
+    <div class="shot">
+      <img src="img/pillbox/main_top.png" alt="오늘 화면">
+    </div>
+    <div class="pin" style="left:0;top:20%"><span>구간 하나에 카드 하나</span></div>
+    <div class="dsh" style="left:0;top:24.5%;width:10%"></div>
+    <div class="zl" style="left:53%;top:23%;width:8%"></div>
+    <div class="zm" style="--img:url(img/pillbox/main_top.png);--px:95%;--py:23%;--zoom:420%;left:61%;top:17%;width:36%;aspect-ratio:16/5"></div>
+    <div class="zc" style="left:61%;top:33%;width:37%"><b>«다 했어요»</b> 한 번이면 그 구간 전체가 체크된다 — 아침 영양제 넷이 한 손에 끝난다</div>
+    <div class="zl" style="left:53%;top:56%;width:8%"></div>
+    <div class="zm" style="--img:url(img/pillbox/main_top.png);--px:92%;--py:55%;--zoom:420%;left:61%;top:50%;width:36%;aspect-ratio:16/5"></div>
+    <div class="zc" style="left:61%;top:66%;width:37%">체크하면 <b>누른 시각</b>이 그 자리에 남는다. 지운 알림과 달리 기록이 된다</div>
+  </div>
+  <p class="cap"><span class="tag">줌 콜아웃 · 라벨 칩</span> 폰 캡처는 글자가 작아 「다 했어요」도 「오전 5:24」도 안 읽힌다. 키우는 대신 그 조각만 네 배로 끌어냈다.</p>
+
+  <h2>화면 넷</h2>
+  <div class="strip">
+    <figure><img src="img/pillbox/main_tail.png" alt=""><figcaption><b>오늘 기록</b><br>그날 넣은 인공눈물과 체크가 시간순으로</figcaption></figure>
+    <figure><img src="img/pillbox/history.png" alt=""><figcaption><b>기록 보관</b><br>지난 날짜를 열어 그날 무엇을 먹었나</figcaption></figure>
+    <figure><img src="img/pillbox/settings_top.png" alt=""><figcaption><b>설정</b><br>네 구간의 시각과 알림 방식을 바꾼다</figcaption></figure>
+    <figure><img src="img/pillbox/meds.png" alt=""><figcaption><b>약 목록</b><br>제형과 색을 골라 구간마다 등록한다</figcaption></figure>
+  </div>
+  <p class="cap"><span class="tag">제목 형식</span> 라벨을 <b>&lt;이름&gt; — &lt;하는 일 한 문장&gt;</b> 으로. 「설정 · 알림 시각과 방식」은 화면 이름이고, 「네 구간의 시각과 알림 방식을 바꾼다」는 거기서 무엇을 하는지다.</p>
+</div>
+</div>
+
+</div>
+
+<h2 class="n">무엇이 달라졌나</h2>
+<table class="diff">
+<tr><th>자리</th><th>지금</th><th>고친 판</th></tr>
+<tr><td>위젯 그림</td><td>캡션 한 문장에 세 가지를 몰아 적음 — 그림을 보면서 읽을 수가 없다</td><td>번호 셋으로 갈라 그림 옆에. 「지금 구간」 줄만 테두리로 띄움</td></tr>
+<tr><td>숫자</td><td>Hero 한 덩이 + 그림 한 장이 세로로 따로 선다</td><td>반반 판 하나로 합쳐 숫자와 그림이 한 눈에</td></tr>
+<tr><td>폰 캡처</td><td>글자가 작아 「다 했어요」도 「오전 5:24」도 안 읽힘</td><td>그 조각만 네 배로 끌어내 옆에. 캡션이 아니라 그림이 설명한다</td></tr>
+<tr><td>화면 넷 라벨</td><td>「설정 · 알림 시각과 방식」 — 화면 이름과 항목 나열</td><td>「설정 — 네 구간의 시각과 알림 방식을 바꾼다」 — 거기서 무엇을 하는지</td></tr>
+<tr><td>절 제목</td><td>「주요 기능」 · 「화면」 — 목차만 보면 내용을 모름</td><td>「구간 알림 — 미리 체크한 구간엔 안 온다」 — 제목이 이미 답이다</td></tr>
+</table>
+
+<h2 class="n">드는 품</h2>
+<table class="diff">
+<tr><th>기법</th><th>어떻게 만드나</th><th>품</th></tr>
+<tr><td>번호 뱃지</td><td>그림 위에 <code>%</code> 좌표로 얹는 컴포넌트 하나. 캡처는 그대로</td><td>컴포넌트 한 번, 편마다 좌표 서너 줄</td></tr>
+<tr><td>라벨 칩 + 인출선</td><td>같은 컴포넌트에 칩과 점선을 더함</td><td>위와 같이</td></tr>
+<tr><td>줌 콜아웃</td><td>같은 파일을 <code>background-position</code> 으로 잘라 확대. 새 캡처가 필요 없다</td><td>자리 잡는 데 한 그림에 5분</td></tr>
+<tr><td>들어올리기</td><td>테두리 상자 하나</td><td>거의 없음</td></tr>
+<tr><td>제목 형식</td><td>글만 고친다</td><td>편당 10분, 26편</td></tr>
+</table>
+
+</div></body></html>

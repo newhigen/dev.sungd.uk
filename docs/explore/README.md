@@ -23,5 +23,6 @@
 | `career-radar-why-questions.html` | 커리어 레이더 «왜 만들었나» 질문지 — 범위(매트릭스 vs 잡보드) · 쓰던 것 · 막힌 지점 · 실제로 본 판 · 달라진 것 · 지금 · 공개 수위 |
 | `ml-job-board-why-questions.html` | ML 잡보드 «왜 만들었나» 질문지 — 이름 · 쓰던 것 · 막힌 지점 · 실제로 보는 탭 · 메일을 끈 까닭 · 열엿새 정지 · 지금 · 공개 수위 |
 | `backtrack-format.html` | 시각화 규칙(`visual-format.md`)을 프로젝트 페이지에 어디까지 적용할까 — A 지금 판 · B 글자와 색만 · C 1600px 두 단 · D 출품작 판(번호 뱃지 · 인출선 · 줌 콜아웃 · 들어올리기). Backtrack 실측으로 |
+| `pillbox-compare.html` | 약수첩 소개를 좌우로 — 왼쪽 지금 그대로, 오른쪽 같은 글·같은 그림에 주석 기법만 얹은 판 |
 
 로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.
