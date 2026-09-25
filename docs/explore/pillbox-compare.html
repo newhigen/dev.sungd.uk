@@ -64,7 +64,11 @@ body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--sans);wo
 .half h4{font-family:var(--serif);font-size:1.18rem;font-weight:700;color:var(--ink);line-height:1.45;margin:0 0 .5rem}
 .half .chips{display:flex;flex-direction:column;gap:.35rem}
 .half .chips span{display:flex;flex-direction:column;background:var(--card);border-radius:9px;padding:.45rem .7rem;font-family:var(--sans);font-size:.7rem;color:var(--ink-3)}
-.half .chips b{font-family:var(--sans);font-size:.98rem;color:var(--ink);letter-spacing:-.01em}
+.half .chips b{font-family:var(--sans);font-size:.98rem;color:var(--ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.half .chips.c span{flex-direction:column-reverse;gap:.1rem}
+.half .chips.c b s{text-decoration:none;color:var(--ink-3);font-weight:600}
+.half .chips.c b i{font-style:normal;color:var(--ink-3);font-weight:400;padding:0 .18rem}
+.half .chips.c b em{font-style:normal;color:#2E7D4F}
 .half .pic img{width:100%;border-radius:10px;display:block}
 
 .anno{position:relative;margin:1.3rem 0 1.5rem}
@@ -90,6 +94,22 @@ body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--sans);wo
 .tag{display:inline-block;font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.1em;
   color:var(--acc);background:var(--acc-bg);border-radius:5px;padding:.12rem .4rem;margin-bottom:.4rem}
 
+
+
+/* ── 하루 타임라인 · 칩 ── */
+.meds{display:flex;flex-wrap:wrap;gap:.35rem;margin:.8rem 0 0}
+.meds span{font-family:var(--sans);font-size:.78rem;background:var(--card-2);border-radius:7px;padding:.22rem .55rem;color:var(--ink-2)}
+.meds span b{color:var(--ink);font-weight:600}
+.day{margin:1.2rem 0 .3rem}
+.day svg{display:block;width:100%;height:auto}
+.day .ax{stroke:#cfcadb;stroke-width:1}
+.day .tk{font:500 10px var(--sans);fill:var(--ink-3)}
+.day .nm{font:700 12px var(--sans);fill:var(--ink)}
+.day .tm{font:600 10px var(--sans);fill:var(--ink-3)}
+.day .st{font:600 10.5px var(--sans)}
+.day .ok{fill:#2E7D4F}
+.day .no{fill:#C0392B}
+.day .lg{font:500 10.5px var(--sans);fill:var(--ink-3)}
 
 /* ── 숫자 놓는 자리 시안 ── */
 .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:1rem;align-items:start}
@@ -195,7 +215,7 @@ h2.n{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);
 
 <!-- ══════════ 오른쪽: 고친 판 ══════════ -->
 <div class="col">
-<div class="hd r"><b>고친 판</b><span>같은 글 · 같은 그림, 주석만 얹음</span></div>
+<div class="hd r"><b>고친 판</b><span>주석 + 줄글을 도식으로</span></div>
 <div class="paper doc">
   <p class="q">하루 알림 4번, 지우면 남는 기록 0.</p>
   <p>체크가 곧 알림 해제. 미리 체크한 구간은 알림 없음, 확인은 홈 화면 위젯에서 끝.</p>
@@ -203,15 +223,15 @@ h2.n{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);
   <div class="half">
     <div>
       <h4>홈 화면에서 한 번 보고 끝</h4>
-      <div class="chips">
-        <span><b>0회</b>미리 체크한 구간에 오는 알림</span>
-        <span><b>2×1</b>홈 화면에서 차지하는 칸</span>
-        <span><b>2탭</b>인공눈물 기록</span>
+      <div class="chips c">
+        <span>하루에 오는 알림<b><s>4번</s><i>→</i><em>0번</em></b></span>
+        <span>홈 화면에서 차지하는 칸<b><s>4×3</s><i>→</i><em>2×1</em></b></span>
+        <span>인공눈물을 기록하는 데 드는 손<b>2탭</b></span>
       </div>
     </div>
     <div class="pic"><img src="img/pillbox/widget.png" alt="홈 화면 위젯"></div>
   </div>
-  <p class="cap"><span class="tag">반반 판</span> 숫자를 따로 세우지 않고 그림 옆에 붙였다. Hero 한 덩이 + Fig 한 장이 한 칸이 된다.</p>
+  <p class="cap"><span class="tag">반반 판 · 숫자 C</span> 숫자를 따로 세우지 않고 그림 옆에. 값은 앞 값과 맞세워 놓았다 — 아래 「숫자를 놓는 자리」의 C 꼴.</p>
 
   <h2>위젯 한 장에 든 것</h2>
   <div class="anno">
@@ -231,14 +251,44 @@ h2.n{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);
   </div>
   <p class="cap"><span class="tag">번호 뱃지 · 들어올리기</span> 지금은 이 셋을 캡션 한 문장에 몰아 적었다. 번호를 붙이면 그림을 보면서 읽게 된다. 파란 테두리는 「지금 구간」 줄만 띄운 것.</p>
 
-  <h2>이런 하루</h2>
-  <p>먹는 약 셋, 영양제 넷, 아침저녁 처방 안약, 바르는 연고, 수시로 넣는 인공눈물.</p>
-  <ul class="story">
-    <li><span class="at">05:20</span><span class="wt">아침 약. 앱에서 아침 카드를 누르면 영양제 넷이 한 번에 체크. <b>알림 없음.</b></span></li>
-    <li><span class="at">10:30</span><span class="wt">낮 구간 처방 안약. 위젯 윗줄은 이미 낮 구간.</span></li>
-    <li><span class="at">15:45</span><span class="wt">오후 6종을 깜빡함. <b>그때만</b> 알림 한 번. «먹었어요» 로 구간 전체 체크.</span></li>
-    <li><span class="at">수시</span><span class="wt">인공눈물은 위젯 띠를 두 번 탭. 마지막 점안 후 60분이 지나면 물방울이 빨강.</span></li>
-  </ul>
+  <h2>하루 — 알림은 놓친 구간에만 한 번</h2>
+  <div class="meds">
+    <span>먹는 약 <b>3</b></span><span>영양제 <b>4</b></span><span>처방 안약 <b>아침 · 저녁</b></span><span>연고 <b>1</b></span><span>인공눈물 <b>수시</b></span>
+  </div>
+  <div class="day">
+    <svg viewBox="0 0 560 158" role="img" aria-label="하루 네 구간과 알림이 오는 자리">
+      <rect x="64" y="26" width="132" height="34" rx="7" fill="#2E7D4F" opacity="0.12"/>
+      <rect x="196" y="26" width="134" height="34" rx="7" fill="#2E7D4F" opacity="0.12"/>
+      <rect x="330" y="26" width="108" height="34" rx="7" fill="#C0392B" opacity="0.13"/>
+      <rect x="438" y="26" width="102" height="34" rx="7" fill="#cfcadb" opacity="0.35"/>
+
+      <text class="nm" x="72" y="41">아침</text><text class="tm" x="72" y="54">5:20</text>
+      <text class="st ok" x="118" y="46">✓ 미리 체크</text>
+      <text class="nm" x="204" y="41">낮</text><text class="tm" x="204" y="54">10:30</text>
+      <text class="st ok" x="240" y="46">✓ 미리 체크</text>
+      <text class="nm" x="338" y="41">오후</text><text class="tm" x="338" y="54">3:45</text>
+      <text class="st no" x="378" y="46">알림 1회</text>
+      <text class="nm" x="446" y="41">밤</text><text class="tm" x="446" y="54">8:00</text>
+
+      <line class="ax" x1="30" y1="76" x2="540" y2="76"/>
+      <g class="tk">
+        <text x="26" y="90">04</text><text x="128" y="90">08</text><text x="230" y="90">12</text>
+        <text x="332" y="90">16</text><text x="434" y="90">20</text><text x="530" y="90">24</text>
+      </g>
+      <g stroke="#cfcadb" stroke-width="1">
+        <path d="M30 76 V 70"/><path d="M132 76 V 70"/><path d="M234 76 V 70"/>
+        <path d="M336 76 V 70"/><path d="M438 76 V 70"/><path d="M540 76 V 70"/>
+      </g>
+
+      <circle cx="330" cy="76" r="4.5" fill="#C0392B"/>
+      <path d="M330 76 V 106" stroke="#C0392B" stroke-width="1.4" stroke-dasharray="3 3"/>
+      <rect x="292" y="108" width="176" height="20" rx="6" fill="#C0392B" opacity="0.1"/>
+      <text class="st no" x="302" y="122">오후 6종을 깜빡 → 그때 한 번</text>
+
+      <text class="lg" x="30" y="150">미리 체크해 둔 구간은 시각이 지나도 알림이 안 온다. 놓친 구간에만 한 번 오고, 그 알림에서 바로 체크한다.</text>
+    </svg>
+  </div>
+  <p class="cap"><span class="tag">하루 타임라인</span> 줄글 다섯 줄이 한 장이 됐다. 「알림 4번 → 1번」이 시각 축 위에서 바로 보인다. 구간 시각은 설정 화면 값 그대로.</p>
 
   <h2>구간 알림 — 미리 체크한 구간엔 안 온다</h2>
   <div class="anno ph">
