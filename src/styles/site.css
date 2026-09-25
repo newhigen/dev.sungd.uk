@@ -1097,12 +1097,12 @@ a.prow:hover .rn { color: var(--link); }
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  padding: 0.5rem 0.95rem;
-  border-radius: 20px;
+  padding: 0.8rem 1.15rem;
+  border-radius: 24px;
   background: var(--accent);
   color: var(--card);
-  font-size: 0.72rem;
-  line-height: 1.5;
+  font-size: 0.75rem;
+  line-height: 1.6;
   white-space: nowrap;
 }
 
@@ -1243,7 +1243,8 @@ a.prow:hover .rn { color: var(--link); }
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2.5rem;
+  /* 좌우는 거의 붙인다 — 세로로 긴 그림이라 높이가 폭을 정하고, 옆 여백은 그 나머지다 */
+  padding: 1.2rem 0.75rem;
   background: rgba(22, 19, 32, 0.84);
 }
 .lb[hidden] { display: none; }
@@ -1251,8 +1252,10 @@ a.prow:hover .rn { color: var(--link); }
 /* 손 모양도 CSS 로 — 갈아 끼운 그림에 스크립트가 다시 손대지 않는다 */
 .prose img[src^="/p/"] { cursor: zoom-in; }
 .lb img {
-  max-width: min(90vw, 760px);
-  max-height: 90vh;
+  /* 원본 크기에 묶이면 세로 그림이 화면 가운데 작게 뜨고 양옆만 비었다 — 높이를 채운다 */
+  height: min(96vh, 1100px);
+  width: auto;
+  max-width: 98vw;
   border-radius: 14px;
   background: var(--paper, #fff);
   box-shadow: 0 12px 60px rgba(0, 0, 0, 0.45);
