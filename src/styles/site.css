@@ -989,7 +989,10 @@ a.prow:hover .rn { color: var(--link); }
 
 /* 들어오는 것과 남는 것을 한 그림에 겹쳐 놓는다. 두 가지를 따로 그리면
    «알림 4번, 남는 기록 0» 같은 훅이 두 그림에 나뉘어 증명이 안 된다. */
-.ba2 { margin: 1.6rem 0 2.2rem; }
+/* 글 기둥에 맞춘다 — figure 기본 max-width(44rem)와 좌우 끌어내기(-1.2rem)가 겹쳐
+   왼쪽만 삐져나오고 오른쪽엔 빈 자리가 남았다. .flow 와 같은 손 */
+.ba2 { max-width: var(--measure); margin: 1.6rem 0 2.2rem; }
+.doc-body .prose > figure.ba2 { margin-left: 0; margin-right: 0; }
 .ba2 svg { display: block; width: 100%; height: auto; font-family: var(--body); }
 .ba2 .rail { stroke: #e8e6ec; stroke-width: 15; stroke-linecap: round; }
 .ba2 .rail.good { stroke: #e4ecea; }
@@ -1036,7 +1039,8 @@ a.prow:hover .rn { color: var(--link); }
 
 /* 간격은 날짜가 아니라 차례로 고르게 벌린다 — 날짜 비례로 하면 몰린 자리의
    라벨이 서로 눌린다. 본문 폭(40rem)보다 넓으므로 가로로 민다. */
-.tml { margin: 1.6rem 0 2.2rem; }
+.tml { max-width: var(--measure); margin: 1.6rem 0 2.2rem; }
+.doc-body .prose > figure.tml { margin-left: 0; margin-right: 0; }
 .tml-scroll { overflow-x: auto; padding-bottom: 0.5rem; }
 .tml svg { display: block; font-family: var(--body); }
 .tml .rail { stroke: #c9c5d4; stroke-width: 1; }
@@ -1158,7 +1162,8 @@ a.prow:hover .rn { color: var(--link); }
 
 /* 후보를 그려 놓고 고른 판들. 세로로 쌓으면 이 절이 본문보다 무거워진다.
    미는 손은 변천사 카드·개발기 축과 같다 — 편 안에서 미는 법이 하나가 되게. */
-.reel { margin: 1.5rem 0 2.2rem; }
+.reel { max-width: var(--measure); margin: 1.5rem 0 2.2rem; }
+.doc-body .prose > figure.reel { margin-left: 0; margin-right: 0; }
 .reel-scroll {
   overflow-x: auto;
   overscroll-behavior-x: contain;
