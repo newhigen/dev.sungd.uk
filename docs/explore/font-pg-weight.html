@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>제목 굵기 일곱 — 페이퍼로지 제목 + 스위트 본문</title>
+<title>제목 굵기와 자간 열 — 페이퍼로지 제목 + 스위트 본문</title>
 
 <style>
 /* 눈누 후보 — ~/dev/analyses/fonts/noonnu.py css <id> 로 뽑음. 라이선스는 각 눈누 페이지 */
@@ -101,9 +101,9 @@ body{margin:0;padding:2rem 1.5rem 6rem;background:var(--bg);color:var(--ink);
 <div class="wrap">
 
 <div class="top">
-  <h1>제목 굵기 일곱</h1>
+  <h1>제목 굵기와 자간 열</h1>
   <p>본문은 스위트 400 으로 고정하고 페이퍼로지 제목의 굵기만 내렸다. 큰 훅과 작은 절 제목을 따로 줄 수 있어 둘을 나눈 판도 넣었다.</p>
-  <p class="hint">W1 이 지금까지 보던 700. 아래로 갈수록 연해진다.</p>
+  <p class="hint">W1 이 지금까지 보던 700. 아래로 갈수록 연해진다. 맨 아래 셋은 굵기를 600 으로 묶고 자간만 바꾼 판이다.</p>
 </div>
 
 <div class="bar">
@@ -138,6 +138,15 @@ const PICKS = [
 
   { no:'W7', name:'훅 500 · 절 제목 600 · 자간 0', who:'자간까지 푼 판', hw:500, sw:600, ls:'0',
     note:'W4 에서 음수 자간을 뺐다. 연한 글자는 자간을 죄면 더 흐려진다.' },
+
+  { no:'W8', name:'훅 600 · 절 제목 600 · 자간 -0.012em', who:'W2 그대로', hw:600, sw:600, ls:'-.012em',
+    tag:'자간 견주기', note:'지금 걸려 있는 값. 23px 훅에서 0.27px 죈다 — 거의 안 보이는 양이다.' },
+
+  { no:'W9', name:'훅 600 · 절 제목 600 · 자간 0', who:'죄지 않은 판', hw:600, sw:600, ls:'0',
+    tag:'자간 견주기', note:'글자를 당기지 않는다. 한글은 네모틀이라 이쪽이 기본값에 가깝다.' },
+
+  { no:'W10', name:'훅 600 · 절 제목 600 · 자간 -0.04em', who:'많이 죈 판', hw:600, sw:600, ls:'-.04em',
+    tag:'자간 견주기', note:'차이를 보라고 과장했다. 23px 훅에서 0.9px — 여기서는 눈에 보인다.' },
 ];
 
 const BODY = `
