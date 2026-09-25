@@ -1078,7 +1078,7 @@ a.prow:hover .rn { color: var(--link); }
 .tml[data-edge="none"] .tml-scroll { -webkit-mask-image: none; mask-image: none; }
 .tml .zone { scroll-snap-align: center; }
 
-/* 가운데 창 — 여기 든 항목이 아래 칸에 펼쳐진다. 높이는 스크립트가 축 내용에 맞춘다 */
+/* 가운데 창 — 여기 든 항목이 아래 칸에 펼쳐진다. 위치와 높이는 스크립트가 축 내용에 맞춘다 */
 .tml-win {
   position: absolute;
   top: 0;

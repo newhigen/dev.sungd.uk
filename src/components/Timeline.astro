@@ -158,9 +158,11 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
           '</dl></div>';
       }
 
-      // 창은 축 내용 높이에 딱 맞춘다 — 스크롤바와 아래 여백까지 두르면 창이 내려앉아 보인다
+      // 창은 축 내용 높이에 맞추되 위아래로 한 칸씩 더 준다 — 딱 맞으면 그림이 테두리에 끼여 보인다
+      var VPAD = 16;
       function fit() {
-        win.style.height = svg.getBoundingClientRect().height + 'px';
+        win.style.top = -VPAD + 'px';
+        win.style.height = svg.getBoundingClientRect().height + VPAD * 2 + 'px';
         // 양 끝에 반 칸씩 — 없으면 첫 항목과 마지막 둘이 창에 못 온다
         var half = sc.clientWidth / 2 - PAD;
         sc.style.paddingLeft = sc.style.paddingRight = Math.max(half, 0) + 'px';
