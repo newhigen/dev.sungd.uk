@@ -1238,8 +1238,6 @@ a.prow:hover .rn { color: var(--link); }
 .reel-scroll { cursor: grab; }
 .tml-scroll.grabbing,
 .reel-scroll.grabbing { cursor: grabbing; user-select: none; }
-.tml-scroll.grabbing img,
-.reel-scroll.grabbing img { pointer-events: none; }
 
 /* ── 눌러서 크게 ──────────────────────────────────── */
 

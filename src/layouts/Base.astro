@@ -131,6 +131,8 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
           var el = e.target.closest ? e.target.closest(SEL) : null;
           if (!el || el.scrollWidth - el.clientWidth < 8) return;
           sc = el; x0 = e.clientX; left0 = el.scrollLeft; moved = false;
+          // 창 밖에서 손을 떼도 끝이 오게 잡아 둔다 — 안 그러면 끄는 상태가 남아 클릭이 막힌다
+          try { el.setPointerCapture(e.pointerId); } catch (err) {}
         });
         document.addEventListener('pointermove', function (e) {
           if (!sc) return;
@@ -148,6 +150,8 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
         }
         document.addEventListener('pointerup', end);
         document.addEventListener('pointercancel', end);
+        document.addEventListener('lostpointercapture', end);
+        window.addEventListener('blur', end);
         // 끄는 동안 그림이 통째로 끌려가는 기본 동작을 막는다
         document.addEventListener('dragstart', function (e) {
           if (e.target.closest && e.target.closest(SEL)) e.preventDefault();
