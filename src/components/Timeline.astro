@@ -51,7 +51,7 @@ const one = first >= 0 ? items[first] : null;
 const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
 ---
 
-<figure class="tml" id={uid} data-open={opens ? '' : null}>
+<figure class="tml" id={uid} data-open={opens ? '' : null} data-edge={opens ? 'start' : null}>
   <div class="tml-track">
     {opens && (
       <div class="tml-win" style={`width:${STEP}px`}>
@@ -169,6 +169,12 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
         var k = svg.getBoundingClientRect().width / svg.getAttribute('width');
         return (PAD + i * STEP) * k;
       }
+      function edge() {
+        var max = sc.scrollWidth - sc.clientWidth;
+        if (max < 8) return box.setAttribute('data-edge', 'none');
+        box.setAttribute('data-edge',
+          sc.scrollLeft < 8 ? 'start' : sc.scrollLeft > max - 8 ? 'end' : 'mid');
+      }
       function pick() {
         var padL = parseFloat(sc.style.paddingLeft || 0);
         var mid = sc.scrollLeft + sc.clientWidth / 2 - padL;
@@ -179,6 +185,7 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
           if (d < bd) { bd = d; best = i; }
         });
         if (best >= 0) show(best);
+        edge();
       }
       var snapBack;
       function go(i) {

@@ -1054,7 +1054,28 @@ a.prow:hover .rn { color: var(--link); }
 }
 .tml .shot { cursor: zoom-in; }
 .tml-track { position: relative; }
-.tml-scroll { position: relative; z-index: 1; scroll-snap-type: x proximity; }
+.tml-scroll {
+  position: relative;
+  z-index: 1;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  /* 양 끝을 흐려 더 밀 것이 있음을 알린다. 끝에 닿으면 그쪽은 안 흐린다.
+     창은 이 칸 밖이라 테두리가 같이 흐려지지 않는다 */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3.5rem, #000 calc(100% - 3.5rem), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 3.5rem, #000 calc(100% - 3.5rem), transparent 100%);
+  transition: mask-image 0.2s;
+}
+.tml-scroll::-webkit-scrollbar { display: none; }
+.tml[data-edge="start"] .tml-scroll {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 3.5rem), transparent 100%);
+  mask-image: linear-gradient(to right, #000 calc(100% - 3.5rem), transparent 100%);
+}
+.tml[data-edge="end"] .tml-scroll {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3.5rem);
+  mask-image: linear-gradient(to right, transparent 0, #000 3.5rem);
+}
+.tml[data-edge="none"] .tml-scroll { -webkit-mask-image: none; mask-image: none; }
 .tml .zone { scroll-snap-align: center; }
 
 /* 가운데 창 — 여기 든 항목이 아래 칸에 펼쳐진다. 높이는 스크립트가 축 내용에 맞춘다 */
@@ -1070,9 +1091,11 @@ a.prow:hover .rn { color: var(--link); }
 }
 .tml-win .chip {
   position: absolute;
-  top: -0.6rem;
+  /* 테두리를 반반 걸친다 — 높이의 절반을 스스로 끌어올리므로 글자 크기가 바뀌어도 안 어긋난다.
+     absolute 의 0 은 테두리 안쪽이라 테두리 두께만큼 도로 올린다 */
+  top: -1.5px;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-50%, -50%);
   z-index: 2;
   padding: 0.1rem 0.55rem;
   border-radius: 20px;
