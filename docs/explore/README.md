@@ -24,5 +24,6 @@
 | `ml-job-board-why-questions.html` | ML 잡보드 «왜 만들었나» 질문지 — 이름 · 쓰던 것 · 막힌 지점 · 실제로 보는 탭 · 메일을 끈 까닭 · 열엿새 정지 · 지금 · 공개 수위 |
 | `backtrack-format.html` | 시각화 규칙(`visual-format.md`)을 프로젝트 페이지에 어디까지 적용할까 — A 지금 판 · B 글자와 색만 · C 1600px 두 단 · D 출품작 판(번호 뱃지 · 인출선 · 줌 콜아웃 · 들어올리기). Backtrack 실측으로 |
 | `pillbox-compare.html` | 약수첩 소개를 좌우로 — 왼쪽 지금 그대로, 오른쪽 같은 글·같은 그림에 주석 기법만 얹은 판 |
+| `font-picks.html` | 프로젝트 편 글꼴 열한 짝 — 지금 판(Inter Tight + Noto Serif KR)과 눈누 후보 열. 약수첩 실제 문구로 그리고 갈래·크기로 걸러 본다 |
 
 로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.
