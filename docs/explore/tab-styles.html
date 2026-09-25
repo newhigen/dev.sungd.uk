@@ -288,25 +288,6 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
       <p class="cap">그림 바닥과 치수 라벨 사이를 22px 띄워 글자가 그림에 안 물린다. 폭이 좁아지면 가로로 밀린다.</p>
     </div>
   </section>
-
-  <script>
-  (function(){
-    var box = document.getElementById('pick1');
-    if (!box) return;
-    var img = box.querySelector('.view img'), cap = box.querySelector('.view p');
-    box.querySelectorAll('li.has').forEach(function(li){
-      li.addEventListener('click', function(){
-        box.querySelectorAll('li.sel').forEach(function(o){ o.classList.remove('sel'); });
-        li.classList.add('sel');
-        img.src = 'img/pillbox/' + li.dataset.img + '.png';
-        // 2×1 은 폭이 절반이다 — 같은 폭으로 늘리면 흐려진다
-        img.width = (li.dataset.img === 'evo-4') ? 198 : 396;
-        cap.textContent = li.dataset.cap;
-      });
-    });
-  })();
-  </script>
-
 <div class="lb" id="lb" role="dialog" aria-label="크게 본 위젯">
   <button class="x" type="button" aria-label="닫기">✕</button>
   <img alt="">

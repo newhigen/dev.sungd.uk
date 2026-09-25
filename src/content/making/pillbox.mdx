@@ -4,32 +4,35 @@ tagline: 위젯을 4×3 에서 2×1 로 줄이고, 앱 넷의 아이콘 규칙�
 
 import Evo from '../../components/Evo.astro';
 import Shots from '../../components/Shots.astro';
-import Track from '../../components/Track.astro';
+import Timeline from '../../components/Timeline.astro';
 
 <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
 
-<Track large min={0} max={13}
-  ticks={[{ at: 0, label: "8/23" }, { at: 7, label: "8/30" }, { at: 10, label: "9/2" }, { at: 13, label: "9/5" }]}
-  bars={[
-    { from: 0, to: 10, tone: "1", label: "위젯 네 번 축소" },
-    { from: 10, to: 13, tone: "mute" },
+<Timeline
+  items={[
+    { at: "8/23 (일)", title: "네 구간을 다 펼침", note: "4×3",
+      img: "/p/pillbox/evo-1.png", iw: 763, ih: 991, alt: "4×3 위젯" },
+    { at: "8/24 (월)", title: "기록을 영구 보관" },
+    { at: "8/25 (화)", title: "주간 약통 알림" },
+    { at: "8/30 (일)", title: "터치를 걷어냄", note: "4×2",
+      img: "/p/pillbox/evo-2.png", iw: 763, ih: 645, alt: "4×2 위젯" },
+    { at: "9/1 (화)", title: "두 열로 눌러 담음", note: "4×1",
+      img: "/p/pillbox/evo-3.png", iw: 763, ih: 297, alt: "4×1 위젯" },
+    { at: "9/2 (수)", title: "지금 구간만", note: "2×1",
+      img: "/p/pillbox/evo-4.png", iw: 386, ih: 297, alt: "2×1 위젯" },
+    { at: "9/2 (수)", title: "이름과 아이콘" },
+    { at: "9/4 (금)", title: "인공눈물 하루 경계" },
+    { at: "9/5 (토)", title: "채우기 알림 미루기" },
   ]}
-  points={[
-    { at: 0, kind: "dot", label: "4×3" },
-    { at: 7, kind: "dot", label: "4×2" },
-    { at: 9, kind: "dot", label: "4×1" },
-    { at: 10, kind: "ring", label: "2×1" },
-    { at: 1, kind: "small" }, { at: 2, kind: "small" },
-    { at: 12, kind: "small" }, { at: 13, kind: "small" },
-  ]}
-  caption="큰 점이 위젯 크기가 바뀐 날, 작은 점이 나머지 결정. 터치 입력을 걷어내며 크기가 줄어듦." />
+  caption="위가 위젯 치수가 바뀐 넷, 아래가 나머지 다섯. 그림은 그때 치수 그대로라 줄어든 크기가 실제 비율이다."
+/>
 
 ## 개발 과정
 
-그때 치수 그대로 다시 그린 그림 — 줄어든 크기가 실제 비율.
+위젯 치수는 위 축에 그려 두었다. 여기는 그때마다 무엇이 막혔고 무엇을 정했나.
 
 <Evo items={[
-  { at: "8월 23일", title: "4×3 — 네 구간을 다 펼침", w: 229, img: "/p/pillbox/evo-1.png",
+  { at: "8월 23일", title: "4×3 — 네 구간을 다 펼침",
     problem: "네 구간을 한눈에 보여 주려니 넣을 것이 많음",
     did: "구간마다 한 줄. 시각과 이름을 적고 약은 <b>위젯에서 눌러</b> 체크",
     result: "홈 화면 한 판을 다 쓰고도 인공눈물 띠 자리가 빠듯함" },
@@ -41,16 +44,16 @@ import Track from '../../components/Track.astro';
     problem: "일주일치 약통 채우기를 자꾸 잊음",
     did: "토요일 아침 알림 하나",
     result: "매일 하는 일이 아니라 위젯에는 안 세움" },
-  { at: "8월 30일", title: "4×2 — 위젯은 보는 자리로", w: 229, img: "/p/pillbox/evo-2.png",
+  { at: "8월 30일", title: "4×2 — 위젯은 보는 자리로",
     problem: "위젯에서 실제로 하는 일은 <b>상태 확인뿐</b>",
     did: "터치 입력을 걷어내고 두 줄로 접음",
     result: "체크는 앱으로. 크기가 4×3 에서 4×2 로" },
-  { at: "9월 1일", title: "4×1 — 한 줄 높이로", w: 229, img: "/p/pillbox/evo-3.png",
+  { at: "9월 1일", title: "4×1 — 한 줄 높이로",
     problem: "두 줄도 홈 화면을 많이 차지",
     did: "네 구간을 두 열로 눌러 담고 앱 버튼을 동그랗게",
     result: "4×1. 인공눈물 띠는 폭의 절반만 사용",
     next: "«위젯이 할 일» 을 먼저 정했으면 세 번에 걸쳐 줄이지 않았을 것" },
-  { at: "9월 2일", title: "2×1 — 폭이 반", w: 116, img: "/p/pillbox/evo-4.png",
+  { at: "9월 2일", title: "2×1 — 폭이 반",
     problem: "폭이 절반이면 네 구간을 다 못 그림",
     did: "지금 구간만 약을 그리고 나머지 셋은 이름과 표식으로",
     result: "2×1. 칸은 줄었는데 지금 구간 약은 오히려 커짐" },

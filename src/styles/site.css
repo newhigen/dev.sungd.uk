@@ -985,6 +985,113 @@ a.prow:hover .rn { color: var(--link); }
 .cmp .row .b { color: var(--ink-3); }
 .cmp .row .a { color: var(--ink); }
 
+/* ── 전과 후를 같은 하루 축에 ─────────────────────── */
+
+/* 들어오는 것과 남는 것을 한 그림에 겹쳐 놓는다. 두 가지를 따로 그리면
+   «알림 4번, 남는 기록 0» 같은 훅이 두 그림에 나뉘어 증명이 안 된다. */
+.ba2 { margin: 1.6rem 0 2.2rem; }
+.ba2 svg { display: block; width: 100%; height: auto; font-family: var(--body); }
+.ba2 .rail { stroke: #e8e6ec; stroke-width: 15; stroke-linecap: round; }
+.ba2 .rail.good { stroke: #e4ecea; }
+.ba2 .rail.mute { stroke: #f2f0f5; }
+.ba2 .side { font-size: 10.5px; font-weight: 600; fill: var(--ink-3); }
+.ba2 .rowlb { font-size: 9px; fill: #9a95a8; }
+.ba2 .pt { fill: var(--ink-3); }
+.ba2 .pt.bad { fill: #c0392b; }
+.ba2 .pt.good { fill: #2e7d4f; }
+.ba2 .ptlb { font-size: 9px; fill: #c0392b; }
+.ba2 .ck { stroke: #2e7d4f; stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+.ba2 .mid { font-size: 10px; fill: #9a95a8; }
+.ba2 .cnt { font-size: 10.5px; font-weight: 600; fill: var(--ink-3); }
+.ba2 .cnt.bad { fill: #c0392b; }
+.ba2 .cnt.good { fill: #2e7d4f; }
+.ba2 .band { stroke: #e0dde8; stroke-width: 1; }
+.ba2 .bandlb { font-size: 9.5px; fill: var(--ink-3); }
+.ba2 .div { stroke: #e8e6ec; stroke-width: 1; }
+.ba2 .axis { stroke: #c9c5d4; stroke-width: 1; }
+.ba2 .tick { font-size: 10px; fill: var(--ink-3); }
+.ba2 figcaption { margin-top: 0.6rem; font-size: 0.8125rem; color: var(--ink-3); }
+
+/* ── 값을 그림으로 ────────────────────────────────── */
+
+/* 단위가 제각각인 값(횟수 · 칸 · 탭)은 막대로 못 견준다. 값마다 그 뜻을 그린다. */
+.vfig {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.6rem 1.4rem;
+  margin: 1.6rem 0 1.2rem;
+}
+.vfig figure { margin: 0; }
+.vfig svg { display: block; margin-bottom: 0.6rem; }
+.vfig b {
+  display: block;
+  font-family: var(--title);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.vfig p { margin: 0.25rem 0 0; font-size: 0.8125rem; line-height: 1.6; color: var(--ink-2); }
+
+/* ── 결정을 한 축에 ───────────────────────────────── */
+
+/* 간격은 날짜가 아니라 차례로 고르게 벌린다 — 날짜 비례로 하면 몰린 자리의
+   라벨이 서로 눌린다. 본문 폭(40rem)보다 넓으므로 가로로 민다. */
+.tml { margin: 1.6rem 0 2.2rem; }
+.tml-scroll { overflow-x: auto; padding-bottom: 0.5rem; }
+.tml svg { display: block; font-family: var(--body); }
+.tml .rail { stroke: #c9c5d4; stroke-width: 1; }
+.tml .tick { stroke: #dcd8e4; stroke-width: 1; }
+.tml .stem { stroke: #8a6a3c; stroke-width: 1.2; opacity: 0.45; }
+.tml .dot { fill: var(--ink-3); }
+.tml .dot.big { fill: #8a6a3c; }
+.tml .at { font-size: 10.5px; fill: var(--ink-3); }
+.tml .nm { font-size: 11.5px; fill: var(--ink-2); }
+.tml .sz {
+  font-family: var(--title);
+  font-size: 13px;
+  font-weight: 600;
+  fill: var(--ink);
+}
+.tml .shot { cursor: zoom-in; }
+.tml figcaption { margin-top: 0.5rem; font-size: 0.8125rem; color: var(--ink-3); }
+
+/* ── 눌러서 크게 ──────────────────────────────────── */
+
+/* 편에 들어가는 화면 그림은 본문 폭에 맞춰 원본의 10~30% 로 줄어든다.
+   그 안의 글자가 보여 주려던 것일 때가 있어 원본으로 열 길을 둔다. */
+.lb {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  background: rgba(22, 19, 32, 0.84);
+}
+.lb[hidden] { display: none; }
+.lb img {
+  max-width: min(90vw, 760px);
+  max-height: 90vh;
+  border-radius: 14px;
+  background: var(--paper, #fff);
+  box-shadow: 0 12px 60px rgba(0, 0, 0, 0.45);
+}
+.lb .x {
+  position: absolute;
+  top: 1.1rem;
+  right: 1.4rem;
+  padding: 0.2rem 0.5rem;
+  border: 0;
+  background: none;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: #fff;
+  opacity: 0.75;
+  cursor: pointer;
+}
+.lb .x:hover { opacity: 1; }
+
 /* ── 이럴 때 이렇게 ───────────────────────────────── */
 
 .cases {

@@ -79,5 +79,39 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
         <a href="https://sungd.uk">sungd.uk</a>
       </footer>
     </div>
+
+    <div class="lb" id="lb" role="dialog" aria-label="크게 본 그림" aria-modal="true" hidden>
+      <button class="x" type="button" aria-label="닫기">✕</button>
+      <img alt="" />
+    </div>
+    <script is:inline>
+      (function () {
+        var lb = document.getElementById('lb');
+        if (!lb) return;
+        var big = lb.querySelector('img');
+        function open(src, alt) {
+          big.src = src;
+          big.alt = alt || '';
+          lb.hidden = false;
+        }
+        function shut() { lb.hidden = true; }
+        // 편 본문의 화면 그림만 — 로고나 아이콘 링크는 걸지 않는다
+        document.querySelectorAll('.prose img[src^="/p/"]').forEach(function (el) {
+          el.style.cursor = 'zoom-in';
+          el.addEventListener('click', function () { open(el.getAttribute('src'), el.alt); });
+        });
+        document.querySelectorAll('.prose svg image').forEach(function (el) {
+          var href = el.getAttribute('href') || '';
+          if (href.indexOf('/p/') !== 0) return;
+          el.addEventListener('click', function () {
+            open(href, el.getAttribute('aria-label') || '');
+          });
+        });
+        lb.addEventListener('click', shut);
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') shut();
+        });
+      })();
+    </script>
   </body>
 </html>

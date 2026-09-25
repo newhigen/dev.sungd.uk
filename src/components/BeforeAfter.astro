@@ -1,0 +1,82 @@
+---
+interface Row {
+  label: string;
+  /** 축 위에 찍는 표 — dot 은 온 것, check 는 남은 것 */
+  marks?: { at: number; kind: 'dot' | 'check'; label?: string }[];
+  /** 오른쪽 끝 값 */
+  count: string;
+  tone: 'bad' | 'good' | 'mute';
+  /** 줄 가운데에 놓는 한 줄 (값이 0 이라 찍을 표가 없을 때) */
+  note?: string;
+}
+interface Props {
+  /** 전과 후를 같은 하루 축에 — 시각은 소수 시(15.75 = 오후 3시 45분) */
+  from: number;
+  to: number;
+  ticks: { at: number; label: string }[];
+  /** 구간 이름과 나누는 세로선 */
+  bands?: { at: number; label: string; line?: boolean }[];
+  before: { label: string; rows: Row[] };
+  after: { label: string; rows: Row[] };
+  caption?: string;
+}
+const { from, to, ticks, bands = [], before, after, caption } = Astro.props;
+
+const W = 600, L = 52, R = 576;
+const x = (h: number) => L + ((h - from) / (to - from)) * (R - L);
+
+const ROW = 34, GAP = 24;
+const sides = [before, after];
+const yTop = (s: number) => 44 + s * (before.rows.length * ROW + GAP);
+const y = (s: number, r: number) => yTop(s) + r * ROW;
+const lastY = y(1, after.rows.length - 1);
+const AXIS = lastY + 22;
+const H = AXIS + 28;
+const DIV = yTop(1) - GAP / 2 - 6;
+---
+
+<figure class="ba2">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={caption ?? '전과 후'}>
+    {bands.map(b => (
+      <g>
+        {b.line && <line class="band" x1={x(b.at)} y1="20" x2={x(b.at)} y2={AXIS} />}
+        <text class="bandlb" x={x(b.at)} y="16" text-anchor="middle">{b.label}</text>
+      </g>
+    ))}
+
+    {sides.map((side, s) => (
+      <g>
+        <text class="side" x="4" y={y(s, 0) + 2}>{side.label}</text>
+        {side.rows.map((r, i) => (
+          <g>
+            <text class="rowlb" x="4" y={y(s, i) + 16}>{r.label}</text>
+            <line class={`rail ${r.tone}`} x1={L} y1={y(s, i)} x2={R} y2={y(s, i)} />
+            {r.note && <text class="mid" x={(L + R) / 2} y={y(s, i) + 4} text-anchor="middle">{r.note}</text>}
+            {(r.marks ?? []).map(m =>
+              m.kind === 'dot' ? (
+                <g>
+                  <circle class={`pt ${r.tone}`} cx={x(m.at)} cy={y(s, i)} r="4.5" />
+                  {m.label && <text class={`ptlb ${r.tone}`} x={x(m.at)} y={y(s, i) - 12} text-anchor="middle">{m.label}</text>}
+                </g>
+              ) : (
+                <path
+                  class="ck"
+                  d={`M${x(m.at) - 4} ${y(s, i)}l3 3 6-6`}
+                />
+              )
+            )}
+            <text class={`cnt ${r.tone}`} x={R} y={y(s, i) + 4} text-anchor="end">{r.count}</text>
+          </g>
+        ))}
+      </g>
+    ))}
+
+    <line class="div" x1="20" y1={DIV} x2={W - 20} y2={DIV} />
+
+    <line class="axis" x1={L} y1={AXIS} x2={R} y2={AXIS} />
+    {ticks.map(t => (
+      <text class="tick" x={x(t.at)} y={AXIS + 16} text-anchor="middle">{t.label}</text>
+    ))}
+  </svg>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

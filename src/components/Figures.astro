@@ -1,0 +1,25 @@
+---
+interface Props {
+  /** 값 셋을 그림으로 — 단위가 제각각이라(횟수 · 칸 · 탭) 막대로 못 견줄 때 쓴다.
+   *  그림은 이름 붙인 slot 으로 받는다: <svg slot="fig0"> … */
+  items: { title: string; note: string }[];
+  basis?: string;
+}
+const { items, basis } = Astro.props;
+
+// slot[name] 은 정적 문자열만 받는다 — 항목마다 다른 slot 은 여기서 미리 그린다
+const figs = await Promise.all(
+  items.map((_, i) => (Astro.slots.has(`fig${i}`) ? Astro.slots.render(`fig${i}`) : null))
+);
+---
+
+<div class="vfig">
+  {items.map((it, i) => (
+    <figure>
+      {figs[i] && <Fragment set:html={figs[i]} />}
+      <b>{it.title}</b>
+      <p>{it.note}</p>
+    </figure>
+  ))}
+</div>
+{basis && <p class="basis">{basis}</p>}

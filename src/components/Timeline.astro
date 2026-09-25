@@ -1,0 +1,79 @@
+---
+interface Props {
+  /** 결정을 차례대로 한 축에 — 간격은 날짜가 아니라 차례로 고르게 벌린다.
+   *  날짜 비례로 하면 몰린 자리의 라벨이 서로 눌린다. */
+  items: {
+    at: string;
+    title: string;
+    note?: string;
+    /** 그림이 있는 항목은 축 위로 올라간다. iw·ih 는 원본 픽셀 — 항목끼리 실제 크기를 견주려면 필요하다 */
+    img?: string;
+    iw?: number;
+    ih?: number;
+    alt?: string;
+  }[];
+  caption?: string;
+}
+const { items, caption } = Astro.props;
+
+const STEP = 145, PAD = 80, TOP = 110;
+const AX = 300, BASE = 250; // 축 y · 그림 바닥 y
+const W = PAD * 2 + (items.length - 1) * STEP;
+
+// 원본이 가장 큰 그림을 110px 로 놓고 나머지를 같은 배율로 — 그래야 크기 차이가 실제 비율이 된다
+const shots = items.filter(i => i.img && i.iw && i.ih);
+const scale = shots.length ? 110 / Math.max(...shots.map(i => i.iw!)) : 1;
+
+const x = (i: number) => PAD + i * STEP;
+const box = (it: Props['items'][number]) => ({
+  w: Math.round(it.iw! * scale),
+  h: Math.round(it.ih! * scale),
+});
+---
+
+<figure class="tml">
+  <div class="tml-scroll">
+    <svg
+      width={W}
+      height={AX - TOP + 70}
+      viewBox={`0 ${TOP} ${W} ${AX - TOP + 70}`}
+      role="img"
+      aria-label={caption ?? '결정 타임라인'}
+    >
+      <line class="rail" x1={x(0)} y1={AX} x2={x(items.length - 1)} y2={AX} />
+
+      {items.map((it, i) => (
+        <g>
+          <line class="tick" x1={x(i)} y1={AX - 5} x2={x(i)} y2={AX + 5} />
+          <text class="at" x={x(i)} y={AX + 22} text-anchor="middle">{it.at}</text>
+          <text class="nm" x={x(i)} y={AX + 42} text-anchor="middle">{it.title}</text>
+        </g>
+      ))}
+
+      {items.map((it, i) =>
+        it.img && it.iw && it.ih ? (
+          <g>
+            <line class="stem" x1={x(i)} y1={AX - 7} x2={x(i)} y2={BASE + 30} />
+            <circle class="dot big" cx={x(i)} cy={AX} r="4.5" />
+            <image
+              class="shot"
+              href={it.img}
+              x={x(i) - box(it).w / 2}
+              y={BASE - box(it).h}
+              width={box(it).w}
+              height={box(it).h}
+              role="img"
+              aria-label={it.alt ?? it.title}
+            />
+            {it.note && (
+              <text class="sz" x={x(i)} y={BASE + 22} text-anchor="middle">{it.note}</text>
+            )}
+          </g>
+        ) : (
+          <circle class="dot" cx={x(i)} cy={AX} r="3" />
+        )
+      )}
+    </svg>
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
