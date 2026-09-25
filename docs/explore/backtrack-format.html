@@ -1,30 +1,41 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>프로젝트 페이지 판 — visual-format 적용 정도</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
+
+<style>
+/* 배포된 dev.sungd.uk 와 같은 글꼴 — 눈누 https://noonnu.cc/font_page/1456 · 1150 */
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+</style>
 <style>
 :root{
   /* 지금 사이트 토큰 */
   --bg:#e6e3f0; --card:#fbfaff; --card-2:#dfe6f2; --shadow:0 2px 24px rgba(40,35,80,.08);
   --ink:#221f2b; --prose:#3a3646; --ink-2:#57536b; --ink-3:#6f6b85; --accent:#8a6a3c; --link:#4a4b93;
-  --sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;
-  --serif:"Noto Serif KR",Pretendard,serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
   /* visual-format 토큰 */
   --v-ink:#1C1E23; --v-sub:#6B7079; --v-face:#F4F5F7;
   --v-acc:#2B59C3; --v-acc-bg:#EAF0FC;
   --v-up:#2E7D4F; --v-down:#C0392B;
   --v-d1:#DCE5F7; --v-d2:#A9BEEA; --v-d3:#6D8FD8; --v-d4:#2B59C3; --v-d5:#1E3F8C;
-  --wanted:"Wanted Sans Variable","Wanted Sans",Pretendard,-apple-system,system-ui,sans-serif;
+  --wanted:"SUITE",-apple-system,system-ui,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--sans);word-break:keep-all;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--body);word-break:keep-all;-webkit-font-smoothing:antialiased}
 .wrap{max-width:100rem;margin:0 auto;padding:3rem 2rem 8rem}
-.lede h1{font-family:var(--serif);font-size:2.2rem;font-weight:700;letter-spacing:-.02em;margin:0 0 .6rem;color:var(--ink)}
+.lede h1{font-family:var(--title);font-size:2.2rem;font-weight:500;margin:0 0 .6rem;color:var(--ink)}
 .lede p{max-width:56rem;margin:0 0 .5rem;color:var(--ink-2)}
 .lede .meta{font-size:.85rem;color:var(--ink-3)}
-h2.n{font-size:1.15rem;font-weight:700;color:var(--ink);margin:3.4rem 0 .2rem;font-family:var(--serif)}
+h2.n{font-size:1.15rem;font-weight:600;color:var(--ink);margin:3.4rem 0 .2rem;font-family:var(--title)}
 h2.n em{font-style:normal;font-weight:500;color:var(--ink-3);font-size:.9rem;margin-left:.5rem}
 .q{font-size:.88rem;color:var(--ink-3);margin:0 0 1rem;max-width:60rem}
 .q b{color:var(--ink-2);font-weight:600}
@@ -34,30 +45,30 @@ h2.n em{font-style:normal;font-weight:500;color:var(--ink-3);font-size:.9rem;mar
 .pad{padding:2.2rem 2.4rem 2.6rem}
 
 /* ══ A. 지금 판 ══ */
-.va{font-family:var(--serif);color:var(--prose)}
+.va{font-family:var(--body);color:var(--prose)}
 .va .measure{max-width:40rem}
 .va .hook{font-size:1.35rem;font-weight:700;color:var(--ink);line-height:1.5;margin:0 0 1rem}
 .va p{font-size:1rem;line-height:1.9;margin:0 0 .9rem}
-.va h3{font-family:var(--serif);font-size:1.15rem;color:var(--accent);margin:2.2rem 0 .7rem}
+.va h3{font-family:var(--title);font-size:1.15rem;color:var(--accent);margin:2.2rem 0 .7rem}
 .va .hero{background:var(--card-2);border-radius:14px;padding:1.4rem 1.5rem;margin:1.4rem 0 .6rem;max-width:40rem}
-.va .hero .lb{font-family:var(--sans);font-size:.75rem;color:var(--ink-3)}
-.va .hero .v{font-family:var(--sans);font-size:2.6rem;font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.1;margin:.1rem 0 .2rem}
-.va .hero .nt{font-family:var(--sans);font-size:.8rem;color:var(--ink-2)}
+.va .hero .lb{font-family:var(--body);font-size:.75rem;color:var(--ink-3)}
+.va .hero .v{font-family:var(--title);font-size:2.6rem;font-weight:500;color:var(--ink);line-height:1.1;margin:.1rem 0 .2rem}
+.va .hero .nt{font-family:var(--body);font-size:.8rem;color:var(--ink-2)}
 .va .tiles{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-top:.8rem}
 .va .tiles div{background:var(--card);border-radius:10px;padding:.7rem .9rem}
-.va .tiles .tv{font-family:var(--sans);font-size:1.15rem;font-weight:700;color:var(--ink)}
-.va .tiles .tn{font-family:var(--sans);font-size:.72rem;color:var(--ink-3)}
-.va .basis{font-family:var(--sans);font-size:.74rem;color:var(--ink-3);margin:.5rem 0 0}
-.va table{border-collapse:collapse;font-family:var(--sans);font-size:.85rem;margin:1rem 0}
+.va .tiles .tv{font-family:var(--title);font-size:1.15rem;font-weight:600;color:var(--ink)}
+.va .tiles .tn{font-family:var(--body);font-size:.72rem;color:var(--ink-3)}
+.va .basis{font-family:var(--body);font-size:.74rem;color:var(--ink-3);margin:.5rem 0 0}
+.va table{border-collapse:collapse;font-family:var(--body);font-size:.85rem;margin:1rem 0}
 .va th,.va td{padding:.45rem .8rem .45rem 0;text-align:left;border-bottom:1px solid rgba(34,31,43,.08)}
 .va th{font-size:.75rem;color:var(--ink-3);font-weight:600}
 
 /* ══ B. 글자와 색만 규칙으로 ══ */
 .vb{font-family:var(--wanted);color:#3A3D44}
 .vb .measure{max-width:44rem}
-.vb .hook{font-family:var(--serif);font-size:1.5rem;font-weight:700;color:var(--v-ink);line-height:1.45;margin:0 0 1rem;letter-spacing:-.01em}
+.vb .hook{font-family:var(--title);font-size:1.5rem;font-weight:500;color:var(--v-ink);line-height:1.45;margin:0 0 1rem}
 .vb p{font-size:.97rem;line-height:1.6;margin:0 0 .85rem}
-.vb h3{font-family:var(--serif);font-size:1.12rem;font-weight:600;color:var(--v-ink);margin:2.3rem 0 .7rem}
+.vb h3{font-family:var(--title);font-size:1.12rem;font-weight:600;color:var(--v-ink);margin:2.3rem 0 .7rem}
 .vb .num{font-variant-numeric:tabular-nums}
 .vb .cap{font-size:.78rem;color:var(--v-sub);margin:.5rem 0 0}
 .vb figure{margin:1.3rem 0 .4rem}
@@ -86,10 +97,10 @@ h2.n em{font-style:normal;font-weight:500;color:var(--ink-3);font-size:.9rem;mar
 .vc .tabs{display:flex;gap:.3rem;margin:0 0 1.2rem}
 .vc .tabs span{font-size:.85rem;padding:.33rem .8rem;border-radius:8px;color:var(--v-sub);background:var(--v-face)}
 .vc .tabs span.on{background:var(--v-ink);color:#fff;font-weight:600}
-.vc .verdict{font-family:var(--serif);font-size:1.55rem;font-weight:700;color:var(--v-ink);line-height:1.4;margin:0 0 1.4rem;letter-spacing:-.01em}
+.vc .verdict{font-family:var(--title);font-size:1.55rem;font-weight:500;color:var(--v-ink);line-height:1.4;margin:0 0 1.4rem}
 .vc .two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:2.4rem;padding:0 2.4rem 2.4rem;align-items:start}
 .vc p{font-size:.95rem;line-height:1.58;margin:0 0 .8rem}
-.vc h3{font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--v-ink);margin:1.6rem 0 .5rem}
+.vc h3{font-family:var(--title);font-size:1.05rem;font-weight:600;color:var(--v-ink);margin:1.6rem 0 .5rem}
 .vc h3:first-child{margin-top:0}
 .vc table{border-collapse:collapse;width:100%;font-size:.84rem;font-variant-numeric:tabular-nums}
 .vc th,.vc td{padding:.4rem .6rem;text-align:right;border-bottom:1px solid #E7E8EC}
@@ -111,12 +122,12 @@ svg{display:block;max-width:100%;height:auto}
 /* ══ D. 출품작 판 ══ */
 .pn{background:#EFEDF6;border-radius:16px;padding:2rem 2.2rem 2.2rem;margin:0 0 .6rem;font-family:var(--wanted);box-shadow:var(--shadow)}
 .pn-l{font:700 .72rem var(--wanted);letter-spacing:.12em;color:var(--v-acc);margin:0 0 .5rem}
-.pn h4{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:var(--v-ink);line-height:1.38;margin:0 0 .5rem;letter-spacing:-.015em}
+.pn h4{font-family:var(--title);font-size:1.7rem;font-weight:500;color:var(--v-ink);line-height:1.38;margin:0 0 .5rem}
 .pn-s{font-size:.92rem;line-height:1.6;color:var(--v-sub);margin:0 0 1.2rem;max-width:34rem}
 .pn-2{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:2.2rem;align-items:center}
 .pn-chips{display:flex;flex-direction:column;gap:.45rem;margin-top:1.4rem}
 .pn-chips span{display:flex;flex-direction:column;background:#fff;border-radius:10px;padding:.55rem .8rem;font-size:.74rem;color:var(--v-sub)}
-.pn-chips b{font-size:1.02rem;color:var(--v-ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.pn-chips b{font-family:var(--title);font-weight:600;font-size:1.02rem;color:var(--v-ink);font-variant-numeric:tabular-nums}
 .pn-shot img{display:block;width:100%;border-radius:12px;box-shadow:0 8px 30px rgba(30,25,60,.14)}
 .pn-fig{position:relative;padding:0 23% 0 20%}
 .shot{position:relative;aspect-ratio:1593/640;overflow:hidden;border-radius:12px;box-shadow:0 8px 30px rgba(30,25,60,.14)}
@@ -159,7 +170,7 @@ table.diff td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
 <p class="q">시안을 보기 전에, 두 규칙이 실제로 부딪히는 곳만 추렸다.</p>
 <table class="diff">
 <tr><th>무엇</th><th>지금 사이트</th><th>visual-format.md</th></tr>
-<tr><td>글꼴</td><td>본문 Noto Serif KR · 제목 Inter Tight</td><td>본문 Wanted Sans · 제목 Noto Serif KR — 정확히 반대</td></tr>
+<tr><td>글꼴</td><td colspan="2"><b>정해졌다 (2026-09-25)</b> — 제목 페이퍼로지, 본문 SUITE, 둘 다 고딕. 규칙의 「제목 명조」도 사이트의 옛 「본문 명조」도 아닌 제삼의 답으로 갔다. 네 판이 같은 글꼴을 쓰므로 이제 이 축은 시안을 가르지 않는다</td></tr>
 <tr><td>강조색</td><td>절 제목 황토 <code>#8a6a3c</code></td><td>강조 하나 파랑 <code>#2B59C3</code></td></tr>
 <tr><td>가운뎃점</td><td>머리말·캡션에 전면적으로 씀</td><td>장식용 가운뎃점 안 씀</td></tr>
 <tr><td>본문 폭</td><td>한 단 40rem</td><td>바깥 1600px · 탭 · 두 단(글 왼쪽 그림 오른쪽)</td></tr>
@@ -171,7 +182,7 @@ table.diff td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
 
 <!-- ════════════════ A ════════════════ -->
 <h2 class="n">A · 지금 판 그대로 <em>현행 스킬</em></h2>
-<p class="q">연보라 바탕 + 흰 종이 + 세리프 본문 + 황토 절 제목. 훅 다음에 대표 숫자 Hero, 그 아래 타일 둘. <b>바꾸는 것 없음</b> — 다른 26편과 한 벌로 읽힌다.</p>
+<p class="q">연보라 바탕 + 흰 종이 + 황토 절 제목. 글꼴은 네 판이 같다(제목 페이퍼로지, 본문 SUITE). 훅 다음에 대표 숫자 Hero, 그 아래 타일 둘. <b>바꾸는 것 없음</b> — 다른 26편과 한 벌로 읽힌다.</p>
 <div class="paper"><div class="pad va">
 <div class="measure">
   <p class="hook">턴 효율은 3.1배 좋아졌는데, 같은 110달러로 내는 PR 은 73개에서 15개가 됐다.</p>
@@ -203,7 +214,7 @@ table.diff td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
 
 <!-- ════════════════ B ════════════════ -->
 <h2 class="n">B · 글자와 색만 규칙으로 <em>레이아웃은 그대로</em></h2>
-<p class="q">읽는 판(한 단)은 지금대로 두고 <b>글꼴 · 색 · 숫자 표기 · 차트 종류 · 중첩 목록</b>만 <code>visual-format.md</code> 로 간다. 본문 Wanted Sans, 제목 Noto Serif KR, 강조 파랑, 가운뎃점 제거, 늘고 줄고 뜻 색, 표에 값 막대.</p>
+<p class="q">읽는 판(한 단)은 지금대로 두고 <b>색 · 숫자 표기 · 차트 종류 · 중첩 목록</b>만 <code>visual-format.md</code> 로 간다. 강조 파랑, 가운뎃점 제거, 늘고 줄고 뜻 색, 표에 값 막대. 글꼴은 빠졌다 — 이미 정해져 네 판이 같이 쓴다.</p>
 <div class="paper"><div class="pad vb">
 <div class="measure">
   <p class="hook">턴 효율은 3.1배 좋아졌는데, 같은 110달러로 내는 PR 은 73개에서 15개가 됐다.</p>
