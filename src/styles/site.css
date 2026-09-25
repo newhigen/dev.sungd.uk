@@ -1231,6 +1231,16 @@ a.prow:hover .rn { color: var(--link); }
 }
 .reel .cap { margin-top: 0.2rem; font-size: 0.8125rem; color: var(--ink-3); }
 
+/* ── 잡아 끌어 미는 줄 ───────────────────────────── */
+
+/* 마우스에만 해당한다 — 트랙패드는 두 손가락, 마우스는 휠 + Shift 도 그대로 */
+.tml-scroll,
+.reel-scroll { cursor: grab; }
+.tml-scroll.grabbing,
+.reel-scroll.grabbing { cursor: grabbing; user-select: none; }
+.tml-scroll.grabbing img,
+.reel-scroll.grabbing img { pointer-events: none; }
+
 /* ── 눌러서 크게 ──────────────────────────────────── */
 
 /* 편에 들어가는 화면 그림은 본문 폭에 맞춰 원본의 10~30% 로 줄어든다.

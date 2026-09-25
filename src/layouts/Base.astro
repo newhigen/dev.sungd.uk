@@ -119,5 +119,40 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
         });
       })();
     </script>
+
+    <script is:inline>
+      // 마우스로 잡아 끌어 미는 줄 — 트랙패드와 휠은 브라우저가 이미 해 준다.
+      // 손을 뗀 뒤 눌린 것으로 오인되는 건 위 8px 가드가 막는다.
+      (function () {
+        var SEL = '.tml-scroll, .reel-scroll';
+        var sc = null, x0 = 0, left0 = 0, moved = false;
+        document.addEventListener('pointerdown', function (e) {
+          if (e.pointerType !== 'mouse' || e.button !== 0) return;
+          var el = e.target.closest ? e.target.closest(SEL) : null;
+          if (!el || el.scrollWidth - el.clientWidth < 8) return;
+          sc = el; x0 = e.clientX; left0 = el.scrollLeft; moved = false;
+        });
+        document.addEventListener('pointermove', function (e) {
+          if (!sc) return;
+          var dx = e.clientX - x0;
+          if (!moved && Math.abs(dx) < 4) return;
+          if (!moved) { moved = true; sc.classList.add('grabbing'); }
+          // 글자·그림이 딸려 잡히지 않게
+          e.preventDefault();
+          sc.scrollLeft = left0 - dx;
+        });
+        function end() {
+          if (!sc) return;
+          sc.classList.remove('grabbing');
+          sc = null;
+        }
+        document.addEventListener('pointerup', end);
+        document.addEventListener('pointercancel', end);
+        // 끄는 동안 그림이 통째로 끌려가는 기본 동작을 막는다
+        document.addEventListener('dragstart', function (e) {
+          if (e.target.closest && e.target.closest(SEL)) e.preventDefault();
+        });
+      })();
+    </script>
   </body>
 </html>
