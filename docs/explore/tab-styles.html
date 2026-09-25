@@ -66,64 +66,21 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
   line-height:1.45;margin:0 0 .8rem}
 .cap{margin:.4rem 0 .2rem;font-size:.78rem;color:var(--ink-3)}
 
-/* B1 흐름 한 줄 */
-.flow{display:flex;gap:.5rem;margin:0 0 .5rem;flex-wrap:wrap}
-.flow .s{flex:1 1 0;min-width:7rem;padding:.55rem .7rem;border-radius:10px;background:var(--card-2)}
-.flow .s.key{background:#dfe4f6;box-shadow:inset 0 0 0 1.5px var(--acc)}
-.flow .at{font-size:.68rem;color:var(--ink-3)}
-.flow .nm{font-family:var(--title);font-weight:600;font-size:.9rem;color:var(--ink);margin-top:.1rem}
-.flow .nt{font-size:.72rem;line-height:1.45;color:var(--ink-2);margin-top:.15rem}
-
 /* B2 스윔레인 */
-.steps,.lane{display:grid;grid-template-columns:3.4rem repeat(4,1fr);gap:.45rem}
-.steps{margin:0 0 .3rem}
-.steps span{font-size:.7rem;color:var(--ink-3);text-align:center}
-.steps span:first-child{text-align:left}
-.lane{align-items:stretch;margin:0 0 .45rem}
-.lane .lb{display:flex;align-items:center;font-family:var(--title);font-weight:600;font-size:.82rem;color:var(--ink-2)}
-.lane .c{padding:.5rem .65rem;border-radius:10px;background:var(--card-2);min-height:4rem}
-.lane.before .c{background:#e8e6ec}
-.lane .nm{font-family:var(--title);font-weight:600;font-size:.84rem;color:var(--ink);line-height:1.35}
-.lane .nt{font-size:.7rem;line-height:1.45;color:var(--ink-2);margin-top:.2rem}
-.lane .c.bad{box-shadow:inset 0 0 0 1.5px var(--bad)}
-.lane .c.good{box-shadow:inset 0 0 0 1.5px var(--good)}
 
-/* B3 전후 두 열 */
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:0 0 .5rem}
-.ba h5{margin:0 0 .5rem;font-family:var(--title);font-size:.92rem;font-weight:600;color:var(--ink)}
-.ba .b h5{color:var(--ink-3)}
-.ba .st{padding:.5rem .7rem;border-radius:10px;background:var(--card-2);margin-bottom:.35rem}
-.ba .b .st{background:#e8e6ec}
-.ba .st .nm{font-family:var(--title);font-weight:600;font-size:.86rem;color:var(--ink)}
-.ba .st .nt{font-size:.72rem;line-height:1.45;color:var(--ink-2);margin-top:.15rem}
-.ba .st.bad{box-shadow:inset 0 0 0 1.5px var(--bad)}
-.ba .st.good{box-shadow:inset 0 0 0 1.5px var(--good)}
+.lane .lb{display:flex;align-items:center;font-family:var(--title);font-weight:600;font-size:.82rem;color:var(--ink-2)}
 
 /* B5 하루 축 하나에 전후를 겹친다 */
 .tline{margin:.2rem 0 .5rem}
 .tline svg{display:block;width:100%;height:auto;font-family:var(--body)}
 
 /* I1 카드 셋 */
-.impact{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:0 0 .3rem}
-.impact section{display:flex;flex-direction:column;border-radius:12px;padding:.9rem 1rem 1rem;background:var(--card-2)}
+
 .impact .lb{font-size:.68rem;color:var(--ink-3)}
-.impact h5{margin:.1rem 0 .45rem;font-family:var(--title);font-size:.9rem;font-weight:600;color:var(--ink);line-height:1.45}
-.impact p{flex:1;margin:0;font-size:.78rem;line-height:1.55;color:var(--ink-2)}
-.impact .v{margin-top:.8rem;font-family:var(--title);font-size:1.5rem;font-weight:500;color:var(--ink);line-height:1.1}
-.impact .v small{display:block;margin-top:.2rem;font-size:.7rem;font-weight:400;color:var(--ink-3)}
 
 /* I4 막힌 것 → 한 것 을 잇는 짝 */
-.pair{margin:.2rem 0 .3rem}
-.pair .r{display:grid;grid-template-columns:1fr 1.6rem 1fr;align-items:center;gap:.6rem;margin-bottom:.7rem}
+
 .pair .x{padding:.6rem .8rem;border-radius:10px;background:#e8e6ec;box-shadow:inset 0 0 0 1.5px var(--bad)}
-.pair .o{padding:.6rem .8rem;border-radius:10px;background:var(--card-2);box-shadow:inset 0 0 0 1.5px var(--good)}
-.pair .nm{font-family:var(--title);font-weight:600;font-size:.88rem;color:var(--ink);line-height:1.4}
-.pair .nt{font-size:.74rem;line-height:1.5;color:var(--ink-2);margin-top:.2rem}
-.pair .ar{text-align:center;color:var(--ink-3);font-size:1.1rem}
-.pair .res{grid-column:1 / -1;display:flex;align-items:baseline;gap:.5rem;
-  margin:.15rem 0 0;padding-left:.2rem}
-.pair .res b{font-family:var(--title);font-size:1.3rem;font-weight:500;color:var(--good);line-height:1.2}
-.pair .res span{font-size:.74rem;color:var(--ink-3)}
 
 /* I5 값을 그림으로 */
 .vfig{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin:.3rem 0 .4rem}
@@ -133,91 +90,16 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
 .vfig p{margin:.2rem 0 0;font-size:.78rem;line-height:1.55;color:var(--ink-2)}
 
 /* B7 픽토그램 — 수를 그림 개수로 */
-.picto{display:grid;grid-template-columns:4.6rem 1fr;gap:.55rem .9rem;align-items:center;margin:.3rem 0 .4rem}
+
 .picto .lb{font-family:var(--title);font-weight:600;font-size:.84rem;color:var(--ink-2)}
-.picto .row{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
-.picto .row .tail{margin-left:.35rem;font-size:.78rem;color:var(--ink-3)}
-.picto .row b{font-family:var(--title);font-weight:600;font-size:.86rem;color:var(--ink)}
-
-/* B8 홈 화면 전후 */
-.homes{display:grid;grid-template-columns:1fr 1fr;gap:1.4rem;margin:.3rem 0 .4rem;max-width:34rem}
-.homes figure{margin:0;text-align:center}
-.homes svg{display:block;margin:0 auto .5rem}
-.homes b{display:block;font-family:var(--title);font-size:.9rem;font-weight:600;color:var(--ink)}
-.homes p{margin:.2rem 0 0;font-size:.78rem;line-height:1.55;color:var(--ink-2)}
-
-/* D1 필름 — 상자 없이 그림만 가로로 */
-.film{display:flex;align-items:flex-end;gap:1.5rem;overflow-x:auto;padding:.2rem .2rem 1rem;margin:.2rem 0 .3rem}
-.film figure{margin:0;flex:0 0 auto;text-align:center}
-.film img{display:block;border-radius:8px;box-shadow:0 3px 14px rgba(30,25,60,.14)}
-.film .dot{width:.55rem;height:.55rem;border-radius:50%;background:#b9b4c6;margin:0 auto .5rem}
-.film figcaption{margin-top:.5rem;font-size:.74rem;line-height:1.5;color:var(--ink-3);max-width:11rem}
-.film b{display:block;font-family:var(--title);font-weight:600;font-size:.88rem;color:var(--ink)}
-.film .d{display:block;font-size:.68rem;color:var(--ink-3);margin-bottom:.1rem}
-.film .thin{max-width:8rem}
 
 /* D2 축 하나에 매단다 */
 .axis{overflow-x:auto;padding-bottom:.6rem;margin:.2rem 0 .3rem}
 .axis svg{display:block;font-family:var(--body)}
 
-/* D3 계단 — 줄어든 자리를 남긴다 */
-.stair{display:flex;align-items:flex-start;gap:1.2rem;overflow-x:auto;padding:.2rem .2rem 1rem;margin:.2rem 0 .3rem}
-.stair figure{margin:0;flex:0 0 auto;text-align:center}
-.stair .box{position:relative;border-radius:9px;background:repeating-linear-gradient(135deg,#f0eff4 0 7px,#e7e5ee 7px 14px)}
-.stair .box img{display:block;border-radius:8px;box-shadow:0 3px 14px rgba(30,25,60,.14)}
-.stair figcaption{margin-top:.5rem;font-size:.74rem;line-height:1.5;color:var(--ink-3)}
-.stair b{display:block;font-family:var(--title);font-weight:600;font-size:.88rem;color:var(--ink)}
-.stair .d{display:block;font-size:.68rem;color:var(--ink-3);margin-bottom:.1rem}
-
-/* ── E 계열 — 그림을 키우고 결정 아홉을 다 살린다 ── */
-
 /* E1 양 끝에 큰 그림, 가운데에 축 */
-.ends{display:grid;grid-template-columns:auto 1fr auto;gap:1.4rem;align-items:center;margin:.4rem 0 .3rem}
-.ends figure{margin:0;text-align:center}
-.ends img{display:block;border-radius:10px;box-shadow:0 4px 18px rgba(30,25,60,.16)}
-.ends figcaption{margin-top:.55rem;font-family:var(--title);font-weight:600;font-size:1rem;color:var(--ink)}
-.ends figcaption span{display:block;font-family:var(--body);font-weight:400;font-size:.72rem;color:var(--ink-3);margin-top:.1rem}
+
 .ends .mid{align-self:stretch;display:flex;flex-direction:column;justify-content:center;min-width:0;overflow-x:auto}
-
-/* E2 한 자리에 겹쳐 얹는다 */
-.stack{display:flex;align-items:flex-start;gap:2rem;flex-wrap:wrap;margin:.4rem 0 .3rem}
-.stack .pile{position:relative;flex:0 0 auto}
-.stack .pile img{display:block;border-radius:10px}
-.stack .pile .lay{position:absolute;left:0;top:0;border-radius:10px;
-  box-shadow:0 4px 16px rgba(30,25,60,.18);outline:2px solid #fbfaff}
-.stack .tag{position:absolute;font-family:var(--title);font-weight:600;font-size:.78rem;
-  color:var(--ink);background:#fbfaffdd;border-radius:6px;padding:.08rem .34rem;white-space:nowrap}
-.stack .why{flex:1 1 15rem;min-width:13rem;margin:0;padding:0;list-style:none}
-.stack .why li{display:grid;grid-template-columns:3rem 1fr;gap:.1rem .6rem;margin-bottom:.5rem;font-size:.8rem;line-height:1.5;color:var(--ink-3)}
-.stack .why b{grid-column:2;font-family:var(--title);font-weight:600;font-size:.9rem;color:var(--ink)}
-.stack .why .d{grid-row:1 / span 2;font-size:.72rem;color:var(--ink-3);padding-top:.15rem}
-
-/* E3 홈 화면 격자 — 사진 대신 칸으로. 작아도 읽힌다 */
-.grid4{display:flex;gap:1.5rem;overflow-x:auto;padding:.2rem .2rem 1rem;margin:.3rem 0 .3rem}
-.grid4 figure{margin:0;flex:0 0 auto;text-align:center}
-.grid4 .ph{display:grid;grid-template-columns:repeat(4,1.5rem);grid-template-rows:repeat(5,1.5rem);
-  gap:.28rem;padding:.5rem;border-radius:12px;background:#f4f3f7;box-shadow:inset 0 0 0 1.5px #e0dee8}
-.grid4 .ph i{border-radius:5px;background:#e4e2ec}
-.grid4 .ph i.on{background:var(--acc)}
-.grid4 figcaption{margin-top:.6rem;font-size:.74rem;line-height:1.5;color:var(--ink-3);max-width:9rem}
-.grid4 b{display:block;font-family:var(--title);font-weight:600;font-size:.95rem;color:var(--ink)}
-.grid4 .d{display:block;font-size:.68rem;color:var(--ink-3);margin-bottom:.15rem}
-.grid4 .cells{display:block;font-variant-numeric:tabular-nums;color:var(--acc);font-weight:600}
-
-/* E4 왼쪽에서 고르면 오른쪽 그림이 바뀐다 */
-.pick{display:grid;grid-template-columns:minmax(14rem,20rem) 1fr;gap:1.6rem;align-items:start;margin:.4rem 0 .3rem}
-.pick ol{margin:0;padding:0;list-style:none;counter-reset:none}
-.pick li{display:grid;grid-template-columns:3rem 1fr;gap:.5rem;padding:.42rem .5rem;border-radius:9px;
-  font-size:.82rem;line-height:1.45;color:var(--ink-3);cursor:default}
-.pick li .d{font-size:.72rem;padding-top:.08rem}
-.pick li b{font-family:var(--title);font-weight:600;font-size:.88rem;color:var(--ink)}
-.pick li.has{cursor:pointer}
-.pick li.has:hover{background:#e6ebf6}
-.pick li.sel{background:var(--card-2)}
-.pick li.sel b{color:var(--acc)}
-.pick .view{position:sticky;top:1rem;text-align:center}
-.pick .view img{display:block;margin:0 auto;border-radius:10px;box-shadow:0 4px 18px rgba(30,25,60,.16)}
-.pick .view p{margin:.7rem 0 0;font-size:.76rem;color:var(--ink-3)}
 
 /* 누르면 크게 — 위젯 그림은 줄여 놓으면 안 읽힌다 */
 .zoomable{cursor:zoom-in}
@@ -230,40 +112,7 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
   opacity:.75;cursor:pointer;background:none;border:0;padding:.2rem .5rem}
 .lb .x:hover{opacity:1}
 
-/* 개발기 — 가로로 미는 틀은 넷이 같다 */
-.evo{display:flex;gap:.8rem;overflow-x:auto;padding:.1rem .1rem .7rem;margin:0 0 .3rem;
-  scroll-snap-type:x proximity}
-.evo .c{flex:0 0 15rem;border-radius:12px;padding:.9rem 1rem 1rem;background:var(--card-2);
-  scroll-snap-align:start;display:flex;flex-direction:column}
-.evo .at{font-size:.7rem;color:var(--ink-3)}
-.evo b{display:block;font-family:var(--title);font-size:1rem;font-weight:600;color:var(--ink);margin-top:.15rem}
-.evo dl{margin:.45rem 0 0;display:grid;grid-template-columns:2.9rem 1fr;gap:.08rem .5rem}
-.evo dt{font-size:.68rem;line-height:1.65;color:var(--ink-3)}
-.evo dd{margin:0;font-size:.78rem;line-height:1.55;color:var(--ink-2)}
-
-/* C2 카드 위에 그림 */
-.evo.shot .c{flex-basis:16.5rem}
-.evo.shot .pic{height:8.4rem;display:flex;align-items:center;justify-content:center;
-  margin:-.3rem -.4rem .6rem;border-radius:9px;background:#f4f3f7}
-.evo.shot .pic img{max-width:100%;max-height:100%;border-radius:6px}
-.evo.shot .pic.none{background:repeating-linear-gradient(135deg,#f0eff4 0 8px,#eae9f0 8px 16px);
-  font-size:.72rem;color:var(--ink-3)}
-
-/* C3 카드 폭이 위젯 크기를 따라간다 */
-.evo.sized .pic{display:flex;align-items:flex-end;margin:-.3rem -.4rem .55rem;
-  border-radius:9px;background:#f4f3f7;padding:.5rem}
-.evo.sized .pic img{width:100%;border-radius:6px}
-.evo.sized .c.w4{flex-basis:16rem}
-.evo.sized .c.w2{flex-basis:9.5rem}
-.evo.sized .c.plain{flex-basis:12rem}
-
 /* C4 위젯 넷을 실제 비율로 한 줄에 */
-.shrink{display:flex;align-items:flex-end;gap:1.6rem;margin:.3rem 0 .5rem;flex-wrap:wrap}
-.shrink figure{margin:0;text-align:center}
-.shrink img{display:block;border-radius:8px;box-shadow:0 3px 14px rgba(30,25,60,.14)}
-.shrink figcaption{margin-top:.45rem;font-size:.74rem;line-height:1.45;color:var(--ink-3)}
-.shrink b{display:block;font-family:var(--title);font-weight:600;font-size:.92rem;color:var(--ink)}
-.shrink .d{display:block;font-size:.68rem;color:var(--ink-3);margin-bottom:.12rem}
 
 @media (max-width:1180px){ .impact{grid-template-columns:1fr} .ba{grid-template-columns:1fr} }
 </style>
@@ -273,83 +122,25 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
 
 <div class="lede">
   <h1>탭마다 다른 판</h1>
-  <p>소개는 출품작 판으로 정해졌다. 나머지 두 탭은 주인공이 달라 같은 손을 쓸 수 없다.</p>
+  <p>탭 셋은 주인공이 달라 같은 손을 쓸 수 없다. 탭마다 하나씩 정했다.</p>
   <p class="sm">약수첩의 실제 「왜 만들었나」와 「개발기」 내용으로 그렸다. 글꼴과 색은 배포된 사이트 그대로다.
-  세 절을 따로 고르면 된다.</p>
+  위젯 그림은 누르면 크게 뜬다.</p>
 </div>
 
 <table class="kinds">
-  <tr><th>탭</th><th>주인공</th><th>읽는 법</th><th>쓸 손</th></tr>
+  <tr><th>탭</th><th>주인공</th><th>읽는 법</th><th>쓰는 손</th></tr>
   <tr><td>소개</td><td>앱 화면</td><td>훑는다 — 무엇인지 몇 초에 알면 된다</td>
-    <td class="set">출품작 판 — 번호 뱃지, 인출선, 줌 콜아웃 (정해짐)</td></tr>
+    <td class="set">출품작 판 — 번호 뱃지, 인출선, 줌 콜아웃</td></tr>
   <tr><td>왜 만들었나</td><td>전과 후의 차이</td><td>따라간다</td>
-    <td>① 전후 네 가지 · ② 막힌 지점 세 가지</td></tr>
+    <td class="set">① 같은 축에 두 가지 · ② 값을 그림으로</td></tr>
   <tr><td>개발기</td><td>시간과 결정</td><td>훑다가 멈춘다</td>
-    <td>③ 가로로 미는 틀은 그대로, 카드만 바꾼다</td></tr>
+    <td class="set">③ 축 하나에 매단다</td></tr>
 </table>
 
-<h2 class="sec">① 전과 후를 어떻게 보이나</h2>
-<p class="secn">흐름으로 볼 수도, 비교로 볼 수도 있다. 같은 내용을 네 가지로.</p>
+<h2 class="sec">① 전과 후</h2>
+<p class="secn">하루 축 한 줄에 들어오는 것과 남는 것을 겹쳐 놓는다.</p>
 
 <div class="deck">
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">B5</span><h3>하루 축 하나에 전과 후를 겹친다</h3></div>
-      <p class="note">오전 4시부터 자정까지 한 축을 깔고 알림이 언제 오는지를 두 줄로 얹는다. 「네 번이 한 번으로」가 세는 것 없이 보인다. 흐름도 표도 아니고 그림 한 장이다.</p>
-    </div>
-    <div class="body mid">
-      <p class="q">알림은 옴. 지우면 끝.</p>
-      <div class="tline">
-        <svg viewBox="0 0 600 168" role="img" aria-label="하루 동안 알림이 오는 때 — 전 네 번, 후 한 번">
-          <!-- 축 -->
-          <line x1="52" y1="140" x2="576" y2="140" stroke="#c9c5d4" stroke-width="1"/>
-          <g fill="#6f6b85" font-size="10" text-anchor="middle">
-            <text x="52" y="156">오전 4시</text><text x="183" y="156">오전 9시</text>
-            <text x="314" y="156">오후 2시</text><text x="445" y="156">오후 7시</text>
-            <text x="576" y="156">자정</text>
-          </g>
-          <g stroke="#e0dde8" stroke-width="1">
-            <line x1="183" y1="24" x2="183" y2="140"/><line x1="314" y1="24" x2="314" y2="140"/>
-            <line x1="445" y1="24" x2="445" y2="140"/>
-          </g>
-
-          <!-- 구간 (약을 먹는 때) -->
-          <g fill="#6f6b85" font-size="9.5" text-anchor="middle">
-            <text x="87" y="20">아침</text><text x="222" y="20">낮</text>
-            <text x="307" y="20">오후</text><text x="418" y="20">밤</text>
-          </g>
-          <g fill="#dfe6f2">
-            <rect x="70" y="26" width="34" height="14" rx="4"/><rect x="205" y="26" width="34" height="14" rx="4"/>
-            <rect x="290" y="26" width="34" height="14" rx="4"/><rect x="401" y="26" width="34" height="14" rx="4"/>
-          </g>
-
-          <!-- 전 -->
-          <text x="4" y="62" fill="#6f6b85" font-size="11" font-weight="600">전</text>
-          <line x1="52" y1="58" x2="576" y2="58" stroke="#e8e6ec" stroke-width="16" stroke-linecap="round"/>
-          <g fill="#C0392B">
-            <circle cx="87" cy="58" r="5"/><circle cx="222" cy="58" r="5"/>
-            <circle cx="307" cy="58" r="5"/><circle cx="418" cy="58" r="5"/>
-          </g>
-          <text x="576" y="62" fill="#C0392B" font-size="11" font-weight="600" text-anchor="end">알림 4번</text>
-
-          <!-- 후 -->
-          <text x="4" y="104" fill="#6f6b85" font-size="11" font-weight="600">후</text>
-          <line x1="52" y1="100" x2="576" y2="100" stroke="#e4ecea" stroke-width="16" stroke-linecap="round"/>
-          <g fill="#2E7D4F">
-            <path d="M83 100l3 3 6-6" stroke="#2E7D4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M218 100l3 3 6-6" stroke="#2E7D4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M414 100l3 3 6-6" stroke="#2E7D4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          </g>
-          <circle cx="359" cy="100" r="5" fill="#C0392B"/>
-          <line x1="307" y1="100" x2="352" y2="100" stroke="#C0392B" stroke-width="1" stroke-dasharray="3 3"/>
-          <text x="359" y="87" fill="#C0392B" font-size="9.5" text-anchor="middle">두 시간 뒤 한 번</text>
-          <text x="576" y="104" fill="#2E7D4F" font-size="11" font-weight="600" text-anchor="end">알림 1번</text>
-        </svg>
-      </div>
-      <p class="cap">빨간 점이 알림, 초록 체크가 미리 챙겨 알림이 안 온 구간. 오후만 놓쳐 두 시간 뒤 한 번 왔다.</p>
-    </div>
-  </section>
 
   <section class="card">
     <div class="meta">
@@ -410,159 +201,12 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
     </div>
   </section>
 
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">B7</span><h3>픽토그램 — 수를 그림 개수로</h3></div>
-      <p class="note">축도 시각도 버리고 개수만 남긴다. 네 개와 한 개가 크기로 바로 보여 가장 빨리 읽힌다. 대신 언제 오는지는 사라진다.</p>
-    </div>
-    <div class="body">
-      <p class="q">알림은 옴. 지우면 끝.</p>
-      <div class="picto">
-        <div class="lb">전</div>
-        <div class="row">
-          <svg width="112" height="26" viewBox="0 0 112 26" aria-label="알림 네 번">
-            <g fill="#C0392B"><rect x="0" y="4" width="22" height="18" rx="4"/><rect x="30" y="4" width="22" height="18" rx="4"/>
-              <rect x="60" y="4" width="22" height="18" rx="4"/><rect x="90" y="4" width="22" height="18" rx="4"/></g>
-          </svg>
-          <b>알림 4번</b><span class="tail">먹었든 안 먹었든</span>
-        </div>
-        <div class="lb"></div>
-        <div class="row">
-          <svg width="112" height="26" viewBox="0 0 112 26" aria-label="남는 기록 없음">
-            <g fill="none" stroke="#c9c5d4" stroke-width="1.4" stroke-dasharray="3 3">
-              <rect x="0.7" y="4.7" width="20.6" height="16.6" rx="4"/><rect x="30.7" y="4.7" width="20.6" height="16.6" rx="4"/>
-              <rect x="60.7" y="4.7" width="20.6" height="16.6" rx="4"/><rect x="90.7" y="4.7" width="20.6" height="16.6" rx="4"/></g>
-          </svg>
-          <b>남는 기록 0</b><span class="tail">지우면 끝</span>
-        </div>
-        <div class="lb">후</div>
-        <div class="row">
-          <svg width="112" height="26" viewBox="0 0 112 26" aria-label="알림 한 번">
-            <rect x="0" y="4" width="22" height="18" rx="4" fill="#C0392B"/>
-            <g fill="none" stroke="#dcd8e4" stroke-width="1.4"><rect x="30.7" y="4.7" width="20.6" height="16.6" rx="4"/>
-              <rect x="60.7" y="4.7" width="20.6" height="16.6" rx="4"/><rect x="90.7" y="4.7" width="20.6" height="16.6" rx="4"/></g>
-          </svg>
-          <b>알림 1번</b><span class="tail">놓친 구간에만</span>
-        </div>
-        <div class="lb"></div>
-        <div class="row">
-          <svg width="112" height="26" viewBox="0 0 112 26" aria-label="기록 네 건">
-            <g fill="#2E7D4F"><rect x="0" y="4" width="22" height="18" rx="4"/><rect x="30" y="4" width="22" height="18" rx="4"/>
-              <rect x="60" y="4" width="22" height="18" rx="4"/><rect x="90" y="4" width="22" height="18" rx="4"/></g>
-          </svg>
-          <b>기록 4건</b><span class="tail">날짜별로 쌓임</span>
-        </div>
-      </div>
-      <p class="cap">칸 하나가 한 번. 빈 칸은 그날 안 생긴 것.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">B8</span><h3>홈 화면 전후 — 무엇이 생겼나</h3></div>
-      <p class="note">알림도 기록도 아닌 세 번째 자리. 앱을 깔기 전과 뒤의 홈 화면을 나란히 놓아 「앱을 안 열어도 된다」를 그림으로 말한다. I5 와 같은 인포그래픽 손이다.</p>
-    </div>
-    <div class="body">
-      <p class="q">알림은 옴. 지우면 끝.</p>
-      <div class="homes">
-        <figure>
-          <svg width="150" height="120" viewBox="0 0 150 120" aria-label="전 — 홈 화면에 아무것도 없다">
-            <rect x="1" y="1" width="148" height="118" rx="12" fill="#f2f0f5" stroke="#dcd8e4"/>
-            <g fill="#e2dfe9">
-              <rect x="16" y="16" width="26" height="26" rx="7"/><rect x="52" y="16" width="26" height="26" rx="7"/>
-              <rect x="88" y="16" width="26" height="26" rx="7"/><rect x="124" y="16" width="10" height="26" rx="5"/>
-              <rect x="16" y="52" width="26" height="26" rx="7"/><rect x="52" y="52" width="26" height="26" rx="7"/>
-              <rect x="88" y="52" width="26" height="26" rx="7"/><rect x="124" y="52" width="10" height="26" rx="5"/>
-            </g>
-            <text x="75" y="99" fill="#9a95a8" font-size="10" text-anchor="middle">확인하려면</text>
-            <text x="75" y="111" fill="#9a95a8" font-size="10" text-anchor="middle">앱을 열어야 한다</text>
-          </svg>
-          <b>전</b>
-          <p>홈 화면에 아무 표시도 없다. 먹었는지는 기억에 의존.</p>
-        </figure>
-        <figure>
-          <svg width="150" height="120" viewBox="0 0 150 120" aria-label="후 — 2×1 위젯이 생겼다">
-            <rect x="1" y="1" width="148" height="118" rx="12" fill="#f2f0f5" stroke="#dcd8e4"/>
-            <g fill="#e2dfe9">
-              <rect x="16" y="16" width="26" height="26" rx="7"/><rect x="52" y="16" width="26" height="26" rx="7"/>
-              <rect x="88" y="16" width="26" height="26" rx="7"/><rect x="124" y="16" width="10" height="26" rx="5"/>
-            </g>
-            <rect x="16" y="52" width="98" height="26" rx="7" fill="#2E7D4F" opacity=".14"/>
-            <rect x="16" y="52" width="98" height="26" rx="7" fill="none" stroke="#2E7D4F" stroke-width="1.6"/>
-            <g stroke="#2E7D4F" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M28 65l3 3 6-6"/><path d="M52 65l3 3 6-6"/>
-            </g>
-            <circle cx="82" cy="65" r="6" fill="none" stroke="#2E7D4F" stroke-width="1.4"/>
-            <text x="82" y="68.5" fill="#2E7D4F" font-size="8" text-anchor="middle">1</text>
-            <circle cx="104" cy="65" r="4.5" fill="#C0392B" opacity=".65"/>
-            <rect x="124" y="52" width="10" height="26" rx="5" fill="#e2dfe9"/>
-            <text x="75" y="99" fill="#2E7D4F" font-size="10" text-anchor="middle">한 번 보고 끝</text>
-            <text x="75" y="111" fill="#9a95a8" font-size="10" text-anchor="middle">2×1 칸 하나</text>
-          </svg>
-          <b>후</b>
-          <p>구간별 체크와 남은 개수, 인공눈물 경과가 한 줄에.</p>
-        </figure>
-      </div>
-      <p class="cap">위젯 안 배치는 실제 2×1 판을 줄여 그린 것.</p>
-    </div>
-  </section>
 </div>
 
-<h2 class="sec">② 막힌 지점과 한 것</h2>
-<p class="secn">세 덩이에 값이 하나씩 붙는다. 카드가 지금 판인데 값이 카드마다 떨어져 있어 견주기 어렵다.</p>
+<h2 class="sec">② 막힌 지점</h2>
+<p class="secn">숫자를 읽지 않아도 크기 차이로 보이게 그린다.</p>
 
 <div class="deck">
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">I1</span><h3>카드 셋</h3><span class="tag">지금 쓰는 것</span></div>
-      <p class="note">한 덩이가 한 카드. 값(0회 · 2×1 · 2탭)이 카드 바닥에 하나씩 떨어져 있어 세 값을 한 줄로 못 읽는다.</p>
-    </div>
-    <div class="body mid">
-      <div class="impact">
-        <section><div class="lb">알림을 지우면 끝</div><h5>먹었는지 기록 없음, 기억에 의존</h5>
-          <p>체크가 곧 알림 해제. 미리 체크한 구간은 알림 없음, 놓친 구간에만 한 번</p>
-          <div class="v">0회<small>미리 체크한 구간에 오는 알림</small></div></section>
-        <section><div class="lb">위젯이 없음</div><h5>오늘 챙긴 것을 보려면 앱 실행</h5>
-          <p>홈 화면 위젯 — 다 챙겼으면 체크, 남았으면 개수</p>
-          <div class="v">2×1<small>홈 화면 칸</small></div></section>
-        <section><div class="lb">간격으로 넣는 약</div><h5>정해진 시각이 없어 시각 알림 앱으론 불가</h5>
-          <p>마지막 점안 후 경과 시간을 위젯 띠에. 간격이 지나면 빨강</p>
-          <div class="v">2탭<small>기록 · 4초 안에 두 번</small></div></section>
-      </div>
-      <p class="cap">앱 동작 기준. 경과 표시 간격은 설정값(기본 60분).</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">I4</span><h3>막힌 것과 한 것을 좌우로 잇는다</h3></div>
-      <p class="note">왼쪽이 막혔던 것, 오른쪽이 그것을 푼 것, 그 아래에 결과 값. 표가 아니라 짝이라서 한 쌍씩 읽고 끊을 수 있다. 빨강과 초록이 어느 쪽이 문제였는지를 색으로 말한다.</p>
-    </div>
-    <div class="body mid">
-      <div class="pair">
-        <div class="r">
-          <div class="x"><div class="nm">알림을 지우면 끝</div><div class="nt">먹었는지가 어디에도 안 남아 기억에 의존</div></div>
-          <div class="ar">→</div>
-          <div class="o"><div class="nm">체크가 곧 알림 해제</div><div class="nt">미리 체크한 구간은 알림 없음, 놓친 구간에만 한 번</div></div>
-          <div class="res"><b>0회</b><span>미리 체크한 구간에 오는 알림</span></div>
-        </div>
-        <div class="r">
-          <div class="x"><div class="nm">위젯이 없음</div><div class="nt">오늘 챙긴 것을 보려면 앱을 열어야 함</div></div>
-          <div class="ar">→</div>
-          <div class="o"><div class="nm">홈 화면 위젯</div><div class="nt">다 챙겼으면 체크, 남았으면 개수</div></div>
-          <div class="res"><b>2×1</b><span>홈 화면에서 차지하는 칸</span></div>
-        </div>
-        <div class="r">
-          <div class="x"><div class="nm">간격으로 넣는 약</div><div class="nt">인공눈물은 정해진 시각이 없어 시각 알림 앱으론 불가</div></div>
-          <div class="ar">→</div>
-          <div class="o"><div class="nm">경과 시간을 위젯 띠에</div><div class="nt">마지막 점안 뒤 몇 시간. 간격이 지나면 빨강</div></div>
-          <div class="res"><b>2탭</b><span>기록하는 데 드는 손</span></div>
-        </div>
-      </div>
-      <p class="cap">앱 동작 기준. 경과 표시 간격은 설정값(기본 60분).</p>
-    </div>
-  </section>
 
   <section class="card">
     <div class="meta">
@@ -617,176 +261,10 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
   </section>
 </div>
 
-<h2 class="sec">③ 개발기 — 가로로 미는 카드를 어떻게 바꾸나</h2>
-<p class="secn">미는 틀은 그대로 둔다. 카드 안만 바꾼다 — 지금은 여덟 장 모두 글만 들었다.</p>
+<h2 class="sec">③ 개발기</h2>
+<p class="secn">아홉 결정을 한 줄에 세우고 위젯이 바뀐 넷만 그림으로 올린다.</p>
 
 <div class="deck">
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">C1</span><h3>지금 카드 — 글만</h3><span class="tag">지금 쓰는 것</span></div>
-      <p class="note">날짜, 제목, 막힘 · 한 것 · 결과. 위젯이 줄어드는 것이 이 편의 이야기인데 카드에는 그 그림이 없다.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="evo">
-        <div class="c"><div class="at">8월 23일</div><b>4×3 — 네 구간을 다 펼침</b>
-          <dl><dt>막힘</dt><dd>네 구간을 한눈에 보여 주려니 넣을 것이 많음</dd>
-              <dt>한 것</dt><dd>구간마다 한 줄. 약은 위젯에서 눌러 체크</dd>
-              <dt>결과</dt><dd>홈 화면 한 판을 다 씀</dd></dl></div>
-        <div class="c"><div class="at">8월 24일</div><b>기록 영구 보관</b>
-          <dl><dt>막힘</dt><dd>체크가 그날만 살고 다음 날 사라짐</dd>
-              <dt>한 것</dt><dd>날짜별로 쌓아 저장</dd>
-              <dt>결과</dt><dd>지난 기록 다시 보기 가능</dd></dl></div>
-        <div class="c"><div class="at">8월 25일</div><b>주간 약통 알림</b>
-          <dl><dt>막힘</dt><dd>일주일치 약통 채우기를 자꾸 잊음</dd>
-              <dt>한 것</dt><dd>토요일 아침 알림 하나</dd>
-              <dt>결과</dt><dd>위젯에는 안 세움</dd></dl></div>
-        <div class="c"><div class="at">8월 30일</div><b>4×2 — 보는 자리로</b>
-          <dl><dt>막힘</dt><dd>위젯에서 하는 일은 상태 확인뿐</dd>
-              <dt>한 것</dt><dd>터치 입력을 걷어내고 두 줄로 접음</dd>
-              <dt>결과</dt><dd>4×3 에서 4×2 로</dd></dl></div>
-        <div class="c"><div class="at">9월 1일</div><b>4×1 — 한 줄 높이로</b>
-          <dl><dt>막힘</dt><dd>두 줄도 홈 화면을 많이 차지</dd>
-              <dt>한 것</dt><dd>네 구간을 두 열로 눌러 담음</dd>
-              <dt>결과</dt><dd>4×1</dd></dl></div>
-      </div>
-      <p class="cap">오른쪽으로 세 장 더 — 2×1, 이름과 아이콘, 인공눈물 하루 경계, 채우기 알림 미루기.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">C2</span><h3>카드 위에 그림을 얹는다</h3></div>
-      <p class="note">그림이 있는 날은 카드 위쪽에 위젯을, 없는 날은 빗금 자리를 둔다. 카드 높이가 고르고 밀 때 그림이 흐르듯 지나간다.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="evo shot">
-        <div class="c"><div class="pic"><img src="img/pillbox/evo-1.png" alt="4×3 위젯"></div>
-          <div class="at">8월 23일</div><b>4×3 — 네 구간을 다 펼침</b>
-          <dl><dt>막힘</dt><dd>넣을 것이 많음</dd><dt>한 것</dt><dd>구간마다 한 줄</dd>
-              <dt>결과</dt><dd>홈 화면 한 판을 다 씀</dd></dl></div>
-        <div class="c"><div class="pic none">그림 없음</div>
-          <div class="at">8월 24일</div><b>기록 영구 보관</b>
-          <dl><dt>막힘</dt><dd>체크가 그날만 살고 사라짐</dd><dt>한 것</dt><dd>날짜별로 쌓아 저장</dd>
-              <dt>결과</dt><dd>지난 기록 다시 보기</dd></dl></div>
-        <div class="c"><div class="pic"><img src="img/pillbox/evo-2.png" alt="4×2 위젯"></div>
-          <div class="at">8월 30일</div><b>4×2 — 보는 자리로</b>
-          <dl><dt>막힘</dt><dd>하는 일은 상태 확인뿐</dd><dt>한 것</dt><dd>터치를 걷어내고 두 줄로</dd>
-              <dt>결과</dt><dd>4×3 에서 4×2 로</dd></dl></div>
-        <div class="c"><div class="pic"><img src="img/pillbox/evo-3.png" alt="4×1 위젯"></div>
-          <div class="at">9월 1일</div><b>4×1 — 한 줄 높이로</b>
-          <dl><dt>막힘</dt><dd>두 줄도 자리를 많이 차지</dd><dt>한 것</dt><dd>네 구간을 두 열로</dd>
-              <dt>결과</dt><dd>4×1</dd></dl></div>
-        <div class="c"><div class="pic"><img src="img/pillbox/evo-4.png" alt="2×1 위젯"></div>
-          <div class="at">9월 2일</div><b>2×1 — 폭이 반</b>
-          <dl><dt>막힘</dt><dd>폭이 절반이면 넷을 다 못 그림</dd><dt>한 것</dt><dd>지금 구간만 약을 그림</dd>
-              <dt>결과</dt><dd>지금 구간 약은 오히려 커짐</dd></dl></div>
-      </div>
-      <p class="cap">그림 자리를 고정 높이로 잡아 위젯이 가운데 선다. 그림 없는 날은 빗금.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">C3</span><h3>카드 폭이 위젯 크기를 따라간다</h3></div>
-      <p class="note">4×3 카드는 넓고 2×1 카드는 좁다. 미는 동안 카드가 실제로 줄어들어 이야기가 손끝에서 일어난다. 대신 카드 높이까지 그림을 따라가 아랫줄이 안 맞고, 글 칸이 좁아져 마지막 카드는 글을 줄여야 한다.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="evo sized">
-        <div class="c w4"><div class="pic"><img src="img/pillbox/evo-1.png" alt="4×3 위젯"></div>
-          <div class="at">8월 23일</div><b>4×3</b>
-          <dl><dt>막힘</dt><dd>넣을 것이 많음</dd><dt>한 것</dt><dd>구간마다 한 줄</dd></dl></div>
-        <div class="c plain">
-          <div class="at">8월 24일</div><b>기록 영구 보관</b>
-          <dl><dt>막힘</dt><dd>체크가 그날만 살고 사라짐</dd><dt>한 것</dt><dd>날짜별로 쌓아 저장</dd></dl></div>
-        <div class="c w4"><div class="pic"><img src="img/pillbox/evo-2.png" alt="4×2 위젯"></div>
-          <div class="at">8월 30일</div><b>4×2</b>
-          <dl><dt>막힘</dt><dd>하는 일은 상태 확인뿐</dd><dt>한 것</dt><dd>터치를 걷어냄</dd></dl></div>
-        <div class="c w4"><div class="pic"><img src="img/pillbox/evo-3.png" alt="4×1 위젯"></div>
-          <div class="at">9월 1일</div><b>4×1</b>
-          <dl><dt>막힘</dt><dd>두 줄도 자리를 차지</dd><dt>한 것</dt><dd>두 열로 눌러 담음</dd></dl></div>
-        <div class="c w2"><div class="pic"><img src="img/pillbox/evo-4.png" alt="2×1 위젯"></div>
-          <div class="at">9월 2일</div><b>2×1</b>
-          <dl><dt>막힘</dt><dd>넷을 다 못 그림</dd><dt>한 것</dt><dd>지금 구간만</dd></dl></div>
-      </div>
-      <p class="cap">그림 없는 날은 가운데 폭으로 둔다.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">C4</span><h3>줄어드는 줄을 먼저 보이고, 카드는 그대로</h3></div>
-      <p class="note">위젯 넷을 실제 비율로 맨 위에 한 줄 놓아 결론을 먼저 보인 뒤, 카드는 지금처럼 글만 들고 옆으로 민다. 카드를 안 건드리는 가장 작은 변경.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="shrink">
-        <figure><img src="img/pillbox/evo-1.png" width="229" alt="4×3 위젯">
-          <figcaption><b>4×3</b><span class="d">8월 23일</span>네 구간을 다 펼침</figcaption></figure>
-        <figure><img src="img/pillbox/evo-2.png" width="229" alt="4×2 위젯">
-          <figcaption><b>4×2</b><span class="d">8월 30일</span>터치를 걷어내고 두 줄로</figcaption></figure>
-        <figure><img src="img/pillbox/evo-3.png" width="229" alt="4×1 위젯">
-          <figcaption><b>4×1</b><span class="d">9월 1일</span>두 열로 눌러 담음</figcaption></figure>
-        <figure><img src="img/pillbox/evo-4.png" width="116" alt="2×1 위젯">
-          <figcaption><b>2×1</b><span class="d">9월 2일</span>지금 구간만 그림</figcaption></figure>
-      </div>
-      <p class="cap">그때 치수 그대로 다시 그린 그림 — 줄어든 크기가 실제 비율이다.</p>
-      <div class="evo">
-        <div class="c"><div class="at">8월 24일</div><b>기록 영구 보관</b>
-          <dl><dt>막힘</dt><dd>체크가 그날만 살고 다음 날 사라짐</dd>
-              <dt>한 것</dt><dd>날짜별로 쌓아 저장</dd>
-              <dt>결과</dt><dd>지난 기록 다시 보기 가능</dd></dl></div>
-        <div class="c"><div class="at">8월 25일</div><b>주간 약통 알림</b>
-          <dl><dt>막힘</dt><dd>일주일치 약통 채우기를 자꾸 잊음</dd>
-              <dt>한 것</dt><dd>토요일 아침 알림 하나</dd>
-              <dt>결과</dt><dd>위젯에는 안 세움</dd></dl></div>
-        <div class="c"><div class="at">9월 2일</div><b>이름과 아이콘</b>
-          <dl><dt>막힘</dt><dd>«약통» 은 경구약만 가리켜 연고·안약이 빠짐</dd>
-              <dt>한 것</dt><dd>「약수첩」으로. 아이콘은 앱 넷 공통 규칙</dd>
-              <dt>결과</dt><dd>후보 24안 중 원색은 모두 제외</dd></dl></div>
-        <div class="c"><div class="at">9월 4일</div><b>인공눈물 하루 경계</b>
-          <dl><dt>막힘</dt><dd>«N시간 전» 이 자정을 넘으면 어제 것이 오늘 것처럼</dd>
-              <dt>한 것</dt><dd>하루 경계를 새벽 3시로</dd>
-              <dt>결과</dt><dd>오늘 기록이 없으면 「오늘 아직」</dd></dl></div>
-        <div class="c"><div class="at">9월 5일</div><b>채우기 알림 미루기</b>
-          <dl><dt>막힘</dt><dd>토요일 아침에 약속이 있으면 못 채움</dd>
-              <dt>한 것</dt><dd>알림에 «오후 9시로 미루기»</dd>
-              <dt>결과</dt><dd>그날 저녁에 한 번 더</dd></dl></div>
-      </div>
-      <p class="cap">위젯 크기가 바뀐 날 넷은 위 줄이 맡으므로 카드에서 뺐다 — 여덟 장이 다섯 장으로 준다.</p>
-    </div>
-  </section>
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">D1</span><h3>필름 — 상자를 없애고 그림만 가로로</h3></div>
-      <p class="note">카드 상자를 걷어낸다. 위젯은 실제 비율 그대로, 글은 그림 아래 두 줄. 그림이 없는 날은 점 하나로 자리만 잡아 흐름이 안 끊긴다. 보이는 것이 곧 위젯이라 상자가 할 일이 없다.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="film">
-        <figure><img src="img/pillbox/evo-1.png" width="200" alt="4×3 위젯">
-          <figcaption><b>4×3</b><span class="d">8월 23일</span>구간마다 한 줄. 홈 화면 한 판을 다 씀</figcaption></figure>
-        <figure><div class="dot"></div>
-          <figcaption class="thin"><b>기록 보관</b><span class="d">8월 24일</span>날짜별로 쌓아 저장</figcaption></figure>
-        <figure><div class="dot"></div>
-          <figcaption class="thin"><b>주간 알림</b><span class="d">8월 25일</span>토요일 아침 한 번</figcaption></figure>
-        <figure><img src="img/pillbox/evo-2.png" width="200" alt="4×2 위젯">
-          <figcaption><b>4×2</b><span class="d">8월 30일</span>터치를 걷어내고 두 줄로 접음</figcaption></figure>
-        <figure><img src="img/pillbox/evo-3.png" width="200" alt="4×1 위젯">
-          <figcaption><b>4×1</b><span class="d">9월 1일</span>네 구간을 두 열로 눌러 담음</figcaption></figure>
-        <figure><img src="img/pillbox/evo-4.png" width="101" alt="2×1 위젯">
-          <figcaption class="thin"><b>2×1</b><span class="d">9월 2일</span>지금 구간만 약을 그림</figcaption></figure>
-        <figure><div class="dot"></div>
-          <figcaption class="thin"><b>하루 경계</b><span class="d">9월 4일</span>새벽 3시로</figcaption></figure>
-        <figure><div class="dot"></div>
-          <figcaption class="thin"><b>알림 미루기</b><span class="d">9월 5일</span>오후 9시로</figcaption></figure>
-      </div>
-      <p class="cap">그림은 그때 치수 그대로. 바닥을 맞춰 놓아 줄어든 높이가 그대로 보인다.</p>
-    </div>
-  </section>
 
   <section class="card">
     <div class="meta">
@@ -808,169 +286,6 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
         </svg>
       </div>
       <p class="cap">그림 바닥과 치수 라벨 사이를 22px 띄워 글자가 그림에 안 물린다. 폭이 좁아지면 가로로 밀린다.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">D3</span><h3>계단 — 줄어든 자리를 빗금으로 남긴다</h3></div>
-      <p class="note">위젯 뒤에 첫 판(4×3)의 자리를 빗금으로 깔아 둔다. 오른쪽으로 갈수록 빗금이 드러나 <b>얼마나 줄었는지</b>가 빈 자리로 보인다. 줄어든 것이 이야기인 편에만 쓸 수 있는 손이다.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="stair">
-        <figure><div class="box" style="width:200px;height:260px">
-            <img src="img/pillbox/evo-1.png" width="200" alt="4×3 위젯"></div>
-          <figcaption><b>4×3</b><span class="d">8월 23일</span>네 구간을 다 펼침</figcaption></figure>
-        <figure><div class="box" style="width:200px;height:260px">
-            <img src="img/pillbox/evo-2.png" width="200" alt="4×2 위젯"></div>
-          <figcaption><b>4×2</b><span class="d">8월 30일</span>터치를 걷어냄</figcaption></figure>
-        <figure><div class="box" style="width:200px;height:260px">
-            <img src="img/pillbox/evo-3.png" width="200" alt="4×1 위젯"></div>
-          <figcaption><b>4×1</b><span class="d">9월 1일</span>두 열로 눌러 담음</figcaption></figure>
-        <figure><div class="box" style="width:200px;height:260px">
-            <img src="img/pillbox/evo-4.png" width="101" alt="2×1 위젯"></div>
-          <figcaption><b>2×1</b><span class="d">9월 2일</span>지금 구간만 그림</figcaption></figure>
-      </div>
-      <p class="cap">빗금이 4×3 이 차지하던 자리. 마지막 판은 그 자리의 여덟 분의 일만 쓴다.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">E1</span><h3>양 끝에 큰 그림, 가운데에 결정</h3></div>
-      <p class="note">처음과 끝만 그림으로 크게 놓는다(원본의 45%). 4×3 과 2×1 은 나란히 두면 그 자체로 전후라 가운데를 채울 필요가 없다. 사이에 있었던 아홉 결정은 축 위에 글로 선다 — 위가 위젯 치수, 아래가 나머지 다섯.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="ends">
-        <figure><img src="img/pillbox/evo-1.png" width="340" alt="4×3 위젯">
-          <figcaption>4×3<span>8월 23일 — 네 구간을 다 펼침</span></figcaption></figure>
-        <div class="mid">
-          <svg width="880" height="290" viewBox="0 0 880 290" role="img" aria-label="열나흘 사이의 결정 아홉">
-            <line x1="20" y1="170" x2="860" y2="170" stroke="#c9c5d4" stroke-width="1"/>
-            <g stroke="#dcd8e4" stroke-width="1">
-              <line x1="20" y1="165" x2="20" y2="175"/><line x1="85" y1="165" x2="85" y2="175"/>
-              <line x1="149" y1="165" x2="149" y2="175"/><line x1="472" y1="165" x2="472" y2="175"/>
-              <line x1="601" y1="165" x2="601" y2="175"/><line x1="666" y1="165" x2="666" y2="175"/>
-              <line x1="795" y1="165" x2="795" y2="175"/><line x1="860" y1="165" x2="860" y2="175"/>
-            </g>
-            <g fill="#6f6b85" font-size="10.5" text-anchor="middle">
-              <text x="20" y="190">8/23</text><text x="472" y="190">8/30</text>
-              <text x="601" y="190">9/1</text><text x="860" y="190">9/5</text>
-            </g>
-            <image href="img/pillbox/evo-2.png" x="427" y="52" width="90" height="76"/>
-            <image href="img/pillbox/evo-3.png" x="556" y="93" width="90" height="35"/>
-            <g stroke="#8a6a3c" stroke-width="1.4">
-              <line x1="472" y1="163" x2="472" y2="152"/><line x1="601" y1="163" x2="601" y2="152"/>
-            </g>
-            <g fill="#8a6a3c"><circle cx="472" cy="170" r="4"/><circle cx="601" cy="170" r="4"/></g>
-            <g font-size="12" font-weight="600" fill="#221f2b" text-anchor="middle">
-              <text x="472" y="146">4×2</text><text x="601" y="146">4×1</text>
-            </g>
-            <g stroke="#b9b4c6" stroke-width="1.2">
-              <line x1="85" y1="177" x2="85" y2="208"/><line x1="149" y1="177" x2="149" y2="236"/>
-              <line x1="666" y1="177" x2="666" y2="208"/><line x1="795" y1="177" x2="795" y2="236"/>
-              <line x1="860" y1="177" x2="860" y2="208"/>
-            </g>
-            <g fill="#6f6b85"><circle cx="85" cy="170" r="3"/><circle cx="149" cy="170" r="3"/>
-              <circle cx="666" cy="170" r="3"/><circle cx="795" cy="170" r="3"/><circle cx="860" cy="170" r="3"/></g>
-            <g font-size="11" fill="#3a3646">
-              <text x="85" y="222" text-anchor="middle">기록 영구 보관</text>
-              <text x="149" y="250" text-anchor="middle">주간 약통 알림</text>
-              <text x="666" y="222" text-anchor="middle">이름과 아이콘</text>
-              <text x="795" y="250" text-anchor="middle">인공눈물 하루 경계</text>
-              <text x="860" y="222" text-anchor="end">채우기 알림 미루기</text>
-            </g>
-          </svg>
-        </div>
-        <figure><img src="img/pillbox/evo-4.png" width="172" alt="2×1 위젯">
-          <figcaption>2×1<span>9월 2일 — 지금 구간만</span></figcaption></figure>
-      </div>
-      <p class="cap">그림 둘이 원본의 45%라 약 아이콘과 체크가 읽힌다. 가운데 축은 폭이 좁아지면 가로로 밀린다.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">E2</span><h3>한 자리에 겹쳐 얹는다</h3></div>
-      <p class="note">넉 장을 늘어놓지 않고 <b>같은 왼쪽 위 모서리에 겹친다</b>. 큰 판이 뒤에 깔리고 작아진 판이 앞에 얹혀, 줄어든 몫이 뒤로 드러난 띠가 된다. 그림은 한 장 크기(원본의 45%)를 그대로 쓴다.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="stack">
-        <div class="pile" style="width:420px;height:452px">
-          <img src="img/pillbox/evo-1.png" width="340" alt="4×3 위젯" style="box-shadow:0 4px 16px rgba(30,25,60,.12)">
-          <img class="lay" src="img/pillbox/evo-2.png" width="340" alt="4×2 위젯">
-          <img class="lay" src="img/pillbox/evo-3.png" width="340" alt="4×1 위젯">
-          <img class="lay" src="img/pillbox/evo-4.png" width="172" alt="2×1 위젯">
-          <span class="tag" style="left:348px;top:426px">4×3</span>
-          <span class="tag" style="left:348px;top:272px">4×2</span>
-          <span class="tag" style="left:348px;top:118px">4×1</span>
-          <span class="tag" style="left:184px;top:60px">2×1</span>
-        </div>
-        <ul class="why">
-          <li><span class="d">8/23</span><b>4×3 — 네 구간을 다 펼침</b><span>홈 화면 한 판을 다 썼다</span></li>
-          <li><span class="d">8/24</span><b>기록을 영구 보관</b><span>날짜별로 쌓아 저장</span></li>
-          <li><span class="d">8/25</span><b>주간 약통 알림</b><span>토요일 아침 한 번</span></li>
-          <li><span class="d">8/30</span><b>4×2 — 터치를 걷어냄</b><span>두 줄로 접었다</span></li>
-          <li><span class="d">9/1</span><b>4×1 — 두 열로 눌러 담음</b><span>네 구간이 한 줄에</span></li>
-          <li><span class="d">9/2</span><b>2×1 — 지금 구간만</b><span>나머지는 체크 표시로</span></li>
-          <li><span class="d">9/2</span><b>이름과 아이콘</b><span></span></li>
-          <li><span class="d">9/4</span><b>인공눈물 하루 경계</b><span>새벽 3시로</span></li>
-          <li><span class="d">9/5</span><b>채우기 알림 미루기</b><span>오후 9시로</span></li>
-        </ul>
-      </div>
-      <p class="cap">뒤로 드러난 띠가 곧 줄어든 몫. 오른쪽 목록이 아홉 결정을 다 받는다.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">E3</span><h3>홈 화면 칸으로 — 사진 대신 격자</h3></div>
-      <p class="note">스크린샷을 줄이면 안 읽히지만 <b>네모는 작아져도 읽힌다</b>. 홈 화면 4×5 격자를 그리고 위젯이 먹는 칸만 칠한다. 12칸에서 2칸으로 줄어든 게 한눈에 들어오고, 스크린샷을 안 써서 아무리 작아도 안 뭉개진다.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="grid4">
-        <figure><div class="ph"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <figcaption><span class="d">8월 23일</span><b>4×3</b><span class="cells">12칸</span>네 구간을 다 펼침</figcaption></figure>
-        <figure><div class="ph"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <figcaption><span class="d">8월 30일</span><b>4×2</b><span class="cells">8칸</span>터치를 걷어내고 두 줄로</figcaption></figure>
-        <figure><div class="ph"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <figcaption><span class="d">9월 1일</span><b>4×1</b><span class="cells">4칸</span>네 구간을 두 열로 눌러 담음</figcaption></figure>
-        <figure><div class="ph"><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-          <figcaption><span class="d">9월 2일</span><b>2×1</b><span class="cells">2칸</span>지금 구간만 약을 그림</figcaption></figure>
-      </div>
-      <p class="cap">열흘 만에 홈 화면의 12칸이 2칸이 됐다. 나머지 결정 다섯은 이 아래 목록으로 받는다.</p>
-    </div>
-  </section>
-
-  <section class="card">
-    <div class="meta">
-      <div class="hd"><span class="no">E4</span><h3>왼쪽에서 고르면 오른쪽이 바뀐다</h3></div>
-      <p class="note">아홉 결정을 왼쪽에 세로로 다 세우고, 그림은 오른쪽 한 자리에서 갈아 끼운다. 그림이 한 장뿐이라 <b>크게 쓸 수 있고</b>(원본의 52%), 그림이 없는 결정도 같은 줄에 서서 밀려나지 않는다.</p>
-    </div>
-    <div class="body wide">
-      <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
-      <div class="pick" id="pick1">
-        <ol>
-          <li class="has sel" data-img="evo-1" data-cap="4×3 — 네 구간이 각각 한 줄을 차지한다"><span class="d">8/23</span><span><b>4×3 — 네 구간을 다 펼침</b><br>홈 화면 한 판을 다 썼다</span></li>
-          <li><span class="d">8/24</span><span><b>기록을 영구 보관</b><br>날짜별로 쌓아 저장</span></li>
-          <li><span class="d">8/25</span><span><b>주간 약통 알림</b><br>토요일 아침 한 번</span></li>
-          <li class="has" data-img="evo-2" data-cap="4×2 — 터치를 걷어내고 두 줄로 접었다"><span class="d">8/30</span><span><b>4×2 — 터치를 걷어냄</b><br>눌러서 체크하던 것을 뺐다</span></li>
-          <li class="has" data-img="evo-3" data-cap="4×1 — 네 구간이 두 열에 들어간다"><span class="d">9/1</span><span><b>4×1 — 두 열로 눌러 담음</b><br>한 줄에 네 구간</span></li>
-          <li class="has" data-img="evo-4" data-cap="2×1 — 지금 구간만 약을 그리고 나머지는 체크로"><span class="d">9/2</span><span><b>2×1 — 지금 구간만</b><br>나머지는 체크 표시로</span></li>
-          <li><span class="d">9/2</span><span><b>이름과 아이콘</b></span></li>
-          <li><span class="d">9/4</span><span><b>인공눈물 하루 경계</b><br>새벽 3시로</span></li>
-          <li><span class="d">9/5</span><span><b>채우기 알림 미루기</b><br>오후 9시로</span></li>
-        </ol>
-        <div class="view">
-          <img src="img/pillbox/evo-1.png" width="396" alt="그때의 위젯">
-          <p>4×3 — 네 구간이 각각 한 줄을 차지한다</p>
-        </div>
-      </div>
-      <p class="cap">치수가 바뀐 넷만 누를 수 있다. 나머지 다섯은 그림 없이 줄만 선다.</p>
     </div>
   </section>
 
