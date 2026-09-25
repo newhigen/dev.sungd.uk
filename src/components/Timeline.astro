@@ -1,17 +1,26 @@
 ---
+interface Item {
+  at: string;
+  title: string;
+  /** 축 위 그림 밑에 서는 짧은 값 — 위젯 치수 같은 것 */
+  note?: string;
+  /** 그림이 있는 항목은 축 위로 올라간다. iw·ih 는 원본 픽셀 — 항목끼리 실제 크기를 견주려면 필요하다 */
+  img?: string;
+  iw?: number;
+  ih?: number;
+  alt?: string;
+  /** 아래 칸에 펼쳐지는 내용. problem·did·result·next 는 인라인 태그를 그대로 쓴다 */
+  day?: string;
+  problem?: string;
+  did?: string;
+  result?: string;
+  next?: string;
+}
 interface Props {
   /** 결정을 차례대로 한 축에 — 간격은 날짜가 아니라 차례로 고르게 벌린다.
-   *  날짜 비례로 하면 몰린 자리의 라벨이 서로 눌린다. */
-  items: {
-    at: string;
-    title: string;
-    note?: string;
-    /** 그림이 있는 항목은 축 위로 올라간다. iw·ih 는 원본 픽셀 — 항목끼리 실제 크기를 견주려면 필요하다 */
-    img?: string;
-    iw?: number;
-    ih?: number;
-    alt?: string;
-  }[];
+   *  날짜 비례로 하면 몰린 자리의 라벨이 서로 눌린다.
+   *  항목에 problem·did·result 가 있으면 축 아래 한 칸이 펼쳐진다. */
+  items: Item[];
   caption?: string;
 }
 const { items, caption } = Astro.props;
@@ -25,55 +34,120 @@ const shots = items.filter(i => i.img && i.iw && i.ih);
 const scale = shots.length ? 110 / Math.max(...shots.map(i => i.iw!)) : 1;
 
 const x = (i: number) => PAD + i * STEP;
-const box = (it: Props['items'][number]) => ({
-  w: Math.round(it.iw! * scale),
-  h: Math.round(it.ih! * scale),
-});
+const box = (it: Item) => ({ w: Math.round(it.iw! * scale), h: Math.round(it.ih! * scale) });
+
+const has = (it: Item) => Boolean(it.problem || it.did || it.result);
+const opens = items.some(has);
+const first = items.findIndex(has);
+const one = first >= 0 ? items[first] : null;
+
+// 한 페이지에 둘 이상 설 수 있다
+const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
 ---
 
-<figure class="tml">
+<figure class="tml" id={uid} data-open={opens ? '' : null}>
   <div class="tml-scroll">
     <svg
       width={W}
       height={AX - TOP + 70}
       viewBox={`0 ${TOP} ${W} ${AX - TOP + 70}`}
-      role="img"
+      role={opens ? 'group' : 'img'}
       aria-label={caption ?? '결정 타임라인'}
     >
       <line class="rail" x1={x(0)} y1={AX} x2={x(items.length - 1)} y2={AX} />
 
       {items.map((it, i) => (
-        <g>
+        <g
+          class:list={['it', { hit: opens && has(it), sel: opens && i === first }]}
+          data-i={i}
+          role={opens && has(it) ? 'button' : null}
+          tabindex={opens && has(it) ? 0 : null}
+          aria-label={opens && has(it) ? `${it.at} ${it.title}` : null}
+        >
           <line class="tick" x1={x(i)} y1={AX - 5} x2={x(i)} y2={AX + 5} />
           <text class="at" x={x(i)} y={AX + 22} text-anchor="middle">{it.at}</text>
           <text class="nm" x={x(i)} y={AX + 42} text-anchor="middle">{it.title}</text>
+
+          {it.img && it.iw && it.ih && (
+            <g>
+              <line class="stem" x1={x(i)} y1={AX - 7} x2={x(i)} y2={BASE + 30} />
+              <circle class="dot big" cx={x(i)} cy={AX} r="4.5" />
+              <image
+                class="shot"
+                href={it.img}
+                x={x(i) - box(it).w / 2}
+                y={BASE - box(it).h}
+                width={box(it).w}
+                height={box(it).h}
+                role="img"
+                aria-label={it.alt ?? it.title}
+              />
+              {it.note && <text class="sz" x={x(i)} y={BASE + 22} text-anchor="middle">{it.note}</text>}
+            </g>
+          )}
+          {!it.img && <circle class="dot" cx={x(i)} cy={AX} r="3" />}
+
+          {opens && has(it) && (
+            <rect class="zone" x={x(i) - STEP / 2} y={TOP} width={STEP} height={AX - TOP + 60} fill="transparent" />
+          )}
         </g>
       ))}
-
-      {items.map((it, i) =>
-        it.img && it.iw && it.ih ? (
-          <g>
-            <line class="stem" x1={x(i)} y1={AX - 7} x2={x(i)} y2={BASE + 30} />
-            <circle class="dot big" cx={x(i)} cy={AX} r="4.5" />
-            <image
-              class="shot"
-              href={it.img}
-              x={x(i) - box(it).w / 2}
-              y={BASE - box(it).h}
-              width={box(it).w}
-              height={box(it).h}
-              role="img"
-              aria-label={it.alt ?? it.title}
-            />
-            {it.note && (
-              <text class="sz" x={x(i)} y={BASE + 22} text-anchor="middle">{it.note}</text>
-            )}
-          </g>
-        ) : (
-          <circle class="dot" cx={x(i)} cy={AX} r="3" />
-        )
-      )}
     </svg>
   </div>
+
+  {one && (
+    <div class="tml-open" aria-live="polite">
+      <div class:list={['shot', { none: !one.img }]}>
+        {one.img && <img src={one.img} alt={one.alt ?? ''} />}
+      </div>
+      <div class="txt">
+        <span class="d">{one.day ?? one.at}</span>
+        <h4>{one.title}</h4>
+        <dl>
+          {one.problem && <Fragment><dt>막힘</dt><dd set:html={one.problem} /></Fragment>}
+          {one.did && <Fragment><dt>한 것</dt><dd set:html={one.did} /></Fragment>}
+          {one.result && <Fragment><dt>결과</dt><dd set:html={one.result} /></Fragment>}
+          {one.next && <Fragment><dt>다음엔</dt><dd set:html={one.next} /></Fragment>}
+        </dl>
+      </div>
+    </div>
+  )}
+
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
+
+{opens && (
+  <script is:inline define:vars={{ uid, items }}>
+    (function () {
+      var box = document.getElementById(uid);
+      if (!box) return;
+      var open = box.querySelector('.tml-open');
+      var gs = box.querySelectorAll('g.hit');
+
+      function row(label, html) {
+        return html ? '<dt>' + label + '</dt><dd>' + html + '</dd>' : '';
+      }
+      function show(i) {
+        var it = items[i];
+        if (!it) return;
+        box.querySelectorAll('g.sel').forEach(function (g) { g.classList.remove('sel'); });
+        var g = box.querySelector('g[data-i="' + i + '"]');
+        if (g) g.classList.add('sel');
+        open.innerHTML =
+          '<div class="shot' + (it.img ? '' : ' none') + '">' +
+          (it.img ? '<img src="' + it.img + '" alt="' + (it.alt || '') + '">' : '') +
+          '</div><div class="txt"><span class="d">' + (it.day || it.at) + '</span>' +
+          '<h4>' + it.title + '</h4><dl>' +
+          row('막힘', it.problem) + row('한 것', it.did) +
+          row('결과', it.result) + row('다음엔', it.next) +
+          '</dl></div>';
+      }
+      gs.forEach(function (g) {
+        g.addEventListener('click', function () { show(+g.dataset.i); });
+        g.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(+g.dataset.i); }
+        });
+      });
+    })();
+  </script>
+)}

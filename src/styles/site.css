@@ -1053,6 +1053,53 @@ a.prow:hover .rn { color: var(--link); }
   fill: var(--ink);
 }
 .tml .shot { cursor: zoom-in; }
+.tml .it.hit { cursor: pointer; }
+.tml .it.hit:hover .nm,
+.tml .it.sel .nm { fill: var(--accent); font-weight: 600; }
+.tml .it.hit:hover .at,
+.tml .it.sel .at { fill: var(--accent); }
+.tml .it.sel .dot { fill: var(--accent); }
+.tml .it:focus { outline: none; }
+.tml .it:focus-visible .zone { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 8px; }
+
+/* 축 아래 한 칸 — 누른 결정 하나만 펼친다. 카드 아홉을 세로로 쌓지 않아 편이 짧아진다 */
+.tml-open {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 1.3rem;
+  align-items: start;
+  margin-top: 1rem;
+  padding: 1.1rem 1.2rem 1.2rem;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 9%, var(--card));
+  min-height: 10rem;
+}
+.tml-open .shot { width: 150px; }
+.tml-open .shot.none { width: 0; }
+.tml-open .shot img {
+  display: block;
+  width: 100%;
+  border-radius: 7px;
+  box-shadow: 0 3px 12px rgba(30, 25, 60, 0.13);
+  cursor: zoom-in;
+}
+.tml-open .d { font-size: 0.75rem; color: var(--ink-3); }
+.tml-open h4 {
+  margin: 0 0 0.1rem;
+  font-family: var(--title);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.tml-open dl {
+  margin: 0.6rem 0 0;
+  display: grid;
+  grid-template-columns: 3.2rem 1fr;
+  gap: 0.15rem 0.7rem;
+  font-size: 0.875rem;
+}
+.tml-open dt { padding-top: 0.1rem; font-size: 0.78rem; color: var(--ink-3); }
+.tml-open dd { margin: 0; color: var(--ink-2); }
 .tml figcaption { margin-top: 0.5rem; font-size: 0.8125rem; color: var(--ink-3); }
 
 /* ── 눌러서 크게 ──────────────────────────────────── */
@@ -1070,6 +1117,9 @@ a.prow:hover .rn { color: var(--link); }
   background: rgba(22, 19, 32, 0.84);
 }
 .lb[hidden] { display: none; }
+
+/* 손 모양도 CSS 로 — 갈아 끼운 그림에 스크립트가 다시 손대지 않는다 */
+.prose img[src^="/p/"] { cursor: zoom-in; }
 .lb img {
   max-width: min(90vw, 760px);
   max-height: 90vh;

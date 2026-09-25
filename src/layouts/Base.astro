@@ -95,17 +95,19 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
           lb.hidden = false;
         }
         function shut() { lb.hidden = true; }
-        // 편 본문의 화면 그림만 — 로고나 아이콘 링크는 걸지 않는다
-        document.querySelectorAll('.prose img[src^="/p/"]').forEach(function (el) {
-          el.style.cursor = 'zoom-in';
-          el.addEventListener('click', function () { open(el.getAttribute('src'), el.alt); });
-        });
-        document.querySelectorAll('.prose svg image').forEach(function (el) {
-          var href = el.getAttribute('href') || '';
-          if (href.indexOf('/p/') !== 0) return;
-          el.addEventListener('click', function () {
+        // 위임으로 잡는다 — 펼치는 도식은 그림을 갈아 끼우므로 요소마다 걸면 새 그림이 빠진다
+        document.addEventListener('click', function (e) {
+          var el = e.target;
+          if (!el || !el.closest || !el.closest('.prose')) return;
+          if (el.tagName === 'IMG') {
+            var src = el.getAttribute('src') || '';
+            if (src.indexOf('/p/') !== 0) return;
+            open(src, el.alt);
+          } else if (el.tagName === 'image') {
+            var href = el.getAttribute('href') || '';
+            if (href.indexOf('/p/') !== 0) return;
             open(href, el.getAttribute('aria-label') || '');
-          });
+          }
         });
         lb.addEventListener('click', shut);
         document.addEventListener('keydown', function (e) {
