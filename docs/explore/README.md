@@ -26,5 +26,7 @@
 | `pillbox-compare.html` | 약수첩 소개를 좌우로 — 왼쪽 지금 그대로, 오른쪽 같은 글·같은 그림에 주석 기법만 얹은 판 |
 | `font-picks.html` | 프로젝트 편 글꼴 열한 짝 — 지금 판(Inter Tight + Noto Serif KR)과 눈누 후보 열. 약수첩 실제 문구로 그리고 갈래·크기로 걸러 본다 |
 | `font-paperlogy.html` | 페이퍼로지를 축에 둔 조합 여덟 — 하나로(굵기 대비 둘) · 제목만 · 본문만 · 숫자와 표만 스포카 |
+| `font-titles.html` | 제목 얼굴만 열둘 — 본문은 프리텐다드 고정, 제목만 명조 일곱과 고딕 다섯으로 |
+| `font-pg-body.html` | 페이퍼로지 제목에 붙일 본문 고딕 열하나 — 제목과 숫자는 페이퍼로지 700 고정 |
 
 로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.
