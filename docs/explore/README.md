@@ -25,5 +25,6 @@
 | `backtrack-format.html` | 시각화 규칙(`visual-format.md`)을 프로젝트 페이지에 어디까지 적용할까 — A 지금 판 · B 글자와 색만 · C 1600px 두 단 · D 출품작 판(번호 뱃지 · 인출선 · 줌 콜아웃 · 들어올리기). Backtrack 실측으로 |
 | `pillbox-compare.html` | 약수첩 소개를 좌우로 — 왼쪽 지금 그대로, 오른쪽 같은 글·같은 그림에 주석 기법만 얹은 판 |
 | `font-picks.html` | 프로젝트 편 글꼴 열한 짝 — 지금 판(Inter Tight + Noto Serif KR)과 눈누 후보 열. 약수첩 실제 문구로 그리고 갈래·크기로 걸러 본다 |
+| `font-paperlogy.html` | 페이퍼로지를 축에 둔 조합 여덟 — 하나로(굵기 대비 둘) · 제목만 · 본문만 · 숫자와 표만 스포카 |
 
 로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.
