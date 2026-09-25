@@ -99,15 +99,9 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
 .ba .st.bad{box-shadow:inset 0 0 0 1.5px var(--bad)}
 .ba .st.good{box-shadow:inset 0 0 0 1.5px var(--good)}
 
-/* B4 항목별 두 열 */
-.vs{width:100%;border-collapse:collapse;margin:0 0 .5rem}
-.vs th,.vs td{padding:.55rem .7rem .55rem 0;text-align:left;vertical-align:top;
-  font-size:.86rem;line-height:1.6;border-bottom:1px solid var(--rule)}
-.vs th{font-family:var(--title);font-weight:600;font-size:.76rem;color:var(--ink-2)}
-.vs td:first-child{font-family:var(--title);font-weight:600;color:var(--ink);white-space:nowrap;width:8.5rem}
-.vs td.b{color:var(--ink-3)}
-.vs td.a{color:var(--ink)}
-.vs td em{display:block;font-style:normal;font-size:.74rem;color:var(--ink-3);margin-top:.1rem}
+/* B5 하루 축 하나에 전후를 겹친다 */
+.tline{margin:.2rem 0 .5rem}
+.tline svg{display:block;width:100%;height:auto;font-family:var(--body)}
 
 /* I1 카드 셋 */
 .impact{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem;margin:0 0 .3rem}
@@ -118,22 +112,25 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
 .impact .v{margin-top:.8rem;font-family:var(--title);font-size:1.5rem;font-weight:500;color:var(--ink);line-height:1.1}
 .impact .v small{display:block;margin-top:.2rem;font-size:.7rem;font-weight:400;color:var(--ink-3)}
 
-/* I2 표 */
-.itbl{width:100%;border-collapse:collapse;margin:0 0 .3rem}
-.itbl th,.itbl td{padding:.6rem .7rem .6rem 0;text-align:left;border-bottom:1px solid var(--rule);
-  font-size:.86rem;line-height:1.6;vertical-align:top}
-.itbl th{font-family:var(--title);font-weight:600;font-size:.76rem;color:var(--ink-2)}
-.itbl td.n{white-space:nowrap;font-family:var(--title);font-weight:600;font-size:1.05rem;color:var(--ink);text-align:right}
-.itbl td.n em{display:block;font-style:normal;font-size:.7rem;font-weight:400;color:var(--ink-3);margin-top:.15rem}
-.itbl td:first-child{font-family:var(--title);font-weight:600;color:var(--ink)}
+/* I4 막힌 것 → 한 것 을 잇는 짝 */
+.pair{margin:.2rem 0 .3rem}
+.pair .r{display:grid;grid-template-columns:1fr 1.6rem 1fr;align-items:center;gap:.6rem;margin-bottom:.7rem}
+.pair .x{padding:.6rem .8rem;border-radius:10px;background:#e8e6ec;box-shadow:inset 0 0 0 1.5px var(--bad)}
+.pair .o{padding:.6rem .8rem;border-radius:10px;background:var(--card-2);box-shadow:inset 0 0 0 1.5px var(--good)}
+.pair .nm{font-family:var(--title);font-weight:600;font-size:.88rem;color:var(--ink);line-height:1.4}
+.pair .nt{font-size:.74rem;line-height:1.5;color:var(--ink-2);margin-top:.2rem}
+.pair .ar{text-align:center;color:var(--ink-3);font-size:1.1rem}
+.pair .res{grid-column:1 / -1;display:flex;align-items:baseline;gap:.5rem;
+  margin:.15rem 0 0;padding-left:.2rem}
+.pair .res b{font-family:var(--title);font-size:1.3rem;font-weight:500;color:var(--good);line-height:1.2}
+.pair .res span{font-size:.74rem;color:var(--ink-3)}
 
-/* I3 줄 목록 */
-.ilist .r{display:grid;grid-template-columns:1fr 6rem;gap:1rem;padding:.7rem 0;border-bottom:1px solid var(--rule)}
-.ilist .r:last-child{border-bottom:0}
-.ilist b{font-family:var(--title);font-size:.92rem;font-weight:600;color:var(--ink);display:block}
-.ilist p{margin:.2rem 0 0;font-size:.82rem;line-height:1.6;color:var(--ink-2)}
-.ilist .v{text-align:right;font-family:var(--title);font-size:1.35rem;font-weight:500;color:var(--ink);line-height:1.2}
-.ilist .v em{display:block;font-style:normal;font-size:.68rem;font-weight:400;color:var(--ink-3);margin-top:.15rem;line-height:1.4}
+/* I5 값을 그림으로 */
+.vfig{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin:.3rem 0 .4rem}
+.vfig figure{margin:0;text-align:center}
+.vfig svg{display:block;margin:0 auto .5rem;font-family:var(--body)}
+.vfig b{display:block;font-family:var(--title);font-size:.92rem;font-weight:600;color:var(--ink)}
+.vfig p{margin:.2rem 0 0;font-size:.78rem;line-height:1.55;color:var(--ink-2)}
 
 /* 개발기 — 가로로 미는 틀은 넷이 같다 */
 .evo{display:flex;gap:.8rem;overflow-x:auto;padding:.1rem .1rem .7rem;margin:0 0 .3rem;
@@ -275,22 +272,59 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
 
   <section class="card">
     <div class="meta">
-      <div class="hd"><span class="no">B4</span><h3>항목별 두 열 — 무엇이 어떻게 달라졌나</h3></div>
-      <p class="note">행이 항목, 열이 전과 후. 흐름을 버리고 차이만 남긴다. 가장 짧고 값이 한 열에 줄 맞춰 선다. 사이트에 이미 있는 <code>Versus</code> 꼴.</p>
+      <div class="hd"><span class="no">B5</span><h3>하루 축 하나에 전과 후를 겹친다</h3></div>
+      <p class="note">오전 4시부터 자정까지 한 축을 깔고 알림이 언제 오는지를 두 줄로 얹는다. 「네 번이 한 번으로」가 세는 것 없이 보인다. 흐름도 표도 아니고 그림 한 장이다.</p>
     </div>
-    <div class="body">
+    <div class="body mid">
       <p class="q">알림은 옴. 지우면 끝.</p>
-      <table class="vs">
-        <tr><th></th><th>전 — 시각 알림 앱</th><th>후 — 약수첩</th></tr>
-        <tr><td>알림이 오는 때</td><td class="b">정해진 시각마다<em>먹었든 안 먹었든</em></td>
-          <td class="a">놓친 구간에만 한 번<em>미리 체크하면 안 온다</em></td></tr>
-        <tr><td>먹은 뒤 남는 것</td><td class="b">없음<em>알림을 지우면 끝</em></td>
-          <td class="a">날짜별 기록<em>위젯이 체크 표시로</em></td></tr>
-        <tr><td>확인하는 법</td><td class="b">기억<em>«먹었나?» — 자주 틀림</em></td>
-          <td class="a">홈 화면 위젯<em>앱을 안 열어도 된다</em></td></tr>
-        <tr><td>간격으로 넣는 약</td><td class="b">못 다룸<em>정해진 시각이 없다</em></td>
-          <td class="a">경과 시간을 띠에<em>간격이 지나면 빨강</em></td></tr>
-      </table>
+      <div class="tline">
+        <svg viewBox="0 0 600 168" role="img" aria-label="하루 동안 알림이 오는 때 — 전 네 번, 후 한 번">
+          <!-- 축 -->
+          <line x1="52" y1="140" x2="576" y2="140" stroke="#c9c5d4" stroke-width="1"/>
+          <g fill="#6f6b85" font-size="10" text-anchor="middle">
+            <text x="52" y="156">오전 4시</text><text x="183" y="156">오전 9시</text>
+            <text x="314" y="156">오후 2시</text><text x="445" y="156">오후 7시</text>
+            <text x="576" y="156">자정</text>
+          </g>
+          <g stroke="#e0dde8" stroke-width="1">
+            <line x1="183" y1="24" x2="183" y2="140"/><line x1="314" y1="24" x2="314" y2="140"/>
+            <line x1="445" y1="24" x2="445" y2="140"/>
+          </g>
+
+          <!-- 구간 (약을 먹는 때) -->
+          <g fill="#6f6b85" font-size="9.5" text-anchor="middle">
+            <text x="87" y="20">아침</text><text x="222" y="20">낮</text>
+            <text x="307" y="20">오후</text><text x="418" y="20">밤</text>
+          </g>
+          <g fill="#dfe6f2">
+            <rect x="70" y="26" width="34" height="14" rx="4"/><rect x="205" y="26" width="34" height="14" rx="4"/>
+            <rect x="290" y="26" width="34" height="14" rx="4"/><rect x="401" y="26" width="34" height="14" rx="4"/>
+          </g>
+
+          <!-- 전 -->
+          <text x="4" y="62" fill="#6f6b85" font-size="11" font-weight="600">전</text>
+          <line x1="52" y1="58" x2="576" y2="58" stroke="#e8e6ec" stroke-width="16" stroke-linecap="round"/>
+          <g fill="#C0392B">
+            <circle cx="87" cy="58" r="5"/><circle cx="222" cy="58" r="5"/>
+            <circle cx="307" cy="58" r="5"/><circle cx="418" cy="58" r="5"/>
+          </g>
+          <text x="576" y="62" fill="#C0392B" font-size="11" font-weight="600" text-anchor="end">알림 4번</text>
+
+          <!-- 후 -->
+          <text x="4" y="104" fill="#6f6b85" font-size="11" font-weight="600">후</text>
+          <line x1="52" y1="100" x2="576" y2="100" stroke="#e4ecea" stroke-width="16" stroke-linecap="round"/>
+          <g fill="#2E7D4F">
+            <path d="M83 100l3 3 6-6" stroke="#2E7D4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M218 100l3 3 6-6" stroke="#2E7D4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M414 100l3 3 6-6" stroke="#2E7D4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          </g>
+          <circle cx="359" cy="100" r="5" fill="#C0392B"/>
+          <line x1="307" y1="100" x2="352" y2="100" stroke="#C0392B" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="359" y="87" fill="#C0392B" font-size="9.5" text-anchor="middle">두 시간 뒤 한 번</text>
+          <text x="576" y="104" fill="#2E7D4F" font-size="11" font-weight="600" text-anchor="end">알림 1번</text>
+        </svg>
+      </div>
+      <p class="cap">빨간 점이 알림, 초록 체크가 미리 챙겨 알림이 안 온 구간. 오후만 놓쳐 두 시간 뒤 한 번 왔다.</p>
     </div>
   </section>
 </div>
@@ -323,45 +357,81 @@ p.secn{max-width:56rem;margin:0 auto 1.2rem;font-size:.9rem;color:var(--ink-3)}
 
   <section class="card">
     <div class="meta">
-      <div class="hd"><span class="no">I2</span><h3>표 — 네 열로 눕힘</h3></div>
-      <p class="note">막힌 것 · 왜 · 한 것 · 값이 열로 선다. 값 셋이 한 열에 맞춰 서서 견주기 쉽다. 대신 줄이 길어 훑는 맛은 준다.</p>
+      <div class="hd"><span class="no">I4</span><h3>막힌 것과 한 것을 좌우로 잇는다</h3></div>
+      <p class="note">왼쪽이 막혔던 것, 오른쪽이 그것을 푼 것, 그 아래에 결과 값. 표가 아니라 짝이라서 한 쌍씩 읽고 끊을 수 있다. 빨강과 초록이 어느 쪽이 문제였는지를 색으로 말한다.</p>
     </div>
     <div class="body mid">
-      <table class="itbl">
-        <tr><th>막힌 것</th><th>왜 막혔나</th><th>한 것</th><th style="text-align:right">결과</th></tr>
-        <tr><td>알림을 지우면 끝</td><td>먹었는지 기록 없음, 기억에 의존</td>
-          <td>체크가 곧 알림 해제. 미리 체크한 구간은 알림 없음, 놓친 구간에만 한 번</td>
-          <td class="n">0회<em>미리 체크한 구간에 오는 알림</em></td></tr>
-        <tr><td>위젯이 없음</td><td>오늘 챙긴 것을 보려면 앱 실행</td>
-          <td>홈 화면 위젯 — 다 챙겼으면 체크, 남았으면 개수</td>
-          <td class="n">2×1<em>홈 화면 칸</em></td></tr>
-        <tr><td>간격으로 넣는 약</td><td>인공눈물은 정해진 시각이 없어 시각 알림 앱으론 불가</td>
-          <td>마지막 점안 후 경과 시간을 위젯 띠에. 간격이 지나면 빨강</td>
-          <td class="n">2탭<em>기록 · 4초 안에 두 번</em></td></tr>
-      </table>
+      <div class="pair">
+        <div class="r">
+          <div class="x"><div class="nm">알림을 지우면 끝</div><div class="nt">먹었는지가 어디에도 안 남아 기억에 의존</div></div>
+          <div class="ar">→</div>
+          <div class="o"><div class="nm">체크가 곧 알림 해제</div><div class="nt">미리 체크한 구간은 알림 없음, 놓친 구간에만 한 번</div></div>
+          <div class="res"><b>0회</b><span>미리 체크한 구간에 오는 알림</span></div>
+        </div>
+        <div class="r">
+          <div class="x"><div class="nm">위젯이 없음</div><div class="nt">오늘 챙긴 것을 보려면 앱을 열어야 함</div></div>
+          <div class="ar">→</div>
+          <div class="o"><div class="nm">홈 화면 위젯</div><div class="nt">다 챙겼으면 체크, 남았으면 개수</div></div>
+          <div class="res"><b>2×1</b><span>홈 화면에서 차지하는 칸</span></div>
+        </div>
+        <div class="r">
+          <div class="x"><div class="nm">간격으로 넣는 약</div><div class="nt">인공눈물은 정해진 시각이 없어 시각 알림 앱으론 불가</div></div>
+          <div class="ar">→</div>
+          <div class="o"><div class="nm">경과 시간을 위젯 띠에</div><div class="nt">마지막 점안 뒤 몇 시간. 간격이 지나면 빨강</div></div>
+          <div class="res"><b>2탭</b><span>기록하는 데 드는 손</span></div>
+        </div>
+      </div>
       <p class="cap">앱 동작 기준. 경과 표시 간격은 설정값(기본 60분).</p>
     </div>
   </section>
 
   <section class="card">
     <div class="meta">
-      <div class="hd"><span class="no">I3</span><h3>줄 목록 — 한 줄에 하나, 값은 오른쪽 끝</h3></div>
-      <p class="note">표의 네 열을 둘로 줄였다. 왼쪽은 문장으로 읽고 값만 오른쪽 열에 맞춰 세운다. 본문 폭에 들어가 다른 절과 한 벌로 읽힌다.</p>
+      <div class="hd"><span class="no">I5</span><h3>값을 그림으로 — 숫자를 안 읽어도 된다</h3></div>
+      <p class="note">세 값은 단위가 제각각이라(횟수 · 칸 · 탭) 막대로 견줄 수 없다. 대신 값마다 그 뜻을 그림으로 그린다 — 안 오는 알림, 차지하는 칸, 두 번 누르는 손. 글은 그림 아래 한 줄.</p>
     </div>
-    <div class="body">
-      <div class="ilist">
-        <div class="r"><div>
-          <b>알림을 지우면 끝이라 기록이 안 남았다</b>
-          <p>체크가 곧 알림 해제. 미리 체크한 구간은 알림이 안 오고, 놓친 구간에만 두 시간 뒤 한 번.</p>
-        </div><div class="v">0회<em>미리 체크한 구간에 오는 알림</em></div></div>
-        <div class="r"><div>
-          <b>오늘 챙긴 것을 보려면 앱을 열어야 했다</b>
-          <p>홈 화면 위젯에 다 챙겼으면 체크, 남았으면 개수를 띄운다.</p>
-        </div><div class="v">2×1<em>홈 화면 칸</em></div></div>
-        <div class="r"><div>
-          <b>인공눈물은 정해진 시각이 없어 시각 알림 앱으로 못 다뤘다</b>
-          <p>마지막 점안 후 경과 시간을 위젯 띠에. 간격이 지나면 빨강으로 바뀐다.</p>
-        </div><div class="v">2탭<em>기록 · 4초 안에 두 번</em></div></div>
+    <div class="body mid">
+      <div class="vfig">
+        <figure>
+          <svg width="112" height="76" viewBox="0 0 112 76" role="img" aria-label="알림이 오지 않는다">
+            <rect x="18" y="8" width="76" height="46" rx="9" fill="#e8e6ec"/>
+            <rect x="26" y="18" width="30" height="5" rx="2.5" fill="#b9b4c6"/>
+            <rect x="26" y="29" width="52" height="5" rx="2.5" fill="#cfcad9"/>
+            <rect x="26" y="40" width="40" height="5" rx="2.5" fill="#cfcad9"/>
+            <line x1="20" y1="56" x2="92" y2="6" stroke="#2E7D4F" stroke-width="3.5" stroke-linecap="round"/>
+            <text x="56" y="72" fill="#6f6b85" font-size="10" text-anchor="middle">미리 체크한 구간</text>
+          </svg>
+          <b>알림이 안 온다</b>
+          <p>체크가 곧 알림 해제. 놓친 구간에만 두 시간 뒤 한 번.</p>
+        </figure>
+        <figure>
+          <svg width="112" height="76" viewBox="0 0 112 76" role="img" aria-label="홈 화면에서 2×1 칸">
+            <g fill="#e8e6ec">
+              <rect x="10" y="6" width="22" height="22" rx="5"/><rect x="36" y="6" width="22" height="22" rx="5"/>
+              <rect x="62" y="6" width="22" height="22" rx="5"/><rect x="88" y="6" width="14" height="22" rx="5"/>
+              <rect x="10" y="32" width="22" height="22" rx="5"/><rect x="36" y="32" width="22" height="22" rx="5"/>
+            </g>
+            <rect x="62" y="32" width="40" height="22" rx="5" fill="#2E7D4F" opacity=".18"/>
+            <rect x="62" y="32" width="40" height="22" rx="5" fill="none" stroke="#2E7D4F" stroke-width="1.6"/>
+            <text x="82" y="47" fill="#2E7D4F" font-size="10" font-weight="600" text-anchor="middle">2×1</text>
+            <text x="56" y="72" fill="#6f6b85" font-size="10" text-anchor="middle">4×3 에서 줄어든 자리</text>
+          </svg>
+          <b>홈 화면 한 줄의 절반</b>
+          <p>다 챙겼으면 체크, 남았으면 개수. 앱을 안 열어도 된다.</p>
+        </figure>
+        <figure>
+          <svg width="112" height="76" viewBox="0 0 112 76" role="img" aria-label="두 번 눌러 기록">
+            <circle cx="38" cy="30" r="15" fill="#dfe6f2"/>
+            <circle cx="38" cy="30" r="6" fill="#2E7D4F"/>
+            <circle cx="74" cy="30" r="15" fill="#dfe6f2"/>
+            <circle cx="74" cy="30" r="6" fill="#2E7D4F"/>
+            <text x="38" y="56" fill="#6f6b85" font-size="10" text-anchor="middle">위젯</text>
+            <text x="74" y="56" fill="#6f6b85" font-size="10" text-anchor="middle">기록</text>
+            <text x="56" y="72" fill="#6f6b85" font-size="10" text-anchor="middle">4초 안에</text>
+          </svg>
+          <b>두 번 누르면 끝</b>
+          <p>인공눈물은 정해진 시각이 없어 넣자마자 바로 남긴다.</p>
+        </figure>
       </div>
       <p class="cap">앱 동작 기준. 경과 표시 간격은 설정값(기본 60분).</p>
     </div>
