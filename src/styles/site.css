@@ -1097,12 +1097,12 @@ a.prow:hover .rn { color: var(--link); }
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  padding: 0.8rem 1.15rem;
+  padding: 0.52rem 1.05rem;
   border-radius: 24px;
   background: var(--accent);
   color: var(--card);
   font-size: 0.75rem;
-  line-height: 1.6;
+  line-height: 1.45;
   white-space: nowrap;
 }
 
