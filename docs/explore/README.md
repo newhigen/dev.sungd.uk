@@ -22,5 +22,12 @@
 | `claude-watch-why-questions.html` | Claude 워치 «왜 만들었나» 질문지 — 쓰던 것 · 괴로운 장면 · 실제로 쓴 것 · 화면을 접은 까닭 · 지금 |
 | `career-radar-why-questions.html` | 커리어 레이더 «왜 만들었나» 질문지 — 범위(매트릭스 vs 잡보드) · 쓰던 것 · 막힌 지점 · 실제로 본 판 · 달라진 것 · 지금 · 공개 수위 |
 | `ml-job-board-why-questions.html` | ML 잡보드 «왜 만들었나» 질문지 — 이름 · 쓰던 것 · 막힌 지점 · 실제로 보는 탭 · 메일을 끈 까닭 · 열엿새 정지 · 지금 · 공개 수위 |
+| `backtrack-format.html` | 시각화 규칙(`visual-format.md`)을 프로젝트 페이지에 어디까지 적용할까 — A 지금 판 · B 글자와 색만 · C 1600px 두 단 · D 출품작 판(번호 뱃지 · 인출선 · 줌 콜아웃 · 들어올리기). Backtrack 실측으로 |
+| `pillbox-compare.html` | 약수첩 소개를 좌우로 — 왼쪽 지금 그대로, 오른쪽 같은 글·같은 그림에 주석 기법만 얹은 판 |
+| `font-picks.html` | 프로젝트 편 글꼴 열한 짝 — 지금 판(Inter Tight + Noto Serif KR)과 눈누 후보 열. 약수첩 실제 문구로 그리고 갈래·크기로 걸러 본다 |
+| `font-paperlogy.html` | 페이퍼로지를 축에 둔 조합 여덟 — 하나로(굵기 대비 둘) · 제목만 · 본문만 · 숫자와 표만 스포카 |
+| `font-titles.html` | 제목 얼굴만 열둘 — 본문은 프리텐다드 고정, 제목만 명조 일곱과 고딕 다섯으로 |
+| `font-pg-body.html` | 페이퍼로지 제목에 붙일 본문 고딕 열하나 — 제목과 숫자는 페이퍼로지 700 고정 |
+| `font-pg-weight.html` | 페이퍼로지 제목 + 스위트 본문에서 제목 굵기 일곱과 자간 셋 — 훅과 절 제목을 따로 준 판 포함 |
 
 로컬에서 보려면 `npx http-server docs/explore -p 4398 -s -c-1`.

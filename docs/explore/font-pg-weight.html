@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>제목 굵기와 자간 열 — 페이퍼로지 제목 + 스위트 본문</title>
+
+<style>
+/* 눈누 후보 — ~/dev/analyses/fonts/noonnu.py css <id> 로 뽑음. 라이선스는 각 눈누 페이지 */
+
+/* 페이퍼로지 — 이주임 X 김도균 · https://noonnu.cc/font_page/1456 · 제목 */
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-8ExtraBold.woff2') format('woff2'); font-weight: 800; font-display: swap; }
+
+/* 스위트 — SUNN YOUN · https://noonnu.cc/font_page/1150 · 본문 */
+@font-face { font-family: 'Sweet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Sweet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Sweet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Sweet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Sweet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+:root{
+  --bg:#e6e3f0; --card:#fbfaff; --card-2:#dfe6f2;
+  --ink:#221f2b; --prose:#3a3646; --ink-2:#57536b; --ink-3:#6f6b85;
+  --rule:rgba(34,31,43,.09); --chip:rgba(34,31,43,.14); --good:#2E7D4F;
+  --ui:Sweet,system-ui,sans-serif;
+  --tf:Paperlogy,sans-serif;
+  --bf:Sweet,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;padding:2rem 1.5rem 6rem;background:var(--bg);color:var(--ink);
+  font-family:var(--ui);word-break:keep-all;font-variant-numeric:tabular-nums}
+.wrap{max-width:1600px;margin:0 auto}
+
+.top{margin:0 auto 1.6rem;max-width:56rem}
+.top h1{margin:0 0 .5rem;font:600 1.5rem/1.35 Paperlogy,var(--ui);letter-spacing:-.01em}
+.top p{margin:0 0 .3rem;font:400 .95rem/1.6 var(--ui);color:var(--ink-2)}
+.top .hint{font-size:.85rem;color:var(--ink-3)}
+
+.bar{position:sticky;top:0;z-index:20;margin:0 auto 1.4rem;max-width:1600px;
+  display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;padding:.65rem .8rem;border-radius:12px;
+  background:rgba(251,250,255,.82);backdrop-filter:blur(10px);box-shadow:0 4px 18px rgba(40,35,80,.1)}
+.bar b{font:600 .8rem/1 var(--ui);color:var(--ink-3);margin-right:.2rem}
+.bar button{appearance:none;border:0;cursor:pointer;border-radius:999px;padding:.38rem .7rem;
+  font:500 .8rem/1 var(--ui);color:var(--ink-2);background:var(--chip)}
+.bar button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.bar .sp{flex:1}
+
+.deck{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem}
+@media (max-width:1180px){.deck{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--card);border-radius:14px;padding:1.05rem 1.3rem 1.25rem;
+  box-shadow:0 2px 20px rgba(40,35,80,.07)}
+.meta{margin-bottom:.95rem;padding-bottom:.7rem;border-bottom:1px solid var(--rule)}
+.meta .hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem}
+.meta .no{font:600 .72rem/1.5 var(--ui);color:var(--ink-3);letter-spacing:.06em}
+.meta h2{margin:0;font:600 1.02rem/1.35 var(--ui);color:var(--ink)}
+.meta .who{margin:0;font:400 .76rem/1.5 var(--ui);color:var(--ink-3)}
+.meta .note{margin:.22rem 0 0;font:400 .8rem/1.55 var(--ui);color:var(--ink-2)}
+.meta .tag{padding:.14rem .45rem;border-radius:5px;background:var(--chip);
+  font:500 .68rem/1.4 var(--ui);color:var(--ink-2)}
+
+/* 견본 — hw 훅 굵기 · sw 절 제목 굵기 · ls 자간만 판마다 다르다 */
+.samp{min-width:0}
+.samp .hook{margin:0 0 .55rem;font-family:var(--tf);font-weight:var(--hw);
+  font-size:1.42rem;line-height:1.38;letter-spacing:var(--ls,-.012em);color:var(--ink)}
+.samp .lead{margin:0 0 1rem;font-family:var(--bf);font-weight:400;
+  font-size:1rem;line-height:1.68;color:var(--prose);max-width:40rem}
+.samp h3{margin:0 0 .5rem;font-family:var(--tf);font-weight:var(--sw);
+  font-size:1.02rem;line-height:1.45;color:var(--ink)}
+.samp p{margin:0 0 .85rem;font-family:var(--bf);font-weight:400;
+  font-size:.95rem;line-height:1.66;color:var(--prose);max-width:40rem}
+.samp ul{margin:0 0 .9rem;padding-left:1.05rem;max-width:40rem}
+.samp li{font-family:var(--bf);font-size:.93rem;line-height:1.62;color:var(--prose);margin-bottom:.22rem}
+.samp li::marker{color:var(--ink-3)}
+
+.nums{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem}
+.nums span{display:flex;flex-direction:column-reverse;gap:.12rem;padding:.45rem .7rem;
+  border-radius:9px;background:var(--card-2)}
+.nums em{font-style:normal;font-family:var(--bf);font-size:.74rem;line-height:1.4;color:var(--ink-2)}
+.nums b{font-family:var(--tf);font-weight:var(--sw);font-size:1.02rem;line-height:1.3;color:var(--ink)}
+.nums b s{text-decoration:none;font-weight:400;color:var(--ink-3)}
+.nums b i{font-style:normal;font-weight:400;color:var(--ink-3);padding:0 .2rem}
+.nums b u{text-decoration:none;color:var(--good)}
+
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .9rem}
+.chips span{padding:.28rem .6rem;border-radius:999px;background:var(--chip);
+  font-family:var(--bf);font-weight:500;font-size:.8rem;line-height:1.45;color:var(--ink-2)}
+
+.tbl{width:100%;border-collapse:collapse;max-width:40rem;margin:0}
+.tbl th,.tbl td{text-align:left;padding:.36rem .55rem;border-bottom:1px solid var(--rule);
+  font-family:var(--bf);font-size:.88rem;line-height:1.5;color:var(--prose)}
+.tbl th{font-weight:600;color:var(--ink-2);font-size:.78rem}
+.tbl td.n{text-align:right;font-family:var(--tf);font-weight:var(--sw);color:var(--ink)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+  <h1>제목 굵기와 자간 열</h1>
+  <p>본문은 스위트 400 으로 고정하고 페이퍼로지 제목의 굵기만 내렸다. 큰 훅과 작은 절 제목을 따로 줄 수 있어 둘을 나눈 판도 넣었다.</p>
+  <p class="hint">W1 이 지금까지 보던 700. 아래로 갈수록 연해진다. 맨 아래 셋은 굵기를 600 으로 묶고 자간만 바꾼 판이다.</p>
+</div>
+
+<div class="bar">
+  <b>크기</b>
+  <button data-s="1" aria-pressed="true">그대로</button>
+  <button data-s="1.12" aria-pressed="false">크게</button>
+</div>
+
+<div class="deck" id="deck"></div>
+
+</div>
+
+<script>
+const PICKS = [
+  { no:'W1', name:'훅 700 · 절 제목 700', who:'Bold', hw:700, sw:700, tag:'지금까지 보던 것',
+    note:'가장 진한 판. 훅이 본문보다 두 단 위로 튄다.' },
+
+  { no:'W2', name:'훅 600 · 절 제목 600', who:'SemiBold', hw:600, sw:600,
+    note:'한 단 내렸다. 얼굴은 남고 무게만 빠진다.' },
+
+  { no:'W3', name:'훅 500 · 절 제목 500', who:'Medium', hw:500, sw:500,
+    note:'두 단 내렸다. 제목이 본문과 나란해져 판이 조용하다.' },
+
+  { no:'W4', name:'훅 500 · 절 제목 600', who:'큰 것만 연하게', hw:500, sw:600,
+    note:'큰 글자는 얇아도 읽히고 작은 글자는 굵어야 걸린다. 크기와 굵기를 반대로.' },
+
+  { no:'W5', name:'훅 600 · 절 제목 700', who:'큰 것만 한 단 연하게', hw:600, sw:700,
+    note:'W1 에서 훅만 한 단 내린 판.' },
+
+  { no:'W6', name:'훅 400 · 절 제목 600', who:'훅은 본문 굵기로', hw:400, sw:600,
+    note:'훅을 아예 굵게 안 쓴다. 크기만으로 제목임을 낸다.' },
+
+  { no:'W7', name:'훅 500 · 절 제목 600 · 자간 0', who:'자간까지 푼 판', hw:500, sw:600, ls:'0',
+    note:'W4 에서 음수 자간을 뺐다. 연한 글자는 자간을 죄면 더 흐려진다.' },
+
+  { no:'W8', name:'훅 600 · 절 제목 600 · 자간 -0.012em', who:'W2 그대로', hw:600, sw:600, ls:'-.012em',
+    tag:'자간 견주기', note:'지금 걸려 있는 값. 23px 훅에서 0.27px 죈다 — 거의 안 보이는 양이다.' },
+
+  { no:'W9', name:'훅 600 · 절 제목 600 · 자간 0', who:'죄지 않은 판', hw:600, sw:600, ls:'0',
+    tag:'자간 견주기', note:'글자를 당기지 않는다. 한글은 네모틀이라 이쪽이 기본값에 가깝다.' },
+
+  { no:'W10', name:'훅 600 · 절 제목 600 · 자간 -0.04em', who:'많이 죈 판', hw:600, sw:600, ls:'-.04em',
+    tag:'자간 견주기', note:'차이를 보라고 과장했다. 23px 훅에서 0.9px — 여기서는 눈에 보인다.' },
+];
+
+const BODY = `
+  <p class="hook">하루 알림 4번, 지우면 남는 기록 0.</p>
+  <p class="lead">체크가 곧 알림 해제. 미리 체크한 구간은 알림 없음, 확인은 홈 화면 위젯에서 끝.</p>
+
+  <div class="nums">
+    <span><em>하루에 오는 알림</em><b><s>4번</s><i>→</i><u>0번</u></b></span>
+    <span><em>홈 화면에서 차지하는 칸</em><b><s>4×3</s><i>→</i><u>2×1</u></b></span>
+    <span><em>인공눈물을 기록하는 데 드는 손</em><b>2탭</b></span>
+  </div>
+
+  <h3>위젯 한 장에 든 것</h3>
+  <p>지금 구간의 약을 종류별로 늘어놓고, 나머지 세 구간은 체크 표시만 남긴다. 마지막으로 넣은
+  인공눈물은 몇 시간 전인지로 적는다. 홈 화면에서 한 번 보고 앱을 안 열어도 되게.</p>
+
+  <div class="chips">
+    <span>먹는 약 3</span><span>영양제 4</span><span>처방 안약 아침·저녁</span>
+    <span>연고 1</span><span>인공눈물 수시</span>
+  </div>
+
+  <h3>구간 알림 — 미리 체크한 구간엔 안 온다</h3>
+  <ul>
+    <li>아침 오전 5시 20분에 일어나 먹고 그 자리에서 체크하면 알림이 아예 안 뜬다.</li>
+    <li>놓친 구간만 두 시간 뒤 한 번 내려오고, 그마저도 체크하면 사라진다.</li>
+  </ul>
+
+  <table class="tbl">
+    <tr><th>구간</th><th>시각</th><th>약</th><th class="n" style="text-align:right">알림</th></tr>
+    <tr><td>아침</td><td>오전 5시 20분</td><td>먹는 약 2, 안약</td><td class="n">0</td></tr>
+    <tr><td>낮</td><td>오전 10시 30분</td><td>영양제 4</td><td class="n">0</td></tr>
+    <tr><td>오후</td><td>오후 3시 45분</td><td>먹는 약 1, 연고</td><td class="n">1</td></tr>
+    <tr><td>밤</td><td>오후 8시</td><td>안약</td><td class="n">0</td></tr>
+  </table>
+`;
+
+const deck = document.getElementById('deck');
+for (const p of PICKS) {
+  const card = document.createElement('section');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="meta">
+      <div class="hd">
+        <span class="no">${p.no}</span>
+        <h2>${p.name}</h2>
+        <p class="who">${p.who}</p>
+        ${p.tag ? `<span class="tag">${p.tag}</span>` : ''}
+      </div>
+      <p class="note">${p.note}</p>
+    </div>
+    <div class="samp">${BODY}</div>`;
+  const s = card.querySelector('.samp').style;
+  s.setProperty('--hw', p.hw);
+  s.setProperty('--sw', p.sw);
+  if (p.ls) s.setProperty('--ls', p.ls);
+  deck.appendChild(card);
+}
+
+document.querySelectorAll('.bar button[data-s]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.bar button[data-s]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  document.documentElement.style.fontSize = (16 * parseFloat(b.dataset.s)) + 'px';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로젝트 편 글꼴 고르기 — 눈누 후보 열한 짝</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css">
+
+<style>
+/* 눈누 후보 — ~/dev/analyses/fonts/noonnu.py css <id> 로 뽑음. 라이선스는 각 눈누 페이지 */
+
+/* 프리텐다드 — 길형진 (orioncactus) · https://noonnu.cc/font_page/694 */
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Pretendard'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+/* 수트 — SUNN YOUN · https://noonnu.cc/font_page/845 */
+@font-face { font-family: 'Suit'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Suit'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Suit'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Suit'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Suit'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+/* 페이퍼로지 — 이주임 X 김도균 · https://noonnu.cc/font_page/1456 */
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-3Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-4Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+/* 프리젠테이션 — 이주임 · https://noonnu.cc/font_page/1369 */
+@font-face { font-family: 'Presentation'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-3Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Presentation'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-4Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Presentation'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-5Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Presentation'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Presentation'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2404@1.0/Freesentation-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+/* 스포카 한 산스 네오 — 스포카 · https://noonnu.cc/font_page/744 */
+@font-face { font-family: 'Spoqa'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Light.woff') format('woff'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Spoqa'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Regular.woff') format('woff'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Spoqa'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Medium.woff') format('woff'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Spoqa'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SpoqaHanSansNeo-Bold.woff') format('woff'); font-weight: 700; font-display: swap; }
+
+/* LINE Seed — 라인 · https://noonnu.cc/font_page/1050 */
+@font-face { font-family: 'LineSeed'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Rg.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'LineSeed'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_11-01@1.0/LINESeedKR-Bd.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+/* 마루 부리 — 네이버 · https://noonnu.cc/font_page/487 */
+@font-face { font-family: 'MaruBuri'; src: url('https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'MaruBuri'; src: url('https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'MaruBuri'; src: url('https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'MaruBuri'; src: url('https://hangeul.pstatic.net/hangeul_static/webfont/MaruBuri/MaruBuri-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+/* 고운바탕 — 류양희 · https://noonnu.cc/font_page/733 */
+@font-face { font-family: 'GowunBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'GowunBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Bold.woff') format('woff'); font-weight: 700; font-display: swap; }
+
+/* 순바탕 — 한국출판문화산업진흥원 · https://noonnu.cc/font_page/289 */
+@font-face { font-family: 'SunBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Light.woff') format('woff'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'SunBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Medium.woff') format('woff'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'SunBatang'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_eight@1.0/SunBatang-Bold.woff') format('woff'); font-weight: 700; font-display: swap; }
+
+/* 함렛 — Hypertype · https://noonnu.cc/font_page/757 */
+@font-face { font-family: 'Hamlet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Hamlet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Hamlet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Hamlet'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/Hahmlet-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+
+:root{
+  --bg:#e6e3f0; --card:#fbfaff; --card-2:#dfe6f2;
+  --ink:#221f2b; --prose:#3a3646; --ink-2:#57536b; --ink-3:#6f6b85;
+  --accent:#8a6a3c; --rule:rgba(34,31,43,.09); --rule-mid:rgba(34,31,43,.18);
+  --chip:rgba(34,31,43,.14); --good:#2E7D4F; --bad:#C0392B;
+  --ui:"Wanted Sans Variable","Inter Tight",Pretendard,system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; padding:2rem 1.5rem 6rem; background:var(--bg); color:var(--ink);
+  font-family:var(--ui); word-break:keep-all; font-variant-numeric:tabular-nums;
+}
+.wrap{max-width:1600px;margin:0 auto}
+
+/* 머리 */
+.top{margin:0 auto 1.6rem;max-width:56rem}
+.top h1{margin:0 0 .5rem;font:600 1.5rem/1.35 var(--ui);letter-spacing:-.01em}
+.top p{margin:0 0 .3rem;font:400 .95rem/1.6 var(--ui);color:var(--ink-2)}
+.top .hint{font-size:.85rem;color:var(--ink-3)}
+
+/* 고르는 줄 */
+.bar{position:sticky;top:0;z-index:20;margin:0 auto 1.4rem;max-width:1600px;
+  display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;
+  padding:.65rem .8rem;border-radius:12px;background:rgba(251,250,255,.82);
+  backdrop-filter:blur(10px);box-shadow:0 4px 18px rgba(40,35,80,.1)}
+.bar b{font:600 .8rem/1 var(--ui);color:var(--ink-3);margin-right:.2rem}
+.bar button{appearance:none;border:0;cursor:pointer;border-radius:999px;
+  padding:.38rem .7rem;font:500 .8rem/1 var(--ui);color:var(--ink-2);background:var(--chip)}
+.bar button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.bar .sp{flex:1}
+
+/* 판 */
+.deck{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem}
+@media (max-width:1180px){.deck{grid-template-columns:minmax(0,1fr)}}
+.card{background:var(--card);border-radius:14px;padding:1.05rem 1.3rem 1.25rem;
+  box-shadow:0 2px 20px rgba(40,35,80,.07)}
+.card.hide{display:none}
+.meta{margin-bottom:.95rem;padding-bottom:.7rem;border-bottom:1px solid var(--rule)}
+.meta .hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:.5rem}
+.meta .no{font:600 .72rem/1.5 var(--ui);color:var(--ink-3);letter-spacing:.06em}
+.meta h2{margin:0;font:600 1.02rem/1.35 var(--ui);color:var(--ink)}
+.meta .who{margin:0;font:400 .76rem/1.5 var(--ui);color:var(--ink-3)}
+.meta .note{margin:.22rem 0 0;font:400 .8rem/1.55 var(--ui);color:var(--ink-2)}
+.meta .now{padding:.14rem .45rem;border-radius:5px;
+  background:var(--chip);font:500 .68rem/1.4 var(--ui);color:var(--ink-2)}
+
+/* 견본 — 여기 안만 후보 글꼴로 그린다 */
+.samp{min-width:0}
+.samp .hook{margin:0 0 .55rem;font-family:var(--tf);font-weight:var(--tw,600);
+  font-size:1.42rem;line-height:1.38;letter-spacing:-.012em;color:var(--ink)}
+.samp .lead{margin:0 0 1rem;font-family:var(--bf);font-weight:400;
+  font-size:1rem;line-height:1.68;color:var(--prose);max-width:40rem}
+.samp h3{margin:0 0 .5rem;font-family:var(--tf);font-weight:var(--tw,600);
+  font-size:1.02rem;line-height:1.45;color:var(--ink)}
+.samp p{margin:0 0 .85rem;font-family:var(--bf);font-weight:400;
+  font-size:.95rem;line-height:1.66;color:var(--prose);max-width:40rem}
+.samp ul{margin:0 0 .9rem;padding-left:1.05rem;max-width:40rem}
+.samp li{font-family:var(--bf);font-weight:400;font-size:.93rem;line-height:1.62;color:var(--prose);margin-bottom:.22rem}
+.samp li::marker{color:var(--ink-3)}
+
+.nums{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1rem}
+.nums span{display:flex;flex-direction:column-reverse;gap:.12rem;
+  padding:.45rem .7rem;border-radius:9px;background:var(--card-2)}
+.nums em{font-style:normal;font-family:var(--bf);font-size:.74rem;line-height:1.4;color:var(--ink-2)}
+.nums b{font-family:var(--tf);font-weight:700;font-size:1.02rem;line-height:1.3;color:var(--ink)}
+.nums b s{text-decoration:none;font-weight:600;color:var(--ink-3)}
+.nums b i{font-style:normal;font-weight:400;color:var(--ink-3);padding:0 .2rem}
+.nums b u{text-decoration:none;color:var(--good)}
+
+.chips{display:flex;flex-wrap:wrap;gap:.35rem;margin:0 0 .9rem}
+.chips span{padding:.28rem .6rem;border-radius:999px;background:var(--chip);
+  font-family:var(--bf);font-weight:500;font-size:.8rem;line-height:1.45;color:var(--ink-2)}
+
+.tbl{width:100%;border-collapse:collapse;max-width:40rem;margin:0}
+.tbl th,.tbl td{text-align:left;padding:.36rem .55rem;border-bottom:1px solid var(--rule);
+  font-family:var(--bf);font-size:.88rem;line-height:1.5;color:var(--prose)}
+.tbl th{font-weight:600;color:var(--ink-2);font-size:.78rem}
+.tbl td.n{text-align:right;font-family:var(--tf);font-weight:600;color:var(--ink)}
+
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="top">
+  <h1>프로젝트 편 글꼴 고르기 — 열한 짝</h1>
+  <p>약수첩 편에 실제로 들어가는 문구와 모양 그대로, 글꼴만 바꿔 쌓았다. 1번이 지금 판이다.</p>
+  <p class="hint">후보는 눈누 목록 1141개에서 골랐다. 위 줄로 갈래를 걸러 볼 수 있다.</p>
+</div>
+
+<div class="bar">
+  <b>보기</b>
+  <button data-f="all" aria-pressed="true">전부</button>
+  <button data-f="sans" aria-pressed="false">고딕 하나로</button>
+  <button data-f="mix" aria-pressed="false">제목 명조 + 본문 고딕</button>
+  <button data-f="serif" aria-pressed="false">본문 명조</button>
+  <span class="sp"></span>
+  <b>크기</b>
+  <button data-s="1" aria-pressed="true">그대로</button>
+  <button data-s="1.12" aria-pressed="false">크게</button>
+</div>
+
+<div class="deck" id="deck"></div>
+
+</div>
+
+<script>
+const PICKS = [
+  { no:'01', name:'지금 판', who:'Inter Tight + Noto Serif KR', kind:'serif',
+    tf:'"Inter Tight", Pretendard, sans-serif', bf:'"Noto Serif KR", serif', tw:600,
+    note:'제목은 영문 산세, 본문은 명조. 한글 제목이 Pretendard 로 떨어진다.', now:true },
+
+  { no:'02', name:'프리텐다드', who:'길형진 · 조회 5M', kind:'sans',
+    tf:'Pretendard, sans-serif', bf:'Pretendard, sans-serif', tw:600,
+    note:'가장 많이 쓰는 본문 고딕. 굵기 아홉, 숫자 폭이 고르다.' },
+
+  { no:'03', name:'수트 (SUIT)', who:'SUNN YOUN · 조회 744K', kind:'sans',
+    tf:'Suit, sans-serif', bf:'Suit, sans-serif', tw:600,
+    note:'프리텐다드보다 글자 폭이 좁고 속공간이 넓다. 화면용.' },
+
+  { no:'04', name:'페이퍼로지', who:'이주임 X 김도균 · 조회 1.3M', kind:'sans',
+    tf:'Paperlogy, sans-serif', bf:'Paperlogy, sans-serif', tw:600,
+    note:'끝이 살짝 둥글어 덜 딱딱하다. 굵기 아홉.' },
+
+  { no:'05', name:'프리젠테이션', who:'이주임 · 조회 652K', kind:'sans',
+    tf:'Presentation, sans-serif', bf:'Presentation, sans-serif', tw:600,
+    note:'제목에서 또렷하고 본문에서도 버틴다. 굵기 아홉.' },
+
+  { no:'06', name:'스포카 한 산스 네오', who:'스포카 · 조회 206K', kind:'sans',
+    tf:'Spoqa, sans-serif', bf:'Spoqa, sans-serif', tw:700,
+    note:'숫자와 한글 높이를 맞춰 만든 글꼴. 표에서 강하다.' },
+
+  { no:'07', name:'LINE Seed', who:'라인 · 조회 294K', kind:'sans',
+    tf:'LineSeed, sans-serif', bf:'LineSeed, sans-serif', tw:700,
+    note:'네모틀이 커서 시원하다. 굵기가 셋뿐이라 층을 내기 어렵다.' },
+
+  { no:'08', name:'함렛 + 프리텐다드', who:'Hypertype · 조회 177K', kind:'mix',
+    tf:'Hamlet, serif', bf:'Pretendard, sans-serif', tw:600,
+    note:'제목만 명조. 획 대비가 적어 큰 글자에서 단단하다.' },
+
+  { no:'09', name:'마루 부리 + 프리텐다드', who:'네이버 · 조회 598K', kind:'mix',
+    tf:'MaruBuri, serif', bf:'Pretendard, sans-serif', tw:600,
+    note:'화면에서 읽으라고 만든 명조. 제목에 쓰면 부드럽다.' },
+
+  { no:'10', name:'마루 부리 (본문까지)', who:'네이버 · 조회 598K', kind:'serif',
+    tf:'MaruBuri, serif', bf:'MaruBuri, serif', tw:600,
+    note:'지금 판과 같은 자리에 Noto Serif KR 대신. 획이 가늘고 자간이 넓다.' },
+
+  { no:'11', name:'고운바탕 (본문까지)', who:'류양희 · 조회 1.2M', kind:'serif',
+    tf:'GowunBatang, serif', bf:'GowunBatang, serif', tw:700,
+    note:'명조인데 획 끝이 둥글다. 굵기가 둘뿐.' },
+];
+
+const BODY = `
+  <p class="hook">하루 알림 4번, 지우면 남는 기록 0.</p>
+  <p class="lead">체크가 곧 알림 해제. 미리 체크한 구간은 알림 없음, 확인은 홈 화면 위젯에서 끝.</p>
+
+  <div class="nums">
+    <span><em>하루에 오는 알림</em><b><s>4번</s><i>→</i><u>0번</u></b></span>
+    <span><em>홈 화면에서 차지하는 칸</em><b><s>4×3</s><i>→</i><u>2×1</u></b></span>
+    <span><em>인공눈물을 기록하는 데 드는 손</em><b>2탭</b></span>
+  </div>
+
+  <h3>위젯 한 장에 든 것</h3>
+  <p>지금 구간의 약을 종류별로 늘어놓고, 나머지 세 구간은 체크 표시만 남긴다. 마지막으로 넣은
+  인공눈물은 몇 시간 전인지로 적는다. 홈 화면에서 한 번 보고 앱을 안 열어도 되게.</p>
+
+  <div class="chips">
+    <span>먹는 약 3</span><span>영양제 4</span><span>처방 안약 아침·저녁</span>
+    <span>연고 1</span><span>인공눈물 수시</span>
+  </div>
+
+  <h3>구간 알림 — 미리 체크한 구간엔 안 온다</h3>
+  <ul>
+    <li>아침 오전 5시 20분에 일어나 먹고 그 자리에서 체크하면 알림이 아예 안 뜬다.</li>
+    <li>놓친 구간만 두 시간 뒤 한 번 내려오고, 그마저도 체크하면 사라진다.</li>
+  </ul>
+
+  <table class="tbl">
+    <tr><th>구간</th><th>시각</th><th>약</th><th class="n" style="text-align:right">알림</th></tr>
+    <tr><td>아침</td><td>오전 5시 20분</td><td>먹는 약 2, 안약</td><td class="n">0</td></tr>
+    <tr><td>낮</td><td>오전 10시 30분</td><td>영양제 4</td><td class="n">0</td></tr>
+    <tr><td>오후</td><td>오후 3시 45분</td><td>먹는 약 1, 연고</td><td class="n">1</td></tr>
+    <tr><td>밤</td><td>오후 8시</td><td>안약</td><td class="n">0</td></tr>
+  </table>
+`;
+
+const deck = document.getElementById('deck');
+for (const p of PICKS) {
+  const card = document.createElement('section');
+  card.className = 'card';
+  card.dataset.kind = p.kind;
+  card.innerHTML = `
+    <div class="meta">
+      <div class="hd">
+        <span class="no">${p.no}</span>
+        <h2>${p.name}</h2>
+        <p class="who">${p.who}</p>
+        ${p.now ? '<span class="now">지금 쓰는 것</span>' : ''}
+      </div>
+      <p class="note">${p.note}</p>
+    </div>
+    <div class="samp">${BODY}</div>`;
+  // 따옴표가 든 글꼴 이름은 style 속성에 못 넣는다 — 속성이 거기서 끊긴다
+  const s = card.querySelector('.samp').style;
+  s.setProperty('--tf', p.tf);
+  s.setProperty('--bf', p.bf);
+  s.setProperty('--tw', p.tw);
+  deck.appendChild(card);
+}
+
+document.querySelectorAll('.bar button[data-f]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.bar button[data-f]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  const f = b.dataset.f;
+  document.querySelectorAll('.card').forEach(c =>
+    c.classList.toggle('hide', f !== 'all' && c.dataset.kind !== f));
+});
+
+document.querySelectorAll('.bar button[data-s]').forEach(b => b.onclick = () => {
+  document.querySelectorAll('.bar button[data-s]').forEach(x => x.setAttribute('aria-pressed', x === b));
+  document.documentElement.style.fontSize = (16 * parseFloat(b.dataset.s)) + 'px';
+});
+</script>
+</body>
+</html>
