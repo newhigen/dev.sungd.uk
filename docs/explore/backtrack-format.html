@@ -108,6 +108,37 @@ svg{display:block;max-width:100%;height:auto}
 .sv-up{font:700 12px var(--wanted);fill:var(--v-up);font-variant-numeric:tabular-nums}
 .sv-dn{font:700 12px var(--wanted);fill:var(--v-down);font-variant-numeric:tabular-nums}
 
+/* ══ D. 출품작 판 ══ */
+.pn{background:#EFEDF6;border-radius:16px;padding:2rem 2.2rem 2.2rem;margin:0 0 .6rem;font-family:var(--wanted);box-shadow:var(--shadow)}
+.pn-l{font:700 .72rem var(--wanted);letter-spacing:.12em;color:var(--v-acc);margin:0 0 .5rem}
+.pn h4{font-family:var(--serif);font-size:1.7rem;font-weight:700;color:var(--v-ink);line-height:1.38;margin:0 0 .5rem;letter-spacing:-.015em}
+.pn-s{font-size:.92rem;line-height:1.6;color:var(--v-sub);margin:0 0 1.2rem;max-width:34rem}
+.pn-2{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:2.2rem;align-items:center}
+.pn-chips{display:flex;flex-direction:column;gap:.45rem;margin-top:1.4rem}
+.pn-chips span{display:flex;flex-direction:column;background:#fff;border-radius:10px;padding:.55rem .8rem;font-size:.74rem;color:var(--v-sub)}
+.pn-chips b{font-size:1.02rem;color:var(--v-ink);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.pn-shot img{display:block;width:100%;border-radius:12px;box-shadow:0 8px 30px rgba(30,25,60,.14)}
+.pn-fig{position:relative;padding:0 23% 0 20%}
+.shot{position:relative;aspect-ratio:1593/640;overflow:hidden;border-radius:12px;box-shadow:0 8px 30px rgba(30,25,60,.14)}
+.shot img{display:block;width:100%}
+.bd{position:absolute;width:1.5rem;height:1.5rem;border-radius:50%;background:var(--v-acc);color:#fff;
+  font:700 .8rem/1.5rem var(--wanted);font-style:normal;text-align:center;z-index:3}
+.an{position:absolute;font:.82rem/1.45 var(--wanted);color:#3A3D44;width:13%;z-index:3}
+.zm{position:absolute;left:78%;width:21%;border-radius:8px;z-index:4;
+  background-image:var(--img);background-size:var(--zoom) auto;background-position:var(--px) var(--py);
+  background-repeat:no-repeat;box-shadow:0 6px 22px rgba(30,25,60,.22);outline:2px solid var(--v-acc)}
+.zl{position:absolute;height:0;border-top:1.5px dashed var(--v-acc);z-index:3}
+.zc{position:absolute;left:78%;width:21%;font:.76rem/1.45 var(--wanted);color:var(--v-sub);z-index:3}
+.pin{position:absolute;z-index:3}
+.pin span{display:inline-block;background:#fff;border-radius:8px;padding:.28rem .6rem;
+  font:600 .78rem var(--wanted);color:var(--v-ink);box-shadow:0 2px 8px rgba(30,25,60,.12)}
+.dsh{position:absolute;height:0;border-top:1.5px dashed #9AA0AC;z-index:3}
+.lift{position:absolute;z-index:3;border-radius:8px;outline:2px solid var(--v-acc);
+  box-shadow:0 8px 26px rgba(43,89,195,.28)}
+.lift-c{position:absolute;z-index:3;font:600 .8rem/1.45 var(--wanted);color:var(--v-acc);width:18%}
+.cp{font-size:.85rem;color:var(--ink-2);max-width:64rem;margin:0 0 2rem}
+.cp b{color:var(--ink)}
+
 .two-col{display:grid;grid-template-columns:1fr;gap:1.6rem}
 @media(max-width:1100px){.vc .two{grid-template-columns:1fr}}
 .note{max-width:60rem;font-size:.88rem;color:var(--ink-2);background:#fff;border-radius:12px;padding:1rem 1.2rem;margin:1rem 0 0}
@@ -307,6 +338,77 @@ table.diff td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
       <p class="cap">전부 결정론적이다. 헛턴은 되돌림이나 반복 명령이 들어 있던 턴이고, 한 턴에 둘 다 있어도 한 번만 센다.</p>
     </div>
   </div>
+</div>
+
+<!-- ════════════════ D ════════════════ -->
+<h2 class="n">D · 출품작 판 <em>16:9 주석 그림이 주인공</em></h2>
+<p class="q">원티드 AI 챔피언십 2026 출품작 1,391개 중 인기 상위 판을 훑어 뽑은 기법이다. 공통은 하나 — <b>화면을 그냥 붙이지 않고 어디를 볼지 표시한다.</b> 라벨 · 굵은 제목 · 보조 한 줄을 위에 두고, 아래 그림에 번호 · 인출선 · 확대 · 들어올리기를 얹는다. 아래 셋은 Backtrack 실제 화면에 그 기법을 입힌 것이다.</p>
+
+<div class="pn">
+  <div class="pn-l">BACKTRACK</div>
+  <div class="pn-2">
+    <div>
+      <h4>턴 효율은 3.1배 좋아졌는데<br>같은 110달러가 사는 PR 은<br>73개에서 15개가 됐다</h4>
+      <p class="pn-s">Claude Code 세션 로그를 브라우저 안에서 읽어 턴이 어디로 갔는지 센다. 아무것도 올라가지 않는다.</p>
+      <div class="pn-chips">
+        <span><b>$0.018 → $0.115</b>턴 하나의 값</span>
+        <span><b>18.9K → 164.8K</b>턴마다 다시 읽는 토큰</span>
+        <span><b>0건</b>외부로 나간 요청</span>
+      </div>
+    </div>
+    <div class="pn-shot"><img src="img/backtrack/01-landing.png" alt="Backtrack 첫 화면"></div>
+  </div>
+</div>
+<p class="cp"><b>반반 판</b> — 왼쪽은 말, 오른쪽은 진짜 화면. 브라우저 주소창 같은 기기 틀은 그리지 않고 둥근 모서리와 그림자만 준다. (Bbik · PLIMAP)</p>
+
+<div class="pn">
+  <div class="pn-l">KEY 1</div>
+  <h4>진단 — 이 세션에서 어디를 맴돌았나</h4>
+  <p class="pn-s">세션 하나를 고르면 되돌림과 반복 명령이 몇 턴을 가져갔는지 나온다.</p>
+  <div class="pn-fig">
+    <div class="shot"><img src="img/backtrack/02-diag.png" alt="진단 화면"></div>
+    <i class="bd" style="left:1.5%;top:23%">1</i>
+    <div class="an" style="left:5.5%;top:21.5%">한 파일에 묶인 턴 수를<br>맨 위에 하나만</div>
+    <i class="bd" style="left:1.5%;top:50%">2</i>
+    <div class="an" style="left:5.5%;top:48.5%">턴을 시간 순으로 눕힌 띠<br>붉은 칸이 헛턴</div>
+    <i class="bd" style="left:1.5%;top:71%">3</i>
+    <div class="an" style="left:5.5%;top:69.5%">그 아래 네 숫자가<br>왜 그렇게 됐는지</div>
+    <div class="zl" style="left:66%;top:53.5%;width:12%"></div>
+    <div class="zm" style="--img:url(img/backtrack/02-diag.png);--px:50%;--py:41.5%;--zoom:760%;top:45%;aspect-ratio:16/2.1"></div>
+    <div class="zc" style="top:62%">띠 한 칸이 세션의 1/60 · 진할수록 그 구간에 헛턴이 몰렸다</div>
+  </div>
+</div>
+<p class="cp"><b>번호 뱃지와 줌 콜아웃</b> — 번호는 읽는 순서를 정하고, 확대는 캡처로는 안 보이는 것을 보이게 한다. 「그림이 작다」의 답은 키우는 게 아니라 조각을 뽑아내는 것이다. (에움길 · 여백)</p>
+
+<div class="pn">
+  <div class="pn-l">KEY 2</div>
+  <h4>값 — 같은 구독료로 얼마나 더 내게 됐나</h4>
+  <p class="pn-s">효율이 좋아진 것과 값이 오른 것을 한 화면에서 맞세운다.</p>
+  <div class="pn-fig">
+    <div class="shot" style="aspect-ratio:1593/750"><img src="img/backtrack/04-value.png" alt="값 화면"></div>
+    <div class="pin" style="left:1.5%;top:15%"><span>대표 숫자 하나</span></div>
+    <div class="dsh" style="left:13.5%;top:19.5%;width:18.5%"></div>
+    <div class="pin" style="left:1.5%;top:46%"><span>8월과 9월 두 칸</span></div>
+    <div class="dsh" style="left:13.5%;top:50.5%;width:18.5%"></div>
+    <div class="lift" style="left:33%;top:80.5%;width:31.5%;height:6%"></div>
+    <div class="lift-c" style="left:79%;top:80%">여기 한 줄이<br>이 판의 결론</div>
+  </div>
+</div>
+<p class="cp"><b>라벨 칩 + 점선 인출선, 그리고 들어올리기</b> — 결론이 되는 한 줄만 테두리와 그림자로 띄운다. (PLIMAP · 에움길)</p>
+
+<h2 class="n">가져올 기법 다섯</h2>
+<table class="diff">
+<tr><th>기법</th><th>무엇을 하나</th><th>지금 사이트에 없는 것</th></tr>
+<tr><td>번호 뱃지</td><td>화면 위에 ①②③ 을 얹어 읽는 순서를 정한다</td><td><code>Fig</code> 는 캡션 한 줄뿐이라 어디를 볼지 안 알려 준다</td></tr>
+<tr><td>라벨 칩 + 인출선</td><td>화면 옆에 이름표를 두고 점선으로 그 자리를 가리킨다</td><td>mock 컴포넌트에 주석 층이 없다</td></tr>
+<tr><td>줌 콜아웃</td><td>작아서 안 보이는 조각을 끌어내 두세 배로</td><td>「그림이 너무 작다」의 진짜 답 — 키우는 게 아니라 뽑아내는 것</td></tr>
+<tr><td>들어올리기</td><td>결론이 되는 한 줄만 흰 카드로 띄우고 나머지는 눌러 둔다</td><td>없음</td></tr>
+<tr><td>제목 형식</td><td><code>&lt;이름&gt; — &lt;하는 일 한 문장&gt;</code>. 「진단 — 이 세션에서 어디를 맴돌았나」</td><td>지금 h2 는 명사구뿐이라 절 제목만 보고는 내용을 모른다</td></tr>
+</table>
+<div class="note" style="margin-top:1rem">
+<p style="margin:0 0 .6rem"><b>기기 틀은 안 그린다.</b> 인기 상위 판 어디에도 브라우저 주소창이 없다. 폰은 목업, 웹 화면은 둥근 모서리와 옅은 그림자만 준다.</p>
+<p style="margin:0 0 .6rem"><b>바탕색 하나로 묶는다.</b> 한 프로젝트의 그림 다섯 장이 같은 바탕을 쓴다(연보라 · 올리브 · 먹 · 옅은 회색). 사이트는 이미 연보라가 있으니 그대로 쓰면 된다.</p>
+<p style="margin:0"><b>설명 문장은 핵심 낱말만 색.</b> 문장 전체를 굵게 하지 않는다.</p>
 </div>
 
 <h2 class="n">고르고 나면</h2>
