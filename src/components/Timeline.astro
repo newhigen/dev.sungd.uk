@@ -9,7 +9,7 @@ interface Item {
   iw?: number;
   ih?: number;
   alt?: string;
-  /** 아래 칸에 펼쳐지는 내용. problem·did·result·next 는 인라인 태그를 그대로 쓴다 */
+  /** 창에 든 항목의 글. problem·did·result·next 는 인라인 태그를 그대로 쓴다 */
   day?: string;
   problem?: string;
   did?: string;
@@ -19,22 +19,28 @@ interface Item {
 interface Props {
   /** 결정을 차례대로 한 축에 — 간격은 날짜가 아니라 차례로 고르게 벌린다.
    *  날짜 비례로 하면 몰린 자리의 라벨이 서로 눌린다.
-   *  항목에 problem·did·result 가 있으면 축 아래 한 칸이 펼쳐진다. */
+   *  항목에 problem·did·result 가 있으면 축을 밀어 창에 든 것이 아래에 펼쳐진다. */
   items: Item[];
   caption?: string;
 }
 const { items, caption } = Astro.props;
 
-const STEP = 145, PAD = 80, TOP = 110;
+const STEP = 145, PAD = 80;
 const AX = 300, BASE = 250; // 축 y · 그림 바닥 y
 const W = PAD * 2 + (items.length - 1) * STEP;
 
 // 원본이 가장 큰 그림을 110px 로 놓고 나머지를 같은 배율로 — 그래야 크기 차이가 실제 비율이 된다
 const shots = items.filter(i => i.img && i.iw && i.ih);
 const scale = shots.length ? 110 / Math.max(...shots.map(i => i.iw!)) : 1;
+const box = (it: Item) => ({ w: Math.round(it.iw! * scale), h: Math.round(it.ih! * scale) });
+
+// viewBox 를 내용에 딱 맞춘다 — 넉넉히 잡으면 창 테두리가 빈 자리까지 두른다
+const tallest = shots.length ? Math.max(...shots.map(box).map(b => b.h)) : 0;
+const TOP = Math.min(BASE - tallest, AX) - 4;
+const BOT = AX + 46;
+const VH = BOT - TOP;
 
 const x = (i: number) => PAD + i * STEP;
-const box = (it: Item) => ({ w: Math.round(it.iw! * scale), h: Math.round(it.ih! * scale) });
 
 const has = (it: Item) => Boolean(it.problem || it.did || it.result);
 const opens = items.some(has);
@@ -46,53 +52,58 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
 ---
 
 <figure class="tml" id={uid} data-open={opens ? '' : null}>
-  <div class="tml-scroll">
-    <svg
-      width={W}
-      height={AX - TOP + 70}
-      viewBox={`0 ${TOP} ${W} ${AX - TOP + 70}`}
-      role={opens ? 'group' : 'img'}
-      aria-label={caption ?? '결정 타임라인'}
-    >
-      <line class="rail" x1={x(0)} y1={AX} x2={x(items.length - 1)} y2={AX} />
+  <div class="tml-track">
+    {opens && (
+      <div class="tml-win" style={`width:${STEP}px`}>
+        <span class="chip">밀어서 보기</span>
+      </div>
+    )}
+    <div class="tml-scroll">
+      <svg
+        width={W}
+        height={VH}
+        viewBox={`0 ${TOP} ${W} ${VH}`}
+        role={opens ? 'group' : 'img'}
+        aria-label={caption ?? '결정 타임라인'}
+      >
+        <line class="rail" x1={x(0)} y1={AX} x2={x(items.length - 1)} y2={AX} />
 
-      {items.map((it, i) => (
-        <g
-          class:list={['it', { hit: opens && has(it), sel: opens && i === first }]}
-          data-i={i}
-          role={opens && has(it) ? 'button' : null}
-          tabindex={opens && has(it) ? 0 : null}
-          aria-label={opens && has(it) ? `${it.at} ${it.title}` : null}
-        >
-          <line class="tick" x1={x(i)} y1={AX - 5} x2={x(i)} y2={AX + 5} />
-          <text class="at" x={x(i)} y={AX + 22} text-anchor="middle">{it.at}</text>
-          <text class="nm" x={x(i)} y={AX + 42} text-anchor="middle">{it.title}</text>
+        {items.map((it, i) => (
+          <g
+            class:list={['it', { hit: opens && has(it), sel: opens && i === first }]}
+            data-i={i}
+            role={opens && has(it) ? 'button' : null}
+            tabindex={opens && has(it) ? 0 : null}
+            aria-label={opens && has(it) ? `${it.at} ${it.title}` : null}
+          >
+            <line class="tick" x1={x(i)} y1={AX - 5} x2={x(i)} y2={AX + 5} />
+            <text class="at" x={x(i)} y={AX + 22} text-anchor="middle">{it.at}</text>
+            <text class="nm" x={x(i)} y={AX + 42} text-anchor="middle">{it.title}</text>
 
-          {it.img && it.iw && it.ih && (
-            <g>
-              <line class="stem" x1={x(i)} y1={AX - 7} x2={x(i)} y2={BASE + 30} />
-              <circle class="dot big" cx={x(i)} cy={AX} r="4.5" />
-              <image
-                class="shot"
-                href={it.img}
-                x={x(i) - box(it).w / 2}
-                y={BASE - box(it).h}
-                width={box(it).w}
-                height={box(it).h}
-                role="img"
-                aria-label={it.alt ?? it.title}
-              />
-              {it.note && <text class="sz" x={x(i)} y={BASE + 22} text-anchor="middle">{it.note}</text>}
-            </g>
-          )}
-          {!it.img && <circle class="dot" cx={x(i)} cy={AX} r="3" />}
+            {it.img && it.iw && it.ih && (
+              <g>
+                <line class="stem" x1={x(i)} y1={AX - 7} x2={x(i)} y2={BASE + 30} />
+                <circle class="dot big" cx={x(i)} cy={AX} r="4.5" />
+                <image
+                  class="shot"
+                  href={it.img}
+                  x={x(i) - box(it).w / 2}
+                  y={BASE - box(it).h}
+                  width={box(it).w}
+                  height={box(it).h}
+                  role="img"
+                  aria-label={it.alt ?? it.title}
+                />
+                {it.note && <text class="sz" x={x(i)} y={BASE + 22} text-anchor="middle">{it.note}</text>}
+              </g>
+            )}
+            {!it.img && <circle class="dot" cx={x(i)} cy={AX} r="3" />}
 
-          {opens && has(it) && (
-            <rect class="zone" x={x(i) - STEP / 2} y={TOP} width={STEP} height={AX - TOP + 60} fill="transparent" />
-          )}
-        </g>
-      ))}
-    </svg>
+            <rect class="zone" x={x(i) - STEP / 2} y={TOP} width={STEP} height={VH} fill="transparent" />
+          </g>
+        ))}
+      </svg>
+    </div>
   </div>
 
   {one && (
@@ -117,22 +128,26 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
 </figure>
 
 {opens && (
-  <script is:inline define:vars={{ uid, items }}>
+  <script is:inline define:vars={{ uid, items, STEP, PAD }}>
     (function () {
       var box = document.getElementById(uid);
       if (!box) return;
       var open = box.querySelector('.tml-open');
-      var gs = box.querySelectorAll('g.hit');
+      var win = box.querySelector('.tml-win');
+      var sc = box.querySelector('.tml-scroll');
+      var svg = sc.querySelector('svg');
+      var gs = box.querySelectorAll('g.it');
+      var cur = -1;
 
       function row(label, html) {
         return html ? '<dt>' + label + '</dt><dd>' + html + '</dd>' : '';
       }
       function show(i) {
+        if (i === cur) return;
         var it = items[i];
-        if (!it) return;
-        box.querySelectorAll('g.sel').forEach(function (g) { g.classList.remove('sel'); });
-        var g = box.querySelector('g[data-i="' + i + '"]');
-        if (g) g.classList.add('sel');
+        if (!it || !(it.problem || it.did || it.result)) return;
+        cur = i;
+        gs.forEach(function (g, k) { g.classList.toggle('sel', k === i); });
         open.innerHTML =
           '<div class="shot' + (it.img ? '' : ' none') + '">' +
           (it.img ? '<img src="' + it.img + '" alt="' + (it.alt || '') + '">' : '') +
@@ -142,10 +157,54 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
           row('결과', it.result) + row('다음엔', it.next) +
           '</dl></div>';
       }
+
+      // 창은 축 내용 높이에 딱 맞춘다 — 스크롤바와 아래 여백까지 두르면 창이 내려앉아 보인다
+      function fit() {
+        win.style.height = svg.getBoundingClientRect().height + 'px';
+        // 양 끝에 반 칸씩 — 없으면 첫 항목과 마지막 둘이 창에 못 온다
+        var half = sc.clientWidth / 2 - PAD;
+        sc.style.paddingLeft = sc.style.paddingRight = Math.max(half, 0) + 'px';
+      }
+      function at(i) {
+        var k = svg.getBoundingClientRect().width / svg.getAttribute('width');
+        return (PAD + i * STEP) * k;
+      }
+      function pick() {
+        var padL = parseFloat(sc.style.paddingLeft || 0);
+        var mid = sc.scrollLeft + sc.clientWidth / 2 - padL;
+        var best = -1, bd = Infinity;
+        items.forEach(function (it, i) {
+          if (!(it.problem || it.did || it.result)) return;
+          var d = Math.abs(at(i) - mid);
+          if (d < bd) { bd = d; best = i; }
+        });
+        if (best >= 0) show(best);
+      }
+      var snapBack;
+      function go(i) {
+        var to = at(i) + parseFloat(sc.style.paddingLeft || 0) - sc.clientWidth / 2;
+        if (Math.abs(to - sc.scrollLeft) < 2) return;
+        // 스냅이 켜져 있으면 브라우저가 프로그램 스크롤을 되돌린다 — 옮기는 동안만 끈다
+        show(i);
+        sc.style.scrollSnapType = 'none';
+        sc.scrollTo({ left: to, behavior: 'smooth' });
+        clearTimeout(snapBack);
+        snapBack = setTimeout(function () {
+          // 부드러운 스크롤은 프레임이 돌 때만 움직인다 — 안 닿았으면 그냥 옮긴다
+          if (Math.abs(sc.scrollLeft - to) > 2) sc.scrollLeft = to;
+          sc.style.scrollSnapType = '';
+          pick();
+        }, 700);
+      }
+
+      fit();
+      pick();
+      window.addEventListener('resize', function () { fit(); pick(); });
+      sc.addEventListener('scroll', pick, { passive: true });
       gs.forEach(function (g) {
-        g.addEventListener('click', function () { show(+g.dataset.i); });
+        g.addEventListener('click', function () { go(+g.dataset.i); });
         g.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(+g.dataset.i); }
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(+g.dataset.i); }
         });
       });
     })();

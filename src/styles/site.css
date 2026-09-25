@@ -1053,6 +1053,35 @@ a.prow:hover .rn { color: var(--link); }
   fill: var(--ink);
 }
 .tml .shot { cursor: zoom-in; }
+.tml-track { position: relative; }
+.tml-scroll { position: relative; z-index: 1; scroll-snap-type: x proximity; }
+.tml .zone { scroll-snap-align: center; }
+
+/* 가운데 창 — 여기 든 항목이 아래 칸에 펼쳐진다. 높이는 스크립트가 축 내용에 맞춘다 */
+.tml-win {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 0;
+  border: 1.5px solid var(--accent);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 9%, var(--card));
+}
+.tml-win .chip {
+  position: absolute;
+  top: -0.6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 0.1rem 0.55rem;
+  border-radius: 20px;
+  background: var(--accent);
+  color: var(--card);
+  font-size: 0.66rem;
+  white-space: nowrap;
+}
+
 .tml .it.hit { cursor: pointer; }
 .tml .it.hit:hover .nm,
 .tml .it.sel .nm { fill: var(--accent); font-weight: 600; }
@@ -1062,7 +1091,7 @@ a.prow:hover .rn { color: var(--link); }
 .tml .it:focus { outline: none; }
 .tml .it:focus-visible .zone { outline: 2px solid var(--accent); outline-offset: -2px; border-radius: 8px; }
 
-/* 축 아래 한 칸 — 누른 결정 하나만 펼친다. 카드 아홉을 세로로 쌓지 않아 편이 짧아진다 */
+/* 창 아래 칸 — 누른 결정 하나만 펼친다. 카드 아홉을 세로로 쌓지 않아 편이 짧아진다 */
 .tml-open {
   display: grid;
   grid-template-columns: auto 1fr;
