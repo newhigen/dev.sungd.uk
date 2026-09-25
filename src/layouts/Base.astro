@@ -95,10 +95,14 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
           lb.hidden = false;
         }
         function shut() { lb.hidden = true; }
+        // 가로로 미는 줄에서는 밀고 손을 뗀 것이 누른 것으로 온다 — 움직였으면 안 연다
+        var px = 0, py = 0;
+        document.addEventListener('pointerdown', function (e) { px = e.clientX; py = e.clientY; }, true);
         // 위임으로 잡는다 — 펼치는 도식은 그림을 갈아 끼우므로 요소마다 걸면 새 그림이 빠진다
         document.addEventListener('click', function (e) {
           var el = e.target;
           if (!el || !el.closest || !el.closest('.prose')) return;
+          if (Math.abs(e.clientX - px) > 8 || Math.abs(e.clientY - py) > 8) return;
           if (el.tagName === 'IMG') {
             var src = el.getAttribute('src') || '';
             if (src.indexOf('/p/') !== 0) return;

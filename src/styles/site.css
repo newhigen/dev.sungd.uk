@@ -1155,6 +1155,83 @@ a.prow:hover .rn { color: var(--link); }
 .tml-open dd { margin: 0; color: var(--ink-2); }
 .tml figcaption { margin-top: 0.5rem; font-size: 0.8125rem; color: var(--ink-3); }
 
+/* ── 시안 판을 한 줄로 ────────────────────────────── */
+
+/* 후보를 그려 놓고 고른 판들. 세로로 쌓으면 이 절이 본문보다 무거워진다.
+   미는 손은 변천사 카드·개발기 축과 같다 — 편 안에서 미는 법이 하나가 되게. */
+.reel { margin: 1.5rem 0 2.2rem; }
+.reel-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+  margin: 0 -2.8rem;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2.8rem, #000 calc(100% - 2.8rem), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 2.8rem, #000 calc(100% - 2.8rem), transparent 100%);
+  transition: mask-image 0.2s;
+}
+.reel-scroll::-webkit-scrollbar { display: none; }
+.reel[data-edge="start"] .reel-scroll {
+  -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 2.8rem), transparent 100%);
+  mask-image: linear-gradient(to right, #000 calc(100% - 2.8rem), transparent 100%);
+}
+.reel[data-edge="end"] .reel-scroll {
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2.8rem);
+  mask-image: linear-gradient(to right, transparent 0, #000 2.8rem);
+}
+.reel[data-edge="none"] .reel-scroll { -webkit-mask-image: none; mask-image: none; }
+
+.reel .track { display: flex; gap: 1rem; padding: 0.2rem 2.8rem 1rem; width: max-content; }
+.reel .track > figure {
+  flex: 0 0 11rem;
+  margin: 0;
+  position: relative;
+  scroll-snap-align: center;
+}
+.reel .track img {
+  display: block;
+  width: 100%;
+  border-radius: 9px;
+  box-shadow: 0 3px 14px rgba(30, 25, 60, 0.13);
+  cursor: zoom-in;
+}
+.reel .cnt {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 2;
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  background: var(--accent);
+  color: var(--card);
+  font-size: 0.68rem;
+  white-space: nowrap;
+}
+.reel .track figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--ink-3);
+}
+.reel .track figcaption b {
+  display: block;
+  margin-bottom: 0.1rem;
+  font-family: var(--title);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+/* 그림은 크게 보기, 이 링크가 그 판으로 — 누르는 자리를 둘로 가른다 */
+.reel .track figcaption a {
+  display: inline-block;
+  margin-top: 0.25rem;
+  color: var(--accent);
+  font-size: 0.74rem;
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+}
+.reel .cap { margin-top: 0.2rem; font-size: 0.8125rem; color: var(--ink-3); }
+
 /* ── 눌러서 크게 ──────────────────────────────────── */
 
 /* 편에 들어가는 화면 그림은 본문 폭에 맞춰 원본의 10~30% 로 줄어든다.
