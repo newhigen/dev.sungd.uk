@@ -53,11 +53,7 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
 
 <figure class="tml" id={uid} data-open={opens ? '' : null} data-edge={opens ? 'start' : null}>
   <div class="tml-track">
-    {opens && (
-      <div class="tml-win" style={`width:${STEP}px`}>
-        <span class="chip">밀어서 보기</span>
-      </div>
-    )}
+    {opens && <div class="tml-win bg" style={`width:${STEP}px`} />}
     <div class="tml-scroll">
       <svg
         width={W}
@@ -104,6 +100,11 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
         ))}
       </svg>
     </div>
+    {opens && (
+      <div class="tml-win fr" style={`width:${STEP}px`}>
+        <span class="chip">밀어서 보기</span>
+      </div>
+    )}
   </div>
 
   {one && (
@@ -133,7 +134,7 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
       var box = document.getElementById(uid);
       if (!box) return;
       var open = box.querySelector('.tml-open');
-      var win = box.querySelector('.tml-win');
+      var wins = box.querySelectorAll('.tml-win');
       var sc = box.querySelector('.tml-scroll');
       var svg = sc.querySelector('svg');
       var gs = box.querySelectorAll('g.it');
@@ -162,8 +163,8 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
       // 위는 칩이 얹히는 쪽이라 더 주고, 아래는 축 이름표만 있어 덜 준다
       var VTOP = 16, VBOT = 9;
       function fit() {
-        win.style.top = -VTOP + 'px';
-        win.style.height = svg.getBoundingClientRect().height + VTOP + VBOT + 'px';
+        var h = svg.getBoundingClientRect().height + VTOP + VBOT + 'px';
+        wins.forEach(function (w) { w.style.top = -VTOP + 'px'; w.style.height = h; });
         // 양 끝에 반 칸씩 — 없으면 첫 항목과 마지막 둘이 창에 못 온다
         var half = sc.clientWidth / 2 - PAD;
         sc.style.paddingLeft = sc.style.paddingRight = Math.max(half, 0) + 'px';

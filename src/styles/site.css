@@ -1081,17 +1081,27 @@ a.prow:hover .rn { color: var(--link); }
 }
 .tml[data-edge="none"] .tml-scroll { -webkit-mask-image: none; mask-image: none; }
 
-/* 가운데 창 — 여기 든 항목이 아래 칸에 펼쳐진다. 위치와 높이는 스크립트가 축 내용에 맞춘다 */
+/* 가운데 창 — 여기 든 항목이 아래 칸에 펼쳐진다. 위치와 높이는 스크립트가 축 내용에 맞춘다.
+   두 겹이다: 바탕은 축 뒤에 깔리고, 테두리만 축 위로 올라온다. 한 겹이면 지나가는
+   그림이 테두리를 덮어 「지금 보는 칸」의 경계가 끊긴다. */
 .tml-win {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 0;
-  border: 1.5px solid var(--accent);
   border-radius: 10px;
+}
+.tml-win.bg {
+  z-index: 0;
   background: color-mix(in srgb, var(--accent) 9%, var(--card));
 }
+.tml-win.fr {
+  z-index: 2;
+  border: 1.5px solid var(--accent);
+  /* 테두리 겹은 눈에만 있다 — 밀기와 날짜 누르기는 그대로 축이 받는다 */
+  pointer-events: none;
+}
+.tml-win.fr .chip { pointer-events: auto; }
 .tml-win .chip {
   position: absolute;
   /* 테두리를 반반 걸친다 — 높이의 절반을 스스로 끌어올리므로 글자 크기가 바뀌어도 안 어긋난다.
