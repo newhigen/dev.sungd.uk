@@ -18,10 +18,12 @@ interface Props {
 }
 const { label, title, sub, chips = [], src, srcDark, alt, basis } = Astro.props;
 const lines = Array.isArray(title) ? title : [title];
+// 오른쪽에 세울 화면이 없으면 한 단으로 — 가로로 넓은 그림은 좁은 셀에서 못 읽는다
+const solo = !src && !Astro.slots.has('default');
 ---
 
 <figure class="pnl">
-  <div class="pnl-2">
+  <div class={solo ? "pnl-2 solo" : "pnl-2"}>
     <div class="pnl-say">
       {label && <p class="pnl-l">{label}</p>}
       <h3>{lines.map((l, i) => <>{i > 0 && <br />}{l}</>)}</h3>
@@ -32,7 +34,7 @@ const lines = Array.isArray(title) ? title : [title];
         </div>
       )}
     </div>
-    <div class="pnl-shot">
+    {!solo && <div class="pnl-shot">
       {src
         ? (srcDark
             ? <picture>
@@ -41,7 +43,7 @@ const lines = Array.isArray(title) ? title : [title];
               </picture>
             : <img src={src} alt={alt ?? ''} />)
         : <slot />}
-    </div>
+    </div>}
   </div>
   {basis && <figcaption class="pnl-b">{basis}</figcaption>}
 </figure>

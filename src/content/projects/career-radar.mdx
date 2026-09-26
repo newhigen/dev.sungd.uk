@@ -8,6 +8,7 @@ ended: 대시보드가 6월 1일 자료에서 멈춤 · 8월부터 손이 매일
 kind: Claude Code 스킬 · 대시보드
 tags: [Claude Code, Node.js, JD 분석]
 cover: "/p/career-radar/career-radar.png"
+headCover: false
 use:
   - "직군을 고르면 회사들이 공통으로 요구하는 것이 뜬다"
   - "회사 × 스택 매트릭스로 공통과 차이를 한 판에"
@@ -31,9 +32,11 @@ import Common from '../../components/cr/Common.astro';
     { v: "1 → 7", label: "직군 — MLOps 하나로 시작해 TPgM 까지" },
     { v: "하루", label: "첫 판까지 — 스카폴드부터 스킬화까지 커밋 14개" },
   ]}
-  basis="직군 수는 저장소 roles.mjs 기준. 커밋 수는 저장소 기록. 채용 페이지를 연 횟수 실측은 없음.">
-  <Grid caption="MLOps Engineer 직군 · 공고 8곳을 겹친 매트릭스. 회사 이름만 업종으로 바꿨다." />
-</Panel>
+  src="/p/career-radar/career-radar.png"
+  alt="직군을 고르면 공통 스택이 뜨는 판"
+  basis="직군 수는 저장소 roles.mjs 기준. 커밋 수는 저장소 기록. 채용 페이지를 연 횟수 실측은 없음." />
+
+<Grid wide caption="MLOps Engineer 직군 · 공고 8곳을 겹친 매트릭스. 회사 이름만 업종으로 바꿨다." />
 
 <Now year="2026" month="8월"
   line="손이 <b>매일 도는 채용 감시 보드</b>로 옮겨가 보류"

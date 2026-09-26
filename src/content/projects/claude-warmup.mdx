@@ -26,18 +26,17 @@ import Versus from '../../components/Versus.astro';
 import Fig from '../../components/Fig.astro';
 
 <Panel label="개발 도구"
-  title={["9시간을 일하는데", "5시간 윈도우는 두 개뿐이었다"]}
+  title={["9시간을 일하는데", "윈도우는 두 개뿐이었다"]}
   sub="Claude 의 5시간 윈도우는 첫 메시지 시각에 시작한다. 출근 전 자동 메시지로 근무 중 윈도우 셋을 확보한다."
   chips={[
     { v: "최대 1.5배", label: "하루에 받는 한도 — 근무 중 윈도우 2개에서 3개로" },
     { v: "20% → ≈100%", label: "야근한 날 세 번째 윈도우 — 19시 퇴근" },
     { v: "하루 3통", label: "드는 것 — 가장 작은 모델 · 한 단어 · 세션 미저장" },
   ]}
-  src="/p/claude-warmup/quota-windows.png"
-  alt="근무 시간과 5시간 윈도우"
   basis="계산값 — 7시 출근 · 16시 퇴근 기준 윈도우 계산. 토큰 사용량 실측 아님." />
 
-윈도우를 시간축에 늘어놓고 근무 시간을 겹쳐 본 판. 왼쪽 빗금이 못 쓰고 버리는 몫.
+<Fig src="/p/claude-warmup/quota-windows.png" wide
+  caption="윈도우를 시간축에 늘어놓고 근무 시간을 겹쳐 본 판. 왼쪽 빗금이 못 쓰고 버리는 몫." />
 
 <Now year="2026" month="6월"
   line="Claude Code 에 <b>/schedule</b> 이 들어와 종료"

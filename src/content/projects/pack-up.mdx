@@ -17,26 +17,23 @@ use:
 ---
 
 import Fig from '../../components/Fig.astro';
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Next from '../../components/Next.astro';
 import Story from '../../components/Story.astro';
 import Strip from '../../components/Strip.astro';
 import Cases from '../../components/Cases.astro';
 
-<p class="q">날씨 숫자 넷, 챙길 건 우산 하나.</p>
-
-내일 예보를 전날 밤 준비물 목록으로 바꿔 알림 하나로 전달.
-
-<Hero label="숫자 대신 받는 것" v="준비물 12종"
-  note="비·눈 · 자외선 · 미세먼지 · 기온 네 갈래 문턱에서 항목으로. 항목마다 왜 떴는지 근거 줄"
-  tiles={[
-    { label: "합쳐 보는 동네", v: "2곳", note: "집 · 회사 중 더 안 좋은 쪽" },
-    { label: "알림", v: "하루 최대 2번", note: "21:00 · 06:30(안 챙긴 게 남을 때만) · 주말 제외" },
+<Panel label="안드로이드 앱"
+  title={["날씨 숫자는 넷인데", "챙길 건 우산 하나였다"]}
+  sub="내일 예보를 전날 밤 준비물 목록으로 바꿔 알림 하나로 보낸다. 항목마다 왜 떴는지 근거 줄이 붙는다."
+  chips={[
+    { v: "12종", label: "숫자 대신 받는 것 — 비·눈, 자외선, 미세먼지, 기온 네 갈래에서" },
+    { v: "2곳", label: "합쳐 보는 동네 — 집과 회사 중 더 안 좋은 쪽" },
+    { v: "하루 2번", label: "알림 — 밤 9시와 아침 6시 반, 주말은 없다" },
   ]}
+  src="/p/pack-up/main.png"
+  alt="날씨가 시킨 것과 늘 챙기는 것, 하루 차트"
   basis="앱 규칙(Rules.kt)과 기본 설정 기준. 사용 효과 실측 아님." />
-
-<Fig src="/p/pack-up/main.png" phone
-  caption="날씨가 시킨 것 · 늘 챙기는 것 · 하루 차트. 항목마다 근거 줄." />
 
 <Next items={[
   { tab: "왜 만들었나", title: "숫자에서 우산까지 누가 건너나", href: "/pack-up/why" },

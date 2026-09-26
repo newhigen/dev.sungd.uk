@@ -728,25 +728,7 @@ a.prow:hover .rn { color: var(--link); }
   line-height: 1.2;
 }
 /* 대표 숫자 하나 + 타일 — 소개 맨 위 */
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
-  gap: 0.8rem;
-  max-width: var(--measure);
-  margin: 1.8rem 0 2.4rem;
-  font-family: var(--body);
-}
-.hero .tile { border-radius: 12px; padding: 1rem 1.2rem; background: var(--card-2); }
-.hero .big { grid-row: span 2; display: flex; flex-direction: column; justify-content: space-between; gap: 1rem; }
-.hero .lb { font-size: 0.75rem; color: var(--ink-3); }
-.hero .v { margin-top: 0.15rem; font-family: var(--title); font-size: 1.45rem; font-weight: 500; line-height: 1.2; color: var(--ink); }
-.hero .big .v { font-size: 3.2rem; line-height: 1.1; }
-.hero .d { margin-top: 0.2rem; font-size: 0.78rem; line-height: 1.5; color: var(--ink-2); }
-.hero .cells .line { display: flex; align-items: center; gap: 0.35rem; margin-top: 0.35rem; }
-.hero .cells i { width: 2.2rem; height: 0.55rem; border-radius: 3px; background: var(--rule-mid); }
-.hero .cells i.on { background: var(--ink); }
-.hero .cells span { margin-left: 0.3rem; font-size: 0.72rem; color: var(--ink-3); }
-.hero .basis, .impact-basis { grid-column: 1 / -1; margin: 0; font-family: var(--body); font-size: 0.75rem; color: var(--ink-3); }
+.impact-basis { grid-column: 1 / -1; margin: 0; font-family: var(--body); font-size: 0.75rem; color: var(--ink-3); }
 
 /* 막힌 지점 → 한 것 → 숫자 */
 .impact {
@@ -783,9 +765,6 @@ a.prow:hover .rn { color: var(--link); }
 .day-legend i.t1 { background: var(--t1); } .day-legend i.t2 { background: var(--t2); } .day-legend i.t3 { background: var(--t3); }
 .day-legend i.cut { background: repeating-linear-gradient(45deg, var(--cut) 0 2px, transparent 2px 5px); }
 @media (max-width: 640px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero .big { grid-row: auto; }
-  .hero .big .v { font-size: 2.6rem; }
 }
 
 /* 계산 한 줄 — 칸 넷, 입력 칸만 짙게 */
@@ -1307,6 +1286,17 @@ a.prow:hover .rn { color: var(--link); }
 .mrk { max-width: var(--measure); margin: 1.6rem 0 2.2rem; }
 .doc-body .prose > figure.pnl,
 .doc-body .prose > figure.mrk { margin-left: 0; margin-right: 0; }
+/* 판 안에 들어온 컴포넌트는 제 폭을 주장하지 않는다 */
+.pnl-shot figure { max-width: 100%; margin: 0; }
+.pnl-shot .caps-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pnl-shot .voices > div { grid-template-columns: 1fr; gap: 0.3rem; }
+.pnl-shot .voices audio { width: 100%; }
+/* 폰 세로 캡처는 판을 혼자 길게 만든다 */
+.pnl-shot img { max-width: 100%; max-height: 30rem; width: auto; margin: 0 auto; }
+.pnl-2.solo { grid-template-columns: 1fr; }
+/* 어떤 컴포넌트가 들어와도 판 밖으로는 안 나간다 */
+.pnl-shot { min-width: 0; overflow: hidden; }
+.pnl-shot .stb-row { min-width: 0; }
 .mrk-fig { position: relative; padding: 0 21%; }
 .mrk-shot { position: relative; overflow: hidden; border-radius: 12px; box-shadow: var(--shadow); }
 .mrk-shot img { display: block; width: 100%; }
