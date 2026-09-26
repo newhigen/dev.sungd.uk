@@ -8,10 +8,13 @@ interface Props {
   sub?: string;
   /** 왼쪽에 세로로 서는 숫자 칩 */
   chips?: { v: string; label: string }[];
-  src: string;
+  /** 오른쪽 화면. 그림 한 장이면 src, 컴포넌트로 그린 화면이면 자식으로 넣는다 */
+  src?: string;
   alt?: string;
+  /** 숫자의 출처. 실측이 아니면 아니라고 적는다 */
+  basis?: string;
 }
-const { label, title, sub, chips = [], src, alt } = Astro.props;
+const { label, title, sub, chips = [], src, alt, basis } = Astro.props;
 const lines = Array.isArray(title) ? title : [title];
 ---
 
@@ -27,6 +30,9 @@ const lines = Array.isArray(title) ? title : [title];
         </div>
       )}
     </div>
-    <div class="pnl-shot"><img src={src} alt={alt ?? ''} /></div>
+    <div class="pnl-shot">
+      {src ? <img src={src} alt={alt ?? ''} /> : <slot />}
+    </div>
   </div>
+  {basis && <figcaption class="pnl-b">{basis}</figcaption>}
 </figure>

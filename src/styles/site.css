@@ -1296,6 +1296,9 @@ a.prow:hover .rn { color: var(--link); }
   font-variant-numeric: tabular-nums;
 }
 .pnl-shot img { display: block; width: 100%; border-radius: 12px; box-shadow: var(--shadow); }
+/* 컴포넌트로 그린 화면이 들어오면 그쪽 바깥 여백은 판이 맡는다 */
+.pnl-shot > :global(figure) { margin: 0; }
+.pnl-b { margin: 1.1rem 0 0; font-size: 0.78rem; color: var(--ink-3); }
 
 /* ── 번호를 얹은 화면 ─────────────────────────────── */
 
