@@ -5,7 +5,7 @@ tagline: 날씨 숫자를 준비물 목록으로, 잘라 온 예보로 하루를
 import Versus from '../../components/Versus.astro';
 import Track from '../../components/Track.astro';
 import Timeline from '../../components/Timeline.astro';
-import Shots from '../../components/Shots.astro';
+import Reel from '../../components/Reel.astro';
 import Cases from '../../components/Cases.astro';
 
 <p class="q">68mm 쏟아진 날, 카드엔 0mm.</p>
@@ -91,13 +91,14 @@ import Cases from '../../components/Cases.astro';
   { when: "어떻게 고르나", what: "고른 뒤에 구현. 네 안을 다 만들지 않음" },
 ]} />
 
-<Shots items={[
-  { src: "/p/pack-up/shot-widget-ideas.png", caption: "위젯 한 판 그리기 — 네 안 중 겹쳐 세우기", href: "/p/pack-up/pages/widget-ideas.html" },
-  { src: "/p/pack-up/shot-widget-1row.png", caption: "한 줄 위젯 배치 — 왼쪽·오른쪽에서 위·아래로", href: "/p/pack-up/pages/widget-1row.html" },
-  { src: "/p/pack-up/shot-widget-polish.png", caption: "한 줄 위젯 다듬기 — 눈금과 이름표", href: "/p/pack-up/pages/widget-polish.html" },
-  { src: "/p/pack-up/shot-widget-dust.png", caption: "위젯에 미세먼지 — 그림 «안» 에 조각으로", href: "/p/pack-up/pages/widget-dust.html" },
-  { src: "/p/pack-up/shot-guide-bands.png", caption: "기준 화면 — 구간 띠에 준비물을 얹어", href: "/p/pack-up/pages/guide-bands.html" },
-]} />
+<Reel items={[
+  { src: "/p/pack-up/shot-widget-ideas.png", q: "위젯 한 판 그리기", note: "네 안 중 겹쳐 세우기", href: "/p/pack-up/pages/widget-ideas.html" },
+  { src: "/p/pack-up/shot-widget-1row.png", q: "한 줄 위젯 배치", note: "왼쪽·오른쪽에서 위·아래로", href: "/p/pack-up/pages/widget-1row.html" },
+  { src: "/p/pack-up/shot-widget-polish.png", q: "한 줄 위젯 다듬기", note: "눈금과 이름표", href: "/p/pack-up/pages/widget-polish.html" },
+  { src: "/p/pack-up/shot-widget-dust.png", q: "위젯에 미세먼지", note: "그림 «안» 에 조각으로", href: "/p/pack-up/pages/widget-dust.html" },
+  { src: "/p/pack-up/shot-guide-bands.png", q: "기준 화면", note: "구간 띠에 준비물을 얹어", href: "/p/pack-up/pages/guide-bands.html" },
+]}
+  caption="그림을 누르면 크게 뜨고, 「후보 보기」 가 그 판으로 간다." />
 
 ## 잘라 온 자료로 하루를 요약하지 않기
 

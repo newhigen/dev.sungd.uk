@@ -4,20 +4,21 @@ tagline: 이름부터 색까지, 후보 시안을 그려 놓고 고른 기록
 
 import Fig from '../../components/Fig.astro';
 import Timeline from '../../components/Timeline.astro';
-import Shots from '../../components/Shots.astro';
+import Reel from '../../components/Reel.astro';
 
 <p class="q">결정 7건, 말 대신 후보 시안 6판.</p>
 
 이름 · 런처 아이콘 · 상태 표시줄 아이콘 · 글꼴 · 알람음 · 버튼 배치 · 색 — 전부 후보를 실제 크기로 그려 화면에서 고름.
 
-<Shots items={[
-  { src: '/p/sleep-now/shot-name.png', caption: '이름 — 문장형 계열 20안', href: '/p/sleep-now/pages/name.html' },
-  { src: '/p/sleep-now/shot-icon-moon.png', caption: '런처 아이콘 — 달 계열 12안', href: '/p/sleep-now/pages/icon-moon.html' },
-  { src: '/p/sleep-now/shot-statusbar.png', caption: '상태 표시줄 아이콘 — 실제 크기 28안', href: '/p/sleep-now/pages/statusbar.html' },
-  { src: '/p/sleep-now/shot-lower.png', caption: '하단 목록 — 재구성 5안', href: '/p/sleep-now/pages/lower.html' },
-  { src: '/p/sleep-now/shot-timeline.png', caption: '타임라인 통합 — 17안', href: '/p/sleep-now/pages/timeline.html' },
-  { src: '/p/sleep-now/shot-palette.png', caption: '색 — 팔레트 10벌, 라이트·다크 나란히', href: '/p/sleep-now/pages/palette.html' },
-]} />
+<Reel items={[
+  { src: '/p/sleep-now/shot-name.png', q: '이름', note: '문장형 계열 20안', href: '/p/sleep-now/pages/name.html' },
+  { src: '/p/sleep-now/shot-icon-moon.png', q: '런처 아이콘', note: '달 계열 12안', href: '/p/sleep-now/pages/icon-moon.html' },
+  { src: '/p/sleep-now/shot-statusbar.png', q: '상태 표시줄 아이콘', note: '실제 크기 28안', href: '/p/sleep-now/pages/statusbar.html' },
+  { src: '/p/sleep-now/shot-lower.png', q: '하단 목록', note: '재구성 5안', href: '/p/sleep-now/pages/lower.html' },
+  { src: '/p/sleep-now/shot-timeline.png', q: '타임라인 통합', note: '17안', href: '/p/sleep-now/pages/timeline.html' },
+  { src: '/p/sleep-now/shot-palette.png', q: '색', note: '팔레트 10벌, 라이트·다크 나란히', href: '/p/sleep-now/pages/palette.html' },
+]}
+  caption="그림을 누르면 크게 뜨고, 「후보 보기」 가 그 판으로 간다." />
 
 ## 개발 과정
 

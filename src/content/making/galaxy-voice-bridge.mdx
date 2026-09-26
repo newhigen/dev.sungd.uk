@@ -4,7 +4,7 @@ tagline: 삼성 녹음기 자동화에서 전용 앱으로, 그리고 녹음 캡
 
 import Track from '../../components/Track.astro';
 import Timeline from '../../components/Timeline.astro';
-import Shots from '../../components/Shots.astro';
+import Reel from '../../components/Reel.astro';
 
 <p class="q">닷새 동안 PR 34개, 그중 18개가 녹음 캡슐.</p>
 
@@ -67,14 +67,15 @@ import Shots from '../../components/Shots.astro';
 
 말로 고르지 않고 후보를 HTML 로 그려 같은 조건에서 비교. 캡슐은 시안과 실제 Mac 화면을 나란히 놓고 밀도 · 좌표계를 맞춤. 누르면 그때 페이지.
 
-<Shots items={[
-  { src: "/p/galaxy-voice-bridge/shot-ui-candidates.png", caption: "9월 8일 — Mac 상태 표시 넷 · 갤럭시 연결 화면 둘", href: "/p/galaxy-voice-bridge/pages/ui-candidates.html" },
-  { src: "/p/galaxy-voice-bridge/shot-bright-capsule-variants.png", caption: "9월 8일 — 밝은 캡슐 그림자 후보", href: "/p/galaxy-voice-bridge/pages/bright-capsule-variants.html" },
-  { src: "/p/galaxy-voice-bridge/shot-capsule-current-comparison.png", caption: "9월 8일 — 실제 캡슐과 대안을 같은 조건에서", href: "/p/galaxy-voice-bridge/pages/capsule-current-comparison.html" },
-  { src: "/p/galaxy-voice-bridge/shot-special-capsule-showcase.png", caption: "9월 9일 — 캡슐의 특별한 표현", href: "/p/galaxy-voice-bridge/pages/special-capsule-showcase.html" },
-  { src: "/p/galaxy-voice-bridge/shot-radical-voice.png", caption: "9월 9일 — 여섯 방향: 잉크 한 방울 · 두 기기 사이 · 빛의 틈 · 말의 밑줄 · 음성 메모지 · 작은 녹음기", href: "/p/galaxy-voice-bridge/pages/radical-voice.html" },
-  { src: "/p/galaxy-voice-bridge/shot-subtle-capsules.png", caption: "9월 9일 — 결국 기존 캡슐의 미세 조정 A~F, F 채택", href: "/p/galaxy-voice-bridge/pages/subtle-capsules.html" },
-]} />
+<Reel items={[
+  { src: "/p/galaxy-voice-bridge/shot-ui-candidates.png", q: "Mac 상태 표시 넷 · 갤럭시 연결 화면 둘", note: "9월 8일", href: "/p/galaxy-voice-bridge/pages/ui-candidates.html" },
+  { src: "/p/galaxy-voice-bridge/shot-bright-capsule-variants.png", q: "밝은 캡슐 그림자 후보", note: "9월 8일", href: "/p/galaxy-voice-bridge/pages/bright-capsule-variants.html" },
+  { src: "/p/galaxy-voice-bridge/shot-capsule-current-comparison.png", q: "실제 캡슐과 대안을 같은 조건에서", note: "9월 8일", href: "/p/galaxy-voice-bridge/pages/capsule-current-comparison.html" },
+  { src: "/p/galaxy-voice-bridge/shot-special-capsule-showcase.png", q: "캡슐의 특별한 표현", note: "9월 9일", href: "/p/galaxy-voice-bridge/pages/special-capsule-showcase.html" },
+  { src: "/p/galaxy-voice-bridge/shot-radical-voice.png", q: "여섯 방향: 잉크 한 방울 · 두 기기 사이 · 빛의 틈 · 말의 밑줄 · 음성 메모지 · 작은 녹음기", note: "9월 9일", href: "/p/galaxy-voice-bridge/pages/radical-voice.html" },
+  { src: "/p/galaxy-voice-bridge/shot-subtle-capsules.png", q: "결국 기존 캡슐의 미세 조정 A~F, F 채택", note: "9월 9일", href: "/p/galaxy-voice-bridge/pages/subtle-capsules.html" },
+]}
+  caption="그림을 누르면 크게 뜨고, 「후보 보기」 가 그 판으로 간다." />
 
 ## 배운 점
 

@@ -5,7 +5,7 @@ tagline: 문자 감지 제거부터 카드 글자 제거까지
 import Nums from '../../components/Nums.astro';
 import Versus from '../../components/Versus.astro';
 import Timeline from '../../components/Timeline.astro';
-import Shots from '../../components/Shots.astro';
+import Reel from '../../components/Reel.astro';
 import Cases from '../../components/Cases.astro';
 
 <p class="q">문자 권한 1개 → 0개, 하루 만에.</p>
@@ -60,11 +60,12 @@ import Cases from '../../components/Cases.astro';
 말이 아니라 **실제 크기로 그려 놓고 선택.** 카드는 360dp 폭이 진짜 크기 — 그 폭에 안을 나란히 세우면 무엇이
 먼저 읽히는지 보임. 아래 셋이 그 페이지.
 
-<Shots items={[
-  { src: "/p/coupons/shot-cards.png", caption: "목록 카드 다섯 안 — 무엇을 먼저 읽게 할까", href: "/p/coupons/pages/cards.html" },
-  { src: "/p/coupons/shot-brand-color.png", caption: "브랜드 색 네 안 — 색으로 가게를 알아보게", href: "/p/coupons/pages/brand-color.html" },
-  { src: "/p/coupons/shot-logo.png", caption: "공식 로고 세 안 — 색 대신 로고로", href: "/p/coupons/pages/logo.html" },
-]} />
+<Reel items={[
+  { src: "/p/coupons/shot-cards.png", q: "목록 카드 다섯 안", note: "무엇을 먼저 읽게 할까", href: "/p/coupons/pages/cards.html" },
+  { src: "/p/coupons/shot-brand-color.png", q: "브랜드 색 네 안", note: "색으로 가게를 알아보게", href: "/p/coupons/pages/brand-color.html" },
+  { src: "/p/coupons/shot-logo.png", q: "공식 로고 세 안", note: "색 대신 로고로", href: "/p/coupons/pages/logo.html" },
+]}
+  caption="그림을 누르면 크게 뜨고, 「후보 보기」 가 그 판으로 간다." />
 
 ## 브랜드 로고 모으는 법
 

@@ -5,7 +5,7 @@ tagline: 달 격자를 네 주 창으로 바꾸고, 일정을 무게 넷으로 �
 import Fig from '../../components/Fig.astro';
 import Nums from '../../components/Nums.astro';
 import Timeline from '../../components/Timeline.astro';
-import Shots from '../../components/Shots.astro';
+import Reel from '../../components/Reel.astro';
 import Cases from '../../components/Cases.astro';
 
 <p class="q">처음 판, 월말에 남은 칸 닷새.</p>
@@ -77,17 +77,18 @@ import Cases from '../../components/Cases.astro';
 
 누르면 그때 그 화면으로 이동 — 라디오 단추도 그대로.
 
-<Shots items={[
-  { src: "/p/wallcal/shot-ideas.png", caption: "달력 위젯 아이디어 — 무엇을 만들지부터", href: "/p/wallcal/pages/ideas.html" },
-  { src: "/p/wallcal/shot-style.png", caption: "색과 글꼴 — 파스텔·조용한 주말색", href: "/p/wallcal/pages/style.html" },
-  { src: "/p/wallcal/shot-next.png", caption: "다음 일정 줄 — 디데이로 갈아탄 자리", href: "/p/wallcal/pages/next.html" },
-  { src: "/p/wallcal/shot-day.png", caption: "오른쪽 그날 칸 — 시간축으로", href: "/p/wallcal/pages/day.html" },
-  { src: "/p/wallcal/shot-holiday.png", caption: "공휴일 그리는 법 — 이어지는 선", href: "/p/wallcal/pages/holiday.html" },
-  { src: "/p/wallcal/shot-shape.png", caption: "위젯 바탕 모양 — 두 장", href: "/p/wallcal/pages/shape.html" },
-  { src: "/p/wallcal/shot-chip.png", caption: "일정 막대 스타일 — 안 바꾸기로", href: "/p/wallcal/pages/chip.html" },
-  { src: "/p/wallcal/shot-allday.png", caption: "종일과 시각 가르기 — 점", href: "/p/wallcal/pages/allday.html" },
-  { src: "/p/wallcal/shot-deadline.png", caption: "마감 그리기 — 별 단 것을 선으로", href: "/p/wallcal/pages/deadline.html" },
-]} />
+<Reel items={[
+  { src: "/p/wallcal/shot-ideas.png", q: "달력 위젯 아이디어", note: "무엇을 만들지부터", href: "/p/wallcal/pages/ideas.html" },
+  { src: "/p/wallcal/shot-style.png", q: "색과 글꼴", note: "파스텔·조용한 주말색", href: "/p/wallcal/pages/style.html" },
+  { src: "/p/wallcal/shot-next.png", q: "다음 일정 줄", note: "디데이로 갈아탄 자리", href: "/p/wallcal/pages/next.html" },
+  { src: "/p/wallcal/shot-day.png", q: "오른쪽 그날 칸", note: "시간축으로", href: "/p/wallcal/pages/day.html" },
+  { src: "/p/wallcal/shot-holiday.png", q: "공휴일 그리는 법", note: "이어지는 선", href: "/p/wallcal/pages/holiday.html" },
+  { src: "/p/wallcal/shot-shape.png", q: "위젯 바탕 모양", note: "두 장", href: "/p/wallcal/pages/shape.html" },
+  { src: "/p/wallcal/shot-chip.png", q: "일정 막대 스타일", note: "안 바꾸기로", href: "/p/wallcal/pages/chip.html" },
+  { src: "/p/wallcal/shot-allday.png", q: "종일과 시각 가르기", note: "점", href: "/p/wallcal/pages/allday.html" },
+  { src: "/p/wallcal/shot-deadline.png", q: "마감 그리기", note: "별 단 것을 선으로", href: "/p/wallcal/pages/deadline.html" },
+]}
+  caption="그림을 누르면 크게 뜨고, 「후보 보기」 가 그 판으로 간다." />
 
 아홉 장 중 **하나는 «안 바꾸기»로 끝남** — 일정 막대는 여덟 안을 다 그려 보니 지금이 최선. 그리는 값이 거기에도 있음.
 
