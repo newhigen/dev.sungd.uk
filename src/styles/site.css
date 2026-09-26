@@ -748,23 +748,7 @@ a.prow:hover .rn { color: var(--link); }
 
 /* 하루 타임라인 — 전 · 후 줄에 윈도우 같은 블록 */
 :root { --t1: #7c93d6; --t2: #5fa88c; --t3: #9a82d4; --cut: #c98a8a; }
-.doc-body .prose > figure.day { max-width: var(--measure); margin: 1.6rem 0 2rem; }
-.day svg { display: block; width: 100%; height: auto; font-family: var(--body); }
-.day .span { fill: var(--ink); opacity: 0.05; }
-.day .end { stroke: var(--ink); stroke-width: 1.2; stroke-dasharray: 3 3; opacity: 0.7; }
-.day .lbl, .day .tick { font-size: 10px; fill: var(--ink-3); }
-.day .row { font-size: 12px; font-weight: 600; fill: var(--ink); }
-.day .blk { opacity: 0.88; }
-.day .t1 { fill: var(--t1); } .day .t2 { fill: var(--t2); } .day .t3 { fill: var(--t3); }
-.day .bn { font-size: 11px; font-weight: 600; fill: #fff; }
-.day .cnt { font-size: 22px; font-weight: 700; fill: var(--ink); }
-.day .mk { fill: var(--ink); }
-.day .cutblk { stroke: var(--cut); stroke-width: 1; }
-.day-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin-top: 0.5rem; font-size: 0.75rem; color: var(--ink-3); }
-.day-legend i { display: inline-block; width: 0.8rem; height: 0.8rem; margin-right: 0.3rem; border-radius: 3px; vertical-align: -0.1rem; }
-.day-legend i.t1 { background: var(--t1); } .day-legend i.t2 { background: var(--t2); } .day-legend i.t3 { background: var(--t3); }
-.day-legend i.cut { background: repeating-linear-gradient(45deg, var(--cut) 0 2px, transparent 2px 5px); }
-@media (max-width: 640px) {
+.doc-body .prose > figure@media (max-width: 640px) {
 }
 
 /* 계산 한 줄 — 칸 넷, 입력 칸만 짙게 */
@@ -992,6 +976,16 @@ a.prow:hover .rn { color: var(--link); }
 .ba2 .div { stroke: #e8e6ec; stroke-width: 1; }
 .ba2 .axis { stroke: #c9c5d4; stroke-width: 1; }
 .ba2 .tick { font-size: 10px; fill: var(--ink-3); }
+.ba2 .span { fill: var(--ink); opacity: 0.05; }
+.ba2 .blk { opacity: 0.88; }
+.ba2 .t1 { fill: var(--t1); } .ba2 .t2 { fill: var(--t2); } .ba2 .t3 { fill: var(--t3); }
+.ba2 .bn { font-size: 10px; font-weight: 600; fill: #fff; }
+.ba2 .cutblk { stroke: var(--cut); stroke-width: 1; }
+.ba2-legend { display: flex; flex-wrap: wrap; gap: 0.4rem 1.1rem; margin-top: 0.5rem; font-size: 0.75rem; color: var(--ink-3); }
+.ba2-legend span { display: inline-flex; align-items: center; }
+.ba2-legend i { width: 0.8rem; height: 0.8rem; margin-right: 0.3rem; border-radius: 3px; }
+.ba2-legend i.t1 { background: var(--t1); } .ba2-legend i.t2 { background: var(--t2); } .ba2-legend i.t3 { background: var(--t3); }
+.ba2-legend i.cut { background: repeating-linear-gradient(45deg, var(--cut) 0 2px, transparent 2px 5px); }
 .ba2 figcaption { margin-top: 0.6rem; font-size: 0.8125rem; color: var(--ink-3); }
 
 /* ── 값을 그림으로 ────────────────────────────────── */
@@ -1354,7 +1348,7 @@ a.prow:hover .rn { color: var(--link); }
 
 /* 편에 들어가는 화면 그림은 본문 폭에 맞춰 원본의 10~30% 로 줄어든다.
    그 안의 글자가 보여 주려던 것일 때가 있어 원본으로 열 길을 둔다. */
-.lb {
+.zoombox {
   position: fixed;
   inset: 0;
   z-index: 60;
@@ -1365,11 +1359,11 @@ a.prow:hover .rn { color: var(--link); }
   padding: 1.2rem 0.75rem;
   background: rgba(22, 19, 32, 0.84);
 }
-.lb[hidden] { display: none; }
+.zoombox[hidden] { display: none; }
 
 /* 손 모양도 CSS 로 — 갈아 끼운 그림에 스크립트가 다시 손대지 않는다 */
 .prose img[src^="/p/"] { cursor: zoom-in; }
-.lb img {
+.zoombox img {
   /* 원본 크기에 묶이면 세로 그림이 화면 가운데 작게 뜨고 양옆만 비었다 — 높이를 채운다 */
   height: min(96vh, 1100px);
   width: auto;
@@ -1378,7 +1372,7 @@ a.prow:hover .rn { color: var(--link); }
   background: var(--paper, #fff);
   box-shadow: 0 12px 60px rgba(0, 0, 0, 0.45);
 }
-.lb .x {
+.zoombox .x {
   position: absolute;
   top: 1.1rem;
   right: 1.4rem;
@@ -1391,7 +1385,7 @@ a.prow:hover .rn { color: var(--link); }
   opacity: 0.75;
   cursor: pointer;
 }
-.lb .x:hover { opacity: 1; }
+.zoombox .x:hover { opacity: 1; }
 
 /* ── 이럴 때 이렇게 ───────────────────────────────── */
 

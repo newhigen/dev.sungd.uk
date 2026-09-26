@@ -3,6 +3,10 @@ interface Row {
   label: string;
   /** 축 위에 찍는 표 — dot 은 온 것, check 는 남은 것 */
   marks?: { at: number; kind: 'dot' | 'check'; label?: string }[];
+  /** 축 위에 눕히는 기간 띠 — 점으로는 길이를 못 보일 때 */
+  blocks?: { from: number; to: number; name: string; tone: 1 | 2 | 3 }[];
+  /** 음영 구간 끝 뒤로 넘친 몫을 빗금으로 */
+  cut?: { from: number; to: number };
   /** 오른쪽 끝 값 */
   count: string;
   tone: 'bad' | 'good' | 'mute';
@@ -16,17 +20,23 @@ interface Props {
   ticks: { at: number; label: string }[];
   /** 구간 이름과 나누는 세로선 */
   bands?: { at: number; label: string; line?: boolean }[];
+  /** 음영으로 까는 구간 (근무 시간 등) */
+  span?: { from: number; to: number; label: string };
   before: { label: string; rows: Row[] };
   after: { label: string; rows: Row[] };
+  /** 띠 색이 무엇을 뜻하나 — 앞 셋은 tone 1·2·3, 넷째는 빗금 */
+  legend?: string[];
   caption?: string;
 }
-const { from, to, ticks, bands = [], before, after, caption } = Astro.props;
+const { from, to, ticks, bands = [], span, before, after, legend = [], caption } = Astro.props;
 
 const W = 600, L = 52, R = 576;
 const x = (h: number) => L + ((h - from) / (to - from)) * (R - L);
 
-const ROW = 34, GAP = 24;
 const sides = [before, after];
+// 기간 띠가 있는 줄은 띠 안에 이름이 들어가 한 줄이 더 높아진다
+const hasBlocks = sides.some(s => s.rows.some(r => r.blocks?.length));
+const ROW = hasBlocks ? 46 : 34, GAP = 24;
 const yTop = (s: number) => 44 + s * (before.rows.length * ROW + GAP);
 const y = (s: number, r: number) => yTop(s) + r * ROW;
 const lastY = y(1, after.rows.length - 1);
@@ -37,6 +47,20 @@ const DIV = yTop(1) - GAP / 2 - 6;
 
 <figure class="ba2">
   <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={caption ?? '전과 후'}>
+    <defs>
+      <pattern id="ba2-cut" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="0" y2="6" stroke="#c98a8a" stroke-width="2.5" />
+      </pattern>
+    </defs>
+
+    {span && (
+      <g>
+        <rect class="span" x={x(span.from)} y="20" width={x(span.to) - x(span.from)} height={AXIS - 20} rx="6" />
+        <text class="bandlb" x={x(span.from) + 6} y="16">{span.label}</text>
+        <line class="band" x1={x(span.to)} y1="20" x2={x(span.to)} y2={AXIS} />
+      </g>
+    )}
+
     {bands.map(b => (
       <g>
         {b.line && <line class="band" x1={x(b.at)} y1="20" x2={x(b.at)} y2={AXIS} />}
@@ -52,6 +76,19 @@ const DIV = yTop(1) - GAP / 2 - 6;
             <text class="rowlb" x="4" y={y(s, i) + 16}>{r.label}</text>
             <line class={`rail ${r.tone}`} x1={L} y1={y(s, i)} x2={R} y2={y(s, i)} />
             {r.note && <text class="mid" x={(L + R) / 2} y={y(s, i) + 4} text-anchor="middle">{r.note}</text>}
+            {(r.blocks ?? []).map(b => (
+              <g>
+                {/* 빗금 구간과 겹치면 띠는 거기서 끊고 남은 몫은 빗금만 남긴다 */}
+                <rect class={`blk t${b.tone}`} x={x(b.from)} y={y(s, i) - 10}
+                  width={x(r.cut && b.to > r.cut.from ? r.cut.from : b.to) - x(b.from) - (r.cut && b.to > r.cut.from ? 0 : 3)}
+                  height="20" rx="5" />
+                <text class="bn" x={x(b.from) + 7} y={y(s, i) + 4}>{b.name}</text>
+              </g>
+            ))}
+            {r.cut && (
+              <rect class="cutblk" x={x(r.cut.from)} y={y(s, i) - 10}
+                width={x(r.cut.to) - x(r.cut.from) - 3} height="20" rx="5" fill="url(#ba2-cut)" />
+            )}
             {(r.marks ?? []).map(m =>
               m.kind === 'dot' ? (
                 <g>
@@ -78,5 +115,10 @@ const DIV = yTop(1) - GAP / 2 - 6;
       <text class="tick" x={x(t.at)} y={AXIS + 16} text-anchor="middle">{t.label}</text>
     ))}
   </svg>
+  {legend.length > 0 && (
+    <div class="ba2-legend">
+      {legend.map((l, i) => <span><i class:list={[i < 3 ? `t${i + 1}` : 'cut']} />{l}</span>)}
+    </div>
+  )}
   {caption && <figcaption>{caption}</figcaption>}
 </figure>
