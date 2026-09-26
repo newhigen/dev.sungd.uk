@@ -1,12 +1,19 @@
+<div align="center">
+
 # dev.sungd.uk
 
-프로젝트와 노트 — 앱 · 도구 · 대시보드 · 분석, 그리고 개발 메모. [dev.sungd.uk](https://dev.sungd.uk)
+직접 만든 앱, 도구, 대시보드와 개발 노트
 
-전에는 `resume.sungd.uk/projects` 에 있었다. 주소는 이력서인데 라우트로 보면 프로젝트가
-더 컸고, 갈래도 화면도 다시 짜야 해서 제 주소로 뗐다. 2026-09-14 에 `projects.sungd.uk`
-에서 이 주소로 옮겼다.
+[**dev.sungd.uk**](https://dev.sungd.uk/) &nbsp;·&nbsp; [노트](https://dev.sungd.uk/notes/)
 
-## 구조
+<img src="docs/screenshot.png" alt="dev.sungd.uk 첫 화면" width="100%">
+
+</div>
+
+<details>
+<summary><b>개발</b></summary>
+
+### 구조
 
 ```
 src/content/projects/   프로젝트 한 편 = 파일 하나 (.md · 그림을 직접 배치하면 .mdx)
@@ -16,7 +23,7 @@ src/styles/site.css     토큰과 화면 전부. sungd.uk 랜딩과 같은 계�
 public/p/<슬러그>/       그 프로젝트의 그림과, 열어볼 수 있게 옮겨 둔 페이지
 ```
 
-## 머리말
+### 머리말
 
 | 키 | 무엇 |
 |---|---|
@@ -32,7 +39,7 @@ public/p/<슬러그>/       그 프로젝트의 그림과, 열어볼 수 있게 
 | `shots` | 그전 모습 (`src` · `label` · `note`) |
 | `feature` | 목록 맨 위에 크게. 하나만 |
 
-## 만들기
+### 만들기
 
 ```bash
 npm install
@@ -43,7 +50,16 @@ npm run build      # dist/
 `main` 에 올리면 Actions 가 GitHub Pages 로 올린다. 도메인은 Cloudflare 에서
 `dev` → `CNAME newhigen.github.io` (회색 구름).
 
-## 남은 것
+### 남은 것
 
-- `resume.sungd.uk/projects/*` 에서 이쪽으로 넘기는 안내가 아직 없다. 2026-09-20 에
-  resume.sungd.uk 은 Pages 가 꺼져 404 가 됐다 — 넘김은 Cloudflare 쪽에서 걸어야 한다
+</details>
+
+<details>
+<summary><b>다른 사이트</b></summary>
+
+- [sungd.uk](https://sungd.uk/) — 소개, 이력서, 활동
+- [writing.sungd.uk](https://writing.sungd.uk/) — 책, 생각, 기술 글
+- [books.sungd.uk](https://books.sungd.uk/) — 흩어진 책을 한 장에
+- [ai.sungd.uk](https://ai.sungd.uk/) — 오늘 써 볼 AI 도구
+
+</details>
