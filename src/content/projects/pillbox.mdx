@@ -20,24 +20,24 @@ use:
 ---
 
 import Fig from '../../components/Fig.astro';
-import Hero from '../../components/Hero.astro';
+import Mark from '../../components/Mark.astro';
 import Next from '../../components/Next.astro';
+import Panel from '../../components/Panel.astro';
 import Story from '../../components/Story.astro';
 import Strip from '../../components/Strip.astro';
 
-<p class="q">하루 알림 4번, 지우면 남는 기록 0.</p>
+<Panel label="안드로이드 앱"
+  title={["알림을 지우고 나면", "먹었는지가 안 남았다"]}
+  sub="체크가 곧 알림 해제다. 미리 체크한 구간에는 알림이 오지 않고, 확인은 홈 화면 위젯에서 끝난다."
+  chips={[
+    { v: "0회", label: "미리 체크한 구간에 오는 알림" },
+    { v: "2×1", label: "홈 화면에서 차지하는 칸 — 처음 4×3 에서" },
+    { v: "2탭", label: "인공눈물 기록 — 4초 안에 두 번" },
+  ]}
+  src="/p/pillbox/widget.png"
+  alt="홈 화면 2×1 위젯" />
 
-체크가 곧 알림 해제. 미리 체크한 구간은 알림 없음, 확인은 홈 화면 위젯에서 끝.
-
-<Fig src="/p/pillbox/widget.png"
-  caption="홈 화면 2×1 위젯. 윗줄은 현재 구간의 약, 아랫줄은 나머지 세 구간 — 완료는 체크, 미완료는 남은 개수. 맨 아래는 인공눈물 띠." />
-
-<Hero label="미리 체크한 구간에 오는 알림" v="0회"
-  note="체크가 곧 알림 해제. 놓친 구간에만 한 번"
-  tiles={[
-    { label: "홈 화면에서 차지하는 칸", v: "2×1", note: "처음 4×3 에서 축소" },
-    { label: "인공눈물 기록", v: "2탭", note: "오터치 방지 — 4초 안에 두 번" },
-  ]} />
+윗줄은 현재 구간의 약, 아랫줄은 나머지 세 구간 — 완료는 체크, 미완료는 남은 개수. 맨 아래는 인공눈물 띠.
 
 <Next items={[
   { tab: "왜 만들었나", title: "알림을 지우면 끝이던 복약 앱", href: "/pillbox/why" },
@@ -66,8 +66,14 @@ import Strip from '../../components/Strip.astro';
 
 **미리 체크한 구간은 알림 없음.** 놓친 구간에만 한 번, 알림에서 바로 체크.
 
-<Fig src="/p/pillbox/main_top.png" phone
-  caption="오늘 화면. 구간마다 카드 하나, 항목을 누르면 체크와 시각 기록." />
+<Mark src="/p/pillbox/main_top.png" alt="오늘 화면"
+  marks={[
+    { at: [0, 21], text: "구간마다 카드 하나. 이름 옆이 알림 시각" },
+    { at: [0, 30], side: "right", text: "줄을 누르면 체크. 시각이 남는다" },
+    { at: [0, 52], text: "영양제는 한 줄 — 한 번에 체크" },
+    { at: [0, 84], side: "right", text: "지금 구간은 밝은 판. 남은 개수가 선다" },
+  ]}
+  caption="오늘 화면. 구간마다 카드 하나, 항목을 누르면 체크와 시각이 기록된다." />
 
 ### 인공눈물 기록
 

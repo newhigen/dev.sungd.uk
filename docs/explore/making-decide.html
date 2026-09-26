@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>의사결정 방식 — 그림을 지키면서</title>
+<style>
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+:root {
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --ink:#221f2b; --ink-2:#3a3646; --ink-3:#6f6b85;
+  --paper:#fbfaff; --bg:#e6e3f0; --acc:#8a6a3c; --tint:#f3efe7; --card2:#dfe6f2;
+}
+* { box-sizing:border-box }
+body { margin:0; background:var(--bg); color:var(--ink-2); font-family:var(--body);
+  font-size:15px; line-height:1.62; word-break:keep-all }
+.wrap { max-width:1000px; margin:0 auto; padding:2.6rem 1.5rem 6rem }
+h1 { font-family:var(--title); font-weight:500; font-size:2rem; color:var(--ink); margin:0 0 .3rem }
+.lede p { margin:.2rem 0; color:var(--ink-3); font-size:.9rem }
+h2 { font-family:var(--title); font-weight:600; font-size:1.25rem; color:var(--ink); margin:2.8rem 0 .2rem }
+h2 .no { display:inline-block; min-width:2.2rem; font-size:.78rem; color:var(--acc) }
+.secn { margin:.1rem 0 1rem; color:var(--ink-3); font-size:.86rem }
+.pane { background:var(--paper); border-radius:14px; padding:1.5rem 1.6rem 1.7rem; width:782px; max-width:100% }
+.pane h3 { font-family:var(--title); font-weight:600; font-size:1.05rem; color:var(--ink); margin:0 0 .5rem }
+.intro { font-size:.9rem; margin:0 0 1.1rem }
+.cap { margin:.7rem 0 0; font-size:.8rem; color:var(--ink-3) }
+
+.steps { display:grid; grid-template-columns:repeat(4,1fr); gap:.7rem; margin:.3rem 0 .9rem }
+.steps .s { background:var(--tint); border-radius:10px; padding:.8rem .9rem }
+.steps .s b { display:block; font-family:var(--title); font-weight:600; font-size:.9rem; color:var(--ink); margin-bottom:.15rem }
+.steps .s span { font-size:.76rem; color:var(--ink-3); line-height:1.5 }
+.steps .s em { display:block; font-style:normal; font-size:.68rem; color:var(--acc); margin-top:.3rem }
+.trap { display:grid; grid-template-columns:auto 1fr; gap:0 .8rem; align-items:start;
+  background:#f6eeea; border-radius:10px; padding:.8rem 1rem; margin-bottom:1.2rem }
+.trap .m { font-size:1.05rem; line-height:1.3 }
+.trap b { font-family:var(--title); font-weight:600; font-size:.9rem; color:var(--ink) }
+.trap p { margin:.1rem 0 0; font-size:.82rem; color:var(--ink-2) }
+
+/* 공통 — 그림과 뱃지 */
+.cnt { font-size:.68rem; color:var(--paper); background:var(--acc); border-radius:20px;
+  padding:.2rem .5rem; white-space:nowrap }
+figure { margin:0; position:relative }
+figure img { display:block; width:100%; border-radius:9px; box-shadow:0 3px 14px rgba(30,25,60,.13) }
+figure .cnt { position:absolute; top:.5rem; left:.5rem; z-index:2 }
+figcaption { margin-top:.5rem; font-size:.76rem; line-height:1.5; color:var(--ink-3) }
+figcaption b { display:block; font-family:var(--title); font-weight:600; font-size:.86rem;
+  color:var(--ink); margin-bottom:.1rem }
+
+/* P1 절차 머리 + 격자 */
+.shots { display:grid; grid-template-columns:repeat(auto-fit,minmax(10.5rem,1fr)); gap:1.1rem }
+
+/* P2 한 줄로 민다 */
+.reel { overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none;
+  margin:0 -1.6rem; scroll-snap-type:x proximity;
+  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 2.4rem,#000 calc(100% - 2.4rem),transparent 100%);
+  mask-image:linear-gradient(to right,transparent 0,#000 2.4rem,#000 calc(100% - 2.4rem),transparent 100%) }
+.reel::-webkit-scrollbar { display:none }
+.reel .track { display:flex; gap:1rem; padding:.2rem 1.6rem 1rem; width:max-content }
+.reel figure { flex:0 0 11rem; scroll-snap-align:center }
+
+/* P3 갈래마다 한 줄 */
+.p3 section { margin-bottom:1.5rem }
+.p3 h4 { font-family:var(--title); font-weight:600; font-size:.95rem; color:var(--ink); margin:0 0 .5rem }
+.p3 h4 span { font-family:var(--body); font-weight:400; font-size:.76rem; color:var(--ink-3); margin-left:.4rem }
+.rowshots { display:grid; grid-template-columns:repeat(4,1fr); gap:.9rem }
+.p3 figcaption { font-size:.72rem }
+.p3 figcaption b { font-size:.8rem }
+
+/* P4 큰 것 하나 + 썸네일 */
+.p4 .big { display:grid; grid-template-columns:1fr 13rem; gap:1.4rem; align-items:start; margin-bottom:1rem }
+.p4 .big img { display:block; width:100%; border-radius:10px; box-shadow:0 4px 18px rgba(30,25,60,.15) }
+.p4 .big .meta b { display:block; font-family:var(--title); font-weight:600; font-size:1.05rem;
+  color:var(--ink); margin:.5rem 0 .2rem }
+.p4 .big .meta p { margin:0; font-size:.83rem; color:var(--ink-3) }
+.p4 .thumbs { display:flex; gap:.6rem; overflow-x:auto; scrollbar-width:none; padding-bottom:.2rem }
+.p4 .thumbs::-webkit-scrollbar { display:none }
+.p4 .th { flex:0 0 5.4rem; border:0; background:none; padding:0; cursor:pointer; position:relative;
+  border-radius:8px; opacity:.5; transition:opacity .12s }
+.p4 .th img { display:block; width:100%; border-radius:7px }
+.p4 .th span { position:absolute; bottom:.25rem; left:50%; transform:translateX(-50%);
+  font-size:.6rem; color:var(--paper); background:rgba(34,31,43,.72); border-radius:20px; padding:.05rem .35rem }
+.p4 .th.on { opacity:1; box-shadow:0 0 0 2px var(--acc) }
+.p4 .th:hover { opacity:.85 }
+
+/* P5 한 줄에 한 판 */
+.p5 .ln { display:grid; grid-template-columns:7rem 1fr auto; gap:1.1rem; align-items:center;
+  padding:.8rem 0; border-bottom:1px solid #f0eef4 }
+.p5 .ln:last-child { border-bottom:0 }
+.p5 .ln img { display:block; width:100%; border-radius:8px; box-shadow:0 2px 10px rgba(30,25,60,.12) }
+.p5 .ln .g { font-size:.7rem; color:var(--ink-3) }
+.p5 .ln b { display:block; font-family:var(--title); font-weight:600; font-size:.95rem; color:var(--ink) }
+.p5 .ln p { margin:.1rem 0 0; font-size:.8rem; color:var(--ink-3) }
+
+.cmpt { width:100%; border-collapse:collapse; margin:1rem 0 0; font-size:.86rem }
+.cmpt th, .cmpt td { text-align:left; padding:.5rem .7rem; border-bottom:1px solid #e3e0ea; vertical-align:top }
+.cmpt th { font-weight:600; color:var(--ink-3); font-size:.78rem }
+.cmpt td:first-child { font-weight:600; color:var(--ink); white-space:nowrap }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="lede">
+  <h1>의사결정 방식 — 그림을 지키면서</h1>
+  <p>스크린샷은 남긴다. 지금 판의 약점 셋만 고친다 — 세로가 길다, 물음이 캡션에 묻힌다, 절차가 안 보인다.</p>
+  <p>본문 폭은 실제 편과 같은 782px. 후보 수는 실제 시안 페이지를 세어 얻었다(일곱 판에 42안).</p>
+</div>
+
+<h2><span class="no">P1</span>절차를 머리에 두고 격자</h2>
+<p class="secn">지금 격자는 그대로. 위에 네 걸음과 「틀린 결론」을 세워 이 절이 <b>방식</b>을 말한다는 것을 먼저 보인다. 일곱 판을 다 보인다(지금은 넷).</p>
+<div class="pane">
+  <h3>의사결정 방식</h3>
+  <div class="steps">
+    <div class="s"><b>질문 하나</b><span>한 번에 하나만 묻는다</span></div>
+    <div class="s"><b>실제 크기로</b><span>그때 치수 그대로 그린다</span></div>
+    <div class="s"><b>폰에 설치</b><span>One UI 가 주는 dp 를 잰다</span><em>에뮬레이터 값과 다르다</em></div>
+    <div class="s"><b>화면에서 고름</b><span>나란히 놓고 본다</span></div>
+  </div>
+  <div class="trap"><span class="m">⚠</span>
+    <div><b>처음엔 「다 안 들어간다」는 틀린 결론</b>
+    <p>에뮬레이터 dp 로 그렸더니 넘쳤다. 폰에 올려 실제 값을 재고 나서야 맞는 크기로 그려졌다.</p></div>
+  </div>
+  <div class="shots"><figure>
+      <span class="cnt">4안</span>
+      <img src="img/pillbox/shot-compact.png" alt="4×1 로 줄이면 무엇을 빼나">
+      <figcaption><b>4×1 로 줄이면 무엇을 빼나</b>시각과 이름을 뺀 레이아웃</figcaption>
+    </figure>
+<figure>
+      <span class="cnt">5안</span>
+      <img src="img/pillbox/shot-two-cells.png" alt="폭이 절반이면 무엇을 그리나">
+      <figcaption><b>폭이 절반이면 무엇을 그리나</b>지금 4×1 을 옆에 두고 견줌</figcaption>
+    </figure>
+<figure>
+      <span class="cnt">7안</span>
+      <img src="img/pillbox/shot-tiles.png" alt="약을 무엇으로 그리나">
+      <figcaption><b>약을 무엇으로 그리나</b>이모지는 영양제에 맞는 것이 없어 💊 가 겹침</figcaption>
+    </figure>
+<figure>
+      <span class="cnt">8안</span>
+      <img src="img/pillbox/shot-forms.png" alt="제형 아이콘의 비율은">
+      <figcaption><b>제형 아이콘의 비율은</b>연고 튜브 넷과 알약 넷</figcaption>
+    </figure>
+<figure>
+      <span class="cnt">6안</span>
+      <img src="img/pillbox/shot-icon-family.png" alt="네 앱을 한 규칙으로 묶으려면">
+      <figcaption><b>네 앱을 한 규칙으로 묶으려면</b>지금 것을 포함해 견줌</figcaption>
+    </figure>
+<figure>
+      <span class="cnt">8안</span>
+      <img src="img/pillbox/shot-icon-muted.png" alt="원색을 빼면 무엇이 남나">
+      <figcaption><b>원색을 빼면 무엇이 남나</b>저채도와 무채색</figcaption>
+    </figure>
+<figure>
+      <span class="cnt">4안</span>
+      <img src="img/pillbox/shot-icon-final.png" alt="먹색 판에 무슨 잉크를 얹나">
+      <figcaption><b>먹색 판에 무슨 잉크를 얹나</b>「가」 — 황토 잉크, 오른쪽 아래로 2.6dp</figcaption>
+    </figure></div>
+</div>
+
+<h2><span class="no">P2</span>한 줄로 민다</h2>
+<p class="secn">일곱 장을 세로로 쌓지 않고 가로 한 줄에. 세로 길이가 한 판 높이로 줄고, 개발기 축과 같은 손이라 편 안에서 미는 법이 하나가 된다.</p>
+<div class="pane p2">
+  <h3>의사결정 방식</h3>
+  <p class="intro">질문 하나로 좁히고, 후보를 실제 크기로 그려 화면에서 선택.</p>
+  <div class="reel"><div class="track"><figure>
+        <span class="cnt">4안</span>
+        <img src="img/pillbox/shot-compact.png" alt="4×1 로 줄이면 무엇을 빼나">
+        <figcaption><b>4×1 로 줄이면 무엇을 빼나</b>시각과 이름을 뺀 레이아웃</figcaption>
+      </figure>
+<figure>
+        <span class="cnt">5안</span>
+        <img src="img/pillbox/shot-two-cells.png" alt="폭이 절반이면 무엇을 그리나">
+        <figcaption><b>폭이 절반이면 무엇을 그리나</b>지금 4×1 을 옆에 두고 견줌</figcaption>
+      </figure>
+<figure>
+        <span class="cnt">7안</span>
+        <img src="img/pillbox/shot-tiles.png" alt="약을 무엇으로 그리나">
+        <figcaption><b>약을 무엇으로 그리나</b>이모지는 영양제에 맞는 것이 없어 💊 가 겹침</figcaption>
+      </figure>
+<figure>
+        <span class="cnt">8안</span>
+        <img src="img/pillbox/shot-forms.png" alt="제형 아이콘의 비율은">
+        <figcaption><b>제형 아이콘의 비율은</b>연고 튜브 넷과 알약 넷</figcaption>
+      </figure>
+<figure>
+        <span class="cnt">6안</span>
+        <img src="img/pillbox/shot-icon-family.png" alt="네 앱을 한 규칙으로 묶으려면">
+        <figcaption><b>네 앱을 한 규칙으로 묶으려면</b>지금 것을 포함해 견줌</figcaption>
+      </figure>
+<figure>
+        <span class="cnt">8안</span>
+        <img src="img/pillbox/shot-icon-muted.png" alt="원색을 빼면 무엇이 남나">
+        <figcaption><b>원색을 빼면 무엇이 남나</b>저채도와 무채색</figcaption>
+      </figure>
+<figure>
+        <span class="cnt">4안</span>
+        <img src="img/pillbox/shot-icon-final.png" alt="먹색 판에 무슨 잉크를 얹나">
+        <figcaption><b>먹색 판에 무슨 잉크를 얹나</b>「가」 — 황토 잉크, 오른쪽 아래로 2.6dp</figcaption>
+      </figure></div></div>
+  <p class="cap">일곱 판이 한 줄에. 개발기 축과 같은 손이라 편 안에서 미는 법이 하나가 된다.</p>
+</div>
+
+<h2><span class="no">P3</span>갈래마다 한 줄</h2>
+<p class="secn">위젯 넷과 아이콘 셋으로 갈라 각각 한 줄에 넣는다. 미는 것 없이 다 보이고, 어느 갈래에 손이 더 갔는지도 보인다.</p>
+<div class="pane p3">
+  <h3>의사결정 방식</h3>
+  <p class="intro">질문 하나로 좁히고, 후보를 실제 크기로 그려 화면에서 선택.</p>
+  <section>
+      <h4>위젯 <span>24안 · 4판</span></h4>
+      <div class="rowshots"><figure>
+          <span class="cnt">4안</span>
+          <img src="img/pillbox/shot-compact.png" alt="4×1 로 줄이면 무엇을 빼나">
+          <figcaption><b>4×1 로 줄이면 무엇을 빼나</b></figcaption>
+        </figure>
+<figure>
+          <span class="cnt">5안</span>
+          <img src="img/pillbox/shot-two-cells.png" alt="폭이 절반이면 무엇을 그리나">
+          <figcaption><b>폭이 절반이면 무엇을 그리나</b></figcaption>
+        </figure>
+<figure>
+          <span class="cnt">7안</span>
+          <img src="img/pillbox/shot-tiles.png" alt="약을 무엇으로 그리나">
+          <figcaption><b>약을 무엇으로 그리나</b></figcaption>
+        </figure>
+<figure>
+          <span class="cnt">8안</span>
+          <img src="img/pillbox/shot-forms.png" alt="제형 아이콘의 비율은">
+          <figcaption><b>제형 아이콘의 비율은</b></figcaption>
+        </figure></div>
+    </section><section>
+      <h4>아이콘 <span>18안 · 3판</span></h4>
+      <div class="rowshots"><figure>
+          <span class="cnt">6안</span>
+          <img src="img/pillbox/shot-icon-family.png" alt="네 앱을 한 규칙으로 묶으려면">
+          <figcaption><b>네 앱을 한 규칙으로 묶으려면</b></figcaption>
+        </figure>
+<figure>
+          <span class="cnt">8안</span>
+          <img src="img/pillbox/shot-icon-muted.png" alt="원색을 빼면 무엇이 남나">
+          <figcaption><b>원색을 빼면 무엇이 남나</b></figcaption>
+        </figure>
+<figure>
+          <span class="cnt">4안</span>
+          <img src="img/pillbox/shot-icon-final.png" alt="먹색 판에 무슨 잉크를 얹나">
+          <figcaption><b>먹색 판에 무슨 잉크를 얹나</b></figcaption>
+        </figure></div>
+    </section>
+</div>
+
+<h2><span class="no">P4</span>한 장을 크게, 나머지는 썸네일</h2>
+<p class="secn">대표 한 장을 크게 보이고 나머지 여섯은 아래 띠로. 누르면 갈아 끼운다 — 개발기 창과 같은 손. 그림이 가장 크게 보인다.</p>
+<div class="pane p4" id="p4">
+  <h3>의사결정 방식</h3>
+  <p class="intro">질문 하나로 좁히고, 후보를 실제 크기로 그려 화면에서 선택.</p>
+  <div class="big">
+    <img src="img/pillbox/shot-compact.png" alt="4×1 로 줄이면 무엇을 빼나">
+    <div class="meta"><span class="cnt">4안</span>
+      <b>4×1 로 줄이면 무엇을 빼나</b><p>시각과 이름을 뺀 레이아웃</p></div>
+  </div>
+  <div class="thumbs"><button class="th on" data-i="0">
+        <img src="img/pillbox/shot-compact.png" alt="4×1 로 줄이면 무엇을 빼나"><span>4안</span>
+      </button>
+<button class="th" data-i="1">
+        <img src="img/pillbox/shot-two-cells.png" alt="폭이 절반이면 무엇을 그리나"><span>5안</span>
+      </button>
+<button class="th" data-i="2">
+        <img src="img/pillbox/shot-tiles.png" alt="약을 무엇으로 그리나"><span>7안</span>
+      </button>
+<button class="th" data-i="3">
+        <img src="img/pillbox/shot-forms.png" alt="제형 아이콘의 비율은"><span>8안</span>
+      </button>
+<button class="th" data-i="4">
+        <img src="img/pillbox/shot-icon-family.png" alt="네 앱을 한 규칙으로 묶으려면"><span>6안</span>
+      </button>
+<button class="th" data-i="5">
+        <img src="img/pillbox/shot-icon-muted.png" alt="원색을 빼면 무엇이 남나"><span>8안</span>
+      </button>
+<button class="th" data-i="6">
+        <img src="img/pillbox/shot-icon-final.png" alt="먹색 판에 무슨 잉크를 얹나"><span>4안</span>
+      </button></div>
+</div>
+
+<h2><span class="no">P5</span>한 줄에 한 판 — 물음이 주인공</h2>
+<p class="secn">그림을 작게 왼쪽에 두고 물음을 크게 오른쪽에. 일곱 물음이 세로로 읽히고 그림은 곁들임이 된다.</p>
+<div class="pane p5">
+  <h3>의사결정 방식</h3>
+  <p class="intro">질문 하나로 좁히고, 후보를 실제 크기로 그려 화면에서 선택.</p>
+  <div class="ln">
+      <img src="img/pillbox/shot-compact.png" alt="4×1 로 줄이면 무엇을 빼나">
+      <div class="t"><span class="g">위젯</span>
+        <b>4×1 로 줄이면 무엇을 빼나</b><p>시각과 이름을 뺀 레이아웃</p></div>
+      <span class="cnt">4안</span>
+    </div>
+<div class="ln">
+      <img src="img/pillbox/shot-two-cells.png" alt="폭이 절반이면 무엇을 그리나">
+      <div class="t"><span class="g">위젯</span>
+        <b>폭이 절반이면 무엇을 그리나</b><p>지금 4×1 을 옆에 두고 견줌</p></div>
+      <span class="cnt">5안</span>
+    </div>
+<div class="ln">
+      <img src="img/pillbox/shot-tiles.png" alt="약을 무엇으로 그리나">
+      <div class="t"><span class="g">위젯</span>
+        <b>약을 무엇으로 그리나</b><p>이모지는 영양제에 맞는 것이 없어 💊 가 겹침</p></div>
+      <span class="cnt">7안</span>
+    </div>
+<div class="ln">
+      <img src="img/pillbox/shot-forms.png" alt="제형 아이콘의 비율은">
+      <div class="t"><span class="g">위젯</span>
+        <b>제형 아이콘의 비율은</b><p>연고 튜브 넷과 알약 넷</p></div>
+      <span class="cnt">8안</span>
+    </div>
+<div class="ln">
+      <img src="img/pillbox/shot-icon-family.png" alt="네 앱을 한 규칙으로 묶으려면">
+      <div class="t"><span class="g">아이콘</span>
+        <b>네 앱을 한 규칙으로 묶으려면</b><p>지금 것을 포함해 견줌</p></div>
+      <span class="cnt">6안</span>
+    </div>
+<div class="ln">
+      <img src="img/pillbox/shot-icon-muted.png" alt="원색을 빼면 무엇이 남나">
+      <div class="t"><span class="g">아이콘</span>
+        <b>원색을 빼면 무엇이 남나</b><p>저채도와 무채색</p></div>
+      <span class="cnt">8안</span>
+    </div>
+<div class="ln">
+      <img src="img/pillbox/shot-icon-final.png" alt="먹색 판에 무슨 잉크를 얹나">
+      <div class="t"><span class="g">아이콘</span>
+        <b>먹색 판에 무슨 잉크를 얹나</b><p>「가」 — 황토 잉크, 오른쪽 아래로 2.6dp</p></div>
+      <span class="cnt">4안</span>
+    </div>
+</div>
+
+<h2>견주기</h2>
+<div class="pane" style="width:auto">
+<table class="cmpt">
+  <tr><th></th><th>지금</th><th>P1 절차+격자</th><th>P2 한 줄</th><th>P3 갈래</th><th>P4 크게+썸네일</th><th>P5 물음</th></tr>
+  <tr><td>그림 크기</td><td>보통</td><td>보통</td><td>작음</td><td>작음</td><td>가장 큼</td><td>가장 작음</td></tr>
+  <tr><td>몇 판 보이나</td><td>넷</td><td>일곱</td><td>일곱</td><td>일곱</td><td>한 장씩</td><td>일곱</td></tr>
+  <tr><td>물음이 보이나</td><td>캡션에 섞임</td><td>캡션 머리에</td><td>캡션 머리에</td><td>캡션 머리에</td><td>크게</td><td>가장 또렷</td></tr>
+  <tr><td>절차가 보이나</td><td>줄글</td><td>네 걸음으로</td><td>줄글</td><td>줄글</td><td>줄글</td><td>줄글</td></tr>
+  <tr><td>세로 길이</td><td>보통</td><td>가장 김</td><td>짧음</td><td>보통</td><td>짧음</td><td>보통</td></tr>
+  <tr><td>손이 가나</td><td>안 감</td><td>안 감</td><td>밀어야 다 봄</td><td>안 감</td><td>눌러야 다 봄</td><td>안 감</td></tr>
+</table>
+</div>
+
+</div>
+<script>
+(function () {
+  var D = [{"k": "compact", "shot": "shot-compact", "q": "4×1 로 줄이면 무엇을 빼나", "n": 4, "note": "시각과 이름을 뺀 레이아웃", "group": "위젯"}, {"k": "two-cells", "shot": "shot-two-cells", "q": "폭이 절반이면 무엇을 그리나", "n": 5, "note": "지금 4×1 을 옆에 두고 견줌", "group": "위젯"}, {"k": "tiles", "shot": "shot-tiles", "q": "약을 무엇으로 그리나", "n": 7, "note": "이모지는 영양제에 맞는 것이 없어 💊 가 겹침", "group": "위젯"}, {"k": "forms", "shot": "shot-forms", "q": "제형 아이콘의 비율은", "n": 8, "note": "연고 튜브 넷과 알약 넷", "group": "위젯"}, {"k": "icon-family", "shot": "shot-icon-family", "q": "네 앱을 한 규칙으로 묶으려면", "n": 6, "note": "지금 것을 포함해 견줌", "group": "아이콘"}, {"k": "icon-muted", "shot": "shot-icon-muted", "q": "원색을 빼면 무엇이 남나", "n": 8, "note": "저채도와 무채색", "group": "아이콘"}, {"k": "icon-final", "shot": "shot-icon-final", "q": "먹색 판에 무슨 잉크를 얹나", "n": 4, "note": "「가」 — 황토 잉크, 오른쪽 아래로 2.6dp", "group": "아이콘", "picked": true}];
+  var box = document.getElementById('p4');
+  if (!box) return;
+  var img = box.querySelector('.big img'), meta = box.querySelector('.big .meta');
+  box.querySelectorAll('.th').forEach(function (t) {
+    t.addEventListener('click', function () {
+      var b = D[+t.dataset.i];
+      box.querySelectorAll('.th.on').forEach(function (o) { o.classList.remove('on'); });
+      t.classList.add('on');
+      img.src = 'img/pillbox/' + b.shot + '.png';
+      img.alt = b.q;
+      meta.innerHTML = '<span class="cnt">' + b.n + '안</span><b>' + b.q + '</b><p>' + b.note + '</p>';
+    });
+  });
+})();
+</script>
+</body>
+</html>

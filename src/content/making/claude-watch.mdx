@@ -3,7 +3,7 @@ tagline: 100일 · 커밋 190개로 화면을 다듬었는데, 남아서 매일 
 ---
 
 import Track from '../../components/Track.astro';
-import Evo from '../../components/Evo.astro';
+import Timeline from '../../components/Timeline.astro';
 
 <p class="q">7월 한 달에 커밋 114개. 그중 지금도 도는 건 카드 클릭 하나.</p>
 
@@ -23,7 +23,7 @@ import Evo from '../../components/Evo.astro';
 
 ## 개발 과정
 
-<Evo items={[
+<Timeline items={[
   { at: "6월 6일", title: "읽기만 하던 화면을 만지는 화면으로",
     problem: "상태는 보이는데 답은 결국 터미널로 돌아가 해야 함",
     did: "cmux 위에 웹을 얹어 폰에서 답하기 · 세션 만들기 · 복원",
@@ -64,7 +64,8 @@ import Evo from '../../components/Evo.astro';
     problem: "한도에 걸려 멈춘 세션이 «도는 중» 으로 보임",
     did: "표식을 새로 만들지 않고 «기다림» 안으로 넣음 — 판 · 메뉴바가 아는 어휘를 안 늘리려고. 9시간 동안 붙잡아 둠",
     result: "«한도 — 14:30 에 풀려요» 처럼 사유만 바뀜. 마지막 커밋" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 화면을 접었다는 말
 

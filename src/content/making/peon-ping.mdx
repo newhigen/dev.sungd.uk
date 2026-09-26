@@ -2,7 +2,7 @@
 tagline: 들리지 않던 완료 알림에서 시작해 열흘 만에 걷어내기까지
 ---
 
-import Evo from '../../components/Evo.astro';
+import Timeline from '../../components/Timeline.astro';
 import Track from '../../components/Track.astro';
 
 <p class="q">소리 분류 7개 중 3개만 켜고, 10일 만에 제거.</p>
@@ -24,7 +24,7 @@ import Track from '../../components/Track.astro';
 
 ## 개발 과정
 
-<Evo items={[
+<Timeline items={[
   { at: "8월 23일", title: "안 들리는 원인",
     problem: "세션 완료에도 무음",
     did: "원인 둘 확인 — Ghostty 벨 기본값이 소리를 끔, tmux 안에선 Claude Code 가 Ghostty 알림 경로를 못 잡음",
@@ -49,7 +49,8 @@ import Track from '../../components/Track.astro';
     problem: "세션이 열 개를 넘으면 목소리로는 어느 세션인지 모름",
     did: "훅 9곳 · 팩 · 스킬 4개 · brew 설치본을 두 기계에서 삭제",
     result: "알림은 세션 모니터 «내 차례» 목록 하나로" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 배운 점
 

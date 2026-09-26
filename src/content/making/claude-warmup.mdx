@@ -2,7 +2,7 @@
 tagline: 새벽 5시 메시지 한 통의 정시 발송을 두고 macOS 절전과 씨름한 17일
 ---
 
-import Evo from '../../components/Evo.astro';
+import Timeline from '../../components/Timeline.astro';
 import Track from '../../components/Track.astro';
 
 <p class="q">5시 예약 메시지, 매일 ~11분 지연.</p>
@@ -40,7 +40,7 @@ import Track from '../../components/Track.astro';
 
 ## 개발 과정
 
-<Evo items={[
+<Timeline items={[
   { at: "5월 29일", title: "출근 시각 하나로 계산",
     problem: "근무 중 윈도우 3개가 들어오는 시각을 사람마다 따로 계산",
     did: "출근 −3:01 · +5:01 · +10:02 공식, 대화형 설치, 미리보기 표",
@@ -57,7 +57,8 @@ import Track from '../../components/Track.astro';
     problem: "Claude Code 루틴(/schedule)이 정한 시각 실행을 공식 지원",
     did: "스케줄 작업 · 설치 폴더 삭제, repo archive, README 맨 위 은퇴 안내",
     result: "읽기 전용 repo 와 윈도우 시각화만 남음" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 배운 점
 

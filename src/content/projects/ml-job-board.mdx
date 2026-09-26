@@ -14,31 +14,32 @@ use:
   - "돈이 안 든다 — 공개 API 와 낱말 대조뿐"
 ---
 
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import Board from '../../components/mjb/Board.astro';
 import Flow from '../../components/Flow.astro';
 import Cases from '../../components/Cases.astro';
 
-<p class="q">공고가 언제 올라오는지 몰라 놓침.</p>
-
-매일 아침 6시 반에 채용 창구를 대신 돈다. 어제 없던 것과 사라진 것을 가려내고, 마감이 가까운 것을 맨 위에 올린다.
-[커리어 레이더](/career-radar) 와 같은 저장소에서 갈라져 나왔지만 회사 목록도 판도 따로 쓴다.
-
-<Hero label="공고를 보려고 도는 채용 페이지" v="0곳"
-  note="매일 06:30 에 대신 돎 · 자고 있었으면 깨어난 뒤 한 번"
-  tiles={[
-    { label: "훑는 창구", v: "29곳", note: "회사 창구 + 자체 사이트 다섯 + 원티드 그물" },
-    { label: "드는 돈", v: "0원", note: "공개 API 만 부르고 점수도 낱말 대조라 모델을 안 씀" },
+<Panel label="채용 감시"
+  title={["올라온 줄도 모르고", "지나간 자리가 있었다"]}
+  sub="매일 아침 6시 반에 채용 창구를 대신 돈다. 어제 없던 것과 사라진 것을 가려내고, 마감이 가까운 것을 맨 위에 올린다."
+  chips={[
+    { v: "0곳", label: "공고를 보려고 여는 채용 페이지" },
+    { v: "29곳", label: "훑는 창구 — 회사 창구와 자체 사이트, 원티드 그물" },
+    { v: "0원", label: "드는 돈 — 공개 API 와 낱말 대조뿐, 모델을 안 쓴다" },
   ]}
-  basis="창구 수는 저장소 sources.json 기준. 놓친 공고 수 실측은 없음." />
+  basis="창구 수는 저장소 sources.json 기준. 놓친 공고 수 실측은 없음.">
+  <Board caption="화면 모형. 탭 이름과 배지·점수 표기 꼴은 저장소 기준이고, 회사는 업종으로만 적은 예시다." />
+</Panel>
+
+[커리어 레이더](/career-radar) 와 같은 저장소에서 갈라져 나왔지만 회사 목록도 판도 따로 쓴다.
 
 <Now year="2026" month="9월"
   line="급히 찾을 자리가 아니게 되어 <b>메일을 끔</b>"
   sub="훑기 · 생사 확인 · 보드 다시 그리기는 그대로 돌아 기록만 쌓임 · 필요해지면 다시 켠다" />
 
-<Board wide caption="화면 모형. 탭 이름과 배지 · 점수 표기 꼴은 저장소 기준이고, 회사는 업종으로만 적은 예시다. 실제 화면에는 검토 중인 공고와 점수가 그대로 있어 캡처를 쓰지 않는다." />
+실제 화면에는 검토 중인 공고와 점수가 그대로 있어 캡처를 쓰지 않는다.
 
 <Next items={[
   { tab: "왜 만들었나", title: "올라온 줄도 모르고 지나간 자리", href: "/ml-job-board/why" },

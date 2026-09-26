@@ -19,26 +19,24 @@ use:
   - "구글·삼성·네이버 달력 중 볼 것만 골라 켬"
 ---
 
-import Fig from '../../components/Fig.astro';
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Next from '../../components/Next.astro';
 import Strip from '../../components/Strip.astro';
 import Cases from '../../components/Cases.astro';
 
-<p class="q">26일에 연 달력 위젯, 남은 날은 닷새뿐.</p>
-
-달 격자 대신 오늘이 든 주부터 네 주를 그리는 위젯. 달이 바뀌어도 창은 그대로 흐르고, 칸 안에 일정 제목까지 표시.
-
-<Hero label="월말에 홈 화면에서 보이는 앞날" v="닷새 → 네 주"
-  note="달 격자는 말일에서 끝남. 한달은 오늘이 든 주부터 네 주"
-  tiles={[
-    { label: "로그인 · API 키 · 네트워크", v: "0", note: "폰의 시스템 달력을 그대로 읽음" },
-    { label: "일정의 무게", v: "4가지", note: "면 · 점 · 가로선 · 회색 글자" },
+<Panel label="홈 화면 위젯"
+  title={["26일에 연 달력 위젯,", "남은 날은 닷새뿐이었다"]}
+  sub="달 격자 대신 오늘이 든 주부터 네 주를 그린다. 달이 바뀌어도 창은 그대로 흐르고, 칸 안에 일정 제목까지 선다."
+  chips={[
+    { v: "닷새 → 네 주", label: "월말에 홈 화면에서 보이는 앞날" },
+    { v: "0", label: "로그인과 API 키, 네트워크 — 폰의 시스템 달력을 그대로 읽는다" },
+    { v: "4가지", label: "일정의 무게 — 면, 점, 가로선, 회색 글자" },
   ]}
+  src="/p/wallcal/widget.png"
+  alt="네 주 격자와 오른쪽 시간 축"
   basis="8월 26일 기준 — 달 격자에 남은 날 27~31일." />
 
-<Fig src="/p/wallcal/widget.png"
-  caption="왼쪽 판은 네 주 격자, 오른쪽 판은 고른 날의 시간 축. 맨 아랫줄은 별을 단 일정의 남은 날." />
+왼쪽 판은 네 주 격자, 오른쪽 판은 고른 날의 시간 축. 맨 아랫줄은 별을 단 일정의 남은 날.
 
 <Next items={[
   { tab: "개발기", title: "달 격자에서 무게 넷까지", href: "/wallcal/making/" },

@@ -14,28 +14,26 @@ use:
 ---
 
 import Voices from '../../components/Voices.astro';
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import Picks from '../../components/pp/Picks.astro';
 
-<p class="q">세션은 여러 개, 완료 알림 소리는 0.</p>
-
-Claude Code 훅에서 직접 목소리 재생. 다른 창에서 일하는 동안에도 세션 완료 · 입력 대기 · 한도를 귀로 확인.
-
-<Voices items={[
-  { when: "세션 완료", line: "Task complete.", src: "/p/peon-ping/task-complete.mp3" },
-  { when: "입력 필요", line: "I have a question.", src: "/p/peon-ping/input-required.mp3" },
-  { when: "한도", line: "We've hit the limit.", src: "/p/peon-ping/resource-limit.mp3" },
-]} />
-
-<Hero label="들리는 알림" v="0 → 3개"
-  note="Ghostty 벨은 기본값이 무음, tmux 안에선 미도착 → 훅에서 세 문장 직접 재생"
-  tiles={[
-    { label: "켠 소리 분류", v: "7 → 3", note: "완료 · 입력 필요 · 한도만" },
-    { label: "소리가 쓰는 토큰", v: "0", note: "훅이라 컨텍스트 밖. 딸려 온 스킬 4개(12.8KB)는 별도" },
+<Panel label="Claude Code 훅"
+  title={["세션은 여러 개인데", "끝났다는 소리가 안 났다"]}
+  sub="Ghostty 벨은 기본값이 무음이고 tmux 안에선 아예 안 온다. 훅에서 목소리를 직접 재생해 다른 창에서 일하는 동안에도 귀로 확인한다."
+  chips={[
+    { v: "0 → 3개", label: "들리는 알림 — 완료, 입력 필요, 한도" },
+    { v: "7 → 3", label: "켠 소리 분류 — 나머지 넷은 껐다" },
+    { v: "0", label: "소리가 쓰는 토큰 — 훅이라 컨텍스트 밖" },
   ]}
-  basis="개수는 설정 파일 기준. 알림 횟수 실측 아님." />
+  basis="개수는 설정 파일 기준. 알림 횟수 실측 아님.">
+  <Voices items={[
+    { when: "세션 완료", line: "Task complete.", src: "/p/peon-ping/task-complete.mp3" },
+    { when: "입력 필요", line: "I have a question.", src: "/p/peon-ping/input-required.mp3" },
+    { when: "한도", line: "We've hit the limit.", src: "/p/peon-ping/resource-limit.mp3" },
+  ]} />
+</Panel>
 
 <Now year="2026" month="9월"
   line="세션이 열 개를 넘으면 <b>어느 세션인지</b> 못 가려 종료"

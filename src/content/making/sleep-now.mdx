@@ -3,46 +3,47 @@ tagline: 이름부터 색까지, 후보 시안을 그려 놓고 고른 기록
 ---
 
 import Fig from '../../components/Fig.astro';
-import Evo from '../../components/Evo.astro';
-import Shots from '../../components/Shots.astro';
+import Timeline from '../../components/Timeline.astro';
+import Reel from '../../components/Reel.astro';
 
 <p class="q">결정 7건, 말 대신 후보 시안 6판.</p>
 
 이름 · 런처 아이콘 · 상태 표시줄 아이콘 · 글꼴 · 알람음 · 버튼 배치 · 색 — 전부 후보를 실제 크기로 그려 화면에서 고름.
 
-<Shots items={[
-  { src: '/p/sleep-now/shot-name.png', caption: '이름 — 문장형 계열 20안', href: '/p/sleep-now/pages/name.html' },
-  { src: '/p/sleep-now/shot-icon-moon.png', caption: '런처 아이콘 — 달 계열 12안', href: '/p/sleep-now/pages/icon-moon.html' },
-  { src: '/p/sleep-now/shot-statusbar.png', caption: '상태 표시줄 아이콘 — 실제 크기 28안', href: '/p/sleep-now/pages/statusbar.html' },
-  { src: '/p/sleep-now/shot-lower.png', caption: '하단 목록 — 재구성 5안', href: '/p/sleep-now/pages/lower.html' },
-  { src: '/p/sleep-now/shot-timeline.png', caption: '타임라인 통합 — 17안', href: '/p/sleep-now/pages/timeline.html' },
-  { src: '/p/sleep-now/shot-palette.png', caption: '색 — 팔레트 10벌, 라이트·다크 나란히', href: '/p/sleep-now/pages/palette.html' },
-]} />
+<Reel items={[
+  { src: '/p/sleep-now/shot-name.png', q: '이름', note: '문장형 계열 20안', href: '/p/sleep-now/pages/name.html' },
+  { src: '/p/sleep-now/shot-icon-moon.png', q: '런처 아이콘', note: '달 계열 12안', href: '/p/sleep-now/pages/icon-moon.html' },
+  { src: '/p/sleep-now/shot-statusbar.png', q: '상태 표시줄 아이콘', note: '실제 크기 28안', href: '/p/sleep-now/pages/statusbar.html' },
+  { src: '/p/sleep-now/shot-lower.png', q: '하단 목록', note: '재구성 5안', href: '/p/sleep-now/pages/lower.html' },
+  { src: '/p/sleep-now/shot-timeline.png', q: '타임라인 통합', note: '17안', href: '/p/sleep-now/pages/timeline.html' },
+  { src: '/p/sleep-now/shot-palette.png', q: '색', note: '팔레트 10벌, 라이트·다크 나란히', href: '/p/sleep-now/pages/palette.html' },
+]}
+  caption="그림을 누르면 크게 뜨고, 「후보 보기」 가 그 판으로 간다." />
 
 ## 개발 과정
 
-<Evo items={[
+<Timeline items={[
   { at: "1", title: "이름",
     problem: "«지금 자면 몇 시에 깨는가» 를 이름 하나로 말하기 어려움",
     did: "후보 13개에서 시작, 계열 네 번 교체",
     result: "「오늘 당겨 쓰면」. «연체» 는 이미 늦은 밤에만 맞는 말이라 제외" },
-  { at: "2", title: "런처 아이콘", w: 96, img: "/p/sleep-now/icon.png",
+  { at: "2", title: "런처 아이콘", w: 96, img: "/p/sleep-now/icon.png", iw: 176, ih: 176,
     problem: "이름이 정해지자 그림이 다른 말을 함",
     did: "점 다이얼 → 달 → 두 막대로 17안",
     result: "오늘 막대가 눈금 40 을 넘고 내일 막대는 그만큼 짧음 — 이름과 같은 뜻" },
-  { at: "3", title: "상태 표시줄과 Now Bar", wide: true, img: "/p/sleep-now/nowbar.png",
+  { at: "3", title: "상태 표시줄과 Now Bar", wide: true, img: "/p/sleep-now/nowbar.png", iw: 900, ih: 291,
     problem: "상태 표시줄 아이콘은 24dp 단색이라 뭉개짐",
     did: "28개를 실제 크기로 놓고 선택",
     result: "잠금화면 Now Bar 는 두 줄까지 써서 값과 이름을 같이 표시" },
-  { at: "4", title: "첫 홈 화면", w: 190, img: "/p/sleep-now/evo-hero.png",
+  { at: "4", title: "첫 홈 화면", w: 190, img: "/p/sleep-now/evo-hero.png", iw: 320, ih: 640,
     problem: "보여 줄 값이 여럿이라 시선 순서 미정",
     did: "남은 시간을 크게, 타임라인 아래에 목록 넉 줄",
     result: "가로선 넉 줄로 화면 아래가 표처럼 보임" },
-  { at: "5", title: "버튼을 둘로", w: 190, img: "/p/sleep-now/evo-buttons.png",
+  { at: "5", title: "버튼을 둘로", w: 190, img: "/p/sleep-now/evo-buttons.png", iw: 320, ih: 640,
     problem: "«지금 취침» 하나로는 목표를 지키는지 포기하는지 구분 불가",
     did: "<b>지금부터</b> 와 <b>목표대로</b> 로 나누고 버튼 안에 결과 시각",
     result: "누르기 전에 기상 시각이 버튼에 보임" },
-  { at: "6", title: "알람", w: 190, img: "/p/sleep-now/img/ringing_full.png",
+  { at: "6", title: "알람", w: 190, img: "/p/sleep-now/img/ringing_full.png", iw: 620, ih: 1102,
     problem: "잠금화면 위 화면이라 자다 깬 손이 잘못 눌러 끔",
     did: "슬라이드 해제로 교체, 알람음 여섯 개 추가",
     result: "WAV 를 AudioTrack 으로 돌려 되풀이에 이음매 없음 (8월 21일)" },
@@ -51,11 +52,11 @@ import Shots from '../../components/Shots.astro';
     did: "기상 + 준비 + 이동으로 도착 시각 계산, 공휴일은 폰 캘린더에서 읽음",
     result: "대체·임시공휴일까지 반영. 쉬는 날 앞 밤엔 표시 안 함 (8월 22일)",
     next: "말 안 되는 값을 숨기는 규칙(06:40~12:00 밖)을 더 일찍 뒀어야 함" },
-  { at: "8", title: "화면 통합", w: 190, img: "/p/sleep-now/evo-timeline.png",
+  { at: "8", title: "화면 통합", w: 190, img: "/p/sleep-now/evo-timeline.png", iw: 320, ih: 640,
     problem: "목록 넉 줄이 성격 다른 셋 — 읽는 값 · 스위치 · 다른 화면 — 을 한 표에 섞음",
     did: "목록을 걷고 그 내용을 타임라인으로 이동",
     result: "홈에 설정 줄 0개. 항목 사이 간격이 분 단위로 붙음 (8월 23일)" },
-  { at: "9", title: "라이트·다크 두 벌", w: 190, img: "/p/sleep-now/app-light.png",
+  { at: "9", title: "라이트·다크 두 벌", w: 190, img: "/p/sleep-now/app-light.png", iw: 720, ih: 1560,
     problem: "다크 모드만 있어 낮에는 화면이 겉돎",
     did: "드로어블 · 캔버스에 박힌 색을 전부 <code>@color</code> 로 옮기고 팔레트 10안 비교",
     result: "<code>values-night</code> 로 두 벌. 알람 화면만 늘 어둡게 고정" },
@@ -63,7 +64,8 @@ import Shots from '../../components/Shots.astro';
     problem: "4×2 는 아래 절반이 빔 — 잠금화면과 같은 정보라 더 할 말 없음",
     did: "4×1 한 줄로, 상태 한 줄과 버튼 둘만. 두 칸까지 좁힘 가능",
     result: "낮에는 버튼도 숨김. 본체는 잠금화면, 위젯은 거드는 자리" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 의사결정 방식
 

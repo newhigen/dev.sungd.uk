@@ -1,0 +1,641 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개발기 — 창 테두리 고르기</title>
+<style>
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+:root {
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --ink:#221f2b; --ink-2:#3a3646; --ink-3:#6f6b85;
+  --paper:#fbfaff; --bg:#e6e3f0; --acc:#8a6a3c; --tint:#f3efe7;
+}
+* { box-sizing:border-box }
+body { margin:0; background:var(--bg); color:var(--ink-2); font-family:var(--body);
+  font-size:15px; line-height:1.62; word-break:keep-all }
+.wrap { max-width:1000px; margin:0 auto; padding:2.6rem 1.5rem 6rem }
+h1 { font-family:var(--title); font-weight:500; font-size:2rem; color:var(--ink); margin:0 0 .3rem }
+.lede p { margin:.2rem 0; color:var(--ink-3); font-size:.9rem }
+h2 { font-family:var(--title); font-weight:600; font-size:1.25rem; color:var(--ink); margin:2.8rem 0 .2rem }
+h2 .no { display:inline-block; min-width:2.2rem; font-size:.78rem; color:var(--acc) }
+.secn { margin:.1rem 0 1rem; color:var(--ink-3); font-size:.86rem }
+.pane { background:var(--paper); border-radius:14px; padding:1.5rem 1.6rem 1.7rem; width:782px; max-width:100% }
+.q { font-family:var(--title); font-weight:500; font-size:1.35rem; color:var(--ink); margin:.2rem 0 1.2rem }
+
+.track { position:relative }
+.tml-scroll { position:relative; z-index:1; overflow-x:auto; padding-bottom:.5rem;
+  scroll-snap-type:x proximity }
+.tml-scroll svg { display:block; font-family:var(--body) }
+.zone { scroll-snap-align:center }
+.rail { stroke:#c9c5d4; stroke-width:1 }
+.tick { stroke:#dcd8e4; stroke-width:1 }
+.stem { stroke:var(--acc); stroke-width:1.2; opacity:.45 }
+.dot { fill:var(--ink-3) }  .dot.big { fill:var(--acc) }
+.at { font-size:10.5px; fill:var(--ink-3) }
+.nm { font-size:11.5px; fill:var(--ink-2) }
+.sz { font-family:var(--title); font-size:13px; font-weight:600; fill:var(--ink) }
+.it.hit { cursor:pointer }
+.it.sel .nm { fill:var(--acc); font-weight:600 }
+.it.sel .at { fill:var(--acc) }
+.it.sel .dot { fill:var(--acc) }
+
+.band { position:absolute; top:0; bottom:.5rem; left:50%; width:145px;
+  transform:translateX(-50%); z-index:0 }
+.chip { position:absolute; top:-.55rem; left:50%; transform:translateX(-50%);
+  font-family:var(--body); font-size:.66rem; color:var(--paper); background:var(--acc);
+  border-radius:20px; padding:.1rem .55rem; white-space:nowrap; z-index:3 }
+
+.open { display:grid; grid-template-columns:auto 1fr; gap:0 1.3rem; align-items:start;
+  margin-top:1rem; padding:1.1rem 1.2rem 1.2rem; border-radius:12px; background:var(--tint); min-height:10rem }
+.open .shot { width:150px }
+.open .shot:empty { width:0 }
+.open .shot img { display:block; width:100%; border-radius:7px; box-shadow:0 3px 12px rgba(30,25,60,.13) }
+.open .d { font-size:.75rem; color:var(--ink-3) }
+.open h4 { font-family:var(--title); font-weight:600; font-size:1.05rem; color:var(--ink); margin:0 0 .1rem }
+.open dl { margin:.6rem 0 0; display:grid; grid-template-columns:3.2rem 1fr; gap:.15rem .7rem; font-size:.875rem }
+.open dt { color:var(--ink-3); font-size:.78rem; padding-top:.1rem }
+.open dd { margin:0 }
+
+/* ── 테두리 네 가지 ── */
+
+/* B1 사방 실선 — 칸 하나가 또렷이 선다 */
+.b1 .band { background:var(--tint); border:1.5px solid var(--acc); border-radius:10px }
+
+/* B2 모서리 꺾쇠 — 네 귀퉁이만. 가운데를 안 막아 그림이 덜 가린다 */
+.b2 .band { background:var(--tint); border-radius:10px }
+.b2 .band i { position:absolute; width:14px; height:14px; border:2px solid var(--acc) }
+.b2 .band i.tl { top:-1px; left:-1px; border-right:0; border-bottom:0; border-radius:8px 0 0 0 }
+.b2 .band i.tr { top:-1px; right:-1px; border-left:0; border-bottom:0; border-radius:0 8px 0 0 }
+.b2 .band i.bl { bottom:-1px; left:-1px; border-right:0; border-top:0; border-radius:0 0 0 8px }
+.b2 .band i.br { bottom:-1px; right:-1px; border-left:0; border-top:0; border-radius:0 0 8px 0 }
+
+/* B3 테두리만 — 바탕을 빼면 위젯 그림 색이 안 바뀐다 */
+.b3 .band { background:transparent; border:1.5px solid var(--acc); border-radius:10px }
+
+/* B4 창이 글로 이어진다 — 아래를 트고 펼침 칸에 붙인다 */
+.b4 .band { background:var(--tint); border:1.5px solid var(--acc); border-bottom:0;
+  border-radius:10px 10px 0 0; bottom:0 }
+.b4 .tml-scroll { padding-bottom:.9rem }
+.b4 .open { margin-top:0; border-radius:0 0 12px 12px }
+.b4 .seam { position:relative; z-index:2; width:145px; margin:0 auto; height:0 }
+.b4 .seam::before { content:''; position:absolute; left:-1.5px; right:-1.5px; top:-2px; height:4px;
+  background:var(--tint) }
+.b4 .seam::after { content:''; position:absolute; left:-1.5px; top:-2px; width:1.5px; height:4px;
+  background:var(--acc); box-shadow:145px 0 0 var(--acc) }
+
+.cmpt { width:100%; border-collapse:collapse; margin:1rem 0 0; font-size:.86rem }
+.cmpt th, .cmpt td { text-align:left; padding:.5rem .7rem; border-bottom:1px solid #e3e0ea; vertical-align:top }
+.cmpt th { font-weight:600; color:var(--ink-3); font-size:.78rem }
+.cmpt td:first-child { font-weight:600; color:var(--ink); white-space:nowrap }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="lede">
+  <h1>창 테두리 고르기</h1>
+  <p>밀어서 바꾸는 판과 가운데 창은 정해졌다. 남은 것은 그 창을 어떻게 두르느냐다.</p>
+  <p>본문 폭은 실제 편과 같은 782px. 축을 밀면 창에 든 항목이 아래에 펼쳐진다.</p>
+</div>
+
+<h2><span class="no">B1</span>사방 실선</h2>
+<p class="secn">한 칸 폭에 1.5px 테두리를 두른다. 칸 하나가 또렷이 서고 「여기 든 것이 아래 글」이 바로 읽힌다.</p>
+<div class="pane bd b1" id="b1">
+  <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
+  <div class="track">
+    <div class="band"></div>
+    <div class="tml-scroll"><svg width="1320" height="260" viewBox="0 110 1320 260" role="group" aria-label="결정 아홉">
+<line class="rail" x1="80" y1="300" x2="1240" y2="300"/>
+<g class="it hit sel" data-i="0">
+<line class="tick" x1="80" y1="295" x2="80" y2="305"/>
+<text class="at" x="80" y="322" text-anchor="middle">8/23 (일)</text>
+<text class="nm" x="80" y="342" text-anchor="middle">네 구간을 다 펼침</text>
+<line class="stem" x1="80" y1="293" x2="80" y2="280"/>
+<circle class="dot big" cx="80" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-1.png" x="25" y="107" width="110" height="143"/>
+<text class="sz" x="80" y="272" text-anchor="middle">4×3</text>
+<rect class="zone" x="8" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="1">
+<line class="tick" x1="225" y1="295" x2="225" y2="305"/>
+<text class="at" x="225" y="322" text-anchor="middle">8/24 (월)</text>
+<text class="nm" x="225" y="342" text-anchor="middle">기록을 영구 보관</text>
+<circle class="dot" cx="225" cy="300" r="3"/>
+<rect class="zone" x="153" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="2">
+<line class="tick" x1="370" y1="295" x2="370" y2="305"/>
+<text class="at" x="370" y="322" text-anchor="middle">8/25 (화)</text>
+<text class="nm" x="370" y="342" text-anchor="middle">주간 약통 알림</text>
+<circle class="dot" cx="370" cy="300" r="3"/>
+<rect class="zone" x="298" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="3">
+<line class="tick" x1="515" y1="295" x2="515" y2="305"/>
+<text class="at" x="515" y="322" text-anchor="middle">8/30 (일)</text>
+<text class="nm" x="515" y="342" text-anchor="middle">터치를 걷어냄</text>
+<line class="stem" x1="515" y1="293" x2="515" y2="280"/>
+<circle class="dot big" cx="515" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-2.png" x="460" y="157" width="110" height="93"/>
+<text class="sz" x="515" y="272" text-anchor="middle">4×2</text>
+<rect class="zone" x="443" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="4">
+<line class="tick" x1="660" y1="295" x2="660" y2="305"/>
+<text class="at" x="660" y="322" text-anchor="middle">9/1 (화)</text>
+<text class="nm" x="660" y="342" text-anchor="middle">두 열로 눌러 담음</text>
+<line class="stem" x1="660" y1="293" x2="660" y2="280"/>
+<circle class="dot big" cx="660" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-3.png" x="605" y="207" width="110" height="43"/>
+<text class="sz" x="660" y="272" text-anchor="middle">4×1</text>
+<rect class="zone" x="588" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="5">
+<line class="tick" x1="805" y1="295" x2="805" y2="305"/>
+<text class="at" x="805" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="805" y="342" text-anchor="middle">지금 구간만</text>
+<line class="stem" x1="805" y1="293" x2="805" y2="280"/>
+<circle class="dot big" cx="805" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-4.png" x="777" y="207" width="56" height="43"/>
+<text class="sz" x="805" y="272" text-anchor="middle">2×1</text>
+<rect class="zone" x="733" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="6">
+<line class="tick" x1="950" y1="295" x2="950" y2="305"/>
+<text class="at" x="950" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="950" y="342" text-anchor="middle">이름과 아이콘</text>
+<circle class="dot" cx="950" cy="300" r="3"/>
+<rect class="zone" x="878" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="7">
+<line class="tick" x1="1095" y1="295" x2="1095" y2="305"/>
+<text class="at" x="1095" y="322" text-anchor="middle">9/4 (금)</text>
+<text class="nm" x="1095" y="342" text-anchor="middle">인공눈물 하루 경계</text>
+<circle class="dot" cx="1095" cy="300" r="3"/>
+<rect class="zone" x="1023" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="8">
+<line class="tick" x1="1240" y1="295" x2="1240" y2="305"/>
+<text class="at" x="1240" y="322" text-anchor="middle">9/5 (토)</text>
+<text class="nm" x="1240" y="342" text-anchor="middle">채우기 알림 미루기</text>
+<circle class="dot" cx="1240" cy="300" r="3"/>
+<rect class="zone" x="1168" y="110" width="145" height="250" fill="transparent"/>
+</g>
+</svg></div>
+  </div>
+  <div class="open">
+      <div class="shot"><img src="img/pillbox/evo-1.png" alt=""></div>
+      <div class="txt"><span class="d">8월 23일</span><h4>네 구간을 다 펼침</h4>
+      <dl><dt>막힘</dt><dd>네 구간을 한눈에 보여 주려니 넣을 것이 많음</dd><dt>한 것</dt><dd>구간마다 한 줄. 시각과 이름을 적고 약은 <b>위젯에서 눌러</b> 체크</dd>
+      <dt>결과</dt><dd>홈 화면 한 판을 다 쓰고도 인공눈물 띠 자리가 빠듯함</dd></dl></div>
+    </div>
+</div>
+
+<h2><span class="no">B2</span>모서리 꺾쇠</h2>
+<p class="secn">네 귀퉁이만 ㄱ자로. 가운데를 선이 안 지나가 위젯 그림을 덜 가린다.</p>
+<div class="pane bd b2" id="b2">
+  <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
+  <div class="track">
+    <div class="band"></div>
+    <div class="tml-scroll"><svg width="1320" height="260" viewBox="0 110 1320 260" role="group" aria-label="결정 아홉">
+<line class="rail" x1="80" y1="300" x2="1240" y2="300"/>
+<g class="it hit sel" data-i="0">
+<line class="tick" x1="80" y1="295" x2="80" y2="305"/>
+<text class="at" x="80" y="322" text-anchor="middle">8/23 (일)</text>
+<text class="nm" x="80" y="342" text-anchor="middle">네 구간을 다 펼침</text>
+<line class="stem" x1="80" y1="293" x2="80" y2="280"/>
+<circle class="dot big" cx="80" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-1.png" x="25" y="107" width="110" height="143"/>
+<text class="sz" x="80" y="272" text-anchor="middle">4×3</text>
+<rect class="zone" x="8" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="1">
+<line class="tick" x1="225" y1="295" x2="225" y2="305"/>
+<text class="at" x="225" y="322" text-anchor="middle">8/24 (월)</text>
+<text class="nm" x="225" y="342" text-anchor="middle">기록을 영구 보관</text>
+<circle class="dot" cx="225" cy="300" r="3"/>
+<rect class="zone" x="153" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="2">
+<line class="tick" x1="370" y1="295" x2="370" y2="305"/>
+<text class="at" x="370" y="322" text-anchor="middle">8/25 (화)</text>
+<text class="nm" x="370" y="342" text-anchor="middle">주간 약통 알림</text>
+<circle class="dot" cx="370" cy="300" r="3"/>
+<rect class="zone" x="298" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="3">
+<line class="tick" x1="515" y1="295" x2="515" y2="305"/>
+<text class="at" x="515" y="322" text-anchor="middle">8/30 (일)</text>
+<text class="nm" x="515" y="342" text-anchor="middle">터치를 걷어냄</text>
+<line class="stem" x1="515" y1="293" x2="515" y2="280"/>
+<circle class="dot big" cx="515" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-2.png" x="460" y="157" width="110" height="93"/>
+<text class="sz" x="515" y="272" text-anchor="middle">4×2</text>
+<rect class="zone" x="443" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="4">
+<line class="tick" x1="660" y1="295" x2="660" y2="305"/>
+<text class="at" x="660" y="322" text-anchor="middle">9/1 (화)</text>
+<text class="nm" x="660" y="342" text-anchor="middle">두 열로 눌러 담음</text>
+<line class="stem" x1="660" y1="293" x2="660" y2="280"/>
+<circle class="dot big" cx="660" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-3.png" x="605" y="207" width="110" height="43"/>
+<text class="sz" x="660" y="272" text-anchor="middle">4×1</text>
+<rect class="zone" x="588" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="5">
+<line class="tick" x1="805" y1="295" x2="805" y2="305"/>
+<text class="at" x="805" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="805" y="342" text-anchor="middle">지금 구간만</text>
+<line class="stem" x1="805" y1="293" x2="805" y2="280"/>
+<circle class="dot big" cx="805" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-4.png" x="777" y="207" width="56" height="43"/>
+<text class="sz" x="805" y="272" text-anchor="middle">2×1</text>
+<rect class="zone" x="733" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="6">
+<line class="tick" x1="950" y1="295" x2="950" y2="305"/>
+<text class="at" x="950" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="950" y="342" text-anchor="middle">이름과 아이콘</text>
+<circle class="dot" cx="950" cy="300" r="3"/>
+<rect class="zone" x="878" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="7">
+<line class="tick" x1="1095" y1="295" x2="1095" y2="305"/>
+<text class="at" x="1095" y="322" text-anchor="middle">9/4 (금)</text>
+<text class="nm" x="1095" y="342" text-anchor="middle">인공눈물 하루 경계</text>
+<circle class="dot" cx="1095" cy="300" r="3"/>
+<rect class="zone" x="1023" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="8">
+<line class="tick" x1="1240" y1="295" x2="1240" y2="305"/>
+<text class="at" x="1240" y="322" text-anchor="middle">9/5 (토)</text>
+<text class="nm" x="1240" y="342" text-anchor="middle">채우기 알림 미루기</text>
+<circle class="dot" cx="1240" cy="300" r="3"/>
+<rect class="zone" x="1168" y="110" width="145" height="250" fill="transparent"/>
+</g>
+</svg></div>
+  </div>
+  <div class="open">
+      <div class="shot"><img src="img/pillbox/evo-1.png" alt=""></div>
+      <div class="txt"><span class="d">8월 23일</span><h4>네 구간을 다 펼침</h4>
+      <dl><dt>막힘</dt><dd>네 구간을 한눈에 보여 주려니 넣을 것이 많음</dd><dt>한 것</dt><dd>구간마다 한 줄. 시각과 이름을 적고 약은 <b>위젯에서 눌러</b> 체크</dd>
+      <dt>결과</dt><dd>홈 화면 한 판을 다 쓰고도 인공눈물 띠 자리가 빠듯함</dd></dl></div>
+    </div>
+</div>
+
+<h2><span class="no">B3</span>테두리만 — 바탕 없이</h2>
+<p class="secn">바탕색을 빼면 창 안 위젯 그림의 색이 창 밖과 같아진다. 선 하나로만 가른다.</p>
+<div class="pane bd b3" id="b3">
+  <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
+  <div class="track">
+    <div class="band"></div>
+    <div class="tml-scroll"><svg width="1320" height="260" viewBox="0 110 1320 260" role="group" aria-label="결정 아홉">
+<line class="rail" x1="80" y1="300" x2="1240" y2="300"/>
+<g class="it hit sel" data-i="0">
+<line class="tick" x1="80" y1="295" x2="80" y2="305"/>
+<text class="at" x="80" y="322" text-anchor="middle">8/23 (일)</text>
+<text class="nm" x="80" y="342" text-anchor="middle">네 구간을 다 펼침</text>
+<line class="stem" x1="80" y1="293" x2="80" y2="280"/>
+<circle class="dot big" cx="80" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-1.png" x="25" y="107" width="110" height="143"/>
+<text class="sz" x="80" y="272" text-anchor="middle">4×3</text>
+<rect class="zone" x="8" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="1">
+<line class="tick" x1="225" y1="295" x2="225" y2="305"/>
+<text class="at" x="225" y="322" text-anchor="middle">8/24 (월)</text>
+<text class="nm" x="225" y="342" text-anchor="middle">기록을 영구 보관</text>
+<circle class="dot" cx="225" cy="300" r="3"/>
+<rect class="zone" x="153" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="2">
+<line class="tick" x1="370" y1="295" x2="370" y2="305"/>
+<text class="at" x="370" y="322" text-anchor="middle">8/25 (화)</text>
+<text class="nm" x="370" y="342" text-anchor="middle">주간 약통 알림</text>
+<circle class="dot" cx="370" cy="300" r="3"/>
+<rect class="zone" x="298" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="3">
+<line class="tick" x1="515" y1="295" x2="515" y2="305"/>
+<text class="at" x="515" y="322" text-anchor="middle">8/30 (일)</text>
+<text class="nm" x="515" y="342" text-anchor="middle">터치를 걷어냄</text>
+<line class="stem" x1="515" y1="293" x2="515" y2="280"/>
+<circle class="dot big" cx="515" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-2.png" x="460" y="157" width="110" height="93"/>
+<text class="sz" x="515" y="272" text-anchor="middle">4×2</text>
+<rect class="zone" x="443" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="4">
+<line class="tick" x1="660" y1="295" x2="660" y2="305"/>
+<text class="at" x="660" y="322" text-anchor="middle">9/1 (화)</text>
+<text class="nm" x="660" y="342" text-anchor="middle">두 열로 눌러 담음</text>
+<line class="stem" x1="660" y1="293" x2="660" y2="280"/>
+<circle class="dot big" cx="660" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-3.png" x="605" y="207" width="110" height="43"/>
+<text class="sz" x="660" y="272" text-anchor="middle">4×1</text>
+<rect class="zone" x="588" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="5">
+<line class="tick" x1="805" y1="295" x2="805" y2="305"/>
+<text class="at" x="805" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="805" y="342" text-anchor="middle">지금 구간만</text>
+<line class="stem" x1="805" y1="293" x2="805" y2="280"/>
+<circle class="dot big" cx="805" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-4.png" x="777" y="207" width="56" height="43"/>
+<text class="sz" x="805" y="272" text-anchor="middle">2×1</text>
+<rect class="zone" x="733" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="6">
+<line class="tick" x1="950" y1="295" x2="950" y2="305"/>
+<text class="at" x="950" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="950" y="342" text-anchor="middle">이름과 아이콘</text>
+<circle class="dot" cx="950" cy="300" r="3"/>
+<rect class="zone" x="878" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="7">
+<line class="tick" x1="1095" y1="295" x2="1095" y2="305"/>
+<text class="at" x="1095" y="322" text-anchor="middle">9/4 (금)</text>
+<text class="nm" x="1095" y="342" text-anchor="middle">인공눈물 하루 경계</text>
+<circle class="dot" cx="1095" cy="300" r="3"/>
+<rect class="zone" x="1023" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="8">
+<line class="tick" x1="1240" y1="295" x2="1240" y2="305"/>
+<text class="at" x="1240" y="322" text-anchor="middle">9/5 (토)</text>
+<text class="nm" x="1240" y="342" text-anchor="middle">채우기 알림 미루기</text>
+<circle class="dot" cx="1240" cy="300" r="3"/>
+<rect class="zone" x="1168" y="110" width="145" height="250" fill="transparent"/>
+</g>
+</svg></div>
+  </div>
+  <div class="open">
+      <div class="shot"><img src="img/pillbox/evo-1.png" alt=""></div>
+      <div class="txt"><span class="d">8월 23일</span><h4>네 구간을 다 펼침</h4>
+      <dl><dt>막힘</dt><dd>네 구간을 한눈에 보여 주려니 넣을 것이 많음</dd><dt>한 것</dt><dd>구간마다 한 줄. 시각과 이름을 적고 약은 <b>위젯에서 눌러</b> 체크</dd>
+      <dt>결과</dt><dd>홈 화면 한 판을 다 쓰고도 인공눈물 띠 자리가 빠듯함</dd></dl></div>
+    </div>
+</div>
+
+<h2><span class="no">B4</span>창이 글로 이어진다</h2>
+<p class="secn">아래를 트고 펼침 칸에 붙인다. 창과 글이 한 덩어리라 둘이 같은 것을 말한다는 게 모양으로 드러난다.</p>
+<div class="pane bd b4" id="b4">
+  <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
+  <div class="track">
+    <div class="band"></div>
+    <div class="tml-scroll"><svg width="1320" height="260" viewBox="0 110 1320 260" role="group" aria-label="결정 아홉">
+<line class="rail" x1="80" y1="300" x2="1240" y2="300"/>
+<g class="it hit sel" data-i="0">
+<line class="tick" x1="80" y1="295" x2="80" y2="305"/>
+<text class="at" x="80" y="322" text-anchor="middle">8/23 (일)</text>
+<text class="nm" x="80" y="342" text-anchor="middle">네 구간을 다 펼침</text>
+<line class="stem" x1="80" y1="293" x2="80" y2="280"/>
+<circle class="dot big" cx="80" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-1.png" x="25" y="107" width="110" height="143"/>
+<text class="sz" x="80" y="272" text-anchor="middle">4×3</text>
+<rect class="zone" x="8" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="1">
+<line class="tick" x1="225" y1="295" x2="225" y2="305"/>
+<text class="at" x="225" y="322" text-anchor="middle">8/24 (월)</text>
+<text class="nm" x="225" y="342" text-anchor="middle">기록을 영구 보관</text>
+<circle class="dot" cx="225" cy="300" r="3"/>
+<rect class="zone" x="153" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="2">
+<line class="tick" x1="370" y1="295" x2="370" y2="305"/>
+<text class="at" x="370" y="322" text-anchor="middle">8/25 (화)</text>
+<text class="nm" x="370" y="342" text-anchor="middle">주간 약통 알림</text>
+<circle class="dot" cx="370" cy="300" r="3"/>
+<rect class="zone" x="298" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="3">
+<line class="tick" x1="515" y1="295" x2="515" y2="305"/>
+<text class="at" x="515" y="322" text-anchor="middle">8/30 (일)</text>
+<text class="nm" x="515" y="342" text-anchor="middle">터치를 걷어냄</text>
+<line class="stem" x1="515" y1="293" x2="515" y2="280"/>
+<circle class="dot big" cx="515" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-2.png" x="460" y="157" width="110" height="93"/>
+<text class="sz" x="515" y="272" text-anchor="middle">4×2</text>
+<rect class="zone" x="443" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="4">
+<line class="tick" x1="660" y1="295" x2="660" y2="305"/>
+<text class="at" x="660" y="322" text-anchor="middle">9/1 (화)</text>
+<text class="nm" x="660" y="342" text-anchor="middle">두 열로 눌러 담음</text>
+<line class="stem" x1="660" y1="293" x2="660" y2="280"/>
+<circle class="dot big" cx="660" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-3.png" x="605" y="207" width="110" height="43"/>
+<text class="sz" x="660" y="272" text-anchor="middle">4×1</text>
+<rect class="zone" x="588" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="5">
+<line class="tick" x1="805" y1="295" x2="805" y2="305"/>
+<text class="at" x="805" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="805" y="342" text-anchor="middle">지금 구간만</text>
+<line class="stem" x1="805" y1="293" x2="805" y2="280"/>
+<circle class="dot big" cx="805" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-4.png" x="777" y="207" width="56" height="43"/>
+<text class="sz" x="805" y="272" text-anchor="middle">2×1</text>
+<rect class="zone" x="733" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="6">
+<line class="tick" x1="950" y1="295" x2="950" y2="305"/>
+<text class="at" x="950" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="950" y="342" text-anchor="middle">이름과 아이콘</text>
+<circle class="dot" cx="950" cy="300" r="3"/>
+<rect class="zone" x="878" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="7">
+<line class="tick" x1="1095" y1="295" x2="1095" y2="305"/>
+<text class="at" x="1095" y="322" text-anchor="middle">9/4 (금)</text>
+<text class="nm" x="1095" y="342" text-anchor="middle">인공눈물 하루 경계</text>
+<circle class="dot" cx="1095" cy="300" r="3"/>
+<rect class="zone" x="1023" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="8">
+<line class="tick" x1="1240" y1="295" x2="1240" y2="305"/>
+<text class="at" x="1240" y="322" text-anchor="middle">9/5 (토)</text>
+<text class="nm" x="1240" y="342" text-anchor="middle">채우기 알림 미루기</text>
+<circle class="dot" cx="1240" cy="300" r="3"/>
+<rect class="zone" x="1168" y="110" width="145" height="250" fill="transparent"/>
+</g>
+</svg></div>
+  </div>
+  <div class="seam"></div>
+  <div class="open">
+      <div class="shot"><img src="img/pillbox/evo-1.png" alt=""></div>
+      <div class="txt"><span class="d">8월 23일</span><h4>네 구간을 다 펼침</h4>
+      <dl><dt>막힘</dt><dd>네 구간을 한눈에 보여 주려니 넣을 것이 많음</dd><dt>한 것</dt><dd>구간마다 한 줄. 시각과 이름을 적고 약은 <b>위젯에서 눌러</b> 체크</dd>
+      <dt>결과</dt><dd>홈 화면 한 판을 다 쓰고도 인공눈물 띠 자리가 빠듯함</dd></dl></div>
+    </div>
+</div>
+
+<h2><span class="no">B5</span>사방 실선 + 이름표</h2>
+<p class="secn">B1 에 「지금 보는 자리」 칩을 얹는다. 처음 보는 사람도 밀어야 한다는 것을 안다.</p>
+<div class="pane bd b1" id="b5">
+  <p class="q">위젯 4×3, 열흘 뒤 2×1.</p>
+  <div class="track">
+    <div class="band"><span class="chip">지금 보는 자리</span></div>
+    <div class="tml-scroll"><svg width="1320" height="260" viewBox="0 110 1320 260" role="group" aria-label="결정 아홉">
+<line class="rail" x1="80" y1="300" x2="1240" y2="300"/>
+<g class="it hit sel" data-i="0">
+<line class="tick" x1="80" y1="295" x2="80" y2="305"/>
+<text class="at" x="80" y="322" text-anchor="middle">8/23 (일)</text>
+<text class="nm" x="80" y="342" text-anchor="middle">네 구간을 다 펼침</text>
+<line class="stem" x1="80" y1="293" x2="80" y2="280"/>
+<circle class="dot big" cx="80" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-1.png" x="25" y="107" width="110" height="143"/>
+<text class="sz" x="80" y="272" text-anchor="middle">4×3</text>
+<rect class="zone" x="8" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="1">
+<line class="tick" x1="225" y1="295" x2="225" y2="305"/>
+<text class="at" x="225" y="322" text-anchor="middle">8/24 (월)</text>
+<text class="nm" x="225" y="342" text-anchor="middle">기록을 영구 보관</text>
+<circle class="dot" cx="225" cy="300" r="3"/>
+<rect class="zone" x="153" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="2">
+<line class="tick" x1="370" y1="295" x2="370" y2="305"/>
+<text class="at" x="370" y="322" text-anchor="middle">8/25 (화)</text>
+<text class="nm" x="370" y="342" text-anchor="middle">주간 약통 알림</text>
+<circle class="dot" cx="370" cy="300" r="3"/>
+<rect class="zone" x="298" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="3">
+<line class="tick" x1="515" y1="295" x2="515" y2="305"/>
+<text class="at" x="515" y="322" text-anchor="middle">8/30 (일)</text>
+<text class="nm" x="515" y="342" text-anchor="middle">터치를 걷어냄</text>
+<line class="stem" x1="515" y1="293" x2="515" y2="280"/>
+<circle class="dot big" cx="515" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-2.png" x="460" y="157" width="110" height="93"/>
+<text class="sz" x="515" y="272" text-anchor="middle">4×2</text>
+<rect class="zone" x="443" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="4">
+<line class="tick" x1="660" y1="295" x2="660" y2="305"/>
+<text class="at" x="660" y="322" text-anchor="middle">9/1 (화)</text>
+<text class="nm" x="660" y="342" text-anchor="middle">두 열로 눌러 담음</text>
+<line class="stem" x1="660" y1="293" x2="660" y2="280"/>
+<circle class="dot big" cx="660" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-3.png" x="605" y="207" width="110" height="43"/>
+<text class="sz" x="660" y="272" text-anchor="middle">4×1</text>
+<rect class="zone" x="588" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="5">
+<line class="tick" x1="805" y1="295" x2="805" y2="305"/>
+<text class="at" x="805" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="805" y="342" text-anchor="middle">지금 구간만</text>
+<line class="stem" x1="805" y1="293" x2="805" y2="280"/>
+<circle class="dot big" cx="805" cy="300" r="4.5"/>
+<image href="img/pillbox/evo-4.png" x="777" y="207" width="56" height="43"/>
+<text class="sz" x="805" y="272" text-anchor="middle">2×1</text>
+<rect class="zone" x="733" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="6">
+<line class="tick" x1="950" y1="295" x2="950" y2="305"/>
+<text class="at" x="950" y="322" text-anchor="middle">9/2 (수)</text>
+<text class="nm" x="950" y="342" text-anchor="middle">이름과 아이콘</text>
+<circle class="dot" cx="950" cy="300" r="3"/>
+<rect class="zone" x="878" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="7">
+<line class="tick" x1="1095" y1="295" x2="1095" y2="305"/>
+<text class="at" x="1095" y="322" text-anchor="middle">9/4 (금)</text>
+<text class="nm" x="1095" y="342" text-anchor="middle">인공눈물 하루 경계</text>
+<circle class="dot" cx="1095" cy="300" r="3"/>
+<rect class="zone" x="1023" y="110" width="145" height="250" fill="transparent"/>
+</g>
+<g class="it hit" data-i="8">
+<line class="tick" x1="1240" y1="295" x2="1240" y2="305"/>
+<text class="at" x="1240" y="322" text-anchor="middle">9/5 (토)</text>
+<text class="nm" x="1240" y="342" text-anchor="middle">채우기 알림 미루기</text>
+<circle class="dot" cx="1240" cy="300" r="3"/>
+<rect class="zone" x="1168" y="110" width="145" height="250" fill="transparent"/>
+</g>
+</svg></div>
+  </div>
+  <div class="open">
+      <div class="shot"><img src="img/pillbox/evo-1.png" alt=""></div>
+      <div class="txt"><span class="d">8월 23일</span><h4>네 구간을 다 펼침</h4>
+      <dl><dt>막힘</dt><dd>네 구간을 한눈에 보여 주려니 넣을 것이 많음</dd><dt>한 것</dt><dd>구간마다 한 줄. 시각과 이름을 적고 약은 <b>위젯에서 눌러</b> 체크</dd>
+      <dt>결과</dt><dd>홈 화면 한 판을 다 쓰고도 인공눈물 띠 자리가 빠듯함</dd></dl></div>
+    </div>
+</div>
+
+<h2>견주기</h2>
+<div class="pane" style="width:auto">
+<table class="cmpt">
+  <tr><th></th><th>B1 사방 실선</th><th>B2 꺾쇠</th><th>B3 테두리만</th><th>B4 글로 이어짐</th><th>B5 이름표</th></tr>
+  <tr><td>칸으로 읽히나</td><td>또렷</td><td>또렷 — 귀퉁이가 칸을 그린다</td><td>또렷하지만 약함</td><td>가장 또렷</td><td>또렷</td></tr>
+  <tr><td>그림을 가리나</td><td>바탕이 색을 바꿈</td><td>같음</td><td>안 바꿈</td><td>바탕이 색을 바꿈</td><td>바탕이 색을 바꿈</td></tr>
+  <tr><td>글과의 관계</td><td>따로 섬</td><td>따로 섬</td><td>따로 섬</td><td>한 덩어리</td><td>따로 섬</td></tr>
+  <tr><td>밀어야 하는 걸 아나</td><td>모름</td><td>모름</td><td>모름</td><td>모름</td><td>칩이 알려 줌</td></tr>
+  <tr><td>선이 늘어나나</td><td>사방 하나</td><td>귀퉁이 넷</td><td>사방 하나</td><td>사방 + 이음매</td><td>사방 + 칩</td></tr>
+</table>
+</div>
+
+</div>
+<script>
+window.__D = [{"at": "8/23 (일)", "day": "8월 23일", "title": "네 구간을 다 펼침", "size": "4×3", "img": "evo-1", "iw": 763, "ih": 991, "problem": "네 구간을 한눈에 보여 주려니 넣을 것이 많음", "did": "구간마다 한 줄. 시각과 이름을 적고 약은 <b>위젯에서 눌러</b> 체크", "result": "홈 화면 한 판을 다 쓰고도 인공눈물 띠 자리가 빠듯함"}, {"at": "8/24 (월)", "day": "8월 24일", "title": "기록을 영구 보관", "problem": "체크가 그날만 살고 다음 날 사라짐", "did": "날짜별로 쌓아 저장", "result": "화면은 그대로. 지난 기록 다시 보기 가능"}, {"at": "8/25 (화)", "day": "8월 25일", "title": "주간 약통 알림", "problem": "일주일치 약통 채우기를 자꾸 잊음", "did": "토요일 아침 알림 하나", "result": "매일 하는 일이 아니라 위젯에는 안 세움"}, {"at": "8/30 (일)", "day": "8월 30일", "title": "터치를 걷어냄", "size": "4×2", "img": "evo-2", "iw": 763, "ih": 645, "problem": "위젯에서 실제로 하는 일은 <b>상태 확인뿐</b>", "did": "터치 입력을 걷어내고 두 줄로 접음", "result": "체크는 앱으로. 크기가 4×3 에서 4×2 로"}, {"at": "9/1 (화)", "day": "9월 1일", "title": "두 열로 눌러 담음", "size": "4×1", "img": "evo-3", "iw": 763, "ih": 297, "problem": "두 줄도 홈 화면을 많이 차지", "did": "네 구간을 두 열로 눌러 담고 앱 버튼을 동그랗게", "result": "4×1. 인공눈물 띠는 폭의 절반만 사용", "next": "«위젯이 할 일» 을 먼저 정했으면 세 번에 걸쳐 줄이지 않았을 것"}, {"at": "9/2 (수)", "day": "9월 2일", "title": "지금 구간만", "size": "2×1", "img": "evo-4", "iw": 386, "ih": 297, "problem": "폭이 절반이면 네 구간을 다 못 그림", "did": "지금 구간만 약을 그리고 나머지 셋은 이름과 표식으로", "result": "2×1. 칸은 줄었는데 지금 구간 약은 오히려 커짐"}, {"at": "9/2 (수)", "day": "9월 2일", "title": "이름과 아이콘", "problem": "«약통» 은 경구약만 가리켜 연고·안약이 빠짐", "did": "「약수첩」 으로 바꾸고, 아이콘은 앱 넷이 같이 쓰는 규칙으로", "result": "후보 24안 중 원색을 쓴 것 모두 제외"}, {"at": "9/4 (금)", "day": "9월 4일", "title": "인공눈물 하루 경계", "problem": "«N시간 전» 이 자정을 넘으면 어제 것이 오늘 것처럼 보임", "did": "하루 경계를 새벽 3시로", "result": "오늘 기록이 없으면 띠가 비고 「오늘 아직」 표시"}, {"at": "9/5 (토)", "day": "9월 5일", "title": "채우기 알림 미루기", "problem": "토요일 아침에 약속이 있으면 그때 못 채움", "did": "알림에 «오후 9시로 미루기». 미룰 시각은 설정에서", "result": "그날 저녁에 한 번 더. 주간 알림은 다음 주 그대로"}];
+document.querySelectorAll('.b2 .band').forEach(function (b) {
+  ['tl', 'tr', 'bl', 'br'].forEach(function (k) {
+    var i = document.createElement('i'); i.className = k; b.appendChild(i);
+  });
+});
+document.querySelectorAll('.pane.bd').forEach(function (box) {
+  var open = box.querySelector('.open');
+  var sc = box.querySelector('.tml-scroll');
+  var gs = box.querySelectorAll('.it');
+  var cur = 0;
+  function row(l, h) { return h ? '<dt>' + l + '</dt><dd>' + h + '</dd>' : ''; }
+  function show(i) {
+    if (i === cur) return;
+    cur = i;
+    var it = window.__D[i];
+    gs.forEach(function (g, k) { g.classList.toggle('sel', k === i); });
+    open.innerHTML =
+      '<div class="shot">' + (it.img ? '<img src="img/pillbox/' + it.img + '.png" alt="">' : '') +
+      '</div><div class="txt"><span class="d">' + it.day + '</span><h4>' + it.title + '</h4><dl>' +
+      row('막힘', it.problem) + row('한 것', it.did) + row('결과', it.result) + row('다음엔', it.next) +
+      '</dl></div>';
+  }
+  function pad() {
+    var half = sc.clientWidth / 2 - 80;
+    sc.style.paddingLeft = sc.style.paddingRight = Math.max(half, 0) + 'px';
+  }
+  function pick() {
+    var padL = parseFloat(sc.style.paddingLeft || 0);
+    var mid = sc.scrollLeft + sc.clientWidth / 2 - padL, best = 0, bd = Infinity;
+    var sv = sc.querySelector('svg');
+    var k = sv.getBoundingClientRect().width / +sv.getAttribute('width');
+    gs.forEach(function (g, i) {
+      var z = g.querySelector('.zone');
+      var c = (+z.getAttribute('x') + +z.getAttribute('width') / 2) * k;
+      var d = Math.abs(c - mid);
+      if (d < bd) { bd = d; best = i; }
+    });
+    show(best);
+  }
+  pad(); pick();
+  window.addEventListener('resize', function () { pad(); pick(); });
+  sc.addEventListener('scroll', pick, { passive: true });
+  gs.forEach(function (g) {
+    g.addEventListener('click', function () {
+      var z = g.querySelector('.zone');
+      var sv = sc.querySelector('svg');
+      var k = sv.getBoundingClientRect().width / +sv.getAttribute('width');
+      var c = (+z.getAttribute('x') + +z.getAttribute('width') / 2) * k;
+      sc.scrollTo({ left: c + parseFloat(sc.style.paddingLeft || 0) - sc.clientWidth / 2, behavior: 'smooth' });
+    });
+  });
+});
+</script>
+</body>
+</html>

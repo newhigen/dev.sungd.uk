@@ -79,5 +79,84 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
         <a href="https://sungd.uk">sungd.uk</a>
       </footer>
     </div>
+
+    <div class="zoombox" id="zoombox" role="dialog" aria-label="크게 본 그림" aria-modal="true" hidden>
+      <button class="x" type="button" aria-label="닫기">✕</button>
+      <img alt="" />
+    </div>
+    <script is:inline>
+      (function () {
+        var lb = document.getElementById('zoombox');
+        if (!lb) return;
+        var big = lb.querySelector('img');
+        function open(src, alt) {
+          big.src = src;
+          big.alt = alt || '';
+          lb.hidden = false;
+        }
+        function shut() { lb.hidden = true; }
+        // 가로로 미는 줄에서는 밀고 손을 뗀 것이 누른 것으로 온다 — 움직였으면 안 연다
+        var px = 0, py = 0;
+        document.addEventListener('pointerdown', function (e) { px = e.clientX; py = e.clientY; }, true);
+        // 위임으로 잡는다 — 펼치는 도식은 그림을 갈아 끼우므로 요소마다 걸면 새 그림이 빠진다
+        document.addEventListener('click', function (e) {
+          var el = e.target;
+          if (!el || !el.closest || !el.closest('.prose')) return;
+          if (Math.abs(e.clientX - px) > 8 || Math.abs(e.clientY - py) > 8) return;
+          if (el.tagName === 'IMG') {
+            var src = el.getAttribute('src') || '';
+            if (src.indexOf('/p/') !== 0) return;
+            open(src, el.alt);
+          } else if (el.tagName === 'image') {
+            var href = el.getAttribute('href') || '';
+            if (href.indexOf('/p/') !== 0) return;
+            open(href, el.getAttribute('aria-label') || '');
+          }
+        });
+        lb.addEventListener('click', shut);
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') shut();
+        });
+      })();
+    </script>
+
+    <script is:inline>
+      // 마우스로 잡아 끌어 미는 줄 — 트랙패드와 휠은 브라우저가 이미 해 준다.
+      // 손을 뗀 뒤 눌린 것으로 오인되는 건 위 8px 가드가 막는다.
+      (function () {
+        var SEL = '.tml-scroll, .reel-scroll';
+        var sc = null, x0 = 0, left0 = 0, moved = false;
+        document.addEventListener('pointerdown', function (e) {
+          if (e.pointerType !== 'mouse' || e.button !== 0) return;
+          var el = e.target.closest ? e.target.closest(SEL) : null;
+          if (!el || el.scrollWidth - el.clientWidth < 8) return;
+          sc = el; x0 = e.clientX; left0 = el.scrollLeft; moved = false;
+          // 창 밖에서 손을 떼도 끝이 오게 잡아 둔다 — 안 그러면 끄는 상태가 남아 클릭이 막힌다
+          try { el.setPointerCapture(e.pointerId); } catch (err) {}
+        });
+        document.addEventListener('pointermove', function (e) {
+          if (!sc) return;
+          var dx = e.clientX - x0;
+          if (!moved && Math.abs(dx) < 4) return;
+          if (!moved) { moved = true; sc.classList.add('grabbing'); }
+          // 글자·그림이 딸려 잡히지 않게
+          e.preventDefault();
+          sc.scrollLeft = left0 - dx;
+        });
+        function end() {
+          if (!sc) return;
+          sc.classList.remove('grabbing');
+          sc = null;
+        }
+        document.addEventListener('pointerup', end);
+        document.addEventListener('pointercancel', end);
+        document.addEventListener('lostpointercapture', end);
+        window.addEventListener('blur', end);
+        // 끄는 동안 그림이 통째로 끌려가는 기본 동작을 막는다
+        document.addEventListener('dragstart', function (e) {
+          if (e.target.closest && e.target.closest(SEL)) e.preventDefault();
+        });
+      })();
+    </script>
   </body>
 </html>

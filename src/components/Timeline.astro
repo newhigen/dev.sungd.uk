@@ -1,0 +1,245 @@
+---
+interface Item {
+  at: string;
+  title: string;
+  /** 축 위 그림 밑에 서는 짧은 값 — 위젯 치수 같은 것 */
+  note?: string;
+  /** 그림이 있는 항목은 축 위로 올라간다. iw·ih 는 원본 픽셀 — 항목끼리 실제 크기를 견주려면 필요하다 */
+  img?: string;
+  iw?: number;
+  ih?: number;
+  alt?: string;
+  /** 창에 든 항목의 글. problem·did·result·next 는 인라인 태그를 그대로 쓴다 */
+  day?: string;
+  problem?: string;
+  did?: string;
+  result?: string;
+  next?: string;
+}
+interface Props {
+  /** 결정을 차례대로 한 축에 — 간격은 날짜가 아니라 차례로 고르게 벌린다.
+   *  날짜 비례로 하면 몰린 자리의 라벨이 서로 눌린다.
+   *  항목에 problem·did·result 가 있으면 축을 밀어 창에 든 것이 아래에 펼쳐진다. */
+  items: Item[];
+  caption?: string;
+}
+const { items, caption } = Astro.props;
+
+const STEP = 145, PAD = 80;
+const AX = 300, BASE = 250; // 축 y · 그림 바닥 y
+const W = PAD * 2 + (items.length - 1) * STEP;
+
+// 원본이 가장 큰 그림을 110px 로 놓고 나머지를 같은 배율로 — 그래야 크기 차이가 실제 비율이 된다
+const shots = items.filter(i => i.img && i.iw && i.ih);
+const scale = shots.length ? 110 / Math.max(...shots.map(i => i.iw!)) : 1;
+const box = (it: Item) => ({ w: Math.round(it.iw! * scale), h: Math.round(it.ih! * scale) });
+
+// viewBox 를 내용에 딱 맞춘다 — 넉넉히 잡으면 창 테두리가 빈 자리까지 두른다
+const tallest = shots.length ? Math.max(...shots.map(box).map(b => b.h)) : 0;
+const TOP = Math.min(BASE - tallest, AX) - 4;
+const BOT = AX + 46;
+const VH = BOT - TOP;
+
+const x = (i: number) => PAD + i * STEP;
+
+const has = (it: Item) => Boolean(it.problem || it.did || it.result);
+const opens = items.some(has);
+const first = items.findIndex(has);
+const one = first >= 0 ? items[first] : null;
+
+// 한 페이지에 둘 이상 설 수 있다
+const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
+---
+
+<figure class="tml" id={uid} data-open={opens ? '' : null} data-edge={opens ? 'start' : null}>
+  <div class="tml-track">
+    {opens && <div class="tml-win bg" style={`width:${STEP}px`} />}
+    <div class="tml-scroll">
+      <svg
+        width={W}
+        height={VH}
+        viewBox={`0 ${TOP} ${W} ${VH}`}
+        role={opens ? 'group' : 'img'}
+        aria-label={caption ?? '결정 타임라인'}
+      >
+        <line class="rail" x1={x(0)} y1={AX} x2={x(items.length - 1)} y2={AX} />
+
+        {items.map((it, i) => (
+          <g
+            class:list={['it', { hit: opens && has(it), sel: opens && i === first }]}
+            data-i={i}
+            role={opens && has(it) ? 'button' : null}
+            tabindex={opens && has(it) ? 0 : null}
+            aria-label={opens && has(it) ? `${it.at} ${it.title}` : null}
+          >
+            <line class="tick" x1={x(i)} y1={AX - 5} x2={x(i)} y2={AX + 5} />
+            <text class="at" x={x(i)} y={AX + 22} text-anchor="middle">{it.at}</text>
+            <text class="nm" x={x(i)} y={AX + 42} text-anchor="middle">{it.title}</text>
+
+            {it.img && it.iw && it.ih && (
+              <g>
+                <line class="stem" x1={x(i)} y1={AX - 7} x2={x(i)} y2={BASE + 30} />
+                <circle class="dot big" cx={x(i)} cy={AX} r="4.5" />
+                <image
+                  class="shot"
+                  href={it.img}
+                  x={x(i) - box(it).w / 2}
+                  y={BASE - box(it).h}
+                  width={box(it).w}
+                  height={box(it).h}
+                  role="img"
+                  aria-label={it.alt ?? it.title}
+                />
+                {it.note && <text class="sz" x={x(i)} y={BASE + 22} text-anchor="middle">{it.note}</text>}
+              </g>
+            )}
+            {!it.img && <circle class="dot" cx={x(i)} cy={AX} r="3" />}
+
+            <rect class="zone" x={x(i) - STEP / 2} y={TOP} width={STEP} height={VH} fill="transparent" />
+          </g>
+        ))}
+      </svg>
+    </div>
+    {opens && (
+      <div class="tml-win fr" style={`width:${STEP}px`}>
+        <span class="chip">밀어서 보기</span>
+      </div>
+    )}
+  </div>
+
+  {one && (
+    <div class="tml-open" aria-live="polite">
+      <div class:list={['shot', { none: !one.img }]}>
+        {one.img && <img src={one.img} alt={one.alt ?? ''} />}
+      </div>
+      <div class="txt">
+        <span class="d">{one.day ?? one.at}</span>
+        <h4>{one.title}</h4>
+        <dl>
+          {one.problem && <Fragment><dt>막힘</dt><dd set:html={one.problem} /></Fragment>}
+          {one.did && <Fragment><dt>한 것</dt><dd set:html={one.did} /></Fragment>}
+          {one.result && <Fragment><dt>결과</dt><dd set:html={one.result} /></Fragment>}
+          {one.next && <Fragment><dt>다음엔</dt><dd set:html={one.next} /></Fragment>}
+        </dl>
+      </div>
+    </div>
+  )}
+
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+{opens && (
+  <script is:inline define:vars={{ uid, items, STEP, PAD }}>
+    (function () {
+      var box = document.getElementById(uid);
+      if (!box) return;
+      var open = box.querySelector('.tml-open');
+      var wins = box.querySelectorAll('.tml-win');
+      var sc = box.querySelector('.tml-scroll');
+      var svg = sc.querySelector('svg');
+      var gs = box.querySelectorAll('g.it');
+      var cur = -1;
+
+      function row(label, html) {
+        return html ? '<dt>' + label + '</dt><dd>' + html + '</dd>' : '';
+      }
+      function show(i) {
+        if (i === cur) return;
+        var it = items[i];
+        if (!it || !(it.problem || it.did || it.result)) return;
+        cur = i;
+        gs.forEach(function (g, k) { g.classList.toggle('sel', k === i); });
+        open.innerHTML =
+          '<div class="shot' + (it.img ? '' : ' none') + '">' +
+          (it.img ? '<img src="' + it.img + '" alt="' + (it.alt || '') + '">' : '') +
+          '</div><div class="txt"><span class="d">' + (it.day || it.at) + '</span>' +
+          '<h4>' + it.title + '</h4><dl>' +
+          row('막힘', it.problem) + row('한 것', it.did) +
+          row('결과', it.result) + row('다음엔', it.next) +
+          '</dl></div>';
+      }
+
+      // 창은 축 내용 높이에 맞추되 위아래로 한 칸씩 더 준다 — 딱 맞으면 그림이 테두리에 끼여 보인다
+      // 위는 칩이 얹히는 쪽이라 더 주고, 아래는 축 이름표만 있어 덜 준다
+      var VTOP = 16, VBOT = 9;
+      function fit() {
+        var h = svg.getBoundingClientRect().height + VTOP + VBOT + 'px';
+        wins.forEach(function (w) { w.style.top = -VTOP + 'px'; w.style.height = h; });
+        // 양 끝에 반 칸씩 — 없으면 첫 항목과 마지막 둘이 창에 못 온다
+        var half = sc.clientWidth / 2 - PAD;
+        sc.style.paddingLeft = sc.style.paddingRight = Math.max(half, 0) + 'px';
+      }
+      function at(i) {
+        var k = svg.getBoundingClientRect().width / svg.getAttribute('width');
+        return (PAD + i * STEP) * k;
+      }
+      function edge() {
+        var max = sc.scrollWidth - sc.clientWidth;
+        if (max < 8) return box.setAttribute('data-edge', 'none');
+        box.setAttribute('data-edge',
+          sc.scrollLeft < 8 ? 'start' : sc.scrollLeft > max - 8 ? 'end' : 'mid');
+      }
+      function pick() {
+        var padL = parseFloat(sc.style.paddingLeft || 0);
+        var mid = sc.scrollLeft + sc.clientWidth / 2 - padL;
+        var best = -1, bd = Infinity;
+        items.forEach(function (it, i) {
+          if (!(it.problem || it.did || it.result)) return;
+          var d = Math.abs(at(i) - mid);
+          if (d < bd) { bd = d; best = i; }
+        });
+        if (best >= 0) show(best);
+        edge();
+      }
+      // 지금 창에 가장 가까운 항목. 펼칠 내용이 있는 것만 센다
+      function near() {
+        var padL = parseFloat(sc.style.paddingLeft || 0);
+        var mid = sc.scrollLeft + sc.clientWidth / 2 - padL;
+        var best = -1, bd = Infinity;
+        items.forEach(function (it, i) {
+          if (!(it.problem || it.did || it.result)) return;
+          var d = Math.abs(at(i) - mid);
+          if (d < bd) { bd = d; best = i; }
+        });
+        return best;
+      }
+      var snapBack, settling = false;
+      function go(i) {
+        var to = at(i) + parseFloat(sc.style.paddingLeft || 0) - sc.clientWidth / 2;
+        if (Math.abs(to - sc.scrollLeft) < 2) return;
+        show(i);
+        settling = true;
+        sc.scrollTo({ left: to, behavior: 'smooth' });
+        clearTimeout(snapBack);
+        snapBack = setTimeout(function () {
+          // 부드러운 스크롤은 프레임이 돌 때만 움직인다 — 안 닿았으면 그냥 옮긴다
+          if (Math.abs(sc.scrollLeft - to) > 2) sc.scrollLeft = to;
+          settling = false;
+          pick();
+        }, 700);
+      }
+      // 손을 뗀 뒤 가장 가까운 항목에 붙인다 — 축의 칸은 SVG 안이라 CSS 스냅이 안 먹는다
+      var rest;
+      function settle() {
+        clearTimeout(rest);
+        if (settling) return;
+        rest = setTimeout(function () {
+          if (settling) return;
+          var i = near();
+          if (i >= 0) go(i);
+        }, 130);
+      }
+
+      fit();
+      pick();
+      window.addEventListener('resize', function () { fit(); pick(); });
+      sc.addEventListener('scroll', function () { pick(); settle(); }, { passive: true });
+      gs.forEach(function (g) {
+        g.addEventListener('click', function () { go(+g.dataset.i); });
+        g.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(+g.dataset.i); }
+        });
+      });
+    })();
+  </script>
+)}

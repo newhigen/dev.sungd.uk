@@ -14,30 +14,28 @@ use:
   - "같은 주소는 새로 안 열고 있던 탭으로"
 ---
 
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import TabBar from '../../components/st/TabBar.astro';
 import Flow from '../../components/Flow.astro';
 import Cases from '../../components/Cases.astro';
 
-<p class="q">세션 열 개, 탭 28장, 누구 탭인지 모름.</p>
-
-세션이 여는 탭에 그 세션 이름을 붙여 크롬 탭 그룹으로. 지금 세션 그룹만 펴지고 나머지는 칩 하나로 접힘.
-
-<Hero label="세션을 옮길 때 브라우저에서 누르는 것" v="0번"
-  note="세션으로 넘어가면 그 그룹이 이미 펴져 있음"
-  tiles={[
-    { label: "같은 주소", v: "3장 → 1장", note: "한 그룹에 쌓였던 쿠폰함 페이지" },
-    { label: "펴져 있는 그룹", v: "1개", note: "나머지는 칩 · 살아 있는 그룹 최대 5개" },
+<Panel label="크롬 확장"
+  title={["세션 열 개에 탭 28장,", "누구 탭인지 몰랐다"]}
+  sub="세션이 여는 탭에 그 세션 이름을 붙여 크롬 탭 그룹으로 묶는다. 지금 세션 그룹만 펴지고 나머지는 칩 하나로 접힌다."
+  chips={[
+    { v: "0번", label: "세션을 옮길 때 브라우저에서 누르는 것" },
+    { v: "3장 → 1장", label: "같은 주소 — 한 그룹에 쌓였던 쿠폰함 페이지" },
+    { v: "1개", label: "펴져 있는 그룹 — 나머지는 칩, 살아 있는 그룹 최대 다섯" },
   ]}
-  basis="28장 · 3장은 session-tabs HISTORY 의 실측(2026-09-04 · 09-05). 사용 횟수 기록은 없음." />
+  basis="28장과 3장은 session-tabs HISTORY 의 실측(2026-09-04 · 09-05). 사용 횟수 기록은 없음.">
+  <TabBar caption="탭 제목과 점 색은 예시. 그룹 이름은 실제 저장소 이름." />
+</Panel>
 
 <Now year="2026" month="9월"
   line="손으로 연 탭과 한 창에 섞여 <b>보류</b>"
   sub="그룹째 닫기와 빠르게 이어 열기가 생기면 확장을 다시 붙여 이어감" />
-
-<TabBar wide caption="탭 제목과 점 색은 예시. 그룹 이름은 실제 저장소 이름." />
 
 <Next items={[
   { tab: "왜 만들었나", title: "탭 28장 속 다른 세션의 최신 탭", href: "/session-tabs/why" },

@@ -8,13 +8,14 @@ ended: 대시보드가 6월 1일 자료에서 멈춤 · 8월부터 손이 매일
 kind: Claude Code 스킬 · 대시보드
 tags: [Claude Code, Node.js, JD 분석]
 cover: "/p/career-radar/career-radar.png"
+headCover: false
 use:
   - "직군을 고르면 회사들이 공통으로 요구하는 것이 뜬다"
   - "회사 × 스택 매트릭스로 공통과 차이를 한 판에"
   - "공고에 직접 나온 것만 — 빈칸은 «미명시» 로 남긴다"
 ---
 
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import Flow from '../../components/Flow.astro';
@@ -23,19 +24,19 @@ import Grid from '../../components/cr/Grid.astro';
 import Synth from '../../components/cr/Synth.astro';
 import Common from '../../components/cr/Common.astro';
 
-<p class="q">공고를 열 개 모아 놓고도 무엇부터 할지 못 정함.</p>
-
-직군 하나를 여러 회사 공고로 겹쳐 본다. 절반 넘게 나온 기술이 위로 올라오고, 그게 준비 우선순위가 된다.
-
-<Grid wide caption="MLOps Engineer 직군 · 공고 8곳을 겹친 매트릭스. 칸 내용과 배지 숫자는 실제 집계 그대로고 회사 이름만 업종으로 바꿨다." />
-
-<Hero label="견주려고 여는 채용 페이지" v="0곳"
-  note="직군을 고르면 모아 둔 공고가 한 판으로 겹쳐짐"
-  tiles={[
-    { label: "직군", v: "1 → 7", note: "MLOps 하나로 시작해 TPgM 까지" },
-    { label: "첫 판까지", v: "하루", note: "2026년 5월 26일 · 스카폴드부터 스킬화까지 커밋 14개" },
+<Panel label="채용 도구"
+  title={["공고를 열 개 모아 놓고도", "무엇부터 할지 못 정했다"]}
+  sub="직군 하나를 여러 회사 공고로 겹쳐 본다. 절반 넘게 나온 기술이 위로 올라오고, 그게 준비 우선순위가 된다."
+  chips={[
+    { v: "0곳", label: "견주려고 여는 채용 페이지" },
+    { v: "1 → 7", label: "직군 — MLOps 하나로 시작해 TPgM 까지" },
+    { v: "하루", label: "첫 판까지 — 스카폴드부터 스킬화까지 커밋 14개" },
   ]}
+  src="/p/career-radar/career-radar.png"
+  alt="직군을 고르면 공통 스택이 뜨는 판"
   basis="직군 수는 저장소 roles.mjs 기준. 커밋 수는 저장소 기록. 채용 페이지를 연 횟수 실측은 없음." />
+
+<Grid wide caption="MLOps Engineer 직군 · 공고 8곳을 겹친 매트릭스. 회사 이름만 업종으로 바꿨다." />
 
 <Now year="2026" month="8월"
   line="손이 <b>매일 도는 채용 감시 보드</b>로 옮겨가 보류"

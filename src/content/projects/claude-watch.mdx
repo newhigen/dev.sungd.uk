@@ -13,30 +13,28 @@ use:
   - "5h · 7d 한도는 터미널 상태줄 한 줄로"
 ---
 
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import Rows from '../../components/cw/Rows.astro';
 import Marks from '../../components/cw/Marks.astro';
 import Flow from '../../components/Flow.astro';
 
-<p class="q">내 차례인 세션이 «완료» 줄에 섞여 있음.</p>
-
-세션마다 상태를 읽어 한 판에 모음. 내 차례가 맨 위, 무엇을 묻는지 한 줄. 카드를 누르면 그 세션 자리로.
-
-<Hero label="손볼 세션을 찾으려고 여는 창" v="0개"
-  note="한 판에 모이고 급한 것이 맨 위로"
-  tiles={[
-    { label: "세션 열기", v: "4.0초 → 0.34초", note: "부르는 쪽이 아는 이름을 그대로 받음 · 9월 5일" },
-    { label: "갱신 한 바퀴", v: "1258ms → 80ms", note: "안 쓰는 모듈 7개를 걷어냄 · 9월 4일" },
+<Panel label="개발 도구"
+  title={["내 차례인 세션이", "«완료» 줄에 섞여 있었다"]}
+  sub="세션마다 상태를 읽어 한 판에 모은다. 내 차례가 맨 위, 무엇을 묻는지 한 줄. 카드를 누르면 그 세션 자리로."
+  chips={[
+    { v: "0개", label: "손볼 세션을 찾으려고 여는 창" },
+    { v: "4.0초 → 0.34초", label: "세션 열기 — 부르는 쪽이 아는 이름을 그대로" },
+    { v: "1258ms → 80ms", label: "갱신 한 바퀴 — 안 쓰는 모듈 일곱을 걷고" },
   ]}
-  basis="두 숫자는 claude-watch HISTORY 실측(2026-09-04 · 09-05). 창을 들춘 횟수 실측은 없음." />
+  basis="두 숫자는 claude-watch HISTORY 실측(2026-09-04 · 09-05). 창을 들춘 횟수 실측은 없음.">
+  <Rows caption="접기 전 화면. 표식 · 색 · 정렬 · 총계 줄 · 상태줄 형식은 저장소 기준." />
+</Panel>
 
 <Now year="2026" month="9월"
   line="화면은 접고 <b>판(Deck) 뒤로</b>"
   sub="판에서 카드를 누를 때마다 이 명령이 세션을 엶 · 목록도 여기서 받아 감" />
-
-<Rows wide caption="접기 전 화면. 표식 · 색 · 정렬 · 총계 줄 · 상태줄 형식은 저장소 기준. 세션 이름은 실제 저장소 이름이고 묻는 말과 숫자는 예시." />
 
 <Next items={[
   { tab: "왜 만들었나", title: "«완료» 줄에 섞여 있던 내 차례", href: "/claude-watch/why" },

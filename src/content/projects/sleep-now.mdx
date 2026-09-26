@@ -19,22 +19,22 @@ use:
 ---
 
 import Fig from '../../components/Fig.astro';
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Next from '../../components/Next.astro';
 import Flow from '../../components/Flow.astro';
 import Strip from '../../components/Strip.astro';
 import Cases from '../../components/Cases.astro';
 
-<p class="q">20분 더 깨어 있으면, 기상도 20분 뒤로.</p>
-
-«지금 자면 몇 시 기상» 을 밤새 상태 표시줄 · 잠금화면에 표시, 누울 때 버튼 하나로 알람까지 설정.
-
-<Hero label="밤에 누르는 것" v="2번"
-  note="잠들 때 취침 · 아침 알람 해제. 나머지는 잠금화면이 표시"
-  tiles={[
-    { label: "잠금화면 값 갱신", v: "1분마다", note: "One UI 8 Now Bar" },
-    { label: "밤의 구간", v: "4개", note: "활동 시간 · 목표 전 · 목표 경과 · 취침 후" },
+<Panel label="안드로이드 앱"
+  title={["20분 더 깨어 있으면", "기상도 20분 뒤로 간다"]}
+  sub="「지금 자면 몇 시 기상」 을 밤새 상태 표시줄과 잠금화면에 띄운다. 누울 때 버튼 하나로 알람까지 맞춰진다."
+  chips={[
+    { v: "2번", label: "밤에 누르는 것 — 잠들 때 취침, 아침에 알람 해제" },
+    { v: "1분마다", label: "잠금화면 값 갱신 — One UI 8 Now Bar" },
+    { v: "4개", label: "밤의 구간 — 활동 시간, 목표 전, 목표 경과, 취침 후" },
   ]}
+  src="/p/sleep-now/app-light.png" srcDark="/p/sleep-now/app-dark.png"
+  alt="지금 자면 몇 시에 일어나는지 띄운 앱 화면"
   basis="앱 동작 기준 — 사용 기록 실측 아님." />
 
 <Fig src="/p/sleep-now/demo.mp4" video phone
