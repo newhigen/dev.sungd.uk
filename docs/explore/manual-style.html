@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설명서 판 — 집 손으로 맞추기</title>
+<style>
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight:700; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+:root {
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --ink:#221f2b; --ink-2:#3a3646; --ink-3:#6f6b85;
+  --paper:#fbfaff; --bg:#e6e3f0; --acc:#8a6a3c; --rule:rgba(34,31,43,.09);
+  /* 지금 설명서가 쓰는 값 — 견주려고 그대로 둔다 */
+  --old-bg:#EDEAE3; --old-card:#FBF9F5; --old-ink:#2B2926; --old-sec:#5A554F;
+  --old-mut:#8F887D; --old-acc:#A8834F; --old-num:#C9A87A; --old-rule:#E4DFD5;
+}
+* { box-sizing:border-box }
+body { margin:0; background:var(--bg); color:var(--ink-2); font-family:var(--body);
+  font-size:15px; line-height:1.62; word-break:keep-all }
+.wrap { max-width:1180px; margin:0 auto; padding:2.6rem 1.5rem 6rem }
+h1 { font-family:var(--title); font-weight:500; font-size:2rem; color:var(--ink); margin:0 0 .3rem }
+.lede p { margin:.2rem 0; color:var(--ink-3); font-size:.9rem }
+h2.sec { font-family:var(--title); font-weight:600; font-size:1.25rem; color:var(--ink); margin:3rem 0 .2rem }
+h2.sec .no { display:inline-block; min-width:2.4rem; font-size:.78rem; color:var(--acc) }
+.secn { margin:.1rem 0 1rem; color:var(--ink-3); font-size:.86rem }
+.pane { border-radius:14px; padding:0; overflow:hidden; border:1px solid var(--rule) }
+
+/* ── 설명서 첫 화면을 그대로 옮긴 판. 판마다 이 위에 색·글꼴·배치만 갈아 끼운다 ── */
+.m { padding:34px 30px 38px; font-size:14px; line-height:1.6 }
+.m h3 { margin:0 0 3px; font-size:29px; font-weight:700; letter-spacing:-.02em }
+.m .tag { margin:0 0 22px; font-size:15px }
+.m h4 { margin:34px 0 8px; font-size:17px; font-weight:700 }
+.m .hero { display:block; width:100%; border-radius:0 }
+.m .cap { margin:8px 0 0; font-size:13.5px }
+.m .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin:11px 0 0 }
+.m .step { border-radius:16px; padding:14px 14px 12px; border:1px solid }
+.m .step b { display:block; font-size:21px; margin-bottom:2px }
+.m .step span { display:block; font-weight:700 }
+.m .step i { font-style:normal; font-size:12.5px }
+.m .cases { display:grid; grid-template-columns:repeat(2,1fr); gap:11px; margin:11px 0 0 }
+.m .case { border-radius:16px; padding:14px 16px; border:1px solid }
+.m .case b { display:block; margin-bottom:2px }
+.m .case p { margin:0; font-size:13.5px }
+
+/* 지금 판 — 베이지, Pretendard(없으면 시스템 고딕), 왼쪽 55% */
+.m.old { background:var(--old-bg); color:var(--old-ink);
+  font-family:"Pretendard",-apple-system,system-ui,sans-serif }
+.m.old .tag { color:var(--old-mut) }
+.m.old .cap { color:var(--old-sec) }
+.m.old .hero, .m.old .steps, .m.old .cap { width:55.1% }
+.m.old .step, .m.old .case { background:var(--old-card); border-color:var(--old-rule) }
+.m.old .step b { color:var(--old-num) }
+.m.old .step i, .m.old .case p { color:var(--old-sec) }
+
+/* A · 글꼴과 색만 집 것으로 — 배치는 그대로 */
+.m.a { background:var(--bg); color:var(--ink); font-family:var(--body) }
+.m.a h3, .m.a h4 { font-family:var(--title); font-weight:600; letter-spacing:0 }
+.m.a .tag { color:var(--ink-3) }
+.m.a .cap { color:var(--ink-3) }
+.m.a .hero, .m.a .steps, .m.a .cap { width:55.1% }
+.m.a .step, .m.a .case { background:var(--paper); border-color:var(--rule) }
+.m.a .step b { color:var(--acc); font-family:var(--title) }
+.m.a .step i, .m.a .case p { color:var(--ink-2) }
+
+/* B · 첫 화면을 두 단으로 — 위젯 왼쪽, 처음 세 걸음 오른쪽 */
+.m.b { background:var(--bg); color:var(--ink); font-family:var(--body) }
+.m.b h3, .m.b h4 { font-family:var(--title); font-weight:600; letter-spacing:0 }
+.m.b .tag { color:var(--ink-3) }
+.m.b .cap { color:var(--ink-3) }
+.m.b .top { display:grid; grid-template-columns:55.1% 1fr; gap:0 26px; align-items:start }
+.m.b .top h4 { margin-top:0 }
+.m.b .steps { grid-template-columns:1fr; gap:9px }
+.m.b .step, .m.b .case { background:var(--paper); border-color:var(--rule) }
+.m.b .step b { color:var(--acc); font-family:var(--title) }
+.m.b .step i, .m.b .case p { color:var(--ink-2) }
+
+/* C · 판 위에 — 편 페이지처럼 본문이 흰 판에 얹힌다 */
+.m.c { background:var(--bg); padding:26px 22px 30px }
+.m.c .sheet { background:var(--paper); border-radius:18px; padding:30px 32px 34px; color:var(--ink);
+  font-family:var(--body) }
+.m.c h3, .m.c h4 { font-family:var(--title); font-weight:600; letter-spacing:0 }
+.m.c h3 { color:var(--ink) }
+.m.c h4 { color:var(--acc) }
+.m.c .tag, .m.c .cap { color:var(--ink-3) }
+.m.c .top { display:grid; grid-template-columns:55.1% 1fr; gap:0 26px; align-items:start }
+.m.c .top h4 { margin-top:0 }
+.m.c .steps { grid-template-columns:1fr; gap:9px }
+.m.c .step, .m.c .case { background:transparent; border-color:var(--rule) }
+.m.c .step b { color:var(--acc); font-family:var(--title) }
+.m.c .step i, .m.c .case p { color:var(--ink-2) }
+
+.foot { margin:3.4rem 0 0; font-size:.82rem; color:var(--ink-3) }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>설명서 판 — 집 손으로 맞추기</h1>
+<div class="lede">
+  <p>약수첩 설명서 첫 화면을 네 가지로 그렸다. 폰 화면에 인출선을 단 SVG 도식은 그대로 두고 껍데기만 바꾼다.</p>
+  <p>지금 판은 글꼴이 Pretendard, 바탕이 베이지라 편 페이지와 따로 논다. 첫 화면 오른쪽 45%가 비어 있는 것도 여기서 보인다.</p>
+</div>
+
+<h2 class="sec"><span class="no">지금</span>있는 그대로</h2>
+<p class="secn">Pretendard · 베이지 바탕 · 왼쪽 55.1%. 오른쪽이 통째로 빈다.</p>
+<div class="pane"><div class="m old">
+  <h3>약수첩</h3>
+  <p class="tag">먹고 바르고 넣는 약을 홈 화면에서 챙긴다</p>
+  <img class="hero" src="img/pillbox/widget.png" alt="홈 화면 위젯">
+  <p class="cap">홈 화면 위젯. 윗줄이 지금 구간의 약, 아랫줄이 나머지 셋 — 다 챙겼으면 체크, 남았으면 개수.</p>
+  <h4>처음 세 걸음</h4>
+  <div class="steps">
+    <div class="step"><b>1</b><span>약을 넣는다</span><i>약 목록에서 이름 · 모양 · 색 · 언제</i></div>
+    <div class="step"><b>2</b><span>위젯을 올린다</span><i>홈 화면에 2칸짜리</i></div>
+    <div class="step"><b>3</b><span>먹고 누른다</span><i>앱에서 체크, 인공눈물은 띠에서</i></div>
+  </div>
+  <h4>이럴 때 이렇게</h4>
+  <div class="cases">
+    <div class="case"><b>아침에 먹고</b><p>앱을 열어 아침 카드의 줄을 눌러요. 영양제 넷은 한 번에.</p></div>
+    <div class="case"><b>깜빡했을 때</b><p>구간 시각에 알림이 하나. 남은 것 이름만 적혀 있어요.</p></div>
+  </div>
+</div></div>
+
+<h2 class="sec"><span class="no">A</span>글꼴과 색만 집 것으로</h2>
+<p class="secn">Paperlogy · SUITE · 집 바탕과 황토. 배치는 손대지 않는다 — 가장 적게 고치는 길.</p>
+<div class="pane"><div class="m a">
+  <h3>약수첩</h3>
+  <p class="tag">먹고 바르고 넣는 약을 홈 화면에서 챙긴다</p>
+  <img class="hero" src="img/pillbox/widget.png" alt="홈 화면 위젯">
+  <p class="cap">홈 화면 위젯. 윗줄이 지금 구간의 약, 아랫줄이 나머지 셋 — 다 챙겼으면 체크, 남았으면 개수.</p>
+  <h4>처음 세 걸음</h4>
+  <div class="steps">
+    <div class="step"><b>1</b><span>약을 넣는다</span><i>약 목록에서 이름 · 모양 · 색 · 언제</i></div>
+    <div class="step"><b>2</b><span>위젯을 올린다</span><i>홈 화면에 2칸짜리</i></div>
+    <div class="step"><b>3</b><span>먹고 누른다</span><i>앱에서 체크, 인공눈물은 띠에서</i></div>
+  </div>
+  <h4>이럴 때 이렇게</h4>
+  <div class="cases">
+    <div class="case"><b>아침에 먹고</b><p>앱을 열어 아침 카드의 줄을 눌러요. 영양제 넷은 한 번에.</p></div>
+    <div class="case"><b>깜빡했을 때</b><p>구간 시각에 알림이 하나. 남은 것 이름만 적혀 있어요.</p></div>
+  </div>
+</div></div>
+
+<h2 class="sec"><span class="no">B</span>첫 화면을 두 단으로</h2>
+<p class="secn">A 에 배치를 더한다. 빈 오른쪽에 「처음 세 걸음」이 세로로 선다 — 첫 화면에 시작하는 법까지 들어온다.</p>
+<div class="pane"><div class="m b">
+  <h3>약수첩</h3>
+  <p class="tag">먹고 바르고 넣는 약을 홈 화면에서 챙긴다</p>
+  <div class="top">
+    <div>
+      <img class="hero" src="img/pillbox/widget.png" alt="홈 화면 위젯">
+      <p class="cap">홈 화면 위젯. 윗줄이 지금 구간의 약, 아랫줄이 나머지 셋 — 다 챙겼으면 체크, 남았으면 개수.</p>
+    </div>
+    <div>
+      <h4>처음 세 걸음</h4>
+      <div class="steps">
+        <div class="step"><b>1</b><span>약을 넣는다</span><i>약 목록에서 이름 · 모양 · 색 · 언제</i></div>
+        <div class="step"><b>2</b><span>위젯을 올린다</span><i>홈 화면에 2칸짜리</i></div>
+        <div class="step"><b>3</b><span>먹고 누른다</span><i>앱에서 체크, 인공눈물은 띠에서</i></div>
+      </div>
+    </div>
+  </div>
+  <h4>이럴 때 이렇게</h4>
+  <div class="cases">
+    <div class="case"><b>아침에 먹고</b><p>앱을 열어 아침 카드의 줄을 눌러요. 영양제 넷은 한 번에.</p></div>
+    <div class="case"><b>깜빡했을 때</b><p>구간 시각에 알림이 하나. 남은 것 이름만 적혀 있어요.</p></div>
+  </div>
+</div></div>
+
+<h2 class="sec"><span class="no">C</span>판 위에 얹는다</h2>
+<p class="secn">B 에 더해 본문이 흰 판에 앉는다 — 편 페이지와 같은 짜임. 절 제목은 황토.</p>
+<div class="pane"><div class="m c"><div class="sheet">
+  <h3>약수첩</h3>
+  <p class="tag">먹고 바르고 넣는 약을 홈 화면에서 챙긴다</p>
+  <div class="top">
+    <div>
+      <img class="hero" src="img/pillbox/widget.png" alt="홈 화면 위젯">
+      <p class="cap">홈 화면 위젯. 윗줄이 지금 구간의 약, 아랫줄이 나머지 셋 — 다 챙겼으면 체크, 남았으면 개수.</p>
+    </div>
+    <div>
+      <h4>처음 세 걸음</h4>
+      <div class="steps">
+        <div class="step"><b>1</b><span>약을 넣는다</span><i>약 목록에서 이름 · 모양 · 색 · 언제</i></div>
+        <div class="step"><b>2</b><span>위젯을 올린다</span><i>홈 화면에 2칸짜리</i></div>
+        <div class="step"><b>3</b><span>먹고 누른다</span><i>앱에서 체크, 인공눈물은 띠에서</i></div>
+      </div>
+    </div>
+  </div>
+  <h4>이럴 때 이렇게</h4>
+  <div class="cases">
+    <div class="case"><b>아침에 먹고</b><p>앱을 열어 아침 카드의 줄을 눌러요. 영양제 넷은 한 번에.</p></div>
+    <div class="case"><b>깜빡했을 때</b><p>구간 시각에 알림이 하나. 남은 것 이름만 적혀 있어요.</p></div>
+  </div>
+</div></div></div>
+
+<p class="foot">SVG 인출선 도식(폰 화면 + 콜아웃)은 어느 판에서도 그대로 둔다. 글자 색만 판을 따라간다.</p>
+
+</div>
+</body>
+</html>
