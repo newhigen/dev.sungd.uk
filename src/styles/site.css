@@ -1251,6 +1251,7 @@ a.prow:hover .rn { color: var(--link); }
 /* 편 맨 위. 왼쪽은 말, 오른쪽은 진짜 화면 — 기기 틀은 그리지 않는다.
    원티드 챔피언십 인기 상위 판에서 가져온 꼴(docs/explore/backtrack-format.html D). */
 .pnl {
+  max-width: var(--measure);
   margin: 1.6rem 0 2.4rem;
   padding: 2rem 2.2rem 2.2rem;
   border-radius: 16px;
@@ -1303,7 +1304,9 @@ a.prow:hover .rn { color: var(--link); }
 /* ── 번호를 얹은 화면 ─────────────────────────────── */
 
 /* 캡션 한 줄은 어디를 볼지 알려 주지 못한다. 번호가 읽는 순서를 정한다. */
-.mrk { margin: 1.6rem 0 2.2rem; }
+.mrk { max-width: var(--measure); margin: 1.6rem 0 2.2rem; }
+.doc-body .prose > figure.pnl,
+.doc-body .prose > figure.mrk { margin-left: 0; margin-right: 0; }
 .mrk-fig { position: relative; padding: 0 21%; }
 .mrk-shot { position: relative; overflow: hidden; border-radius: 12px; box-shadow: var(--shadow); }
 .mrk-shot img { display: block; width: 100%; }

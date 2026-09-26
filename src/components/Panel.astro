@@ -10,11 +10,13 @@ interface Props {
   chips?: { v: string; label: string }[];
   /** 오른쪽 화면. 그림 한 장이면 src, 컴포넌트로 그린 화면이면 자식으로 넣는다 */
   src?: string;
+  /** 밤 판에서 갈아 끼울 그림 — Fig 와 같은 관례 */
+  srcDark?: string;
   alt?: string;
   /** 숫자의 출처. 실측이 아니면 아니라고 적는다 */
   basis?: string;
 }
-const { label, title, sub, chips = [], src, alt, basis } = Astro.props;
+const { label, title, sub, chips = [], src, srcDark, alt, basis } = Astro.props;
 const lines = Array.isArray(title) ? title : [title];
 ---
 
@@ -31,7 +33,14 @@ const lines = Array.isArray(title) ? title : [title];
       )}
     </div>
     <div class="pnl-shot">
-      {src ? <img src={src} alt={alt ?? ''} /> : <slot />}
+      {src
+        ? (srcDark
+            ? <picture>
+                <source srcset={srcDark} media="(prefers-color-scheme: dark)" />
+                <img src={src} alt={alt ?? ''} />
+              </picture>
+            : <img src={src} alt={alt ?? ''} />)
+        : <slot />}
     </div>
   </div>
   {basis && <figcaption class="pnl-b">{basis}</figcaption>}

@@ -18,28 +18,26 @@ use:
   - "근무 중 사용량 윈도우 3개가 차례로 개방"
 ---
 
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import Chain from '../../components/Chain.astro';
 import Versus from '../../components/Versus.astro';
 import Fig from '../../components/Fig.astro';
 
-<p class="q">9시간 근무, 5시간 윈도우는 2개뿐.</p>
-
-Claude 의 5시간 윈도우는 첫 메시지 시각에 시작. 출근 전 자동 메시지로 근무 중 윈도우 3개 확보.
-
-<Fig src="/p/claude-warmup/quota-windows.png" wide
-  alt="왼쪽은 미리 안 깨웠을 때 근무 시간에 윈도우가 두 개만 걸리는 두 시나리오, 오른쪽은 출근 −3:01 · +2:00 · +7:01 세 번 깨워 출근 시각 다섯 경우 모두 윈도우 세 개가 걸리는 판"
-  caption="윈도우를 시간축에 늘어놓고 근무 시간을 겹쳐 본 판. 왼쪽 빗금이 못 쓰고 버리는 몫." />
-
-<Hero label="하루에 받는 한도" v="최대 1.5배"
-  note="근무 중 윈도우 2개 → 3개. 한도를 매번 다 쓰는 날 기준"
-  tiles={[
-    { label: "야근한 날 세 번째 윈도우", v: "20% → ≈100%", note: "19시 퇴근" },
-    { label: "드는 것", v: "하루 3통", note: "가장 작은 모델 · 한 단어 · 세션 미저장" },
+<Panel label="개발 도구"
+  title={["9시간을 일하는데", "5시간 윈도우는 두 개뿐이었다"]}
+  sub="Claude 의 5시간 윈도우는 첫 메시지 시각에 시작한다. 출근 전 자동 메시지로 근무 중 윈도우 셋을 확보한다."
+  chips={[
+    { v: "최대 1.5배", label: "하루에 받는 한도 — 근무 중 윈도우 2개에서 3개로" },
+    { v: "20% → ≈100%", label: "야근한 날 세 번째 윈도우 — 19시 퇴근" },
+    { v: "하루 3통", label: "드는 것 — 가장 작은 모델 · 한 단어 · 세션 미저장" },
   ]}
+  src="/p/claude-warmup/quota-windows.png"
+  alt="근무 시간과 5시간 윈도우"
   basis="계산값 — 7시 출근 · 16시 퇴근 기준 윈도우 계산. 토큰 사용량 실측 아님." />
+
+윈도우를 시간축에 늘어놓고 근무 시간을 겹쳐 본 판. 왼쪽 빗금이 못 쓰고 버리는 몫.
 
 <Now year="2026" month="6월"
   line="Claude Code 에 <b>/schedule</b> 이 들어와 종료"

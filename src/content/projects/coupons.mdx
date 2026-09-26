@@ -17,25 +17,24 @@ use:
 ---
 
 import Fig from '../../components/Fig.astro';
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
 import Next from '../../components/Next.astro';
 import Story from '../../components/Story.astro';
 import Strip from '../../components/Strip.astro';
 import Cases from '../../components/Cases.astro';
 
-<p class="q">지나가면 0번, 가게 앞 3분이면 1번.</p>
+<Panel label="생활 앱"
+  title={["지나가면 0번,", "가게 앞 3분이면 1번"]}
+  sub="흩어진 쿠폰을 기한 순으로 한곳에 모으고, 쓸 수 있는 가게 앞에 머물 때만 알린다."
+  chips={[
+    { v: "3분", label: "가게 앞 알림 조건 — 반경 150m 안에 머문 시간" },
+    { v: "0", label: "문자 권한 · 계정 · 서버 — 쿠폰은 폰 밖으로 안 나간다" },
+    { v: "34개", label: "미리 넣은 브랜드 로고 — 없는 곳은 업종 아이콘" },
+  ]}
+  src="/p/coupons/list.png" srcDark="/p/coupons/list-dark.png"
+  alt="기한이 가까운 것부터 선 쿠폰 목록" />
 
-흩어진 쿠폰을 기한 순으로 한곳에 모으고, 쓸 수 있는 가게 앞에 머물 때만 알림.
-
-<Hero label="가게 앞 알림 조건" v="3분"
-  note="가게 반경 150m 안에 3분 넘게 머물 때만. 지하철 · 버스로 지나가는 길엔 미발송"
-  tiles={[
-    { label: "문자 권한 · 계정 · 서버", v: "0", note: "쿠폰은 폰 밖으로 안 나감" },
-    { label: "미리 넣은 브랜드 로고", v: "34개", note: "없는 곳은 업종 아이콘" },
-  ]} />
-
-<Fig src="/p/coupons/list.png" srcDark="/p/coupons/list-dark.png" phone
-  caption="기한이 가까운 것부터. 로고로 가게 먼저, 남은 날은 「모레까지」 처럼 말로." />
+기한이 가까운 것부터. 로고로 가게 먼저, 남은 날은 「모레까지」 처럼 말로.
 
 <Next items={[
   { tab: "개발기", title: "문자 권한을 걷어낸 날", href: "/coupons/making" },
