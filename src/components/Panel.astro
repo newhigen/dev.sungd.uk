@@ -1,0 +1,32 @@
+---
+interface Props {
+  /** 편 맨 위 반반 판 — 왼쪽은 말, 오른쪽은 진짜 화면.
+   *  브라우저 주소창 같은 기기 틀은 그리지 않는다. 둥근 모서리와 그림자만. */
+  label?: string;
+  /** 굵은 제목. 줄을 나누고 싶으면 배열로 준다 — 명사구가 아니라 문장이다 */
+  title: string | string[];
+  sub?: string;
+  /** 왼쪽에 세로로 서는 숫자 칩 */
+  chips?: { v: string; label: string }[];
+  src: string;
+  alt?: string;
+}
+const { label, title, sub, chips = [], src, alt } = Astro.props;
+const lines = Array.isArray(title) ? title : [title];
+---
+
+<figure class="pnl">
+  <div class="pnl-2">
+    <div class="pnl-say">
+      {label && <p class="pnl-l">{label}</p>}
+      <h3>{lines.map((l, i) => <>{i > 0 && <br />}{l}</>)}</h3>
+      {sub && <p class="pnl-s">{sub}</p>}
+      {chips.length > 0 && (
+        <div class="pnl-chips">
+          {chips.map(c => <span><b>{c.v}</b>{c.label}</span>)}
+        </div>
+      )}
+    </div>
+    <div class="pnl-shot"><img src={src} alt={alt ?? ''} /></div>
+  </div>
+</figure>

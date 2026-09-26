@@ -1246,6 +1246,106 @@ a.prow:hover .rn { color: var(--link); }
 }
 .reel .cap { margin-top: 0.2rem; font-size: 0.8125rem; color: var(--ink-3); }
 
+/* ── 반반 판 ──────────────────────────────────────── */
+
+/* 편 맨 위. 왼쪽은 말, 오른쪽은 진짜 화면 — 기기 틀은 그리지 않는다.
+   원티드 챔피언십 인기 상위 판에서 가져온 꼴(docs/explore/backtrack-format.html D). */
+.pnl {
+  margin: 1.6rem 0 2.4rem;
+  padding: 2rem 2.2rem 2.2rem;
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--bg) 62%, var(--card));
+}
+.pnl-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+  gap: 2.2rem;
+  align-items: center;
+}
+.pnl-l {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.pnl h3 {
+  margin: 0 0 0.5rem;
+  font-family: var(--title);
+  font-size: 1.45rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.pnl-s { margin: 0; font-size: 0.92rem; line-height: 1.6; color: var(--ink-2); }
+.pnl-chips { display: flex; flex-direction: column; gap: 0.45rem; margin-top: 1.4rem; }
+.pnl-chips span {
+  display: flex;
+  flex-direction: column;
+  padding: 0.55rem 0.8rem;
+  border-radius: 10px;
+  background: var(--card);
+  font-size: 0.74rem;
+  color: var(--ink-3);
+}
+.pnl-chips b {
+  font-family: var(--title);
+  font-weight: 600;
+  font-size: 1.02rem;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.pnl-shot img { display: block; width: 100%; border-radius: 12px; box-shadow: var(--shadow); }
+
+/* ── 번호를 얹은 화면 ─────────────────────────────── */
+
+/* 캡션 한 줄은 어디를 볼지 알려 주지 못한다. 번호가 읽는 순서를 정한다. */
+.mrk { margin: 1.6rem 0 2.2rem; }
+.mrk-fig { position: relative; padding: 0 21%; }
+.mrk-shot { position: relative; overflow: hidden; border-radius: 12px; box-shadow: var(--shadow); }
+.mrk-shot img { display: block; width: 100%; }
+.mrk-note {
+  position: absolute;
+  display: flex;
+  gap: 0.45rem;
+  width: 19%;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+.mrk-note.left { left: 0; }
+.mrk-note.right { right: 0; }
+.mrk-note i {
+  flex: 0 0 auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--card);
+  font-style: normal;
+  font-size: 0.8rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  text-align: center;
+}
+/* 좁은 화면에서는 옆이 아니라 아래로 — 번호는 목록이 이어받는다 */
+.mrk-list { display: none; }
+
+@media (max-width: 860px) {
+  .pnl-2 { grid-template-columns: 1fr; gap: 1.4rem; }
+  .pnl-2 .pnl-shot { order: -1; }
+  .mrk-fig { padding: 0; }
+  .mrk-note { display: none; }
+  .mrk-list {
+    display: block;
+    margin: 0.9rem 0 0;
+    padding-left: 1.3rem;
+    font-size: 0.86rem;
+    color: var(--ink-2);
+  }
+  .mrk-list li { margin: 0.3rem 0; }
+}
+
 /* ── 잡아 끌어 미는 줄 ───────────────────────────── */
 
 /* 마우스에만 해당한다 — 트랙패드는 두 손가락, 마우스는 휠 + Shift 도 그대로 */
