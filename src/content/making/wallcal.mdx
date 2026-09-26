@@ -4,7 +4,7 @@ tagline: 달 격자를 네 주 창으로 바꾸고, 일정을 무게 넷으로 �
 
 import Fig from '../../components/Fig.astro';
 import Nums from '../../components/Nums.astro';
-import Evo from '../../components/Evo.astro';
+import Timeline from '../../components/Timeline.astro';
 import Shots from '../../components/Shots.astro';
 import Cases from '../../components/Cases.astro';
 
@@ -26,12 +26,12 @@ import Cases from '../../components/Cases.astro';
 옛 위젯은 캡처가 없음. 아래 그림은 **그때 배치를 같은 위젯 크기로 다시 그린 것**(`tools/gen_evo.py`) —
 바뀐 건 크기가 아니라 배치와 무게라서 크기를 하나로 고정. 마지막 판만 실제 캡처.
 
-<Evo items={[
-  { at: "8월 30일", title: "한 달 격자 → 다섯 주 창", w: 240, img: "/p/wallcal/evo-2.png",
+<Timeline items={[
+  { at: "8월 30일", title: "한 달 격자 → 다섯 주 창", w: 240, img: "/p/wallcal/evo-2.png", iw: 600, ih: 549,
     problem: "달 격자는 월말에 다음 주가 안 보임",
     did: "이전주 하나 + 이번주 + 다음 세 주로 창을 바꾸고 앞뒤 이동 추가",
     result: "달이 바뀌어도 창이 그대로 흐름. 앞뒤는 한 주씩이 아니라 <b>창째로</b>" },
-  { at: "8월 30일", title: "다섯 주 → 네 주", w: 240, img: "/p/wallcal/evo-3.png",
+  { at: "8월 30일", title: "다섯 주 → 네 주", w: 240, img: "/p/wallcal/evo-3.png", iw: 600, ih: 549,
     problem: "지난주는 거의 안 봄. 그만큼 줄이 낮아 일정이 한 줄씩 덜 들어감",
     did: "이전주를 걷고 네 주로",
     result: "줄이 높아져 하루에 보이는 일정 줄 수 증가" },
@@ -39,16 +39,16 @@ import Cases from '../../components/Cases.astro';
     problem: "막대를 옅게 깔았더니 밝은 판에서 글씨가 안 보임",
     did: "막대 위에 깔릴 색을 실제로 합성해 4.5:1(WCAG)을 넘기는 쪽을 선택",
     result: "진하기를 어디에 두든 글자가 읽힘. 설정 하나가 화면을 깨뜨리지 않음" },
-  { at: "9월 1일", title: "맨 아랫줄을 디데이 셋으로", w: 240, img: "/p/wallcal/evo-4.png",
+  { at: "9월 1일", title: "맨 아랫줄을 디데이 셋으로", w: 240, img: "/p/wallcal/evo-4.png", iw: 600, ih: 549,
     problem: "«다음 일정» 한 줄이 위젯 폭을 다 쓰고도 빈자리가 많음",
     did: "앱에서 <b>별을 눌러 고른</b> 일정 셋을 «며칠 남았는지» 로",
     result: "안 고르면 줄이 없어져 그만큼 격자가 높아짐",
     next: "처음부터 «이 줄이 무엇에 답하나» 를 정했으면 네 번 갈아엎지 않았음" },
-  { at: "9월 2일", title: "오른쪽에 그날 시간 축", w: 240, img: "/p/wallcal/evo-5.png",
+  { at: "9월 2일", title: "오른쪽에 그날 시간 축", w: 240, img: "/p/wallcal/evo-5.png", iw: 600, ih: 549,
     problem: "날짜를 누르면 달력 앱이 열림. 홈 화면에서 하려던 건 «그날이 어떻게 생겼나» 보기",
     did: "격자 오른쪽에 그날을 시간 축으로 펴는 판 추가",
     result: "격자는 <b>고르는 곳</b>, 일정은 오른쪽에서 열기 — 한 칸에서 두 동작이 안 섞임" },
-  { at: "9월 3일", title: "판을 두 장으로", w: 240, img: "/p/wallcal/evo-6.png",
+  { at: "9월 3일", title: "판을 두 장으로", w: 240, img: "/p/wallcal/evo-6.png", iw: 600, ih: 549,
     problem: "한 장에 다 얹으니 그날 칸이 달력의 한 부분처럼 읽힘",
     did: "달력 한 장, 그날 칸 한 장. 사이로 벽지가 지나가게",
     result: "둘이 다른 것임이 모양으로 보임. 그날 칸이 위젯 높이를 그대로 써서 시간 축도 길어짐" },
@@ -56,12 +56,13 @@ import Cases from '../../components/Cases.astro';
     problem: "추석이 회의·약속과 같은 무게로 칠해짐. 하는 일이 아니라 아는 일인데",
     did: "첫날에 이름, 그 뒤를 선이 이음",
     result: "면을 걷으면서도 <b>연휴 길이는 선이 유지</b> — 글자만 두면 어디까지인지 사라짐" },
-  { at: "9월 4일", title: "무게 넷으로 정리", w: 240, img: "/p/wallcal/widget.png",
+  { at: "9월 4일", title: "무게 넷으로 정리", w: 240, img: "/p/wallcal/widget.png", iw: 1200, ih: 1112,
     problem: "「휴가」 와 「9시 회의」 가 똑같이 생겨 눌러야 구분",
     did: "종일은 면, 시각 있는 것은 앞에 점, 날짜 자체가 뜻인 것은 가로선, 기억용은 회색 글자",
     result: "네 가지가 서로 다른 자리 차지. 별을 단 마감도 «날짜가 뜻» 이라 가로선으로 합침",
     next: "들여쓰기 → 왼쪽 세로선 → 점으로 하루에 세 번 교체. 옆 칸이 비면 자리 차이가 안 보인다는 걸 먼저 그려 봤어야" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 의사결정 방식 — 여덟 안을 그려 놓고 선택
 

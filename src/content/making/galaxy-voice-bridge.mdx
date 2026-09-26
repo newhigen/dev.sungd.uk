@@ -3,7 +3,7 @@ tagline: 삼성 녹음기 자동화에서 전용 앱으로, 그리고 녹음 캡
 ---
 
 import Track from '../../components/Track.astro';
-import Evo from '../../components/Evo.astro';
+import Timeline from '../../components/Timeline.astro';
 import Shots from '../../components/Shots.astro';
 
 <p class="q">닷새 동안 PR 34개, 그중 18개가 녹음 캡슐.</p>
@@ -27,7 +27,7 @@ import Shots from '../../components/Shots.astro';
 
 ## 개발 과정
 
-<Evo items={[
+<Timeline items={[
   { at: "9월 6일", title: "삼성 녹음기 대신 전용 앱",
     problem: "삼성 음성 녹음기의 녹음 시작 Intent(START_RECORDING)는 signature|privileged 권한 — 남의 앱에서 못 부름. 화면 자동화는 되지만 저장 대화상자에 의존",
     did: "전용 안드로이드 앱이 마이크 PCM 을 녹음 중 Mac 으로 전송. 갤럭시 · Mac 양쪽에 WAV 백업. 첫 연결은 ADB reverse 로만",
@@ -60,7 +60,8 @@ import Shots from '../../components/Shots.astro';
     problem: "두 번째 Mac 준비가 손작업. 같은 Wi-Fi 에 두 대면 어느 쪽에 붙었는지 모름",
     did: "setup_mac.sh 한 명령(Handy 없으면 whisper.cpp · q5 모델 자동). Mac 이 발견 응답에 컴퓨터 이름을 실어 보냄",
     result: "갤럭시 화면에 연결된 Mac 과 발견한 Mac 목록. 갤럭시 앱은 다시 설치할 필요 없음" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 의사결정 방식
 

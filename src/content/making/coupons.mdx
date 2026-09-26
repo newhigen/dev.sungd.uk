@@ -4,7 +4,7 @@ tagline: 문자 감지 제거부터 카드 글자 제거까지
 
 import Nums from '../../components/Nums.astro';
 import Versus from '../../components/Versus.astro';
-import Evo from '../../components/Evo.astro';
+import Timeline from '../../components/Timeline.astro';
 import Shots from '../../components/Shots.astro';
 import Cases from '../../components/Cases.astro';
 
@@ -26,7 +26,7 @@ import Cases from '../../components/Cases.astro';
 
 ## 개발 과정
 
-<Evo items={[
+<Timeline items={[
   { at: "9월 4일", title: "문자에서 찾기 → 걷어냄",
     problem: "쿠폰은 문자로 옴. 문자를 읽어 자동으로 잡고 받은 편지함도 훑음",
     did: "은행 앱이 문자 권한을 문제 삼아 <b>권한과 코드를 통째로 삭제</b>",
@@ -36,11 +36,11 @@ import Cases from '../../components/Cases.astro';
     problem: "가게 반경에 들어오면 알리게 했더니 지하철 · 버스로 지나가기만 해도 울림",
     did: "머무름(DWELL)으로 바꿔 <b>3분 넘게 있을 때만</b>, 집 · 회사 둘레 제외",
     result: "출퇴근길 무알림. 카카오 로컬 업종 이름으로 가짜 매장도 거름 — 「트레이더스」 검색에 「트레이더스FX PC카페」 가 딸려 옴" },
-  { at: "9월 5일", title: "목록 카드 다섯 안", img: "/p/coupons/shot-cards.png", w: 260,
+  { at: "9월 5일", title: "목록 카드 다섯 안", img: "/p/coupons/shot-cards.png", iw: 520, ih: 334, w: 260,
     problem: "카드가 글자 넉 줄이라 어느 쿠폰인지 훑어서 안 보임",
     did: "실제 크기(360dp)로 다섯 안을 그려 놓고 선택",
     result: "남은 날을 <b>「모레까지」</b> 처럼 말로. 뜻 없던 「번호 있음」 제거" },
-  { at: "9월 5일", title: "브랜드 색 → 공식 로고", img: "/p/coupons/shot-logo.png", w: 260,
+  { at: "9월 5일", title: "브랜드 색 → 공식 로고", img: "/p/coupons/shot-logo.png", iw: 520, ih: 334, w: 260,
     problem: "브랜드를 색 동그라미로 세웠더니 색만으로는 어느 가게인지 안 붙음",
     did: "기프티콘 브랜드 수가 한정적이라 <b>로고를 미리 넣어 두기로</b>, 왼쪽 색 띠 제거",
     result: "48dp 자리에 로고만. 없는 곳은 업종 아이콘" },
@@ -52,7 +52,8 @@ import Cases from '../../components/Cases.astro';
     problem: "「원본 보기」 로 다른 화면에 넘어가야 그림이 보임",
     did: "계산대 화면 바코드 아래에 <b>그림이면 그림, 문자면 문자</b> 그대로",
     result: "「이거 그 쿠폰 맞나」 를 한 화면에서 확인. 문자는 글자를 짚어 복사 가능" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 의사결정 방식
 

@@ -3,7 +3,7 @@ tagline: 첫 11시간에 탭 그룹을 세우고, 나머지 PR 절반 이상은 
 ---
 
 import Track from '../../components/Track.astro';
-import Evo from '../../components/Evo.astro';
+import Timeline from '../../components/Timeline.astro';
 
 <p class="q">56시간 동안 PR 80개, 탭 정리는 첫 11시간의 28개.</p>
 
@@ -23,7 +23,7 @@ import Evo from '../../components/Evo.astro';
 
 ## 개발 과정
 
-<Evo items={[
+<Timeline items={[
   { at: "9월 4일", title: "창 대신 탭 그룹",
     problem: "세션 = 크롬 창으로 잡으면 창 전환 목록이 열 개로 무너짐",
     did: "창은 하나, 세션은 탭 그룹. 무대 · 창고 두 창 사이로 탭을 옮기는 안은 버림 — 탭 이동은 렌더러를 뗐다 붙이는 일",
@@ -60,7 +60,8 @@ import Evo from '../../components/Evo.astro';
     problem: "같이 쓰는 Codex 세션이 연 탭은 아무 데도 안 묶임",
     did: "훅 입력 스키마가 Claude Code 와 같음 → 훅 파일을 한 줄도 안 고치고 Codex 훅에 걺",
     result: "PR #79" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 옆으로 자란 것
 
