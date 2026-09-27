@@ -101,7 +101,8 @@ a { color: inherit; }
 .wrap {
   max-width: var(--page);
   margin: 0 auto;
-  padding: 2.25rem var(--gut) 6rem;
+  /* 아래는 바닥 줄 다음의 숨 자리라 위 여백만큼이면 된다 — 6rem 은 아래만 유독 넓었다 */
+  padding: 2.25rem var(--gut) 2.5rem;
 }
 
 /* ── 제호 ─────────────────────────────────────────── */
