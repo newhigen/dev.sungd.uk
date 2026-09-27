@@ -63,9 +63,9 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     <div class="wrap">
       <header class="masthead" transition:persist>
         <a class="site" href="/">프로젝트</a>
+        {/* 제호 줄은 이 사이트 안 이동만 맡는다 — 바깥으로 나가는 길은 바닥에 모았다 */}
         <nav>
           <a href="/notes/">노트</a>
-          <a href="https://sungd.uk">sungd.uk</a>
         </nav>
       </header>
 
