@@ -1,4 +1,5 @@
 ---
+import Stack from '../components/Stack.astro';
 import { getCollection, getEntry, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Badge from '../components/Badge.astro';
@@ -41,7 +42,7 @@ if (d.shots.length > 0) toc.push({ slug: 'shots', text: '이전 버전' });
         <dt>갈래</dt>
         <dd>{d.purpose}</dd>
         {d.ended && <><dt>{d.status}</dt><dd class="ended">{d.ended}</dd></>}
-        {d.tags.length > 0 && <><dt>스택</dt><dd>{d.tags.join(' · ')}</dd></>}
+        {d.tags.length > 0 && <><dt>스택</dt><dd><Stack items={d.tags} color /></dd></>}
         {(d.github || d.link) && (
           <>
             <dt>링크</dt>

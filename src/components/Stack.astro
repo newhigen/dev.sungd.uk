@@ -24,7 +24,9 @@ const LOGO: Record<string, { d: string; hex: string }> = {
 
 <div class:list={['stk', { color }]}>
   {items.map(name => {
-    const l = LOGO[name];
+    // 「Claude Code 훅」처럼 뒤에 말이 붙은 이름도 같은 로고를 받는다
+    const key = Object.keys(LOGO).find(k => name === k || name.startsWith(k + ' '));
+    const l = key ? LOGO[key] : undefined;
     return (
       <span>
         {logo && l && (
