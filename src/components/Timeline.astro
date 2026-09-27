@@ -241,6 +241,10 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
       window.addEventListener('resize', function () { fit(); pick(); });
       sc.addEventListener('scroll', function () { pick(); settle(); }, { passive: true });
       gs.forEach(function (g) {
+        // 마우스로 누를 땐 초점을 잡지 않는다. 초점이 남아 있으면 Shift 를 누르는 순간
+        // 브라우저가 그것을 키보드 초점으로 쳐서, 아까 누른 항목에 테두리가 되살아난다
+        // (Shift+휠로 축을 밀 때마다 「처음 본 것」에 테두리가 생겼다). Tab 초점은 그대로다
+        g.addEventListener('mousedown', function (e) { e.preventDefault(); });
         g.addEventListener('click', function () { go(+g.dataset.i); });
         g.addEventListener('keydown', function (e) {
           if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); go(+g.dataset.i); }

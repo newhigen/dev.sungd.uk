@@ -125,20 +125,25 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
       // 손을 뗀 뒤 눌린 것으로 오인되는 건 위 8px 가드가 막는다.
       (function () {
         var SEL = '.tml-scroll, .reel-scroll';
-        var sc = null, x0 = 0, left0 = 0, moved = false;
+        var sc = null, x0 = 0, left0 = 0, moved = false, pid = null;
         document.addEventListener('pointerdown', function (e) {
           if (e.pointerType !== 'mouse' || e.button !== 0) return;
           var el = e.target.closest ? e.target.closest(SEL) : null;
           if (!el || el.scrollWidth - el.clientWidth < 8) return;
-          sc = el; x0 = e.clientX; left0 = el.scrollLeft; moved = false;
-          // 창 밖에서 손을 떼도 끝이 오게 잡아 둔다 — 안 그러면 끄는 상태가 남아 클릭이 막힌다
-          try { el.setPointerCapture(e.pointerId); } catch (err) {}
+          sc = el; x0 = e.clientX; left0 = el.scrollLeft; moved = false; pid = e.pointerId;
         });
         document.addEventListener('pointermove', function (e) {
           if (!sc) return;
           var dx = e.clientX - x0;
           if (!moved && Math.abs(dx) < 4) return;
-          if (!moved) { moved = true; sc.classList.add('grabbing'); }
+          if (!moved) {
+            moved = true;
+            sc.classList.add('grabbing');
+            // 잡는 건 실제로 끌기 시작한 뒤에만. 누르자마자 잡으면 클릭이 이 칸으로
+            // 되돌려져(retarget) 축의 날짜를 눌러도 아래가 안 펼쳐진다
+            // 창 밖에서 손을 떼도 끝이 오게 하려는 것이라 이때 잡아도 충분하다
+            try { sc.setPointerCapture(pid); } catch (err) {}
+          }
           // 글자·그림이 딸려 잡히지 않게
           e.preventDefault();
           sc.scrollLeft = left0 - dx;
