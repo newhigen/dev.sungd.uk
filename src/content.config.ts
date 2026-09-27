@@ -48,6 +48,9 @@ const projects = defineCollection({
     headCover: z.boolean().default(true),
     /** 이럴 때 쓴다 — 서너 줄 */
     use: z.array(z.string()).default([]),
+    /** 같이 쓰는 편 — 슬러그로. 홈 카드 아래에 «↳ 이름과 함께» 한 줄로 선다.
+        한쪽에만 적어도 양쪽 카드에 서니 두 편에 겹쳐 적지 않는다 */
+    with: z.array(z.string()).default([]),
     /** 그전 모습 */
     shots: z.array(z.object({
       src: z.string(),

@@ -1,0 +1,153 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>짝 표시를 카드 어디에 둘까</title>
+<style>
+/* 글꼴과 색은 site.css 의 것을 그대로 옮긴다 */
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+:root{
+  --bg:#eff0f1;--card:#fff;--shadow:0 2px 20px rgba(20,22,26,.07);
+  --ink:#1c1e21;--prose:#34373c;--ink-2:#52565c;--ink-3:#6c7076;--accent:#8a6a3c;
+  --rule:rgba(28,30,33,.09);--rule-mid:rgba(28,30,33,.18);--link:#8a6a3c;
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --mono:"Google Sans Code",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#dcdee0;color:var(--ink);font:16.5px/1.6 var(--body);word-break:keep-all;-webkit-font-smoothing:antialiased}
+.top{max-width:78.5rem;margin:0 auto;padding:2.5rem 2rem 0}
+.top h1{font-family:var(--title);font-size:2rem;font-weight:700;margin:0 0 .4rem}
+.top p{margin:0 0 .5rem;color:var(--ink-2);max-width:52rem}
+.v{max-width:78.5rem;margin:0 auto;padding:2.8rem 2rem 0}
+.vt{font-family:var(--title);font-size:1.25rem;font-weight:600;color:var(--accent);margin:0}
+.vq{margin:.15rem 0 .9rem;color:var(--ink-2);font-size:.92rem;max-width:62rem}
+.frame{width:100%;max-width:78.5rem;overflow:hidden;border-radius:12px;box-shadow:0 6px 30px rgba(20,22,26,.18);background:var(--bg)}
+.pg{background:var(--bg);padding:1.6rem 2.5rem 2.2rem}
+.take{max-width:62rem;margin:.7rem 0 0;font-size:.9rem;color:var(--ink-2)}
+.take b{color:var(--ink);font-weight:600}
+
+/* ── 홈 카드 (site.css 발췌) ───────────────────────── */
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.85rem}
+.card{display:flex;flex-direction:column;padding:.9rem 0 .85rem;border-radius:11px;background:var(--card);box-shadow:var(--shadow)}
+.card .shotrow{display:flex;align-items:flex-end;gap:.4rem;min-height:5.5rem;padding:4px calc(1.25rem - 1px) 0;margin-bottom:.7rem}
+.card .shotrow-i{flex:none;width:fit-content;line-height:0;padding:0;border:1px solid var(--rule-mid);border-radius:.5rem;background:#fff;box-shadow:0 1px 5px rgba(20,22,26,.12);overflow:hidden}
+.card .shotrow-i img{display:block;height:5.5rem;width:auto;max-width:7.5rem;object-fit:cover;object-position:top left}
+.card .icon.ph{display:flex;align-items:center;justify-content:center;width:3rem;height:3rem;border-radius:22%;background:color-mix(in srgb,var(--ink) 6%,transparent);color:var(--ink-3);font-family:var(--title);font-size:1.1rem;font-weight:600}
+.card .body{display:block;padding:0 1.25rem;text-decoration:none;color:inherit}
+.card .nm{display:flex;align-items:center;gap:.45rem;font-size:.95rem;font-weight:600;letter-spacing:-.01em}
+.card .plat{display:inline-flex;align-items:center;gap:.3rem}
+.card .plat span{display:block;width:.95rem;height:.95rem;border-radius:3px;background:var(--rule-mid)}
+.card .ds{margin:.15rem 0 0;font-size:.84rem;line-height:1.5;color:var(--ink-2);min-height:2.5em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .mt{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;width:100%;gap:.3rem .6rem;margin-top:.5rem;font-family:var(--mono);font-size:.75rem;color:var(--ink-3)}
+.chip-g{display:inline-flex;align-items:center;padding:.08rem .45rem;border-radius:999px;background:color-mix(in srgb,var(--ink) 7%,transparent);color:var(--ink-2);font-family:var(--body);font-size:.72rem}
+.when{color:var(--ink-3);font-variant-numeric:tabular-nums}
+.sec{font-family:var(--title);font-size:1.05rem;font-weight:600;margin:0 0 .8rem;display:flex;align-items:baseline;gap:.4rem}
+.sec .n{font-family:var(--mono);font-size:.78rem;font-weight:400;color:var(--ink-3)}
+
+/* ── 짝 표시 — 판마다 자리와 모양이 다르다 ─────────── */
+/* 1 설명 아래 */
+.w1 .tail{margin:.45rem 0 0;font-size:.78rem;color:var(--ink-3)}
+.w1 .tail b{font-weight:500;color:var(--link)}
+/* 2 맨 아래 줄 — 갈래·날짜 밑으로 내린다 */
+.w2 .tailb{margin:.4rem 0 0;padding-top:.4rem;border-top:1px solid var(--rule);font-size:.76rem;color:var(--ink-3)}
+.w2 .tailb b{font-weight:500;color:var(--link)}
+/* 3 갈래 칩 옆 — 줄이 안 늘어난다 */
+.w3 .withchip{display:inline-flex;align-items:center;gap:.25rem;padding:.08rem .45rem .08rem .38rem;border-radius:999px;background:color-mix(in srgb,var(--link) 10%,transparent);color:var(--link);font-family:var(--body);font-size:.72rem}
+.w3 .mt .lf{display:flex;align-items:center;gap:.3rem}
+/* 4 모든 카드에 자리를 비워 둔다 */
+.w4 .tail{margin:.45rem 0 0;min-height:1.22em;font-size:.78rem;color:var(--ink-3)}
+.w4 .tail b{font-weight:500;color:var(--link)}
+/* 5 제목 옆 고리 */
+.w5 .lk{display:inline-flex;align-items:center;justify-content:center;width:1.05rem;height:1.05rem;border-radius:999px;background:color-mix(in srgb,var(--link) 14%,transparent);color:var(--link);font-size:.62rem;line-height:1}
+.w5 .note{margin:.45rem 0 0;font-size:.78rem;color:var(--ink-3)}
+</style>
+</head><body>
+
+<div class="top">
+  <h1>짝 표시를 카드 어디에 둘까</h1>
+  <p>A 를 그대로 두면 짝이 있는 카드만 한 줄 길어져 갈래 칩과 날짜가 아래로 밀린다. 카드 여덟 장을 깔아 그 어긋남이 실제로 얼마나 보이는지 본다. 짝은 갤럭시 음성 브리지와 마이크 자동 멈춤 둘이다.</p>
+</div>
+
+<div id="out"></div>
+
+<script>
+// 홈 목록에 실제로 서는 여덟 편. 짝인 둘은 with 를 들고 있다
+const CARDS = [
+  { t: '마이크 자동 멈춤', d: '마이크가 켜지면 음악을 멈추고, 꺼지면 다시 튼다', g: '개발 도구', w: '2026.09', p: 1, with: '갤럭시 음성 브리지' },
+  { t: '쿠폰함', d: '기한 남은 쿠폰을 모아 알리고 바코드를 크게 띄운다', g: '생활', w: '2026.09', p: 1, img: 'img/coupons/list.png' },
+  { t: '약수첩', d: '약과 영양제를 홈 화면 위젯에서 바로 체크한다', g: '생활', w: '2026.09', p: 1, img: 'img/pillbox/main_top.png' },
+  { t: '갤럭시 음성 브리지', d: '갤럭시를 맥의 무선 받아쓰기 마이크로', g: '개발 도구', w: '2026.09', p: 2, img: 'img/gvb/diagram.svg', with: '마이크 자동 멈춤' },
+  { t: '한달', d: '다섯 주를 한 판에 보는 홈 화면 달력 위젯', g: '생활', w: '2026.09', p: 1, img: 'img/wallcal/app.png' },
+  { t: '준비물', d: '내일 날씨를 보고 챙길 것을 전날 밤에 알려 준다', g: '생활', w: '2026.09', p: 1, img: 'img/pack-up/main.png' },
+  { t: '오늘 당겨 쓰면', d: '지금 누우면 몇 시에 깨는지 상단 바에 띄운다', g: '생활', w: '2026.08', p: 1, img: 'img/sleep-now/app-light.png' },
+  { t: 'Claude 워치', d: '여러 세션이 지금 무엇을 하는지 한 화면에 모은다', g: '개발 도구', w: '2026.05', p: 1, img: 'img/claude-watch/diagram.svg' },
+];
+
+const shot = c => c.img
+  ? `<span class="shotrow-i"><img src="${c.img}" alt=""></span>`
+  : `<span class="icon ph">${c.t.slice(0, 1)}</span>`;
+const plat = n => `<span class="plat">${'<span></span>'.repeat(n)}</span>`;
+
+// 판마다 카드 속을 다르게 짠다
+const MAKE = {
+  w1: c => `<p class="ds">${c.d}</p>
+      ${c.with ? `<p class="tail">↳ <b>${c.with}</b>와 함께</p>` : ''}
+      <div class="mt"><span class="chip-g">${c.g}</span><span class="when">${c.w}</span></div>`,
+  w2: c => `<p class="ds">${c.d}</p>
+      <div class="mt"><span class="chip-g">${c.g}</span><span class="when">${c.w}</span></div>
+      ${c.with ? `<p class="tailb">↳ <b>${c.with}</b>와 함께</p>` : ''}`,
+  w3: c => `<p class="ds">${c.d}</p>
+      <div class="mt"><span class="lf"><span class="chip-g">${c.g}</span>${
+        c.with ? `<span class="withchip">🔗 ${c.with}</span>` : ''
+      }</span><span class="when">${c.w}</span></div>`,
+  w4: c => `<p class="ds">${c.d}</p>
+      <p class="tail">${c.with ? `↳ <b>${c.with}</b>와 함께` : ''}</p>
+      <div class="mt"><span class="chip-g">${c.g}</span><span class="when">${c.w}</span></div>`,
+  w5: c => `<p class="ds">${c.d}</p>
+      <div class="mt"><span class="chip-g">${c.g}</span><span class="when">${c.w}</span></div>`,
+};
+
+function card(c, k) {
+  const ring = k === 'w5' && c.with ? `<span class="lk" title="${c.with}와 함께">↔</span>` : '';
+  return `<article class="card">
+    <div class="shotrow">${shot(c)}</div>
+    <a class="body">
+      <div class="nm">${c.t}${ring}${plat(c.p)}</div>
+      ${MAKE[k](c)}
+    </a>
+  </article>`;
+}
+
+const VIEWS = [
+  ['w1', 'A-1 — 설명 바로 아래 (지금 판)',
+   '짝이 있는 두 카드만 한 줄 길어진다. 갈래 칩과 날짜가 다른 카드와 다른 높이에 선다.',
+   '<b>어긋남</b> 그대로. 두 줄로 끊은 설명을 애써 맞춰 놓은 것이 여기서 풀린다.'],
+  ['w2', 'A-2 — 갈래·날짜 아래로 내린다',
+   '카드 맨 끝에 가는 줄을 긋고 그 밑에 둔다. 위 세 줄은 모든 카드가 같은 높이에 선다.',
+   '<b>어긋남</b> 카드 아래 끝에서만. 다만 가로선을 긋는 셈이라 이 사이트가 안 쓰는 모양이다.'],
+  ['w3', 'A-3 — 갈래 칩 옆에 칩으로',
+   '이미 있는 맨 아래 줄 안에 얹는다. 줄이 하나도 안 늘어난다.',
+   '<b>어긋남 없음.</b> 대신 이름이 길면 날짜와 부딪히고, 「와 함께」 같은 말을 붙일 자리가 없다.'],
+  ['w4', 'A-4 — 모든 카드에 그 자리를 비워 둔다',
+   '짝이 없는 카드도 한 줄 몫을 남긴다. 여덟 장이 같은 높이에 선다.',
+   '<b>어긋남 없음.</b> 대신 여섯 장에 쓰지 않는 빈 줄이 생겨 목록이 성겨진다.'],
+  ['w5', 'A-5 — 이름 옆에 고리 하나',
+   '제목 옆에 작은 표시만 두고 무엇과 짝인지는 그 편에서 말한다.',
+   '<b>어긋남 없음.</b> 가장 조용하지만 눌러 보기 전에는 무엇과 짝인지 모른다.'],
+];
+
+document.getElementById('out').innerHTML = VIEWS.map(([k, t, q, take]) => `
+  <div class="v">
+    <p class="vt">${t}</p>
+    <p class="vq">${q}</p>
+    <div class="frame"><div class="pg ${k}">
+      <h2 class="sec">지금 쓰는 것<span class="n">14</span></h2>
+      <div class="cards">${CARDS.map(c => card(c, k)).join('')}</div>
+    </div></div>
+    <p class="take">${take}</p>
+  </div>`).join('') + '<div style="height:4rem"></div>';
+</script>
+</body></html>

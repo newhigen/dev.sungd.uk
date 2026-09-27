@@ -1,0 +1,91 @@
+---
+title: 마이크 자동 멈춤
+tagline: 마이크가 켜지면 음악을 멈추고, 꺼지면 다시 튼다
+platform: [apple]
+period: "2026.09.25"
+purpose: 개발 도구
+kind: Mac 도우미
+tags: [Python, CoreAudio, launchd, Spotify API, adb]
+github: https://github.com/newhigen-labs/pause-on-mic
+headCover: false
+screens:
+  - src: /p/pause-on-mic/diagram.svg
+    label: 마이크가 열리면 폰 음악이 멈추고, 끝나고 0.8초 뒤 다시 난다
+with: [galaxy-voice-bridge]
+use:
+  - "받아쓰기를 켜면 음악이 저절로 멈춘다 — 손이 안 간다"
+  - "말이 끝나면 0.8초 뒤 다시 튼다"
+  - "화상회의처럼 받아쓰기가 아닌 것에도 걸린다"
+---
+
+import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
+import Versus from '../../components/Versus.astro';
+import Cases from '../../components/Cases.astro';
+import Next from '../../components/Next.astro';
+
+<Panel label="Mac"
+  title={["스피커를 나눠 쓰던 때는 우연히 막혔다.", "떼어 놓자 음악이 녹음에 섞였다."]}
+  sub="맥과 폰이 블루투스 스피커 하나를 나눠 쓰던 때는, 녹음이 시작되면 맥이 스피커를 빼앗아 폰 음악이 밀려 멈췄다. 부작용이었지만 편했다. 맥을 스피커에서 떼자 그 멈춤도 사라져서 제대로 만들었다."
+  chips={[
+    { v: "0.8초", label: "마이크가 꺼진 뒤 다시 틀 때까지 — 연달아 받아쓸 때 음악이 튀지 않게" },
+    { v: "앱 무관", label: "받아쓰기든 화상회의든 마이크를 쓰면 걸린다" },
+    { v: "내가 멈춘 것만", label: "원래 멈춰 있던 음악은 켜지 않는다" },
+  ]}
+  basis="config.json 의 기본값과 watch.py 의 동작 기준." />
+
+## 동작 방식
+
+앱을 지켜보지 않고 **마이크 자체**를 본다. 맥이 녹음을 시작했는지 CoreAudio 에 직접 묻는다 —
+`kAudioDevicePropertyDeviceIsRunningSomewhere`. 이름이 비슷한 `goin` 은 내 프로세스 기준이라
+남이 녹음해도 계속 꺼짐으로 나온다.
+
+<Fig src="/p/pause-on-mic/diagram.svg"
+  alt="맥에서 받아쓰기를 시작하면 마이크 켜짐을 읽어 폰 음악을 멈추고, 끝나고 0.8초 뒤 다시 트는 흐름"
+  caption="받아쓰기 한 번. 짙은 칸이 이 도구가 하는 일이다." />
+
+### 음악을 조종하는 두 갈래
+
+<Versus a="Spotify API" b="adb" rows={[
+  { head: "조건", a: "Premium", aNote: "Basic 에서 재생 조종 API 가 열린다",
+    b: "같은 망 + 무선 디버깅", bNote: "폰 설정에서 켜 둬야 한다" },
+  { head: "닿는 범위", a: "폰이 어느 망에 있든", aNote: "와이파이만 있으면 된다",
+    b: "같은 망 안에서만" },
+  { head: "미리 할 일", a: "앱 등록과 토큰 한 번", aNote: "키체인에 들어간다",
+    b: "없다" },
+  { head: "안 될 때", a: "토큰이 만료되면 다시 받는다",
+    b: "폰이 잠들거나 망이 바뀌면 조용히 아무것도 안 한다" },
+]} />
+
+`config.json` 의 `player` 로 고른다. adb 갈래를 먼저 만들었다 — 문서가 SDK 와 API 를 섞어 말해
+Premium Basic 에서 재생 조종이 되는지 확언이 안 됐다. 붙여 보니 멈춤과 재생 둘 다 먹어서
+Spotify 를 기본으로 두고 adb 는 무선 디버깅이 꺼져 있을 때의 대비로 남겼다.
+
+## 자세한 동작
+
+<Cases items={[
+  { when: "원래 음악이 멈춰 있었다",
+    what: "아무것도 안 한다. 멈춘 것을 표시해 두고 그 표시가 있을 때만 다시 트니, 끝에 재생을 보내 원래 꺼져 있던 음악이 켜지는 일이 없다." },
+  { when: "연달아 받아쓴다",
+    what: "마이크가 꺼진 뒤 <b>0.8초</b> 잠잠해야 다시 튼다. 그 안에 다시 켜지면 멈춘 채로 둔다 — 문장 사이마다 음악이 튀지 않는다." },
+  { when: "받아쓰기가 아니라 화상회의다",
+    what: "똑같이 걸린다. 마이크를 쓰는 것이면 무엇이든 반응한다 — 앱을 가리지 않는 것이 이 방식의 덤이다." },
+  { when: "폰이 잠들었거나 망이 바뀌었다 (adb)",
+    what: "조용히 아무것도 안 한다. 음악은 그대로 나고 로그에만 남는다." },
+]} />
+
+## 설치와 요구 사항
+
+macOS 와 Python 3. `./install.sh` 를 돌리면 launchd 에 올라가 로그인 때 저절로 뜬다.
+Spotify 갈래를 쓰려면 개발자 대시보드에서 앱을 만들고 `python3 spotify_auth.py` 로 토큰을
+한 번 받는다. 토큰은 키체인에 들어간다.
+
+지금 마이크가 켜져 있는지는 `python3 micstate.py`, 무엇이 일어났는지는
+`~/Library/Logs/pause-on-mic.log` 에서 본다.
+
+만들면서 밟은 함정 — 이름이 비슷한 CoreAudio 상수, 본문 없이 오는 204, PATH 가 빈 launchd —
+은 저장소의 `HISTORY.md` 에 적어 뒀다.
+
+<Next items={[
+  { tab: "같이 쓰는 편", title: "갤럭시를 맥의 무선 받아쓰기 마이크로", href: "/galaxy-voice-bridge" },
+]} />
