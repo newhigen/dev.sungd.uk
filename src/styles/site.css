@@ -1985,6 +1985,11 @@ figcaption {
   border-radius: 10px;
   border: 1px solid var(--rule);
   background: #fff;
+  /* 좌우로 미는 것은 그림 넘기기다 — 세로만 브라우저에 남긴다.
+     끌 때 그림이 통째로 딸려 가지 않게 고르기와 끌기도 막는다 */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 .shotbox-cap { margin: 0; font-size: 0.875rem; color: var(--ink-2); }
 .shotbox-x {

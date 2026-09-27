@@ -238,6 +238,46 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
       if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); show(at + 1); }
     });
+
+    // 폰에서 좌우로 밀어 넘긴다 — 썸네일은 작아서 손가락으로 겨냥하기 어렵다.
+    // 세로로 긋는 것은 스크롤이지 넘기기가 아니라 방향을 보고 가른다.
+    let sx = 0, sy = 0, dx = 0, swiping = false;
+    function slide(px: number, fade: boolean) {
+      img.style.transform = px ? `translateX(${px}px)` : '';
+      img.style.opacity = fade ? String(1 - Math.min(Math.abs(px) / 420, 0.4)) : '';
+    }
+    img.addEventListener('pointerdown', e => {
+      if (group.length < 2) return;
+      sx = e.clientX; sy = e.clientY; dx = 0; swiping = true;
+      img.style.transition = '';
+      img.setPointerCapture(e.pointerId);
+    });
+    img.addEventListener('pointermove', e => {
+      if (!swiping) return;
+      const mx = e.clientX - sx, my = e.clientY - sy;
+      if (Math.abs(my) > Math.abs(mx) && Math.abs(my) > 12) { swiping = false; slide(0, false); return; }
+      dx = mx;
+      e.preventDefault();
+      slide(dx, true);
+    });
+    function endSwipe() {
+      if (!swiping) return;
+      swiping = false;
+      const moved = dx;
+      dx = 0;
+      if (Math.abs(moved) > 48) {
+        // 넘긴 뒤에는 새 그림이 제자리에서 시작해야 한다
+        slide(0, false);
+        show(at + (moved < 0 ? 1 : -1));
+        return;
+      }
+      img.style.transition = 'transform .16s ease, opacity .16s ease';
+      slide(0, false);
+      setTimeout(() => { img.style.transition = ''; }, 180);
+    }
+    img.addEventListener('pointerup', endSwipe);
+    img.addEventListener('pointercancel', endSwipe);
+    img.addEventListener('lostpointercapture', endSwipe);
     // 그림 바깥(판 자체)을 누르면 닫는다
     lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
   }
