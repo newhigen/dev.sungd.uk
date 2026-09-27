@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 1100" width="620" height="1100" role="img" aria-label="여러 Claude Code 세션을 상태별로 한 판에 모아 내 차례인 것을 맨 위로 올리는 화면">
+  <rect width="620" height="1100" fill="#fffefc"/>
+
+  <!-- 머리 — 판이 무엇을 세는가 -->
+  <g>
+    <text x="34" y="46" font-family="sans-serif" font-size="26" font-weight="700" fill="#211f1b">판 (Deck)</text>
+    <text x="34" y="76" font-family="sans-serif" font-size="18" fill="#706c62">세션 7 — 내 차례 2, 작동 중 3, 기다림 1, 끝남 1</text>
+    <!-- 한 줄 띠로 비중을 보인다 -->
+    <g>
+      <rect x="34" y="92" width="160" height="14" rx="7" fill="#8a6a3c"/>
+      <rect x="198" y="92" width="240" height="14" rx="7" fill="#7f8b76"/>
+      <rect x="442" y="92" width="80" height="14" rx="7" fill="#c3bcae"/>
+      <rect x="526" y="92" width="60" height="14" rx="7" fill="#e0dbd0"/>
+    </g>
+  </g>
+
+  <!-- 내 차례 — 맨 위로 올라온다 -->
+  <g>
+    <text x="34" y="150" font-family="sans-serif" font-size="17" font-weight="700" fill="#8a6a3c">내 차례 — 눌러서 이어간다</text>
+    <g>
+      <rect x="34" y="164" width="552" height="104" rx="16" fill="#fffefc" stroke="#8a6a3c" stroke-width="4"/>
+      <circle cx="66" cy="196" r="10" fill="#8a6a3c"/>
+      <text x="88" y="203" font-family="sans-serif" font-size="22" font-weight="700" fill="#211f1b">dev.sungd.uk</text>
+      <text x="88" y="232" font-family="sans-serif" font-size="17" fill="#56524a">홈 카드 시안 — 어느 판으로 갈지 물었다</text>
+      <rect x="88" y="244" width="150" height="8" rx="4" fill="#e0dbd0"/>
+      <rect x="88" y="244" width="150" height="8" rx="4" fill="#8a6a3c"/>
+      <text x="556" y="188" font-family="sans-serif" font-size="15" fill="#9a9184" text-anchor="end">3분 전</text>
+      <rect x="452" y="206" width="104" height="40" rx="20" fill="#8a6a3c"/>
+      <text x="504" y="232" font-family="sans-serif" font-size="18" font-weight="600" fill="#fffefc" text-anchor="middle">이어가기</text>
+    </g>
+    <g>
+      <rect x="34" y="280" width="552" height="88" rx="16" fill="#fffefc" stroke="#8a6a3c" stroke-width="3"/>
+      <circle cx="66" cy="310" r="10" fill="#8a6a3c"/>
+      <text x="88" y="317" font-family="sans-serif" font-size="21" font-weight="700" fill="#211f1b">whooing</text>
+      <text x="88" y="344" font-family="sans-serif" font-size="17" fill="#56524a">9월 분류 규칙을 확인해 달라고 멈췄다</text>
+      <text x="556" y="304" font-family="sans-serif" font-size="15" fill="#9a9184" text-anchor="end">21분 전</text>
+    </g>
+  </g>
+
+  <!-- 작동 중 — 손댈 것 없다 -->
+  <g>
+    <text x="34" y="412" font-family="sans-serif" font-size="17" font-weight="700" fill="#5f6b57">작동 중 — 기다리면 된다</text>
+    <g>
+      <rect x="34" y="426" width="552" height="76" rx="14" fill="#f3f4f0" stroke="#dde0d6" stroke-width="2"/>
+      <circle cx="66" cy="452" r="9" fill="#7f8b76"/>
+      <text x="88" y="459" font-family="sans-serif" font-size="20" font-weight="600" fill="#211f1b">analyses</text>
+      <text x="88" y="484" font-family="sans-serif" font-size="16" fill="#6b6a60">8월 가계부 판을 굽는 중</text>
+      <rect x="392" y="446" width="164" height="8" rx="4" fill="#dde0d6"/>
+      <rect x="392" y="446" width="112" height="8" rx="4" fill="#7f8b76"/>
+      <text x="556" y="484" font-family="sans-serif" font-size="14" fill="#9a9184" text-anchor="end">도구 24번째</text>
+    </g>
+    <g>
+      <rect x="34" y="514" width="552" height="76" rx="14" fill="#f3f4f0" stroke="#dde0d6" stroke-width="2"/>
+      <circle cx="66" cy="540" r="9" fill="#7f8b76"/>
+      <text x="88" y="547" font-family="sans-serif" font-size="20" font-weight="600" fill="#211f1b">pillbox</text>
+      <text x="88" y="572" font-family="sans-serif" font-size="16" fill="#6b6a60">위젯 시안 다섯 판을 찍는 중</text>
+      <rect x="392" y="534" width="164" height="8" rx="4" fill="#dde0d6"/>
+      <rect x="392" y="534" width="58" height="8" rx="4" fill="#7f8b76"/>
+      <text x="556" y="572" font-family="sans-serif" font-size="14" fill="#9a9184" text-anchor="end">도구 6번째</text>
+    </g>
+    <g>
+      <rect x="34" y="602" width="552" height="76" rx="14" fill="#f3f4f0" stroke="#dde0d6" stroke-width="2"/>
+      <circle cx="66" cy="628" r="9" fill="#7f8b76"/>
+      <text x="88" y="635" font-family="sans-serif" font-size="20" font-weight="600" fill="#211f1b">claude-config</text>
+      <text x="88" y="660" font-family="sans-serif" font-size="16" fill="#6b6a60">규칙 파일을 세 기계에 반영하는 중</text>
+      <rect x="392" y="622" width="164" height="8" rx="4" fill="#dde0d6"/>
+      <rect x="392" y="622" width="148" height="8" rx="4" fill="#7f8b76"/>
+      <text x="556" y="660" font-family="sans-serif" font-size="14" fill="#9a9184" text-anchor="end">도구 31번째</text>
+    </g>
+  </g>
+
+  <!-- 기다림·끝남 — 접혀 있다 -->
+  <g>
+    <text x="34" y="722" font-family="sans-serif" font-size="17" font-weight="700" fill="#8a857a">기다림과 끝남 — 접혀 있다</text>
+    <g>
+      <rect x="34" y="736" width="552" height="58" rx="12" fill="#f7f6f2" stroke="#e4e0d6" stroke-width="2"/>
+      <circle cx="66" cy="765" r="8" fill="#c3bcae"/>
+      <text x="88" y="772" font-family="sans-serif" font-size="19" fill="#6b6a60">books.sungd.uk</text>
+      <text x="556" y="772" font-family="sans-serif" font-size="15" fill="#9a9184" text-anchor="end">어제 (금)</text>
+    </g>
+    <g>
+      <rect x="34" y="806" width="552" height="58" rx="12" fill="#f7f6f2" stroke="#e4e0d6" stroke-width="2"/>
+      <path d="M62 765 m0 0" fill="none"/>
+      <text x="66" y="842" font-family="sans-serif" font-size="19" fill="#a8a296" text-anchor="middle">✓</text>
+      <text x="88" y="842" font-family="sans-serif" font-size="19" fill="#a8a296">sleep-now</text>
+      <text x="556" y="842" font-family="sans-serif" font-size="15" fill="#b3ada1" text-anchor="end">끝남</text>
+    </g>
+  </g>
+
+  <!-- 어떻게 도나 -->
+  <g>
+    <rect x="34" y="898" width="552" height="150" rx="16" fill="#211f1b"/>
+    <text x="60" y="936" font-family="sans-serif" font-size="19" font-weight="700" fill="#e8e0d0">어떻게 아나</text>
+    <g font-family="sans-serif" font-size="16" fill="#a8a296">
+      <circle cx="70" cy="966" r="4" fill="#8a6a3c"/>
+      <text x="86" y="972">세션 기록을 읽어 마지막 줄이 질문이면 「내 차례」</text>
+      <circle cx="70" cy="996" r="4" fill="#7f8b76"/>
+      <text x="86" y="1002">도구를 쓰고 있으면 「작동 중」과 몇 번째인지</text>
+      <circle cx="70" cy="1026" r="4" fill="#c3bcae"/>
+      <text x="86" y="1032">화면은 접고 판만 남긴다 — 어디를 먼저 볼지만 고른다</text>
+    </g>
+  </g>
+</svg>
