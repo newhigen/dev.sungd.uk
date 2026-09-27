@@ -12,6 +12,10 @@ function num(p: string) {
 }
 /** 목록에는 월까지만 — 2026.05.30 → 2026.05 */
 function ym(p: string) { return p.slice(0, 7); }
+/** 로고에 붙는 이름 — 그림만 두면 무엇인지 읽어 줄 수 없다 */
+const PLAT_NAME: Record<string, string> = {
+  android: '안드로이드', apple: 'Mac', terminal: '터미널',
+};
 
 const sorted = [...all].sort((a, b) => num(b.data.period) - num(a.data.period));
 // 지금 쓰는 것(사용 중 · 페이지 있음)은 카드로 크게, 나머지(보류 · 완료 · 종료 · 페이지 없는 편)는 한 줄 목록
@@ -69,10 +73,21 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
                 </div>
                 {/* 아래는 글 — 누르면 그 편으로 간다 */}
                 <a class="body" href={`/${p.id}`}>
-                  {d.kind && <div class="kd">{d.kind}</div>}
-                  <div class="nm">{d.title}</div>
+                  <div class="nm">
+                    {d.title}
+                    {d.platform.length > 0 && (
+                      <span class="plat">
+                        {d.platform.map((k) => (
+                          <img src={`/i/${k}.svg`} alt={PLAT_NAME[k]} title={PLAT_NAME[k]} />
+                        ))}
+                      </span>
+                    )}
+                  </div>
                   <p class="ds">{d.tagline}</p>
-                  <div class="mt"><span>{d.purpose} · {ym(d.period)}</span></div>
+                  <div class="mt">
+                    <span class="chip-g">{d.purpose}</span>
+                    <span class="when">{ym(d.period)}</span>
+                  </div>
                 </a>
               </article>
             );

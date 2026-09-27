@@ -33,6 +33,8 @@ const projects = defineCollection({
     kind: z.string().optional(),
     /** 카드에 서는 앱 아이콘 (정사각 png) */
     icon: z.string().optional(),
+    /** 어느 자리에서 도는가. 카드 제목 옆에 로고로 선다 */
+    platform: z.array(z.enum(['android', 'apple', 'terminal'])).default([]),
     /** 홈 카드에 나란히 세우는 앱 화면. 없으면 아이콘이 대신 선다.
         이름이 shot- 으로 시작하는 것은 시안 비교판이라 여기 넣지 않는다 */
     screens: z.array(z.object({
