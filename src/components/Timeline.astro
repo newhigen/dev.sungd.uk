@@ -143,20 +143,36 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
       function row(label, html) {
         return html ? '<dt>' + label + '</dt><dd>' + html + '</dd>' : '';
       }
+      // 판은 서버가 그려 둔 것을 그대로 쓰고 값만 갈아 끼운다.
+      // 통째로 다시 그리면 <img> 가 매번 새로 만들어져 받는 동안 빈칸이 됐다 —
+      // 축을 한 번 미는 사이에 지나간 항목마다 그러니 여러 번 깜빡이는 것으로 보인다
+      var oShot = open.querySelector('.shot');
+      var oD = open.querySelector('.d');
+      var oH = open.querySelector('h4');
+      var oDl = open.querySelector('dl');
+      function img(src, alt) {
+        // 그림 없는 항목에선 지우지 않고 그대로 둔다 — 칸은 .none 이 접는다.
+        // 지웠다 다시 만들면 같은 그림으로 돌아올 때 또 받는다
+        if (!src) return;
+        var el = oShot.querySelector('img');
+        if (!el) { el = document.createElement('img'); oShot.appendChild(el); }
+        // 같은 그림이면 src 를 건드리지 않는다 — 다시 넣으면 다시 받는다
+        if (el.getAttribute('src') !== src) el.setAttribute('src', src);
+        el.alt = alt || '';
+      }
       function show(i) {
         if (i === cur) return;
         var it = items[i];
         if (!it || !(it.problem || it.did || it.result)) return;
         cur = i;
         gs.forEach(function (g, k) { g.classList.toggle('sel', k === i); });
-        open.innerHTML =
-          '<div class="shot' + (it.img ? '' : ' none') + '">' +
-          (it.img ? '<img src="' + it.img + '" alt="' + (it.alt || '') + '">' : '') +
-          '</div><div class="txt"><span class="d">' + (it.day || it.at) + '</span>' +
-          '<h4>' + it.title + '</h4><dl>' +
+        oShot.classList.toggle('none', !it.img);
+        img(it.img, it.alt);
+        oD.textContent = it.day || it.at;
+        oH.textContent = it.title;
+        oDl.innerHTML =
           row('막힘', it.problem) + row('한 것', it.did) +
-          row('결과', it.result) + row('다음엔', it.next) +
-          '</dl></div>';
+          row('결과', it.result) + row('다음엔', it.next);
       }
 
       // 창은 축 내용 높이에 맞추되 위아래로 한 칸씩 더 준다 — 딱 맞으면 그림이 테두리에 끼여 보인다
@@ -239,7 +255,11 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
       fit();
       pick();
       window.addEventListener('resize', function () { fit(); pick(); });
-      sc.addEventListener('scroll', function () { pick(); settle(); }, { passive: true });
+      sc.addEventListener('scroll', function () {
+        // 눌러서 옮기는 중이면 지나가는 항목을 펼치지 않는다 — 목적지 것은 go() 가 이미 세웠다
+        if (settling) edge(); else pick();
+        settle();
+      }, { passive: true });
       gs.forEach(function (g) {
         // 마우스로 누를 땐 초점을 잡지 않는다. 초점이 남아 있으면 Shift 를 누르는 순간
         // 브라우저가 그것을 키보드 초점으로 쳐서, 아까 누른 항목에 테두리가 되살아난다
