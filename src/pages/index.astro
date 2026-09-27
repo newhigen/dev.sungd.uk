@@ -29,13 +29,11 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
 ---
 
 <Base title="프로젝트">
+  {/* 제호 바로 아래 — 거르는 칸 안에 두면 그 칸의 머리말로 읽힌다 */}
+  <p class="lede">직접 쓰려고 만든 앱과 도구. 하루에 걸리적거리던 것에서 시작했다.</p>
+
   <div class="home">
     <aside class="pick-rail">
-      <p class="lede">
-        직접 쓰려고 만든 앱과 도구. 대개 내 하루에 걸리적거리던 것에서 시작했다. 종료한 것도 까닭과 함께
-        남겨 둔다.
-      </p>
-
       <nav class="pick" data-key="갈래" aria-label="갈래">
         <div class="lb">갈래</div>
         <button type="button" class="on" data-pick="">전체<span class="n">{all.length}</span></button>
