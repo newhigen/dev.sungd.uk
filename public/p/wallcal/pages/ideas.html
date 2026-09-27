@@ -237,7 +237,7 @@ const SETS = {
       {t:'엄마 생신', c:'b', a:1, b:1, past:1, all:1},
       {t:'수영', c:'b', a:2, b:2, past:1, tm:'07:00', rep:1},
       {t:'스프린트 회고', c:'p', a:4, b:4, past:1, tm:'15:00', more:3},
-      {t:'치과', c:'b', a:6, b:6, tm:'14:00'},
+      {t:'수업', c:'b', a:6, b:6, tm:'14:00'},
       {t:'장보기', c:'b', a:6, b:6, tm:'17:00'},
     ]},
     {d:[31,'9/1',2,3,4,5,6], month:1, e:[
@@ -256,7 +256,7 @@ const SETS = {
   ],
   today: [
     {d:[30,31,'9/1',2,3,4,5], today:0, month:2, e:[
-      {t:'치과', c:'b', a:0, b:0, tm:'14:00'},
+      {t:'수업', c:'b', a:0, b:0, tm:'14:00'},
       {t:'장보기', c:'b', a:0, b:0, tm:'17:00'},
       {t:'팀 회의', c:'p', a:1, b:1, tm:'10:00'},
       {t:'휴가', c:'p', a:2, b:4, all:1},
@@ -304,7 +304,7 @@ function head(o){
   h += '<div class="btn">‹</div><div class="btn">›</div>';
   if(o.dayNav) h += '<div class="btn">››</div>';
   h += '</div>';
-  if(o.next) h += '<div class="next"><i></i><b>14:00 치과</b><em>2시간 뒤</em></div>';
+  if(o.next) h += '<div class="next"><i></i><b>14:00 수업</b><em>2시간 뒤</em></div>';
   if(o.remain) h += '<div class="next"><i style="background:var(--b)"></i>오늘 남은 일정<em>2건</em></div>';
   if(o.holidayIn) h += '<div class="next"><i style="background:var(--g)"></i>다음 연휴 추석<em>26일 뒤</em></div>';
   if(o.sum) h += '<div class="next"><i style="background:var(--p)"></i>이번 주 일정<em>6시간 20분</em></div>';
@@ -367,7 +367,7 @@ function grid(o){
       if(o.repeatFaint && e.rep) bc.push('faint');
       if(o.tentative && e.tent) bc.push('dash');
       if(o.keyword && e.key) bc.push('key');
-      if(o.live && e.t==='치과') bc.push('live');
+      if(o.live && e.t==='수업') bc.push('live');
       if(o.offHours && e.tm && (parseInt(e.tm)<9 || parseInt(e.tm)>=18)) bc.push('hollow');
       if(e.a>0 && e.b>e.a) {}
       let txt = e.t;
@@ -404,19 +404,19 @@ function grid(o){
 
 function tile(){
   return '<div class="tile"><div class="sub">8월 30일 일요일</div><div class="big">30</div>'
-    +'<div class="li"><i style="background:var(--b)"></i>14:00 치과</div>'
+    +'<div class="li"><i style="background:var(--b)"></i>14:00 수업</div>'
     +'<div class="li"><i style="background:var(--b)"></i>17:00 장보기</div>'
     +'<div class="li" style="color:var(--faint)">그 밖에 1건</div></div>';
 }
 function line(){
   return '<div class="line"><i style="background:var(--b)"></i><div>'
-    +'<div class="t">치과</div><div class="s">오늘 14:00 – 15:00 · 2시간 뒤</div></div></div>';
+    +'<div class="t">수업</div><div class="s">오늘 14:00 – 15:00 · 2시간 뒤</div></div></div>';
 }
 function list(app){
   return '<div class="list">'
     +(app?'<div style="font-weight:700;font-size:13px;padding:2px 2px 6px">오늘</div>':'')
     +'<div class="h">8월 30일 (일)</div>'
-    +'<div class="it"><i style="background:var(--b)"></i>치과<em>14:00</em></div>'
+    +'<div class="it"><i style="background:var(--b)"></i>수업<em>14:00</em></div>'
     +'<div class="it"><i style="background:var(--b)"></i>장보기<em>17:00</em></div>'
     +'<div class="h">8월 31일 (월)</div>'
     +'<div class="it"><i style="background:var(--p)"></i>팀 회의<em>10:00</em></div>'
@@ -430,7 +430,7 @@ function table(){
   let h='<div class="tt"><div class="g"><b></b>';
   DOW.forEach(d=>h+='<s style="color:var(--faint);background:none;text-align:center">'+d+'</s>');
   const blocks=[['09',1,'팀 회의','var(--p)',2],['13',2,'월간 보고','var(--p)',2],
-    ['07',0,'헬스','var(--g)',1],['14',6,'치과','var(--b)',2],['17',6,'장보기','var(--b)',1],
+    ['07',0,'헬스','var(--g)',1],['14',6,'수업','var(--b)',2],['17',6,'장보기','var(--b)',1],
     ['19',4,'저녁 약속','var(--b)',2]];
   const hours=['07','09','11','13','15','17','19','21'];
   hours.forEach((hh,ri)=>{
@@ -444,7 +444,7 @@ function table(){
 }
 function lock(){
   return '<div class="lock"><div class="clk">3:42</div><div class="dt">8월 30일 일요일</div>'
-    +'<div class="li"><i style="background:#4ca6f0"></i>14:00 치과</div>'
+    +'<div class="li"><i style="background:#4ca6f0"></i>14:00 수업</div>'
     +'<div class="li"><i style="background:#4ca6f0"></i>17:00 장보기</div>'
     +'<div class="li"><i style="background:#f2648f"></i>내일 10:00 팀 회의</div></div>';
 }
@@ -452,8 +452,8 @@ function sheet(o){
   o=o||{};
   let h='<div class="sheet"><div class="t"><i style="background:var(--p)"></i><div>휴가</div></div>'
     +'<div class="lb">언제</div><div class="vl">9월 1일 (화) – 9월 3일 (목) · 종일</div>';
-  if(o.map) h+='<div class="lb">장소</div><div class="vl">제주도 서귀포 <span style="color:var(--accent)">지도 ↗</span></div>';
-  else h+='<div class="lb">장소</div><div class="vl">제주도 서귀포</div>';
+  if(o.map) h+='<div class="lb">장소</div><div class="vl">여행도 서귀포 <span style="color:var(--accent)">지도 ↗</span></div>';
+  else h+='<div class="lb">장소</div><div class="vl">여행도 서귀포</div>';
   h+='<div class="lb">달력</div><div class="vl">업무</div>';
   if(o.meet) h+='<div class="lb">회의</div><div class="vl"><span style="color:var(--accent)">화상회의 참여 ↗</span></div>';
   h+='<div class="lb">메모</div><div class="vl">비행기 아침 김포 출발. 렌터카 예약 확인할 것.</div>';
@@ -505,7 +505,7 @@ function miniGrid(o,style){
     const on = i===3;
     h+='<div class="d'+(on?' today '+(o||'ring'):'')+'" style="grid-column:'+(i+1)+';grid-row:1">'+day+'</div>';
   });
-  h+='<div class="bar2 b" style="grid-column:3/span 2;grid-row:2">치과</div></div>';
+  h+='<div class="bar2 b" style="grid-column:3/span 2;grid-row:2">수업</div></div>';
   return h;
 }
 

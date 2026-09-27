@@ -131,7 +131,7 @@ function head(extra){
 function card(inner,extra){ return '<div class="w">'+head(extra)+grid()+inner+'</div>'; }
 
 var LINE='<span class="lab">다음</span><span class="dot"></span>'
-  +'<span class="t"><span class="w1">9/4 (금) 8:30</span>&nbsp;&nbsp;안과</span>';
+  +'<span class="t"><span class="w1">9/4 (금) 8:30</span>&nbsp;&nbsp;스터디</span>';
 
 var MOCK={
   full:  function(){ return card('<div class="strip">'+LINE+'</div>'); },
@@ -139,31 +139,31 @@ var MOCK={
   ends:  function(){ return card('<div class="strip">'+LINE
            +'<span class="fill"></span><span class="r">사흘 뒤</span></div>'); },
   two:   function(){ return card('<div class="half">'
-           +'<div class="strip"><span class="dot"></span><span class="t"><span class="w1">9/4 (금) 8:30</span>&nbsp;&nbsp;안과</span></div>'
+           +'<div class="strip"><span class="dot"></span><span class="t"><span class="w1">9/4 (금) 8:30</span>&nbsp;&nbsp;스터디</span></div>'
            +'<div class="strip"><span class="dot" style="background:var(--c1)"></span><span class="t"><span class="w1">9/8 (월) 13:00</span>&nbsp;&nbsp;월간 보고</span></div>'
            +'</div>'); },
   chips: function(){ return card('<div class="chips">'
-           +'<span class="chip"><i class="dot" style="background:var(--c2)"></i>8:30 안과</span>'
+           +'<span class="chip"><i class="dot" style="background:var(--c2)"></i>8:30 스터디</span>'
            +'<span class="chip"><i class="dot" style="background:var(--c1)"></i>13:00 월간 보고</span>'
            +'<span class="chip"><i class="dot" style="background:var(--c3)"></i>19:00 독서모임</span>'
            +'<span class="chip more">+2</span></div>'); },
   head:  function(){ return card('<div class="pad"></div>',
-           '<span class="hdnext">● 9/4 (금) 8:30 안과</span>'); },
+           '<span class="hdnext">● 9/4 (금) 8:30 스터디</span>'); },
 
   what1: function(){ return card('<div class="strip"><span class="lab">다음</span><span class="dot"></span>'
-           +'<span class="t"><span class="w1">9/4 (금) 8:30</span>&nbsp;&nbsp;안과</span></div>'); },
+           +'<span class="t"><span class="w1">9/4 (금) 8:30</span>&nbsp;&nbsp;스터디</span></div>'); },
   what2: function(){ return card('<div class="strip"><span class="lab">다음</span><span class="dot"></span>'
-           +'<span class="t"><span class="w1">사흘 뒤</span>&nbsp;&nbsp;안과</span></div>'); },
+           +'<span class="t"><span class="w1">사흘 뒤</span>&nbsp;&nbsp;스터디</span></div>'); },
   what3: function(){ return card('<div class="strip"><span class="lab">다음</span><span class="dot"></span>'
-           +'<span class="t"><span class="w1">사흘 뒤 · 8:30</span>&nbsp;&nbsp;안과</span></div>'); },
+           +'<span class="t"><span class="w1">사흘 뒤 · 8:30</span>&nbsp;&nbsp;스터디</span></div>'); },
   what4: function(){ return card('<div class="strip"><span class="lab">다음</span>'
            +'<span class="dot" style="background:var(--c3)"></span>'
            +'<span class="t"><span class="w1">9/24 (목) 종일</span>&nbsp;&nbsp;추석</span></div>'); },
 
   bare:  function(){ return card('<div class="strip bare">'+LINE+'</div>'); },
   edge:  function(){ return card('<div class="strip edge"><i class="vbar"></i>'
-           +'<span class="t"><span class="w1">9/4 (금) 8:30</span>&nbsp;&nbsp;안과</span></div>'); },
-  twoln: function(){ return card('<div class="two"><span class="a">8:30 안과</span>'
+           +'<span class="t"><span class="w1">9/4 (금) 8:30</span>&nbsp;&nbsp;스터디</span></div>'); },
+  twoln: function(){ return card('<div class="two"><span class="a">8:30 스터디</span>'
            +'<span class="b">9/4 (금) · 사흘 뒤</span></div>'); }
 };
 
