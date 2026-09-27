@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 470" width="900" height="470" role="img" aria-label="프레임은 종류 1바이트와 길이 4바이트 머리에 몸이 붙는 꼴이고, 종류는 다섯 가지다">
+  <style>
+    :root {
+    --paper: #ffffff;
+    --lane: #f2f3f4;
+    --lane2: #eaebed;
+    --face: #f6f7f8;
+    --ink: #1c1e21;
+    --ink2: #52565c;
+    --ink3: #797e85;
+    --line: #c3c6ca;
+    --edge: #dcdee1;
+    --mark: #8a6a3c;
+    --markface: #f3ece1;
+    --markink: #6f532a;
+    --dark: #1c1e21;
+    --darkink: #e9eaec;
+    --bad: #b0453a;
+    --badface: #f8ecea;
+    --good: #2f6b4c;
+    --goodface: #e9f1ec;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+      --paper: #16171a;
+      --lane: #1e2024;
+      --lane2: #25272c;
+      --face: #202226;
+      --ink: #e9eaec;
+      --ink2: #a9adb3;
+      --ink3: #868b92;
+      --line: #4a4e55;
+      --edge: #33363c;
+      --mark: #c79a5c;
+      --markface: #2d2519;
+      --markink: #d9b077;
+      --dark: #e9eaec;
+      --darkink: #16171a;
+      --bad: #d4796d;
+      --badface: #2d1f1d;
+      --good: #7db898;
+      --goodface: #1b2621;
+      }
+    }
+    text { font-family: system-ui, -apple-system, sans-serif; }
+    .m { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+  <rect width="900" height="470" fill="var(--paper)"/>
+  <text x="40" y="44" text-anchor="start" font-size="17" font-weight="700" fill="var(--ink)">프레임 하나가 이렇게 생겼다</text>
+  <rect x="40" y="74" width="96" height="96" rx="10" fill="var(--markface)" stroke="var(--mark)" stroke-width="1.5"/>
+  <text x="88.0" y="100" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">종류</text>
+  <text x="88.0" y="121" text-anchor="middle" font-size="11.5" font-weight="400" fill="var(--ink3)">1바이트</text>
+  <text x="88.0" y="150" text-anchor="middle" font-size="13" font-weight="600" fill="var(--markink)" class="m">01</text>
+  <rect x="144" y="74" width="268" height="96" rx="10" fill="var(--markface)" stroke="var(--mark)" stroke-width="1.5"/>
+  <text x="278.0" y="100" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">길이</text>
+  <text x="278.0" y="121" text-anchor="middle" font-size="11.5" font-weight="400" fill="var(--ink3)">4바이트, big-endian</text>
+  <text x="278.0" y="150" text-anchor="middle" font-size="13" font-weight="600" fill="var(--markink)" class="m">00 00 0C 80</text>
+  <rect x="420" y="74" width="440" height="96" rx="10" fill="var(--face)" stroke="var(--edge)" stroke-width="1.5"/>
+  <text x="640.0" y="100" text-anchor="middle" font-size="15" font-weight="700" fill="var(--ink)">몸</text>
+  <text x="640.0" y="121" text-anchor="middle" font-size="11.5" font-weight="400" fill="var(--ink3)">길이만큼, 최대 1MB</text>
+  <text x="640.0" y="150" text-anchor="middle" font-size="13" font-weight="600" fill="var(--ink2)" class="m">PCM 3,200바이트 = 0.1초치</text>
+  <path d="M40 180 V 190 H 412 V 180" stroke="var(--line)" stroke-width="2" fill="none"/>
+  <text x="226.0" y="210" text-anchor="middle" font-size="12.5" font-weight="600" fill="var(--ink2)">머리 6바이트</text>
+  <text x="40" y="242" text-anchor="start" font-size="13" font-weight="400" fill="var(--ink2)">TCP 는 바이트 흐름이라 알아서 잘라 주지 않는다 — 길이가 앞에 있어야 소리를 나눠 보내며 경계를 잃지 않는다.</text>
+  <text x="40" y="274" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">종류는 다섯</text>
+  <rect x="32" y="292" width="836" height="28" rx="7" fill="var(--face)"/>
+  <text x="60" y="311" text-anchor="end" font-size="12.5" font-weight="400" fill="var(--ink3)" class="m">1</text>
+  <text x="78" y="311" text-anchor="start" font-size="13" font-weight="700" fill="var(--ink)" class="m">AUDIO</text>
+  <text x="298" y="311" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">폰 → 맥</text>
+  <text x="388" y="311" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">PCM 16비트 조각</text>
+  <text x="60" y="341" text-anchor="end" font-size="12.5" font-weight="400" fill="var(--ink3)" class="m">2</text>
+  <text x="78" y="341" text-anchor="start" font-size="13" font-weight="700" fill="var(--ink)" class="m">STATUS</text>
+  <text x="298" y="341" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">폰 → 맥</text>
+  <text x="388" y="341" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">{"state":"recording"}</text>
+  <rect x="32" y="352" width="836" height="28" rx="7" fill="var(--face)"/>
+  <text x="60" y="371" text-anchor="end" font-size="12.5" font-weight="400" fill="var(--ink3)" class="m">3</text>
+  <text x="78" y="371" text-anchor="start" font-size="13" font-weight="700" fill="var(--ink)" class="m">RECORDING_END</text>
+  <text x="298" y="371" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">폰 → 맥</text>
+  <text x="388" y="371" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">폰 쪽 파일 경로와 크기</text>
+  <text x="60" y="401" text-anchor="end" font-size="12.5" font-weight="400" fill="var(--ink3)" class="m">4</text>
+  <text x="78" y="401" text-anchor="start" font-size="13" font-weight="700" fill="var(--ink)" class="m">RECORDING_CANCEL</text>
+  <text x="298" y="401" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">폰 → 맥</text>
+  <text x="388" y="401" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">같은 정보 — 양쪽에서 지운다</text>
+  <rect x="32" y="412" width="836" height="28" rx="7" fill="var(--face)"/>
+  <text x="60" y="431" text-anchor="end" font-size="12.5" font-weight="400" fill="var(--ink3)" class="m">16</text>
+  <text x="78" y="431" text-anchor="start" font-size="13" font-weight="700" fill="var(--ink)" class="m">COMMAND</text>
+  <text x="298" y="431" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">맥 → 폰</text>
+  <text x="388" y="431" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">start stop cancel toggle status</text>
+</svg>
