@@ -121,9 +121,12 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
   {/* 화면을 크게 보는 판. 열릴 때까지 비어 있다 */}
   <dialog class="shotbox" aria-label="화면 크게 보기">
     <button class="shotbox-x" type="button" aria-label="닫기">✕</button>
-    <button class="shotbox-p" type="button" aria-label="앞 화면">‹</button>
-    <figure><img alt="" /><figcaption /></figure>
-    <button class="shotbox-n" type="button" aria-label="다음 화면">›</button>
+    <div class="shotbox-fig">
+      <img alt="" />
+      <p class="shotbox-cap"></p>
+      {/* 여러 장이면 썸네일로 넘긴다. 한 장이면 비어 있다 */}
+      <div class="shotbox-th" role="tablist" aria-label="이 편의 화면들"></div>
+    </div>
   </dialog>
 </Base>
 
@@ -176,9 +179,31 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
     const lb = document.querySelector<HTMLDialogElement>('.shotbox');
     if (!lb) return;
     const img = lb.querySelector('img')!;
-    const cap = lb.querySelector('figcaption')!;
+    const cap = lb.querySelector('.shotbox-cap')!;
+    const rail = lb.querySelector('.shotbox-th')!;
     let group: HTMLButtonElement[] = [];
     let at = 0;
+
+    /** 그 카드의 화면들을 썸네일 줄로 세운다 — 판을 열 때 한 번 */
+    function rebuild() {
+      rail.textContent = '';
+      // 한 장뿐이면 넘길 것이 없으니 줄 자체를 세우지 않는다
+      lb.classList.toggle('one', group.length < 2);
+      if (group.length < 2) return;
+      group.forEach((b, i) => {
+        const t = document.createElement('button');
+        t.type = 'button';
+        t.className = 'shotbox-t';
+        t.dataset.i = String(i);
+        t.setAttribute('role', 'tab');
+        t.setAttribute('aria-label', b.dataset.label || `화면 ${i + 1}`);
+        const im = document.createElement('img');
+        im.src = b.dataset.src!;
+        im.alt = '';
+        t.append(im);
+        rail.append(t);
+      });
+    }
 
     function show(i: number) {
       const b = group[(i + group.length) % group.length];
@@ -187,8 +212,10 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
       img.src = b.dataset.src!;
       img.alt = b.dataset.label || '';
       cap.textContent = [b.dataset.of, b.dataset.label].filter(Boolean).join(' — ');
-      // 한 장뿐이면 넘길 단추를 감춘다
-      lb.classList.toggle('one', group.length < 2);
+      rail.querySelectorAll('.shotbox-t').forEach((t, j) => {
+        t.classList.toggle('on', j === at);
+        t.setAttribute('aria-selected', String(j === at));
+      });
     }
 
     document.querySelector('.cards')?.addEventListener('click', e => {
@@ -197,13 +224,16 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
       // 끌어서 민 직후의 클릭은 확대가 아니다
       if (b.closest('.shotrow')?.classList.contains('dragged')) return;
       group = [...b.closest('.shotrow')!.querySelectorAll<HTMLButtonElement>('.shotrow-i')];
+      rebuild();
       show(group.indexOf(b));
       lb.showModal();
     });
 
     lb.querySelector('.shotbox-x')!.addEventListener('click', () => lb.close());
-    lb.querySelector('.shotbox-p')!.addEventListener('click', () => show(at - 1));
-    lb.querySelector('.shotbox-n')!.addEventListener('click', () => show(at + 1));
+    rail.addEventListener('click', e => {
+      const t = (e.target as HTMLElement).closest<HTMLButtonElement>('.shotbox-t');
+      if (t) show(Number(t.dataset.i));
+    });
     lb.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
       if (e.key === 'ArrowRight') { e.preventDefault(); show(at + 1); }

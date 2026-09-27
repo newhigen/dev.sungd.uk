@@ -45,5 +45,10 @@ main 에 머지하면 `.github/workflows/deploy.yml` 이 GitHub Pages 로 올린
 
 ## ⚠ 경고
 
+- **`site.css` 는 한 벌뿐이라 흔한 이름이 남의 화면까지 잡는다.** 새 덩이에는 그 덩이
+  전용 접두어를 붙이고(`.shotbox-*` 처럼), 태그 이름(`figure`·`button`)이나 두세 글자
+  클래스를 그대로 쓰지 않는다. 지금까지 `.cap`·`.lb`·`.shots`·`figure img`·`.shotbox button`
+  다섯 번 부딪혔고, 마지막 둘은 확대 판 그림의 비율을 깨고 썸네일 줄을 흐름에서 빼 버렸다.
+  빌드는 멀쩡히 지나가니 **화면을 헤드리스로 재서 확인한다.**
 - 프로젝트 페이지를 새로 쓰거나 고칠 땐 `personal-project-page` 스킬을 따른다.
 - 옛 주소 `resume.sungd.uk/projects/*` 에서 넘기는 장치는 없다. 필요하면 Cloudflare 에서 건다.
