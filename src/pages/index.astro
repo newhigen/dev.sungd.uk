@@ -100,16 +100,7 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
                 </div>
                 {/* 아래는 글 — 누르면 그 편으로 간다 */}
                 <a class="body" href={`/${p.id}`}>
-                  <div class="nm">
-                    {d.title}
-                    {d.platform.length > 0 && (
-                      <span class="plat">
-                        {d.platform.map((k) => (
-                          <img src={`/i/${k}.svg`} alt={PLAT_NAME[k]} title={PLAT_NAME[k]} />
-                        ))}
-                      </span>
-                    )}
-                  </div>
+                  <div class="nm">{d.title}</div>
                   <p class="ds">{d.tagline}</p>
                   {/* 같이 쓰는 편 — 짝이 없는 카드도 한 줄 몫을 비워 둔다.
                       안 그러면 짝 있는 카드만 길어져 아래 줄이 어긋난다
@@ -119,8 +110,20 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
                       <>{i > 0 && ', '}↳ <b>{w.title}</b>{w.gwa} 함께</>
                     ))}
                   </p>
+                  {/* 플랫폼 아이콘은 제목 줄이 아니라 여기 선다 — 제목 옆에 두면
+                      좁은 칸에서 제목이 접히거나 아이콘만 다음 줄로 떨어진다
+                      (2026-09-28 폰 두 열) */}
                   <div class="mt">
-                    <span class="chip-g">{d.purpose}</span>
+                    <span class="mt-l">
+                      <span class="chip-g">{d.purpose}</span>
+                      {d.platform.length > 0 && (
+                        <span class="plat">
+                          {d.platform.map((k) => (
+                            <img src={`/i/${k}.svg`} alt={PLAT_NAME[k]} title={PLAT_NAME[k]} />
+                          ))}
+                        </span>
+                      )}
+                    </span>
                     <span class="when">{ym(d.period)}</span>
                   </div>
                 </a>
