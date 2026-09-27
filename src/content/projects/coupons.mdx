@@ -16,11 +16,10 @@ use:
   - "쿠폰이 통하는 가게 근처에 3분 넘게 머물면 알림"
 ---
 
-import Fig from '../../components/Fig.astro';
 import Panel from '../../components/Panel.astro';
+import Mark from '../../components/Mark.astro';
 import Next from '../../components/Next.astro';
 import Story from '../../components/Story.astro';
-import Strip from '../../components/Strip.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel label="생활 앱"
@@ -34,11 +33,7 @@ import Cases from '../../components/Cases.astro';
   src="/p/coupons/list.png" srcDark="/p/coupons/list-dark.png"
   alt="기한이 가까운 것부터 선 쿠폰 목록" />
 
-기한이 가까운 것부터. 로고로 가게 먼저, 남은 날은 「모레까지」 처럼 말로.
-
-<Next items={[
-  { tab: "개발기", title: "문자 권한을 걷어낸 날", href: "/coupons/making" },
-]} />
+기한이 가까운 것부터 「사흘 안 · 이번 달 · 한 달 뒤」 로 묶는다. 로고로 가게 먼저, 남은 날은 「모레까지」 처럼 말로. 알림은 D-7 · D-1 아침과 주말에 몰아서.
 
 ## 하루 타임라인
 
@@ -50,35 +45,32 @@ import Cases from '../../components/Cases.astro';
   { at: "토요일 09:00", what: "그 주에 기한이 걸린 것을 <b>한 번에 몰아서</b> 알림. 평일엔 D-7 · D-1 만." },
 ]} />
 
-## 주요 기능
-
-### 넣는 길 셋
-
-문자 · 메일 **공유**, 복사해 두면 앱을 열 때 맨 위에 제안, 기프티콘 **그림** 선택. 그림은 폰 안에서 바코드 · 글자
-인식(ML Kit), 인터넷 미사용. 셋 다 값이 채워진 편집 화면으로 연결.
-
-### 계산대 화면
-
-번호로 **바코드를 다시 그림** — 원본 확대보다 리더기 인식률이 높음. 화면 밝기 최대. 원본 그림 · 문자는 바로 아래에
-펼쳐 한 화면에서 확인.
-
-### 기한 알림
-
-D-7 · D-1 아침, 주말엔 그 주 것을 몰아서. 목록은 「사흘 안 · 이번 달 · 한 달 뒤 · 기한 없음」 으로 묶어 급한 것이 맨 위.
-
-### 근처 알림
-
-들고 있는 쿠폰의 가게를 카카오 로컬에서 찾아 둘레 2.5km 안에 지오펜스. 집 · 회사 둘레 500m 는 제외.
-「근처 찾기」 로 지금 걸린 가게와 걸어서 몇 분인지 확인.
-
 ## 화면
 
-<Strip items={[
-  { src: "/p/coupons/list.png", label: "목록", note: "기한이 가까운 것부터" },
-  { src: "/p/coupons/register.png", label: "계산대", note: "번호를 바코드로 다시 그림" },
-  { src: "/p/coupons/nearby.png", label: "근처", note: "지금 걸려 있는 가게" },
-  { src: "/p/coupons/add.png", label: "넣기", note: "읽은 값을 고쳐 저장" },
-]} />
+<Mark src="/p/coupons/add.png" alt="쿠폰 넣기 화면"
+  marks={[
+    { at: [0, 16], text: "문자 · 메일 공유, 복사해 둔 글, 기프티콘 그림 — 셋 다 이 화면으로" },
+    { at: [0, 31], side: "right", text: "읽은 값이 채워진 채로 열린다. 고쳐서 저장" },
+    { at: [0, 81], text: "번호를 바코드로 그릴지 여기서" },
+  ]}
+  caption="그림은 폰 안에서 바코드와 글자를 읽는다(ML Kit). 인터넷을 쓰지 않는다." />
+
+<Mark src="/p/coupons/register.png" alt="계산대 화면"
+  marks={[
+    { at: [0, 9], side: "right", text: "남은 날은 말로 — 사흘 안이면 빨강" },
+    { at: [0, 34], text: "번호로 바코드를 다시 그림" },
+    { at: [0, 64], side: "right", text: "원본 그림과 문자는 바로 아래" },
+  ]}
+  caption="원본을 확대하는 것보다 리더기 인식률이 높다. 열면 화면 밝기가 최대로." />
+
+<Mark src="/p/coupons/nearby.png" alt="근처 찾기 화면"
+  marks={[
+    { at: [0, 13], text: "들고 있는 쿠폰의 가게를 가까운 순으로" },
+    { at: [0, 23], side: "right", text: "시험 삼아 울려 보기" },
+    { at: [0, 33], side: "right", text: "걸어서 몇 분인지" },
+    { at: [0, 41], text: "가게마다 걸린 쿠폰" },
+  ]}
+  caption="가게 둘레 2.5km 안에 지오펜스. 집 · 회사 둘레 500m 는 뺀다." />
 
 ## 자세한 동작
 
@@ -92,3 +84,7 @@ D-7 · D-1 아침, 주말엔 그 주 것을 몰아서. 목록은 「사흘 안 �
 
 갤럭시 S25+ 한 대용. 스토어 미등록, `assembleDebug` → `adb install`. Android 12(minSdk 31) 이상.
 근처 알림엔 카카오 로컬 REST 키 필요 — 설정 화면에 입력, 없어도 나머지는 동작. 문자 권한은 없음(개발기 참고).
+
+<Next items={[
+  { tab: "개발기", title: "문자 권한을 걷어낸 날", href: "/coupons/making" },
+]} />
