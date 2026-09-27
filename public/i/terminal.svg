@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><rect x="2" y="3.6" width="20" height="16.8" rx="3" fill="#211F1B"/><path d="M6.6 9.4 9.6 12l-3 2.6M12.6 15.1h5" fill="none" stroke="#E8E0D0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <style>
+    /* 터미널은 검은 창이 곧 정체성이라 색을 뒤집지 않는다.
+       밤 판에서 바탕에 묻히지 않게 테두리만 두른다 */
+    .win { fill: #211f1b; stroke: none }
+    @media (prefers-color-scheme: dark) { .win { stroke: #6f6a61; stroke-width: 1.4 } }
+  </style>
+  <rect class="win" x="2.7" y="4.3" width="18.6" height="15.4" rx="2.6"/>
+  <path d="M6.6 9.4 9.6 12l-3 2.6M12.6 15.1h5" fill="none" stroke="#e8e0d0" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
