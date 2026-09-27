@@ -308,9 +308,10 @@ a.prow:hover .rn { color: var(--link); }
 
 .doc-body {
   display: grid;
-  grid-template-columns: 13rem minmax(0, 1fr);
+  /* 난 208 + 빈틈 56 이 본문 앞에서 264px 를 먹어 카드가 오른쪽으로 132px 쏠렸다 */
+  grid-template-columns: 9.5rem minmax(0, 1fr);
   /* 칸 안의 그림 원래 크기가 칸을 밀지 않게 — 없으면 폰에서 가로로 넘친다 */
-  gap: 0 3.5rem;
+  gap: 0 2.2rem;
   padding-top: 0.8rem;
 }
 .doc-body > * { min-width: 0; }
@@ -330,20 +331,29 @@ a.prow:hover .rn { color: var(--link); }
 .doc-body > .prose > figure.phone { margin-left: 0; margin-right: 0; }
 
 .rail {
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   color: var(--ink-3);
-  line-height: 1.7;
+  line-height: 1.6;
 }
 .rail dl { margin: 0; }
 .rail dt { color: var(--ink-3); margin-top: 0.9rem; }
 .rail dt:first-child { margin-top: 0; }
 .rail dd { margin: 0; color: var(--ink-2); }
 .rail dd.when { font-family: var(--mono); }
+/* 스택 칩 — 가운뎃점으로 이으면 좁은 난에서 이름 가운데가 끊긴다(「One / UI」) */
+.stk { display: flex; flex-wrap: wrap; gap: 0.28rem; margin-top: 0.15rem; }
+.stk span {
+  display: inline-flex; align-items: center; gap: 0.26rem;
+  padding: 0.14rem 0.42rem; border-radius: 6px;
+  background: color-mix(in srgb, var(--ink) 5%, transparent);
+  font-size: 0.8125rem; line-height: 1.5; color: var(--ink-2); white-space: nowrap;
+}
+.stk svg { width: 0.8rem; height: 0.8rem; flex: none; fill: currentColor; }
 .rail a { color: var(--link); text-decoration: none; }
 .rail a:hover { text-decoration: underline; }
 .rail ul {
   list-style: none;
-  margin: 1.8rem 0 0;
+  margin: 1.4rem 0 0;
 }
 .rail li { display: flex; gap: 0.45rem; margin-bottom: 0.3rem; }
 .rail li::before { content: "—"; color: var(--ink-3); flex-shrink: 0; }

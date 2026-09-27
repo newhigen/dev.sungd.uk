@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>왼쪽 난과 절 구분</title>
+<link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
+<style>
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+:root {
+  --ink: #1C1E23; --sub: #6B7079; --face: #F4F5F7;
+  --acc: #2B59C3; --acc-bg: #EAF0FC; --line: #E3E1EC;
+  --d1: #DCE5F7; --d2: #A9BEEA; --d3: #6D8FD8;
+  --body: "Wanted Sans Variable", "Wanted Sans", -apple-system, system-ui, sans-serif;
+  --title: "Paperlogy", var(--body);
+  --scale: 0.30;
+  --frame-w: 1280px;
+  --frame-h: 2400px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 28px 24px 56px; background: #fff; color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  word-break: keep-all; font-variant-numeric: tabular-nums;
+}
+h1 { margin: 0 0 6px; font-family: var(--title); font-size: 1.5rem; font-weight: 600; }
+h2.sec { margin: 34px 0 2px; font-family: var(--title); font-size: 1.1875rem; font-weight: 600; }
+.lede { margin: 0 0 4px; color: var(--sub); font-size: 0.9375rem; }
+.lede b { color: var(--ink); font-weight: 600; }
+.wrap { max-width: 1240px; margin: 0 auto; }
+
+.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.col > h3 { margin: 0 0 2px; font-family: var(--title); font-size: 1rem; font-weight: 600; display: flex; align-items: baseline; gap: 0.35rem; }
+.col > h3 em { font-style: normal; font-size: 0.8125rem; font-weight: 400; color: var(--sub); }
+.col.rec > h3::after { content: "추천"; padding: 0.1rem 0.4rem; border-radius: 20px; background: var(--acc-bg); color: var(--acc); font-size: 0.6875rem; font-weight: 600; }
+.col > p { margin: 0 0 9px; font-size: 0.8125rem; line-height: 1.55; color: var(--sub); min-height: 3.2em; }
+.col > p b { color: var(--ink); font-weight: 600; }
+
+.shot {
+  position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 10px;
+  background: #e6e3f0;
+  width: calc(var(--frame-w) * var(--scale));
+  height: calc(var(--frame-h) * var(--scale));
+  max-width: 100%;
+}
+.shot iframe { width: var(--frame-w); height: var(--frame-h); border: 0; transform: scale(var(--scale)); transform-origin: 0 0; }
+.open { display: inline-block; margin-top: 7px; font-size: 0.8125rem; color: var(--acc); text-decoration: none; }
+.open:hover { text-decoration: underline; }
+
+table { border-collapse: collapse; margin-top: 14px; font-size: 0.875rem; }
+th, td { padding: 0.4rem 0.9rem 0.4rem 0; text-align: left; }
+th { font-weight: 600; color: var(--sub); font-size: 0.8125rem; }
+tbody tr + tr td { border-top: 1px solid var(--line); }
+td.n { text-align: right; padding-right: 1.2rem; }
+.bar { display: inline-block; height: 0.6rem; border-radius: 3px; vertical-align: 0; }
+.note { margin-top: 22px; padding: 14px 16px; background: var(--face); border-radius: 10px; font-size: 0.875rem; color: var(--sub); }
+.note b { color: var(--ink); font-weight: 600; }
+.note ul { margin: 6px 0 0; padding-left: 1.1rem; }
+.note li { margin: 3px 0; }
+@media (max-width: 1260px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>왼쪽 난과 절 구분</h1>
+  <p class="lede">판 <b>G</b> 를 고정해 두고 둘레만 바꿔 본 것. 창 1280px 에서 본문 카드가 <b>오른쪽으로 132px 쏠려</b> 있고, 글이 실제로 서는 폭은 1136 중 640(56%)다.</p>
+
+  <h2 class="sec">왼쪽 난</h2>
+  <p class="lede">난은 208px, 그 뒤 빈틈이 56px — 둘이 본문 앞에서 264px 를 먹는다.</p>
+
+  <div class="grid">
+    <div class="col">
+      <h3>L1 <em>지금</em></h3>
+      <p>난 208 + 빈틈 56. 카드가 오른쪽으로 <b>132px</b> 쏠린다.</p>
+      <div class="shot"><iframe src="http://localhost:4410/x-l1.html" loading="lazy" title="L1"></iframe></div>
+      <a class="open" href="http://localhost:4410/x-l1.html" target="_blank">크게 보기 →</a>
+    </div>
+    <div class="col rec">
+      <h3>L2 <em>난을 좁게</em></h3>
+      <p>난 152 + 빈틈 35, 글자도 한 단계 작게. 쏠림이 <b>94px</b> 로 준다. 손대는 곳이 CSS 두 줄.</p>
+      <div class="shot"><iframe src="http://localhost:4410/x-l2.html" loading="lazy" title="L2"></iframe></div>
+      <a class="open" href="http://localhost:4410/x-l2.html" target="_blank">크게 보기 →</a>
+    </div>
+    <div class="col">
+      <h3>L3 <em>난을 바깥으로</em></h3>
+      <p>난을 카드 왼쪽 <b>바깥 여백</b>에 띄우고 카드를 화면 폭에 맞춘다. 쏠림 <b>0</b>. 대신 좁은 화면에서 난이 잘린다.</p>
+      <div class="shot"><iframe src="http://localhost:4410/x-l3.html" loading="lazy" title="L3"></iframe></div>
+      <a class="open" href="http://localhost:4410/x-l3.html" target="_blank">크게 보기 →</a>
+    </div>
+  </div>
+
+  <table>
+    <thead><tr><th>판</th><th class="n">카드 왼쪽</th><th class="n">카드 폭</th><th class="n">글 폭</th><th class="n">쏠림</th><th>카드가 차지하는 자리</th></tr></thead>
+    <tbody>
+      <tr><td>L1 지금</td><td class="n">336</td><td class="n">872</td><td class="n">640</td><td class="n">오른쪽 132</td><td><i class="bar" style="width:68px;background:var(--d1)"></i><i class="bar" style="width:177px;background:var(--d3)"></i></td></tr>
+      <tr><td>L2 좁게</td><td class="n">259</td><td class="n">949</td><td class="n">640</td><td class="n">오른쪽 94</td><td><i class="bar" style="width:53px;background:var(--d1)"></i><i class="bar" style="width:192px;background:var(--d3)"></i></td></tr>
+      <tr><td>L3 바깥</td><td class="n">72</td><td class="n">1136</td><td class="n">640</td><td class="n">0</td><td><i class="bar" style="width:245px;background:var(--d3)"></i></td></tr>
+    </tbody>
+  </table>
+  <p class="lede" style="margin-top:8px;font-size:0.8125rem">옅은 칸이 난, 짙은 칸이 본문 카드. <b>글 폭 640 은 셋 다 같다</b> — 카드가 넓어져도 글줄은 안 길어지고 카드 안 여백만 는다.</p>
+
+  <h2 class="sec">절 구분</h2>
+  <p class="lede">가로선은 쓰지 않는다. 층은 크기와 여백으로 내되, 지금은 <b>제목 색과 크기만</b>으로 갈린다.</p>
+
+  <div class="grid">
+    <div class="col">
+      <h3>S1 <em>지금</em></h3>
+      <p>제목이 황토색 + 큰 글자. 그 위 여백으로만 갈린다.</p>
+      <div class="shot"><iframe src="http://localhost:4410/x-l1.html" loading="lazy" title="S1"></iframe></div>
+      <a class="open" href="http://localhost:4410/x-l1.html" target="_blank">크게 보기 →</a>
+    </div>
+    <div class="col rec">
+      <h3>S2 <em>절 번호</em></h3>
+      <p>제목 왼쪽 여백에 <b>01 02 03</b>. 지금 몇 번째 덩이인지, 몇 개나 남았는지가 보인다.</p>
+      <div class="shot"><iframe src="http://localhost:4410/x-s2.html" loading="lazy" title="S2"></iframe></div>
+      <a class="open" href="http://localhost:4410/x-s2.html" target="_blank">크게 보기 →</a>
+    </div>
+    <div class="col">
+      <h3>S3 <em>제목 내어쓰기</em></h3>
+      <p>제목만 본문보다 왼쪽으로 나온다. 글줄이 시작하는 자리가 하나 더 생겨 층이 눈에 걸린다.</p>
+      <div class="shot"><iframe src="http://localhost:4410/x-s3.html" loading="lazy" title="S3"></iframe></div>
+      <a class="open" href="http://localhost:4410/x-s3.html" target="_blank">크게 보기 →</a>
+    </div>
+  </div>
+
+  <div class="note">
+    <b>둘은 따로 고를 수 있다.</b> 난 폭과 절 구분은 서로 안 건드린다 — <a class="open" href="http://localhost:4410/x-gx.html" target="_blank" style="margin:0">L2 + S2 를 같이 건 판</a> 도 구워 뒀다.
+    <ul>
+      <li><b>L2</b> 는 CSS 두 줄이라 되돌리기 쉽다. <b>L3</b> 는 좁은 화면 규칙을 새로 써야 한다.</li>
+      <li><b>S2</b> 의 번호는 자동으로 매겨진다 — 편마다 손댈 게 없다.</li>
+      <li><b>S3</b> 는 내어쓴 만큼 카드 왼쪽 여백이 필요해 L3 와 같이 쓰면 잘릴 수 있다.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>

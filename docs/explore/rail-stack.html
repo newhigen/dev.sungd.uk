@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>난의 스택 줄</title>
+<link href="https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css" rel="stylesheet">
+<style>
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+:root {
+  --ink: #1C1E23; --sub: #6B7079; --face: #F4F5F7;
+  --acc: #2B59C3; --acc-bg: #EAF0FC; --line: #E3E1EC;
+  --body: "Wanted Sans Variable", "Wanted Sans", -apple-system, system-ui, sans-serif;
+  --title: "Paperlogy", var(--body);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; padding: 28px 24px 56px; background: #fff; color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.6;
+  word-break: keep-all; font-variant-numeric: tabular-nums;
+}
+h1 { margin: 0 0 6px; font-family: var(--title); font-size: 1.5rem; font-weight: 600; }
+h2.sec { margin: 32px 0 4px; font-family: var(--title); font-size: 1.1875rem; font-weight: 600; }
+.lede { margin: 0 0 4px; color: var(--sub); font-size: 0.9375rem; }
+.lede b { color: var(--ink); font-weight: 600; }
+.wrap { max-width: 1180px; margin: 0 auto; }
+
+.grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin-top: 18px; }
+.col > h3 { margin: 0 0 2px; font-family: var(--title); font-size: 1rem; font-weight: 600; display: flex; align-items: baseline; gap: 0.35rem; }
+.col > h3 em { font-style: normal; font-size: 0.8125rem; font-weight: 400; color: var(--sub); }
+.col.rec > h3::after { content: "추천"; padding: 0.1rem 0.4rem; border-radius: 20px; background: var(--acc-bg); color: var(--acc); font-size: 0.6875rem; font-weight: 600; }
+.col > p { margin: 0 0 10px; font-size: 0.8125rem; line-height: 1.55; color: var(--sub); min-height: 4.6em; }
+.col > p b { color: var(--ink); font-weight: 600; }
+
+/* 난만 1:1 로 잘라 본다 — 로고는 줄여 보면 판단이 안 된다 */
+.shot { position: relative; overflow: hidden; border: 1px solid var(--line); border-radius: 10px; width: 100%; height: 420px; }
+.shot iframe { position: absolute; width: 1280px; height: 1100px; border: 0; left: -62px; top: -285px; }
+.open { display: inline-block; margin-top: 7px; font-size: 0.8125rem; color: var(--acc); text-decoration: none; }
+.open:hover { text-decoration: underline; }
+
+table { border-collapse: collapse; margin-top: 12px; font-size: 0.875rem; }
+th, td { padding: 0.4rem 1rem 0.4rem 0; text-align: left; vertical-align: top; }
+th { font-weight: 600; color: var(--sub); font-size: 0.8125rem; }
+tbody tr + tr td { border-top: 1px solid var(--line); }
+.note { margin-top: 22px; padding: 14px 16px; background: var(--face); border-radius: 10px; font-size: 0.875rem; color: var(--sub); }
+.note b { color: var(--ink); font-weight: 600; }
+.note ul { margin: 6px 0 0; padding-left: 1.1rem; }
+.note li { margin: 3px 0; }
+@media (max-width: 1100px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>난의 스택 줄</h1>
+  <p class="lede">난을 좁히자 <b>「One UI」가 「One / UI」로 쪼개졌다</b> — 가운뎃점으로 이은 글줄이라 공백에서 끊긴다. 칩으로 묶으면 이름 단위로 줄이 넘어간다.</p>
+  <p class="lede">로고는 simple-icons 에서 path 만 뽑아 컴포넌트에 박았다. 요청 0, 파일 하나.</p>
+
+  <div class="grid">
+    <div class="col">
+      <h3>R1 <em>지금</em></h3>
+      <p>가운뎃점으로 이은 글줄. 좁은 난에서 <b>이름 가운데가 끊긴다.</b></p>
+      <div class="shot"><iframe src="http://localhost:4410/r-r1.html" loading="lazy" title="R1"></iframe></div>
+      <a class="open" href="http://localhost:4410/r-r1.html" target="_blank">크게 보기 →</a>
+    </div>
+    <div class="col">
+      <h3>R2 <em>칩만</em></h3>
+      <p>이름마다 옅은 칩. 줄바꿈이 해결되고 <b>몇 개인지</b> 가 보인다. 로고는 안 쓴다.</p>
+      <div class="shot"><iframe src="http://localhost:4410/r-r2.html" loading="lazy" title="R2"></iframe></div>
+      <a class="open" href="http://localhost:4410/r-r2.html" target="_blank">크게 보기 →</a>
+    </div>
+    <div class="col">
+      <h3>R3 <em>칩 + 먹색 로고</em></h3>
+      <p>로고가 있는 것만 붙이고 <b>글자와 같은 색</b>으로. 색이 늘지 않아 난이 조용하다.</p>
+      <div class="shot"><iframe src="http://localhost:4410/r-r3.html" loading="lazy" title="R3"></iframe></div>
+      <a class="open" href="http://localhost:4410/r-r3.html" target="_blank">크게 보기 →</a>
+    </div>
+    <div class="col rec">
+      <h3>R4 <em>칩 + 브랜드색</em></h3>
+      <p>로고를 <b>제 색</b>으로. 안드로이드 초록, 코틀린 보라가 난에서 바로 읽힌다. 색이 있는 건 로고뿐이다.</p>
+      <div class="shot"><iframe src="http://localhost:4410/r-r4.html" loading="lazy" title="R4"></iframe></div>
+      <a class="open" href="http://localhost:4410/r-r4.html" target="_blank">크게 보기 →</a>
+    </div>
+  </div>
+
+  <h2 class="sec">로고가 있는 것은 절반이 안 된다</h2>
+  <p class="lede">열두 편의 스택에 든 이름은 연 49개, 겹치는 것을 빼면 28개다. 그중 로고를 붙일 수 있는 건 8개, 나머지 20개는 칩만 선다.</p>
+
+  <table>
+    <thead><tr><th>로고가 있다 (8)</th><th>로고가 없다 (20)</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Android · Kotlin · Python · Swift · Node.js · Bash · Chrome Extension · Claude Code</td>
+        <td>CLI · Claude Code 훅 · ElevenLabs · JD 분석 · ML Kit · One UI · Open-Meteo · Textual · WebSocket · Whisper · launchd · peon-ping · pmset · 기상청 · 날씨 · 위젯 · 지오펜스 · 채용 공고 · 카카오 로컬 · 캘린더</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="note">
+    <b>스택에 기술이 아닌 것이 섞여 있다.</b> 「날씨」·「기상청」·「채용 공고」·「캘린더」·「JD 분석」은 스택이 아니라 그 편이 다루는 <b>소재</b>다. 스택 줄에서 빼면 로고 없는 칩이 눈에 띄게 준다.
+    <ul>
+      <li>스택은 지금 <b>난의 한 줄에만</b> 쓰인다 — 목록 필터도 검색도 아니라, 빼거나 고쳐도 깨질 곳이 없다.</li>
+      <li>소재를 빼면 편마다 칩이 서넛으로 줄고, 그중 절반이 로고를 갖는다.</li>
+    </ul>
+  </div>
+</div>
+</body>
+</html>
