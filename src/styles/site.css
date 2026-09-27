@@ -1914,7 +1914,9 @@ figcaption {
   align-items: flex-end;
   gap: 0.4rem;
   min-height: 6rem;
-  padding: 0 calc(1.25rem - 1px);
+  /* 위 4px 는 호버로 2px 떠오른 그림 몫 — overflow-y 가 hidden 이라
+     여유가 없으면 떠오른 만큼 위가 잘린다 */
+  padding: 4px calc(1.25rem - 1px) 0;
   margin-bottom: 0.85rem;
   overflow-x: auto;
   overflow-y: hidden;
