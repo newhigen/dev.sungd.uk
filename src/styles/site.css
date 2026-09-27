@@ -1956,7 +1956,10 @@ figcaption {
 
 /* 화면을 크게 보는 판 */
 .shotbox {
-  width: min(92vw, 60rem);
+  /* 판이 그림에 맞춰 줄어든다 — 세로 폰 화면 한 장에 60rem 짜리 흰 판을 두르면
+     그림은 가운데에 조금 서고 양옆이 비었다 */
+  width: fit-content;
+  max-width: min(92vw, 60rem);
   max-height: 90vh;
   padding: 1.2rem;
   border: 0;
@@ -1965,33 +1968,59 @@ figcaption {
   color: var(--ink);
   box-shadow: 0 18px 60px rgba(20, 22, 26, 0.32);
 }
-.shotbox::backdrop { background: rgba(33, 31, 27, 0.55); }
-.shotbox figure { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; margin: 0; }
+.shotbox::backdrop { background: rgba(20, 22, 26, 0.55); }
+.shotbox-fig { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
 .shotbox img {
-  max-width: 100%;
-  max-height: 74vh;
+  /* 크기는 그림이 정한다. <figure> 를 쓰지 않는 까닭도 이것 —
+     글 기둥용 `figure img { width: 100% }` 가 폭을 44rem 에 고정하고 높이만 눌러
+     세로 화면 열네 장의 비율이 최대 2.9배 어긋났다 */
+  width: auto;
+  height: auto;
+  max-width: min(88vw, 54rem);
+  /* 판 전체가 90vh 안에 들어가야 한다 — 설명 줄과 썸네일 줄 몫(10rem)을 빼 둔다.
+     그냥 74vh 로 두면 썸네일 줄이 판 밖으로 잘렸다 */
+  max-height: min(74vh, calc(90vh - 10rem));
   border-radius: 10px;
   border: 1px solid var(--rule);
   background: #fff;
 }
-.shotbox figcaption { font-size: 0.875rem; color: var(--ink-2); }
-.shotbox button {
+.shotbox-cap { margin: 0; font-size: 0.875rem; color: var(--ink-2); }
+.shotbox-x {
   position: absolute;
   border: 0;
   border-radius: 999px;
-  background: var(--chip);
-  color: var(--ink);
+  /* 판이 그림에 딱 맞게 줄어들어 이 단추는 늘 그림 위에 얹힌다 —
+     판 색을 따라가면 밤 판에서 흐려지니 고정 색으로 둔다 */
+  background: rgba(20, 22, 26, 0.55);
+  color: #fff;
   font-size: 1.1rem;
   line-height: 1;
   width: 2.2rem;
   height: 2.2rem;
   cursor: pointer;
 }
-.shotbox button:hover { background: var(--chip-stuck); }
+.shotbox-x:hover { background: rgba(20, 22, 26, 0.75); }
 .shotbox-x { top: 0.7rem; right: 0.7rem; }
-.shotbox-p { left: 0.7rem; top: 50%; transform: translateY(-50%); }
-.shotbox-n { right: 0.7rem; top: 50%; transform: translateY(-50%); }
-.shotbox.one .shotbox-p, .shotbox.one .shotbox-n { display: none; }
+
+/* 썸네일 줄 — 여러 장일 때만 선다. 넘기는 단추 대신 어디쯤인지도 같이 보인다 */
+.shotbox-th { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
+.shotbox.one .shotbox-th { display: none; }
+.shotbox-t {
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  border-radius: 7px;
+  line-height: 0;
+  opacity: 0.55;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  transition: opacity 0.12s ease, outline-color 0.12s ease;
+}
+.shotbox-t img { display: block; height: 3.4rem; width: auto; border-radius: 6px;
+  border: 1px solid var(--rule); background: var(--card); }
+.shotbox-t:hover { opacity: 0.85; }
+.shotbox-t.on { opacity: 1; outline-color: var(--link); }
 
 /* 카드 여백 — 화면 5.5rem, 설명은 두 줄까지. 일곱 장이 고르게 선다 */
 .card { padding: 0.9rem 0 0.85rem; }
