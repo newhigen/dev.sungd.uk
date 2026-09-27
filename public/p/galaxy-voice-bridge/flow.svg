@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 1350" width="980" height="1350" role="img" aria-label="핫키 헬퍼와 수신 서버와 브리지 서비스 셋이 한 소켓으로 붙어 Option+Space 한 번을 커서 자리의 글로 옮기는 흐름">
+  <style>
+    :root {
+    --paper: #ffffff;
+    --lane: #f2f3f4;
+    --lane2: #eaebed;
+    --face: #f6f7f8;
+    --ink: #1c1e21;
+    --ink2: #52565c;
+    --ink3: #797e85;
+    --line: #c3c6ca;
+    --edge: #dcdee1;
+    --mark: #8a6a3c;
+    --markface: #f3ece1;
+    --markink: #6f532a;
+    --dark: #1c1e21;
+    --darkink: #e9eaec;
+    --bad: #b0453a;
+    --badface: #f8ecea;
+    --good: #2f6b4c;
+    --goodface: #e9f1ec;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+      --paper: #16171a;
+      --lane: #1e2024;
+      --lane2: #25272c;
+      --face: #202226;
+      --ink: #e9eaec;
+      --ink2: #a9adb3;
+      --ink3: #868b92;
+      --line: #4a4e55;
+      --edge: #33363c;
+      --mark: #c79a5c;
+      --markface: #2d2519;
+      --markink: #d9b077;
+      --dark: #e9eaec;
+      --darkink: #16171a;
+      --bad: #d4796d;
+      --badface: #2d1f1d;
+      --good: #7db898;
+      --goodface: #1b2621;
+      }
+    }
+    text { font-family: system-ui, -apple-system, sans-serif; }
+    .m { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+  <rect width="980" height="1350" fill="var(--paper)"/>
+  <rect x="30" y="124" width="292" height="1144" rx="18" fill="var(--lane)"/>
+  <g><rect x="121.0" y="58.0" width="110.1" height="44.0" rx="22" fill="var(--dark)"/><text x="176.0" y="80.0" text-anchor="middle" dominant-baseline="central" font-size="19" font-weight="700" fill="var(--darkink)">핫키 헬퍼</text></g>
+  <text x="176.0" y="122" text-anchor="middle" font-size="13" font-weight="400" fill="var(--ink3)">맥에 사는 Swift 앱</text>
+  <rect x="344" y="124" width="292" height="1144" rx="18" fill="var(--lane)"/>
+  <g><rect x="435.0" y="58.0" width="110.1" height="44.0" rx="22" fill="var(--dark)"/><text x="490.0" y="80.0" text-anchor="middle" dominant-baseline="central" font-size="19" font-weight="700" fill="var(--darkink)">수신 서버</text></g>
+  <text x="490.0" y="122" text-anchor="middle" font-size="13" font-weight="400" fill="var(--ink3)">맥에 사는 파이썬</text>
+  <rect x="658" y="124" width="292" height="1144" rx="18" fill="var(--lane2)"/>
+  <g><rect x="732.5" y="58.0" width="143.0" height="44.0" rx="22" fill="var(--mark)"/><text x="804.0" y="80.0" text-anchor="middle" dominant-baseline="central" font-size="19" font-weight="700" fill="var(--markface)">브리지 서비스</text></g>
+  <text x="804.0" y="122" text-anchor="middle" font-size="13" font-weight="400" fill="var(--ink3)">폰에 사는 포그라운드 서비스</text>
+  <g><rect x="45" y="150" width="262" height="74" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="59" y="175" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">Option+Space 를 잡는다</text>
+   <text x="59" y="194" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">맥 스피커를 음소거한다</text>
+   <text x="59" y="211" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">맥에서 나는 소리가 폰 마이크로 들어가니까</text>
+  </g>
+  <path d="M176.0 230 V 232 q0 16 16 16 H 474.0 q16 0 16 16 V 233" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M484.5 233 H 495.5 L 490.0 242 Z" fill="var(--line)"/>
+  <g><rect x="359" y="242" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="373" y="267" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">COMMAND start 를 보낸다</text>
+   <text x="373" y="286" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">제어 포트는 127.0.0.1 에만 묶여 있다</text>
+  </g>
+  <path d="M490.0 305 V 307 q0 16 16 16 H 788.0 q16 0 16 16 V 325" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M798.5 325 H 809.5 L 804.0 334 Z" fill="var(--line)"/>
+  <g><rect x="673" y="334" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="687" y="359" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">오디오 포커스를 빌린다</text>
+   <text x="687" y="378" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">TRANSIENT_EXCLUSIVE — 음악이 멈춘다</text>
+  </g>
+  <path d="M804.0 397 V 417" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M798.5 417 H 809.5 L 804.0 426 Z" fill="var(--line)"/>
+  <g><rect x="673" y="426" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="687" y="451" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">STATUS recording</text>
+   <text x="687" y="470" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">녹음이 시작됐다고 맥에 알린다</text>
+  </g>
+  <path d="M804.0 489 V 509" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M798.5 509 H 809.5 L 804.0 518 Z" fill="var(--line)"/>
+  <g><rect x="673" y="518" width="262" height="74" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="687" y="543" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">16kHz PCM 을 끊어 보낸다</text>
+   <text x="687" y="562" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">0.1초치씩 — 폰에도 wav 로 남긴다</text>
+   <text x="687" y="579" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">소켓이 끊겨도 소리는 안 잃는다</text>
+  </g>
+  <path d="M804.0 598 V 600 q0 16 -16 16 H 506.0 q-16 0 -16 16 V 601" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M484.5 601 H 495.5 L 490.0 610 Z" fill="var(--line)"/>
+  <g><rect x="359" y="610" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="373" y="635" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">wav 로 쌓는다</text>
+   <text x="373" y="654" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">40ms 마다 음량을 파일로 낸다</text>
+  </g>
+  <path d="M353 638.5 H 316" stroke="var(--mark)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M316 633.0 V 644.0 L 307 638.5 Z" fill="var(--mark)"/>
+  <g><rect x="45" y="610" width="262" height="57" rx="10" fill="var(--markface)" stroke="var(--mark)" stroke-width="1.5"/>
+   <text x="59" y="635" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">캡슐에 파형이 선다</text>
+   <text x="59" y="654" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">그 음량 파일을 캡슐이 읽는다</text>
+  </g>
+  <path d="M490.0 673 V 675 q0 16 -16 16 H 192.0 q-16 0 -16 16 V 693" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M170.5 693 H 181.5 L 176.0 702 Z" fill="var(--line)"/>
+  <g><rect x="45" y="702" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="59" y="727" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">다시 Option+Space</text>
+   <text x="59" y="746" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">취소는 Escape — 그때만 잡고 끝나면 뗀다</text>
+  </g>
+  <path d="M176.0 765 V 767 q0 16 16 16 H 474.0 q16 0 16 16 V 785" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M484.5 785 H 495.5 L 490.0 794 Z" fill="var(--line)"/>
+  <g><rect x="359" y="794" width="262" height="40" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="373" y="819" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">COMMAND stop</text>
+  </g>
+  <path d="M490.0 840 V 842 q0 16 16 16 H 788.0 q16 0 16 16 V 877" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M798.5 877 H 809.5 L 804.0 886 Z" fill="var(--line)"/>
+  <g><rect x="673" y="886" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="687" y="911" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">포커스를 놓는다</text>
+   <text x="687" y="930" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">멈춰 있던 쪽이 스스로 이어서 난다</text>
+  </g>
+  <path d="M804.0 949 V 969" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M798.5 969 H 809.5 L 804.0 978 Z" fill="var(--line)"/>
+  <g><rect x="673" y="978" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="687" y="1003" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">RECORDING_END</text>
+   <text x="687" y="1022" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">폰 쪽 파일 경로와 크기를 실어 보낸다</text>
+  </g>
+  <path d="M804.0 1041 V 1043 q0 16 -16 16 H 506.0 q-16 0 -16 16 V 1061" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M484.5 1061 H 495.5 L 490.0 1070 Z" fill="var(--line)"/>
+  <g><rect x="359" y="1070" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="373" y="1095" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">Handy 에 넘긴다</text>
+   <text x="373" y="1114" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">wav 경로를 주고 글을 받는다</text>
+  </g>
+  <path d="M490.0 1133 V 1135 q0 16 -16 16 H 192.0 q-16 0 -16 16 V 1153" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M170.5 1153 H 181.5 L 176.0 1162 Z" fill="var(--line)"/>
+  <g><rect x="45" y="1162" width="262" height="57" rx="10" fill="var(--paper)" stroke="var(--edge)" stroke-width="1.5"/>
+   <text x="59" y="1187" text-anchor="start" font-size="15" font-weight="700" fill="var(--ink)">커서 자리에 붙인다</text>
+   <text x="59" y="1206" text-anchor="start" font-size="12.5" font-weight="400" fill="var(--ink2)">글 파일과 신호를 받아 Cmd+V 를 합성한다</text>
+  </g>
+  <rect x="273.9" y="238.0" width="118.2" height="20" rx="10" fill="var(--paper)"/>
+  <text x="333.0" y="252" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink2)">toggle 한 줄, 8767</text>
+  <rect x="569.6" y="313.0" width="154.8" height="20" rx="10" fill="var(--paper)"/>
+  <text x="647.0" y="327" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink2)">COMMAND 프레임, 8766</text>
+  <rect x="583.4" y="606.0" width="127.1" height="20" rx="10" fill="var(--paper)"/>
+  <text x="647.0" y="620" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink2)">AUDIO 프레임 수백 개</text>
+  <rect x="292.6" y="773.0" width="80.8" height="20" rx="10" fill="var(--paper)"/>
+  <text x="333.0" y="787" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink2)">toggle 한 줄</text>
+  <rect x="588.7" y="848.0" width="116.5" height="20" rx="10" fill="var(--paper)"/>
+  <text x="647.0" y="862" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink2)">COMMAND 프레임</text>
+  <rect x="587.0" y="1049.0" width="119.9" height="20" rx="10" fill="var(--paper)"/>
+  <text x="647.0" y="1063" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink2)">AUDIO 를 다 받은 뒤</text>
+  <rect x="287.2" y="1141.0" width="91.7" height="20" rx="10" fill="var(--paper)"/>
+  <text x="333.0" y="1155" text-anchor="middle" font-size="12" font-weight="600" fill="var(--ink2)">글과 SIGUSR1</text>
+  <path d="M176.0 1225 V 1249" stroke="var(--line)" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M170.5 1249 H 181.5 L 176.0 1258 Z" fill="var(--line)"/>
+  <g><rect x="90.5" y="1258.0" width="170.9" height="38.0" rx="19" fill="var(--dark)"/><text x="176.0" y="1277.0" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="700" fill="var(--darkink)">앞에 있는 앱의 커서 자리</text></g>
+</svg>

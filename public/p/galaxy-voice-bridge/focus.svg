@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 430" width="900" height="430" role="img" aria-label="전에는 마이크를 잡은 부수효과로 음악이 멈춰 되살릴 주체가 없었고, 이제는 포커스를 빌렸다 놓아 상대가 스스로 이어서 난다">
+  <style>
+    :root {
+    --paper: #ffffff;
+    --lane: #f2f3f4;
+    --lane2: #eaebed;
+    --face: #f6f7f8;
+    --ink: #1c1e21;
+    --ink2: #52565c;
+    --ink3: #797e85;
+    --line: #c3c6ca;
+    --edge: #dcdee1;
+    --mark: #8a6a3c;
+    --markface: #f3ece1;
+    --markink: #6f532a;
+    --dark: #1c1e21;
+    --darkink: #e9eaec;
+    --bad: #b0453a;
+    --badface: #f8ecea;
+    --good: #2f6b4c;
+    --goodface: #e9f1ec;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+      --paper: #16171a;
+      --lane: #1e2024;
+      --lane2: #25272c;
+      --face: #202226;
+      --ink: #e9eaec;
+      --ink2: #a9adb3;
+      --ink3: #868b92;
+      --line: #4a4e55;
+      --edge: #33363c;
+      --mark: #c79a5c;
+      --markface: #2d2519;
+      --markink: #d9b077;
+      --dark: #e9eaec;
+      --darkink: #16171a;
+      --bad: #d4796d;
+      --badface: #2d1f1d;
+      --good: #7db898;
+      --goodface: #1b2621;
+      }
+    }
+    text { font-family: system-ui, -apple-system, sans-serif; }
+    .m { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+  <rect width="900" height="430" fill="var(--paper)"/>
+  <rect x="30" y="34" width="412" height="362" rx="16" fill="var(--lane)" stroke="var(--edge)" stroke-width="1.5"/>
+  <text x="50" y="66" text-anchor="start" font-size="16" font-weight="700" fill="var(--bad)">전 — 빼앗았다</text>
+  <text x="50" y="87" text-anchor="start" font-size="12" font-weight="400" fill="var(--ink2)">포커스를 다루는 코드가 한 줄도 없었다</text>
+  <rect x="50" y="104" width="372" height="58" rx="9" fill="var(--face)" stroke="var(--edge)" stroke-width="1.2"/>
+  <text x="64" y="128" text-anchor="start" font-size="13.5" font-weight="700" fill="var(--ink)">녹음 시작</text>
+  <text x="64" y="148" text-anchor="start" font-size="12" font-weight="400" fill="var(--ink2)">VOICE_RECOGNITION 으로 마이크를 연다</text>
+  <path d="M236.0 162 V 173" stroke="var(--line)" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M230.5 173 H 241.5 L 236.0 182 Z" fill="var(--line)"/>
+  <rect x="50" y="182" width="372" height="58" rx="9" fill="var(--face)" stroke="var(--edge)" stroke-width="1.2"/>
+  <text x="64" y="206" text-anchor="start" font-size="13.5" font-weight="700" fill="var(--ink)">안드로이드</text>
+  <text x="64" y="226" text-anchor="start" font-size="12" font-weight="400" fill="var(--ink2)">마이크를 연 쪽이 있으니 음악을 눌러 준다</text>
+  <path d="M236.0 240 V 251" stroke="var(--line)" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M230.5 251 H 241.5 L 236.0 260 Z" fill="var(--line)"/>
+  <rect x="50" y="260" width="372" height="58" rx="9" fill="var(--badface)" stroke="var(--edge)" stroke-width="1.2"/>
+  <text x="64" y="284" text-anchor="start" font-size="13.5" font-weight="700" fill="var(--ink)">녹음 끝</text>
+  <text x="64" y="304" text-anchor="start" font-size="12" font-weight="400" fill="var(--ink2)">요청한 적이 없으니 되살릴 주체도 없다</text>
+  <path d="M236.0 338 V 349" stroke="var(--bad)" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M230.5 349 H 241.5 L 236.0 358 Z" fill="var(--bad)"/>
+  <g><rect x="147.6" y="362.0" width="176.8" height="34.0" rx="17" fill="var(--badface)"/><text x="236.0" y="379.0" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="var(--bad)">스포티파이는 멈춘 채 남는다</text></g>
+  <rect x="478" y="34" width="412" height="362" rx="16" fill="var(--lane)" stroke="var(--edge)" stroke-width="1.5"/>
+  <text x="498" y="66" text-anchor="start" font-size="16" font-weight="700" fill="var(--good)">후 — 빌렸다 놓는다</text>
+  <text x="498" y="87" text-anchor="start" font-size="12" font-weight="400" fill="var(--ink2)" class="m">AUDIOFOCUS_GAIN_TRANSIENT_EXCLUSIVE</text>
+  <rect x="498" y="104" width="372" height="58" rx="9" fill="var(--face)" stroke="var(--edge)" stroke-width="1.2"/>
+  <text x="512" y="128" text-anchor="start" font-size="13.5" font-weight="700" fill="var(--ink)">녹음 시작</text>
+  <text x="512" y="148" text-anchor="start" font-size="12" font-weight="400" fill="var(--ink2)">포커스를 빌리고 wake lock 도 같이 얻는다</text>
+  <path d="M684.0 162 V 173" stroke="var(--line)" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M678.5 173 H 689.5 L 684.0 182 Z" fill="var(--line)"/>
+  <rect x="498" y="182" width="372" height="58" rx="9" fill="var(--face)" stroke="var(--edge)" stroke-width="1.2"/>
+  <text x="512" y="206" text-anchor="start" font-size="13.5" font-weight="700" fill="var(--ink)">안드로이드</text>
+  <text x="512" y="226" text-anchor="start" font-size="12" font-weight="400" fill="var(--ink2)">멈추라고 알린다 — 줄이는 선택은 없다</text>
+  <path d="M684.0 240 V 251" stroke="var(--line)" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M678.5 251 H 689.5 L 684.0 260 Z" fill="var(--line)"/>
+  <rect x="498" y="260" width="372" height="58" rx="9" fill="var(--goodface)" stroke="var(--edge)" stroke-width="1.2"/>
+  <text x="512" y="284" text-anchor="start" font-size="13.5" font-weight="700" fill="var(--ink)">녹음 끝</text>
+  <text x="512" y="304" text-anchor="start" font-size="12" font-weight="400" fill="var(--ink2)">abandonAudioFocusRequest 로 놓는다</text>
+  <path d="M684.0 338 V 349" stroke="var(--good)" stroke-width="2.5" fill="none" stroke-linecap="round"/><path d="M678.5 349 H 689.5 L 684.0 358 Z" fill="var(--good)"/>
+  <g><rect x="584.4" y="362.0" width="199.3" height="34.0" rx="17" fill="var(--goodface)"/><text x="684.0" y="379.0" text-anchor="middle" dominant-baseline="central" font-size="13" font-weight="700" fill="var(--good)">스포티파이가 스스로 이어서 난다</text></g>
+</svg>
