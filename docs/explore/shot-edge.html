@@ -1,0 +1,144 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>스크린샷 테두리 처리</title>
+<style>
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+:root{
+  --bg:#eff0f1;--card:#fff;--shadow:0 2px 20px rgba(20,22,26,.07);
+  --ink:#1c1e21;--ink-2:#52565c;--ink-3:#6c7076;--accent:#8a6a3c;
+  --rule:rgba(28,30,33,.09);--rule-mid:rgba(28,30,33,.18);
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --mono:"Google Sans Code",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:#dcdee0;color:var(--ink);font:16.5px/1.6 var(--body);word-break:keep-all;-webkit-font-smoothing:antialiased}
+.wrap{max-width:70rem;margin:0 auto;padding:2.6rem 2rem 5rem}
+h1{font-family:var(--title);font-size:1.9rem;font-weight:700;margin:0 0 .4rem}
+.lede{color:var(--ink-2);margin:0 0 .4rem;max-width:48rem}
+.note{font-size:.88rem;color:var(--ink-3);margin:0 0 2.2rem;max-width:48rem}
+
+.v{margin-top:2.4rem}
+.vt{font-family:var(--title);font-size:1.15rem;font-weight:600;color:var(--accent);margin:0}
+.vq{margin:.15rem 0 .9rem;color:var(--ink-2);font-size:.9rem;max-width:52rem}
+.stage{display:flex;gap:1.6rem;align-items:flex-start;flex-wrap:wrap;
+  background:var(--bg);border-radius:12px;padding:1.4rem 1.5rem;box-shadow:0 6px 24px rgba(20,22,26,.14)}
+
+/* 카드 썸네일 — site.css 의 .card .shotrow-i 값 그대로 */
+.thumb{flex:none;line-height:0;padding:0;border:1px solid var(--rule-mid);border-radius:.5rem;
+  background:#fff;box-shadow:0 1px 5px rgba(20,22,26,.12);overflow:hidden}
+.thumb img{display:block;height:5.5rem;width:auto;max-width:7.5rem;object-fit:cover;object-position:top left}
+/* 4배로 확대해 귀퉁이를 본다 */
+.zoom{flex:none;width:200px;height:200px;overflow:hidden;border-radius:10px;
+  border:1px solid var(--rule);background:#fff;position:relative}
+.zoom > div{position:absolute;top:0;left:0;transform:scale(4);transform-origin:0 0}
+.lbl{font-family:var(--mono);font-size:.72rem;color:var(--ink-3);margin-top:.5rem;line-height:1.4}
+
+/* 판마다 다른 처리 */
+.p-none .thumb{border:0;border-radius:0;box-shadow:none}
+.p-tight img{object-position:-6px -6px}
+.take{margin:.7rem 0 0;font-size:.88rem;color:var(--ink-2);max-width:52rem}
+.take b{color:var(--ink);font-weight:600}
+</style>
+</head><body><div class="wrap">
+
+<h1>스크린샷 테두리 처리</h1>
+<p class="lede">그림 속 앱에도 둥근 모서리와 바깥 여백이 있고, 카드 썸네일도 둥근 테두리(8px)를 두른다. 두 겹이 겹치면 귀퉁이에 애매한 띠가 남는다.</p>
+<p class="note">왼쪽은 실제 크기 썸네일, 오른쪽은 왼쪽 위 귀퉁이를 4배로 확대한 것. 그림은 김포공항 착석 웹 판(바깥 여백이 넓은 쪽)과 책 구하기 첫 화면.</p>
+
+<div class="v">
+  <p class="vt">지금 — 그대로</p>
+  <p class="vq">그림이 앱 바깥 여백까지 담고 있어, 테두리 안쪽에 그 바탕색이 한 겹 더 보인다.</p>
+  <div class="stage">
+    <div>
+      <span class="thumb"><img src="../../public/p/gimpo-seat/web.png" alt=""></span>
+      <div class="lbl">web.png</div>
+    </div>
+    <div>
+      <div class="zoom"><div><span class="thumb"><img src="../../public/p/gimpo-seat/web.png" alt=""></span></div></div>
+      <div class="lbl">귀퉁이 4배</div>
+    </div>
+    <div>
+      <span class="thumb"><img src="../../public/p/book-hunt/main.png" alt=""></span>
+      <div class="lbl">main.png</div>
+    </div>
+    <div>
+      <div class="zoom"><div><span class="thumb"><img src="../../public/p/book-hunt/main.png" alt=""></span></div></div>
+      <div class="lbl">귀퉁이 4배</div>
+    </div>
+  </div>
+  <p class="take"><b>남는 것</b> 둥근 테두리 → 앱 바깥 여백 → 앱 카드의 둥근 모서리. 세 겹이 한 귀퉁이에 모인다.</p>
+</div>
+
+<div class="v">
+  <p class="vt">A — 여백을 잘라 내용이 모서리까지 차게</p>
+  <p class="vq">그림에서 앱 바깥 여백을 걷어내면 테두리 안쪽이 내용으로 찬다. 여기서는 확대로 흉내 냈고, 실제로는 찍을 때 잘라낸다.</p>
+  <div class="stage p-tight">
+    <div>
+      <span class="thumb"><img src="../../public/p/gimpo-seat/web.png" alt=""></span>
+      <div class="lbl">web.png</div>
+    </div>
+    <div>
+      <div class="zoom"><div><span class="thumb"><img src="../../public/p/gimpo-seat/web.png" alt=""></span></div></div>
+      <div class="lbl">귀퉁이 4배</div>
+    </div>
+    <div>
+      <span class="thumb"><img src="../../public/p/book-hunt/main.png" alt=""></span>
+      <div class="lbl">main.png</div>
+    </div>
+    <div>
+      <div class="zoom"><div><span class="thumb"><img src="../../public/p/book-hunt/main.png" alt=""></span></div></div>
+      <div class="lbl">귀퉁이 4배</div>
+    </div>
+  </div>
+  <p class="take"><b>얻는 것</b> 겹이 하나 준다. <b>잃는 것</b> 앱마다 여백이 달라 그림마다 따로 재야 하고, 화면 가장자리 요소가 잘릴 수 있다.</p>
+</div>
+
+<div class="v">
+  <p class="vt">B — 썸네일에서 테두리와 모서리를 뺀다</p>
+  <p class="vq">그림이 이미 제 테두리를 갖고 있으니 사이트는 얹지 않는다. 그림자만 남긴다.</p>
+  <div class="stage p-none">
+    <div>
+      <span class="thumb"><img src="../../public/p/gimpo-seat/web.png" alt=""></span>
+      <div class="lbl">web.png</div>
+    </div>
+    <div>
+      <div class="zoom"><div><span class="thumb"><img src="../../public/p/gimpo-seat/web.png" alt=""></span></div></div>
+      <div class="lbl">귀퉁이 4배</div>
+    </div>
+    <div>
+      <span class="thumb"><img src="../../public/p/book-hunt/main.png" alt=""></span>
+      <div class="lbl">main.png</div>
+    </div>
+    <div>
+      <div class="zoom"><div><span class="thumb"><img src="../../public/p/book-hunt/main.png" alt=""></span></div></div>
+      <div class="lbl">귀퉁이 4배</div>
+    </div>
+  </div>
+  <p class="take"><b>얻는 것</b> 겹이 없다. <b>잃는 것</b> 바탕이 흰 그림은 카드와 경계가 사라져 어디까지가 화면인지 안 보인다 — 오른쪽 book-hunt 가 그렇다.</p>
+</div>
+
+<div class="v">
+  <p class="vt">C — 찍을 때 앱의 둥근 모서리를 편다</p>
+  <p class="vq">캡처 직전에 그 요소의 border-radius 를 0 으로 둔다. 그림은 꽉 찬 사각이 되고 사이트 테두리가 그대로 깎는다. 중고 상세에 이미 적용했다.</p>
+  <div class="stage">
+    <div>
+      <span class="thumb"><img src="../../public/p/book-hunt/used.png" alt=""></span>
+      <div class="lbl">used.png — 편 판</div>
+    </div>
+    <div>
+      <div class="zoom"><div><span class="thumb"><img src="../../public/p/book-hunt/used.png" alt=""></span></div></div>
+      <div class="lbl">귀퉁이 4배</div>
+    </div>
+  </div>
+  <p class="take"><b>얻는 것</b> 겹이 없고 경계도 남는다. <b>되는 자리</b> 내가 브라우저로 찍는 화면만 — 안드로이드 앱 스크린샷에는 못 쓴다.</p>
+</div>
+
+<div class="v">
+  <p class="vt">고르는 축</p>
+  <p class="vq">브라우저로 찍는 화면은 C 가 가장 깨끗하다. 폰 스크린샷처럼 이미 받아 둔 그림에는 A 나 B 가 남는다.</p>
+</div>
+
+</div></body></html>
