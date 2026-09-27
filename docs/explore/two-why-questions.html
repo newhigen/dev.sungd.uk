@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>책 구하기와 김포 착석 — 왜 만들었나 질문지</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+:root{--bg:#e6e3f0;--card:#fbfaff;--card-2:#dfe6f2;--shadow:0 2px 24px rgba(40,35,80,.08);--ink:#221f2b;--ink-2:#57536b;--ink-3:#6f6b85;--accent:#8a6a3c;--link:#4a4b93;
+--sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;--serif:"Noto Serif KR",Pretendard,serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.7 var(--sans);word-break:keep-all}
+.wrap{max-width:46rem;margin:0 auto;padding:3rem 1.2rem 8rem}
+h1{font-family:var(--serif);font-size:2rem;margin:0 0 .4rem}
+.lede{color:var(--ink-2);margin:0 0 2rem}
+.lede b{color:var(--ink)}
+.grp{font-family:var(--serif);font-size:1.3rem;margin:2.4rem 0 .9rem}
+.grp small{display:block;font-family:var(--sans);font-size:.82rem;font-weight:400;color:var(--ink-3);margin-top:.1rem}
+.q{background:var(--card);border-radius:14px;box-shadow:var(--shadow);padding:1.3rem 1.5rem 1.4rem;margin-bottom:1rem}
+.q .n{font-size:.75rem;font-weight:600;color:var(--accent)}
+.q h2{font-size:1.08rem;margin:.1rem 0 .2rem}
+.q .why{font-size:.8rem;color:var(--ink-3);margin:0 0 .8rem}
+.opts{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:.7rem}
+.opts label{cursor:pointer}
+.opts input{position:absolute;opacity:0;pointer-events:none}
+.opts span{display:inline-block;padding:.36rem .85rem;border-radius:999px;background:rgba(34,31,43,.08);font-size:.88rem;color:var(--ink-2)}
+.opts input:checked+span{background:var(--ink);color:var(--card)}
+textarea{width:100%;min-height:3.2rem;border:0;border-radius:10px;background:var(--card-2);padding:.6rem .8rem;font:inherit;font-size:.9rem;color:var(--ink);resize:vertical}
+textarea::placeholder{color:var(--ink-3)}
+.out{position:sticky;bottom:1rem;margin-top:1.6rem;background:var(--ink);color:var(--card);border-radius:14px;padding:1rem 1.2rem;box-shadow:0 8px 30px rgba(0,0,0,.2)}
+.out .top{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.out b{font-size:.9rem}
+.out button{font:inherit;font-size:.85rem;font-weight:600;border:0;border-radius:999px;padding:.4rem 1rem;background:var(--card);color:var(--ink);cursor:pointer}
+.out pre{margin:.6rem 0 0;white-space:pre-wrap;font:inherit;font-size:.8rem;color:#cfcbdc;max-height:9rem;overflow:auto}
+.use{font-size:.78rem;color:var(--ink-3);margin:.3rem 0 0}
+</style>
+</head>
+<body><div class="wrap">
+<h1>왜 만들었나 — 질문지</h1>
+<p class="lede">저장소 기록(README · HISTORY · 커밋)에 있는 것은 뺐다. 거기 없는 것만 묻는다 — <b>무엇을 쓰다가 어디서 막혔나.</b> 고르고, 모자라면 한 줄. 끝나면 아래 «복사» → 대화에 붙여넣기. 모르는 건 비워 두면 페이지에서 뺀다.</p>
+
+<form id="f">
+
+<div class="grp">책 구하기<small>book-hunt — 도서관, 중고매장, 온라인 중고, 새 책, 이북을 한 화면에</small></div>
+
+<section class="q">
+  <div class="n">1 · 쓰던 것</div>
+  <h2>이걸 만들기 전엔 책 한 권을 어디서 구할지 어떻게 알아봤어?</h2>
+  <p class="why">→ 「쓰던 것」 카드. 여러 개 골라도 된다.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a1" value="알라딘 앱·사이트"><span>알라딘 앱 · 사이트</span></label>
+    <label><input type="checkbox" name="a1" value="교보 앱·사이트"><span>교보 앱 · 사이트</span></label>
+    <label><input type="checkbox" name="a1" value="예스24"><span>예스24</span></label>
+    <label><input type="checkbox" name="a1" value="김포시도서관 사이트"><span>김포시도서관 사이트</span></label>
+    <label><input type="checkbox" name="a1" value="서울도서관·전자도서관"><span>서울도서관 · 전자도서관</span></label>
+    <label><input type="checkbox" name="a1" value="리디·밀리"><span>리디 · 밀리</span></label>
+    <label><input type="checkbox" name="a1" value="그냥 검색"><span>그냥 검색</span></label>
+    <label><input type="checkbox" name="a1" value="안 알아보고 그냥 샀다"><span>안 알아보고 그냥 샀다</span></label>
+  </div>
+  <textarea name="t1" placeholder="덧붙일 것 (예: 보통 어디부터 열었나, 몇 개를 열어 놓고 봤나)"></textarea>
+</section>
+
+<section class="q">
+  <div class="n">2 · 막힌 지점</div>
+  <h2>그중 제일 번거로웠던 장면 하나는?</h2>
+  <p class="why">→ 가장 큰 것 하나가 이 판의 훅이 된다. 실제로 있었던 일이면 더 좋다.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a2" value="탭을 여러 개 열어 놓고 비교"><span>탭 여러 개 열어 비교</span></label>
+    <label><input type="checkbox" name="a2" value="도서관에 있는지 매번 따로 확인"><span>도서관은 매번 따로</span></label>
+    <label><input type="checkbox" name="a2" value="중고매장 재고는 가 봐야 안다"><span>중고매장은 가 봐야 안다</span></label>
+    <label><input type="checkbox" name="a2" value="이북이 있는지 모르고 종이책을 삼"><span>이북 있는 줄 모르고 삼</span></label>
+    <label><input type="checkbox" name="a2" value="샀는데 알고 보니 도서관에 있었다"><span>샀는데 도서관에 있었다</span></label>
+    <label><input type="checkbox" name="a2" value="가격 비교가 귀찮아 그냥 정가로 삼"><span>귀찮아서 정가로 삼</span></label>
+  </div>
+  <textarea name="t2" placeholder="그때 무슨 책이었는지, 무엇이 아까웠는지 한 줄"></textarea>
+</section>
+
+<section class="q">
+  <div class="n">3 · 빈도</div>
+  <h2>책 한 권을 두고 이걸 하는 게 얼마나 자주야?</h2>
+  <p class="why">→ 숫자가 되면 「막힌 지점」에 크기가 생긴다.</p>
+  <div class="opts">
+    <label><input type="radio" name="a3" value="주 여러 번"><span>주 여러 번</span></label>
+    <label><input type="radio" name="a3" value="주 한 번쯤"><span>주 한 번쯤</span></label>
+    <label><input type="radio" name="a3" value="달 두세 번"><span>달 두세 번</span></label>
+    <label><input type="radio" name="a3" value="책 살 마음이 들 때만"><span>살 마음이 들 때만</span></label>
+  </div>
+  <textarea name="t3" placeholder="한 번에 몇 권을 보나, 주로 언제 (출근길? 자기 전?)"></textarea>
+</section>
+
+<section class="q">
+  <div class="n">4 · 순서의 까닭</div>
+  <h2>도서관 → 중고매장 → 온라인 중고 → 새 책 → 이북. 이 순서는 왜야?</h2>
+  <p class="why">→ 코드에 그 순서로 박혀 있는데 까닭은 기록에 없다. 「그래서 정한 것」이 된다.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a4" value="돈"><span>돈</span></label>
+    <label><input type="checkbox" name="a4" value="책이 쌓이는 게 싫다"><span>책이 쌓이는 게 싫다</span></label>
+    <label><input type="checkbox" name="a4" value="빨리 읽고 싶다"><span>빨리 읽고 싶다</span></label>
+    <label><input type="checkbox" name="a4" value="소장할 책과 한 번 읽을 책이 다르다"><span>소장할 책과 한 번 읽을 책이 다르다</span></label>
+    <label><input type="checkbox" name="a4" value="그때그때 다르다"><span>그때그때 다르다</span></label>
+  </div>
+  <textarea name="t4" placeholder="순서를 바꾸고 싶은 때가 있나 (급할 때 · 소장할 책일 때)"></textarea>
+</section>
+
+<section class="q">
+  <div class="n">5 · 전 → 후</div>
+  <h2>만들고 나서 실제로 달라진 것, 그리고 아직 안 되는 것.</h2>
+  <p class="why">→ 「달라진 것」과 「지금」. 안 되는 게 없으면 없다고 쓰면 된다.</p>
+  <textarea name="t5" placeholder="달라진 것 / 아직 안 되는 것"></textarea>
+</section>
+
+<div class="grp">김포 착석<small>gimpo-seat — 지금 나가면 몇 분 뒤에 앉는지, 그리고 출발 알람</small></div>
+
+<section class="q">
+  <div class="n">6 · 쓰던 것</div>
+  <h2>출근길에 앉으려고 전엔 뭘 했어?</h2>
+  <p class="why">→ 「쓰던 것」 카드. 웹 판(gimpo-table.html)이 있었던 건 기록으로 안다. 그 전이 궁금하다.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a6" value="그냥 일찍 나갔다"><span>그냥 일찍 나갔다</span></label>
+    <label><input type="checkbox" name="a6" value="감으로 시각을 잡았다"><span>감으로 시각을 잡았다</span></label>
+    <label><input type="checkbox" name="a6" value="웹 판을 아침에 열어 봤다"><span>웹 판을 열어 봤다</span></label>
+    <label><input type="checkbox" name="a6" value="지하철 앱의 혼잡도"><span>지하철 앱 혼잡도</span></label>
+    <label><input type="checkbox" name="a6" value="시계 앱 알람을 고정으로 맞춰 뒀다"><span>알람을 고정으로 맞춰 뒀다</span></label>
+    <label><input type="checkbox" name="a6" value="아무것도 안 했다"><span>아무것도 안 했다</span></label>
+  </div>
+  <textarea name="t6" placeholder="덧붙일 것 (예: 몇 시에 나가면 앉는다는 걸 어떻게 알았나)"></textarea>
+</section>
+
+<section class="q">
+  <div class="n">7 · 막힌 지점</div>
+  <h2>앉는 데 실패하던 장면은 어떤 거야?</h2>
+  <p class="why">→ 이 판의 훅. 「그날 몇 분 차이로 서서 갔다」 같은 실제 장면이 제일 좋다.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a7" value="몇 분 차이로 줄 뒤에 섰다"><span>몇 분 차이로 줄 뒤에</span></label>
+    <label><input type="checkbox" name="a7" value="일찍 나갔는데도 못 앉았다"><span>일찍 나갔는데도 못 앉음</span></label>
+    <label><input type="checkbox" name="a7" value="언제 나가야 하는지 매번 계산"><span>매번 계산해야 했다</span></label>
+    <label><input type="checkbox" name="a7" value="고른 시각을 시계 앱에 옮겨 적어야 했다"><span>시계 앱에 옮겨 적기</span></label>
+    <label><input type="checkbox" name="a7" value="늦으면 처음부터 다시 봐야 했다"><span>늦으면 처음부터 다시</span></label>
+  </div>
+  <textarea name="t7" placeholder="그때 어떻게 됐는지 한 줄"></textarea>
+</section>
+
+<section class="q">
+  <div class="n">8 · 앉는 게 중요한 까닭</div>
+  <h2>서서 가면 뭐가 문제야?</h2>
+  <p class="why">→ 이게 없으면 「앉는 편을 찾는다」가 왜 값진지 안 보인다.</p>
+  <div class="opts">
+    <label><input type="checkbox" name="a8" value="자려고"><span>자려고</span></label>
+    <label><input type="checkbox" name="a8" value="책을 읽으려고"><span>책을 읽으려고</span></label>
+    <label><input type="checkbox" name="a8" value="일하거나 글을 쓰려고"><span>일하거나 글 쓰려고</span></label>
+    <label><input type="checkbox" name="a8" value="폰으로 무언가 보려고"><span>폰으로 뭘 보려고</span></label>
+    <label><input type="checkbox" name="a8" value="오래 서 있는 게 힘들어서"><span>오래 서 있기 힘들어서</span></label>
+  </div>
+  <textarea name="t8" placeholder="앉으면 실제로 무엇을 하나, 편도 몇 분인가"></textarea>
+</section>
+
+<section class="q">
+  <div class="n">9 · 쓰는 때</div>
+  <h2>아침에 이 앱을 언제 열어?</h2>
+  <p class="why">→ 「열고 한 번 누르면 끝」이라는 설계의 근거가 된다.</p>
+  <div class="opts">
+    <label><input type="radio" name="a9" value="일어나자마자"><span>일어나자마자</span></label>
+    <label><input type="radio" name="a9" value="씻고 나서"><span>씻고 나서</span></label>
+    <label><input type="radio" name="a9" value="나가기 직전"><span>나가기 직전</span></label>
+    <label><input type="radio" name="a9" value="그날그날 다르다"><span>그날그날 다르다</span></label>
+  </div>
+  <textarea name="t9" placeholder="주 며칠 쓰나, 재택인 날은 어떤가"></textarea>
+</section>
+
+<section class="q">
+  <div class="n">10 · 전 → 후</div>
+  <h2>만들고 나서 실제로 달라진 것, 그리고 아직 안 되는 것.</h2>
+  <p class="why">→ 「달라진 것」과 「지금」. 실제로 앉는 비율이 늘었는지 체감이면 체감이라고 쓰면 된다.</p>
+  <textarea name="t10" placeholder="달라진 것 / 아직 안 되는 것"></textarea>
+</section>
+
+</form>
+
+<div class="out">
+  <div class="top"><b>답 모음</b><button type="button" id="copy">복사</button></div>
+  <pre id="pre">(아직 고른 것 없음)</pre>
+  <p class="use">복사한 글을 대화에 그대로 붙여넣으면 된다. 고른 값은 새로고침해도 남는다.</p>
+</div>
+</div>
+
+<script>
+const f = document.getElementById('f'), pre = document.getElementById('pre');
+const title = {
+  1:'[책] 쓰던 것', 2:'[책] 막힌 지점', 3:'[책] 빈도', 4:'[책] 순서의 까닭', 5:'[책] 전 → 후',
+  6:'[김포] 쓰던 것', 7:'[김포] 막힌 지점', 8:'[김포] 앉는 게 중요한 까닭', 9:'[김포] 쓰는 때', 10:'[김포] 전 → 후',
+};
+function text(){
+  const lines = [];
+  for (let k = 1; k <= 10; k++) {
+    const picks = [...f.querySelectorAll(`[name=a${k}]:checked`)].map(i => i.value);
+    const ta = f.querySelector(`[name=t${k}]`);
+    const t = ta ? ta.value.trim() : '';
+    if (!picks.length && !t) continue;
+    lines.push(`${k}. ${title[k]}: ${[...picks, t].filter(Boolean).join(' / ')}`);
+  }
+  return lines.join('\n');
+}
+function draw(){
+  pre.textContent = text() || '(아직 고른 것 없음)';
+  try { localStorage.setItem('two-why-q', JSON.stringify([...new FormData(f)])); } catch {}
+}
+f.addEventListener('input', draw);
+document.getElementById('copy').onclick = async () => {
+  try { await navigator.clipboard.writeText(text()); document.getElementById('copy').textContent = '복사됨'; } catch {}
+};
+try {
+  for (const [n, v] of JSON.parse(localStorage.getItem('two-why-q') || '[]')) {
+    const el = f.querySelector(`[name="${n}"][value="${CSS.escape(v)}"]`);
+    if (el) el.checked = true;
+    else { const ta = f.querySelector(`textarea[name="${n}"]`); if (ta) ta.value = v; }
+  }
+} catch {}
+draw();
+</script>
+</body></html>
