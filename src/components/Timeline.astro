@@ -165,6 +165,12 @@ const uid = 'tml-' + Math.random().toString(36).slice(2, 9);
       function fit() {
         var h = svg.getBoundingClientRect().height + VTOP + VBOT + 'px';
         wins.forEach(function (w) { w.style.top = -VTOP + 'px'; w.style.height = h; });
+        // 창은 축 위로 VTOP 만큼, 칩은 거기서 제 높이의 절반만큼 더 올라간다.
+        // 그만큼 상자에 패딩을 줘야 둘이 상자 안에 든다 — 트랙에 마진을 주면
+        // 상자와 겹쳐(margin collapsing) 상자째로 내려갈 뿐 자리가 안 생긴다
+        var chip = box.querySelector('.tml-win .chip');
+        var up = VTOP + (chip ? chip.getBoundingClientRect().height / 2 : 0);
+        box.style.paddingTop = Math.round(up) + 'px';
         // 양 끝에 반 칸씩 — 없으면 첫 항목과 마지막 둘이 창에 못 온다
         var half = sc.clientWidth / 2 - PAD;
         sc.style.paddingLeft = sc.style.paddingRight = Math.max(half, 0) + 'px';
