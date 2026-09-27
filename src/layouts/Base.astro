@@ -124,7 +124,7 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
       // 마우스로 잡아 끌어 미는 줄 — 트랙패드와 휠은 브라우저가 이미 해 준다.
       // 손을 뗀 뒤 눌린 것으로 오인되는 건 위 8px 가드가 막는다.
       (function () {
-        var SEL = '.tml-scroll, .reel-scroll';
+        var SEL = '.tml-scroll, .reel-scroll, .shotrow';
         var sc = null, x0 = 0, left0 = 0, moved = false, pid = null;
         document.addEventListener('pointerdown', function (e) {
           if (e.pointerType !== 'mouse' || e.button !== 0) return;
@@ -151,6 +151,12 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
         function end() {
           if (!sc) return;
           sc.classList.remove('grabbing');
+          // 끌고 난 직후의 클릭은 누른 것이 아니다 — 한 박자만 표시를 남긴다
+          if (moved) {
+            var el = sc;
+            el.classList.add('dragged');
+            setTimeout(function () { el.classList.remove('dragged'); }, 0);
+          }
           sc = null;
         }
         document.addEventListener('pointerup', end);
