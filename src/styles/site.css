@@ -20,29 +20,29 @@
 @font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
 
 :root {
-  --bg: #e6e3f0;
-  --card: #fbfaff;
-  --card-2: #dfe6f2;
-  --shadow: 0 2px 24px rgba(40, 35, 80, 0.08);
-  --ink: #221f2b;
-  --prose: #3a3646;
-  --ink-2: #57536b;
-  --ink-3: #6f6b85;
+  --bg: #eff0f1;
+  --card: #ffffff;
+  --card-2: #e3e5e7;
+  --shadow: 0 2px 20px rgba(20, 22, 26, 0.07);
+  --ink: #1c1e21;
+  --prose: #34373c;
+  --ink-2: #52565c;
+  --ink-3: #6c7076;
   --accent: #8a6a3c;
-  --rule: rgba(34, 31, 43, 0.09);
-  --rule-mid: rgba(34, 31, 43, 0.18);
-  --rule-ink: rgba(34, 31, 43, 0.82);
-  --link: #4a4b93;
+  --rule: rgba(28, 30, 33, 0.09);
+  --rule-mid: rgba(28, 30, 33, 0.18);
+  --rule-ink: rgba(28, 30, 33, 0.82);
+  --link: #8a6a3c;
   /* 칩 바닥과 떠 있는 띠의 유리 — 밤 판에서 값만 바뀐다.
      바닥을 짙게 둔다: 눌린 칩이 흰색이라 흰 종이 위로 올라가면 바닥 없이는 사라진다 */
-  --chip: rgba(34, 31, 43, 0.14);
-  --chip-stuck: rgba(34, 31, 43, 0.17);
+  --chip: rgba(28, 30, 33, 0.12);
+  --chip-stuck: rgba(28, 30, 33, 0.15);
   --chip-on: var(--card);
   --chip-on-ink: var(--ink);
-  --glass: rgba(251, 250, 255, 0.62);
+  --glass: rgba(255, 255, 255, 0.68);
   --glass-edge: rgba(255, 255, 255, 0.5);
   --glass-top: rgba(255, 255, 255, 0.75);
-  --glass-shadow: 0 8px 28px rgba(40, 35, 80, 0.16);
+  --glass-shadow: 0 8px 28px rgba(20, 22, 26, 0.14);
   /* 제목은 페이퍼로지, 본문과 UI 는 SUITE. 둘 다 고딕이라 층은 크기와 굵기로 낸다 */
   --title: "Paperlogy", "SUITE", -apple-system, system-ui, sans-serif;
   --body: "SUITE", -apple-system, system-ui, sans-serif;
@@ -192,42 +192,45 @@ a { color: inherit; }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(21rem, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
 }
+@media (max-width: 68rem) { .cards { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 52rem) { .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 34rem) { .cards { grid-template-columns: minmax(0, 1fr); } }
+/* 카드는 이제 링크가 아니라 상자다 — 위(화면)와 아래(글)가 하는 일이 다르다.
+   화면은 눌러서 크게 보고, 글은 눌러서 그 편으로 간다. */
 .card {
-  display: grid;
-  grid-template-columns: 3rem minmax(0, 1fr);
-  gap: 0 1.05rem;
-  align-items: start;
-  padding: 1.15rem 1.25rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1.1rem 0 1rem;
   border-radius: 11px;
   background: var(--card);
   box-shadow: var(--shadow);
-  text-decoration: none;
   transition: box-shadow 0.15s ease;
 }
-.card:hover { box-shadow: 0 4px 28px rgba(40, 35, 80, 0.14); }
+.card:hover { box-shadow: 0 4px 26px rgba(20, 22, 26, 0.13); }
 .card .icon {
   display: block;
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
-  grid-row: span 3;
+  /* 앱 아이콘 모양 그대로 — 원으로 깎으면 둥근 사각 둘레가 잘린다 */
+  border-radius: 22%;
 }
-.card .kd {
-  font-family: var(--mono);
-  font-size: 0.6875rem;
+.card .icon.ph {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
   color: var(--ink-3);
-  margin-bottom: 0.15rem;
+  font-family: var(--title);
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 .card .nm { font-size: 1rem; font-weight: 600; letter-spacing: -0.01em; }
 .card:hover .nm { color: var(--link); }
 .card .ds { margin: 0.2rem 0 0; font-size: 0.875rem; color: var(--ink-2); text-wrap: pretty; }
 .card .mt {
-  /* 아이콘이 세 줄만 차지해서 넷째 줄인 이 줄은 아이콘 칸(3rem)으로 밀렸다 —
-     「Androi/d」 처럼 낱말이 끊겼다. 글 칸에 명시해 둔다. */
-  grid-column: 2;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -278,8 +281,6 @@ a.prow:hover .rn { color: var(--link); }
 /* 거른 카드 · 줄 — .card · .prow 의 display:grid 가 hidden 을 이긴다 */
 [hidden] { display: none !important; }
 /* 아이콘이 없는 편 — 아이콘 칸을 비워 두면 이름이 3rem 칸에 끼어 한 글자씩 접힌다 */
-.card.noicon { grid-template-columns: minmax(0, 1fr); }
-.card.noicon .mt { grid-column: 1; }
 
 .rail dd.ended { color: var(--ink-3); }
 
@@ -636,7 +637,6 @@ a.prow:hover .rn { color: var(--link); }
   margin: 1.8rem -2.8rem 2.4rem;
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
   scrollbar-width: none;
   -webkit-mask-image: linear-gradient(to right, transparent 0, #000 2.8rem, #000 calc(100% - 4.5rem), transparent 100%);
   mask-image: linear-gradient(to right, transparent 0, #000 2.8rem, #000 calc(100% - 4.5rem), transparent 100%);
@@ -1509,9 +1509,13 @@ figcaption {
 .foot {
   margin-top: 5rem;
   display: flex;
-  gap: 1.2rem;
+  justify-content: space-between;
+  align-items: center;
   font-size: 0.8125rem;
 }
+.foot .ics { display: inline-flex; gap: 0.7rem; }
+.foot .ics img { display: block; width: 1.2rem; height: 1.2rem; opacity: 0.75; }
+.foot .ics a:hover img { opacity: 1; }
 .foot a { color: var(--ink-3); text-decoration: none; }
 .foot a:hover { color: var(--ink-2); }
 
@@ -1900,3 +1904,114 @@ figcaption {
 .pk-l { display: block; margin-top: 0.2rem; font: 0.76rem var(--mono); color: #2f4d80; }
 .pk-w { display: block; margin-top: 0.2rem; font: 0.72rem/1.5 var(--body); color: var(--ink-3); }
 .picks-f { margin-top: 0.6rem; font: 0.72rem var(--body); color: var(--ink-3); }
+
+
+/* ── 홈 카드 — 화면 줄과 글 칸 ─────────────────────────
+   위는 앱 화면을 옆으로 미는 줄, 아래는 그 편으로 가는 링크다.
+   한 상자가 두 가지 일을 하므로 누를 수 있는 자리를 눈으로도 갈라 둔다. */
+.card .shotrow {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.4rem;
+  min-height: 6rem;
+  padding: 0 calc(1.25rem - 1px);
+  margin-bottom: 0.85rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  /* 넘치는 것이 있다는 걸 오른쪽 끝을 흐려서 알린다 */
+  mask-image: linear-gradient(to right, #000 calc(100% - 1.6rem), transparent);
+}
+.card .shotrow::-webkit-scrollbar { display: none; }
+.card .shotrow.grabbing { cursor: grabbing; }
+.card .shotrow-i {
+  flex: none;
+  display: block;
+  /* 높이만 맞추고 폭은 그림 비율대로 — 세로 폰과 가로 위젯이 한 줄에 선다.
+     폭을 고정하면 납작한 띠(상태 표시줄)가 잘려 까만 덩어리가 된다 */
+  /* 크기는 그림이 정한다 — 단추에 높이를 주면 버튼 안쪽 셈이 그림 비율을
+     못 물려받아 모두 같은 상자(71×94)로 그려졌다 */
+  width: fit-content;
+  line-height: 0;
+  padding: 0;
+  border: 1px solid var(--rule-mid);
+  border-radius: 0.5rem;
+  background: #fff;
+  box-shadow: 0 1px 5px rgba(20, 22, 26, 0.12);
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.card .shotrow-i:hover { transform: translateY(-2px); box-shadow: 0 3px 10px rgba(20, 22, 26, 0.2); }
+.card .shotrow-i img { display: block; height: 6rem; width: auto; max-width: 7.5rem;
+  object-fit: cover; object-position: top left; }
+.card .body {
+  display: block;
+  padding: 0 1.25rem;
+  text-decoration: none;
+  color: inherit;
+}
+.card:hover { box-shadow: 0 4px 26px rgba(20, 22, 26, 0.13); }
+
+/* 화면을 크게 보는 판 */
+.shotbox {
+  width: min(92vw, 60rem);
+  max-height: 90vh;
+  padding: 1.2rem;
+  border: 0;
+  border-radius: 14px;
+  background: var(--card);
+  color: var(--ink);
+  box-shadow: 0 18px 60px rgba(20, 22, 26, 0.32);
+}
+.shotbox::backdrop { background: rgba(33, 31, 27, 0.55); }
+.shotbox figure { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; margin: 0; }
+.shotbox img {
+  max-width: 100%;
+  max-height: 74vh;
+  border-radius: 10px;
+  border: 1px solid var(--rule);
+  background: #fff;
+}
+.shotbox figcaption { font-size: 0.875rem; color: var(--ink-2); }
+.shotbox button {
+  position: absolute;
+  border: 0;
+  border-radius: 999px;
+  background: var(--chip);
+  color: var(--ink);
+  font-size: 1.1rem;
+  line-height: 1;
+  width: 2.2rem;
+  height: 2.2rem;
+  cursor: pointer;
+}
+.shotbox button:hover { background: var(--chip-stuck); }
+.shotbox-x { top: 0.7rem; right: 0.7rem; }
+.shotbox-p { left: 0.7rem; top: 50%; transform: translateY(-50%); }
+.shotbox-n { right: 0.7rem; top: 50%; transform: translateY(-50%); }
+.shotbox.one .shotbox-p, .shotbox.one .shotbox-n { display: none; }
+
+/* 카드 여백 — 화면 5.5rem, 설명은 두 줄까지. 일곱 장이 고르게 선다 */
+.card { padding: 0.9rem 0 0.85rem; }
+.card .shotrow { min-height: 5.5rem; margin-bottom: 0.7rem; }
+.card .shotrow-i img { height: 5.5rem; }
+.card .nm { display: flex; align-items: center; gap: 0.45rem; font-size: 0.95rem; }
+.card .ds {
+  margin-top: 0.15rem; font-size: 0.84rem; line-height: 1.5;
+  /* 두 줄에서 끊는다 — 카드마다 아래 줄이 다른 높이에 서는 것을 막는다 */
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; min-height: 2.5em;
+}
+/* 어디서 도는가 — 로고가 제목 옆에 선다. 잉크로 맞추려 block 으로 둔다 */
+.card .plat { display: inline-flex; align-items: center; gap: 0.3rem; }
+.card .plat img { display: block; width: 0.95rem; height: 0.95rem; }
+/* 아래 줄 — 갈래는 왼쪽 칩, 날짜는 오른쪽 끝 */
+.card .mt { justify-content: space-between; width: 100%; margin-top: 0.5rem; }
+.card .chip-g {
+  display: inline-flex; align-items: center; padding: 0.08rem 0.45rem;
+  border-radius: 999px; background: color-mix(in srgb, var(--ink) 7%, transparent);
+  color: var(--ink-2); font-family: var(--body); font-size: 0.72rem;
+}
+.card .when { color: var(--ink-3); font-variant-numeric: tabular-nums; }

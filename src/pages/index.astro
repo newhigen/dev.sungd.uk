@@ -12,6 +12,10 @@ function num(p: string) {
 }
 /** 목록에는 월까지만 — 2026.05.30 → 2026.05 */
 function ym(p: string) { return p.slice(0, 7); }
+/** 로고에 붙는 이름 — 그림만 두면 무엇인지 읽어 줄 수 없다 */
+const PLAT_NAME: Record<string, string> = {
+  android: '안드로이드', apple: 'Mac', terminal: '터미널',
+};
 
 const sorted = [...all].sort((a, b) => num(b.data.period) - num(a.data.period));
 // 지금 쓰는 것(사용 중 · 페이지 있음)은 카드로 크게, 나머지(보류 · 완료 · 종료 · 페이지 없는 편)는 한 줄 목록
@@ -55,13 +59,37 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
           {live.map(p => {
             const d = p.data;
             return (
-              <a class:list={['card', { noicon: !d.icon }]} href={`/${p.id}`} data-purpose={d.purpose} data-status={d.status}>
-                {d.icon && <img class="icon" src={d.icon} alt="" />}
-                {d.kind && <div class="kd">{d.kind}</div>}
-                <div class="nm">{d.title}</div>
-                <p class="ds">{d.tagline}</p>
-                <div class="mt"><Badge status={d.status} /><span>{d.purpose} · {ym(d.period)}</span></div>
-              </a>
+              <article class="card" data-purpose={d.purpose} data-status={d.status}>
+                {/* 위는 화면 — 누르면 크게 뜬다. 여러 장이면 옆으로 민다 */}
+                <div class="shotrow">
+                  {d.screens.length ? d.screens.map((s, i) => (
+                    <button class="shotrow-i" type="button" data-src={s.src} data-label={s.label}
+                      data-of={d.title} aria-label={`${d.title} — ${s.label || '화면'} 크게 보기`}>
+                      <img src={s.src} alt={s.label} loading="lazy" />
+                    </button>
+                  )) : (d.icon
+                    ? <img class="icon" src={d.icon} alt="" />
+                    : <span class="icon ph">{d.title.slice(0, 1)}</span>)}
+                </div>
+                {/* 아래는 글 — 누르면 그 편으로 간다 */}
+                <a class="body" href={`/${p.id}`}>
+                  <div class="nm">
+                    {d.title}
+                    {d.platform.length > 0 && (
+                      <span class="plat">
+                        {d.platform.map((k) => (
+                          <img src={`/i/${k}.svg`} alt={PLAT_NAME[k]} title={PLAT_NAME[k]} />
+                        ))}
+                      </span>
+                    )}
+                  </div>
+                  <p class="ds">{d.tagline}</p>
+                  <div class="mt">
+                    <span class="chip-g">{d.purpose}</span>
+                    <span class="when">{ym(d.period)}</span>
+                  </div>
+                </a>
+              </article>
             );
           })}
         </div>
@@ -90,6 +118,13 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
       </section>
     </div>
   </div>
+  {/* 화면을 크게 보는 판. 열릴 때까지 비어 있다 */}
+  <dialog class="shotbox" aria-label="화면 크게 보기">
+    <button class="shotbox-x" type="button" aria-label="닫기">✕</button>
+    <button class="shotbox-p" type="button" aria-label="앞 화면">‹</button>
+    <figure><img alt="" /><figcaption /></figure>
+    <button class="shotbox-n" type="button" aria-label="다음 화면">›</button>
+  </dialog>
 </Base>
 
 <script>
@@ -135,5 +170,47 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
     }
     apply();
   }
-  document.addEventListener('astro:page-load', init);
+
+  /** 카드 위쪽 화면을 누르면 크게 — 그 카드 안에서 앞뒤로 넘긴다 */
+  function lightbox() {
+    const lb = document.querySelector<HTMLDialogElement>('.shotbox');
+    if (!lb) return;
+    const img = lb.querySelector('img')!;
+    const cap = lb.querySelector('figcaption')!;
+    let group: HTMLButtonElement[] = [];
+    let at = 0;
+
+    function show(i: number) {
+      const b = group[(i + group.length) % group.length];
+      if (!b) return;
+      at = (i + group.length) % group.length;
+      img.src = b.dataset.src!;
+      img.alt = b.dataset.label || '';
+      cap.textContent = [b.dataset.of, b.dataset.label].filter(Boolean).join(' — ');
+      // 한 장뿐이면 넘길 단추를 감춘다
+      lb.classList.toggle('one', group.length < 2);
+    }
+
+    document.querySelector('.cards')?.addEventListener('click', e => {
+      const b = (e.target as HTMLElement).closest<HTMLButtonElement>('.shotrow-i');
+      if (!b) return;
+      // 끌어서 민 직후의 클릭은 확대가 아니다
+      if (b.closest('.shotrow')?.classList.contains('dragged')) return;
+      group = [...b.closest('.shotrow')!.querySelectorAll<HTMLButtonElement>('.shotrow-i')];
+      show(group.indexOf(b));
+      lb.showModal();
+    });
+
+    lb.querySelector('.shotbox-x')!.addEventListener('click', () => lb.close());
+    lb.querySelector('.shotbox-p')!.addEventListener('click', () => show(at - 1));
+    lb.querySelector('.shotbox-n')!.addEventListener('click', () => show(at + 1));
+    lb.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); show(at - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); show(at + 1); }
+    });
+    // 그림 바깥(판 자체)을 누르면 닫는다
+    lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+  }
+
+  document.addEventListener('astro:page-load', () => { init(); lightbox(); });
 </script>
