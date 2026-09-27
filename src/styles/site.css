@@ -756,10 +756,8 @@ a.prow:hover .rn { color: var(--link); }
 .impact .v small { display: block; margin-top: 0.2rem; font-size: 0.72rem; font-weight: 500; letter-spacing: 0; color: var(--ink-3); }
 .impact-basis { margin: 0 0 2.2rem; }
 
-/* 하루 타임라인 — 전 · 후 줄에 윈도우 같은 블록 */
+/* 전·후 하루 축의 기간 띠 색 — BeforeAfter 가 쓴다 */
 :root { --t1: #7c93d6; --t2: #5fa88c; --t3: #9a82d4; --cut: #c98a8a; }
-.doc-body .prose > figure@media (max-width: 640px) {
-}
 
 /* 계산 한 줄 — 칸 넷, 입력 칸만 짙게 */
 .chain {
@@ -1282,7 +1280,6 @@ a.prow:hover .rn { color: var(--link); }
 }
 .pnl-shot img { display: block; width: 100%; border-radius: 12px; box-shadow: var(--shadow); }
 /* 컴포넌트로 그린 화면이 들어오면 그쪽 바깥 여백은 판이 맡는다 */
-.pnl-shot > :global(figure) { margin: 0; }
 .pnl-b { margin: 1.1rem 0 0; font-size: 0.78rem; color: var(--ink-3); }
 
 /* ── 번호를 얹은 화면 ─────────────────────────────── */
