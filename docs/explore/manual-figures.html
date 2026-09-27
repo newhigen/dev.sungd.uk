@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설명서 도식 — 줄글을 그림으로</title>
+<style>
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+:root {
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --ink:#221f2b; --ink-2:#3a3646; --ink-3:#6f6b85;
+  --paper:#fbfaff; --bg:#e6e3f0; --acc:#8a6a3c; --rule:rgba(34,31,43,.09);
+  --good:#2e7d4f; --bad:#c0392b;
+}
+* { box-sizing:border-box }
+body { margin:0; background:var(--bg); color:var(--ink-2); font-family:var(--body);
+  font-size:15px; line-height:1.62; word-break:keep-all }
+.wrap { max-width:1000px; margin:0 auto; padding:2.6rem 1.5rem 6rem }
+h1 { font-family:var(--title); font-weight:500; font-size:2rem; color:var(--ink); margin:0 0 .3rem }
+.lede p { margin:.2rem 0; color:var(--ink-3); font-size:.9rem }
+h2 { font-family:var(--title); font-weight:600; font-size:1.25rem; color:var(--ink); margin:3rem 0 .2rem }
+h2 .no { display:inline-block; min-width:2.4rem; font-size:.78rem; color:var(--acc) }
+.was { margin:.1rem 0 .9rem; color:var(--ink-3); font-size:.86rem }
+.was b { color:var(--ink-2); font-weight:500 }
+.pane { background:var(--paper); border-radius:14px; padding:1.4rem 1.6rem 1.5rem; width:720px; max-width:100% }
+.cap { margin:.7rem 0 0; font-size:.8rem; color:var(--ink-3) }
+svg { display:block; width:100%; height:auto; font-family:var(--body) }
+svg text { font-size:11px; fill:var(--ink-2) }
+svg .ttl { font-size:12px; font-weight:600; fill:var(--ink) }
+svg .mut { fill:var(--ink-3); font-size:10px }
+svg .axis { stroke:#c9c5d4; stroke-width:1 }
+svg .tick { stroke:#dcd8e4; stroke-width:1 }
+svg .rail { stroke:#e8e6ec; stroke-width:14; stroke-linecap:round }
+svg .rail.on { stroke:#e4ecea }
+.foot { margin:3.4rem 0 0; font-size:.82rem; color:var(--ink-3) }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>설명서 도식 — 줄글을 그림으로</h1>
+<div class="lede">
+  <p>지금 설명서는 규칙이 전부 카드 안 줄글이다. 「알림이 언제 오나」, 「되돌릴 수 있는 시간」, 「하루가 언제 바뀌나」 는 읽어서 머리로 맞춰야 한다.</p>
+  <p>그 넷을 그림으로 그렸다. 칸마다 지금 문장이 무엇이었는지 함께 적었다.</p>
+</div>
+
+<!-- ─────────────────────────────── 1 -->
+<h2><span class="no">1</span>알림은 안 챙겼을 때만 온다</h2>
+<p class="was">지금: <b>「5시 20분이 돼도 알림은 안 와요 — 이미 했으니까」</b> · <b>「이 시각에 안 챙긴 게 있으면 알림이 와요. 미리 했으면 안 와요」</b></p>
+<div class="pane">
+<svg viewBox="0 0 660 216" role="img" aria-label="하루 축 위에 구간 넷과 알림">
+  <!-- 축 -->
+  <text class="mut" x="54" y="196">새벽 4시</text>
+  <text class="mut" x="243" y="196" text-anchor="middle">낮 12시</text>
+  <text class="mut" x="432" y="196" text-anchor="middle">저녁 8시</text>
+  <text class="mut" x="600" y="196" text-anchor="end">자정</text>
+  <line class="axis" x1="54" y1="180" x2="600" y2="180"/>
+  <line class="tick" x1="54" y1="40" x2="54" y2="180"/>
+  <line class="tick" x1="243" y1="40" x2="243" y2="180"/>
+  <line class="tick" x1="432" y1="40" x2="432" y2="180"/>
+  <line class="tick" x1="600" y1="40" x2="600" y2="180"/>
+
+  <!-- 구간 시각: 5:20 · 10:30 · 15:45 · 20:00  (4시~24시를 54~600 에) -->
+  <!-- x = 54 + (h-4)/20*546 -->
+  <text class="ttl" x="0" y="66">미리 챙긴 날</text>
+  <line class="rail on" x1="54" y1="86" x2="600" y2="86"/>
+  <g>
+    <circle cx="90" cy="86" r="6" fill="#2e7d4f"/><path d="M 87 86 l 2.2 2.4 l 4.2 -4.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="231" cy="86" r="6" fill="#2e7d4f"/><path d="M 228 86 l 2.2 2.4 l 4.2 -4.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="374" cy="86" r="6" fill="#2e7d4f"/><path d="M 371 86 l 2.2 2.4 l 4.2 -4.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="491" cy="86" r="6" fill="#2e7d4f"/><path d="M 488 86 l 2.2 2.4 l 4.2 -4.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="mut" x="612" y="90">알림 0</text>
+
+  <!-- 깜빡한 날 -->
+  <text class="ttl" x="0" y="130">깜빡한 날</text>
+  <line class="rail" x1="54" y1="150" x2="600" y2="150"/>
+  <g>
+    <circle cx="90" cy="150" r="6" fill="#2e7d4f"/><path d="M 87 150 l 2.2 2.4 l 4.2 -4.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <!-- 낮·오후는 안 챙김 → 그 시각에 알림 -->
+    <circle cx="231" cy="150" r="5" fill="none" stroke="#c0392b" stroke-width="1.6"/>
+    <path d="M 231 138 v -14" stroke="#c0392b" stroke-width="1.2"/>
+    <text class="mut" x="231" y="120" text-anchor="middle" fill="#c0392b">알림</text>
+    <circle cx="374" cy="150" r="5" fill="none" stroke="#c0392b" stroke-width="1.6"/>
+    <path d="M 374 138 v -14" stroke="#c0392b" stroke-width="1.2"/>
+    <text class="mut" x="374" y="120" text-anchor="middle" fill="#c0392b">알림</text>
+    <circle cx="491" cy="150" r="6" fill="#2e7d4f"/><path d="M 488 150 l 2.2 2.4 l 4.2 -4.8" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <text class="mut" x="612" y="154">알림 2</text>
+
+  <!-- 구간 이름 -->
+  <text class="mut" x="90" y="30" text-anchor="middle">아침</text>
+  <text class="mut" x="90" y="43" text-anchor="middle" fill="#9a95a8">5:20</text>
+  <text class="mut" x="231" y="30" text-anchor="middle">낮</text>
+  <text class="mut" x="231" y="43" text-anchor="middle" fill="#9a95a8">10:30</text>
+  <text class="mut" x="374" y="30" text-anchor="middle">오후</text>
+  <text class="mut" x="374" y="43" text-anchor="middle" fill="#9a95a8">3:45</text>
+  <text class="mut" x="491" y="30" text-anchor="middle">밤</text>
+  <text class="mut" x="491" y="43" text-anchor="middle" fill="#9a95a8">8:00</text>
+</svg>
+<p class="cap">구간 시각은 「그때 안 챙겼으면 부르는 시각」이지 「먹는 시각」이 아니다. 두 줄을 같은 축에 두면 그 차이가 한눈에 선다.</p>
+</div>
+
+<!-- ─────────────────────────────── 2 -->
+<h2><span class="no">2</span>누른 뒤 5분은 되돌릴 수 있다</h2>
+<p class="was">지금: <b>「몇 분 안엔 같은 줄을 다시 눌러요(기본 5분). 지나면 그대로 굳어요」</b></p>
+<div class="pane">
+<svg viewBox="0 0 660 132" role="img" aria-label="누른 뒤 5분 유예">
+  <line class="axis" x1="70" y1="78" x2="600" y2="78"/>
+  <!-- 누름 -->
+  <circle cx="70" cy="78" r="6" fill="#8a6a3c"/>
+  <text class="ttl" x="70" y="58" text-anchor="middle">줄을 누름</text>
+  <text class="mut" x="70" y="100" text-anchor="middle">체크 · 시각이 남음</text>
+  <!-- 유예 구간 -->
+  <rect x="70" y="70" width="180" height="16" rx="8" fill="#8a6a3c" opacity=".13"/>
+  <text class="mut" x="160" y="118" text-anchor="middle">다시 누르면 취소 — 기본 5분</text>
+  <!-- 경계 -->
+  <line class="tick" x1="250" y1="52" x2="250" y2="104" stroke="#8a6a3c" stroke-dasharray="3 3"/>
+  <text class="mut" x="250" y="44" text-anchor="middle" fill="#8a6a3c">5분</text>
+  <!-- 굳음 -->
+  <rect x="250" y="70" width="350" height="16" rx="8" fill="#e8e6ec"/>
+  <text class="mut" x="425" y="118" text-anchor="middle">굳음 — 앱에서는 못 고침</text>
+  <text class="ttl" x="600" y="58" text-anchor="end">자정</text>
+  <line class="tick" x1="600" y1="62" x2="600" y2="94"/>
+</svg>
+<p class="cap">유예는 「잘못 눌렀을 때만 고치라」고 둔 시간이다. 길이를 눈으로 보이면 왜 짧은지가 설명 없이 읽힌다.</p>
+</div>
+
+<!-- ─────────────────────────────── 3 -->
+<h2><span class="no">3</span>인공눈물 한 바퀴</h2>
+<p class="was">지금: <b>「한 번은 «한 번 더 눌러서 확정», 4초 안에 한 번 더」</b> · <b>「「42분 전」, 간격(기본 60분)이 지나면 물방울이 빨개져요」</b></p>
+<div class="pane">
+<svg viewBox="0 0 660 150" role="img" aria-label="인공눈물 한 바퀴">
+  <!-- 1 두 번 누름 -->
+  <rect x="0" y="44" width="150" height="44" rx="10" fill="#8a6a3c" opacity=".1"/>
+  <text class="ttl" x="75" y="64" text-anchor="middle">띠를 두 번</text>
+  <text class="mut" x="75" y="79" text-anchor="middle">4초 안에 한 번 더</text>
+  <path d="M 150 66 h 26" class="axis"/><path d="M 176 66 l -6 -4 v 8 z" fill="#c9c5d4"/>
+  <!-- 2 채워짐 -->
+  <rect x="182" y="44" width="150" height="44" rx="10" fill="#2e7d4f" opacity=".1"/>
+  <text class="ttl" x="257" y="64" text-anchor="middle">띠가 채워짐</text>
+  <text class="mut" x="257" y="79" text-anchor="middle">「42분 전」이 선다</text>
+  <path d="M 332 66 h 26" class="axis"/><path d="M 358 66 l -6 -4 v 8 z" fill="#c9c5d4"/>
+  <!-- 3 빨강 -->
+  <rect x="364" y="44" width="150" height="44" rx="10" fill="#c0392b" opacity=".09"/>
+  <text class="ttl" x="439" y="64" text-anchor="middle">물방울이 빨강</text>
+  <text class="mut" x="439" y="79" text-anchor="middle">간격이 지남 · 기본 60분</text>
+  <path d="M 514 66 h 26" class="axis"/><path d="M 540 66 l -6 -4 v 8 z" fill="#c9c5d4"/>
+  <!-- 4 초기화 -->
+  <rect x="546" y="44" width="114" height="44" rx="10" fill="#e8e6ec"/>
+  <text class="ttl" x="603" y="64" text-anchor="middle">띠가 빔</text>
+  <text class="mut" x="603" y="79" text-anchor="middle">새벽 3시</text>
+  <text class="mut" x="0" y="26">넣을 때마다 이 바퀴를 돈다. 위젯에서 바로 누르고, 앱에는 시간순으로 쌓인다.</text>
+  <text class="mut" x="0" y="122">돌아온 자리는 「오늘 아직」 — 윤곽만 남은 띠다.</text>
+</svg>
+<p class="cap">네 칸이 한 줄로 서면 「두 번 누르는 이유」와 「빨개지는 이유」가 같은 바퀴 위에 놓인다.</p>
+</div>
+
+<!-- ─────────────────────────────── 4 -->
+<h2><span class="no">4</span>하루가 바뀌는 자리가 셋이다</h2>
+<p class="was">지금: 세 카드에 흩어져 있다 — <b>「자정에 지워지는 건 «오늘 다 했나» 뿐」</b> · <b>「인공눈물은 하루가 새벽 3시에 바뀌어요」</b> · <b>「챙긴 것은 영구히 남아요」</b></p>
+<div class="pane">
+<svg viewBox="0 0 660 176" role="img" aria-label="하루가 바뀌는 자리 셋">
+  <!-- 축 -->
+  <line class="axis" x1="120" y1="150" x2="600" y2="150"/>
+  <text class="mut" x="120" y="168" text-anchor="middle">저녁 8시</text>
+  <text class="mut" x="300" y="168" text-anchor="middle">자정</text>
+  <text class="mut" x="420" y="168" text-anchor="middle">새벽 3시</text>
+  <text class="mut" x="600" y="168" text-anchor="end">아침</text>
+  <line class="tick" x1="300" y1="28" x2="300" y2="150" stroke="#8a6a3c" stroke-dasharray="3 3"/>
+  <line class="tick" x1="420" y1="28" x2="420" y2="150" stroke="#8a6a3c" stroke-dasharray="3 3"/>
+
+  <!-- 줄 1 오늘 다 했나 -->
+  <text class="ttl" x="0" y="52">오늘 다 했나</text>
+  <line class="rail on" x1="120" y1="46" x2="300" y2="46"/>
+  <line class="rail" x1="300" y1="46" x2="600" y2="46"/>
+  <text class="mut" x="310" y="50">자정에 지워짐</text>
+
+  <!-- 줄 2 인공눈물 -->
+  <text class="ttl" x="0" y="92">인공눈물 셈</text>
+  <line class="rail on" x1="120" y1="86" x2="420" y2="86"/>
+  <line class="rail" x1="420" y1="86" x2="600" y2="86"/>
+  <text class="mut" x="430" y="90">새벽 3시에 새 하루</text>
+
+  <!-- 줄 3 기록 -->
+  <text class="ttl" x="0" y="132">지난 기록</text>
+  <line class="rail on" x1="120" y1="126" x2="600" y2="126"/>
+  <text class="mut" x="430" y="118" fill="#2e7d4f">영구히 남음</text>
+</svg>
+<p class="cap">셋이 서로 다른 자리에서 끊긴다는 것이 이 앱에서 가장 헷갈리는 데다. 한 축에 겹쳐 놓으면 표 없이 끝난다.</p>
+</div>
+
+<p class="foot">색은 편 페이지와 같다 — 강조 황토 <code>#8a6a3c</code>, 좋아짐 <code>#2e7d4f</code>, 나빠짐 <code>#c0392b</code>. 글꼴도 Paperlogy · SUITE.</p>
+
+</div>
+</body>
+</html>

@@ -1,20 +1,31 @@
 <!doctype html>
 <html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>약수첩 소개 — 지금 vs 주석을 얹은 판</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=Noto+Serif+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
+<style>
+/* 배포된 dev.sungd.uk 와 같은 글꼴 — 눈누 https://noonnu.cc/font_page/1456 · 1150 */
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Light.woff2') format('woff2'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+</style>
 <style>
 :root{
   --bg:#e6e3f0; --card:#fbfaff; --card-2:#dfe6f2; --shadow:0 2px 24px rgba(40,35,80,.08);
   --ink:#221f2b; --prose:#3a3646; --ink-2:#57536b; --ink-3:#6f6b85; --accent:#8a6a3c; --link:#4a4b93;
-  --sans:"Inter Tight",Pretendard,-apple-system,system-ui,sans-serif;
-  --serif:"Noto Serif KR",Pretendard,serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
   --acc:#2B59C3; --acc-bg:#EAF0FC; --sub:#6B7079;
 }
 *{box-sizing:border-box}
-body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--sans);word-break:keep-all;-webkit-font-smoothing:antialiased}
+body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--body);word-break:keep-all;-webkit-font-smoothing:antialiased}
 .wrap{max-width:96rem;margin:0 auto;padding:2.4rem 2rem 8rem}
-.lede h1{font-family:var(--serif);font-size:2rem;font-weight:700;letter-spacing:-.02em;margin:0 0 .5rem;color:var(--ink)}
+.lede h1{font-family:var(--title);font-size:2rem;font-weight:500;margin:0 0 .5rem;color:var(--ink)}
 .lede p{max-width:58rem;margin:0 0 .3rem;color:var(--ink-2);font-size:.95rem}
 .lede .m{font-size:.85rem;color:var(--ink-3)}
 
@@ -22,49 +33,49 @@ body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--sans);wo
 .cols{display:grid;grid-template-columns:1fr 1fr;gap:1.6rem;margin-top:2rem;align-items:start}
 .col{min-width:0}
 .hd{position:sticky;top:0;z-index:20;background:#eceaf3;padding:.7rem 0 .6rem}
-.hd b{font-family:var(--serif);font-size:1.1rem;color:var(--ink)}
+.hd b{font-family:var(--title);font-size:1.1rem;font-weight:600;color:var(--ink)}
 .hd span{font-size:.82rem;color:var(--ink-3);margin-left:.5rem}
 .hd.r b{color:var(--acc)}
 
 .paper{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:2rem 2.2rem 2.4rem}
-.doc{font-family:var(--serif);color:var(--prose)}
+.doc{font-family:var(--body);color:var(--prose)}
 .doc .q{font-size:1.28rem;font-weight:700;color:var(--ink);line-height:1.5;margin:0 0 .9rem}
 .doc p{font-size:.98rem;line-height:1.9;margin:0 0 .9rem}
-.doc h2{font-family:var(--serif);font-size:1.25rem;color:var(--accent);margin:2.2rem 0 .8rem;font-weight:600}
-.doc h3{font-family:var(--serif);font-size:1.05rem;color:var(--ink);margin:1.5rem 0 .4rem;font-weight:600}
+.doc h2{font-family:var(--title);font-size:1.25rem;color:var(--accent);margin:2.2rem 0 .8rem;font-weight:600}
+.doc h3{font-family:var(--title);font-size:1.05rem;color:var(--ink);margin:1.5rem 0 .4rem;font-weight:600}
 .doc figure{margin:1.3rem 0 1.5rem}
 .doc figure img{display:block;width:100%;border-radius:10px}
 .doc figure.phone{max-width:14rem;margin-left:auto;margin-right:auto}
-.doc figcaption{margin-top:.5rem;font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--ink-3)}
+.doc figcaption{margin-top:.5rem;font-family:var(--body);font-size:.78rem;line-height:1.55;color:var(--ink-3)}
 
 .hero{background:var(--card-2);border-radius:14px;padding:1.2rem 1.3rem;margin:1.3rem 0}
-.hero .lb{font-family:var(--sans);font-size:.74rem;color:var(--ink-3)}
-.hero .v{font-family:var(--sans);font-size:2.4rem;font-weight:700;letter-spacing:-.03em;color:var(--ink);line-height:1.1;margin:.05rem 0 .15rem}
-.hero .nt{font-family:var(--sans);font-size:.78rem;color:var(--ink-2)}
+.hero .lb{font-family:var(--body);font-size:.74rem;color:var(--ink-3)}
+.hero .v{font-family:var(--title);font-size:2.4rem;font-weight:500;color:var(--ink);line-height:1.1;margin:.05rem 0 .15rem}
+.hero .nt{font-family:var(--body);font-size:.78rem;color:var(--ink-2)}
 .hero .tiles{display:grid;grid-template-columns:1fr 1fr;gap:.5rem;margin-top:.8rem}
 .hero .tiles div{background:var(--card);border-radius:10px;padding:.6rem .8rem}
-.hero .tiles .tv{font-family:var(--sans);font-size:1.1rem;font-weight:700;color:var(--ink)}
-.hero .tiles .tn{font-family:var(--sans);font-size:.7rem;color:var(--ink-3)}
+.hero .tiles .tv{font-family:var(--title);font-size:1.1rem;font-weight:600;color:var(--ink)}
+.hero .tiles .tn{font-family:var(--body);font-size:.7rem;color:var(--ink-3)}
 
 .story{list-style:none;margin:1rem 0 0;padding:0}
 .story li{display:flex;gap:.9rem;padding:.5rem 0}
 .story li+li{box-shadow:inset 0 1px rgba(34,31,43,.07)}
-.story .at{flex:none;width:3.4rem;font-family:var(--sans);font-size:.78rem;font-weight:600;color:var(--ink-3);padding-top:.15rem}
+.story .at{flex:none;width:3.4rem;font-family:var(--body);font-size:.78rem;font-weight:600;color:var(--ink-3);padding-top:.15rem}
 .story .wt{font-size:.92rem;line-height:1.7}
 
 .strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin:1.2rem 0}
 .strip figure{margin:0}
 .strip img{width:100%;border-radius:8px;display:block}
-.strip figcaption{margin-top:.35rem;font-family:var(--sans);font-size:.7rem;line-height:1.45;color:var(--ink-3)}
+.strip figcaption{margin-top:.35rem;font-family:var(--body);font-size:.7rem;line-height:1.45;color:var(--ink-3)}
 .strip figcaption b{color:var(--ink-2);font-size:.74rem}
 
 /* ── 오른쪽: 주석 층 ── */
 .half{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:1.2rem;align-items:center;
   background:var(--card-2);border-radius:14px;padding:1.2rem 1.3rem;margin:1.3rem 0}
-.half h4{font-family:var(--serif);font-size:1.18rem;font-weight:700;color:var(--ink);line-height:1.45;margin:0 0 .5rem}
+.half h4{font-family:var(--title);font-size:1.18rem;font-weight:600;color:var(--ink);line-height:1.45;margin:0 0 .5rem}
 .half .chips{display:flex;flex-direction:column;gap:.35rem}
-.half .chips span{display:flex;flex-direction:column;background:var(--card);border-radius:9px;padding:.45rem .7rem;font-family:var(--sans);font-size:.7rem;color:var(--ink-3)}
-.half .chips b{font-family:var(--sans);font-size:.98rem;color:var(--ink);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.half .chips span{display:flex;flex-direction:column;background:var(--card);border-radius:9px;padding:.45rem .7rem;font-family:var(--body);font-size:.7rem;color:var(--ink-3)}
+.half .chips b{font-family:var(--title);font-size:.98rem;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
 .half .chips.c span{flex-direction:column-reverse;gap:.1rem}
 .half .chips.c b s{text-decoration:none;color:var(--ink-3);font-weight:600}
 .half .chips.c b i{font-style:normal;color:var(--ink-3);font-weight:400;padding:0 .18rem}
@@ -76,73 +87,73 @@ body{margin:0;background:#eceaf3;color:var(--prose);font:16px/1.7 var(--sans);wo
 .anno .shot img{display:block;width:100%;border-radius:10px}
 .anno.ph .shot{width:46%;margin-left:6%}
 .bd{position:absolute;width:1.35rem;height:1.35rem;border-radius:50%;background:var(--acc);color:#fff;
-  font:700 .74rem/1.35rem var(--sans);text-align:center;z-index:4}
-.an{position:absolute;font-family:var(--sans);font-size:.78rem;line-height:1.5;color:var(--ink-2);z-index:4}
+  font:700 .74rem/1.35rem var(--body);text-align:center;z-index:4}
+.an{position:absolute;font-family:var(--body);font-size:.78rem;line-height:1.5;color:var(--ink-2);z-index:4}
 .an b{color:var(--ink);font-weight:600}
 .zm{position:absolute;border-radius:8px;z-index:5;background-repeat:no-repeat;
   background-image:var(--img);background-size:var(--zoom) auto;background-position:var(--px) var(--py);
   box-shadow:0 6px 20px rgba(30,25,60,.2);outline:2px solid var(--acc)}
 .zl{position:absolute;height:0;border-top:1.5px dashed var(--acc);z-index:4}
-.zc{position:absolute;font-family:var(--sans);font-size:.74rem;line-height:1.5;color:var(--ink-3);z-index:4}
+.zc{position:absolute;font-family:var(--body);font-size:.74rem;line-height:1.5;color:var(--ink-3);z-index:4}
 .dsh{position:absolute;height:0;border-top:1.5px dashed #9AA0AC;z-index:4}
 .pin{position:absolute;z-index:4}
 .pin span{display:inline-block;background:var(--card);border-radius:8px;padding:.24rem .55rem;
-  font:600 .74rem var(--sans);color:var(--ink);box-shadow:0 2px 8px rgba(30,25,60,.14)}
+  font:600 .74rem var(--body);color:var(--ink);box-shadow:0 2px 8px rgba(30,25,60,.14)}
 .lift{position:absolute;z-index:4;border-radius:7px;outline:2px solid var(--acc);box-shadow:0 6px 20px rgba(43,89,195,.3)}
-.cap{margin-top:.6rem;font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--ink-3)}
+.cap{margin-top:.6rem;font-family:var(--body);font-size:.78rem;line-height:1.55;color:var(--ink-3)}
 
-.tag{display:inline-block;font-family:var(--sans);font-size:.66rem;font-weight:700;letter-spacing:.1em;
+.tag{display:inline-block;font-family:var(--body);font-size:.66rem;font-weight:700;letter-spacing:.1em;
   color:var(--acc);background:var(--acc-bg);border-radius:5px;padding:.12rem .4rem;margin-bottom:.4rem}
 
 
 
 /* ── 하루 타임라인 · 칩 ── */
 .meds{display:flex;flex-wrap:wrap;gap:.35rem;margin:.8rem 0 0}
-.meds span{font-family:var(--sans);font-size:.78rem;background:var(--card-2);border-radius:7px;padding:.22rem .55rem;color:var(--ink-2)}
+.meds span{font-family:var(--body);font-size:.78rem;background:var(--card-2);border-radius:7px;padding:.22rem .55rem;color:var(--ink-2)}
 .meds span b{color:var(--ink);font-weight:600}
 .day{margin:1.2rem 0 .3rem}
 .day svg{display:block;width:100%;height:auto}
 .day .ax{stroke:#cfcadb;stroke-width:1}
-.day .tk{font:500 10px var(--sans);fill:var(--ink-3)}
-.day .nm{font:700 12px var(--sans);fill:var(--ink)}
-.day .tm{font:600 10px var(--sans);fill:var(--ink-3)}
-.day .st{font:600 10.5px var(--sans)}
+.day .tk{font:500 10px var(--body);fill:var(--ink-3)}
+.day .nm{font:700 12px var(--body);fill:var(--ink)}
+.day .tm{font:600 10px var(--body);fill:var(--ink-3)}
+.day .st{font:600 10.5px var(--body)}
 .day .ok{fill:#2E7D4F}
 .day .no{fill:#C0392B}
-.day .lg{font:500 10.5px var(--sans);fill:var(--ink-3)}
+.day .lg{font:500 10.5px var(--body);fill:var(--ink-3)}
 
 /* ── 숫자 놓는 자리 시안 ── */
 .nums{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem;margin-top:1rem;align-items:start}
 .nums>div{min-width:0}
-.nums h3{font-family:var(--serif);font-size:1rem;font-weight:700;color:var(--ink);margin:0 0 .15rem}
+.nums h3{font-family:var(--title);font-size:1rem;font-weight:700;color:var(--ink);margin:0 0 .15rem}
 .nums h3 em{font-style:normal;font-weight:500;font-size:.78rem;color:var(--ink-3);margin-left:.35rem}
-.nums .why{font-family:var(--sans);font-size:.78rem;line-height:1.5;color:var(--ink-3);margin:0 0 .7rem;min-height:3.2em}
+.nums .why{font-family:var(--body);font-size:.78rem;line-height:1.5;color:var(--ink-3);margin:0 0 .7rem;min-height:3.2em}
 .nums .box{background:var(--card);border-radius:12px;padding:1rem 1.1rem 1.1rem;box-shadow:var(--shadow)}
 .bad{outline:2px solid #C0392B}
-.nums .verdict{font-family:var(--sans);font-size:.76rem;line-height:1.5;margin:.6rem 0 0;color:var(--ink-3)}
+.nums .verdict{font-family:var(--body);font-size:.76rem;line-height:1.5;margin:.6rem 0 0;color:var(--ink-3)}
 .nums .verdict b{color:#C0392B}
 .nums .verdict b.ok{color:#2E7D4F}
 
 /* A 숫자 먼저 */
 .na div{padding:.5rem 0}
 .na div+div{box-shadow:inset 0 1px rgba(34,31,43,.08)}
-.na .v{font-family:var(--sans);font-size:1.5rem;font-weight:700;letter-spacing:-.02em;color:var(--ink);line-height:1.15}
-.na .l{font-family:var(--sans);font-size:.74rem;color:var(--ink-3);margin-top:.1rem}
+.na .v{font-family:var(--title);font-size:1.5rem;font-weight:500;color:var(--ink);line-height:1.15}
+.na .l{font-family:var(--body);font-size:.74rem;color:var(--ink-3);margin-top:.1rem}
 /* B 뜻 먼저 */
 .nb div{display:flex;align-items:baseline;gap:.6rem;padding:.5rem 0}
 .nb div+div{box-shadow:inset 0 1px rgba(34,31,43,.08)}
-.nb .l{flex:1 1 auto;font-family:var(--sans);font-size:.82rem;line-height:1.45;color:var(--ink-2)}
-.nb .v{flex:none;font-family:var(--sans);font-size:1.05rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.nb .l{flex:1 1 auto;font-family:var(--body);font-size:.82rem;line-height:1.45;color:var(--ink-2)}
+.nb .v{flex:none;font-family:var(--body);font-size:1.05rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
 /* C 전후 */
 .nc div{padding:.55rem 0}
 .nc div+div{box-shadow:inset 0 1px rgba(34,31,43,.08)}
-.nc .l{font-family:var(--sans);font-size:.76rem;color:var(--ink-3);margin-bottom:.12rem}
-.nc .v{font-family:var(--sans);font-size:1.15rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+.nc .l{font-family:var(--body);font-size:.76rem;color:var(--ink-3);margin-bottom:.12rem}
+.nc .v{font-family:var(--body);font-size:1.15rem;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
 .nc .v s{text-decoration:none;color:var(--ink-3);font-weight:600}
 .nc .v i{font-style:normal;color:var(--ink-3);font-weight:400;padding:0 .2rem}
 .nc .v em{font-style:normal;color:#2E7D4F}
 /* D 문장 */
-.nd p{font-family:var(--serif);font-size:.95rem;line-height:1.85;margin:0 0 .5rem;color:var(--prose)}
+.nd p{font-family:var(--title);font-size:.95rem;line-height:1.85;margin:0 0 .5rem;color:var(--prose)}
 .nd p b{color:var(--ink)}
 
 .gap{margin-top:2.4rem}
@@ -150,7 +161,7 @@ table.diff{border-collapse:collapse;width:100%;font-size:.88rem;background:#fff;
 table.diff th,table.diff td{padding:.6rem .9rem;text-align:left;border-bottom:1px solid #ecebf2;vertical-align:top}
 table.diff th{font-size:.76rem;color:var(--ink-3);font-weight:600;background:#faf9fd}
 table.diff td:first-child{font-weight:600;color:var(--ink);white-space:nowrap}
-h2.n{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);margin:3rem 0 .3rem}
+h2.n{font-family:var(--title);font-size:1.2rem;font-weight:700;color:var(--ink);margin:3rem 0 .3rem}
 @media(max-width:1200px){.cols{grid-template-columns:1fr}}
 </style></head><body><div class="wrap">
 
@@ -358,7 +369,7 @@ h2.n{font-family:var(--serif);font-size:1.2rem;font-weight:700;color:var(--ink);
 
   <div>
     <h3>D 문장에 녹임</h3>
-    <p class="why">숫자 칸을 아예 없애고 본문 문장 안에 넣는다. 세리프 본문이라 읽는 흐름이 안 끊긴다.</p>
+    <p class="why">숫자 칸을 아예 없애고 본문 문장 안에 넣는다. 읽는 흐름이 안 끊긴다.</p>
     <div class="box nd">
       <p>미리 체크해 두면 그 구간에는 알림이 <b>한 번도 안 온다.</b> 하루 네 번 오던 것이 놓친 구간에만 한 번으로 준다.</p>
       <p>위젯은 홈 화면에서 <b>2×1</b> — 처음 4×3 이던 것을 세 번에 걸쳐 줄였다.</p>

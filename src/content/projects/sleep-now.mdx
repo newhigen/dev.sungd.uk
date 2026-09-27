@@ -19,53 +19,32 @@ use:
 ---
 
 import Fig from '../../components/Fig.astro';
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
+import Mark from '../../components/Mark.astro';
 import Next from '../../components/Next.astro';
 import Flow from '../../components/Flow.astro';
 import Strip from '../../components/Strip.astro';
 import Cases from '../../components/Cases.astro';
 
-<p class="q">20분 더 깨어 있으면, 기상도 20분 뒤로.</p>
-
-«지금 자면 몇 시 기상» 을 밤새 상태 표시줄 · 잠금화면에 표시, 누울 때 버튼 하나로 알람까지 설정.
-
-<Hero label="밤에 누르는 것" v="2번"
-  note="잠들 때 취침 · 아침 알람 해제. 나머지는 잠금화면이 표시"
-  tiles={[
-    { label: "잠금화면 값 갱신", v: "1분마다", note: "One UI 8 Now Bar" },
-    { label: "밤의 구간", v: "4개", note: "활동 시간 · 목표 전 · 목표 경과 · 취침 후" },
+<Panel label="안드로이드 앱"
+  title={["20분 더 깨어 있으면", "기상도 20분 뒤로 간다"]}
+  sub="「지금 자면 몇 시 기상」 을 밤새 상태 표시줄과 잠금화면에 띄운다. 누울 때 버튼 하나로 알람까지 맞춰진다."
+  chips={[
+    { v: "2번", label: "밤에 누르는 것 — 잠들 때 취침, 아침에 알람 해제" },
+    { v: "1분마다", label: "잠금화면 값 갱신 — One UI 8 Now Bar" },
+    { v: "4개", label: "밤의 구간 — 활동 시간, 목표 전, 목표 경과, 취침 후" },
   ]}
   basis="앱 동작 기준 — 사용 기록 실측 아님." />
+
+수면 앱 대부분은 사후 분석이지만 판단 시점은 눕기 전이고, 그때 필요한 값은 하나다.
+
+<Fig src="/p/sleep-now/nowbar.png"
+  caption="잠금화면 Now Bar. 화면을 켜지 않아도 남은 시간이 1분마다 갱신된다." />
 
 <Fig src="/p/sleep-now/demo.mp4" video phone
   caption="«목표대로» 를 누르고 아침에 알람을 끄기까지, 23초 영상." />
 
-<Next items={[
-  { tab: "개발기", title: "후보 시안을 그려 놓고 고른 결정 7건", href: "/sleep-now/making" },
-]} />
-
-## 핵심 기능
-
-### 알림이 본체
-
-수면 앱 대부분은 사후 분석(어젯밤 수면 시간 · 깊은 잠 비율). 판단 시점은 눕기 전이고, 필요한 값은
-**지금 누우면 몇 시 기상** 하나. One UI 8 Now Bar 에 올려 잠금화면 하단에 상시 표시.
-
-<Fig src="/p/sleep-now/nowbar.png"
-  caption="잠금화면 Now Bar. 화면을 켜지 않아도 남은 시간 표시." />
-
-### 하룻밤 타임라인
-
-현재 · 목표 취침 · 지금 자면 기상 · 목표대로면 기상 · 회사 도착을 한 축에, 항목 사이 간격은 분 단위로.
-
-<Fig src="/p/sleep-now/app-light.png" srcDark="/p/sleep-now/app-dark.png" phone
-  caption="왼쪽 괄호가 같은 수면 시간(7시간 15분)을 두 번 잼. 위가 목표, 아래가 지금 누웠을 때 — 늦은 만큼 아침 전체가 밀림." />
-
-### 위젯
-
-같은 값을 한 줄로 + 버튼 둘. 두 칸까지 좁힘 가능, 낮에는 버튼 숨김.
-
-## 하루 흐름
+## 하루 타임라인
 
 <Flow caption="밤 시작부터 회사 도착까지. 파란 단계가 사용자가 누르는 두 번." steps={[
   { at: "오후 9시", name: "밤 시작", note: "상태 표시줄이 밤 모드로" },
@@ -76,7 +55,21 @@ import Cases from '../../components/Cases.astro';
   { at: "오전 8:20", name: "회사 도착", note: "준비 30분 + 이동 1:20" },
 ]} />
 
-## 상태별 화면
+## 화면
+
+<Mark src="/p/sleep-now/app-light.png" alt="하룻밤 타임라인"
+  marks={[
+    { at: [0, 14], text: "지금 · 목표 취침 · 기상 · 회사 도착을 한 축에" },
+    { at: [0, 21], side: "right", text: "늦어질 걸 미리 알면 오늘 취침만 미룬다" },
+    { at: [0, 32], text: "지금 누우면 몇 시 기상 — 이 값 하나가 본체" },
+    { at: [0, 63], side: "right", text: "목표 취침까지 남은 시간" },
+    { at: [0, 87], text: "누울 때 한 번. 아침 알람까지 이 단추가 맞춘다" },
+  ]}
+  caption="왼쪽 괄호가 같은 수면 시간(7시간 15분)을 두 번 잰다. 위가 목표, 아래가 지금 누웠을 때 — 늦은 만큼 아침 전체가 밀린다." />
+
+위젯은 같은 값을 한 줄로 줄이고 단추 둘을 붙인다. 두 칸까지 좁혀지고, 낮에는 단추를 감춘다.
+
+## 그 밖의 화면
 
 <Strip items={[
   { src: "/p/sleep-now/img/main_asleep.png", label: "취침 후",
@@ -109,3 +102,7 @@ One UI 8(안드로이드 16) 이상, 갤럭시 S25+ 에서 개발 · 확인. Now
 
 - [설명서](/p/sleep-now/manual.html) — 화면별 설명, 하루 흐름, 상황별 동작
 - [구간 대조표](/p/sleep-now/pages/phases.html) — 네 구간을 다섯 표시 위치에서 캡처해 나란히
+
+<Next items={[
+  { tab: "개발기", title: "후보 시안을 그려 놓고 고른 결정 7건", href: "/sleep-now/making" },
+]} />

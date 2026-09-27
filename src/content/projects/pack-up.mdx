@@ -4,7 +4,7 @@ tagline: 내일 날씨를 보고 챙길 것을 전날 밤에 알려 주는 안�
 period: "2026.09"
 purpose: 생활
 kind: 안드로이드 앱
-tags: [Android, Kotlin, 위젯, 날씨, 기상청, Open-Meteo]
+tags: [Android, Kotlin, 위젯, 기상청, Open-Meteo]
 icon: /p/pack-up/icon.png
 cover: /p/pack-up/main.png
 headCover: false
@@ -17,33 +17,26 @@ use:
 ---
 
 import Fig from '../../components/Fig.astro';
-import Hero from '../../components/Hero.astro';
+import Panel from '../../components/Panel.astro';
+import Mark from '../../components/Mark.astro';
 import Next from '../../components/Next.astro';
 import Story from '../../components/Story.astro';
 import Strip from '../../components/Strip.astro';
 import Cases from '../../components/Cases.astro';
 
-<p class="q">날씨 숫자 넷, 챙길 건 우산 하나.</p>
-
-내일 예보를 전날 밤 준비물 목록으로 바꿔 알림 하나로 전달.
-
-<Hero label="숫자 대신 받는 것" v="준비물 12종"
-  note="비·눈 · 자외선 · 미세먼지 · 기온 네 갈래 문턱에서 항목으로. 항목마다 왜 떴는지 근거 줄"
-  tiles={[
-    { label: "합쳐 보는 동네", v: "2곳", note: "집 · 회사 중 더 안 좋은 쪽" },
-    { label: "알림", v: "하루 최대 2번", note: "21:00 · 06:30(안 챙긴 게 남을 때만) · 주말 제외" },
+<Panel label="안드로이드 앱"
+  title={["날씨 숫자는 넷인데", "챙길 건 우산 하나였다"]}
+  sub="내일 예보를 전날 밤 준비물 목록으로 바꿔 알림 하나로 보낸다. 항목마다 왜 떴는지 근거 줄이 붙는다."
+  chips={[
+    { v: "12종", label: "숫자 대신 받는 것 — 비·눈, 자외선, 미세먼지, 기온 네 갈래에서" },
+    { v: "2곳", label: "합쳐 보는 동네 — 집과 회사 중 더 안 좋은 쪽" },
+    { v: "하루 2번", label: "알림 — 밤 9시와 아침 6시 반, 주말은 없다" },
   ]}
   basis="앱 규칙(Rules.kt)과 기본 설정 기준. 사용 효과 실측 아님." />
 
-<Fig src="/p/pack-up/main.png" phone
-  caption="날씨가 시킨 것 · 늘 챙기는 것 · 하루 차트. 항목마다 근거 줄." />
+밤 아홉 시 알림 하나가 목록이 된다. 챙긴 것을 누르면 알림 내용도 줄고, 다 챙기면 알림이 사라진다.
 
-<Next items={[
-  { tab: "왜 만들었나", title: "숫자에서 우산까지 누가 건너나", href: "/pack-up/why" },
-  { tab: "개발기", title: "68mm 온 날이 0mm 로 요약된 까닭", href: "/pack-up/making" },
-]} />
-
-## 이런 하루
+## 하루 타임라인
 
 <Story items={[
   { at: "21:00", what: "«내일 겉옷 · 선크림» 알림. 펼치면 <b>근거가 같이</b> — 「일교차 10도 (18~28°)」·「자외선 높음 (7)」." },
@@ -54,27 +47,19 @@ import Cases from '../../components/Cases.astro';
   { at: "토요일", what: "알림 없음. 매번 무시하던 주말 알림이 평일 알림까지 무디게 만들어서." },
 ]} />
 
-## 주요 기능
+## 화면
 
-### 두 동네를 하나로 접기
+<Mark src="/p/pack-up/main.png" alt="준비물 화면"
+  marks={[
+    { at: [0, 7], side: "right", text: "날짜 고르는 자리가 없다. 정오 전이면 오늘, 지나면 내일" },
+    { at: [0, 17], text: "항목마다 왜 떴는지 — 「일교차 10도 (18~28°)」" },
+    { at: [0, 46], text: "두 동네를 시각마다 더 나쁜 쪽으로 접는다" },
+    { at: [0, 56], side: "right", text: "등급 조각은 곧 단추. 누르면 기준 화면" },
+    { at: [0, 70], text: "위는 온도, 아래는 강수량. 점선 둘이 각 동네" },
+  ]}
+  caption="한 곳에서만 걸린 항목에는 곳 이름이 붙는다 — 「우산 — 회사 · 비 올 확률 87%」." />
 
-기온 · 강수 · 자외선 · 먼지는 **두 곳 중 더 안 좋은 쪽**(최저기온만 더 추운 쪽), 준비물은 켜 둔 곳 전부
-합산. 한 곳에서만 걸린 항목에만 곳 이름 — 「우산 — 회사 · 비 올 확률 87%」.
-
-### 늘 한 날만
-
-날짜 고르는 자리 없음. 정오 전이면 그날, 지나면 내일. 새벽 두 시에 열어도 그날 기준 — 몇 시간 뒤 출근용.
-날씨는 카드를 밀어 오늘 · 내일 둘 다 확인.
-
-### 하루 차트
-
-카드 안에 스물네 시간 — 위는 온도, 아래는 강수량. **선 셋**: 짙은 실선이 두 곳을 접은 「나쁜 쪽」, 점선
-둘이 각 동네. 기상청 기준선(열대야 25° · 어는점 · 보통 비 3mm/h)은 눈금 안에 들 때만.
-
-### 이번 주 일곱 칸 · 기준 화면
-
-맨 아래 이레 한 줄 — 요일 · 하늘 · 최고 · **온도 막대** · 최저 · 비 올 확률. 막대는 그 주 최저~최고를 한 자로,
-높낮이가 온도 · 길이가 일교차. 등급 조각은 곧 단추 — 값마다 구간 띠 위에 어느 구간부터 무엇을 챙기는지.
+## 그 밖의 화면
 
 <Strip items={[
   { src: "/p/pack-up/week.png", label: "이번 주", note: "주가 바뀌면 카드가 둘" },
@@ -111,3 +96,8 @@ import Cases from '../../components/Cases.astro';
 
 기상청 값에는 열쇠 필요 — [data.go.kr](https://www.data.go.kr) 「기상청_단기예보 조회서비스」 활용신청 후
 앱 설정 「어디서 받나」에 입력.
+
+<Next items={[
+  { tab: "왜 만들었나", title: "숫자에서 우산까지 누가 건너나", href: "/pack-up/why" },
+  { tab: "개발기", title: "68mm 온 날이 0mm 로 요약된 까닭", href: "/pack-up/making" },
+]} />

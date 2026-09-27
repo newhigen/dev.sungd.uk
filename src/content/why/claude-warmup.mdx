@@ -2,32 +2,44 @@
 tagline: 윈도우는 첫 메시지에 시작, 첫 메시지는 늘 출근 후
 ---
 
-import Day from '../../components/Day.astro';
+import BeforeAfter from '../../components/BeforeAfter.astro';
 import Impact from '../../components/Impact.astro';
 
 <p class="q">토큰 부족, 퇴근 시점엔 윈도우 잔여.</p>
 
 5시간 윈도우는 첫 메시지 시각에 시작. 출근 후 첫 사용 시 근무 중 윈도우 2개에 그침.
 
-<Day from={3} to={21}
-  span={{ from: 7, to: 16, label: "근무 07:00–16:00" }}
-  rows={[
-    { label: "전", count: "2개",
+<BeforeAfter
+  from={3} to={21}
+  ticks={[
+    { at: 3, label: "오전 3시" }, { at: 6, label: "오전 6시" }, { at: 9, label: "오전 9시" },
+    { at: 12, label: "정오" }, { at: 15, label: "오후 3시" }, { at: 18, label: "오후 6시" },
+    { at: 21, label: "오후 9시" },
+  ]}
+  span={{ from: 7, to: 16, label: "근무 오전 7시~오후 4시" }}
+  before={{ label: "전", rows: [
+    { label: "윈도우", tone: "bad", count: "2개",
       blocks: [
-        { from: 7, to: 12, name: "W1 07–12", tone: 1 },
-        { from: 13, to: 18, name: "W2 13–18", tone: 2 },
+        { from: 7, to: 12, name: "W1", tone: 1 },
+        { from: 13, to: 18, name: "W2", tone: 2 },
       ],
       cut: { from: 16, to: 18 } },
-    { label: "후", count: "3개",
+  ] }}
+  after={{ label: "후", rows: [
+    { label: "윈도우", tone: "good", count: "3개",
       blocks: [
-        { from: 3.98, to: 8.98, name: "W1 03:59–", tone: 1 },
-        { from: 9, to: 14, name: "W2 09:00–", tone: 2 },
-        { from: 14.02, to: 19.02, name: "W3 14:01–", tone: 3 },
+        { from: 3.98, to: 8.98, name: "W1", tone: 1 },
+        { from: 9, to: 14, name: "W2", tone: 2 },
+        { from: 14.02, to: 19.02, name: "W3", tone: 3 },
       ],
-      marks: [3.98, 9, 14.02], marksLabel: "자동 메시지 3통" },
-  ]}
+      marks: [
+        { at: 3.98, kind: "dot", label: "자동 메시지 3통" },
+        { at: 9, kind: "dot" },
+        { at: 14.02, kind: "dot" },
+      ] },
+  ] }}
   legend={["첫 윈도우", "두 번째", "세 번째", "퇴근 뒤로 밀린 몫"]}
-  caption="7시 출근 · 16시 퇴근 하루. 출근 7~11시 모두 후 줄은 윈도우 3개." />
+  caption="오전 7시 출근 · 오후 4시 퇴근 하루. 출근이 오전 7~11시 어디여도 후 줄은 윈도우 셋." />
 
 ## 막힌 지점과 한 것
 

@@ -1,207 +1,223 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><title>약수첩 — 쓰는 법</title>
 <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='%232B2926'/%3E%3Cg transform='rotate(-32 12 12)'%3E%3Crect x='8.6' y='4.8' width='6.8' height='14.4' rx='3.4' fill='%23E6DFD3'/%3E%3C/g%3E%3C/svg%3E">
-<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet">
 <style>
-:root{--bg:#EDEAE3;--card:#FBF9F5;--ink:#2B2926;--sec:#5A554F;--mut:#8F887D;--acc:#A8834F;--num:#C9A87A;--rule:#E4DFD5}
-*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 "Pretendard",-apple-system,system-ui,sans-serif}
+/* 페이퍼로지 — 제목 · 눈누 https://noonnu.cc/font_page/1456 */
+@font-face{font-family:'Paperlogy';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Paperlogy';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+/* SUITE — 본문과 UI · 눈누 https://noonnu.cc/font_page/1150 */
+@font-face{font-family:'SUITE';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'SUITE';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'SUITE';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'SUITE';src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+
+:root{--bg:#e6e3f0;--card:#fbfaff;--ink:#221f2b;--sec:#3a3646;--mut:#6f6b85;--acc:#8a6a3c;--num:#8a6a3c;--rule:rgba(34,31,43,.09)}
+*{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 "SUITE",-apple-system,system-ui,sans-serif}
 .wrap{max-width:960px;margin:0 auto;padding:56px 32px 100px}
-h1{font-size:38px;letter-spacing:-.02em;font-weight:700;margin:0 0 4px}
+h1{font-family:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;font-size:38px;font-weight:600;margin:0 0 4px}
 .tag{color:var(--mut);font-size:17px;margin:0 0 30px}
-h2{font-size:21px;font-weight:700;margin:52px 0 10px}
+h2{font-family:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;font-size:21px;font-weight:600;margin:52px 0 10px}
 .cap{color:var(--sec);font-size:15px;margin:8px 0 0;width:55.10%} .cap.wide{width:auto;margin-top:18px}
 .lead{color:var(--sec);margin:-4px 0 12px}
-svg.fig{display:block;width:100%;height:auto;margin:6px 0 0} svg.fig text{font-family:"Pretendard",-apple-system,system-ui,sans-serif}
+svg.fig{display:block;width:100%;height:auto;margin:6px 0 0} svg.fig text{font-family:"SUITE",-apple-system,system-ui,sans-serif}
 .hero{display:block;width:55.10%}   /* 위젯 사진은 모서리대로 오려 바깥이 투명하다 — 테를 안 두른다 */
 .hero.none{padding:40px 24px;color:var(--mut);background:var(--card);font-size:14px}
 .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:14px 0 0;width:55.10%}
 .step{background:var(--card);border-radius:18px;padding:18px 18px 16px;border:1px solid var(--rule)}
-.step b{display:block;font-size:24px;color:var(--num);margin-bottom:4px} .step span{display:block;font-weight:700} .step i{font-style:normal;color:var(--mut);font-size:14px}
+.step b{display:block;font-family:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;font-size:24px;color:var(--num);margin-bottom:4px} .step span{display:block;font-weight:700} .step i{font-style:normal;color:var(--mut);font-size:14px}
 .cases{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:14px 0 0}
 .case{background:var(--card);border-radius:18px;padding:18px 20px;border:1px solid var(--rule)} .case b{display:block;margin-bottom:4px} .case p{margin:0;color:var(--sec);font-size:15px}
+/* 같은 자리의 여러 상태 — 화면을 옆에 놓아 무엇이 달라지는지 견준다 */
+.states{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:6px 0 0}
+.states figure{margin:0}
+.states img{display:block;width:100%;border-radius:12px;border:1px solid var(--rule)}
+.states .none{padding:28px 16px;border-radius:12px;background:var(--bg);color:var(--mut);font-size:13px}
+.states figcaption{margin:9px 0 0;font-size:14px;line-height:1.5;color:var(--sec)}
+.states figcaption b{display:block;font-family:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;font-weight:600;font-size:15.5px;color:var(--ink)}
+.states .when{display:block;color:var(--acc);font-size:12.5px;margin-bottom:3px}
 .moment{background:var(--card);border:1px solid var(--rule);border-radius:26px;padding:22px 26px 26px;margin:18px 0 0}
 .moment h2{margin:0 0 8px;font-size:19px}
 .foot{color:var(--mut);font-size:13.5px;margin-top:48px}
 @media (max-width:760px){.wrap{padding:32px 16px 80px} .hero,.steps,.cap{width:100%} .cases,.steps{grid-template-columns:1fr}}
 </style></head><body><div class="wrap">
-<h1>약수첩</h1><p class="tag">먹고 바르고 넣는 약을 홈 화면에서 챙긴다</p><img class="hero" src="img/widget.png" alt=""><p class="cap">홈 화면 위젯. 윗줄이 지금 구간의 약, 아랫줄이 나머지 셋 — 다 챙겼으면 체크, 남았으면 개수. 맨 아래 인공눈물 띠는 두 번 누른다. 오늘 아직 안 넣었으면 띠가 비어 있다. 여기서 보고, 앱에서 누른다.</p><h2>처음 세 걸음</h2><div class="steps"><div class="step"><b>1</b><span>약을 넣는다</span><i>약 목록에서 이름 · 모양 · 색 · 언제</i></div><div class="step"><b>2</b><span>위젯을 올린다</span><i>홈 화면에 2칸짜리</i></div><div class="step"><b>3</b><span>먹고 누른다</span><i>앱에서 체크, 인공눈물은 띠에서</i></div></div><h2>이럴 때 이렇게</h2><div class="cases"><div class="case"><b>아침에 먹고</b><p>앱을 열어 아침 카드의 줄을 눌러요. 영양제 넷은 한 번에. 5시 20분이 돼도 알림은 안 와요 — 이미 했으니까.</p></div><div class="case"><b>깜빡했을 때</b><p>구간 시각에 알림이 하나. 남은 것 이름만 적혀 있고, <b>먹었어요</b> 를 누르면 그 구간이 통째로 체크돼요. 정해 둔 시간이 지나면 알림은 스스로 사라져요.</p></div><div class="case"><b>인공눈물을 넣고</b><p>위젯 띠를 두 번. 한 번은 «한 번 더 눌러서 확정», 4초 안에 한 번 더. 넣으면 띠가 채워지고 「42분 전」, 간격(기본 60분)이 지나면 물방울이 빨개져요.</p></div><div class="case"><b>새벽 3시가 지나면</b><p>인공눈물은 하루가 새벽 3시에 바뀌어요. 어제 넣은 건 안 세고, 오늘 아직 안 넣었으면 띠가 비고 윤곽만 남아 「오늘 아직」 이라 서요.</p></div><div class="case"><b>잘못 눌렀을 때</b><p>몇 분 안엔 같은 줄을 다시 눌러요(기본 5분). 지나면 그대로 굳어요 — 잘못 눌렀을 때만 고치라고 두는 시간이에요.</p></div><div class="case"><b>늦게라도</b><p>타일은 자정까지 눌러 채울 수 있어요. 알림이 사라진 뒤에도요.</p></div><div class="case"><b>토요일 아침</b><p>일주일치 약통을 채우라는 알림. 매일 챙기는 일이 아니라 위젯엔 안 서요. <b>채웠어요</b> 를 누르면 기록에 남고, <b>오후 9시로 미루기</b> 를 누르면 그날 저녁에 다시 와요.</p></div></div><section class="moment"><h2>아침에 먹고 나서</h2><svg class="fig" viewBox="0 0 1960 1816" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
+<h1>약수첩</h1><p class="tag">먹고 바르고 넣는 약을 홈 화면에서 챙긴다</p><img class="hero" src="img/widget.png" alt=""><p class="cap">홈 화면 위젯. 윗줄이 지금 구간의 약, 아랫줄이 나머지 셋 — 다 챙겼으면 체크, 남았으면 개수. 맨 아래 인공눈물 띠는 두 번 누른다. 오늘 아직 안 넣었으면 띠가 비어 있다. 여기서 보고, 앱에서 누른다.</p><h2>처음 세 걸음</h2><div class="steps"><div class="step"><b>1</b><span>약을 넣는다</span><i>약 목록에서 이름 · 모양 · 색 · 언제</i></div><div class="step"><b>2</b><span>위젯을 올린다</span><i>홈 화면에 2칸짜리</i></div><div class="step"><b>3</b><span>먹고 누른다</span><i>앱에서 체크, 인공눈물은 띠에서</i></div></div><h2>이럴 때 이렇게</h2><div class="cases"><div class="case"><b>아침에 먹고</b><p>앱을 열어 아침 카드의 줄을 눌러요. 영양제 넷은 한 번에. 5시 20분이 돼도 알림은 안 와요 — 이미 했으니까.</p></div><div class="case"><b>깜빡했을 때</b><p>구간 시각에 알림이 하나. 남은 것 이름만 적혀 있고, <b>먹었어요</b> 를 누르면 그 구간이 통째로 체크돼요. 정해 둔 시간이 지나면 알림은 스스로 사라져요.</p></div><div class="case"><b>잘못 눌렀을 때</b><p>몇 분 안엔 같은 줄을 다시 눌러요(기본 5분). 지나면 그대로 굳어요 — 잘못 눌렀을 때만 고치라고 두는 시간이에요.</p></div><div class="case"><b>늦게라도</b><p>타일은 자정까지 눌러 채울 수 있어요. 알림이 사라진 뒤에도요.</p></div><div class="case"><b>토요일 아침</b><p>일주일치 약통을 채우라는 알림. 매일 챙기는 일이 아니라 위젯엔 안 서요. <b>채웠어요</b> 를 누르면 기록에 남고, <b>오후 9시로 미루기</b> 를 누르면 그날 저녁에 다시 와요.</p></div></div><section class="moment"><h2>인공눈물 띠</h2><p class="lead">위젯 띠를 두 번 눌러 넣어요 — 한 번은 «한 번 더 눌러서 확정», 4초 안에 한 번 더. 하루는 새벽 3시에 바뀌어서 어제 넣은 건 안 세요.</p><div class="states"><figure><img src="img/tears-empty.png" alt=""><figcaption><b>오늘 아직</b><span class="when">넣기 전 · 새벽 3시가 지나면</span>띠가 비고 윤곽만 남아요.</figcaption></figure><figure><img src="img/tears-ok.png" alt=""><figcaption><b>42분 전</b><span class="when">넣은 뒤 · 간격 안</span>띠가 채워지고 마지막으로 넣은 때가 서요.</figcaption></figure><figure><img src="img/tears-late.png" alt=""><figcaption><b>넣을 때</b><span class="when">간격이 지남 · 기본 60분</span>물방울이 빨개져요.</figcaption></figure></div></section><section class="moment"><h2>아침에 먹고 나서</h2><svg class="fig" viewBox="0 0 1960 1816" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
 <clipPath id="cp_main_top"><rect x="0" y="0" width="1080" height="1816" rx="36"/></clipPath>
 <rect x="0" y="0" width="1080" height="1816" rx="36" fill="#FDFDFB"/><image href="img/main_top.png" xlink:href="img/main_top.png" x="0" y="-26" width="1080" height="1920" clip-path="url(#cp_main_top)"/>
 <rect x="0" y="0" width="1080" height="40" fill="#FDFDFB" clip-path="url(#cp_main_top)"/>
-<rect x="2" y="2" width="1076" height="1812" rx="34" fill="none" stroke="#E4DFD5" stroke-width="4"/>
-<path d="M 830 417 V 397 H 850 M 970 397 H 990 V 417 M 830 451 V 471 H 850 M 970 471 H 990 V 451" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 994 434.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 434.0 H 1110.0 V 415.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="434.0" r="7" fill="#A8834F"/>
-<text x="1140" y="427.0" font-size="34" font-weight="700" fill="#2B2926">구간이 끝나면 «다 했어요»</text>
-<text x="1140" y="475.0" font-size="28" fill="#5A554F">구간마다 카드 하나. 이름 옆이 알림 시각이에요.</text>
-<path d="M 781 570 V 550 H 801 M 970 550 H 990 V 570 M 781 606 V 626 H 801 M 970 626 H 990 V 606" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 994 588.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 588.0 H 1110.0 V 569.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="588.0" r="7" fill="#A8834F"/>
-<text x="1140" y="581.0" font-size="34" font-weight="700" fill="#2B2926">줄을 누르면 체크</text>
-<text x="1140" y="629.0" font-size="28" fill="#5A554F">시각이 남고, 몇 분 안엔 다시 눌러 되돌려요.</text>
-<path d="M 216 985 V 965 H 236 M 789 965 H 809 V 985 M 216 1029 V 1049 H 236 M 789 1049 H 809 V 1029" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 813 1007.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1007.0 H 1110.0 V 988.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1007.0" r="7" fill="#A8834F"/>
-<text x="1140" y="1000.0" font-size="34" font-weight="700" fill="#2B2926">영양제는 한 줄</text>
-<text x="1140" y="1048.0" font-size="28" fill="#5A554F">한 번에 먹으니 한 번에 체크돼요.</text>
-<path d="M 842 1634 V 1614 H 862 M 970 1614 H 990 V 1634 M 842 1668 V 1688 H 862 M 970 1688 H 990 V 1668" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 994 1651.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1651.0 H 1110.0 V 1632.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1651.0" r="7" fill="#A8834F"/>
-<text x="1140" y="1644.0" font-size="34" font-weight="700" fill="#2B2926">지금 구간은 밝은 판</text>
-<text x="1140" y="1692.0" font-size="28" fill="#5A554F">남은 개수가 서요.</text>
+<rect x="2" y="2" width="1076" height="1812" rx="34" fill="none" stroke="rgba(34,31,43,.09)" stroke-width="4"/>
+<path d="M 830 417 V 397 H 850 M 970 397 H 990 V 417 M 830 451 V 471 H 850 M 970 471 H 990 V 451" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 994 434.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 434.0 H 1110.0 V 415.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="434.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="427.0" font-size="34" font-weight="700" fill="#221f2b">구간이 끝나면 «다 했어요»</text>
+<text x="1140" y="475.0" font-size="28" fill="#3a3646">구간마다 카드 하나. 이름 옆이 알림 시각이에요.</text>
+<path d="M 781 570 V 550 H 801 M 970 550 H 990 V 570 M 781 606 V 626 H 801 M 970 626 H 990 V 606" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 994 588.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 588.0 H 1110.0 V 569.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="588.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="581.0" font-size="34" font-weight="700" fill="#221f2b">줄을 누르면 체크</text>
+<text x="1140" y="629.0" font-size="28" fill="#3a3646">시각이 남고, 몇 분 안엔 다시 눌러 되돌려요.</text>
+<path d="M 216 985 V 965 H 236 M 789 965 H 809 V 985 M 216 1029 V 1049 H 236 M 789 1049 H 809 V 1029" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 813 1007.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1007.0 H 1110.0 V 988.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1007.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1000.0" font-size="34" font-weight="700" fill="#221f2b">영양제는 한 줄</text>
+<text x="1140" y="1048.0" font-size="28" fill="#3a3646">한 번에 먹으니 한 번에 체크돼요.</text>
+<path d="M 842 1634 V 1614 H 862 M 970 1614 H 990 V 1634 M 842 1668 V 1688 H 862 M 970 1688 H 990 V 1668" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 994 1651.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1651.0 H 1110.0 V 1632.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1651.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1644.0" font-size="34" font-weight="700" fill="#221f2b">지금 구간은 밝은 판</text>
+<text x="1140" y="1692.0" font-size="28" fill="#3a3646">남은 개수가 서요.</text>
 </svg></section><section class="moment"><h2>인공눈물과 타임라인</h2><svg class="fig" viewBox="0 0 1960 1858" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
 <clipPath id="cp_main_tail"><rect x="0" y="0" width="1080" height="1858" rx="36"/></clipPath>
 <rect x="0" y="0" width="1080" height="1858" rx="36" fill="#FDFDFB"/><image href="img/main_tail.png" xlink:href="img/main_tail.png" x="0" y="-26" width="1080" height="1920" clip-path="url(#cp_main_tail)"/>
 <rect x="0" y="0" width="1080" height="40" fill="#FDFDFB" clip-path="url(#cp_main_tail)"/>
-<rect x="2" y="2" width="1076" height="1854" rx="34" fill="none" stroke="#E4DFD5" stroke-width="4"/>
-<path d="M 85 655 V 635 H 105 M 975 635 H 995 V 655 M 85 765 V 785 H 105 M 975 785 H 995 V 765" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 999 710.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 710.0 H 1110.0 V 691.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="710.0" r="7" fill="#A8834F"/>
-<text x="1140" y="703.0" font-size="34" font-weight="700" fill="#2B2926">넣을 때 한 번</text>
-<text x="1140" y="751.0" font-size="28" fill="#5A554F">위젯 띠를 두 번 눌러도 같아요. 위가 마지막으로 넣은 때예요.</text>
-<path d="M 52 890 V 870 H 72 M 876 870 H 896 V 890 M 52 939 V 959 H 72 M 876 959 H 896 V 939" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 900 914.5 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 914.5 H 1110.0 V 875.5 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="914.5" r="7" fill="#A8834F"/>
-<text x="1140" y="887.5" font-size="34" font-weight="700" fill="#2B2926">오늘 한 일이 시간순으로</text>
-<text x="1140" y="935.5" font-size="28" fill="#5A554F">약은 같은 분끼리 한 줄, 인공눈물은 따로. 잘못 든 줄은 꾹</text>
-<text x="1140" y="975.5" font-size="28" fill="#5A554F">눌러 지워요.</text>
-<path d="M 868 897 V 877 H 888 M 1008 877 H 1028 V 897 M 868 931 V 951 H 888 M 1008 951 H 1028 V 931" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1032 914.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 914.0 H 1110.0 V 1045.5 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="914.0" r="7" fill="#A8834F"/>
-<text x="1140" y="1057.5" font-size="34" font-weight="700" fill="#2B2926">어제부터는 여기서</text>
-<text x="1140" y="1105.5" font-size="28" fill="#5A554F">챙긴 것은 영구히 남아요.</text>
-<path d="M 41 1600 V 1580 H 61 M 521 1580 H 541 V 1600 M 41 1710 V 1730 H 61 M 521 1730 H 541 V 1710" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 545 1655.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1655.0 H 1110.0 V 1636.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1655.0" r="7" fill="#A8834F"/>
-<text x="1140" y="1648.0" font-size="34" font-weight="700" fill="#2B2926">약을 넣고 빼는 곳</text>
-<text x="1140" y="1696.0" font-size="28" fill="#5A554F">«설정» 은 언제 알릴지예요.</text>
+<rect x="2" y="2" width="1076" height="1854" rx="34" fill="none" stroke="rgba(34,31,43,.09)" stroke-width="4"/>
+<path d="M 85 655 V 635 H 105 M 975 635 H 995 V 655 M 85 765 V 785 H 105 M 975 785 H 995 V 765" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 999 710.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 710.0 H 1110.0 V 691.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="710.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="703.0" font-size="34" font-weight="700" fill="#221f2b">넣을 때 한 번</text>
+<text x="1140" y="751.0" font-size="28" fill="#3a3646">위젯 띠를 두 번 눌러도 같아요. 위가 마지막으로 넣은 때예요.</text>
+<path d="M 52 890 V 870 H 72 M 876 870 H 896 V 890 M 52 939 V 959 H 72 M 876 959 H 896 V 939" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 900 914.5 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 914.5 H 1110.0 V 875.5 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="914.5" r="7" fill="#8a6a3c"/>
+<text x="1140" y="887.5" font-size="34" font-weight="700" fill="#221f2b">오늘 한 일이 시간순으로</text>
+<text x="1140" y="935.5" font-size="28" fill="#3a3646">약은 같은 분끼리 한 줄, 인공눈물은 따로. 잘못 든 줄은 꾹</text>
+<text x="1140" y="975.5" font-size="28" fill="#3a3646">눌러 지워요.</text>
+<path d="M 868 897 V 877 H 888 M 1008 877 H 1028 V 897 M 868 931 V 951 H 888 M 1008 951 H 1028 V 931" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1032 914.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 914.0 H 1110.0 V 1045.5 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="914.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1057.5" font-size="34" font-weight="700" fill="#221f2b">어제부터는 여기서</text>
+<text x="1140" y="1105.5" font-size="28" fill="#3a3646">챙긴 것은 영구히 남아요.</text>
+<path d="M 41 1600 V 1580 H 61 M 521 1580 H 541 V 1600 M 41 1710 V 1730 H 61 M 521 1730 H 541 V 1710" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 545 1655.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1655.0 H 1110.0 V 1636.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1655.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1648.0" font-size="34" font-weight="700" fill="#221f2b">약을 넣고 빼는 곳</text>
+<text x="1140" y="1696.0" font-size="28" fill="#3a3646">«설정» 은 언제 알릴지예요.</text>
 </svg></section><section class="moment"><h2>지난 기록</h2><svg class="fig" viewBox="0 0 1960 1894" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
 <clipPath id="cp_history"><rect x="0" y="0" width="1080" height="1894" rx="36"/></clipPath>
 <rect x="0" y="0" width="1080" height="1894" rx="36" fill="#FDFDFB"/><image href="img/history.png" xlink:href="img/history.png" x="0" y="-26" width="1080" height="1920" clip-path="url(#cp_history)"/>
 <rect x="0" y="0" width="1080" height="40" fill="#FDFDFB" clip-path="url(#cp_history)"/>
-<rect x="2" y="2" width="1076" height="1890" rx="34" fill="none" stroke="#E4DFD5" stroke-width="4"/>
-<path d="M 41 245 V 225 H 61 M 1019 225 H 1039 V 245 M 41 279 V 299 H 61 M 1019 299 H 1039 V 279" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 262.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 262.0 H 1110.0 V 243.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="262.0" r="7" fill="#A8834F"/>
-<text x="1140" y="255.0" font-size="34" font-weight="700" fill="#2B2926">얼마나 쌓였나</text>
-<text x="1140" y="303.0" font-size="28" fill="#5A554F">자정에 지워지는 건 «오늘 다 했나» 뿐이에요.</text>
-<path d="M 913 407 V 387 H 933 M 981 387 H 1001 V 407 M 913 440 V 460 H 933 M 981 460 H 1001 V 440" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1005 423.5 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 423.5 H 1110.0 V 404.5 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="423.5" r="7" fill="#A8834F"/>
-<text x="1140" y="416.5" font-size="34" font-weight="700" fill="#2B2926">날짜마다 접고 펴요</text>
-<text x="1140" y="464.5" font-size="28" fill="#5A554F">머리줄에 그날 약 몇 번 · 인공눈물 몇 번.</text>
-<path d="M 79 1810 V 1790 H 99 M 891 1790 H 911 V 1810 M 79 1839 V 1859 H 99 M 891 1859 H 911 V 1839" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 915 1824.5 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1824.5 H 1110.0 V 1805.5 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1824.5" r="7" fill="#A8834F"/>
-<text x="1140" y="1817.5" font-size="34" font-weight="700" fill="#2B2926">약통 채운 것도</text>
-<text x="1140" y="1865.5" font-size="28" fill="#5A554F">알림에서 «채웠어요» 를 누르면 남아요.</text>
+<rect x="2" y="2" width="1076" height="1890" rx="34" fill="none" stroke="rgba(34,31,43,.09)" stroke-width="4"/>
+<path d="M 41 245 V 225 H 61 M 1019 225 H 1039 V 245 M 41 279 V 299 H 61 M 1019 299 H 1039 V 279" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 262.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 262.0 H 1110.0 V 243.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="262.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="255.0" font-size="34" font-weight="700" fill="#221f2b">얼마나 쌓였나</text>
+<text x="1140" y="303.0" font-size="28" fill="#3a3646">자정에 지워지는 건 «오늘 다 했나» 뿐이에요.</text>
+<path d="M 913 407 V 387 H 933 M 981 387 H 1001 V 407 M 913 440 V 460 H 933 M 981 460 H 1001 V 440" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1005 423.5 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 423.5 H 1110.0 V 404.5 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="423.5" r="7" fill="#8a6a3c"/>
+<text x="1140" y="416.5" font-size="34" font-weight="700" fill="#221f2b">날짜마다 접고 펴요</text>
+<text x="1140" y="464.5" font-size="28" fill="#3a3646">머리줄에 그날 약 몇 번 · 인공눈물 몇 번.</text>
+<path d="M 79 1810 V 1790 H 99 M 891 1790 H 911 V 1810 M 79 1839 V 1859 H 99 M 891 1859 H 911 V 1839" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 915 1824.5 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1824.5 H 1110.0 V 1805.5 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1824.5" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1817.5" font-size="34" font-weight="700" fill="#221f2b">약통 채운 것도</text>
+<text x="1140" y="1865.5" font-size="28" fill="#3a3646">알림에서 «채웠어요» 를 누르면 남아요.</text>
 </svg></section><section class="moment"><h2>언제 알릴지</h2><svg class="fig" viewBox="0 0 1960 1643" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
 <clipPath id="cp_settings_top"><rect x="0" y="0" width="1080" height="1643" rx="36"/></clipPath>
 <rect x="0" y="0" width="1080" height="1643" rx="36" fill="#FDFDFB"/><image href="img/settings_top.png" xlink:href="img/settings_top.png" x="0" y="-26" width="1080" height="1920" clip-path="url(#cp_settings_top)"/>
 <rect x="0" y="0" width="1080" height="40" fill="#FDFDFB" clip-path="url(#cp_settings_top)"/>
-<rect x="2" y="2" width="1076" height="1639" rx="34" fill="none" stroke="#E4DFD5" stroke-width="4"/>
-<path d="M 52 531 V 511 H 72 M 888 511 H 908 V 531 M 52 575 V 595 H 72 M 888 595 H 908 V 575" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 912 553.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 553.0 H 1110.0 V 534.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="553.0" r="7" fill="#A8834F"/>
-<text x="1140" y="546.0" font-size="34" font-weight="700" fill="#2B2926">끄면 위젯만</text>
-<text x="1140" y="594.0" font-size="28" fill="#5A554F">알림 없이 위젯으로만 써요.</text>
-<path d="M 41 733 V 713 H 61 M 1019 713 H 1039 V 733 M 41 789 V 809 H 61 M 1019 809 H 1039 V 789" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 761.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 761.0 H 1110.0 V 742.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="761.0" r="7" fill="#A8834F"/>
-<text x="1140" y="754.0" font-size="34" font-weight="700" fill="#2B2926">이 시각에 안 챙긴 게 있으면</text>
-<text x="1140" y="802.0" font-size="28" fill="#5A554F">알림이 와요. 미리 했으면 안 와요.</text>
-<path d="M 907 928 V 908 H 927 M 1008 908 H 1028 V 928 M 907 962 V 982 H 927 M 1008 982 H 1028 V 962" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1032 945.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 945.0 H 1110.0 V 926.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="945.0" r="7" fill="#A8834F"/>
-<text x="1140" y="938.0" font-size="34" font-weight="700" fill="#2B2926">시각만 고쳐요</text>
-<text x="1140" y="986.0" font-size="28" fill="#5A554F">구간 이름은 못 바꿔요.</text>
-<path d="M 41 1439 V 1419 H 61 M 1019 1419 H 1039 V 1439 M 41 1495 V 1515 H 61 M 1019 1515 H 1039 V 1495" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 1467.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1467.0 H 1110.0 V 1448.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1467.0" r="7" fill="#A8834F"/>
-<text x="1140" y="1460.0" font-size="34" font-weight="700" fill="#2B2926">알림이 사라지기까지</text>
-<text x="1140" y="1508.0" font-size="28" fill="#5A554F">그 구간이 지나면 소용없어서요.</text>
+<rect x="2" y="2" width="1076" height="1639" rx="34" fill="none" stroke="rgba(34,31,43,.09)" stroke-width="4"/>
+<path d="M 52 531 V 511 H 72 M 888 511 H 908 V 531 M 52 575 V 595 H 72 M 888 595 H 908 V 575" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 912 553.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 553.0 H 1110.0 V 534.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="553.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="546.0" font-size="34" font-weight="700" fill="#221f2b">끄면 위젯만</text>
+<text x="1140" y="594.0" font-size="28" fill="#3a3646">알림 없이 위젯으로만 써요.</text>
+<path d="M 41 733 V 713 H 61 M 1019 713 H 1039 V 733 M 41 789 V 809 H 61 M 1019 809 H 1039 V 789" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 761.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 761.0 H 1110.0 V 742.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="761.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="754.0" font-size="34" font-weight="700" fill="#221f2b">이 시각에 안 챙긴 게 있으면</text>
+<text x="1140" y="802.0" font-size="28" fill="#3a3646">알림이 와요. 미리 했으면 안 와요.</text>
+<path d="M 907 928 V 908 H 927 M 1008 908 H 1028 V 928 M 907 962 V 982 H 927 M 1008 982 H 1028 V 962" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1032 945.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 945.0 H 1110.0 V 926.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="945.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="938.0" font-size="34" font-weight="700" fill="#221f2b">시각만 고쳐요</text>
+<text x="1140" y="986.0" font-size="28" fill="#3a3646">구간 이름은 못 바꿔요.</text>
+<path d="M 41 1439 V 1419 H 61 M 1019 1419 H 1039 V 1439 M 41 1495 V 1515 H 61 M 1019 1515 H 1039 V 1495" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 1467.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1467.0 H 1110.0 V 1448.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1467.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1460.0" font-size="34" font-weight="700" fill="#221f2b">알림이 사라지기까지</text>
+<text x="1140" y="1508.0" font-size="28" fill="#3a3646">그 구간이 지나면 소용없어서요.</text>
 </svg></section><section class="moment"><h2>인공눈물과 되돌리기</h2><svg class="fig" viewBox="0 0 1960 1271" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
 <clipPath id="cp_settings_bottom"><rect x="0" y="0" width="1080" height="1271" rx="36"/></clipPath>
 <rect x="0" y="0" width="1080" height="1271" rx="36" fill="#FDFDFB"/><image href="img/settings_bottom.png" xlink:href="img/settings_bottom.png" x="0" y="-26" width="1080" height="1920" clip-path="url(#cp_settings_bottom)"/>
 <rect x="0" y="0" width="1080" height="40" fill="#FDFDFB" clip-path="url(#cp_settings_bottom)"/>
-<rect x="2" y="2" width="1076" height="1267" rx="34" fill="none" stroke="#E4DFD5" stroke-width="4"/>
-<path d="M 41 431 V 411 H 61 M 1019 411 H 1039 V 431 M 41 513 V 533 H 61 M 1019 533 H 1039 V 513" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 472.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 472.0 H 1110.0 V 453.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="472.0" r="7" fill="#A8834F"/>
-<text x="1140" y="465.0" font-size="34" font-weight="700" fill="#2B2926">인공눈물 간격</text>
-<text x="1140" y="513.0" font-size="28" fill="#5A554F">지나면 위젯 물방울이 빨개져요. 기본 60분.</text>
-<path d="M 52 865 V 845 H 72 M 888 845 H 908 V 865 M 52 909 V 929 H 72 M 888 929 H 908 V 909" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 912 887.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 887.0 H 1110.0 V 868.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="887.0" r="7" fill="#A8834F"/>
-<text x="1140" y="880.0" font-size="34" font-weight="700" fill="#2B2926">인공눈물도 알릴지</text>
-<text x="1140" y="928.0" font-size="28" fill="#5A554F">기본은 끔.</text>
-<path d="M 41 1067 V 1047 H 61 M 1019 1047 H 1039 V 1067 M 41 1123 V 1143 H 61 M 1019 1143 H 1039 V 1123" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 1095.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1095.0 H 1110.0 V 1076.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1095.0" r="7" fill="#A8834F"/>
-<text x="1140" y="1088.0" font-size="34" font-weight="700" fill="#2B2926">되돌리기 유예</text>
-<text x="1140" y="1136.0" font-size="28" fill="#5A554F">지나면 체크가 그대로 굳어요.</text>
+<rect x="2" y="2" width="1076" height="1267" rx="34" fill="none" stroke="rgba(34,31,43,.09)" stroke-width="4"/>
+<path d="M 41 431 V 411 H 61 M 1019 411 H 1039 V 431 M 41 513 V 533 H 61 M 1019 533 H 1039 V 513" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 472.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 472.0 H 1110.0 V 453.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="472.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="465.0" font-size="34" font-weight="700" fill="#221f2b">인공눈물 간격</text>
+<text x="1140" y="513.0" font-size="28" fill="#3a3646">지나면 위젯 물방울이 빨개져요. 기본 60분.</text>
+<path d="M 52 865 V 845 H 72 M 888 845 H 908 V 865 M 52 909 V 929 H 72 M 888 929 H 908 V 909" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 912 887.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 887.0 H 1110.0 V 868.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="887.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="880.0" font-size="34" font-weight="700" fill="#221f2b">인공눈물도 알릴지</text>
+<text x="1140" y="928.0" font-size="28" fill="#3a3646">기본은 끔.</text>
+<path d="M 41 1067 V 1047 H 61 M 1019 1047 H 1039 V 1067 M 41 1123 V 1143 H 61 M 1019 1143 H 1039 V 1123" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 1095.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1095.0 H 1110.0 V 1076.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1095.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1088.0" font-size="34" font-weight="700" fill="#221f2b">되돌리기 유예</text>
+<text x="1140" y="1136.0" font-size="28" fill="#3a3646">지나면 체크가 그대로 굳어요.</text>
 </svg></section><section class="moment"><h2>약 목록</h2><svg class="fig" viewBox="0 0 1960 1894" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
 <clipPath id="cp_meds"><rect x="0" y="0" width="1080" height="1894" rx="36"/></clipPath>
 <rect x="0" y="0" width="1080" height="1894" rx="36" fill="#FDFDFB"/><image href="img/meds.png" xlink:href="img/meds.png" x="0" y="-26" width="1080" height="1920" clip-path="url(#cp_meds)"/>
 <rect x="0" y="0" width="1080" height="40" fill="#FDFDFB" clip-path="url(#cp_meds)"/>
-<rect x="2" y="2" width="1076" height="1890" rx="34" fill="none" stroke="#E4DFD5" stroke-width="4"/>
-<path d="M 52 283 V 263 H 72 M 1008 263 H 1028 V 283 M 52 316 V 336 H 72 M 1008 336 H 1028 V 316" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1032 299.5 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 299.5 H 1110.0 V 280.5 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="299.5" r="7" fill="#A8834F"/>
-<text x="1140" y="292.5" font-size="34" font-weight="700" fill="#2B2926">순서가 곧 위젯</text>
-<text x="1140" y="340.5" font-size="28" fill="#5A554F">위아래 화살표로 옮겨요.</text>
-<path d="M 178 1081 V 1061 H 198 M 717 1061 H 737 V 1081 M 178 1110 V 1130 H 198 M 717 1130 H 737 V 1110" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 741 1095.5 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1095.5 H 1110.0 V 1076.5 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1095.5" r="7" fill="#A8834F"/>
-<text x="1140" y="1088.5" font-size="34" font-weight="700" fill="#2B2926">영양제 표시</text>
-<text x="1140" y="1136.5" font-size="28" fill="#5A554F">같은 구간의 영양제와 위젯에서 한 타일로 뭉쳐요.</text>
-<path d="M 41 1674 V 1654 H 61 M 1019 1654 H 1039 V 1674 M 41 1784 V 1804 H 61 M 1019 1804 H 1039 V 1784" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 1729.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1729.0 H 1110.0 V 1710.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1729.0" r="7" fill="#A8834F"/>
-<text x="1140" y="1722.0" font-size="34" font-weight="700" fill="#2B2926">새 약</text>
-<text x="1140" y="1770.0" font-size="28" fill="#5A554F">이름 · 짧은 이름 · 모양 · 색 · 언제 먹나.</text>
+<rect x="2" y="2" width="1076" height="1890" rx="34" fill="none" stroke="rgba(34,31,43,.09)" stroke-width="4"/>
+<path d="M 52 283 V 263 H 72 M 1008 263 H 1028 V 283 M 52 316 V 336 H 72 M 1008 336 H 1028 V 316" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1032 299.5 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 299.5 H 1110.0 V 280.5 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="299.5" r="7" fill="#8a6a3c"/>
+<text x="1140" y="292.5" font-size="34" font-weight="700" fill="#221f2b">순서가 곧 위젯</text>
+<text x="1140" y="340.5" font-size="28" fill="#3a3646">위아래 화살표로 옮겨요.</text>
+<path d="M 178 1081 V 1061 H 198 M 717 1061 H 737 V 1081 M 178 1110 V 1130 H 198 M 717 1130 H 737 V 1110" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 741 1095.5 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1095.5 H 1110.0 V 1076.5 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1095.5" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1088.5" font-size="34" font-weight="700" fill="#221f2b">영양제 표시</text>
+<text x="1140" y="1136.5" font-size="28" fill="#3a3646">같은 구간의 영양제와 위젯에서 한 타일로 뭉쳐요.</text>
+<path d="M 41 1674 V 1654 H 61 M 1019 1654 H 1039 V 1674 M 41 1784 V 1804 H 61 M 1019 1804 H 1039 V 1784" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 1729.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1729.0 H 1110.0 V 1710.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1729.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1722.0" font-size="34" font-weight="700" fill="#221f2b">새 약</text>
+<text x="1140" y="1770.0" font-size="28" fill="#3a3646">이름 · 짧은 이름 · 모양 · 색 · 언제 먹나.</text>
 </svg></section><section class="moment"><h2>약 하나 고치기</h2><svg class="fig" viewBox="0 0 1960 1252" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" role="img">
 <clipPath id="cp_edit"><rect x="0" y="0" width="1080" height="1252" rx="36"/></clipPath>
 <rect x="0" y="0" width="1080" height="1252" rx="36" fill="#FDFDFB"/><image href="img/edit.png" xlink:href="img/edit.png" x="0" y="-26" width="1080" height="1920" clip-path="url(#cp_edit)"/>
 <rect x="0" y="0" width="1080" height="40" fill="#FDFDFB" clip-path="url(#cp_edit)"/>
-<rect x="2" y="2" width="1076" height="1248" rx="34" fill="none" stroke="#E4DFD5" stroke-width="4"/>
-<path d="M 255 339 V 319 H 275 M 1019 319 H 1039 V 339 M 255 373 V 393 H 275 M 1019 393 H 1039 V 373" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 356.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 356.0 H 1110.0 V 337.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="356.0" r="7" fill="#A8834F"/>
-<text x="1140" y="349.0" font-size="34" font-weight="700" fill="#2B2926">위젯 타일 미리보기</text>
-<text x="1140" y="397.0" font-size="28" fill="#5A554F">모양과 색을 바꾸면 바로 따라와요.</text>
-<path d="M 41 810 V 790 H 61 M 1019 790 H 1039 V 810 M 41 844 V 864 H 61 M 1019 864 H 1039 V 844" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 827.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 827.0 H 1110.0 V 808.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="827.0" r="7" fill="#A8834F"/>
-<text x="1140" y="820.0" font-size="34" font-weight="700" fill="#2B2926">짧은 이름</text>
-<text x="1140" y="868.0" font-size="28" fill="#5A554F">일곱 글자까지는 자동으로 줄어 다 들어가요.</text>
-<path d="M 41 1070 V 1050 H 61 M 1019 1050 H 1039 V 1070 M 41 1104 V 1124 H 61 M 1019 1124 H 1039 V 1104" fill="none" stroke="#A8834F" stroke-width="4" stroke-linecap="round"/>
-<path d="M 1043 1087.0 H 1080" stroke="#A8834F" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
-<path d="M 1080 1087.0 H 1110.0 V 1068.0 H 1126" fill="none" stroke="#A8834F" stroke-width="3"/>
-<circle cx="1080" cy="1087.0" r="7" fill="#A8834F"/>
-<text x="1140" y="1080.0" font-size="34" font-weight="700" fill="#2B2926">모양과 색을 골라</text>
-<text x="1140" y="1128.0" font-size="28" fill="#5A554F">아이콘은 그리지 않아요. «하양» 은 낮 위젯에서 연회색으로.</text>
+<rect x="2" y="2" width="1076" height="1248" rx="34" fill="none" stroke="rgba(34,31,43,.09)" stroke-width="4"/>
+<path d="M 255 339 V 319 H 275 M 1019 319 H 1039 V 339 M 255 373 V 393 H 275 M 1019 393 H 1039 V 373" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 356.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 356.0 H 1110.0 V 337.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="356.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="349.0" font-size="34" font-weight="700" fill="#221f2b">위젯 타일 미리보기</text>
+<text x="1140" y="397.0" font-size="28" fill="#3a3646">모양과 색을 바꾸면 바로 따라와요.</text>
+<path d="M 41 810 V 790 H 61 M 1019 790 H 1039 V 810 M 41 844 V 864 H 61 M 1019 864 H 1039 V 844" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 827.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 827.0 H 1110.0 V 808.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="827.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="820.0" font-size="34" font-weight="700" fill="#221f2b">짧은 이름</text>
+<text x="1140" y="868.0" font-size="28" fill="#3a3646">일곱 글자까지는 자동으로 줄어 다 들어가요.</text>
+<path d="M 41 1070 V 1050 H 61 M 1019 1050 H 1039 V 1070 M 41 1104 V 1124 H 61 M 1019 1124 H 1039 V 1104" fill="none" stroke="#8a6a3c" stroke-width="4" stroke-linecap="round"/>
+<path d="M 1043 1087.0 H 1080" stroke="#8a6a3c" stroke-width="2" stroke-dasharray="5 7" opacity=".55"/>
+<path d="M 1080 1087.0 H 1110.0 V 1068.0 H 1126" fill="none" stroke="#8a6a3c" stroke-width="3"/>
+<circle cx="1080" cy="1087.0" r="7" fill="#8a6a3c"/>
+<text x="1140" y="1080.0" font-size="34" font-weight="700" fill="#221f2b">모양과 색을 골라</text>
+<text x="1140" y="1128.0" font-size="28" fill="#3a3646">아이콘은 그리지 않아요. «하양» 은 낮 위젯에서 연회색으로.</text>
 </svg></section><p class="cap wide">소리 · 진동 · 잠금화면 표시는 안드로이드가 맡아요 — 설정의 «시스템 알림 설정 열기». 기록은 설정 맨 아래에서 CSV 로 내보내요. 갤럭시 S25+ · One UI 8 전용이고 스토어에 안 올려요. 코드는 <code>newhigen-labs/pillbox</code>.</p>
 </div></body></html>

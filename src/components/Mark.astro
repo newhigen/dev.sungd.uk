@@ -1,0 +1,31 @@
+---
+interface Props {
+  /** 화면 한 장에 번호를 얹어 읽는 순서를 정한다 — 캡션 한 줄은 어디를 볼지 알려 주지 못한다.
+   *  번호는 그림 좌우 여백에 서고, 폰 폭에서는 그림 아래로 접힌다. */
+  src: string;
+  alt?: string;
+  /** 그림 비율. 세로로 긴 폰 화면이면 그대로 둔다 */
+  ratio?: string;
+  /** at 은 그림 폭·높이에 대한 백분율. side 는 번호가 설 쪽(기본 왼쪽) */
+  marks: { at: [number, number]; text: string; side?: 'left' | 'right' }[];
+  caption?: string;
+}
+const { src, alt, ratio, marks, caption } = Astro.props;
+---
+
+<figure class="mrk">
+  <div class="mrk-fig">
+    <div class="mrk-shot" style={ratio ? `aspect-ratio:${ratio}` : undefined}>
+      <img src={src} alt={alt ?? ''} />
+    </div>
+    {marks.map((m, i) => (
+      <div class:list={['mrk-note', m.side ?? 'left']} style={`top:${m.at[1]}%`}>
+        <i>{i + 1}</i><span>{m.text}</span>
+      </div>
+    ))}
+  </div>
+  <ol class="mrk-list">
+    {marks.map(m => <li>{m.text}</li>)}
+  </ol>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>

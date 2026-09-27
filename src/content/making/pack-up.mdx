@@ -4,8 +4,8 @@ tagline: 날씨 숫자를 준비물 목록으로, 잘라 온 예보로 하루를
 
 import Versus from '../../components/Versus.astro';
 import Track from '../../components/Track.astro';
-import Evo from '../../components/Evo.astro';
-import Shots from '../../components/Shots.astro';
+import Timeline from '../../components/Timeline.astro';
+import Reel from '../../components/Reel.astro';
 import Cases from '../../components/Cases.astro';
 
 <p class="q">68mm 쏟아진 날, 카드엔 0mm.</p>
@@ -33,7 +33,7 @@ import Cases from '../../components/Cases.astro';
 
 방향이 바뀐 자리만 날짜 순으로. 대부분 값을 더하는 일이 아니라 이미 있는 값이 무엇을 말하게 할지.
 
-<Evo items={[
+<Timeline items={[
   { at: "8월 24일", title: "숫자 대신 항목",
     problem: "「내일 비 87%」에서 「우산」까지는 매번 사람이 건너는 자리",
     did: "네 갈래 규칙이 항목을 목록에 밀어 넣고, 항목마다 <b>왜 떴는지</b> 근거 줄",
@@ -51,7 +51,7 @@ import Cases from '../../components/Cases.astro';
     problem: "네이버 · 갤럭시 「25~32」, 앱 「25~30」. 모델 차이지만 사용자에겐 앱 오류",
     did: "단기예보를 <b>덮어쓰기</b>로, Open-Meteo 를 바탕으로 — 자외선 · 미세먼지는 단기예보에 없음",
     result: "저쪽과 같은 값. 열쇠 없어도 앱 동작" },
-  { at: "8월 25일", title: "홈 위젯 — 그리기 코드 한 벌", w: 240, img: "/p/pack-up/widget.png",
+  { at: "8월 25일", title: "홈 위젯 — 그리기 코드 한 벌", w: 240, img: "/p/pack-up/widget.png", iw: 1100, ih: 643,
     problem: "RemoteViews 는 커스텀 뷰 불가. 위젯용 그리기를 따로 짜면 한쪽만 고쳐짐",
     did: "뷰를 화면 밖에서 measure · layout 해 <b>비트맵으로 전달</b>",
     result: "차트 코드가 앱 · 위젯 한 벌. 자리가 낮으면 비율 자동 축소" },
@@ -63,7 +63,7 @@ import Cases from '../../components/Cases.astro';
     problem: "강수량 0인데 매일 접이 우산",
     did: "기상청 강수확률 30% 는 사실상 기본값 — 문턱 40 으로 상향, 예보 강수량 0.5mm 도 함께",
     result: "확률 · 양을 같이 판단. 하루 강수량은 <b>합친 스물네 시간에서 재계산</b>" },
-  { at: "9월 3일", title: "기준 화면", w: 140, img: "/p/pack-up/guide.png",
+  { at: "9월 3일", title: "기준 화면", w: 140, img: "/p/pack-up/guide.png", iw: 900, ih: 1950,
     problem: "「높음이 몇부터 높음인가」에 앱 어디에도 답 없음",
     did: "값마다 구간 띠 위에 어느 구간부터 무엇을 챙기는지. 등급 조각이 곧 단추",
     result: "문턱 숫자는 <code>Rules</code> 에서만 읽음 — 두 곳에 적으면 한쪽만 헌 값",
@@ -72,12 +72,13 @@ import Cases from '../../components/Cases.astro';
     problem: "밤에 받은 카드 「25° 23°」, 바로 아래 곡선은 31° · 19°",
     did: "TMN · TMX 가 안 오면 <b>남은 시간으로 메우지 않고 비움</b>",
     result: "기온 · 눈 · 하늘 셋이 같은 병. 강수만 먼저 고쳤던 것을 한 번에" },
-  { at: "9월 4일", title: "이번 주 일곱 칸", w: 140, img: "/p/pack-up/week.png",
+  { at: "9월 4일", title: "이번 주 일곱 칸", w: 140, img: "/p/pack-up/week.png", iw: 900, ih: 1950,
     problem: "오늘 · 내일만이라 「이번 주 언제 비 와?」에 답 없음",
     did: "예보 사흘 → 이레, 요일 · 하늘 · 최고 · <b>온도 막대</b> · 최저 · 비 올 확률 한 줄",
     result: "막대는 그 주 최저~최고를 한 자로 — 높낮이가 온도, 길이가 일교차",
     next: "주 경계를 처음엔 10dp 틈으로만. 바탕이 이어져 <b>한 장에 금이 간</b> 꼴 — 나눌 거면 카드를 나눔" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 의사결정 방식 — 실제 예보로 그려 놓고 고름
 
@@ -90,13 +91,14 @@ import Cases from '../../components/Cases.astro';
   { when: "어떻게 고르나", what: "고른 뒤에 구현. 네 안을 다 만들지 않음" },
 ]} />
 
-<Shots items={[
-  { src: "/p/pack-up/shot-widget-ideas.png", caption: "위젯 한 판 그리기 — 네 안 중 겹쳐 세우기", href: "/p/pack-up/pages/widget-ideas.html" },
-  { src: "/p/pack-up/shot-widget-1row.png", caption: "한 줄 위젯 배치 — 왼쪽·오른쪽에서 위·아래로", href: "/p/pack-up/pages/widget-1row.html" },
-  { src: "/p/pack-up/shot-widget-polish.png", caption: "한 줄 위젯 다듬기 — 눈금과 이름표", href: "/p/pack-up/pages/widget-polish.html" },
-  { src: "/p/pack-up/shot-widget-dust.png", caption: "위젯에 미세먼지 — 그림 «안» 에 조각으로", href: "/p/pack-up/pages/widget-dust.html" },
-  { src: "/p/pack-up/shot-guide-bands.png", caption: "기준 화면 — 구간 띠에 준비물을 얹어", href: "/p/pack-up/pages/guide-bands.html" },
-]} />
+<Reel items={[
+  { src: "/p/pack-up/shot-widget-ideas.png", q: "위젯 한 판 그리기", note: "네 안 중 겹쳐 세우기", href: "/p/pack-up/pages/widget-ideas.html" },
+  { src: "/p/pack-up/shot-widget-1row.png", q: "한 줄 위젯 배치", note: "왼쪽·오른쪽에서 위·아래로", href: "/p/pack-up/pages/widget-1row.html" },
+  { src: "/p/pack-up/shot-widget-polish.png", q: "한 줄 위젯 다듬기", note: "눈금과 이름표", href: "/p/pack-up/pages/widget-polish.html" },
+  { src: "/p/pack-up/shot-widget-dust.png", q: "위젯에 미세먼지", note: "그림 «안» 에 조각으로", href: "/p/pack-up/pages/widget-dust.html" },
+  { src: "/p/pack-up/shot-guide-bands.png", q: "기준 화면", note: "구간 띠에 준비물을 얹어", href: "/p/pack-up/pages/guide-bands.html" },
+]}
+  caption="그림을 누르면 크게 뜨고, 「후보 보기」 가 그 판으로 간다." />
 
 ## 잘라 온 자료로 하루를 요약하지 않기
 

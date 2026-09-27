@@ -3,7 +3,7 @@ tagline: 첫 판을 하루에 세우고, 두 달 뒤 손은 다른 판으로 —
 ---
 
 import Track from '../../components/Track.astro';
-import Evo from '../../components/Evo.astro';
+import Timeline from '../../components/Timeline.astro';
 
 <p class="q">5월 26일 하루에 커밋 14개로 첫 판. 7월 한 달은 0.</p>
 
@@ -26,7 +26,7 @@ import Evo from '../../components/Evo.astro';
 
 ## 개발 과정
 
-<Evo items={[
+<Timeline items={[
   { at: "5월 26일", title: "대상은 해외 빅테크가 아니라",
     problem: "견줄 회사를 고르라니 이름난 해외 빅테크가 먼저 떠오름 — 지원할 일이 없는 곳",
     did: "실제로 지원할 한국 IT 테크 열 곳으로 바꿈. 의료 AI 는 이미 아는 도메인이라 뺌",
@@ -55,7 +55,8 @@ import Evo from '../../components/Evo.astro';
     problem: "매트릭스는 한 번 정리하고 나면 자주 볼 일이 없음 — 새 직군을 넣을 때만 엶",
     did: "매일 아침 공고를 훑어 새로 뜬 것과 내려간 것을 찾는 감시 보드 쪽으로",
     result: "그달 커밋 95개가 그쪽. 매트릭스는 6월 1일 자료에서 멈춤" },
-]} />
+]}
+  caption="날짜를 누르거나 축을 밀면 그때 무엇이 막혔고 무엇을 정했는지 아래에 펼쳐진다." />
 
 ## 배운 점
 

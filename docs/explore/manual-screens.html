@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>설명서 — 화면으로 말하기</title>
+<style>
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-5Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'Paperlogy'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight:400; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Medium.woff2') format('woff2'); font-weight:500; font-display:swap; }
+@font-face { font-family:'SUITE'; src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight:600; font-display:swap; }
+:root {
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --ink:#221f2b; --ink-2:#3a3646; --ink-3:#6f6b85;
+  --paper:#fbfaff; --bg:#e6e3f0; --acc:#8a6a3c; --rule:rgba(34,31,43,.09);
+  --good:#2e7d4f; --bad:#c0392b;
+}
+* { box-sizing:border-box }
+body { margin:0; background:var(--bg); color:var(--ink-2); font-family:var(--body);
+  font-size:15px; line-height:1.62; word-break:keep-all }
+.wrap { max-width:1020px; margin:0 auto; padding:2.6rem 1.5rem 6rem }
+h1 { font-family:var(--title); font-weight:500; font-size:2rem; color:var(--ink); margin:0 0 .3rem }
+.lede p { margin:.2rem 0; color:var(--ink-3); font-size:.9rem }
+h2 { font-family:var(--title); font-weight:600; font-size:1.25rem; color:var(--ink); margin:3rem 0 .2rem }
+h2 .no { display:inline-block; min-width:2.4rem; font-size:.78rem; color:var(--acc) }
+.was { margin:.1rem 0 .9rem; color:var(--ink-3); font-size:.86rem }
+.was b { color:var(--ink-2); font-weight:500 }
+.pane { background:var(--paper); border-radius:14px; padding:1.4rem 1.6rem 1.5rem; width:760px; max-width:100% }
+.cap { margin:.8rem 0 0; font-size:.8rem; color:var(--ink-3) }
+
+/* 같은 자리의 화면 여러 장을 나란히 — 무엇이 달라지는지 눈으로 견준다 */
+.states { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin:.2rem 0 0 }
+.states figure { margin:0 }
+.states img { display:block; width:100%; border-radius:10px; border:1px solid var(--rule) }
+.states figcaption { margin:.5rem 0 0; font-size:.82rem; line-height:1.5 }
+.states b { display:block; font-family:var(--title); font-weight:600; font-size:.92rem; color:var(--ink); margin-bottom:.1rem }
+.states .when { display:block; color:var(--acc); font-size:.76rem; margin-bottom:.2rem }
+
+/* 지금 줄글 — 견주기용 */
+.old { margin:.9rem 0 0; padding:.9rem 1.1rem; border-radius:12px; background:#f1eee8;
+  font-size:.84rem; color:#5A554F; font-family:"Pretendard",-apple-system,system-ui,sans-serif }
+.old b { color:#2B2926 }
+.old .h { display:block; font-weight:700; color:#2B2926; margin-bottom:.15rem }
+
+.todo { margin:.2rem 0 0; padding-left:1.1rem }
+.todo li { margin:.35rem 0; font-size:.88rem }
+.todo code { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:.82rem; color:var(--acc) }
+.foot { margin:3.4rem 0 0; font-size:.82rem; color:var(--ink-3) }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>설명서 — 화면으로 말하기</h1>
+<div class="lede">
+  <p>규칙을 추상 축으로 그리지 말고, 그 규칙이 드러난 실제 화면을 나란히 놓는다.</p>
+  <p>설명서는 <code>gen_manual.py</code> 가 굽고 틀은 스킬의 <code>manual_render.py</code> 가 든다. 화면 한 장에 인출선을 다는 <code>moment()</code> 는 있는데, <b>같은 자리의 여러 상태를 견주는 칸이 없다.</b></p>
+</div>
+
+<h2><span class="no">1</span>인공눈물 띠 — 세 상태</h2>
+<p class="was">캡처는 이미 폴더에 있다. <b>설명서가 안 쓰고 줄글로만 적고 있다.</b></p>
+<div class="pane">
+  <div class="states">
+    <figure>
+      <img src="img/pillbox/tears-empty.png" alt="띠가 비어 윤곽만 남은 위젯">
+      <figcaption><b>오늘 아직</b><span class="when">넣기 전 · 새벽 3시가 지나면</span>띠가 비고 윤곽만 남는다.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/pillbox/tears-ok.png" alt="42분 전이 적힌 위젯">
+      <figcaption><b>42분 전</b><span class="when">넣은 뒤 · 간격 안</span>띠가 채워지고 마지막으로 넣은 때가 선다.</figcaption>
+    </figure>
+    <figure>
+      <img src="img/pillbox/tears-late.png" alt="물방울이 빨개진 위젯">
+      <figcaption><b>넣을 때</b><span class="when">간격이 지남 · 기본 60분</span>물방울이 빨개진다.</figcaption>
+    </figure>
+  </div>
+  <p class="cap">세 장을 나란히 두면 「빔 → 채워짐 → 빨강」이 한눈에 돈다. 띠를 두 번 누르는 법만 한 줄 덧붙이면 된다.</p>
+
+  <div class="old">
+    <span class="h">지금은 이렇게 적혀 있다</span>
+    「위젯 띠를 두 번. 한 번은 «한 번 더 눌러서 확정», 4초 안에 한 번 더. 넣으면 띠가 채워지고 <b>「42분 전」</b>, 간격(기본 60분)이 지나면 물방울이 빨개져요.」<br>
+    「인공눈물은 하루가 새벽 3시에 바뀌어요. 어제 넣은 건 안 세고, 오늘 아직 안 넣었으면 띠가 비고 윤곽만 남아 <b>「오늘 아직」</b> 이라 서요.」
+  </div>
+</div>
+
+<h2><span class="no">2</span>같은 손으로 갈 수 있는 것</h2>
+<p class="was">줄글 카드로 남아 있는 나머지도 화면이 있으면 같은 칸에 들어간다. 없는 것은 에뮬레이터에서 새로 뜬다.</p>
+<div class="pane">
+  <ul class="todo">
+    <li><b>깜빡했을 때</b> — 알림 화면 한 장. 「남은 것 이름만」과 「먹었어요」 단추를 인출선으로. <code>새로 떠야 함</code></li>
+    <li><b>잘못 눌렀을 때</b> — 누른 직후와 5분 뒤 두 장. 되돌릴 수 있는 줄과 굳은 줄. <code>새로 떠야 함</code></li>
+    <li><b>토요일 아침</b> — 약통 알림 한 장. 「채웠어요」와 「오후 9시로 미루기」. <code>새로 떠야 함</code></li>
+    <li><b>아침에 먹고</b> — 이미 <code>main_top</code> 인출선이 맡고 있다. 카드를 지워도 된다</li>
+    <li><b>늦게라도</b> — 한 줄이라 도식이 필요 없다. 인출선에 붙인다</li>
+  </ul>
+  <p class="cap">캡처는 <code>shoot_manual.py</code> 가 adb 로 찍고 요소 위치를 JSON 으로 같이 남긴다 — 인출선은 그 위치에서 글자로 찾아 자동으로 붙는다.</p>
+</div>
+
+<h2><span class="no">3</span>고칠 자리</h2>
+<div class="pane">
+  <ul class="todo">
+    <li><b>스킬</b> <code>~/.claude/skills/personal-android-app/manual_render.py</code> — 여러 상태를 견주는 칸(<code>states()</code>)을 더한다. 앞으로 만들 앱 설명서가 다 쓴다</li>
+    <li><b>내용</b> <code>~/dev/pillbox/tools/gen_manual.py</code> — 줄글 <code>cases()</code> 일곱 중 화면이 있는 것을 <code>states()</code>·<code>moment()</code> 로 옮긴다</li>
+    <li><b>판</b> 글꼴 Paperlogy · SUITE, 집 색으로. 이것도 스킬 쪽이라 한 번만 고치면 된다</li>
+  </ul>
+  <p class="cap">⚠ <code>public/p/pillbox/manual.html</code> 을 직접 고치면 다음 생성 때 날아간다.</p>
+</div>
+
+<p class="foot">sleep-now 설명서는 이 렌더러를 안 쓴다 — 따로 만들어진 판이라 나중에 같은 틀로 옮길지 따로 본다.</p>
+
+</div>
+</body>
+</html>
