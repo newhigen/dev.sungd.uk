@@ -41,7 +41,7 @@ import Flow from '../../components/Flow.astro';
   { tab: "개발기", title: "커밋 190개, 남은 손길 하나", href: "/claude-watch/making" },
 ]} />
 
-## 상태로 가른다
+## 상태 표식
 
 <Marks caption="표식 · 색 · 카드 바탕은 저장소 값 그대로. 세션 이름은 실제 저장소 이름이고 묻는 말은 예시." />
 
@@ -57,7 +57,7 @@ import Flow from '../../components/Flow.astro';
   { at: "같이", name: "브라우저 탭 그룹도 따라옴", note: "세션 탭" },
 ]} />
 
-## 지금은 어떻게 쓰나
+## 지금 쓰는 법
 
 화면은 안 띄움. 지금 보는 판(Deck) 과 메뉴바는 세션 탭 데몬(포트 8908) 이 그리는데, 그 데몬이
 claude-watch 를 제 venv 에서 불러 `ls --follow` 로 목록을 받고, 카드를 누르면 `goto`, 답을 보내면 `send` 로 넘김.
