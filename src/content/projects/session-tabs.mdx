@@ -37,11 +37,6 @@ import Cases from '../../components/Cases.astro';
   line="손으로 연 탭과 한 창에 섞여 <b>보류</b>"
   sub="그룹째 닫기와 빠르게 이어 열기가 생기면 확장을 다시 붙여 이어감" />
 
-<Next items={[
-  { tab: "왜 만들었나", title: "탭 28장 속 다른 세션의 최신 탭", href: "/session-tabs/why" },
-  { tab: "개발기", title: "첫 11시간에 PR 28개", href: "/session-tabs/making" },
-]} />
-
 ## 동작 방식
 
 <Flow caption="사람이 하는 일은 세션을 고르는 것뿐. 나머지는 훅 두 개와 open 대리 명령이 부름." steps={[
@@ -80,3 +75,8 @@ import Cases from '../../components/Cases.astro';
 - **크롬** — 116 이상. `extension/` 을 압축해제된 확장 프로그램으로 로드.
 - **Mac** — 데몬(포트 8908)을 launchd 로 상주. Claude Code `settings.json` 에 SessionStart · SessionEnd 훅 두 개.
 - 저장소는 private.
+
+<Next items={[
+  { tab: "왜 만들었나", title: "탭 28장 속 다른 세션의 최신 탭", href: "/session-tabs/why" },
+  { tab: "개발기", title: "첫 11시간에 PR 28개", href: "/session-tabs/making" },
+]} />

@@ -39,11 +39,6 @@ import Picks from '../../components/pp/Picks.astro';
   line="세션이 열 개를 넘으면 <b>어느 세션인지</b> 못 가려 종료"
   sub="알림은 세션 모니터(claude-watch)의 «내 차례» 목록으로 이전" />
 
-<Next items={[
-  { tab: "왜 만들었나", title: "화면을 안 볼 때의 알림", href: "/peon-ping/why" },
-  { tab: "개발기", title: "안 들리던 벨에서 걷어내기까지 10일", href: "/peon-ping/making" },
-]} />
-
 ## 동작 방식
 
 ### 소리 분류 셋
@@ -57,3 +52,8 @@ ElevenLabs Matilda 목소리 · v3 모델 · `[excited]` 지시. 팩은 `openpeo
 ### 세 기계 · 헤드폰일 때만
 
 팩과 설정을 설정 repo(claude-config)에 두고 세 기계에 같은 소리. 블루투스 · USB 헤드폰 연결 시에만 재생.
+
+<Next items={[
+  { tab: "왜 만들었나", title: "화면을 안 볼 때의 알림", href: "/peon-ping/why" },
+  { tab: "개발기", title: "안 들리던 벨에서 걷어내기까지 10일", href: "/peon-ping/making" },
+]} />

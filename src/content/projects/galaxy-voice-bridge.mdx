@@ -32,11 +32,6 @@ import Cases from '../../components/Cases.astro';
   <Capsules caption="Mac 화면 아래 가운데에 뜨는 캡슐. 연결이 끊기면 주황 점 «연결 오류»." />
 </Panel>
 
-<Next items={[
-  { tab: "왜 만들었나", title: "모니터 2대면 덮개를 닫아야 함", href: "/galaxy-voice-bridge/why" },
-  { tab: "개발기", title: "닷새 동안 PR 34개, 그중 18개가 캡슐", href: "/galaxy-voice-bridge/making" },
-]} />
-
 ## 동작 방식
 
 <Devices caption="사람이 하는 일은 Mac 에서 Option+Space 두 번. 음성은 같은 Wi-Fi 안, 전사는 Mac 안. 입력창 글은 예시." />
@@ -71,3 +66,8 @@ import Cases from '../../components/Cases.astro';
 - **갤럭시** — Galaxy S25+(SM-S936N)에서 검증. 첫 설치만 Android SDK · ADB 필요.
 - **Mac** — `./scripts/setup_mac.sh` 한 번. Apple Silicon · Intel, Handy 가 없으면 whisper.cpp 와 모델까지 자동 준비. 손쉬운 사용 권한 허용.
 - 저장소는 private.
+
+<Next items={[
+  { tab: "왜 만들었나", title: "모니터 2대면 덮개를 닫아야 함", href: "/galaxy-voice-bridge/why" },
+  { tab: "개발기", title: "닷새 동안 PR 34개, 그중 18개가 캡슐", href: "/galaxy-voice-bridge/making" },
+]} />

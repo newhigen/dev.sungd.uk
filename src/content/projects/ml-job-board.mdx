@@ -41,11 +41,6 @@ import Cases from '../../components/Cases.astro';
 
 실제 화면에는 검토 중인 공고와 점수가 그대로 있어 캡처를 쓰지 않는다.
 
-<Next items={[
-  { tab: "왜 만들었나", title: "올라온 줄도 모르고 지나간 자리", href: "/ml-job-board/why" },
-  { tab: "개발기", title: "고친 것이 다음 아침에 안 돌던 여드레", href: "/ml-job-board/making" },
-]} />
-
 ## 하루 타임라인
 
 <Flow caption="사람이 하는 일은 아침에 보드를 여는 것뿐." steps={[
@@ -75,3 +70,8 @@ import Cases from '../../components/Cases.astro';
 - **모델을 안 쓴다** — 같은 공고는 언제 돌려도 같은 점수여야 줄을 세울 수 있다.
 - **모르면 모른다고 한다** — 판정한 항목이 모자라면 점수를 깎고, 셋 중 둘 넘게 못 가르면 숫자를 아예 안 낸다.
 - 눈금과 지켜보는 회사 목록은 저장소 안에만 둔다. 이 페이지에는 회사 이름을 넣지 않았다.
+
+<Next items={[
+  { tab: "왜 만들었나", title: "올라온 줄도 모르고 지나간 자리", href: "/ml-job-board/why" },
+  { tab: "개발기", title: "고친 것이 다음 아침에 안 돌던 여드레", href: "/ml-job-board/making" },
+]} />
