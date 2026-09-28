@@ -1,0 +1,126 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>폰에서 카드 몇 열</title>
+<style>
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-6SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Paperlogy'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2408-3@1.0/Paperlogy-7Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Regular.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-SemiBold.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+:root{
+  --bg:#eff0f1;--card:#fff;--ink:#1c1e21;--ink-2:#52565c;--ink-3:#6c7076;--accent:#8a6a3c;
+  --rule:rgba(28,30,33,.09);--ok:#2e7d4f;--no:#c0392b;
+  --title:"Paperlogy","SUITE",-apple-system,system-ui,sans-serif;
+  --body:"SUITE",-apple-system,system-ui,sans-serif;
+  --mono:"Google Sans Code",ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16.5px/1.6 var(--body);word-break:keep-all;-webkit-font-smoothing:antialiased}
+.wrap{max-width:94rem;margin:0 auto;padding:2.6rem 2rem 5rem}
+h1{font-family:var(--title);font-size:1.9rem;font-weight:700;margin:0 0 .4rem}
+.lede{color:var(--ink-2);margin:0 0 .3rem;max-width:50rem}
+.note{font-size:.88rem;color:var(--ink-3);margin:0 0 2.2rem;max-width:50rem}
+
+.row{display:flex;gap:1.5rem;align-items:flex-start;flex-wrap:wrap;margin-top:1.2rem}
+.v{flex:none;width:340px;max-width:100%}
+.vt{font-family:var(--title);font-size:1.05rem;font-weight:600;margin:0 0 .1rem}
+.vt .pick{font-family:var(--mono);font-size:.7rem;color:var(--accent);margin-left:.4rem}
+.vq{margin:0 0 .7rem;color:var(--ink-2);font-size:.85rem;min-height:3.4em}
+.shot{border-radius:12px;overflow:hidden;background:var(--card);box-shadow:0 4px 22px rgba(20,22,26,.13)}
+.shot img{display:block;width:100%;height:auto}
+.take{margin:.7rem 0 0;font-size:.84rem;color:var(--ink-2);line-height:1.55}
+.take b{color:var(--ink);font-weight:600}
+.y{color:var(--ok);font-weight:600}
+.n{color:var(--no);font-weight:600}
+
+table{border-collapse:collapse;margin-top:1rem;font-size:.88rem}
+th,td{text-align:left;padding:.42rem .9rem .42rem 0;border-bottom:1px solid var(--rule)}
+th{font-weight:600;color:var(--ink-3);font-size:.8rem}
+td.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+h2{font-family:var(--title);font-size:1.25rem;font-weight:600;color:var(--accent);margin:2.6rem 0 .3rem}
+pre{background:#fff;border-radius:8px;padding:.9rem 1.1rem;font:13px/1.65 var(--mono);overflow-x:auto;margin:.8rem 0 0}
+</style>
+</head><body><div class="wrap">
+
+<h1>폰에서 카드 몇 열</h1>
+<p class="lede">폰 폭 390px 에서 지금은 한 열이다. 카드 오른쪽 3분의 2가 비고 한 화면에 세 장만 선다.</p>
+<p class="note">네 판 모두 실제 사이트를 390px 로 띄워 같은 자리에서 찍었다. 견주기 좋게 네 판을 나란히 놓느라 그림만 340px 로 줄였다.</p>
+
+<div class="row">
+
+  <div class="v">
+    <p class="vt">지금 — 한 열</p>
+    <p class="vq">썸네일이 왼쪽에만 서고 오른쪽이 빈다. 한 화면에 세 장.</p>
+    <div class="shot"><img src="img/cols/col1.png" alt="폰 한 열. 카드마다 오른쪽이 비어 있다"></div>
+    <p class="take"><b>얻는 것</b> 제목이 한 줄에 다 들어간다. <span class="n">잃는 것</span> 카드 넓이의 3분의 2가 빈 자리다.</p>
+  </div>
+
+  <div class="v">
+    <p class="vt">두 열 — 그대로</p>
+    <p class="vq">열만 둘로 늘린 판. 한 화면에 여섯 장.</p>
+    <div class="shot"><img src="img/cols/col2.png" alt="폰 두 열. 갈래 칩과 날짜 줄의 높이가 카드마다 어긋난다"></div>
+    <p class="take"><span class="n">걸리는 것</span> 「함께」 줄이 두 줄로 접히면 그 카드만 길어져, <b>갈래 칩과 날짜가 옆 카드와 다른 높이</b>에 선다.</p>
+  </div>
+
+  <div class="v">
+    <p class="vt">두 열 — 아래 줄을 바닥에</p>
+    <p class="vq">위와 같고, 갈래 칩과 날짜만 카드 바닥에 붙인다.</p>
+    <div class="shot"><img src="img/cols/col2-fix.png" alt="폰 두 열. 갈래 칩과 날짜가 카드 바닥에 나란히 선다"></div>
+    <p class="take"><span class="y">되는 것</span> 「함께」 줄이 접혀도 <b>아래 줄이 한 높이</b>에 선다. 썸네일 크기는 그대로라 화면이 읽힌다.</p>
+  </div>
+
+  <div class="v">
+    <p class="vt">두 열 — 썸네일도 줄여<span class="pick">← 정함</span></p>
+    <p class="vq">썸네일을 5.5rem 에서 4.2rem 으로 줄이고 글자도 한 단 낮춘 판.</p>
+    <div class="shot"><img src="img/cols/col2-tight.png" alt="폰 두 열에 작은 썸네일. 세 장짜리 줄은 무엇인지 알아보기 어렵다"></div>
+    <p class="take"><span class="y">정한 판</span> 바닥 정렬과 함께 넣었다. 쿠폰함처럼 화면 세 장이 든 썸네일이
+      작아지는 것은 알고 고른 쪽이다 — 한 화면에 여섯 장이 서는 쪽을 택했다.</p>
+  </div>
+
+</div>
+
+<h2>잰 값</h2>
+<table>
+  <tr><th>판</th><th>열</th><th>카드 폭</th><th>카드 높이</th><th>한 화면에</th><th>가로 넘침</th><th>아래 줄</th></tr>
+  <tr><td>지금 — 한 열</td><td class="num">1</td><td class="num">355px</td><td class="num">252px</td><td class="num">3장</td><td class="num">0</td><td>맞음</td></tr>
+  <tr><td>두 열 — 그대로</td><td class="num">2</td><td class="num">172px</td><td class="num">284px</td><td class="num">6장</td><td class="num">0</td><td class="n">어긋남</td></tr>
+  <tr><td>두 열 — 바닥에</td><td class="num">2</td><td class="num">172px</td><td class="num">288px</td><td class="num">6장</td><td class="num">0</td><td class="y">맞음</td></tr>
+  <tr><td>두 열 — 썸네일도</td><td class="num">2</td><td class="num">171px</td><td class="num">259px</td><td class="num">6장</td><td class="num">0</td><td class="n">어긋남</td></tr>
+</table>
+
+<h2>넣은 뒤</h2>
+<div class="row">
+  <div class="v">
+    <p class="vq">네 판을 견줄 때 쓴 그림은 모두 CSS 를 덧대 흉내 낸 것이고, 이것은 실제로 넣고 다시 찍은 화면이다.</p>
+    <div class="shot"><img src="img/cols/after.png" alt="정한 판을 넣은 뒤의 폰 화면. 두 열에 아래 줄이 나란하다"></div>
+    <p class="take"><span class="y">달라진 것</span> 플랫폼 아이콘이 갈래 칩 옆에 서고, 제목은 한 줄에 들어가며,
+      아래 줄이 옆 카드와 한 높이다.</p>
+  </div>
+</div>
+
+<h2>넣고 나서 드러난 것 넷</h2>
+<p class="take">두 열로 좁히자 <b>한 열에서는 안 보이던 자리가 넷 드러났다.</b> 모두 「그 카드만 한 줄 높아져
+옆 카드와 어긋난다」는 같은 증상이었고, 하나씩 재서 막았다.</p>
+<table>
+  <tr><th>드러난 것</th><th>왜</th><th>막은 법</th></tr>
+  <tr><td>한 열이 두 군데서 걸려 있었다</td><td>34rem 규칙을 640px 규칙이 덮고 있어 34rem 쪽은 죽은 줄이었다</td><td>둘 다 걷어 52rem 의 두 열이 이어지게</td></tr>
+  <tr><td>플랫폼 아이콘이 홀로 뜬다</td><td>제목 줄에 두면 제목이 접히거나(flex) 아이콘만 다음 줄로 떨어진다(block)</td><td>제목 줄에서 떼어 갈래 칩 옆으로</td></tr>
+  <tr><td>날짜가 다음 줄로 내려간다</td><td>아래 줄이 접혀 그 카드만 두 배 높아졌다</td><td><code>flex-wrap: nowrap</code></td></tr>
+  <tr><td>갈래 칩 글자가 접힌다</td><td>「개발 도구」가 두 어절이라 172px 에서 두 줄이 됐다</td><td><code>white-space: nowrap</code></td></tr>
+</table>
+
+<h2>들어간 것</h2>
+<pre>/* 폭과 무관하게 — 아래 줄을 카드 바닥에 */
+.card .body    { display: flex; flex-direction: column; flex: 1; }
+.card .body .mt{ margin-top: auto; padding-top: 0.75rem; }
+.card .mt      { flex-wrap: nowrap; }
+.card .chip-g  { white-space: nowrap; }
+
+/* 폰 두 열 — 칸이 172px 이라 화면과 글자를 한 단 낮춘다 */
+@media (max-width: 640px) {
+  .card .shotrow      { min-height: calc(4.2rem + 6px); }
+  .card .shotrow-i img{ height: 4.2rem; }
+  .card .ds           { font-size: 0.8rem; }
+  .card .card-with    { font-size: 0.72rem; }
+}</pre>
+<p class="take">다섯 폭(390 · 560 · 900 · 1100 · 1560)에서 <b>줄마다 아래 줄 높이가 한 값이고 가로 넘침은 0</b> 이다.</p>
+
+</div></body></html>
