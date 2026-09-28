@@ -1315,6 +1315,9 @@ a.prow:hover .rn { color: var(--link); }
 /* 폰 세로 캡처는 판을 혼자 길게 만든다 */
 .pnl-shot img { max-width: 100%; max-height: 30rem; width: auto; margin: 0 auto; }
 .pnl-2.solo { grid-template-columns: 1fr; }
+/* 화면을 못 세운 판은 한 단이라 칩이 세로로 길어진다 — 가로로 눕혀 폭을 쓴다 */
+.pnl-2.solo .pnl-chips { flex-direction: row; flex-wrap: wrap; }
+.pnl-2.solo .pnl-chips span { flex: 1 1 11rem; }
 /* 어떤 컴포넌트가 들어와도 판 밖으로는 안 나간다 */
 .pnl-shot { min-width: 0; overflow: hidden; }
 .pnl-shot .stb-row { min-width: 0; }

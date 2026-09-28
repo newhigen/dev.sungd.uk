@@ -1,0 +1,49 @@
+---
+title: Claude Code 트래킹
+tagline: 릴리스마다 오늘 써볼 만한 것 하나를 골라낸다
+period: "2026.05"
+purpose: 개발 도구
+kind: 큐레이션 사이트
+tags: [Claude Code, Curation]
+link: "https://ai.sungd.uk"
+linkLabel: 사이트
+cover: "/p/claude-code-tracking/claude-code-tracking.png"
+headCover: false
+use:
+  - "릴리스별로 기능과 수정, 실험을 갈라 훑는다"
+  - "Pick 만 보면 당장 써볼 것이 나온다"
+  - "주제별로 모아 본다"
+---
+
+import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
+import Cases from '../../components/Cases.astro';
+
+<Panel
+  title={["changelog 를 다 읽어도", "무엇을 써야 할지는 안 남았다."]}
+  sub="자주 올라오는 도구일수록 목록이 길다. 긴 목록을 끝까지 읽고 나면 「많이 바뀌었구나」만 남고, 정작 지금 나에게 쓸모 있는 하나는 그 안에 묻힌다. 고르는 쪽을 따로 만들었다." />
+
+전체를 좇는 대신 **지금 쓸모 있는 변화**를 집어내는 쪽으로 뒀다.
+
+<Fig src="/p/claude-code-tracking/claude-code-tracking.png" wide
+  alt="Claude Code 트래킹 사이트. 릴리스별 변경사항이 기능과 수정, 실험으로 갈려 있고 Pick 이 따로 서 있다"
+  caption="Pick 은 그 릴리스에서 당장 써볼 만한 것 하나다." />
+
+## 고르는 것이 정리하는 것보다 어렵다
+
+변경사항을 기능과 수정, 실험으로 가르는 것은 기계가 한다. 어려운 쪽은 **그중 무엇이 오늘 쓸모
+있느냐**다. 이것은 쓰는 사람의 일에 달려 있어 자동으로 안 나온다.
+
+그래서 Pick 은 규칙이 아니라 손으로 고른다. 무엇이 쓸모 있는지는 사람마다 다르니, 이 사이트는
+**내 기준의 큐레이션**이라고 적어 두었다.
+
+## 자세한 동작
+
+<Cases items={[
+  { when: "빠르게 따라잡고 싶다",
+    what: "Pick 만 본다. 릴리스 하나에 하나씩이라 몇 판을 몰아서 읽어도 금방이다." },
+  { when: "특정 주제가 궁금하다",
+    what: "주제별 보기로 모은다. 같은 기능이 여러 릴리스에 걸쳐 조금씩 바뀐 것을 한 줄로 이어 본다." },
+  { when: "실험 기능이 궁금하다",
+    what: "따로 갈라 둔다. 기본으로 켜진 것과 시험 삼아 넣은 것을 섞으면 무엇을 믿고 쓸지 모르게 된다." },
+]} />
