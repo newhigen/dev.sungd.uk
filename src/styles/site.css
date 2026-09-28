@@ -20,28 +20,28 @@
 @font-face { font-family: 'SUITE'; src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/SUITE-Bold.woff2') format('woff2'); font-weight: 700; font-display: swap; }
 
 :root {
-  --bg: #eff0f1;
-  --card: #ffffff;
-  --card-2: #e3e5e7;
+  --bg: light-dark(#eff0f1, #16151d);
+  --card: light-dark(#ffffff, #1e1c27);
+  --card-2: light-dark(#e3e5e7, #232733);
   --shadow: 0 2px 20px rgba(20, 22, 26, 0.07);
-  --ink: #1c1e21;
-  --prose: #34373c;
-  --ink-2: #52565c;
-  --ink-3: #6c7076;
-  --accent: #8a6a3c;
-  --rule: rgba(28, 30, 33, 0.09);
-  --rule-mid: rgba(28, 30, 33, 0.18);
-  --rule-ink: rgba(28, 30, 33, 0.82);
-  --link: #8a6a3c;
+  --ink: light-dark(#1c1e21, #ece9f4);
+  --prose: light-dark(#34373c, #c7c2d8);
+  --ink-2: light-dark(#52565c, #a9a4bd);
+  --ink-3: light-dark(#6c7076, #8c87a3);
+  --accent: light-dark(#8a6a3c, #c9a87a);
+  --rule: light-dark(rgba(28, 30, 33, 0.09), rgba(236, 233, 244, 0.12));
+  --rule-mid: light-dark(rgba(28, 30, 33, 0.18), rgba(236, 233, 244, 0.24));
+  --rule-ink: light-dark(rgba(28, 30, 33, 0.82), rgba(236, 233, 244, 0.82));
+  --link: light-dark(#8a6a3c, #a9a6e8);
   /* 칩 바닥과 떠 있는 띠의 유리 — 밤 판에서 값만 바뀐다.
      바닥을 짙게 둔다: 눌린 칩이 흰색이라 흰 종이 위로 올라가면 바닥 없이는 사라진다 */
-  --chip: rgba(28, 30, 33, 0.12);
-  --chip-stuck: rgba(28, 30, 33, 0.15);
-  --chip-on: var(--card);
-  --chip-on-ink: var(--ink);
-  --glass: rgba(255, 255, 255, 0.68);
-  --glass-edge: rgba(255, 255, 255, 0.5);
-  --glass-top: rgba(255, 255, 255, 0.75);
+  --chip: light-dark(rgba(28, 30, 33, 0.12), rgba(236, 233, 244, 0.16));
+  --chip-stuck: light-dark(rgba(28, 30, 33, 0.15), rgba(236, 233, 244, 0.19));
+  --chip-on: light-dark(var(--card), rgba(255, 255, 255, 0.92));
+  --chip-on-ink: light-dark(var(--ink), #16151d);
+  --glass: light-dark(rgba(255, 255, 255, 0.68), rgba(30, 28, 39, 0.62));
+  --glass-edge: light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.08));
+  --glass-top: light-dark(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.10));
   --glass-shadow: 0 8px 28px rgba(20, 22, 26, 0.14);
   /* 제목은 페이퍼로지, 본문과 UI 는 SUITE. 둘 다 고딕이라 층은 크기와 굵기로 낸다 */
   --title: "Paperlogy", "SUITE", -apple-system, system-ui, sans-serif;
@@ -52,33 +52,26 @@
   --gut: 2.5rem;
   --base: 16.5px;
   --measure: 40rem;
+
+  /* 두 판을 다 받는다고 알린다 — light-dark() 와 폼 · 스크롤바가 이 값을 본다.
+     제호 줄 단추가 아래 두 줄로 OS 설정을 덮고, 고른 값은 브라우저에 남는다 */
   color-scheme: light dark;
 }
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
 
+/* 그림자 둘은 흐림 반지름까지 달라(20→24 · 28→30) light-dark() 로 못 접는다 —
+   색만 바꾸는 함수라서다. 두 판을 따로 적고, 아래 세 갈래가 같은 값을 든다:
+   OS 가 어두운데 낮 판을 고르지 않았을 때, 그리고 밤 판을 손으로 골랐을 때 */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #16151d;
-    --card: #1e1c27;
-    --card-2: #232733;
+  :root:not([data-theme="light"]) {
     --shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
-    --chip: rgba(236, 233, 244, 0.16);
-    --chip-stuck: rgba(236, 233, 244, 0.19);
-    --chip-on: rgba(255, 255, 255, 0.92);
-    --chip-on-ink: #16151d;
-    --glass: rgba(30, 28, 39, 0.62);
-    --glass-edge: rgba(255, 255, 255, 0.08);
-    --glass-top: rgba(255, 255, 255, 0.10);
     --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
-    --ink: #ece9f4;
-    --prose: #c7c2d8;
-    --ink-2: #a9a4bd;
-    --ink-3: #8c87a3;
-    --accent: #c9a87a;
-    --rule: rgba(236, 233, 244, 0.12);
-    --rule-mid: rgba(236, 233, 244, 0.24);
-    --rule-ink: rgba(236, 233, 244, 0.82);
-    --link: #a9a6e8;
   }
+}
+:root[data-theme="dark"] {
+  --shadow: 0 2px 24px rgba(0, 0, 0, 0.35);
+  --glass-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
 }
 
 * { box-sizing: border-box; }
@@ -121,9 +114,23 @@ a { color: inherit; }
   letter-spacing: -0.01em;
   text-decoration: none;
 }
-.masthead nav { display: flex; gap: 1.1rem; font-size: 0.8125rem; color: var(--ink-3); }
+.masthead nav { display: flex; align-items: center; gap: 1.1rem; font-size: 0.8125rem; color: var(--ink-3); }
 .masthead nav a { text-decoration: none; }
 .masthead nav a:hover { color: var(--ink-2); }
+
+/* 밤낮 단추 — 「노트」 글자와 한 줄에 서므로 줄의 가운데로 맞춘다(위 align-items).
+   ⚠ 안의 svg 에 display 를 주지 않는다 — «.only-light/.only-dark» 보다 특이성이 높아
+   숨기기를 이겨 해와 달이 같이 뜬다. flex 자식이라 선언 없이도 baseline 에 안 앉는다 */
+.masthead .theme {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+.masthead .theme:hover { color: var(--ink-2); }
 
 /* ── 목록 ─────────────────────────────────────────── */
 
@@ -131,9 +138,11 @@ a { color: inherit; }
 
 /* 상태 배지 — 색 · 아이콘 · 글자. 목록 카드와 글머리 제목 옆에 같은 모양으로 선다
    (2026-09-13 docs/explore/status-badge.html 의 B 용어 · ② 모양) */
-:root { --st1: #2f8a64; --st2: #a8720f; --st3: #4a6db8; --st4: #716d85; }
-@media (prefers-color-scheme: dark) {
-  :root { --st1: #6cc79d; --st2: #e0b060; --st3: #93adeb; --st4: #aaa5bf; }
+:root {
+  --st1: light-dark(#2f8a64, #6cc79d);
+  --st2: light-dark(#a8720f, #e0b060);
+  --st3: light-dark(#4a6db8, #93adeb);
+  --st4: light-dark(#716d85, #aaa5bf);
 }
 .badge {
   display: inline-flex;
@@ -1499,11 +1508,17 @@ figcaption {
 
 /* ── 밤낮 다른 판 ─────────────────────────────────── */
 
-.only-dark { display: none; }
+/* light-dark() 는 색만 바꾸는 함수라 display 에는 못 쓴다 — 두 갈래로 적는다.
+   ⚠ «:root» 를 앞에 세워 특이성을 한 단 올린다. 맨몸 «.only-dark» 는 «.pnl-shot img»
+   (클래스+태그)에 져서 낮 판에 밤 그림이 같이 떴다 */
+:root .only-dark { display: none; }
 @media (prefers-color-scheme: dark) {
-  .only-dark { display: block; }
-  .only-light { display: none; }
+  :root:not([data-theme="light"]) .only-dark { display: block; }
+  :root:not([data-theme="light"]) .only-light { display: none; }
 }
+:root[data-theme="dark"] .only-dark { display: block; }
+:root[data-theme="dark"] .only-light { display: none; }
+/* 밤 판 OS 에서 낮 판을 고르면 위 미디어쿼리가 빠지므로 제자리로 돌아온다 */
 
 /* ── 꼬리 ─────────────────────────────────────────── */
 

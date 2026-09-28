@@ -84,13 +84,7 @@
 /* shiki 이중 테마 — defaultColor:false 라 밤낮 값을 직접 골라 써야 한다 */
 .note-doc .prose pre[class*='astro-code'],
 .note-doc .prose pre[class*='astro-code'] span {
-  color: var(--shiki-light);
-}
-@media (prefers-color-scheme: dark) {
-  .note-doc .prose pre[class*='astro-code'],
-  .note-doc .prose pre[class*='astro-code'] span {
-    color: var(--shiki-dark);
-  }
+  color: light-dark(var(--shiki-light), var(--shiki-dark));
 }
 
 /* ── 표 — 마크다운 표 그대로. 넓으면 통째로 가로 스크롤 ── */

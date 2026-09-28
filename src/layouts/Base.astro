@@ -27,6 +27,35 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
     <link rel="icon" href="/favicon.png" type="image/png" sizes="128x128" />
     <link rel="apple-touch-icon" href="/favicon.png" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+    {/* 고른 판을 그리기 전에 입힌다 — 본문 뒤에 두면 OS 판이 한 번 번쩍이고 바뀐다.
+        아무것도 안 골랐으면 속성을 비워 둬 OS 설정을 그대로 따라간다 */}
+    <script is:inline>
+      (function () {
+        function apply() {
+          var r = document.documentElement;
+          try {
+            var t = localStorage.getItem('theme');
+            if (t === 'light' || t === 'dark') r.dataset.theme = t;
+            else delete r.dataset.theme;
+          } catch (e) {}
+        }
+        apply();
+        /* 쪽을 넘기면 문서 속성이 새 쪽 것으로 갈리므로 다시 입힌다 */
+        document.addEventListener('astro:after-swap', apply);
+        /* 제호 줄은 transition:persist 라 단추가 살아남지만, 위임으로 받으면
+           그 줄을 안 쓰는 쪽이 생겨도 그대로 돈다 */
+        document.addEventListener('click', function (e) {
+          var b = e.target.closest && e.target.closest('button.theme');
+          if (!b) return;
+          var r = document.documentElement;
+          var now = r.dataset.theme
+            || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          var next = now === 'dark' ? 'light' : 'dark';
+          r.dataset.theme = next;
+          try { localStorage.setItem('theme', next); } catch (e2) {}
+        });
+      })();
+    </script>
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={full} />
@@ -66,6 +95,19 @@ const ogImage = image ? new URL(image, Astro.site).href : undefined;
         {/* 제호 줄은 이 사이트 안 이동만 맡는다 — 바깥으로 나가는 길은 바닥에 모았다 */}
         <nav>
           <a href="/notes/">노트</a>
+          {/* 아이콘 전환은 CSS 가 맡는다 — 낮 판에는 달이, 밤 판에는 해가 선다.
+              둘 다 그려 두고 지금 판이 아닌 쪽을 숨기는 꼴이라 JS 는 고르기만 한다 */}
+          <button class="theme" type="button" aria-label="밤낮 바꾸기" title="밤낮 바꾸기">
+            <svg class="only-light" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"
+              fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 14.2A8.2 8.2 0 0 1 9.8 4 8.4 8.4 0 1 0 20 14.2Z" />
+            </svg>
+            <svg class="only-dark" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"
+              fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="4.1" />
+              <path d="M12 2.6v2.1M12 19.3v2.1M4.3 4.3l1.5 1.5M18.2 18.2l1.5 1.5M2.6 12h2.1M19.3 12h2.1M4.3 19.7l1.5-1.5M18.2 5.8l1.5-1.5" />
+            </svg>
+          </button>
         </nav>
       </header>
 
