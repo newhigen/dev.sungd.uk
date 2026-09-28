@@ -36,7 +36,10 @@ const box = (it: Item) => ({ w: Math.round(it.iw! * scale), h: Math.round(it.ih!
 
 // viewBox 를 내용에 딱 맞춘다 — 넉넉히 잡으면 창 테두리가 빈 자리까지 두른다
 const tallest = shots.length ? Math.max(...shots.map(box).map(b => b.h)) : 0;
-const TOP = Math.min(BASE - tallest, AX) - 4;
+// 그림이 한 장도 없는 편은 그림이 서던 자리(BASE 위)가 통째로 빈다 —
+// 축 바로 위까지만 잡아 창 테두리가 빈 자리를 두르지 않게 한다
+// (2026-09-28 — 그림 없는 여섯 편에서 창 위쪽 54px 이 비어 있었다)
+const TOP = shots.length ? Math.min(BASE - tallest, AX) - 4 : AX - 14;
 const BOT = AX + 46;
 const VH = BOT - TOP;
 
