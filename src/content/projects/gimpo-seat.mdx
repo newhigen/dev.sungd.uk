@@ -11,6 +11,10 @@ link: /p/gimpo-seat/
 linkLabel: 웹 판 열어보기
 headCover: false
 screens:
+  - src: /p/gimpo-seat/app.png
+    label: 아침에 열면 처음 앉는 편이 몇 분 뒤인지 하나만 크게 뜬다
+  - src: /p/gimpo-seat/others.png
+    label: 늦었으면 다른 시각에서 다음 앉는 편으로 옮긴다
   - src: /p/gimpo-seat/verdict.svg
     label: 내 앞에 몇 명이 섰는가로 앉을지가 갈린다
 use:
@@ -32,6 +36,10 @@ import Cases from '../../components/Cases.astro';
     { v: "실시간 없음", label: "혼잡도 API 가 아니라 시각표로 미리 센다" },
   ]}
   basis="좌석 수와 판정 구간은 저장소 docs/dev.md 기준." />
+
+<Fig src="/p/gimpo-seat/answer.png" phone
+  alt="앱 첫 화면. 「3분 뒤」가 가장 크고 그 아래 나설 시각과 착석 가능 여부, 알림 받기 단추"
+  caption="아침 6시 24분에 연 화면. 고를 것은 위 칩 넷뿐이고 나머지는 답이다." />
 
 ## 앉을지 어떻게 아나
 
