@@ -7,6 +7,9 @@ kind: 빌드 파이프라인
 tags: [Node, YAML, PDF]
 github: "https://github.com/newhigen-labs/resume-studio"
 headCover: false
+screens:
+  - src: /p/resume-studio/diagram.svg
+    label: 쌓기 · 마스터 · 뽑기 세 단계
 use:
   - "일하면서 성과를 한 줄씩 쌓는다"
   - "한 곳의 마스터로 모아 태그와 수치를 붙인다"
@@ -14,6 +17,7 @@ use:
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -24,6 +28,10 @@ import Cases from '../../components/Cases.astro';
     { v: "1곳", label: "고쳐야 할 자리. 경력 상세는 마스터 하나에만 있다" },
   ]}
   basis="채용 JD 쪽을 보는 도구와 짝으로 만들었다 — 이쪽이 내 이력이다." />
+
+<Fig src="/p/resume-studio/diagram.svg"
+  alt="성과를 한 줄씩 쌓아 마스터로 올린 뒤 JD 에 맞춰 뽑는 세 단계"
+  caption="쌓는 자리는 형식을 안 따진다 — 따지면 안 적게 된다." />
 
 ## 형식을 안 지켜도 되는 자리를 먼저 둔다
 

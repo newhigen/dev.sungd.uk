@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 742" width="620" height="742" role="img" aria-label="작업 카드의 단위를 티켓 번호에서 주제로 바꾼 전후 비교">
+  <style>
+    /* 밤낮 두 판. img 안이라 문서 CSS 는 못 받지만 color-scheme 은 전해지므로
+       제호 줄 단추로 판을 바꿔도 이 그림이 같이 따라온다 */
+    svg {
+      --paper: #fffefc;   /* 카드 바탕 */
+      --ink: #211f1b;   /* 카드 제목 */
+      --ink2: #5b544a;   /* 카드 설명 */
+      --mark: #8a6a3c;   /* 짚는 색 */
+      --markedge: #ddd6c8;   /* 카드 테두리 */
+      --line: #b9b1a2;   /* 잇는 선 */
+      --lane: #f5f3ee;   /* 레인 바탕 */
+      --lane2: #efece4;   /* 레인 바탕 둘째 */
+      --dim: #efece4;   /* 그전 판 바탕 */
+      /* 짙게 칠한 면 — 글자색(--ink)으로 칠하면 밤에 하얗게 뒤집힌다 */
+      --face: #211f1b;
+      --faceink: #fffefc;
+      --facesub: #c8c0b0;
+      --facedot: #e8e0d0;
+      --facedotink: #211f1b;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --paper: #1e1c27;
+        --ink: #ece9f4;
+        --ink2: #c7c2d8;
+        --mark: #c9a87a;
+        --markedge: #5a4a30;
+        --line: #4a4658;
+        --lane: #232130;
+        --lane2: #26242f;
+        --dim: #26242f;
+        --face: #372f43;
+        --faceink: #f2eff8;
+        --facesub: #bdb6cd;
+        --facedot: #c9a87a;
+        --facedotink: #241f2e;
+      }
+    }
+  </style>
+
+  <rect width="620" height="742" fill="var(--paper)"/>
+  <g font-family="sans-serif">
+    <rect x="34" y="26" width="552" height="314" rx="18" fill="var(--dim)"/>
+    <text x="310" y="66" font-size="24" font-weight="700" fill="var(--ink2)" text-anchor="middle">그전 — 티켓이 카드 하나</text>
+    <rect x="84" y="88" width="452" height="102" rx="14" fill="var(--paper)" stroke="var(--markedge)" stroke-width="2.5" opacity="0.72"/>
+    <text x="104" y="124" font-size="22" font-weight="700" fill="var(--ink2)">번호로 부른다</text>
+    <text x="104" y="158" font-size="19" fill="var(--ink2)">개인 일은 번호로 안 불린다</text>
+    <rect x="84" y="212" width="452" height="102" rx="14" fill="var(--paper)" stroke="var(--markedge)" stroke-width="2.5" opacity="0.72"/>
+    <text x="104" y="248" font-size="22" font-weight="700" fill="var(--ink2)">끝나면 사라진다</text>
+    <text x="104" y="282" font-size="19" fill="var(--ink2)">며칠 쉬었다 열면 다른 카드</text>
+    <path d="M310 354 V 371" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M310 388 l-10 -17 h20 Z" fill="var(--line)"/>
+    <rect x="34" y="402" width="552" height="314" rx="18" fill="var(--lane)"/>
+    <text x="310" y="442" font-size="24" font-weight="700" fill="var(--mark)" text-anchor="middle">지금 — 주제가 카드 하나</text>
+    <rect x="84" y="464" width="452" height="102" rx="16" fill="var(--face)"/>
+    <text x="104" y="500" font-size="24" font-weight="700" fill="var(--faceink)">볼트에서 자리를 받는다</text>
+    <text x="104" y="538" font-size="19" fill="var(--facesub)">어디 붙은 일인지가 카드를 정한다</text>
+    <rect x="84" y="588" width="452" height="102" rx="14" fill="var(--paper)" stroke="var(--markedge)" stroke-width="2.5"/>
+    <text x="104" y="624" font-size="22" font-weight="700" fill="var(--ink)">다시 열려도 같은 카드</text>
+    <text x="104" y="658" font-size="19" fill="var(--ink2)">45일치 사람 턴의 66%가 이런 일이었다</text>
+  </g>
+</svg>

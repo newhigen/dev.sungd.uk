@@ -7,17 +7,25 @@ kind: 패치 모음
 tags: [Claude Code, Customize]
 github: "https://github.com/newhigen/claude-dashboard-patches"
 headCover: false
+screens:
+  - src: /p/claude-dashboard-patches/diagram.svg
+    label: 고친 것을 원본 밖에 둔다
 use:
   - "status line 에 무엇을 어떤 꼴로 띄울지 고친다"
   - "플러그인을 업데이트한 뒤 패치를 다시 입힌다"
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
   title={["취향대로 고쳐 놓으면", "업데이트가 덮어썼다."]}
   sub="자주 올라오는 플러그인을 손대면 다음 판에서 캐시가 원래대로 돌린다. 매번 다시 고치는 대신, 고친 것을 따로 보관하고 업데이트 뒤에 다시 입히기로 했다." />
+
+<Fig src="/p/claude-dashboard-patches/diagram.svg"
+  alt="플러그인 원본을 직접 고치던 것을 변경만 따로 모아 업데이트 뒤 다시 입히게 바꾼 전후 비교"
+  caption="원본을 고치면 업데이트와 개인화 중 하나를 버려야 한다." />
 
 한 줄에 무엇이 서는지는 이렇다. 여유가 있을 때와 한도가 곧 찰 때가 눈에 띄게 갈린다.
 

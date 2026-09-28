@@ -8,6 +8,9 @@ kind: 안드로이드 벽판 앱
 tags: [Kotlin, WebView]
 github: "https://github.com/newhigen-labs/hallboard"
 headCover: false
+screens:
+  - src: /p/hallboard/diagram.svg
+    label: 앱 셋을 벽 한 판으로
 use:
   - "현관에 건 태블릿에서 시계와 날씨, 챙길 것을 한눈에"
   - "지금 나가면 앉을 수 있는지 본다"
@@ -15,6 +18,7 @@ use:
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -25,6 +29,10 @@ import Cases from '../../components/Cases.astro';
     { v: "1분", label: "값을 다시 받는 주기. 같은 주기로 판을 몇 픽셀씩 움직인다" },
   ]}
   basis="2026년 9월에 만들어 현관에 걸었다." />
+
+<Fig src="/p/hallboard/diagram.svg"
+  alt="나가기 전에 열던 앱 셋을 현관 벽 한 판으로 합친 전후 비교"
+  caption="맥이 꺼져 있어도 켜져 있어야 해서 탭 안에서 도는 앱으로 만들었다." />
 
 ## 맥이 꺼져 있어도 돌아야 한다
 

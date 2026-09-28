@@ -8,12 +8,16 @@ status: 종료
 ended: "개인 작업 관리를 Linear 에서 옵시디언으로 옮기면서 전제가 사라졌다 (2026.08)"
 tags: [Multi-agent, Linear, Claude Code]
 headCover: false
+screens:
+  - src: /p/newhigen-inc/diagram.svg
+    label: PM 하나에 나머지는 에이전트
 use:
   - "사람은 PM 만 맡고 티켓을 만든다"
   - "직군별 에이전트가 받아 각자 또는 같이 처리한다"
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -25,6 +29,10 @@ import Cases from '../../components/Cases.astro';
     { v: "2모드", label: "혼자 도는 모드와 팀으로 도는 모드. 뒤엣것에서 실제로 협업이 일어났다" },
   ]}
   basis="2026년 6월 첫 스프린트의 값. 그 뒤로는 돌리지 않았다." />
+
+<Fig src="/p/newhigen-inc/diagram.svg"
+  alt="PM 이 만든 티켓을 리드가 나눠 실무 에이전트 둘이 협업하고 다시 합치는 흐름"
+  caption="에이전트가 또 에이전트를 못 띄워서, 나눠 주는 자리가 하나로 몰렸다." />
 
 ## 위임은 리드만 한다
 

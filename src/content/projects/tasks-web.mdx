@@ -7,6 +7,9 @@ kind: 조망 웹
 tags: [Node, Obsidian]
 github: "https://github.com/newhigen-labs/tasks-web"
 headCover: false
+screens:
+  - src: /p/tasks-web/diagram.svg
+    label: 볼트를 직접 읽게 바꿨다
 use:
   - "구역에서 이슈까지 층을 그대로 편다"
   - "무엇이 되어 가는지를 산출물로 본다"
@@ -14,6 +17,7 @@ use:
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -24,6 +28,10 @@ import Cases from '../../components/Cases.astro';
     { v: "0건", label: "손으로 옮긴 데이터. 볼트를 고치면 판이 따라온다" },
   ]}
   basis="볼트 파일을 그 자리에서 읽으므로 판에 따로 쌓아 두는 것이 없다." />
+
+<Fig src="/p/tasks-web/diagram.svg"
+  alt="손으로 옮긴 데이터를 버리고 볼트 파일을 직접 읽게 바꾼 전후 비교"
+  caption="베껴 그린 판은 볼트를 고쳐도 안 바뀌어, 한 번 보고 나면 못 믿게 된다." />
 
 ## 손으로 옮긴 데이터는 곧 낡는다
 

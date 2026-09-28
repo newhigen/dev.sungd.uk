@@ -7,12 +7,16 @@ kind: 평면도 대시보드
 tags: [HTML, SVG]
 github: "https://github.com/newhigen-labs/home-ops"
 headCover: false
+screens:
+  - src: /p/home-ops/diagram.svg
+    label: 밀린 목록을 한 바퀴 동선으로 바꿨다
 use:
   - "평면도에서 어느 구역에 일이 쌓였는지 본다"
   - "기운이 없을 때 가벼운 것부터 집는다"
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -23,6 +27,10 @@ import Cases from '../../components/Cases.astro';
     { v: "1바퀴", label: "지금 판이 주는 것. 구역을 도는 길 하나로 내준다" },
   ]}
   basis="2026년 6월에 만들고 8월에 목록을 걷어내며 다시 짰다." />
+
+<Fig src="/p/home-ops/diagram.svg"
+  alt="할 일 43건 목록과, 평면도 위 한 바퀴 동선으로 바꾼 지금을 위아래로 견준 그림"
+  caption="위가 그전, 아래가 지금이다. 고를 것을 없애는 쪽으로 바꿨다." />
 
 ## 목록을 걷어내고 동선을 준다
 

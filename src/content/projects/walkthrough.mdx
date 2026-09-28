@@ -9,12 +9,16 @@ ended: "막혔을 때 되묻는 쪽은 아직 못 붙였다"
 tags: [Chrome Extension, Node]
 github: "https://github.com/newhigen-labs/walkthrough"
 headCover: false
+screens:
+  - src: /p/walkthrough/diagram.svg
+    label: 페이지 위가 아니라 옆에 붙인다
 use:
   - "사이트 조작 절차를 사이드 패널에 띄운다"
   - "한 단계씩 체크하며 따라간다"
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -24,6 +28,10 @@ import Cases from '../../components/Cases.astro';
     { v: "0줄", label: "대상 사이트 DOM 에 넣는 코드. 사이드 패널이라 페이지를 안 건드린다" },
   ]}
   basis="사이드 패널은 브라우저가 따로 띄우는 자리라 페이지와 겹치지 않는다." />
+
+<Fig src="/p/walkthrough/diagram.svg"
+  alt="절차를 페이지 위 오버레이가 아니라 브라우저 사이드 패널에 띄우게 바꾼 전후 비교"
+  caption="절차는 원래 여러 쪽을 지나므로, 페이지가 바뀌어도 살아 있어야 한다." />
 
 ## 오버레이가 아니라 사이드 패널
 

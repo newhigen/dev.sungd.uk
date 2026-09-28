@@ -8,6 +8,9 @@ kind: Wear OS 앱
 tags: [Kotlin, Wear OS]
 github: "https://github.com/newhigen-labs/watch-workout"
 headCover: false
+screens:
+  - src: /p/watch-workout/diagram.svg
+    label: 세트와 휴식을 손목이 센다
 use:
   - "운동 중에 폰을 안 본다"
   - "세트 사이 휴식을 손목이 센다"
@@ -15,6 +18,7 @@ use:
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -25,6 +29,10 @@ import Cases from '../../components/Cases.astro';
     { v: "0건", label: "밖으로 나가는 통신. 인터넷도 계정도 안 쓰고 기기 안에만 남는다" },
   ]}
   basis="2026년 9월에 만들어 실제 워치에 올렸다." />
+
+<Fig src="/p/watch-workout/diagram.svg"
+  alt="세트와 휴식, 다음 종목을 손목에서 안내하는 흐름"
+  caption="짙은 칸이 앱이 하는 일이다. 횟수는 여전히 사람이 센다." />
 
 ## 세는 척하지 않는다
 

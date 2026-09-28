@@ -8,6 +8,9 @@ kind: 맥 서버 + 갤럭시 앱
 tags: [Kotlin, Node]
 github: "https://github.com/newhigen-labs/keep-in-touch"
 headCover: false
+screens:
+  - src: /p/keep-in-touch/diagram.svg
+    label: 폰은 모으기만 하고 맥이 센다
 use:
   - "가까운 사람과 마지막으로 연락한 때를 모은다"
   - "뜸해지면 알린다"
@@ -15,6 +18,7 @@ use:
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -25,6 +29,10 @@ import Cases from '../../components/Cases.astro';
     { v: "2단계", label: "폰이 모으고 맥이 센다. 앱은 판단을 안 한다" },
   ]}
   basis="2026년 9월에 폰 쪽 앱까지 붙였다." />
+
+<Fig src="/p/keep-in-touch/diagram.svg"
+  alt="폰이 알림에서 누구와 언제만 모아 보내면 맥이 중복을 거르고 뜸한지 세어 알리는 흐름"
+  caption="왼쪽이 폰, 오른쪽이 맥이다. 짙은 칸이 판단하는 자리다." />
 
 ## 권한을 뺐더니 스미싱 앱에서 벗어났다
 

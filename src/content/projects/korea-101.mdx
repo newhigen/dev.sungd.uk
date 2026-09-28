@@ -7,17 +7,25 @@ kind: 정적 사이트
 tags: [HTML]
 github: "https://github.com/newhigen-labs/korea-101"
 headCover: false
+screens:
+  - src: /p/korea-101/diagram.svg
+    label: 저장소 둘을 하나로 합쳤다
 use:
   - "사회생활 편과 금융 편을 나눠 읽는다"
   - "숫자에 붙은 기준 연도와 출처를 확인한다"
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
   title={["두 편을 따로 두었더니", "스타일을 고칠 때마다 두 군데를 오갔다."]}
   sub="사회생활 편과 금융 편을 저장소 둘로 나눠 뒀는데, 같은 꼴을 쓰니 한쪽을 고치면 다른 쪽도 고쳐야 했다. 2026년 8월에 한 저장소로 합쳤다." />
+
+<Fig src="/p/korea-101/diagram.svg"
+  alt="자매 사이트 둘을 한 저장소로 합치고 빌드를 두지 않은 전후 비교"
+  caption="같은 꼴을 두 벌 관리하면 한쪽을 고칠 때마다 다른 쪽도 열어야 한다." />
 
 ## 빌드를 두지 않았다
 

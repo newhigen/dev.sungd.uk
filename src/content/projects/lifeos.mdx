@@ -9,17 +9,25 @@ ended: "여러 화면을 한곳에 묶었지만 결국 안 쓰게 돼 접었다"
 tags: [React, Vite, pnpm]
 github: "https://github.com/newhigen-labs/lifeos"
 headCover: false
+screens:
+  - src: /p/lifeos/diagram.svg
+    label: 앱이 셋을 내보내면 쉘이 붙인다
 use:
   - "만든 생활 앱을 홈 한 장에서 연다"
   - "앱마다 위젯 하나가 홈 보드에 선다"
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
   title={["앱을 여럿 만들고 나니", "여는 자리가 없었다."]}
   sub="집안일, 독서 분석, 약 위젯을 따로 만들어 두니 저마다 다른 주소에 떠 있었다. 하나씩 여는 대신 홈 한 장에 위젯으로 세우고 거기서 들어가게 하려 했다." />
+
+<Fig src="/p/lifeos/diagram.svg"
+  alt="앱이 정해진 셋을 내보내면 쉘이 탭과 위젯을 붙이는 구조, 그리고 접은 까닭"
+  caption="입주 계약은 잘 돌았는데, 정작 홈을 안 열게 됐다." />
 
 ## 입주 계약을 하나로 뒀다
 

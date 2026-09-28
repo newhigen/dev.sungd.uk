@@ -7,12 +7,16 @@ kind: 메뉴바 앱 + 웹 창구
 tags: [Swift, Node, Claude Code]
 github: "https://github.com/newhigen-labs/switchboard"
 headCover: false
+screens:
+  - src: /p/switchboard/diagram.svg
+    label: 한 문장을 받아 어디로 보낼지 정한다
 use:
   - "떠오른 것을 어디서든 한 문장으로 던진다"
   - "시킬 일은 맞는 세션으로 넘어가고, 메모는 쌓인다"
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -22,6 +26,10 @@ import Cases from '../../components/Cases.astro';
     { v: "0토큰", label: "메모인지 시킬 일인지 가르는 데 드는 값. 끝말 규칙으로 센다" },
   ]}
   basis="갈라내기만 규칙으로 하고, 어느 세션으로 보낼지는 그다음에 정한다." />
+
+<Fig src="/p/switchboard/diagram.svg"
+  alt="한 문장을 받아 메모인지 시킬 일인지 가르고 맞는 세션으로 넘기는 흐름"
+  caption="짙은 칸이 교환대가 하는 일이다. 가르는 데 드는 값은 0이다." />
 
 ## 애매하면 남기는 쪽으로 기운다
 

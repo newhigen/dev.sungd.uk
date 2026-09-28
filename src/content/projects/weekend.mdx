@@ -7,12 +7,16 @@ kind: 슬랙 봇
 tags: [Python, Slack, launchd]
 github: "https://github.com/newhigen-labs/weekend"
 headCover: false
+screens:
+  - src: /p/weekend/diagram.svg
+    label: 던져 두면 목요일 저녁에 하나씩 온다
 use:
   - "하고 싶은 것이 떠오르면 슬랙에 한 줄 던진다"
   - "목요일 저녁에 토요일과 일요일 계획을 받는다"
 ---
 
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Cases from '../../components/Cases.astro';
 
 <Panel
@@ -23,6 +27,10 @@ import Cases from '../../components/Cases.astro';
     { v: "3번", label: "계획에 올랐는데 안 한 횟수가 이만큼이면 뺄지 묻는다" },
   ]}
   basis="2026년 9월에 만들어 돌리는 중이다." />
+
+<Fig src="/p/weekend/diagram.svg"
+  alt="슬랙에 던진 후보를 1분마다 모아 목요일 저녁에 토요일과 일요일 하나씩 고르는 흐름"
+  caption="짙은 칸이 이 봇이 하는 일이다. 나머지는 사람이 한다." />
 
 ## 셋을 주면 하나도 안 한다
 
