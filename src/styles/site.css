@@ -37,8 +37,12 @@
      바닥을 짙게 둔다: 눌린 칩이 흰색이라 흰 종이 위로 올라가면 바닥 없이는 사라진다 */
   --chip: light-dark(rgba(28, 30, 33, 0.12), rgba(236, 233, 244, 0.16));
   --chip-stuck: light-dark(rgba(28, 30, 33, 0.15), rgba(236, 233, 244, 0.19));
-  --chip-on: light-dark(var(--card), rgba(255, 255, 255, 0.92));
-  --chip-on-ink: light-dark(var(--ink), #16151d);
+  /* 판 탭의 눌린 알약. 밤에도 트랙보다 한 단 밝기만 하고 하얗게 가지 않는다 —
+     맥 세그먼트 컨트롤이 그렇다. 흰 알약은 어두운 화면에서 그 칸만 도드라져
+     지금 보는 쪽이 아니라 알약이 먼저 읽힌다 (2026-09-28 docs/explore/chip-night.html) */
+  --chip-on: light-dark(var(--card), rgba(236, 233, 244, 0.22));
+  /* 알약이 판을 따라 밝고 어두워지므로 글자는 그냥 본문 색을 쓴다 */
+  --chip-on-ink: var(--ink);
   --glass: light-dark(rgba(255, 255, 255, 0.68), rgba(30, 28, 39, 0.62));
   --glass-edge: light-dark(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.08));
   --glass-top: light-dark(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.10));
@@ -1102,10 +1106,15 @@ a.prow:hover .rn { color: var(--link); }
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  padding: 0.34rem 0.8rem;
+  /* 창 테두리와 같은 선을 둘러 칩이 창에 달린 이름표로 읽히게 한다.
+     채우지 않는 까닭은 «--accent» 가 낮에 짙고 밤에 밝아, 채우면 밤에만 밝기가
+     뒤집혀 어두운 화면에서 이 칩만 떠 보이기 때문이다
+     (2026-09-28 시안 docs/explore/chip-night.html 의 B) */
+  padding: calc(0.34rem - 2px) calc(0.8rem - 2px);
+  border: 2px solid var(--accent);
   border-radius: 24px;
-  background: var(--accent);
-  color: var(--card);
+  background: var(--card);
+  color: var(--accent);
   font-size: 0.7rem;
   line-height: 1.35;
   white-space: nowrap;
