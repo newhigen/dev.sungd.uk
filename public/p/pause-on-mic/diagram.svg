@@ -1,31 +1,62 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 1100" width="620" height="1100" role="img" aria-label="맥에서 받아쓰기를 시작하면 마이크 켜짐을 읽어 폰 음악을 멈추고, 받아쓰기가 끝나고 0.8초 뒤 다시 트는 흐름">
-  <rect width="620" height="1100" fill="#fffefc"/>
+  <style>
+    /* 밤낮 두 판. img 안이라 문서 CSS 는 못 받지만 color-scheme 은 전해지므로
+       제호 줄 단추로 판을 바꿔도 이 그림이 같이 따라온다 */
+    svg {
+      --paper: #fffefc;   /* 카드 바탕 */
+      --ink: #211f1b;   /* 카드 제목 */
+      --ink2: #5b544a;   /* 카드 설명 */
+      --mark: #8a6a3c;   /* 짚는 색 */
+      --markface: #e8e0d0;   /* 짚은 카드 면 */
+      --markedge: #ddd6c8;   /* 짚은 카드 테두리 */
+      --line: #b9b1a2;   /* 잇는 선 */
+      --line2: #c8c0b0;   /* 잇는 선 둘째 */
+      --lane: #f5f3ee;   /* 레인 바탕 */
+      --lane2: #efece4;   /* 레인 바탕 둘째 */
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --paper: #1e1c27;
+        --ink: #ece9f4;
+        --ink2: #c7c2d8;
+        --mark: #c9a87a;
+        --markface: #3a3020;
+        --markedge: #5a4a30;
+        --line: #4a4658;
+        --line2: #4a4658;
+        --lane: #232130;
+        --lane2: #26242f;
+      }
+    }
+  </style>
+
+  <rect width="620" height="1100" fill="var(--paper)"/>
 
   <!-- 줄(레인) = 누가 한다. 왼쪽은 맥, 오른쪽은 폰 -->
-  <rect x="34" y="96" width="266" height="948" rx="18" fill="#f5f3ee"/>
-  <rect x="320" y="96" width="266" height="948" rx="18" fill="#efece4"/>
+  <rect x="34" y="96" width="266" height="948" rx="18" fill="var(--lane)"/>
+  <rect x="320" y="96" width="266" height="948" rx="18" fill="var(--lane2)"/>
 
   <!-- 레인 이름 -->
   <g font-family="sans-serif" text-anchor="middle">
     <g transform="translate(167 56)">
-      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="#211f1b"/>
-      <text y="9" font-size="27" font-weight="700" fill="#e8e0d0">맥</text>
+      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--ink)"/>
+      <text y="9" font-size="27" font-weight="700" fill="var(--markface)">맥</text>
     </g>
     <g transform="translate(453 56)">
-      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="#8a6a3c"/>
-      <text y="9" font-size="27" font-weight="700" fill="#fffefc">폰</text>
+      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--mark)"/>
+      <text y="9" font-size="27" font-weight="700" fill="var(--paper)">폰</text>
     </g>
   </g>
 
   <!-- 단계를 잇는 선 — 직각으로 가고 꺾이는 곳만 둥글게.
        선은 화살촉 밑동에서 끝낸다(촉 끝으로 삐져나오지 않게) -->
-  <g stroke="#b9b1a2" stroke-width="3.5" fill="none" stroke-linecap="round">
+  <g stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round">
     <path d="M167 252 V 297"/>
     <path d="M167 444 V 462 q0 14 14 14 H 439 q14 0 14 14 V 489"/>
     <path d="M453 636 V 654 q0 14 -14 14 H 181 q-14 0 -14 14 V 681"/>
     <path d="M167 828 V 846 q0 14 14 14 H 439 q14 0 14 14 V 873"/>
   </g>
-  <g fill="#b9b1a2">
+  <g fill="var(--line)">
     <path d="M167 314 l-10 -17 h20 Z"/>
     <path d="M453 506 l-10 -17 h20 Z"/>
     <path d="M167 698 l-10 -17 h20 Z"/>
@@ -34,51 +65,51 @@
 
   <!-- ① 맥 — 받아쓰기를 시작한다 -->
   <g font-family="sans-serif">
-    <rect x="52" y="122" width="230" height="130" rx="16" fill="#fffefc" stroke="#ddd6c8" stroke-width="3"/>
-    <circle cx="80" cy="150" r="13" fill="#211f1b"/>
-    <text x="80" y="157" font-size="16" font-weight="700" fill="#e8e0d0" text-anchor="middle">1</text>
-    <text x="104" y="158" font-size="24" font-weight="700" fill="#211f1b">받아쓰기 시작</text>
-    <text x="72" y="196" font-size="19" fill="#5b544a">앱이 마이크를 연다.</text>
-    <text x="72" y="224" font-size="19" fill="#5b544a">스피커에선 음악이 난다.</text>
+    <rect x="52" y="122" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="80" cy="150" r="13" fill="var(--ink)"/>
+    <text x="80" y="157" font-size="16" font-weight="700" fill="var(--markface)" text-anchor="middle">1</text>
+    <text x="104" y="158" font-size="24" font-weight="700" fill="var(--ink)">받아쓰기 시작</text>
+    <text x="72" y="196" font-size="19" fill="var(--ink2)">앱이 마이크를 연다.</text>
+    <text x="72" y="224" font-size="19" fill="var(--ink2)">스피커에선 음악이 난다.</text>
   </g>
 
   <!-- ② 맥 — 이 도구가 하는 일. 짙게 칠해 구분한다 -->
   <g font-family="sans-serif">
-    <rect x="52" y="314" width="230" height="130" rx="16" fill="#211f1b"/>
-    <circle cx="80" cy="342" r="13" fill="#e8e0d0"/>
-    <text x="80" y="349" font-size="16" font-weight="700" fill="#211f1b" text-anchor="middle">2</text>
-    <text x="104" y="350" font-size="24" font-weight="700" fill="#fffefc">켜짐을 읽는다</text>
-    <text x="72" y="388" font-size="19" fill="#c8c0b0">앱을 지켜보지 않고</text>
-    <text x="72" y="416" font-size="19" fill="#c8c0b0">CoreAudio 에 직접 묻는다.</text>
+    <rect x="52" y="314" width="230" height="130" rx="16" fill="var(--ink)"/>
+    <circle cx="80" cy="342" r="13" fill="var(--markface)"/>
+    <text x="80" y="349" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text>
+    <text x="104" y="350" font-size="24" font-weight="700" fill="var(--paper)">켜짐을 읽는다</text>
+    <text x="72" y="388" font-size="19" fill="var(--line2)">앱을 지켜보지 않고</text>
+    <text x="72" y="416" font-size="19" fill="var(--line2)">CoreAudio 에 직접 묻는다.</text>
   </g>
 
   <!-- ③ 폰 — 음악을 멈춘다 -->
   <g font-family="sans-serif">
-    <rect x="338" y="506" width="230" height="130" rx="16" fill="#fffefc" stroke="#ddd6c8" stroke-width="3"/>
-    <circle cx="366" cy="534" r="13" fill="#8a6a3c"/>
-    <text x="366" y="541" font-size="16" font-weight="700" fill="#fffefc" text-anchor="middle">3</text>
-    <text x="390" y="542" font-size="24" font-weight="700" fill="#211f1b">음악 멈춤</text>
-    <text x="358" y="580" font-size="19" fill="#5b544a">Spotify API 나 adb 로.</text>
-    <text x="358" y="608" font-size="19" fill="#5b544a">말하는 동안 조용하다.</text>
+    <rect x="338" y="506" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="366" cy="534" r="13" fill="var(--mark)"/>
+    <text x="366" y="541" font-size="16" font-weight="700" fill="var(--paper)" text-anchor="middle">3</text>
+    <text x="390" y="542" font-size="24" font-weight="700" fill="var(--ink)">음악 멈춤</text>
+    <text x="358" y="580" font-size="19" fill="var(--ink2)">Spotify API 나 adb 로.</text>
+    <text x="358" y="608" font-size="19" fill="var(--ink2)">말하는 동안 조용하다.</text>
   </g>
 
   <!-- ④ 맥 — 끝나고 기다린다 -->
   <g font-family="sans-serif">
-    <rect x="52" y="698" width="230" height="130" rx="16" fill="#fffefc" stroke="#ddd6c8" stroke-width="3"/>
-    <circle cx="80" cy="726" r="13" fill="#211f1b"/>
-    <text x="80" y="733" font-size="16" font-weight="700" fill="#e8e0d0" text-anchor="middle">4</text>
-    <text x="104" y="734" font-size="24" font-weight="700" fill="#211f1b">마이크 꺼짐</text>
-    <text x="72" y="772" font-size="19" fill="#5b544a">0.8초 잠잠한지 본다.</text>
-    <text x="72" y="800" font-size="19" fill="#5b544a">그 안에 다시 켜지면 둔다.</text>
+    <rect x="52" y="698" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="80" cy="726" r="13" fill="var(--ink)"/>
+    <text x="80" y="733" font-size="16" font-weight="700" fill="var(--markface)" text-anchor="middle">4</text>
+    <text x="104" y="734" font-size="24" font-weight="700" fill="var(--ink)">마이크 꺼짐</text>
+    <text x="72" y="772" font-size="19" fill="var(--ink2)">0.8초 잠잠한지 본다.</text>
+    <text x="72" y="800" font-size="19" fill="var(--ink2)">그 안에 다시 켜지면 둔다.</text>
   </g>
 
   <!-- ⑤ 폰 — 다시 튼다 -->
   <g font-family="sans-serif">
-    <rect x="338" y="890" width="230" height="130" rx="16" fill="#fffefc" stroke="#ddd6c8" stroke-width="3"/>
-    <circle cx="366" cy="918" r="13" fill="#8a6a3c"/>
-    <text x="366" y="925" font-size="16" font-weight="700" fill="#fffefc" text-anchor="middle">5</text>
-    <text x="390" y="926" font-size="24" font-weight="700" fill="#211f1b">음악 다시</text>
-    <text x="358" y="964" font-size="19" fill="#5b544a">내가 멈춘 것일 때만.</text>
-    <text x="358" y="992" font-size="19" fill="#5b544a">원래 꺼져 있었으면 그대로.</text>
+    <rect x="338" y="890" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="366" cy="918" r="13" fill="var(--mark)"/>
+    <text x="366" y="925" font-size="16" font-weight="700" fill="var(--paper)" text-anchor="middle">5</text>
+    <text x="390" y="926" font-size="24" font-weight="700" fill="var(--ink)">음악 다시</text>
+    <text x="358" y="964" font-size="19" fill="var(--ink2)">내가 멈춘 것일 때만.</text>
+    <text x="358" y="992" font-size="19" fill="var(--ink2)">원래 꺼져 있었으면 그대로.</text>
   </g>
 </svg>

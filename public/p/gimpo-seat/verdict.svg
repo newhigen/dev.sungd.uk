@@ -1,39 +1,70 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 250" width="620" height="250" role="img" aria-label="내 앞에 선 사람 수로 갈리는 판정 네 구간. 135명 이하는 앞줄 착석, 300명까지는 착석 가능, 420명까지는 빠듯, 그 위는 서서 감">
-  <rect width="620" height="250" fill="#fffefc"/>
+  <style>
+    /* 밤낮 두 판. img 안이라 문서 CSS 는 못 받지만 color-scheme 은 전해지므로
+       제호 줄 단추로 판을 바꿔도 이 그림이 같이 따라온다 */
+    svg {
+      --paper: #fffefc;   /* 종이 바탕 */
+      --ink: #211f1b;   /* 제목 */
+      --ink2: #8a837a;   /* 눈금 글자와 「서서 감」 */
+      --ink3: #a39b90;   /* 「급행 한 편의 좌석」 */
+      --gray: #b9b1a2;   /* 서서 가는 구간 띠 */
+      --tick: #c3bfb6;   /* 눈금 선 */
+      --warn: #fdf1ef;   /* 경고 상자 면 */
+      --warnedge: #e8c4bd;   /* 경고 상자 테두리 */
+      --warnink: #8f2e22;   /* 경고 제목 */
+      --warnink2: #9a6157;   /* 경고 본문 */
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --paper: #1e1c27;
+        --ink: #ece9f4;
+        --ink2: #a9a4bd;
+        --ink3: #8c87a3;
+        --gray: #4a4658;
+        --tick: #4a4658;
+        --warn: #2e2028;
+        --warnedge: #5f3f3c;
+        --warnink: #e8a99f;
+        --warnink2: #c79a92;
+      }
+    }
+  </style>
 
-  <text x="40" y="34" font-family="sans-serif" font-size="14.5" font-weight="600" fill="#211f1b">내 앞에 선 사람 수</text>
+  <rect width="620" height="250" fill="var(--paper)"/>
+
+  <text x="40" y="34" font-family="sans-serif" font-size="14.5" font-weight="600" fill="var(--ink)">내 앞에 선 사람 수</text>
 
   <!-- 구간 띠 — 급행 한 편이 300석이라 그 선이 착석과 빠듯을 가른다 -->
   <g>
     <rect x="40" y="52" width="148" height="40" rx="5" fill="#2E7D4F"/>
     <rect x="190" y="52" width="179" height="40" rx="5" fill="#7FB394"/>
     <rect x="371" y="52" width="129" height="40" rx="5" fill="#E0A458"/>
-    <rect x="502" y="52" width="38" height="40" rx="5" fill="#b9b1a2"/>
+    <rect x="502" y="52" width="38" height="40" rx="5" fill="var(--gray)"/>
   </g>
   <g font-family="sans-serif" font-size="13.5" font-weight="600" text-anchor="middle">
     <text x="114" y="77" fill="#ffffff">앞줄 착석</text>
     <text x="279" y="77" fill="#1f4a33">착석 가능</text>
     <text x="435" y="77" fill="#5a3c14">빠듯</text>
   </g>
-  <text x="550" y="77" font-family="sans-serif" font-size="13.5" font-weight="600" fill="#8a837a">서서 감</text>
+  <text x="550" y="77" font-family="sans-serif" font-size="13.5" font-weight="600" fill="var(--ink2)">서서 감</text>
 
   <!-- 눈금 — 경계값만 -->
-  <g font-family="sans-serif" font-size="12.5" fill="#8a837a" text-anchor="middle">
-    <line x1="188" y1="96" x2="188" y2="104" stroke="#c3bfb6" stroke-width="1.5"/>
+  <g font-family="sans-serif" font-size="12.5" fill="var(--ink2)" text-anchor="middle">
+    <line x1="188" y1="96" x2="188" y2="104" stroke="var(--tick)" stroke-width="1.5"/>
     <text x="188" y="120">135명</text>
-    <line x1="369" y1="96" x2="369" y2="104" stroke="#c3bfb6" stroke-width="1.5"/>
+    <line x1="369" y1="96" x2="369" y2="104" stroke="var(--tick)" stroke-width="1.5"/>
     <text x="369" y="120">300석</text>
-    <line x1="500" y1="96" x2="500" y2="104" stroke="#c3bfb6" stroke-width="1.5"/>
+    <line x1="500" y1="96" x2="500" y2="104" stroke="var(--tick)" stroke-width="1.5"/>
     <text x="500" y="120">420명</text>
   </g>
-  <text x="369" y="138" font-family="sans-serif" font-size="12" fill="#a39b90" text-anchor="middle">급행 한 편의 좌석</text>
+  <text x="369" y="138" font-family="sans-serif" font-size="12" fill="var(--ink3)" text-anchor="middle">급행 한 편의 좌석</text>
 
   <!-- 그 앞에 먼저 걸리는 조건 -->
   <g>
-    <rect x="40" y="166" width="540" height="56" rx="8" fill="#fdf1ef" stroke="#e8c4bd" stroke-width="1.5"/>
+    <rect x="40" y="166" width="540" height="56" rx="8" fill="var(--warn)" stroke="var(--warnedge)" stroke-width="1.5"/>
     <circle cx="68" cy="194" r="10" fill="#C0392B"/>
     <text x="68" y="199" font-family="sans-serif" font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle">!</text>
-    <text x="88" y="190" font-family="sans-serif" font-size="14" font-weight="600" fill="#8f2e22">여유 1.2분 미만이면 사람 수를 보기 전에 「놓칠 위험」</text>
-    <text x="88" y="211" font-family="sans-serif" font-size="12.5" fill="#9a6157">아무리 앞자리라도 그 편을 못 타면 뜻이 없다.</text>
+    <text x="88" y="190" font-family="sans-serif" font-size="14" font-weight="600" fill="var(--warnink)">여유 1.2분 미만이면 사람 수를 보기 전에 「놓칠 위험」</text>
+    <text x="88" y="211" font-family="sans-serif" font-size="12.5" fill="var(--warnink2)">아무리 앞자리라도 그 편을 못 타면 뜻이 없다.</text>
   </g>
 </svg>
