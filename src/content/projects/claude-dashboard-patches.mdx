@@ -1,0 +1,57 @@
+---
+title: Claude 대시보드 패치
+tagline: 플러그인이 업데이트돼도 손본 status line 이 살아남게 한다
+period: "2026.05"
+purpose: 개발 도구
+kind: 패치 모음
+tags: [Claude Code, Customize]
+github: "https://github.com/newhigen/claude-dashboard-patches"
+headCover: false
+screens:
+  - src: /p/claude-dashboard-patches/diagram.svg
+    label: 고친 것을 원본 밖에 둔다
+use:
+  - "status line 에 무엇을 어떤 꼴로 띄울지 고친다"
+  - "플러그인을 업데이트한 뒤 패치를 다시 입힌다"
+---
+
+import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
+import Cases from '../../components/Cases.astro';
+
+<Panel
+  title={["취향대로 고쳐 놓으면", "업데이트가 덮어썼다."]}
+  sub="자주 올라오는 플러그인을 손대면 다음 판에서 캐시가 원래대로 돌린다. 매번 다시 고치는 대신, 고친 것을 따로 보관하고 업데이트 뒤에 다시 입히기로 했다." />
+
+<Fig src="/p/claude-dashboard-patches/diagram.svg"
+  alt="플러그인 원본을 직접 고치던 것을 변경만 따로 모아 업데이트 뒤 다시 입히게 바꾼 전후 비교"
+  caption="원본을 고치면 업데이트와 개인화 중 하나를 버려야 한다." />
+
+한 줄에 무엇이 서는지는 이렇다. 여유가 있을 때와 한도가 곧 찰 때가 눈에 띄게 갈린다.
+
+```
+~/dev/api-server (main* ↑3)   +1 -1 │ Context: ███░░░ 43%
+Opus(High) │ 5h 0.7x ░░░░░░ 5% → 2:30 AM ✓   7d 1.0x █░░░░░ 15% → 5/22 FRI ✓
+```
+
+```
+~/dev/api-server (main* ↑3)   +1 -1 │ Context: ███████ 87%
+Opus(High) │ 5h 1.4x ███████ 87% → 2:30 PM ⚠ (reset 5:00 PM)   7d 1.0x █░░░░░ 15% → 5/22 FRI ✓
+```
+
+## 고친 것을 원본 밖에 둔다
+
+플러그인을 직접 고치면 그 파일이 곧 패치라, 업데이트가 오면 둘 중 하나를 버려야 한다. 그래서
+**변경만 따로 모아 두고** 업데이트 뒤에 스크립트가 다시 입히게 했다.
+
+업데이트와 개인화 중 하나를 고르지 않아도 된다. 플러그인은 최신을 따라가고, 내가 고친 자리는
+그대로 남는다.
+
+## 자세한 동작
+
+<Cases items={[
+  { when: "업데이트가 왔다",
+    what: "받고 나서 재적용 스크립트를 한 번 돌린다. 무엇을 고쳤는지 기억할 필요가 없다." },
+  { when: "패치가 안 붙는다",
+    what: "원본이 그 자리를 아예 바꾼 경우다. 그때만 손으로 한 번 맞추고, 바뀐 것을 다시 패치로 저장한다." },
+]} />

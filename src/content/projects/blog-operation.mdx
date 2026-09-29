@@ -1,0 +1,54 @@
+---
+title: 블로그 운영
+tagline: 옵시디언에 쓰고 push 하면 생각과 기술 두 갈래로 나뉘어 올라간다
+period: "2025.07"
+purpose: 공부·관심사
+kind: 글 발행 파이프라인
+tags: [Astro, Obsidian]
+link: "https://writing.sungd.uk"
+linkLabel: 사이트
+cover: "/p/blog-operation/blog-operation.png"
+coverLight: "/p/blog-operation/blog-operation-light.png"
+headCover: false
+screens:
+  - src: /p/blog-operation/blog-operation-light.png
+    label: 글 목록과 독서 히트맵
+use:
+  - "옵시디언에서 쓰고 push 한다"
+  - "빌드와 배포가 알아서 돌아 두 갈래로 나뉜다"
+  - "히트맵과 목차, 대시보드 카드를 필요할 때 붙인다"
+---
+
+import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
+import Cases from '../../components/Cases.astro';
+
+<Panel
+  title={["플랫폼이 닫히면", "쓴 글도 같이 닫힌다."]}
+  sub="외부 서비스에 쓰면 디자인을 마음대로 못 바꾸고, 서비스가 접히면 글도 간다. 쓰는 자리를 옵시디언으로 두고 저장소에 담은 다음, 필요한 기능은 직접 붙이기로 했다." />
+
+쓰는 곳과 보이는 곳을 갈랐다. 옵시디언에서 쓰고 push 하면 그다음은 손대지 않는다.
+
+<Fig src="/p/blog-operation/blog-operation-light.png" srcDark="/p/blog-operation/blog-operation.png" wide
+  alt="블로그 화면. 글 목록과 독서 히트맵, 목차가 함께 선다"
+  caption="생각 기록과 기술 메모를 한 저장소에 두되 채널로 갈랐다." />
+
+## 한 저장소, 두 갈래
+
+생각을 적는 글과 기술 메모는 호흡이 다르다. 섞어 두면 어느 쪽도 제 리듬을 못 찾는다. 그래서
+저장소는 하나로 두고 **채널만 둘로 갈랐다** — 읽은 책과 떠오른 생각은 짧게, 개발 도구와 AI 메모는
+간결하게.
+
+붙인 도구는 필요해진 순서대로다. 언제 얼마나 읽었는지 보는 **독서 히트맵**, 긴 글에서 길을 잃지
+않는 **목차**, 분석 대시보드를 글 안에 바로 띄우는 **카드**.
+
+## 자세한 동작
+
+<Cases items={[
+  { when: "글을 고쳤다",
+    what: "push 만 하면 된다. 빌드와 배포는 따로 누르지 않는다 — 전에는 수동이라 고쳐 놓고 안 올린 글이 쌓였다." },
+  { when: "분석 대시보드를 글에 넣고 싶다",
+    what: "카드 한 줄로 붙는다. 대시보드를 글 안에 다시 그리지 않고 원본을 그대로 띄운다." },
+  { when: "플랫폼이 닫히면",
+    what: "글은 저장소에 남는다. 옮길 때 새로 짜야 하는 것은 껍데기뿐이다." },
+]} />

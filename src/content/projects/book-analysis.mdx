@@ -1,0 +1,58 @@
+---
+title: 독서 성향 분석
+tagline: 권수 대신 관심이 어느 분야로 옮겨 갔는지를 본다
+period: "2026.05"
+purpose: 공부·관심사
+kind: 분석 리포트
+status: 완료
+tags: [Data Analysis, Python]
+link: "https://sungd.uk/dashboards/book-analysis.html"
+linkLabel: 대시보드
+cover: "/p/book-analysis/book-analysis.png"
+headCover: false
+screens:
+  - src: /p/book-analysis/book-analysis.png
+    label: 분야 분포와 해마다의 흐름
+use:
+  - "읽은 책 목록을 제목과 분야, 연월만으로 넣는다"
+  - "분야 분포와 해마다의 흐름으로 취향을 살핀다"
+  - "데이터만 갱신하면 리포트가 다시 그려진다"
+shots:
+  - src: "/p/book-analysis/book-before.png"
+    label: "친근체 판"
+    note: "말투가 친근했지만 내 색이 아니었다"
+---
+
+import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
+import Cases from '../../components/Cases.astro';
+
+<Panel
+  title={["읽은 목록을 봐도", "「많이 읽었다」 말고는 안 보였다."]}
+  sub="제목의 나열에서는 분야가 어디로 쏠렸는지도, 관심이 해마다 어디로 옮겨 갔는지도 드러나지 않는다. 제목과 연월만으로 시작해 분야와 결을 채워 가며, 집계는 스크립트에 맡겼다." />
+
+권수는 성실함을 말할 뿐이다. **어떤 분야로 옮겨 갔는지가 취향을 더 잘 보여 준다**고 보고 그쪽을
+세웠다.
+
+<Fig src="/p/book-analysis/book-analysis.png" wide
+  alt="독서 성향 분석 리포트. 분야 분포와 해마다의 흐름, 저자와 읽는 속도로 본 취향"
+  caption="네 탭으로 나뉜다 — 분야 분포, 시기별 흐름, 취향의 결, 해마다의 회고." />
+
+## 입력은 두 칸부터 시작한다
+
+분야와 결(Mood, Pace)까지 다 채워야 넣을 수 있게 하면 시작을 못 한다. 그래서 **제목과 연월 두
+칸만으로 넣고**, 나머지는 읽는 대로 채운다. 얼마나 채워졌는지는 진행률로 따로 본다.
+
+집계는 정해진 스크립트라 사람이 손대지 않는다. 데이터만 갱신하면 리포트가 통째로 다시 그려지고,
+해석은 판이 아니라 읽는 사람이 한다 — 여기서 나오는 성향 요약도 하나의 관점일 뿐이다.
+
+## 자세한 동작
+
+<Cases items={[
+  { when: "성향 요약이 안 맞는 것 같다",
+    what: "결론으로 읽지 않는 것이 맞다. 무엇을 한 분야로 묶느냐에 따라 쏠림이 달라지고, 그 경계는 사람이 정한 것이다." },
+  { when: "다음에 뭘 읽을지 모르겠다",
+    what: "쏠린 분야와 비어 있는 분야를 같이 보이고 추천을 붙인다. 추천보다 <b>빈자리</b>가 더 쓸모 있었다." },
+  { when: "한 해를 돌아보고 싶다",
+    what: "연도별 회고 탭이 그해에 읽은 것과 속도 곡선을 한 장으로 세운다." },
+]} />

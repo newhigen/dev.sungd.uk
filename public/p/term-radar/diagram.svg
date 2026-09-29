@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 888" width="620" height="888" role="img" aria-label="세션에서 용어를 잡아 간격 반복으로 익히려던 흐름과 접은 까닭">
+  <style>
+    /* 밤낮 두 판. img 안이라 문서 CSS 는 못 받지만 color-scheme 은 전해지므로
+       제호 줄 단추로 판을 바꿔도 이 그림이 같이 따라온다 */
+    svg {
+      --paper: #fffefc;   /* 카드 바탕 */
+      --ink: #211f1b;   /* 카드 제목 */
+      --ink2: #5b544a;   /* 카드 설명 */
+      --mark: #8a6a3c;   /* 짚는 색 */
+      --markedge: #ddd6c8;   /* 카드 테두리 */
+      --line: #b9b1a2;   /* 잇는 선 */
+      --lane: #f5f3ee;   /* 레인 바탕 */
+      --lane2: #efece4;   /* 레인 바탕 둘째 */
+      --dim: #efece4;   /* 그전 판 바탕 */
+      /* 짙게 칠한 면 — 글자색(--ink)으로 칠하면 밤에 하얗게 뒤집힌다 */
+      --face: #211f1b;
+      --faceink: #fffefc;
+      --facesub: #c8c0b0;
+      --facedot: #e8e0d0;
+      --facedotink: #211f1b;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --paper: #1e1c27;
+        --ink: #ece9f4;
+        --ink2: #c7c2d8;
+        --mark: #c9a87a;
+        --markedge: #5a4a30;
+        --line: #4a4658;
+        --lane: #232130;
+        --lane2: #26242f;
+        --dim: #26242f;
+        --face: #372f43;
+        --faceink: #f2eff8;
+        --facesub: #bdb6cd;
+        --facedot: #c9a87a;
+        --facedotink: #241f2e;
+      }
+    }
+  </style>
+
+  <rect width="620" height="888" fill="var(--paper)"/>
+  <g font-family="sans-serif">
+    <path d="M310 170 V 215" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M310 232 l-10 -17 h20 Z" fill="var(--line)"/>
+    <path d="M310 362 V 407" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M310 424 l-10 -17 h20 Z" fill="var(--line)"/>
+    <path d="M310 526 V 571" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M310 588 l-10 -17 h20 Z" fill="var(--line)"/>
+    <rect x="84" y="40" width="452" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="112" cy="68" r="13" fill="var(--face)"/>
+    <text x="112" y="75" font-size="16" font-weight="700" fill="var(--facedot)" text-anchor="middle">1</text>
+    <text x="136" y="76" font-size="24" font-weight="700" fill="var(--ink)">일하다 용어를 만난다</text>
+    <text x="104" y="114" font-size="19" fill="var(--ink2)">따로 단어장을 여는</text>
+    <text x="104" y="142" font-size="19" fill="var(--ink2)">순간은 오지 않는다.</text>
+    <rect x="84" y="232" width="452" height="130" rx="16" fill="var(--face)"/>
+    <circle cx="112" cy="260" r="13" fill="var(--facedot)"/>
+    <text x="112" y="267" font-size="16" font-weight="700" fill="var(--facedotink)" text-anchor="middle">2</text>
+    <text x="136" y="268" font-size="24" font-weight="700" fill="var(--faceink)">그 자리에서 잡는다</text>
+    <text x="104" y="306" font-size="19" fill="var(--facesub)">세션당 0~3개.</text>
+    <text x="104" y="334" font-size="19" fill="var(--facesub)">표준 명칭이 있는 것만.</text>
+    <rect x="84" y="424" width="452" height="102" rx="16" fill="var(--face)"/>
+    <circle cx="112" cy="452" r="13" fill="var(--facedot)"/>
+    <text x="112" y="459" font-size="16" font-weight="700" fill="var(--facedotink)" text-anchor="middle">3</text>
+    <text x="136" y="460" font-size="24" font-weight="700" fill="var(--faceink)">간격을 두고 다시 만난다</text>
+    <text x="104" y="498" font-size="19" fill="var(--facesub)">익을 때까지 사이를 늘린다.</text>
+    <rect x="84" y="588" width="452" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="112" cy="616" r="13" fill="var(--face)"/>
+    <text x="112" y="623" font-size="16" font-weight="700" fill="var(--facedot)" text-anchor="middle">4</text>
+    <text x="136" y="624" font-size="24" font-weight="700" fill="var(--ink)">도구가 사라졌다</text>
+    <text x="104" y="662" font-size="19" fill="var(--ink2)">로컬에도 원격에도 없어</text>
+    <text x="104" y="690" font-size="19" fill="var(--ink2)">되살리기를 접었다.</text>
+  </g>
+</svg>

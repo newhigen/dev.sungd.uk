@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 1206" width="620" height="1206" role="img" aria-label="폰이 알림에서 누구와 언제만 모아 보내면 맥이 중복을 거르고 뜸한 사람을 알리는 흐름">
+  <style>
+    /* 밤낮 두 판. img 안이라 문서 CSS 는 못 받지만 color-scheme 은 전해지므로
+       제호 줄 단추로 판을 바꿔도 이 그림이 같이 따라온다 */
+    svg {
+      --paper: #fffefc;   /* 카드 바탕 */
+      --ink: #211f1b;   /* 카드 제목 */
+      --ink2: #5b544a;   /* 카드 설명 */
+      --mark: #8a6a3c;   /* 짚는 색 */
+      --markedge: #ddd6c8;   /* 카드 테두리 */
+      --line: #b9b1a2;   /* 잇는 선 */
+      --lane: #f5f3ee;   /* 레인 바탕 */
+      --lane2: #efece4;   /* 레인 바탕 둘째 */
+      --dim: #efece4;   /* 그전 판 바탕 */
+      /* 짙게 칠한 면 — 글자색(--ink)으로 칠하면 밤에 하얗게 뒤집힌다 */
+      --face: #211f1b;
+      --faceink: #fffefc;
+      --facesub: #c8c0b0;
+      --facedot: #e8e0d0;
+      --facedotink: #211f1b;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --paper: #1e1c27;
+        --ink: #ece9f4;
+        --ink2: #c7c2d8;
+        --mark: #c9a87a;
+        --markedge: #5a4a30;
+        --line: #4a4658;
+        --lane: #232130;
+        --lane2: #26242f;
+        --dim: #26242f;
+        --face: #372f43;
+        --faceink: #f2eff8;
+        --facesub: #bdb6cd;
+        --facedot: #c9a87a;
+        --facedotink: #241f2e;
+      }
+    }
+  </style>
+
+  <rect width="620" height="1206" fill="var(--paper)"/>
+  <rect x="34" y="96" width="266" height="1076" rx="18" fill="var(--lane)"/>
+  <rect x="320" y="96" width="266" height="1076" rx="18" fill="var(--lane2)"/>
+  <g font-family="sans-serif">
+    <g transform="translate(167 56)">
+      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--face)"/>
+      <text y="9" font-size="27" font-weight="700" fill="var(--facedot)" text-anchor="middle">폰</text>
+    </g>
+    <g transform="translate(453 56)">
+      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--mark)"/>
+      <text y="9" font-size="27" font-weight="700" fill="var(--paper)" text-anchor="middle">맥</text>
+    </g>
+    <path d="M167 252 V 297" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M167 314 l-10 -17 h20 Z" fill="var(--line)"/>
+    <path d="M167 444 V 462 q0 14 14 14 H 439 q14 0 14 14 V 489" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M453 506 l-10 -17 h20 Z" fill="var(--line)"/>
+    <path d="M453 636 V 681" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M453 698 l-10 -17 h20 Z" fill="var(--line)"/>
+    <path d="M453 828 V 873" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M453 890 l-10 -17 h20 Z" fill="var(--line)"/>
+    <rect x="52" y="122" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="80" cy="150" r="13" fill="var(--face)"/>
+    <text x="80" y="157" font-size="16" font-weight="700" fill="var(--facedot)" text-anchor="middle">1</text>
+    <text x="104" y="158" font-size="24" font-weight="700" fill="var(--ink)">알림만 읽는다</text>
+    <text x="72" y="196" font-size="19" fill="var(--ink2)">누구와 언제만.</text>
+    <text x="72" y="224" font-size="19" fill="var(--ink2)">문자와 통화 권한은 뺐다.</text>
+    <rect x="52" y="314" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="80" cy="342" r="13" fill="var(--face)"/>
+    <text x="80" y="349" font-size="16" font-weight="700" fill="var(--facedot)" text-anchor="middle">2</text>
+    <text x="104" y="350" font-size="24" font-weight="700" fill="var(--ink)">맥으로 보낸다</text>
+    <text x="72" y="388" font-size="19" fill="var(--ink2)">이름은 맥에서 받아 맞춘다.</text>
+    <text x="72" y="416" font-size="19" fill="var(--ink2)">판단은 앱이 안 한다.</text>
+    <rect x="338" y="506" width="230" height="130" rx="16" fill="var(--face)"/>
+    <circle cx="366" cy="534" r="13" fill="var(--facedot)"/>
+    <text x="366" y="541" font-size="16" font-weight="700" fill="var(--facedotink)" text-anchor="middle">3</text>
+    <text x="390" y="542" font-size="24" font-weight="700" fill="var(--faceink)">중복을 거른다</text>
+    <text x="358" y="580" font-size="19" fill="var(--facesub)">시각과 보낸 사람으로</text>
+    <text x="358" y="608" font-size="19" fill="var(--facesub)">같은 것을 짝지어 뺀다.</text>
+    <rect x="338" y="698" width="230" height="130" rx="16" fill="var(--face)"/>
+    <circle cx="366" cy="726" r="13" fill="var(--facedot)"/>
+    <text x="366" y="733" font-size="16" font-weight="700" fill="var(--facedotink)" text-anchor="middle">4</text>
+    <text x="390" y="734" font-size="24" font-weight="700" fill="var(--faceink)">뜸한지 센다</text>
+    <text x="358" y="772" font-size="19" fill="var(--facesub)">사람마다 평소 간격을 재고</text>
+    <text x="358" y="800" font-size="19" fill="var(--facesub)">얼마나 지났는지 본다.</text>
+    <rect x="338" y="890" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
+    <circle cx="366" cy="918" r="13" fill="var(--mark)"/>
+    <text x="366" y="925" font-size="16" font-weight="700" fill="var(--paper)" text-anchor="middle">5</text>
+    <text x="390" y="926" font-size="24" font-weight="700" fill="var(--ink)">알린다</text>
+    <text x="358" y="964" font-size="19" fill="var(--ink2)">뜸해진 사람만.</text>
+    <text x="358" y="992" font-size="19" fill="var(--ink2)">지난 이야기를 같이 띄운다.</text>
+  </g>
+</svg>

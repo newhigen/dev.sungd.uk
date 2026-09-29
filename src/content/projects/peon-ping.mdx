@@ -7,6 +7,9 @@ purpose: 개발 도구
 ended: 세션이 열 개를 넘으면 목소리로는 어느 세션인지 못 가려 화면 알림으로 이전 (2026.09)
 kind: Claude Code 훅
 tags: [peon-ping, ElevenLabs, Claude Code 훅]
+screens:
+  - src: /p/peon-ping/diagram.svg
+    label: 끝남 · 물음 · 한도를 귀로 가른다
 use:
   - "세션이 끝나면 «Task complete.»"
   - "세션이 답을 기다리면 «I have a question.»"
@@ -15,6 +18,7 @@ use:
 
 import Voices from '../../components/Voices.astro';
 import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
 import Now from '../../components/Now.astro';
 import Next from '../../components/Next.astro';
 import Picks from '../../components/pp/Picks.astro';
@@ -38,6 +42,10 @@ import Picks from '../../components/pp/Picks.astro';
 <Now year="2026" month="9월"
   line="세션이 열 개를 넘으면 <b>어느 세션인지</b> 못 가려 종료"
   sub="알림은 세션 모니터(claude-watch)의 «내 차례» 목록으로 이전" />
+
+<Fig src="/p/peon-ping/diagram.svg"
+  alt="세션이 끝나거나 답을 기다리거나 한도에 닿을 때 목소리로 알리던 흐름과 접은 까닭"
+  caption="짙은 칸이 이 설정이 하던 일이다. 세션이 열 개를 넘자 안 통했다." />
 
 ## 동작 방식
 

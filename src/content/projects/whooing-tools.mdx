@@ -1,0 +1,56 @@
+---
+title: 가계부 자동 기입
+tagline: 은행 엑셀을 넣으면 복식부기 형식으로 바꿔 준다
+period: "2026.05"
+purpose: 돈
+kind: 변환 스크립트
+tags: [Python, Finance, MCP]
+cover: "/p/whooing-tools/whooing-tools.png"
+coverLight: "/p/whooing-tools/whooing-tools-light.png"
+headCover: false
+screens:
+  - src: /p/whooing-tools/whooing-tools-light.png
+    label: 은행별 파서와 매핑 규칙
+use:
+  - "매핑 규칙을 한 번 정해 둔다"
+  - "은행 엑셀을 넣으면 가계부 CSV 가 나온다"
+  - "차변과 대변까지 맞춰 바로 기입한다"
+---
+
+import Panel from '../../components/Panel.astro';
+import Fig from '../../components/Fig.astro';
+import Cases from '../../components/Cases.astro';
+
+<Panel
+  title={["같은 카페를 매달 다르게 분류하고 있었다.", "기준이 그때 기분이었다."]}
+  sub="복식부기 가계부는 좋은데 은행 내역을 옮겨 적는 것이 일이다. 은행마다 엑셀 형식이 다르고, 거래처를 그때그때 분류하니 달마다 기준이 흔들렸다. 규칙을 한 번 정해 두고 변환은 맡겼다."
+  chips={[
+    { v: "1시간 → 10분", label: "매달 정산에 들던 시간. 내 경험상" },
+    { v: "3단계", label: "정기 지출 · 단골 가맹점 · 이름 매칭 순으로 걸러 겹치지 않게 한다" },
+  ]}
+  basis="손으로 하던 때와 견준 체감값이라 실측은 아니다." />
+
+글자만 바꾸는 것이 아니다. **매핑 규칙을 코드 밖에 두어** 거래처가 늘 때마다 코드를 고치지 않는다.
+
+<Fig src="/p/whooing-tools/whooing-tools-light.png" srcDark="/p/whooing-tools/whooing-tools.png" wide
+  alt="가계부 자동 기입 도구 화면. 은행별 파서와 매핑 규칙, 변환된 결과"
+  caption="은행별로 다른 형식을 파서 하나가 흡수하고, 분류는 규칙 파일이 맡는다." />
+
+## 분류가 흔들리면 집계도 흔들린다
+
+가계부의 값은 집계에서 나온다. 그런데 같은 카페를 어떤 달은 식비로, 어떤 달은 여가로 넣으면
+**집계가 말하는 것이 달마다 달라진다.** 손으로 분류하는 한 이 흔들림은 안 없어진다.
+
+그래서 우선순위를 정해 걸렀다. 보험료와 구독료, 관리비처럼 **매달 나가는 것**을 먼저 잡고, 그다음
+단골 가맹점, 마지막으로 가맹점 이름 일부를 본다. 앞에서 걸린 것은 뒤 규칙이 다시 안 건드린다.
+
+## 자세한 동작
+
+<Cases items={[
+  { when: "새 카드를 쓰기 시작했다",
+    what: "파서에 형식 하나를 더한다. 분류 규칙은 그대로 쓴다 — 은행이 달라도 가맹점 이름은 같아서다." },
+  { when: "분류를 바꾸고 싶다",
+    what: "규칙 파일만 고친다. 코드를 안 건드리므로 규칙이 늘어도 복잡해지지 않는다." },
+  { when: "차변과 대변이 안 맞는다",
+    what: "양변을 동시에 만들어 내보낸다. 한쪽만 적어 두고 나중에 맞추는 일이 없게 했다." },
+]} />
