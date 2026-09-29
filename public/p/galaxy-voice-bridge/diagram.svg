@@ -13,6 +13,11 @@
       --line: #b9b1a2;   /* 잇는 선 */
       --lane: #f5f3ee;   /* 레인 바탕 */
       --lane2: #efece4;   /* 레인 바탕 둘째 */
+      --face: #211f1b;   /* 짙은 면 — 밤엔 바탕보다 조금 밝게 */
+      --faceink: #e8e0d0;   /* 그 면 위 글자와 조각 */
+      --facetop: #fffefc;   /* 그 면 위 제목 */
+      --facesub: #c8c0b0;   /* 그 면 위 설명 */
+      --facedotink: #211f1b;   /* 밝은 점 위 숫자 */
       --lane3: #f0eee9;   /* 레인 바탕 셋째 */
     }
     @media (prefers-color-scheme: dark) {
@@ -27,6 +32,7 @@
         --line: #4a4658;
         --lane: #232130;
         --lane2: #26242f;
+        --face: #372f43;
         --lane3: #232130;
       }
     }
@@ -41,8 +47,8 @@
   <!-- 레인 이름 -->
   <g font-family="sans-serif" text-anchor="middle">
     <g transform="translate(167 56)">
-      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--ink)"/>
-      <text y="9" font-size="27" font-weight="700" fill="var(--markface)">맥</text>
+      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--face)"/>
+      <text y="9" font-size="27" font-weight="700" fill="var(--faceink)">맥</text>
     </g>
     <g transform="translate(453 56)">
       <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--mark)"/>
@@ -68,11 +74,11 @@
   <!-- ① 맥에서 단축키를 누른다 -->
   <g>
     <rect x="52" y="122" width="230" height="146" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
-    <circle cx="80" cy="150" r="13" fill="var(--ink)"/>
-    <text x="80" y="158" font-family="sans-serif" font-size="16" font-weight="700" fill="var(--markface)" text-anchor="middle">1</text>
+    <circle cx="80" cy="150" r="13" fill="var(--face)"/>
+    <text x="80" y="158" font-family="sans-serif" font-size="16" font-weight="700" fill="var(--faceink)" text-anchor="middle">1</text>
     <text x="104" y="158" font-family="sans-serif" font-size="24" font-weight="700" fill="var(--ink)">누른다</text>
-    <rect x="72" y="178" width="190" height="46" rx="10" fill="var(--ink)"/>
-    <text x="167" y="208" font-family="sans-serif" font-size="22" font-weight="600" fill="var(--markface)" text-anchor="middle">Option + Space</text>
+    <rect x="72" y="178" width="190" height="46" rx="10" fill="var(--face)"/>
+    <text x="167" y="208" font-family="sans-serif" font-size="22" font-weight="600" fill="var(--faceink)" text-anchor="middle">Option + Space</text>
     <text x="167" y="248" font-family="sans-serif" font-size="18" fill="var(--ink2)" text-anchor="middle">어느 앱에서든</text>
   </g>
 
@@ -83,10 +89,10 @@
     <text x="366" y="398" font-family="sans-serif" font-size="16" font-weight="700" fill="var(--paper)" text-anchor="middle">2</text>
     <text x="390" y="398" font-family="sans-serif" font-size="24" font-weight="700" fill="var(--ink)">녹음한다</text>
     <!-- 폰 모양 + 마이크 -->
-    <rect x="360" y="418" width="66" height="116" rx="12" fill="var(--ink)"/>
-    <rect x="368" y="430" width="50" height="86" rx="5" fill="var(--markface)"/>
+    <rect x="360" y="418" width="66" height="116" rx="12" fill="var(--face)"/>
+    <rect x="368" y="430" width="50" height="86" rx="5" fill="var(--faceink)"/>
     <circle cx="393" cy="466" r="13" fill="var(--mark)"/>
-    <rect x="389" y="459" width="8" height="12" rx="4" fill="var(--paper)"/>
+    <rect x="389" y="459" width="8" height="12" rx="4" fill="var(--facetop)"/>
     <!-- 소리 파형 -->
     <g fill="var(--mark)">
       <rect x="444" y="466" width="7" height="24" rx="3.5"/>

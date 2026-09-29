@@ -13,6 +13,11 @@
       --line2: #c8c0b0;   /* 잇는 선 둘째 */
       --lane: #f5f3ee;   /* 레인 바탕 */
       --lane2: #efece4;   /* 레인 바탕 둘째 */
+      --face: #211f1b;   /* 짙은 면 — 밤엔 바탕보다 조금 밝게 */
+      --faceink: #e8e0d0;   /* 그 면 위 글자와 조각 */
+      --facetop: #fffefc;   /* 그 면 위 제목 */
+      --facesub: #c8c0b0;   /* 그 면 위 설명 */
+      --facedotink: #211f1b;   /* 밝은 점 위 숫자 */
     }
     @media (prefers-color-scheme: dark) {
       svg {
@@ -26,6 +31,7 @@
         --line2: #4a4658;
         --lane: #232130;
         --lane2: #26242f;
+        --face: #372f43;
       }
     }
   </style>
@@ -39,8 +45,8 @@
   <!-- 레인 이름 -->
   <g font-family="sans-serif" text-anchor="middle">
     <g transform="translate(167 56)">
-      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--ink)"/>
-      <text y="9" font-size="27" font-weight="700" fill="var(--markface)">맥</text>
+      <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--face)"/>
+      <text y="9" font-size="27" font-weight="700" fill="var(--faceink)">맥</text>
     </g>
     <g transform="translate(453 56)">
       <rect x="-86" y="-25" width="172" height="50" rx="25" fill="var(--mark)"/>
@@ -66,8 +72,8 @@
   <!-- ① 맥 — 받아쓰기를 시작한다 -->
   <g font-family="sans-serif">
     <rect x="52" y="122" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
-    <circle cx="80" cy="150" r="13" fill="var(--ink)"/>
-    <text x="80" y="157" font-size="16" font-weight="700" fill="var(--markface)" text-anchor="middle">1</text>
+    <circle cx="80" cy="150" r="13" fill="var(--face)"/>
+    <text x="80" y="157" font-size="16" font-weight="700" fill="var(--faceink)" text-anchor="middle">1</text>
     <text x="104" y="158" font-size="24" font-weight="700" fill="var(--ink)">받아쓰기 시작</text>
     <text x="72" y="196" font-size="19" fill="var(--ink2)">앱이 마이크를 연다.</text>
     <text x="72" y="224" font-size="19" fill="var(--ink2)">스피커에선 음악이 난다.</text>
@@ -75,12 +81,12 @@
 
   <!-- ② 맥 — 이 도구가 하는 일. 짙게 칠해 구분한다 -->
   <g font-family="sans-serif">
-    <rect x="52" y="314" width="230" height="130" rx="16" fill="var(--ink)"/>
-    <circle cx="80" cy="342" r="13" fill="var(--markface)"/>
-    <text x="80" y="349" font-size="16" font-weight="700" fill="var(--ink)" text-anchor="middle">2</text>
-    <text x="104" y="350" font-size="24" font-weight="700" fill="var(--paper)">켜짐을 읽는다</text>
-    <text x="72" y="388" font-size="19" fill="var(--line2)">앱을 지켜보지 않고</text>
-    <text x="72" y="416" font-size="19" fill="var(--line2)">CoreAudio 에 직접 묻는다.</text>
+    <rect x="52" y="314" width="230" height="130" rx="16" fill="var(--face)"/>
+    <circle cx="80" cy="342" r="13" fill="var(--faceink)"/>
+    <text x="80" y="349" font-size="16" font-weight="700" fill="var(--facedotink)" text-anchor="middle">2</text>
+    <text x="104" y="350" font-size="24" font-weight="700" fill="var(--facetop)">켜짐을 읽는다</text>
+    <text x="72" y="388" font-size="19" fill="var(--facesub)">앱을 지켜보지 않고</text>
+    <text x="72" y="416" font-size="19" fill="var(--facesub)">CoreAudio 에 직접 묻는다.</text>
   </g>
 
   <!-- ③ 폰 — 음악을 멈춘다 -->
@@ -96,8 +102,8 @@
   <!-- ④ 맥 — 끝나고 기다린다 -->
   <g font-family="sans-serif">
     <rect x="52" y="698" width="230" height="130" rx="16" fill="var(--paper)" stroke="var(--markedge)" stroke-width="3"/>
-    <circle cx="80" cy="726" r="13" fill="var(--ink)"/>
-    <text x="80" y="733" font-size="16" font-weight="700" fill="var(--markface)" text-anchor="middle">4</text>
+    <circle cx="80" cy="726" r="13" fill="var(--face)"/>
+    <text x="80" y="733" font-size="16" font-weight="700" fill="var(--faceink)" text-anchor="middle">4</text>
     <text x="104" y="734" font-size="24" font-weight="700" fill="var(--ink)">마이크 꺼짐</text>
     <text x="72" y="772" font-size="19" fill="var(--ink2)">0.8초 잠잠한지 본다.</text>
     <text x="72" y="800" font-size="19" fill="var(--ink2)">그 안에 다시 켜지면 둔다.</text>
