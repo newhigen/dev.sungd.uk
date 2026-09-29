@@ -1,16 +1,56 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 340" width="620" height="340" role="img" aria-label="첫 화면이 42편짜리 시간표 목록에서 처음 앉는 편 하나로 바뀐 전후 비교">
-  <rect width="620" height="340" fill="#fffefc"/>
+  <style>
+    /* 밤낮 두 판. img 안이라 문서 CSS 는 못 받지만 color-scheme 은 전해진다 */
+    svg {
+      --paper: #fffefc;
+      --card: #faf8f4;
+      --card2: #ffffff;
+      --bone: #eceadf;
+      --bone2: #ddd6c8;
+      --mint: #e3ece6;
+      --mint2: #e8eeea;
+      --mintbg: #f7faf8;
+      --mintline: #a9c9b8;
+      --line: #b9b1a2;
+      --sub: #8a837a;
+      --ink2: #3a3630;
+      --ink: #211f1b;
+      --green2: #5b7a68;
+      --green: #2E7D4F;
+    }
+    @media (prefers-color-scheme: dark) {
+      svg {
+        --paper: #1e1c27;
+        --card: #26242f;
+        --card2: #2a2836;
+        --bone: #343142;
+        --bone2: #3f3b4f;
+        --mint: #2b3a33;
+        --mint2: #2f3f37;
+        --mintbg: #242f29;
+        --mintline: #3f6153;
+        --line: #4a4658;
+        --sub: #9a94a8;
+        --ink2: #c7c2d8;
+        --ink: #ece9f4;
+        --green2: #8fc0a6;
+        --green: #4CAF7D;
+      }
+    }
+  </style>
+
+  <rect width="620" height="340" fill="var(--paper)"/>
 
   <!-- 전 — 42편 목록 -->
   <g font-family="sans-serif">
-    <text x="40" y="28" font-size="13.5" font-weight="600" fill="#8a837a">v0.1 — 시간표를 옮겼다</text>
-    <rect x="40" y="42" width="212" height="264" rx="14" fill="#faf8f4" stroke="#ddd6c8" stroke-width="2"/>
+    <text x="40" y="28" font-size="13.5" font-weight="600" fill="var(--sub)">v0.1 — 시간표를 옮겼다</text>
+    <rect x="40" y="42" width="212" height="264" rx="14" fill="var(--card)" stroke="var(--bone2)" stroke-width="2"/>
     <!-- 거르개 칩 줄 -->
-    <rect x="56" y="58" width="46" height="18" rx="9" fill="#ddd6c8"/>
-    <rect x="108" y="58" width="46" height="18" rx="9" fill="#eceadf"/>
-    <rect x="160" y="58" width="46" height="18" rx="9" fill="#eceadf"/>
+    <rect x="56" y="58" width="46" height="18" rx="9" fill="var(--bone2)"/>
+    <rect x="108" y="58" width="46" height="18" rx="9" fill="var(--bone)"/>
+    <rect x="160" y="58" width="46" height="18" rx="9" fill="var(--bone)"/>
     <!-- 목록 줄 여럿 -->
-    <g fill="#eceadf">
+    <g fill="var(--bone)">
       <rect x="56" y="88" width="180" height="15" rx="4"/>
       <rect x="56" y="109" width="180" height="15" rx="4"/>
       <rect x="56" y="130" width="180" height="15" rx="4"/>
@@ -22,36 +62,36 @@
       <rect x="56" y="256" width="180" height="15" rx="4"/>
       <rect x="56" y="277" width="180" height="15" rx="4"/>
     </g>
-    <text x="146" y="325" font-size="13" fill="#8a837a" text-anchor="middle">42편을 눈으로 훑는다</text>
+    <text x="146" y="325" font-size="13" fill="var(--sub)" text-anchor="middle">42편을 눈으로 훑는다</text>
   </g>
 
   <!-- 화살표 — 직각으로 갈 것이 없어 짧게 -->
   <g>
-    <path d="M272 174 H 328" stroke="#b9b1a2" stroke-width="3.5" fill="none" stroke-linecap="round"/>
-    <path d="M345 174 l-17 -10 v20 Z" fill="#b9b1a2"/>
+    <path d="M272 174 H 328" stroke="var(--line)" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+    <path d="M345 174 l-17 -10 v20 Z" fill="var(--line)"/>
   </g>
 
   <!-- 후 — 답 하나 -->
   <g font-family="sans-serif">
-    <text x="368" y="28" font-size="13.5" font-weight="600" fill="#2E7D4F">v0.2 — 답 하나</text>
-    <rect x="368" y="42" width="212" height="264" rx="14" fill="#f7faf8" stroke="#a9c9b8" stroke-width="2"/>
+    <text x="368" y="28" font-size="13.5" font-weight="600" fill="var(--green)">v0.2 — 답 하나</text>
+    <rect x="368" y="42" width="212" height="264" rx="14" fill="var(--mintbg)" stroke="var(--mintline)" stroke-width="2"/>
     <!-- 미루기 칩 -->
-    <rect x="384" y="58" width="42" height="18" rx="9" fill="#2E7D4F"/>
-    <rect x="432" y="58" width="42" height="18" rx="9" fill="#e3ece6"/>
-    <rect x="480" y="58" width="42" height="18" rx="9" fill="#e3ece6"/>
+    <rect x="384" y="58" width="42" height="18" rx="9" fill="var(--green)"/>
+    <rect x="432" y="58" width="42" height="18" rx="9" fill="var(--mint)"/>
+    <rect x="480" y="58" width="42" height="18" rx="9" fill="var(--mint)"/>
     <!-- 큰 답 -->
-    <text x="398" y="106" font-size="12.5" font-weight="600" fill="#2E7D4F">처음 앉는 편</text>
-    <text x="398" y="164" font-size="52" font-weight="700" fill="#211f1b">3</text>
-    <text x="434" y="164" font-size="22" font-weight="600" fill="#211f1b">분 뒤</text>
-    <text x="398" y="196" font-size="15" font-weight="600" fill="#3a3630">06:27 에 집을 나서요</text>
+    <text x="398" y="106" font-size="12.5" font-weight="600" fill="var(--green)">처음 앉는 편</text>
+    <text x="398" y="164" font-size="52" font-weight="700" fill="var(--ink)">3</text>
+    <text x="434" y="164" font-size="22" font-weight="600" fill="var(--ink)">분 뒤</text>
+    <text x="398" y="196" font-size="15" font-weight="600" fill="var(--ink2)">06:27 에 집을 나서요</text>
     <!-- 알림 단추 -->
-    <rect x="384" y="212" width="180" height="34" rx="9" fill="#2E7D4F"/>
-    <text x="474" y="234" font-size="13" font-weight="600" fill="#ffffff" text-anchor="middle">알림 받기</text>
+    <rect x="384" y="212" width="180" height="34" rx="9" fill="var(--green)"/>
+    <text x="474" y="234" font-size="13" font-weight="600" fill="var(--card2)" text-anchor="middle">알림 받기</text>
     <!-- 다른 시각 둘 -->
-    <g fill="#e8eeea">
+    <g fill="var(--mint2)">
       <rect x="384" y="258" width="180" height="18" rx="5"/>
       <rect x="384" y="282" width="180" height="18" rx="5"/>
     </g>
-    <text x="474" y="325" font-size="13" fill="#5b7a68" text-anchor="middle">열고 한 번 누르면 끝난다</text>
+    <text x="474" y="325" font-size="13" fill="var(--green2)" text-anchor="middle">열고 한 번 누르면 끝난다</text>
   </g>
 </svg>
