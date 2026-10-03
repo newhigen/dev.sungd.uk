@@ -226,7 +226,7 @@ const statuses = STATUS.map(s => ({ name: s, n: all.filter(p => p.data.status ==
     function rebuild() {
       rail.textContent = '';
       // 한 장뿐이면 넘길 것이 없으니 줄 자체를 세우지 않는다
-      lb.classList.toggle('one', group.length < 2);
+      lb!.classList.toggle('one', group.length < 2);
       if (group.length < 2) return;
       group.forEach((b, i) => {
         const t = document.createElement('button');
