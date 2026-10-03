@@ -21,7 +21,8 @@ const d = entry.data;
 const making = await getEntry('making', entry.id);
 const why = await getEntry('why', entry.id);
 // 차례 — 본문 h2 에 템플릿이 붙이는 「그전 모습」 까지
-const toc = headings.filter(h => h.depth <= 3).map(({ slug, text, depth }) => ({ slug, text, depth }));
+const toc: { slug: string; text: string; depth?: number }[] =
+  headings.filter(h => h.depth <= 3).map(({ slug, text, depth }) => ({ slug, text, depth }));
 if (d.shots.length > 0) toc.push({ slug: 'shots', text: '이전 버전' });
 ---
 
